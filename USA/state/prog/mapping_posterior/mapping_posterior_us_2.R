@@ -1,0 +1,950 @@
+rm(list=ls())
+library(maptools)
+library(mapproj)
+library(rgeos)
+library(rgdal)
+library(RColorBrewer)
+library(ggplot2)
+library(plyr)
+
+# load the data
+
+# raw data
+#dat <- readRDS('datus_state_rates_1982_2010')
+#dat$rate.pred <- dat$rate.adj
+
+# national random walk (type I)
+#dat <- readRDS('USA_rate_pred_1982_2010_rw_all')
+
+# national random walk spatially correlated (type Ia)
+dat <- readRDS('USA_rate_pred_type1a_1982_2010')
+model <- 'type1a'
+
+# random walk per time (type II)
+#dat <- readRDS('USA_rate_pred_type2_55_male_1982_2010')
+#dat$rate.pred <- dat$rate.pred.mod2
+
+# random walk per time not spatially correlated (type IIa)
+#dat <- readRDS('USA_rate_pred_type2a_55_male_1982_2010')
+#dat$rate.pred <- dat$rate.pred.mod2
+
+# state random walk (type III)
+#dat <- readRDS('USA_rate_pred_type3_55_male_1982_2010')
+
+# add log(rate) and rates per 100,000
+dat$log.rate <- with(dat,log(rate.pred))
+dat$per.100000 <- 100000*dat$rate.pred
+
+age.filter <- unique(dat$age)
+colourCount <- length(age.filter)
+
+# coding for graph-friendly information
+age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
+age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85),
+                       age.print=age.print)
+month.names <- c('January','February','March','April','May','June',
+                 'July','August','September','October','November','December')
+month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
+sex.lookup <- c('male','female')
+
+# identify start and end years, as well as length of analysis period
+year.start <- min(dat$year)
+year.end <- max(dat$year)
+num.years <- year.end - year.start + 1
+
+# for each fips, age, sex, year analyse co-efficient of variation of the mortality
+dat.var <- ddply(dat, .(fips,sex,age,year), summarize,sd=sd(rate.pred),mean=mean(rate.pred))
+# correct for when there is only one instance in a particular year (sd formula uses n-1 as denominator)
+dat.var$sd <- ifelse(is.na(dat.var$sd)==FALSE,dat.var$sd,0)
+dat.var$coeff.var <- with(dat.var,sd/mean)
+
+# for each age, sex, year analyse median co-efficient of variation of mortality 
+dat.var.median <- ddply(dat.var, .(age,sex,year), summarize,median=median(coeff.var))
+dat.var.median$age.print <- mapvalues(dat.var.median$age, from=unique(dat.var.median$age), to=age.print)
+dat.var.median$age.print <- reorder(dat.var.median$age.print,dat.var.median$age)
+
+# for each age, sex, state analyse median co-efficient of variation of mortality
+dat.var.state <- ddply(dat.var, .(age,sex,fips), summarize,median=median(coeff.var))
+dat.var.state$age.print <- mapvalues(dat.var.state$age, from=unique(dat.var.state$age), to=age.print)
+dat.var.state$age.print <- reorder(dat.var.state$age.print,dat.var.state$age)
+
+# apply mean to each grouping by fips, sex, age, month to find average mortality
+lin.reg.median <- ddply(dat, .(fips,sex,age,month), summarize,median=median(log.rate))
+lin.reg.median$month.short <- mapvalues(lin.reg.median$month,from=unique(lin.reg.median$month),to=month.short)
+
+# make sure the months are in the correct order for plotting
+lin.reg.median$month.short <- reorder(lin.reg.median$month.short,lin.reg.median$month)
+
+# work out the percentage difference between jan and jul for each fips,sex,age
+lin.reg.median.jan.jul <- ddply(lin.reg.median, .(fips,sex,age), summarize,jan=median[month==1],jul=median[month==7])
+lin.reg.median.jan.jul$percent.change <- round(100*exp((lin.reg.median.jan.jul$jan - lin.reg.median.jan.jul$jul)),1)-100
+
+# add year to the nearest rounded-down 5/10
+dat$year.5 <- floor(dat$year/5)*5
+dat$year.10 <- floor(dat$year/10)*10
+
+# apply median to each grouping by fips, sex, age, year.5/year.10 to find average mortality to plot
+lin.reg.median.5 <- ddply(dat, .(fips,sex,age,year.5,month), summarize, median=median(log.rate))
+lin.reg.median.10 <- ddply(dat, .(fips,sex,age,year.10,month), summarize, median=median(log.rate))
+lin.reg.median.5$month.short <- mapvalues(lin.reg.median.5$month,from=unique(lin.reg.median.5$month),to=month.short)
+lin.reg.median.10$month.short <- mapvalues(lin.reg.median.10$month,from=unique(lin.reg.median.10$month),to=month.short)
+
+# make sure the months are in the correct order for plotting
+lin.reg.median.5$month.short <- reorder(lin.reg.median.5$month.short,lin.reg.median.5$month)
+lin.reg.median.10$month.short <- reorder(lin.reg.median.10$month.short,lin.reg.median.10$month)
+
+# adjust median for plots
+lin.reg.median$per.100000 <- with(lin.reg.median,100000*exp(median))
+lin.reg.median.5$per.100000 <- with(lin.reg.median.5,100000*exp(median))
+lin.reg.median.10$per.100000 <- with(lin.reg.median.10,100000*exp(median))
+
+# apply linear regression to each grouping by fips, sex, age, month to find gradient to plot
+lin.reg.grad <- ddply(dat, .(fips,sex,age,month), function(z)coef(lm(log.rate ~ year, data=z)))
+lin.reg.grad$grad <- with(lin.reg.grad,100*(exp(year)-1))
+
+#total percentage change over period
+lin.reg.grad$grad.total <- 100 * ((1 + lin.reg.grad$grad / 100) ^ num.years - 1)
+lin.reg.grad$month.short <- mapvalues(lin.reg.grad$month,from=unique(lin.reg.grad$month),to=month.short)
+
+# make sure the months are in the correct order for plotting
+lin.reg.grad$month.short <- reorder(lin.reg.grad$month.short,lin.reg.grad$month)
+
+# work out the difference between max and min for each fips,sex,age
+lin.reg.grad.max.min<- ddply(lin.reg.grad, .(fips,sex,age), summarize,min=min(grad.total),max=max(grad.total))
+lin.reg.grad.max.min$difference <- with(lin.reg.grad.max.min, round(max-min,1))
+lin.reg.grad.max.min$percent.change <- with(lin.reg.grad.max.min, round(100*abs(max/min),1))
+
+# change name of genders
+lin.reg.median$sex <- as.factor(lin.reg.median$sex)
+levels(lin.reg.median$sex) <- c('male','female')
+lin.reg.grad$sex <- as.factor(lin.reg.grad$sex)
+levels(lin.reg.grad$sex) <- c('male','female')
+
+# PREPARING MAP
+
+# for theme_map
+devtools::source_gist("33baa3a79c5cfef0f6df")
+
+# load shapefile
+us <- readOGR(dsn="shapefiles",layer="states")
+
+# convert shapefile to Albers equal area
+us_aea <- spTransform(us, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"))
+us_aea@data$id <- rownames(us_aea@data)
+
+# extract, then rotate, shrink & move alaska (and reset projection)
+alaska <- us_aea[us_aea$STATE_FIPS=="02",]
+alaska <- elide(alaska,rotate=-50)
+alaska <- elide(alaska,scale=max(apply(bbox(alaska), 1, diff)) / 2.3)
+alaska <- elide(alaska, shift=c(-2100000, -2500000))
+proj4string(alaska) <- proj4string(us_aea)
+
+# extract, then rotate & shift hawaii
+hawaii <- us_aea[us_aea$STATE_FIPS=="15",]
+hawaii <- elide(hawaii, rotate=-35)
+hawaii <- elide(hawaii, shift=c(5400000, -1400000))
+proj4string(hawaii) <- proj4string(us_aea)
+
+# remove old versions of Alaska and Hawaii and put new ones back in
+us_aea <- us_aea[!us_aea$STATE_FIPS %in% c("02", "15"),]
+us_aea <- rbind(us_aea, alaska, hawaii)
+
+# fortify to prepare for ggplot
+map <- fortify(us_aea)
+
+# extract data from shapefile
+shapefile.data <- us_aea@data
+shapefile.data$SUB_REGION <- c('Pacific','Frontier','Northeast','Midwest','Midwest',
+				'Frontier','Midwest','Frontier','Northeast','Midwest',
+				'Pacific','Northeast','Midwest','Northeast','Midwest',
+				'Northeast','Northeast','Northeast','Northeast','Northeast',
+				'Midwest','Pacific','Frontier','Pacific','Midwest',
+				'Midwest','Northeast','Northeast','South','Northeast',
+				'Frontier','South','Frontier','South','Midwest',
+				'Pacific','South','South','South','Frontier',
+				'Frontier','South','South','South','South',
+				'South','South','South','Midwest','Pacific',
+				'Pacific')
+
+# alternative mapping
+#shapefile.data$SUB_REGION <- c('Far West','Rocky Mountain','New England','Plains','Plains',
+#				'Rocky Mountain','Great Lakes','Rocky Mountain','New England','Plains',
+#				'Far West','New England','Plains','New England','Plains',
+#				'Mideast','Mideast','New England','New England','Mideast',
+#				'Great Lakes','Far West','Rocky Mountain','Far West','Great Lakes',
+#				'Great Lakes','Mideast','Mideast','Southeast','Mideast',
+#				'Rocky Mountain','Southeast','Plains','Southeast','Plains',
+#				'Southwest','Southwest','Southeast','Southeast','Southwest',
+#				'Southwest','Southeast','Southeast','Southeast','Southeast',
+#				'Southeast','Southeast','Southeast','Great Lakes','Far West',
+#				'Far West')
+
+
+shapefile.data$climate_region <- 	c('Northwest','Northern Rockies and Plains','Northeast','Northern Rockies and Plains','Northern Rockies and Plains',
+					'Northern Rockies and Plains','Upper Midwest','Northwest','Northeast','Upper Midwest',
+					'Northwest','Northeast','Upper Midwest','Northeast','Northern Rockies and Plains',
+					'Northeast','Northeast','Northeast','Northeast','Northeast',
+					'Ohio Valley','West','Southwest','West','Ohio Valley',
+					'Ohio Valley','Northeast','Northeast','Ohio Valley','Northeast',
+					'Southwest','Ohio Valley','South','South','Ohio Valley',
+					'Southwest','South','Southeast','Ohio Valley','South',
+					'Southwest','Southeast','South','Southeast','Southeast',
+					'South','South','Southeast','Upper Midwest','Northwest',
+					'West')				
+
+
+# merge selected data to map dataframe for colouring of ggplot
+USA.df <- merge(map, shapefile.data, by='id')
+USA.df$STATE_FIPS <- as.integer(as.character(USA.df$STATE_FIPS))
+
+# extract coordinates of states
+USA.coords <- as.data.frame(coordinates(us))
+names(USA.coords)[1:2] <- c('long','lat')
+USA.coords$DRAWSEQ <- 1:nrow(USA.coords)
+USA.coords <- merge(USA.coords, shapefile.data, by='DRAWSEQ')
+USA.coords$STATE_FIPS <- as.numeric(as.character(USA.coords$STATE_FIPS))
+
+# attach coordinate information for colouring
+lin.reg.median <- merge(lin.reg.median, USA.coords, by.x='fips',by.y='STATE_FIPS')
+lin.reg.median <- lin.reg.median[,c(1:10,12,15)]
+lin.reg.grad <- merge(lin.reg.grad, USA.coords, by.x='fips',by.y='STATE_FIPS')
+lin.reg.grad <- lin.reg.grad[,c(1:12,14,17)]
+
+# set colour scheme for geographical colour map
+map.region.colour <- colorRampPalette(rev(brewer.pal(12,"Accent")[c(1:3,5,6)]))(length(unique(USA.df$SUB_REGION)))
+names(map.region.colour) <- levels(as.factor(USA.df$SUB_REGION))
+
+# set colour scheme for climate colour map
+map.climate.colour <- colorRampPalette(rev(brewer.pal(12,"Dark2")[]))(length(unique(USA.df$climate_region)))
+names(map.climate.colour) <- levels(as.factor(USA.df$climate_region))
+
+###############################################################
+# ENTIRE PERIOD SUMMARIES FOR ALL AGES 
+###############################################################
+
+pdf.name <- paste0('USA_summary_',year.start,'_',year.end,'_',model,'.pdf')
+pdf(pdf.name,paper='a4r',height=0,width=0)
+
+# 1. percentage difference between January and July mortality map
+
+# merge selected data to map dataframe for colouring of ggplot
+plot.median.jan.jul <- merge(USA.df,lin.reg.median.jan.jul, by.x='STATE_FIPS',by.y='fips')
+plot.median.jan.jul <- merge(plot.median.jan.jul, age.code, by ='age')
+plot.median.jan.jul <- with(plot.median.jan.jul, plot.median.jan.jul[order(sex,age,DRAWSEQ,order),])
+
+# make sure the age groups are in the correct order for plotting
+plot.median.jan.jul$age.print <- with(plot.median.jan.jul,reorder(age.print,age))
+
+# function to plot
+plot.function.median.jan.jul <- function(sex.sel) {
+
+    # find limits for plot
+    min.plot <- min(plot.median.jan.jul$percent.change)
+    max.plot <- max(plot.median.jan.jul$percent.change)
+
+    print(ggplot(data=subset(plot.median.jan.jul,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=percent.change),color='black',size=0.01) +
+    scale_fill_gradient2(limits=c(min.plot,max.plot),low="#990000", high="#000033",guide = guide_legend(title = '% difference\nbetween\nJan and Jul')) +
+    facet_wrap(~age.print) +
+    xlab('') +
+    ylab('') +
+    ggtitle(paste0(sex.lookup[sex.sel],' : posterior percentage difference between median January and July mortality ',year.start,'-',year.end)) +
+    theme_map() +
+    theme(legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+# male
+pdf('jan_july_median_m.pdf',height=0,width=0,paper='a4r')
+plot.function.median.jan.jul(1)
+dev.off()
+
+# female
+pdf('jan_july_median_f.pdf',height=0,width=0,paper='a4r')
+plot.function.median.jan.jul(2)
+dev.off()
+
+# 2. difference in rate of change of maximum and minimum mortality change map
+
+# merge selected data to map dataframe for colouring of ggplot
+plot.grad.max.min <- merge(USA.df,lin.reg.grad.max.min,by.x='STATE_FIPS',by.y='fips')
+plot.grad.max.min <- merge(plot.grad.max.min, age.code, by ='age')
+plot.grad.max.min <- with(plot.grad.max.min, plot.grad.max.min[order(sex,age,DRAWSEQ,order),])
+
+# make sure the age groups are in the correct order for plotting
+plot.grad.max.min$age.print <- with(plot.grad.max.min,reorder(age.print,age))
+
+# function to plot
+plot.function.grad.max.min <- function(sex.sel) {
+
+    # find limits for plot
+    min.plot <- min(plot.grad.max.min$difference)
+    max.plot <- max(plot.grad.max.min$difference)
+
+    print(ggplot(data=subset(plot.grad.max.min,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=difference),color='black',size=0.01) +
+    scale_fill_gradient2(limits=c(min.plot,max.plot),low="#000033", high="#003300",guide = guide_legend(title = 'difference\nbetween\nmaximum and\nminimum\nrates of change\nfor\nindiviual\nmonths')) +
+    facet_wrap(~age.print) +
+    xlab('') +
+    ylab('') +
+    ggtitle(paste0(sex.lookup[sex.sel],' : posterior difference between maximum and minimum mortality rates change ',year.start,'-',year.end)) +
+    theme_map()+
+    theme(legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+# male
+pdf('jan_july_grad_m.pdf',height=0,width=0,paper='a4r')
+plot.function.grad.max.min(1)
+dev.off()
+
+# female
+pdf('jan_july_grad_f.pdf',height=0,width=0,paper='a4r')
+plot.function.grad.max.min(2)
+dev.off()
+
+# 3. average co-efficient of variation map
+plot.var.state <- merge(USA.df,dat.var.state,by.x='STATE_FIPS',by.y='fips')
+plot.var.state <- with(plot.var.state, plot.var.state[order(sex,age,DRAWSEQ,order),])
+
+# make sure the age groups are in the correct order for plotting
+plot.var.state$age.print <- with(plot.var.state,reorder(age.print,age))
+
+# function to plot
+plot.function.var.state <- function(sex.sel) {
+
+    # find limits for plot
+    min.plot <- min(plot.var.state$median)
+    max.plot <- max(plot.var.state$median)
+
+    print(ggplot(data=subset(plot.var.state,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=median),color='black',size=0.01) +
+    scale_fill_gradient2(limits=c(min.plot,max.plot),low="#000033", high="blue",guide = guide_legend(title = 'coefficient\nof\nseasonality')) +
+    facet_wrap(~age.print) +
+    xlab('') +
+    ylab('') +
+    ggtitle(paste0(sex.lookup[sex.sel],' : median coefficient of seasonality ',year.start,'-',year.end)) +
+    theme_map()+
+    theme(legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+# male
+pdf('jan_july_grad_m.pdf',height=0,width=0,paper='a4r')
+plot.function.var.state(1)
+dev.off()
+
+# female
+pdf('jan_july_grad_f.pdf',height=0,width=0,paper='a4r')
+plot.function.var.state(2)
+dev.off()
+
+# 4. change in mortality over age groups by month
+    
+# find median percentage change per sex,age,month for plotting
+median.df <- ddply(lin.reg.grad, .(month,sex,age), summarise, med = median(grad.total))
+
+# plot
+pdf('change_mort_across_all_months.pdf',height=0,width=0,paper='a4r')
+ggplot(lin.reg.grad, aes(x=age,fill=age,y=grad.total)) +
+geom_line(data = median.df, aes(y = med, colour = factor(month))) +
+geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+xlab('age group') +
+ylab('percentage change of death rate') +
+ggtitle("Median percentage change of mortality across age groups by month") +
+guides(fill=FALSE) +
+facet_wrap(~sex) +
+scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+dev.off()
+
+# find median of medians for centring of following graph
+median.median.df <- ddply(median.df, .(sex, age), summarise, med.med = median(med))
+median.median.df <- merge(median.df, median.median.df, by=c('sex','age'))
+median.median.df$diff.median <- with(median.median.df, med - med.med)
+
+# plot deviations from median
+pdf('diff_change_mort_across_all_months.pdf',height=0,width=0,paper='a4r')
+ggplot(lin.reg.grad, aes(x=age,fill=age,y=grad.total)) +
+geom_line(alpha=0.1,linetype=2,data = median.median.df,aes(y = diff.median, colour = factor(month))) +
+geom_point(data = median.median.df, aes(y = diff.median, colour = factor(month))) +
+geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+xlab('age group') +
+ylab('absolute percentage difference between median mortality change and month mortality change') +
+ggtitle("Median of states’ % change in mortality, centred by overall median of % changes") +
+guides(fill=FALSE) +
+facet_wrap(~sex) +
+scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+dev.off()
+
+# change order of months for heatmap
+#median.median.df$month <- as.factor(median.median.df$month)
+#median.median.df$month <- factor(median.median.df$month, levels=c(10:12,1:9))
+
+# plot heatmap
+pdf('diff_change_mort_across_all_months_heatmap.pdf',height=0,width=0,paper='a4r')
+ggplot(data=median.median.df, aes(x=as.factor(age),y=as.factor(month))) +
+geom_tile(aes(fill=diff.median)) +
+scale_fill_gradient2(low='green',mid='white',high='red',guide = guide_legend(title = '% change\nin\nmortality')) +
+xlab('age group') +
+ylab('month') + 
+scale_x_discrete(labels=age.print) +
+scale_y_discrete(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+facet_wrap(~sex) +
+ggtitle("Heatmap : percentage change in mortality, centred by overall median of percentage changes") +
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+dev.off()
+
+# find median mortality rate across all states and all months
+median.total.df <- ddply(lin.reg.grad, .(sex, age), summarise, med.total=median(grad.total))
+median.total.df <- merge(median.df, median.total.df, by=c('sex','age'))
+median.total.df$diff.median <- with(median.total.df, med - med.total)
+
+# plot
+#pdf('diff_change_mort_across_all_months.pdf',height=0,width=0,paper='a4r')
+#ggplot(lin.reg.grad, aes(x=age,fill=age,y=grad.total)) +
+#geom_line(alpha=0.1,linetype=2,data = median.total.df,aes(y = diff.median, colour = factor(month))) +
+#geom_point(data = median.total.df, aes(y = diff.median, colour = factor(month))) +
+#geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+#xlab('age group') +
+#ylab('absolute percentage difference between median mortality change and month mortality change') +
+#ggtitle("Median of states’ % change in mortality, centred by overall median of % changes B") +
+#guides(fill=FALSE) +
+#facet_wrap(~sex) +
+#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
+#theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+#panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+#dev.off()
+
+# 5. coefficient of seasonality
+
+# male and female
+
+# variables for y-limits on variance graphs
+min.var.median.plot <- min(dat.var.median$median)
+max.var.median.plot <- max(dat.var.median$median)
+
+pdf('coeff_var_all_ages.pdf',paper='a4r',height=0,width=0)
+dat.var.median$sex <- as.factor(dat.var.median$sex)
+levels(dat.var.median$sex) <- c('male','female')
+print(ggplot(dat.var.median,aes(x=year,color=factor(age.print),y=median)) +
+geom_line(alpha=0.4,linetype=2, size=0.5) +
+ylim(0,max.var.median.plot) +
+ylab('coefficient of seasonality') +
+ggtitle(paste0('Median coefficient of seasonality of mortality rates per year over time')) +
+scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlGn")[c(1:5,7:9)]))(colourCount),guide = guide_legend(title = 'age group')) +
+geom_smooth(method='lm',se=FALSE) +
+facet_wrap(~sex) +
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank()))
+dev.off()
+
+# if choosing to print the entire all age group summary togeter, this finishes the pdf
+dev.off()
+
+###############################################################
+# ENTIRE PERIOD SUMMARIES FOR A PARTICULAR AGE 
+###############################################################
+
+# function to choose summary of particular age
+graph.function.age <- function(age.selected=0,together=1) {
+    
+# select the data for the age
+dat <- subset(dat, age==age.selected)
+
+pdf.name <- paste0('USA_',age.selected,'_summary_',year.start,'_',year.end,'_',model,'.pdf')
+if(together==1){pdf(pdf.name,paper='a4r',height=0,width=0)}
+
+age.single <- as.matrix(age.code[age.code==age.selected,])[2]
+
+# 1. median mortality rate
+
+# function to plot
+jitterplot.median.line <- function() {
+    
+    ggplot(subset(lin.reg.median,age==age.selected),aes(x=month,y=per.100000)) +
+    geom_line(aes(color=SUB_REGION,group=factor(fips)),linetype=1,alpha=1) +
+    xlab('month') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    ylab('median mortality rate (per 100,000)') +
+    ggtitle(paste0(age.single,' : median of mortality over months per state (coloured by geographic region)'))+
+    scale_colour_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +		
+    facet_wrap(~sex) +
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank())
+}
+
+# plot
+if(together==0){pdf(paste0(age.selected,'_line_jitterplot_region.pdf'),paper='a4r',height=0,width=0)}
+print(jitterplot.median.line())
+if(together==0){dev.off()}
+
+jitterplot.median.line.2 <- function() {
+    
+    ggplot(subset(lin.reg.median,age==age.selected),aes(x=month,y=per.100000)) +
+    geom_line(aes(color=climate_region,group=factor(fips)),linetype=1,alpha=1) +
+    xlab('month') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    ylab('median mortality rate (per 100,000)') +
+    ggtitle(paste0(age.single,' : median of mortality over months per state (coloured by climate region)'))+
+    facet_wrap(~sex) +
+    scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'climate region')) +	
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank())
+}
+
+# plot
+if(together==0){pdf(paste0(age.selected,'_line_jitterplot_climate.pdf'),paper='a4r',height=0,width=0)}
+print(jitterplot.median.line.2())
+if(together==0){dev.off()}
+
+# function to plot
+jitterplot.median <- function() {
+    ggplot(subset(lin.reg.median,age==age.selected), aes(x=factor(month.short),fill=factor(month),y=per.100000)) +
+    geom_point(aes(colour=as.factor(sex)),position = position_jitterdodge()) +
+    xlab('month') +
+    ylab('median mortality rate (per 100,000)') +
+    ggtitle(paste0(age.single,' : median of mortality over months for all states')) +
+    guides(fill=FALSE) +
+    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('male','female')) +
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank())
+}
+
+# plot
+#print(jitterplot.median())
+
+# function to plot
+jitterplot.median.5 <- function() {
+    ggplot(subset(lin.reg.median.5,age==age.selected), aes(x=factor(month.short),fill=factor(month),y=per.100000)) +
+    geom_point(aes(colour=as.factor(sex)),position = position_jitterdodge()) +
+    xlab('month') +
+    ylab('median mortality rate (per 100,000)') +
+    ggtitle(paste0(age.single,' : 5-year median of mortality over months for all states')) +
+    guides(fill=FALSE) +
+    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('male','female')) +
+    facet_wrap(~year.5) +
+    theme_minimal()
+}
+
+# plot
+#print(jitterplot.median.5())
+
+# function to plot
+jitterplot.median.10 <- function() {
+    ggplot(subset(lin.reg.median.10,age==age.selected), aes(x=factor(month.short),fill=factor(month),y=per.100000)) +
+    geom_point(aes(colour=as.factor(sex)),position = position_jitterdodge()) +
+    xlab('month') +
+    ylab('median mortality rate (per 100,000)') +
+    ggtitle(paste0(age.print,' : 10-year median of mortality over months for all states')) +
+    guides(fill=FALSE) +
+    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('male','female')) +
+    facet_wrap(~year.10) +
+    theme_minimal()
+}
+
+# plot
+#print(jitterplot.median.10())
+
+# 2. change in mortality
+
+# function to plot
+jitterplot.rate <- function() {
+    ggplot(subset(lin.reg.grad,age==age.selected), aes(x=factor(month.short),fill=factor(month),y=grad.total)) +
+    geom_point(aes(colour=as.factor(sex)),position = position_jitterdodge()) +
+    geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+    xlab('month') +
+    ylab('rate of change of mortality rate') +
+    ggtitle(paste0(age.single,' : percentage change of mortality over months for all states')) +
+    guides(fill=FALSE) +
+    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('male','female')) +
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank())
+}
+
+# plot
+#print(jitterplot.rate())
+
+# function to plot
+jitterplot.rate.line <- function() {
+    ggplot(subset(lin.reg.grad,age==age.selected), aes(x=factor(month.short),fill=factor(month),y=grad.total)) +
+    geom_line(aes(color=SUB_REGION,group=factor(fips)),linetype=1,alpha=1) +
+    geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+    xlab('month') +
+    ylab('rate of change of mortality rate') +
+    ggtitle(paste0(age.single,' : percentage change of mortality over months per state (colored by geographic region)')) +
+    guides(fill=FALSE) +
+    scale_colour_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +	
+    facet_wrap(~sex) +	
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank())
+}
+
+# plot
+if(together==0){pdf(paste0(age.selected,'_line_rate_region.pdf'),paper='a4r',height=0,width=0)}
+print(jitterplot.rate.line())
+if(together==0){dev.off()}
+
+# function to plot
+jitterplot.rate.line.2 <- function() {
+    ggplot(subset(lin.reg.grad,age==age.selected), aes(x=factor(month.short),fill=factor(month),y=grad.total)) +
+    geom_line(aes(color=climate_region,group=factor(fips)),linetype=1,alpha=1) +
+    geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+    xlab('month') +
+    ylab('rate of change of mortality rate') +
+    ggtitle(paste0(age.single,' : percentage change of mortality over months per state (colored by climate region)')) +
+    guides(fill=FALSE) +
+    scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'climate region')) +	
+    facet_wrap(~sex) +	
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank())
+}
+
+# plot
+if(together==0){pdf(paste0(age.selected,'_line_rate_climate.pdf'),paper='a4r',height=0,width=0)}
+print(jitterplot.rate.line.2())
+if(together==0){dev.off()}
+
+# 3. median mortality by month map
+
+# merge selected data to map dataframe for colouring of ggplot
+plot.median <- merge(USA.df,lin.reg.median[lin.reg.median$age==age.selected,c(1:8)],by.x=c('STATE_FIPS','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+plot.median <- merge(plot.median, age.code, by ='age')
+plot.median <- with(plot.median, plot.median[order(sex,age,month,DRAWSEQ,order),])
+
+# function to plot
+plot.function.median <- function(sex.sel) {
+
+    # find limits for plot
+    min.plot <- min(plot.median$per.100000)
+    max.plot <- max(plot.median$per.100000)
+
+    print(ggplot(data=subset(plot.median,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=per.100000),color='black',size=0.01) +
+    scale_fill_gradient(limits=c(min.plot,max.plot),low="green", high="red",guide = guide_legend(title = 'median mortality per 100,000')) +
+    facet_wrap(~month.short) +
+    ggtitle(paste0(age.single,' ',sex.sel,' : median mortality by month ',year.start,'-',year.end)) +
+    theme_map()+
+    theme(legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+# plot
+
+# male
+if(together==0){pdf(paste0(age.selected,'_median_map_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.median('male')
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(age.selected,'_median_map_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.median('female')
+if(together==0){dev.off()}
+
+# 4. rate of change of mortality by month map
+
+# merge selected data to map dataframe for colouring of ggplot
+plot.grad <- merge(USA.df,lin.reg.grad[lin.reg.grad$age==age.selected,c(1:10)],by.x=c('STATE_FIPS','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+plot.grad <- merge(plot.grad, age.code, by ='age')
+plot.grad <- with(plot.grad, plot.grad[order(sex,age,month,DRAWSEQ,order),])
+
+# find limits for plot
+min.plot <- min(plot.grad$grad.total)
+max.plot <- max(plot.grad$grad.total)
+
+# function to plot
+plot.function.grad <- function(sex.sel) {
+    print(ggplot(data=subset(plot.grad,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=grad.total),color='black',size=0.01) +
+    scale_fill_gradient2(limits=c(min.plot,max.plot),low="green", high="red",guide = guide_legend(title = 'percentage change in mortality')) +
+    facet_wrap(~month.short) +
+    xlab('') +
+    ylab('') +
+    ggtitle(paste0(age.single,' ',sex.sel,' : percentage change of mortality by month ',year.start,'-',year.end)) +
+    theme_map()+
+    theme(legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+# plot
+
+# male
+if(together==0){pdf(paste0(age.selected,'_grad_map_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.grad('male')
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(age.selected,'_grad_map_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.grad('female')
+if(together==0){dev.off()}
+
+# 5. coefficient of seasonality against time
+
+# merge with coords file to colour
+dat.var <- merge(dat.var, USA.coords, by.x='fips', by.y='STATE_FIPS')
+
+# function to plot
+plot.function.variation.region.1 <- function(sex.sel) {
+
+    # variables for y-limits on variance graphs
+    min.plot <- min(dat.var$coeff.var[dat.var$age==age.selected])
+    max.plot <- max(dat.var$coeff.var[dat.var$age==age.selected])
+
+    print(ggplot(subset(dat.var,age==age.selected & sex==sex.sel),aes(x=year,color=SUB_REGION,group=factor(fips),y=coeff.var)) +
+    geom_line() +
+    ylim(0,max.plot) +
+    ylab('coefficient of seasonality') +
+    ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : coefficient of seasonality over time (coloured by geographic region)')) +
+    scale_colour_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +	
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank()))
+}
+
+# plot
+
+# male
+if(together==0){pdf(paste0(age.selected,'_coeff_var_line_region_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.region.1(1)
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(age.selected,'_coeff_var_line_region_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.region.1(2)
+if(together==0){dev.off()}
+
+# function to plot
+plot.function.variation.region.2 <- function(sex.sel) {
+
+    # variables for y-limits on variance graphs
+    min.plot <- min(dat.var$coeff.var[dat.var$age==age.selected])
+    max.plot <- max(dat.var$coeff.var[dat.var$age==age.selected])
+
+    print(ggplot(subset(dat.var,age==age.selected & sex==sex.sel)) +
+    geom_jitter(aes(x=year,color=SUB_REGION,y=coeff.var),width=0.3) +
+    ylim(0,max.plot) +
+    ylab('coefficient of seasonality') +
+    ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : coefficient of seasonality of mortality over time (coloured by climate region)')) +
+    scale_colour_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +	
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank()))
+}
+
+# male
+if(together==0){pdf(paste0(age.selected,'_coeff_var_points_region_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.region.2(1)
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(age.selected,'_coeff_var_points_region_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.region.2(2)
+if(together==0){dev.off()}
+
+# function to plot
+plot.function.variation.region.3 <- function(sex.sel) {
+
+    # variables for y-limits on variance graphs
+    min.plot <- min(dat.var$coeff.var[dat.var$age==age.selected])
+    max.plot <- max(dat.var$coeff.var[dat.var$age==age.selected])
+
+    print(ggplot(subset(dat.var,age==age.selected & sex==sex.sel),aes(x=year,color=climate_region,group=factor(fips),y=coeff.var)) +
+    geom_line() +
+    ylim(0,max.plot) +
+    ylab('coefficient of seasonality') +
+    ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : coefficient of seasonality of mortality over time (coloured by geographic region)')) +
+    scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'geographic region')) +	
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank()))
+}
+
+# plot
+
+# male
+if(together==0){pdf(paste0(age.selected,'_coeff_var_line_climate_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.region.3(1)
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(age.selected,'_coeff_var_line_climate_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.region.3(2)
+if(together==0){dev.off()}
+
+# function to plot
+plot.function.variation.region.4 <- function(sex.sel) {
+
+    # variables for y-limits on variance graphs
+    min.plot <- min(dat.var$coeff.var[dat.var$age==age.selected])
+    max.plot <- max(dat.var$coeff.var[dat.var$age==age.selected])
+
+    print(ggplot(subset(dat.var,age==age.selected & sex==sex.sel)) +
+    geom_jitter(aes(x=year,color=climate_region,y=coeff.var),width=0.3) +
+    ylim(0,max.plot) +
+    ylab('coefficient of seasonality') +
+    ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : coefficient of seasonality of mortality over time (coloured by region)')) +
+    scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'geographic region')) +	
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank()))
+}
+
+# male
+if(together==0){pdf(paste0(age.selected,'_coeff_var_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.region.4(1)
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(age.selected,'_coeff_var_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.region.4(2)
+if(together==0){dev.off()}
+
+if(together==1){dev.off()}
+
+# closes bracket at beginning of function
+}
+
+mapply(graph.function.age, age.filter,1)
+
+###############################################################
+# TIME SNAPSHOTS FOR A PARTICULAR AGE 
+###############################################################
+
+snapshot.function <- function(age.selected,sex.sel,year1=1982,year2=1990,year3=2000,year=2010) {
+
+# select the data for the age
+dat <- subset(dat, age==age.selected)
+
+pdf.name <- paste0('USA_',age.selected,'_summary_',year.start,'_snapshot_rwall.pdf')
+pdf(pdf.name,paper='a4r',height=0,width=0)
+
+age.single <- as.matrix(age.code[age.code==age.selected,])[2]
+
+# 1. mortality medians through time map
+
+# merge selected data to map dataframe for colouring of ggplot
+plot.median.10 <- merge(USA.df,lin.reg.median.10[lin.reg.median.10$age==age.selected,],by.x='STATE_FIPS',by.y='fips')
+plot.median.10 <- merge(plot.median.10, age.code, by ='age')
+plot.median.10 <- with(plot.median.10, plot.median.10[order(sex,age,month,DRAWSEQ,order),])
+
+# find limits for plot
+min.plot <- min(plot.median.10$per.100000)
+max.plot <- max(plot.median.10$per.100000)
+
+# function to plot
+plot.function.median.10 <- function(sex.sel,month.sel) {
+    print(ggplot(data=subset(plot.median.10,sex==sex.sel & month==month.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=per.100000),color='black',size=0.01) +
+    scale_fill_gradient(limits=c(min.plot,max.plot),low="green", high="red",guide = guide_legend(title = 'median mortality per 100,000')) +
+    facet_wrap(~year.10) +
+    ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : ', month.names[month.sel], ' 10-year median mortality over time ')) +
+    theme_map()+
+    theme(legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+# plot
+
+# male
+#pdf('median_10year_m.pdf',height=0,width=0,paper='a4r')
+mapply(plot.function.median.10, sex.sel=1,month.sel=c(1:12))
+#dev.off()
+
+# female
+#pdf('median_10year_f.pdf',height=0,width=0,paper='a4r')
+mapply(plot.function.median.10, sex.sel=2,month.sel=c(1:12))
+#dev.off()
+
+# 2. mortality snapshots through time map
+
+plot.function.median.filter <- function(month.sel) {
+
+# filter selected years
+selected.years <- c(year1,year2,year3,year4)
+plot.mortality.filter <- subset(dat, age==age.selected & year %in% selected.years)
+
+# merge selected data to map dataframe for colouring of ggplot
+plot.mortality.filter <- merge(USA.df,plot.mortality.filter[plot.mortality.filter$age==age.selected,],by.x='STATE_FIPS',by.y='fips')
+plot.mortality.filter <- merge(plot.mortality.filter, age.code, by ='age')
+plot.mortality.filter <- with(plot.mortality.filter, plot.mortality.filter[order(sex,age,month,DRAWSEQ,order),])
+
+# find limits for plot
+min.plot <- min(plot.mortality.filter$per.100000)
+max.plot <- max(plot.mortality.filter$per.100000)
+
+print(ggplot(data=subset(plot.mortality.filter,month==month.sel & sex==sex.sel),aes(x=long,y=lat,group=group)) +
+geom_polygon(aes(fill=per.100000),color='black',size=0.01) +
+scale_fill_gradient(limits=c(min.plot,max.plot),low="green",high="red",guide = guide_legend(title = 'median mortality per 100,000')) +
+facet_wrap(~year) +
+ggtitle(paste0(age.single,' ',sex.sel,' : ', month.names[month.sel], ' snapshot mortality over time ')) +
+theme_map()+
+theme(legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+
+# plot# set colour scheme for 5 colour map
+map.colour <- brewer.pal(5,"Set1")
+names(map.colour) <- levels(as.factor(USA.df$SUB_REGION))
+
+# male
+#pdf('mortality_snapshot_m.pdf',height=0,width=0,paper='a4r')
+mapply(plot.function.median.filter, sex.sel=1,month.sel=c(1:12))
+#dev.off()
+
+# female
+#pdf('mortality_snapshot_f.pdf',height=0,width=0,paper='a4r')
+mapply(plot.function.median.filter, sex.sel=2,month.sel=c(1:12))
+#dev.off()
+
+dev.off()
+}
+
+# closes bracket at beginning of function
+}
+
+###############################################################
+# ALL AGES FOR A PARTICULAR MONTH 
+###############################################################
+
+jitterplot.grad.by.month <- function(month.selected) {
+
+        # make sure the months are in the correct order for plotting
+        lin.reg.grad$month.short <- reorder(lin.reg.grad$month.short,lin.reg.grad$month)
+       
+        median.df <- ddply(lin.reg.grad, .(sex, age), summarise, med = median(grad.total))
+          
+        print(ggplot(subset(lin.reg.grad,month==month.selected), aes(x=age,fill=age,y=grad.total)) +
+        geom_point(aes(colour=lat,group=factor(sex)),position = position_dodge(width = 3)) +
+        geom_line(data = median.df, aes(y = med,group=factor(sex)),linetype=2, size=0.5,colour='forest green') +
+        geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+        xlab('age group') +
+        ylab('percentage change of death rate') +
+        ggtitle(paste0(month.short[month.selected]," : percentage change of mortality across age groups by state")) +
+        guides(fill=FALSE) +
+        scale_colour_gradient(limits=c(25,50),low='red',high='blue') +
+        theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")))
+}
+
+pdf('percentage_change_across_age_groups_all_months.pdf',paper='a4r',height=0,width=0)
+mapply(jitterplot.grad.by.month, c(1:12))
+dev.off()
+
+# map of the use by state in case needed
+pdf('usa_map_region.pdf',height=0,width=0,paper='a4r')
+ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
+geom_polygon(aes(fill=SUB_REGION),color='black',size=0.1) +
+scale_fill_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +		
+theme_map()
+dev.off()
+
+pdf('usa_map_climate.pdf',height=0,width=0,paper='a4r')
+ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
+geom_polygon(aes(fill=climate_region),color='black',size=0.1) +
+scale_fill_manual(values=map.climate.colour,guide = guide_legend(title = 'geographic region')) +		
+theme_map()
+dev.off()
+
+
