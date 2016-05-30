@@ -242,6 +242,10 @@ plot.median.jan.jul <- merge(USA.df,lin.reg.median.jan.jul, by.x='STATE_FIPS',by
 plot.median.jan.jul <- merge(plot.median.jan.jul, age.code, by ='age')
 plot.median.jan.jul <- with(plot.median.jan.jul, plot.median.jan.jul[order(sex,age,DRAWSEQ,order),])
 
+# find greatest and smallest variation within a single age group for summary statistics
+plot.median.jan.jul.max.min <- ddply(plot.median.jan.jul,.(age,sex),summarize,min=min(percent.change),max=max(percent.change))
+plot.median.jan.jul.max.min$diff <- with(plot.median.jan.jul.max.min,max-min)
+
 # make sure the age groups are in the correct order for plotting
 plot.median.jan.jul$age.print <- with(plot.median.jan.jul,reorder(age.print,age))
 
@@ -372,7 +376,7 @@ median.median.df <- merge(median.df, median.median.df, by=c('sex','age'))
 median.median.df$diff.median <- with(median.median.df, med - med.med)
 
 # summary statistics about heatmap USE FOR POSTER THEN DELETE THIS COMMENT
-median.stats.df <- ddply(median.median.df, .(sex,age), summarise, min=min(diff.median),max=max(diff.median))
+median.stats.df <- ddply(median.median.df, .(sex,age), summarise, min=min(med),max=max(med))
 median.stats.df$min.max.diff <- with(median.stats.df, max-min)
 
 # plot deviations from median
