@@ -33,7 +33,7 @@ global.lon.lat <- read.csv('global_lon_lat.csv')
 global.lon.lat$lon <- global.lon.lat$lon - 180
 
 # process global lon lat through function
-lon.lat.state <- latlong2state(global.lon.lat)
+lon.lat.state <- latlong2state(global.lon.lat[,c(2:3)])
 lon.lat.state <- as.matrix(lon.lat.state)
 
 # bind the lon lat data frame with the processed lon lat filter
