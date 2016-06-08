@@ -1,0 +1,25 @@
+rm(list=ls())
+
+library(WavletComp)
+
+# load data and filter results
+dat <- readRDS('USA_rate_pred_type_1a_1982_2010')
+dat <- subset(dat, fips==1 & sex==1 & age==75)
+
+# prepare data frame for anaylsis
+my.data <- data.frame(log.rate=log(dat$rate.adj),log.deaths=log(dat$deaths))
+
+# perform wavelet analysis
+my.w <- analyze.wavelet(my.data, "log.deaths",
+			lowerPeriod=8, upperPeriod=16,
+			loess.span = 3/26,
+			dt= 1, dj = 1/1000,
+			make.pval= T, n.sim = 10)
+
+# plot wavelet analysis
+wt.image(my.w, n.levels = 250,
+	legend.params = list(lab = "wavelet power levels"),
+	periodlab = "periods (months)", show.date = T, timelab = "",
+	graphics.reset = F)
+abline(h = log(12)/log(2))
+mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
