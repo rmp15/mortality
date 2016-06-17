@@ -45,7 +45,7 @@ geom_line(color='forest green',aes(x=ID,y=100000*rate)) +
 xlab('year') +
 ylab('death rate (per 100,000)') +
 scale_x_discrete(labels=year.list) +
-theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 20),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),axis.text.x = element_text(angle=90)))
 dev.off()
 }
