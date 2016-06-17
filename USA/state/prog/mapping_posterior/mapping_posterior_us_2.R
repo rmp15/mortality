@@ -278,7 +278,7 @@ plot.function.median.jan.jul <- function(sex.sel) {
     ylab('') +
     ##ggtitle(paste0(sex.lookup[sex.sel],' : posterior percentage difference between median January and July mortality ',year.start,'-',year.end)) +
     theme_map() +
-    theme(legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+    theme(text = element_text(size = 15),legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
 }
 
 # male
@@ -316,7 +316,7 @@ plot.function.grad.max.min <- function(sex.sel) {
     ylab('') +
     ##ggtitle(paste0(sex.lookup[sex.sel],' : posterior difference between maximum and minimum mortality rates change ',year.start,'-',year.end)) +
     theme_map()+
-    theme(legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+    theme(text = element_text(size = 15),legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
 }
 
 # male
@@ -351,7 +351,7 @@ plot.function.var.state <- function(sex.sel) {
     ylab('') +
     ##ggtitle(paste0(sex.lookup[sex.sel],' : median coefficient of seasonality ',year.start,'-',year.end)) +
     theme_map()+
-    theme(legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+    theme(text = element_text(size = 15),legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
 }
 
 # male
@@ -382,7 +382,7 @@ ylab('percentage change of death rate') +
 guides(fill=FALSE) +
 facet_wrap(~sex) +
 scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
 axis.text.x = element_text(angle=90))
 dev.off()
@@ -408,7 +408,7 @@ ylab('absolute percentage difference between median mortality change and month m
 guides(fill=FALSE) +
 facet_wrap(~sex) +
 scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), 
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
 
@@ -427,7 +427,7 @@ scale_x_discrete(labels=age.print) +
 scale_y_discrete(breaks=c(seq(1,12,by=1)),labels=month.short)   +
 facet_wrap(~sex) +
 ###ggtitle('Heatmap : percentage change in mortality, centred by overall median of percentage changes') +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), 
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
 
@@ -471,7 +471,7 @@ ylab('coefficient of seasonality') +
 scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlGn")[c(1:5,7:9)]))(colourCount),guide = guide_legend(title = 'age group')) +
 geom_smooth(method='lm',se=FALSE) +
 facet_wrap(~sex) +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank()))
 dev.off()
 
@@ -504,7 +504,7 @@ geom_hline(yintercept=0, linetype=2,alpha=0.5) +
 scale_colour_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +
 guides(colour=FALSE) +
 facet_wrap(~SUB_REGION) +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
 axis.text.x = element_text(angle=90)))
 dev.off()
@@ -523,7 +523,7 @@ facet_wrap(~SUB_REGION) +
 geom_hline(yintercept=0, linetype=2,alpha=0.5) +
 scale_colour_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +
 guides(colour=FALSE) +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
 axis.text.x = element_text(angle=90)))
 dev.off()
@@ -548,7 +548,7 @@ facet_wrap(~sex) +
 geom_hline(yintercept=0, linetype=2,alpha=0.5) +
 scale_colour_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +
 guides(colour=FALSE) +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
 axis.text.x = element_text(angle=90)))
 dev.off()
@@ -575,7 +575,7 @@ plot.function.var.grad <- function(sex.sel) {
     ylab('') +
     ##ggtitle(paste0(sex.lookup[sex.sel],' : posterior difference between maximum and minimum mortality rates change ',year.start,'-',year.end)) +
     theme_map()+
-    theme(legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+    theme(text = element_text(size = 15),legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
 }
 
 # male
@@ -615,7 +615,7 @@ scale_x_discrete(labels=age.print) +
 scale_y_discrete(breaks=c(seq(1,12,by=1)),labels=month.short)   +
 facet_wrap(~sex) +
 #ggtitle('Heatmap : median mortality ranked by month') +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), 
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
 
@@ -1169,7 +1169,7 @@ ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
 geom_polygon(aes(fill=SUB_REGION),color='black',size=0.1) +
 scale_fill_manual(values=map.region.colour,guide = guide_legend(title = '')) +
 theme_map() +
-theme(legend.justification=c(1,0), legend.position=c(1,0))
+theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position=c(1,0))
 dev.off()
 
 pdf('usa_map_climate.pdf',height=0,width=0,paper='a4r')
@@ -1177,7 +1177,7 @@ ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
 geom_polygon(aes(fill=climate_region),color='black',size=0.1) +
 scale_fill_manual(values=map.climate.colour,guide = guide_legend(title = '')) +
 theme_map() +
-theme(legend.justification=c(1,0), legend.position=c(1,0))
+theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position=c(1,0))
 dev.off()
 
 setwd('..')
