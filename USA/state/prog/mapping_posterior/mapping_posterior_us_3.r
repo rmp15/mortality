@@ -1033,9 +1033,10 @@ plot.function.variation.region.2 <- function(sex.sel) {
     min.plot <- min(dat.var$coeff.var[dat.var$age==age.selected])
     max.plot <- max(dat.var$coeff.var[dat.var$age==age.selected])
 
-    print(ggplot(subset(dat.var,age==age.selected & sex==sex.sel)) +
-    geom_jitter(aes(x=year,color=SUB_REGION,y=coeff.var),width=0.3) +
-    geom_line(data=subset(dat.var.median,age==age.selected & sex==sex.lookup[sex.sel]),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=median)) +
+    print(ggplot() +
+    geom_jitter(data=subset(dat.var,age==age.selected & sex==sex.sel),aes(x=year,color=SUB_REGION,y=coeff.var),width=0.3) +
+    geom_line(data=subset(dat.var.national,age==age.selected & sex==sex.sel),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=coeff.var)) +
+    geom_line(data=subset(dat.var.median,age==age.selected & sex==sex.sel),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=median)) +
     ylim(0,max.plot) +
     ylab('coefficient of seasonality') +
     #ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : coefficient of seasonality of mortality over time (coloured by climate region)')) +
@@ -1094,7 +1095,8 @@ plot.function.variation.region.4 <- function(sex.sel) {
 
     print(ggplot(subset(dat.var,age==age.selected & sex==sex.sel)) +
     geom_jitter(aes(x=year,color=climate_region,y=coeff.var),width=0.3) +
-    geom_line(data=subset(dat.var.median,age==age.selected & sex==sex.lookup[sex.sel]),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=median)) +
+    geom_line(data=subset(dat.var.national,age==age.selected & sex==sex.sel),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=coeff.var)) +
+    #geom_line(data=subset(dat.var.median,age==age.selected & sex==sex.lookup[sex.sel]),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=median)) +
     ylim(0,max.plot) +
     ylab('coefficient of seasonality') +
     #ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : coefficient of seasonality of mortality over time (coloured by region)')) +
@@ -1112,6 +1114,77 @@ if(together==0){dev.off()}
 # female
 if(together==0){pdf(paste0(age.selected,'_coeff_var_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
 plot.function.variation.region.4(2)
+if(together==0){dev.off()}
+
+# centred around the national coefficient of seasonality
+
+# create data frame to subtract national coefficient of seasonality from each state
+# THIS IS NOT CORRECT SOMEHOW FIX
+#dat.var.delta <- merge(dat.var[,c(1:4,7)], dat.var.national[,c(1:3,6)], by=c('sex','age','year'))
+#names(dat.var.delta) <- c('sex','age','year','fips','coeff.var.state','coeff.var.nat')
+#dat.var.delta$coeff.var.delta <- with(dat.var.delta,coeff.var.state-coeff.var.nat)
+
+dat.var.delta <- merge(dat.var[,c(1:4,7)], dat.var.median, by=c('sex','age','year'))
+names(dat.var.delta) <- c('sex','age','year','fips','coeff.var.state','coeff.var.med','age.print')
+dat.var.delta$coeff.var.delta <- with(dat.var.delta,coeff.var.state-coeff.var.med)
+dat.var.delta <- merge(dat.var.delta, shapefile.data, by.x='fips',by.y='STATE_FIPS')
+
+# function to plot
+plot.function.variation.centred.1 <- function(sex.sel) {
+    
+    # variables for y-limits on variance graphs
+    min.plot <- min(dat.var.delta$coeff.var.delta[dat.var.delta$age==age.selected])
+    max.plot <- max(dat.var.delta$coeff.var.delta[dat.var.delta$age==age.selected])
+    
+    print(ggplot(subset(dat.var.delta,age==age.selected & sex==sex.sel)) +
+    geom_jitter(aes(x=year,color=SUB_REGION,y=coeff.var.delta),width=0.3) +
+    ylim(min.plot,max.plot) +
+    ylab('state relative to national coefficient of seasonality') +
+    geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+    #ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : coefficient of seasonality of mortality over time (coloured by region)')) +
+    scale_colour_manual(values=map.region.colour,guide = guide_legend(title = 'geographic region')) +
+    theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank()))
+}
+
+# male
+if(together==0){pdf(paste0(age.selected,'_coeff_var_points_region_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.centred.1(1)
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(age.selected,'_coeff_var_points_region_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.centred.1(2)
+if(together==0){dev.off()}
+
+# function to plot
+plot.function.variation.centred.2 <- function(sex.sel) {
+    
+    # variables for y-limits on variance graphs
+    min.plot <- min(dat.var.delta$coeff.var.delta[dat.var.delta$age==age.selected])
+    max.plot <- max(dat.var.delta$coeff.var.delta[dat.var.delta$age==age.selected])
+    
+    print(ggplot(subset(dat.var.delta,age==age.selected & sex==sex.sel)) +
+    geom_jitter(aes(x=year,color=climate_region,y=coeff.var.delta),width=0.3) +
+    ylim(min.plot,max.plot) +
+    ylab('state relative to national coefficient of seasonality') +
+    geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+    #ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : coefficient of seasonality of mortality over time (coloured by region)')) +
+    scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'climate region')) +
+    theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank()))
+}
+
+# male
+if(together==0){pdf(paste0(age.selected,'_coeff_var_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.centred.2(1)
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(age.selected,'_coeff_var_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.variation.centred.2(2)
 if(together==0){dev.off()}
 
 # 6. summary of timing of peak mortality
@@ -1156,6 +1229,7 @@ setwd('..')
 
 # use mapply to perform age specific function chosen ages (0 at end means pdfs separate)
 #mapply(graph.function.age,age.filter,0)
+mapply(graph.function.age,0,0)
 
 ###############################################################
 # TIME SNAPSHOTS FOR A PARTICULAR AGE 
