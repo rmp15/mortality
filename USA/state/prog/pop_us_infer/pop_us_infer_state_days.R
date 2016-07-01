@@ -197,7 +197,7 @@ geom_line(data=pop.state.long[c(1:100),],color='blue',aes(x=id,y=pop.adj.exp.jun
 xlab('time') +
 ylab('population') +
 scale_x_continuous(breaks=seq(0,plot.limit,12)) +
-theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+theme(text = element_text(size = 15), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
 axis.text.x = element_text(angle=0))
 

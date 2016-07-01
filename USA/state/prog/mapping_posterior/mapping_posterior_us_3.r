@@ -17,7 +17,7 @@ library(plyr)
 #dat <- readRDS('USA_rate_pred_1982_2010_rw_all')
 
 # national random walk spatially correlated (type Ia)
-dat <- readRDS('USA_rate_pred_type1a_1982_2010')
+dat <- readRDS('../../data/USA_rate_pred_type1a_1982_2010')
 model <- 'type1a'
 
 # nationalised data
@@ -29,7 +29,7 @@ dat.national$rate.pred <- with(dat.national,deaths.pred/pop.adj)
 dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
 # add fips lookup
-fips.lookup <- read.csv('name_fips_lookup.csv')
+fips.lookup <- read.csv('../../data/name_fips_lookup.csv')
 
 # random walk per time (type II)
 #dat <- readRDS('USA_rate_pred_type2_55_male_1982_2010')
@@ -159,7 +159,7 @@ levels(lin.reg.grad$sex) <- c('male','female')
 devtools::source_gist("33baa3a79c5cfef0f6df")
 
 # load shapefile
-us <- readOGR(dsn="shapefiles",layer="states")
+us <- readOGR(dsn="../../data/shapefiles",layer="states")
 
 # convert shapefile to Albers equal area
 us_aea <- spTransform(us, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"))
@@ -269,8 +269,8 @@ names(map.climate.colour) <- levels(as.factor(USA.df$climate_region))
 ###############################################################
 
 # change path to write files to
-dir.create('output')
-setwd('output')
+dir.create('../../output/mapping_posterior')
+setwd('../../output/mapping_posterior')
 dir.create('national_summary')
 setwd('national_summary')
 
@@ -376,7 +376,7 @@ plot.function.grad.max.min <- function(sex.sel) {
 
     print(ggplot(data=subset(plot.grad.max.min,sex==sex.sel),aes(x=long,y=lat,group=group)) +
     geom_polygon(aes(fill=difference),color='black',size=0.01) +
-    scale_fill_gradient2(limits=c(min.plot,max.plot),low="#000033", high="#003300",guide = guide_legend(title = 'difference\nbetween\nmaximum and\nminimum\nrates of change\nfor\nindiviual\nmonths')) +
+    scale_fill_gradient2(limits=c(min.plot,max.plot),low="#000033", high="#003300",guide = guide_legend(title = 'percentage\npoint\ndifference')) +
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
@@ -421,12 +421,12 @@ plot.function.var.state <- function(sex.sel) {
 }
 
 # male
-pdf('jan_july_grad_m.pdf',height=0,width=0,paper='a4r')
+pdf('jan_july_coeff_var_m.pdf',height=0,width=0,paper='a4r')
 plot.function.var.state(1)
 dev.off()
 
 # female
-pdf('jan_july_grad_f.pdf',height=0,width=0,paper='a4r')
+pdf('jan_july_coeff_var_f.pdf',height=0,width=0,paper='a4r')
 plot.function.var.state(2)
 dev.off()
 
@@ -1047,11 +1047,13 @@ plot.function.variation.region.2 <- function(sex.sel) {
 }
 
 # male
+# SOMETHING WRONG WITH THIS
 if(together==0){pdf(paste0(age.selected,'_coeff_var_points_region_m.pdf'),height=0,width=0,paper='a4r')}
 plot.function.variation.region.2(1)
 if(together==0){dev.off()}
 
 # female
+# SOMETHING WRONG WITH THIS
 if(together==0){pdf(paste0(age.selected,'_coeff_var_points_region_f.pdf'),height=0,width=0,paper='a4r')}
 plot.function.variation.region.2(2)
 if(together==0){dev.off()}
