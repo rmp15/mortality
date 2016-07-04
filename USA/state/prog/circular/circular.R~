@@ -4,15 +4,14 @@ require(CircStats)
 
 # coding for graph-friendly information
 age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
-age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85),
-                       age.print=age.print)
+age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85), age.print=age.print)
 sex.lookup <- c('male','female')
 month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
 
-state.lookup <- read.csv('../data/fips_lookup/name_fips_lookup.csv')
+state.lookup <- read.csv('../../data/name_fips_lookup.csv')
 
 # load data and filter results
-dat <- readRDS('../data/mortality/USA_rate_pred_type1a_1982_2010')
+dat <- readRDS('../../data/USA_rate_pred_type1a_1982_2010')
 
 # perform for nationalised data
 library(plyr)
@@ -113,9 +112,9 @@ names(dat.COM) <- c('age','sex','COM','lowerCI','upperCI')
 dat.COM$sex <- as.factor(dat.COM$sex)
 levels(dat.COM$sex) <- sex.lookup
 
-write.csv(dat.COM,'../output/USA_COM_1982_2010.csv')
+write.csv(dat.COM,'../../output/circular/USA_COM_1982_2010.csv')
 
-pdf('../output/USA_COM_1982_2010.pdf')
+pdf('../../output/circular/USA_COM_1982_2010.pdf')
 library(ggplot2)
 ggplot(data=dat.COM,aes(x=COM,y=factor(age))) +
 geom_point(fill='red',size=3,color='red') +
@@ -128,3 +127,48 @@ facet_wrap(~sex)+
 theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
+
+# function to find centre of mass of seasonality subnationally
+circular.age.mean.subnational <- function(age.selected,sex.selected,fips.selected) {
+
+# take dates as subset
+dat <- subset(dat,age==age.selected & sex==sex.selected & fips==fips.selected)
+
+# take months column and repeat death column times
+dat <- rep(dat$month,dat$deaths)
+
+# convert months -> radians
+conv <- 2*pi/12
+
+# find circular mean, where 1 is January and 0 is December.
+dat.mean <- circ.mean(conv*(dat))/conv
+dat.mean <- (dat.mean + 12) %% 12
+
+# create 1000 bootstrap samples
+resamples <- lapply(1:1000, function(i)sample(dat, replace = T))
+
+# function for circular mean
+circ.bootstrap <-function(data.frame) {
+    dat.mean <- circ.mean(conv*(data.frame))/conv
+    dat.mean <- (dat.mean + 12) %% 12
+    return(dat.mean)
+}
+
+# calculate COM for each bootstrap sample
+set.seed(123)
+COM.bootstrap <- (sapply(resamples, circ.bootstrap))
+COM.bootstrap.5 <- sort(COM.bootstrap)[25]
+COM.bootstrap.95 <- sort(COM.bootstrap)[975]
+
+# calculate bootstrap std. error
+std.error <- sqrt(var(COM.bootstrap))
+
+# compile information for output of function
+dat.frame <- c(age.selected,sex.selected,dat.mean,COM.bootstrap.5,COM.bootstrap.95)
+
+return(dat.frame)
+#return(COM.bootstrap)
+}
+
+thirtyfive.female.calif <- circular.age.mean.subnational(35,2,6)
+thirtyfive.female.florid <- circular.age.mean.subnational(35,2,12)
