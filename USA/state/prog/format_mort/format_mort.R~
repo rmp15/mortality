@@ -1,5 +1,7 @@
 rm(list=ls())
 
+library(foreign)
+
 # arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
 
@@ -34,7 +36,7 @@ dat.clean <- data.frame(rectype=NA,resident=NA,stateocc_fips=NA,countyocc_fips=N
 			)
 
 #for(i in c(1:length(dat))) {
-for(i in c(1:50)) {
+for(i in c(1:500)) {
 	rectype 	<- 	as.character(substr(dat[i],19,19))
 	resident 	<- 	as.character(substr(dat[i],20,20))
 	stateocc_fips 	<- 	as.character(substr(dat[i],21,22))
