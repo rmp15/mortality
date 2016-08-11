@@ -1,0 +1,15 @@
+
+MCD files from 1979-1997 were downloaded and infixed by Rodrigo Dias on 
+October, 2005. Infix was adapted from Sandeep's infix99.do using codebooks
+specific to those years. Some variables considered "duplicates" and blank
+variables were dropped. For example, there are two similar variables for state,
+one of which is coded through FIPS codes. State variables not coded by the 
+FIPS were dropped to conserve memory space. 
+
+Original MCD files 1968-1997 were acquired from the NBER (National Bureau of 
+Economics Research) database by Rodrigo Dias. The .zip files were burned into 
+a CD and is at the PIT as of October, 2005.
+
+The files from 1998-2001 were infix(ed) by Sandeep. These files were
+received from the NCHS with complete county codes. 
+The 2002 file was infix(ed) by Sandeep. 
