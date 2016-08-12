@@ -10,6 +10,9 @@ args <- commandArgs(trailingOnly=TRUE)
 year <- as.numeric(args[1])
 file.type <- as.character(args[2])
 
+year <- 2013
+file.type <- 'USPART2'
+
 # file name
 file.name 	<- paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.',file.type)
 
@@ -91,6 +94,12 @@ names.2		<- c('race_detail','origin','hispanic_recode')
 # load file part 1
 dat.1	 	<- 	readr::read_fwf(file.name, fwf_positions(start.positions.1,end.positions.1,names.1), progress=interactive())
 
+# establish any problems in data extraction
+problems.1 <- problems(dat.1)
+problem.rows <- sort(unique(problems.1$row))
+dat.problem  <- 
+write.csv(problems.1, paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.',file.type,'.problems.csv'))
+
 # load file part 2
 dat.2	 	<- 	readr::read_fwf(file.name, fwf_positions(start.positions.2,end.positions.2,names.2), progress=interactive())
 
@@ -98,7 +107,7 @@ dat.2	 	<- 	readr::read_fwf(file.name, fwf_positions(start.positions.2,end.posit
 dat <- cbind(dat.1,dat.2)
 
 # reorder to kyle/sandeep order
-dat <- dat[,c()]
+dat <- dat[,c(1:30,94:96,31:93)]
 
 write.dta(dat,paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.',file.type,'.processed.dta'))
 write.csv(dat,paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.',file.type,'.processed.csv'))

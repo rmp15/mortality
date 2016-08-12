@@ -91,6 +91,12 @@ names.2		<- c('race_detail','origin','hispanic_recode')
 # load file part 1
 dat.1	 	<- 	readr::read_fwf(file.name, fwf_positions(start.positions.1,end.positions.1,names.1), progress=interactive())
 
+# establish any problems in data extraction
+problems.1 <- problems(dat.1)
+problem.rows <- sort(unique(problems.1$row))
+dat.problem  <- dat.1[problem.rows,]
+write.csv(dat.problem, paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.',file.type,'.problems.csv'))
+
 # load file part 2
 dat.2	 	<- 	readr::read_fwf(file.name, fwf_positions(start.positions.2,end.positions.2,names.2), progress=interactive())
 
