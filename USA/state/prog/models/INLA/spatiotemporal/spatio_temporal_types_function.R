@@ -20,7 +20,7 @@ require(mailR)
 ifelse(!dir.exists(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/')), dir.create(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/')), FALSE)
 
 # load USA data
-dat.inla.load <- readRDS('mortality/datus_state_rates_1982_2010')
+dat.inla.load <- readRDS('../../output/prep_data/datus_state_rates_1982_2010')
 
 # available ages
 age.filter <- unique(dat.inla.load$age)

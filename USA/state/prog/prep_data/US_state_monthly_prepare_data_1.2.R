@@ -1,18 +1,26 @@
 rm(list=ls())
 
+# break down the arguments from Rscript
+args <- commandArgs(trailingOnly=TRUE)
+year.start.arg <- as.numeric(args[1])
+year.end.arg <- as.numeric(args[2])
+
 library(dplyr)
 library(foreign)
 
 # Function to summarise a year's data. x is the year in 2 number form (e.g. 1989 -> 89).
 # y is the number of rows. default (-1) is all rows.
 yearsummary  <- function(x=2000,y=-1) {
+
+	print(paste0('year ',x,' now being processed'))
   
 	# load year of deaths
-	dat.name <- paste0("deaths",x,".dta")
+	file.loc <- '~/data/mortality/US/state/processed/county/'
+	dat.name <- paste0(file.loc,"deaths",x,".dta")
 	dat <- read.dta(dat.name)
 
 	# load lookup for fips
-	fips.lookup <- read.csv('fipsMap.csv')
+	fips.lookup <- read.csv('~/data/mortality/US/state/lookup/fipsMap.csv')
 	dat$fips <- as.numeric(dat$fips)
 
 	# merge files by fips code and keep stateFips info
@@ -70,7 +78,7 @@ appendyears  <- function(x=1980, y=1981) {
 }
 
 # append summarised dataset
-dat.appended <- appendyears(1982,2010)
+dat.appended <- appendyears(year.start.arg,year.end.arg)
 
 # reorder appended data
 dat.appended <- dat.appended[order(dat.appended$fips,dat.appended$sex,dat.appended$age,dat.appended$year,dat.appended$month),]
@@ -83,7 +91,7 @@ dat.appended   <- na.omit(dat.appended)
 dat.appended$iso3 <- "USA"
 
 # add inferred population data by day
-pop.state <- readRDS('statePopulations_infer_by_days')
+pop.state <- readRDS('../../output/pop_us_infer/statePopulations_infer_by_days')
 pop.state$fips <- as.integer(pop.state$fips)
 
 # merge deaths and population files
@@ -104,8 +112,13 @@ dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat
 dat.merged$rate <- dat.merged$deaths / dat.merged$pop
 dat.merged$rate.adj <- dat.merged$deaths / dat.merged$pop.adj
 
+# create output directory
+ifelse(!dir.exists("../../output/prep_data"), dir.create("../../output/prep_data"), FALSE)
+
 # plot to check rates
+pdf(paste0('../../output/prep_data/rate_compared_',year.start.arg,'_',year.end.arg,'.pdf'),height=0,width=0,paper='a4r')
 plot(dat.merged$rate,dat.merged$rate.adj)
+dev.off()
 
 # output file as RDS
-saveRDS(dat.merged,'datus_state_rates_1982_2010')
+saveRDS(dat.merged,paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
