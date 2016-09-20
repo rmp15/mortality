@@ -47,6 +47,8 @@ USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"
 
 ##############
 
+library(INLA)
+
 # function to enable age group and sex to be selected
 inla.function <- function(age.sel=55,sex.sel=1,year.start=1982,year.end=2010,type=1,cluster=0) {
 
@@ -57,6 +59,9 @@ sex <- sex.sel
 age <- age.sel
 fit.years <- year.start:year.end
 dat.inla <- dat.inla[dat.inla$sex==sex & dat.inla$age==age & dat.inla$year %in% fit.years,]
+
+# load drawseq lookup
+drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
 
 dat.inla <- merge(dat.inla,drawseq.lookup, by='fips')
 
@@ -185,10 +190,10 @@ file.loc <- paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/a
 ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
 # save all parameters of INLA model
-parameters.name <- paste0(USA_rate_pred_type1a_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_parameters')
+parameters.name <- paste0('USA_rate_pred_type1a_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_parameters')
 mod1a$misc <- NULL
 mod1a$.args$.parent.frame <- NULL
-if(cluster==0){saveRDS(mod1a,paste0(file.loc,'/',parameters.name)}
+if(cluster==0){saveRDS(mod1a,paste0(file.loc,'/',parameters.name))}
 if(cluster==1){saveRDS(mod1a,paste0('../output/pred/',parameters.name))}
 
 # save summary of INLA model
@@ -550,7 +555,7 @@ send.mail(from = sender,
 ################
 
 # input arguments into function to perform inference
-#mapply(inla.function,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.end.arg,type=type.arg,cluster=cluster.arg)
+mapply(inla.function,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.end.arg,type=type.arg,cluster=cluster.arg)
 
 #mapply(inla.function,age.sel=c(75,85,0,5,15,25,35,45),sex.sel=1,year.start=1982,year.end=2010,type=2,cluster=0)
 #mapply(inla.function,age.sel=c(55,65,75,85,0,5,15,25,35,45),sex.sel=2,year.start=1982,year.end=2010,type=2,cluster=0)

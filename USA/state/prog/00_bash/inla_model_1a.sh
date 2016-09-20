@@ -6,7 +6,7 @@
 
 # MALE
 
-for age in $(0);
+for age in 0;
 
 do
 
@@ -18,7 +18,7 @@ done;
 
 # FEMALE
 
-for age in $(0);
+for age in 0;
 
 do
 

@@ -33,6 +33,9 @@ library(INLA)
 file.loc <- '~/git/mortality/USA/state/output/adj_matrix_create/'
 ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
+# save DRAWSEQ lookup
+saveRDS(drawseq.lookup,paste0(file.loc,'drawseq.lookup.rds'))
+
 nb2INLA(paste0(file.loc,"USA.graph"),USA.nb)
 USA.adj <- paste0(file.loc,"USA.graph")
 

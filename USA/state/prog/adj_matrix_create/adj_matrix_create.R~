@@ -30,10 +30,13 @@ USA.nb <- poly2nb(USA.gen, queen=1)
 library(INLA)
 
 # create directory for output
-file.loc <- '~/git/mortality/USA/state/output/adj_matrix_create'
+file.loc <- '~/git/mortality/USA/state/output/adj_matrix_create/'
 ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
-nb2INLA("../../output/adj_matrix_create/USA.graph",USA.nb)
-USA.adj <- "USA.graph"
+# save DRAWSEQ lookup
+saveRDS(drawseq.lookup,paste0(file.loc,'drawseq.lookup.rds'))
+
+nb2INLA(paste0(file.loc,"USA.graph"),USA.nb)
+USA.adj <- paste0(file.loc,"USA.graph")
 
 
