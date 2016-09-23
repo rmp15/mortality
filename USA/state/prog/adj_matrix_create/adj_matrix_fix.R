@@ -4,6 +4,13 @@ rm(list=ls())
 dat <- read.table('~/git/mortality/USA/state/output/adj_matrix_create/USA.graph',header=F, sep= ' ', col.names = (paste0('V',seq_len(10))),fill=T)
 
 # adjust the file to fix Hawaii and Alaska connections
+dat[2,c(2,3)] <- c(1,25)
+dat[3,c(2:5)] <- c(3,9,12,51)
+dat[26,c(2:6)] <- c(4,1,12,23,37)
+dat[51,c(2,3))] <- c(1,2)
 
+# replace NAs with blanks
+dat[is.na(dat)] <- ' '
 
-
+# save file as txt file
+write.table(dat, '~/git/mortality/USA/state/output/adj_matrix_create/USA.graph.edit.test', sep="\t", row.names=FALSE,col.names=FALSE)
