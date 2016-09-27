@@ -194,7 +194,7 @@ pop.state.long$id <- seq(1:nrow(pop.state.long))
 print(
 ggplot() +
 geom_line(data=pop.state.long[c(1:100),],color='red',aes(x=id,y=pop)) +
-geom_line(data=pop.state.long[c(1:100),],color='blue',aes(x=id,y=pop.adj.exp.jun)) +
+geom_line(data=pop.state.long[c(1:100),],color='blue',aes(x=id,y=pop.adj)) +
 xlab('time') +
 ylab('population') +
 scale_x_continuous(breaks=seq(0,plot.limit,12)) +

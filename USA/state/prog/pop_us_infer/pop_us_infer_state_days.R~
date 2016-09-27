@@ -187,14 +187,14 @@ pop.state.long <- pop.state.long[,c('year','month','sex','age','fips','pop','pop
 ifelse(!dir.exists("../../output/pop_us_infer"), dir.create("../../output/pop_us_infer"), FALSE)
 
 # plot to check
-pdf('../../output/pop_us_infer/interpolated_pop_example.pdf')
+png('../../output/pop_us_infer/interpolated_pop_example.png')
 library(ggplot2)
 plot.limit <- 100
 pop.state.long$id <- seq(1:nrow(pop.state.long))
 print(
 ggplot() +
 geom_line(data=pop.state.long[c(1:100),],color='red',aes(x=id,y=pop)) +
-geom_line(data=pop.state.long[c(1:100),],color='blue',aes(x=id,y=pop.adj.exp.jun)) +
+geom_line(data=pop.state.long[c(1:100),],color='blue',aes(x=id,y=pop.adj)) +
 xlab('time') +
 ylab('population') +
 scale_x_continuous(breaks=seq(0,plot.limit,12)) +

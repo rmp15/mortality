@@ -18,7 +18,7 @@ Rscript ~/git/mortality/USA/state/prog/pop_us_infer/pop_us_infer_state_days.R
 Rscript ~/git/mortality/USA/state/prog/prep_data/US_state_monthly_prepare_data.R 1982 2011
 
 #################################################
-# 3.CHECK DATA
+# 3. EXPLORE DATA
 #################################################
 
 Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore.R 1982 2011
