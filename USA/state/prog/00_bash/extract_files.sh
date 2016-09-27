@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# this script 
+# parses the raw tape data (at the moment from 2011 format forwards)
+# removes foreign deaths and recodes age
+# formats data in same way as old code in Stata for next stage of processing
+
 #################################################
 # 1. EXTRACT FROM TAPES
 #################################################

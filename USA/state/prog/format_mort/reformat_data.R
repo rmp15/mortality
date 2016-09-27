@@ -12,7 +12,7 @@ year <- as.numeric(args[1])
 
 # read files
 dat.us <- read.dta(paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.USPART2.processed.age_recode.dta'))
-dat.ps <- read.dta(paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.PSPART2.processed.age_recode.dta'))
+try(dat.ps <- read.dta(paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.PSPART2.processed.age_recode.dta')))
 
 # append datasets if necessary
 dat <- dat.us
@@ -67,6 +67,9 @@ dat$age <-
 dat$dummy <- 1
 dat.summarised <- summarise(group_by(dat,monthdth,age,fips,sex,year),sum(dummy))
 dat.summarised <- plyr::rename(dat.summarised,c('sum(dummy)'='deaths'))
+
+# convert month of death into number
+dat.summarised$monthdth <- as.numeric(dat.summarised$monthdth)
 
 # output file for next stage of processing
 write.dta(dat.summarised,paste0("/home/rmp15/data/mortality/US/state/processed/county/deaths",year,'.dta'))
