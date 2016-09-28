@@ -24,15 +24,15 @@ done;
 # 1. COMPARE OLD AND NEW POP FILES
 #################################################
 
-for year in $(seq 2011 2011);
+#for year in $(seq 2011 2011);
 
-do
+#do
 
-echo $year
+#echo $year
 
-Rscript ~/git/mortality/USA/state/prog/pop_format/pop_old_new_compare.R $year
+#Rscript ~/git/mortality/USA/state/prog/pop_format/pop_old_new_compare.R $year
 
-done;
+#done;
 
 #################################################
 # 2. RUN POPULATION INFER BY DAY

@@ -64,6 +64,14 @@ dat$year <- year
 # get rid of old columns
 dat <- dat[,c('fips','sex','age','pop','year','stateFips','countyFips')]
 
+# convert columns to correct class
+dat$sex <- as.numeric(as.character(dat$sex))
+dat$age <- as.numeric(as.character(dat$age))
+dat$pop <- as.numeric(as.character(dat$pop))
+
+# remove NAs
+dat <- na.omit(dat)
+
 # create output directory
 ifelse(!dir.exists("../../output/pop_format"), dir.create("../../output/pop_format"), FALSE)
 
