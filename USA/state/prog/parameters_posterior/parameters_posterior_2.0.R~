@@ -25,8 +25,8 @@ file.loc <- paste0('~/data/mortality/US/state/predicted/type_',model,'/age_group
 dat <- readRDS(file.loc)
 
 # lists of marginals
-marginals.fixed 	<- 	names(dat$marginals.fixed)
-marginals.random 	<- 	names(dat$marginals.random)
+marginals.fixed <- 	names(dat$marginals.fixed)
+marginals.random <- 	names(dat$marginals.random)
 
 #######################################
 # 1. Plotting intercepts
