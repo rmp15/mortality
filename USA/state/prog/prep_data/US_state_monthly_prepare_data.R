@@ -91,7 +91,7 @@ dat.appended   <- na.omit(dat.appended)
 dat.appended$iso3 <- "USA"
 
 # add inferred population data by day
-pop.state <- readRDS('../../output/pop_us_infer/statePopulations_infer_by_days')
+pop.state <- readRDS('../../output/pop_us_infer/statePopulations_infer_by_days_new_years')
 pop.state$fips <- as.integer(pop.state$fips)
 
 # merge deaths and population files

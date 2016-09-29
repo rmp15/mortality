@@ -154,6 +154,8 @@ if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
 if(type==2){
 
 # 1. Type Ia space-time interaction
+# THIS SHOULD BE THE BASIS OF THE CODE FOR ALL THE OTHER VERSIONS.
+# I SHOULD STREAMLINE THIS GENERALLY.
 
 fml1a <- deaths ~
 	# global terms
@@ -201,6 +203,9 @@ summary.name <- paste0('USA_rate_pred_type1a_',age,'_',sex.lookup[sex],'_',year.
 inla.summary.mod1a <- summary(mod1a)
 if(cluster==0){capture.output(inla.summary.mod1a,file=paste0(file.loc,'/',summary.name))}
 if(cluster==1){capture.output(inla.summary.mod1a,file=paste0('../output/summary/',summary.name))}
+
+# capture output for emailing purposes
+email.content <- capture.output(inla.summary.mod1a)
 
 # save plot of INLA model
 #plot.name <- paste0('USA_rate_pred_type1a_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_summary.pdf')
@@ -543,6 +548,7 @@ send.mail(from = sender,
           to = recipients,
           subject = paste0(sex.lookup[sex.sel],' ',age.sel,' done'),
           body = "Well done",
+	  #body= as.character(email.content[8]),
           smtp = list(host.name = "smtp.gmail.com", port = 465, 
                       user.name = "emailr349@gmail.com",            
                       passwd = "inlaisthebest", ssl = TRUE),

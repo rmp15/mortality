@@ -116,7 +116,7 @@ dat.merged$rate.adj <- dat.merged$deaths / dat.merged$pop.adj
 ifelse(!dir.exists("../../output/prep_data"), dir.create("../../output/prep_data"), FALSE)
 
 # plot to check rates
-png(paste0('../../output/prep_data/rate_compared_',year.start.arg,'_',year.end.arg,'.pdf'))
+png(paste0('../../output/prep_data/rate_compared_',year.start.arg,'_',year.end.arg,'.png'))
 plot(dat.merged$rate,dat.merged$rate.adj)
 dev.off()
 

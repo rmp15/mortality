@@ -50,9 +50,9 @@ theme_bw()
 dev.off()
 
 # output files of mismatched data
-write.csv(unmatched.old,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_old_county_',year.arg,'.csv',row.names=FALSE))
-write.csv(unmatched.new,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_new_county_',year.arg,'.csv',row.names=FALSE))
-write.csv(dat.diff,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_population_county_',year.arg,'.csv',row.names=FALSE))
+write.csv(unmatched.old,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_old_county_',year.arg,'.csv'),row.names=FALSE)
+write.csv(unmatched.new,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_new_county_',year.arg,'.csv'),row.names=FALSE)
+write.csv(dat.diff,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_population_county_',year.arg,'.csv'),row.names=FALSE)
 
 ##### 2. compare state by state population
 
@@ -75,9 +75,9 @@ unmatched.state.old <- anti_join(dat.state.old,dat.state.new,by=c('sex','age','y
 unmatched.state.new <- anti_join(dat.state.new,dat.state.old,by=c('sex','age','year','stateFips'))
 
 # output files of mismatched data
-write.csv(unmatched.state.old,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_old_state_',year.arg,'.csv',row.names=FALSE))
-write.csv(unmatched.state.new,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_new_state_',year.arg,'.csv',row.names=FALSE))
-write.csv(dat.diff.state,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_population_state_',year.arg,'.csv',row.names=FALSE))
+write.csv(unmatched.state.old,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_old_state_',year.arg,'.csv'),row.names=FALSE)
+write.csv(unmatched.state.new,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_new_state_',year.arg,'.csv'),row.names=FALSE)
+write.csv(dat.diff.state,paste0('../../output/pop_old_new_compare/',year.arg,'/unmatched_population_state_',year.arg,'.csv'),row.names=FALSE)
 
 # plot population against each other to check
 png(paste0('../../output/pop_old_new_compare/',year.arg,'/old_against_new_population_state_',year.arg,'.png'))

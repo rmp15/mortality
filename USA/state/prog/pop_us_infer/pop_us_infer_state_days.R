@@ -2,7 +2,8 @@ rm(list=ls())
 
 # add inferred population data
 library(foreign)
-pop.state <- read.dta('~/data/mortality/US/state/processed/county/statePopulations.dta')
+#pop.state <- read.dta('~/data/mortality/US/state/processed/county/statePopulations.dta')
+pop.state <- read.dta("../../output/pop_add_new_years/statePopulationsnewyears.dta")
 
 # remove '99' age groups
 pop.state <- pop.state[pop.state$age!=99,]
@@ -204,4 +205,4 @@ axis.text.x = element_text(angle=0))
 )
 dev.off()
 
-saveRDS(pop.state.long, '../../output/pop_us_infer/statePopulations_infer_by_days')
+saveRDS(pop.state.long, '../../output/pop_us_infer/statePopulations_infer_by_days_new_years')

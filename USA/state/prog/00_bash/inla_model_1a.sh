@@ -13,7 +13,7 @@ do
 echo $age;
 
 # runs model for males
-Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/spatio_temporal_types_function.R $age 1 1982 2011 2 0
+Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/spatio_temporal_types_function.R $age 1 1982 2013 2 0
 
 done;
 
@@ -26,7 +26,7 @@ do
 echo $age;
 
 # runs model for females
-Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/spatio_temporal_types_function.R $age 2 1982 2011 2 0
+Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/spatio_temporal_types_function.R $age 2 1982 2013 2 0
 
 done;
 

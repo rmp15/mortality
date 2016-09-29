@@ -10,7 +10,7 @@
 # 1. FORMAT RAW POPULATION FILES
 #################################################
 
-for year in $(seq 2011 2015);
+for year in $(seq 2005 2015);
 
 do
 
@@ -24,7 +24,7 @@ done;
 # 2. COMPARE OLD AND NEW POP FILES
 #################################################
 
-for year in $(seq 2011 2011);
+for year in $(seq 2005 2011);
 
 do
 
@@ -38,22 +38,22 @@ done;
 # 3. ADD NEW YEARS TO POPULATION FILES
 #################################################
 
-Rscript ~/git/mortality/USA/state/prog/pop_format/pop_add_new_years.R 2011 2015
+Rscript ~/git/mortality/USA/state/prog/pop_format/pop_add_new_years.R 2012 2015
 
 #################################################
 # 4. RUN POPULATION INFER BY DAY
 #################################################
 
-#Rscript ~/git/mortality/USA/state/prog/pop_us_infer/pop_us_infer_state_days.R
+Rscript ~/git/mortality/USA/state/prog/pop_us_infer/pop_us_infer_state_days.R
 
 #################################################
 # 5. PROCESS DATA
 #################################################
 
-#Rscript ~/git/mortality/USA/state/prog/prep_data/US_state_monthly_prepare_data.R 1982 2011
+Rscript ~/git/mortality/USA/state/prog/prep_data/US_state_monthly_prepare_data.R 1982 2013
 
 #################################################
 # 6. EXPLORE DATA
 #################################################
 
-#Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore.R 1982 2011
+Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore.R 1982 2013

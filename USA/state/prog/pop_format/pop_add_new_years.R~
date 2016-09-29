@@ -1,0 +1,67 @@
+rm(list=ls())
+
+library(foreign)
+library(plyr)
+
+# break down the arguments from Rscript
+args <- commandArgs(trailingOnly=TRUE)
+year.start.arg <- as.numeric(args[1])
+year.end.arg <- as.numeric(args[2])
+
+# load original population file
+dat.old <- read.dta('~/git/mortality/USA/state/data/population/original/countyPopulations.dta')
+
+# load new years
+years <- year.start.arg:year.end.arg
+
+dat.new <- dat.old
+
+for(i in years) {
+ 	print(i)
+	dat.current <- read.dta(paste0('~/git/mortality/USA/state/output/pop_format/popcounty',i,'.dta'))
+	dat.new <- rbind(dat.new,dat.current)
+}
+
+# summarise population by year across states
+dat.state <- ddply(dat.new,.(sex, age, year, stateFips), summarise,pop=sum(pop)) 
+dat.state <- subset(dat.national,age!=99)
+
+# summarise population by year nationally
+dat.national <- ddply(dat.new,.(sex, age, year), summarise,pop=sum(pop)) 
+dat.national <- subset(dat.national,age!=99)
+
+# create output directory
+ifelse(!dir.exists("../../output/pop_add_new_years"), dir.create("../../output/pop_add_new_years"), FALSE)
+
+# plot each age group population across time
+library(ggplot2)
+png(paste0('../../output/pop_add_new_years/population_against_time_',year.start.arg,'_and_beyond.png'))
+print(
+ggplot(dat.national,aes(x=year,y=pop)) +
+geom_line(aes(color=as.factor(age))) +
+geom_vline(xintercept=year.start.arg,linetype=2) +
+ggtitle(paste0('old against new state population added from ',year.start.arg)) +
+xlab('year') +
+ylab('population') +
+facet_wrap(~sex) + 
+theme_bw()
+)
+dev.off()
+
+# plot each age group population across time zoomed into area where new years begin
+png(paste0('../../output/pop_add_new_years/population_against_time_',year.start.arg,'_and_beyond_zoomed.png'))
+print(
+ggplot(subset(dat.national,year %in% (year.start.arg-5):year.end.arg),aes(x=year,y=pop)) +
+geom_line(aes(color=as.factor(age))) +
+geom_vline(xintercept=year.start.arg,linetype=2) +
+ggtitle(paste0('zoomed in old against new state population added from ',year.start.arg)) +
+xlab('year') +
+ylab('population') +
+facet_wrap(~sex) + 
+theme_bw()
+)
+dev.off()
+
+# write new population file
+write.dta(dat.state,paste0("../../output/pop_add_new_years/statePopulationsnewyears.dta"))
+write.dta(dat.new,paste0("../../output/pop_add_new_years/countyPopulationsnewyears.dta"))
