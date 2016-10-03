@@ -11,34 +11,29 @@ declare -i start=1982
 declare -i end=2013
 declare country="USA"
 
-#################################################
-# 1. RUN AGE-SEPARATED MODEL
-#################################################
-
-# MALE
-
-for age in "${ages[@]}"; do
-
-echo "starting male $age INLA model $model years $start - $end";
-
-# runs model for males
-Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/spatio_temporal_types_function.R $age 1 $start $end $model 0
-
-echo "starting female $age INLA model $model years $start - $end";
-
-# runs model for females
-Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/spatio_temporal_types_function.R $age 2 $start $end $model 0
-
-done;
+# this will disappear once sorted out
+Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior.R $start $end $country $model
 
 #################################################
-# 2. COMBINE RESULTS
+# 1. PREPARE DATA FOR PLOTTING
 #################################################
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior.R $start $end $country 2
+# DATA PREPARATION
 
 #################################################
-# 3. PLOTTING PARAMETERS FROM MODEL
+# 2. PLOT 1
 #################################################
 
-# PLOT PARAMETERS CODE
+# PLOT SOMETHING
+
+#################################################
+# 3. PLOT 2
+#################################################
+
+# PLOT SOMETHING ELSE
+
+#################################################
+# 4. PLOT 3
+#################################################
+
+# PLOT SOMETHING ELSE AGAIN

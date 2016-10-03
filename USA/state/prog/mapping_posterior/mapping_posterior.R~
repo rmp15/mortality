@@ -7,18 +7,36 @@ library(RColorBrewer)
 library(ggplot2)
 library(plyr)
 
+# break down the arguments from Rscript
+args <- commandArgs(trailingOnly=TRUE)
+year.start <- as.numeric(args[1])
+year.end <- as.numeric(args[2])
+country <- as.character(args[3])
+model <- as.numeric(args[4])
+
+# models to choose from
+models <- c('1','1a','2','2a','3','3a','4','4a')
+model <- models[model]
+
 # load the data
+dat <- readRDS(paste0('../../data/predicted/',country,'_rate_pred_type',model,'_',year.start,'_',year.end))
 
-# raw data
-#dat <- readRDS('datus_state_rates_1982_2010')
-#dat$rate.pred <- dat$rate.adj
+# add fips lookup
+fips.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 
-# national random walk (type I)
-#dat <- readRDS('USA_rate_pred_1982_2010_rw_all')
+# coding for graph-friendly information
+age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
+age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85),
+                       age.print=age.print)
+month.names <- c('January','February','March','April','May','June',
+                 'July','August','September','October','November','December')
+month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
+sex.lookup <- c('male','female')
+model <- paste0('type',model)
 
-# national random walk spatially correlated (type Ia)
-dat <- readRDS('../../data/USA_rate_pred_type1a_1982_2010')
-model <- 'type1a'
+###############################################################
+# DATA PROCESSING
+###############################################################
 
 # nationalised data
 dat.copy <- dat
@@ -27,20 +45,6 @@ dat.national <- ddply(dat.copy,.(year,month,sex,age),summarize,deaths=sum(deaths
 dat.national$rate <- with(dat.national,deaths/pop.adj)
 dat.national$rate.pred <- with(dat.national,deaths.pred/pop.adj)
 dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
-
-# add fips lookup
-fips.lookup <- read.csv('../../data/name_fips_lookup.csv')
-
-# random walk per time (type II)
-#dat <- readRDS('USA_rate_pred_type2_55_male_1982_2010')
-#dat$rate.pred <- dat$rate.pred.mod2
-
-# random walk per time not spatially correlated (type IIa)
-#dat <- readRDS('USA_rate_pred_type2a_55_male_1982_2010')
-#dat$rate.pred <- dat$rate.pred.mod2
-
-# state random walk (type III)
-#dat <- readRDS('USA_rate_pred_type3_55_male_1982_2010')
 
 # add log(rate) and rates per 100,000
 dat$log.rate <- with(dat,log(rate.pred))
@@ -52,15 +56,6 @@ dat.nat$rate.adj <- with(dat.nat,deaths/pop.adj)
 
 age.filter <- unique(dat$age)
 colourCount <- length(age.filter)
-
-# coding for graph-friendly information
-age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
-age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85),
-                       age.print=age.print)
-month.names <- c('January','February','March','April','May','June',
-                 'July','August','September','October','November','December')
-month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
-sex.lookup <- c('male','female')
 
 # identify start and end years, as well as length of analysis period
 year.start <- min(dat$year)
@@ -153,7 +148,9 @@ levels(lin.reg.median$sex) <- c('male','female')
 lin.reg.grad$sex <- as.factor(lin.reg.grad$sex)
 levels(lin.reg.grad$sex) <- c('male','female')
 
+###############################################################
 # PREPARING MAP
+###############################################################
 
 # for theme_map
 devtools::source_gist("33baa3a79c5cfef0f6df")
@@ -265,56 +262,43 @@ map.climate.colour <- colorRampPalette(rev(brewer.pal(12,"Accent")[c(1:3,5,6)]))
 names(map.climate.colour) <- levels(as.factor(USA.df$climate_region))
 
 ###############################################################
-# NATIONAL TRENDS
+# DIRECTORY CREATION
 ###############################################################
 
-# change path to write files to
-#dir.create('output')
-#setwd('output')
-#dir.create('national_summary')
-#setwd('national_summary')
+# create directories for output
+file.loc <- paste0('../../output/mapping_posterior/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
-# 1. Coefficient of seasonality over time
+file.loc <- paste0(file.loc,'INLA/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
-# male and female
+file.loc <- paste0(file.loc,model,'/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
-# variables for y-limits on variance graphs
-#min.var.national.plot <- min(dat.var.national$coeff.var)
-#max.var.national.plot <- max(dat.var.national$coeff.var)
+file.loc <- paste0(file.loc,year.start,'_',year.end,'/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
-# prepare data
-#dat.var.national$age.print <- mapvalues(dat.var.national$age, from=unique(dat.var.national$age), to=age.print)
-#dat.var.national$age.print <- reorder(dat.var.national$age.print,dat.var.national$age)
+# create directory for national summary
+file.loc.nat.sum <- paste0(file.loc,'all_age_summaries/')
+ifelse(!dir.exists(file.loc.nat.sum), dir.create(file.loc.nat.sum), FALSE)
 
-#pdf('coeff_var_national_all_ages.pdf',paper='a4r',height=0,width=0)
-#dat.var.national$sex <- as.factor(dat.var.national$sex)
-#levels(dat.var.national$sex) <- c('male','female')
-#print(ggplot(dat.var.national,aes(x=year,color=factor(age.print),y=coeff.var)) +
-#geom_line(size=0.5) +
-#geom_vline(xintercept=c(1993) +
-#ylim(0,max.var.national.plot) +
-#ylab('coefficient of seasonality') +
-##ggtitle(paste0('Median coefficient of seasonality of mortality rates per year over time')) +
-#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlGn")[c(1:5,7:9)]))(colourCount),guide = guide_legend(title = 'age group')) +
-#geom_smooth(method='lm',se=FALSE) +
-#facet_wrap(~sex) +
-#theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-#panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank()))
-#dev.off()
+# create directory for age specific summaries
+file.loc.age.sum <- paste0(file.loc,'individual_age_summaries/')
+ifelse(!dir.exists(file.loc.age.sum), dir.create(file.loc.age.sum), FALSE)
 
-#setwd('..')
+# create directory for age specific summaries
+file.loc.mon.sum <- paste0(file.loc,'month_summaries/')
+ifelse(!dir.exists(file.loc.mon.sum), dir.create(file.loc.mon.sum), FALSE)
+
+# create directory for age specific summaries
+file.loc.maps <- paste0(file.loc,'maps/')
+ifelse(!dir.exists(file.loc.maps), dir.create(file.loc.maps), FALSE)
 
 ###############################################################
 # ENTIRE PERIOD SUMMARIES FOR ALL AGES 
 ###############################################################
 
-# change path to write files to
-#dir.create('../../output')
-setwd('../../output/mapping_posterior')
-dir.create('all_age_summary')
-setwd('all_age_summary')
-
-# 0. Coefficient of seasonality over time
+# 1. Coefficient of seasonality over time
 
 # male and female
 
@@ -326,7 +310,7 @@ max.var.national.plot <- max(dat.var.national$coeff.var)
 dat.var.national$age.print <- mapvalues(dat.var.national$age, from=unique(dat.var.national$age), to=age.print)
 dat.var.national$age.print <- reorder(dat.var.national$age.print,dat.var.national$age)
 
-pdf('coeff_var_national_all_ages.pdf',paper='a4r',height=0,width=0)
+pdf(paste0(file.loc.nat.sum,'coeff_var_national_all_ages.pdf'),paper='a4r',height=0,width=0)
 dat.var.national$sex <- as.factor(dat.var.national$sex)
 levels(dat.var.national$sex) <- c('male','female')
 print(ggplot(dat.var.national,aes(x=year,color=factor(age.print),y=coeff.var)) +
@@ -345,7 +329,7 @@ dev.off()
 pdf.name <- paste0('USA_summary_',year.start,'_',year.end,'_',model,'.pdf')
 #pdf(pdf.name,paper='a4r',height=0,width=0)
 
-# 1. percentage difference between January and July mortality map
+# 2. percentage difference between January and July mortality map
 
 # merge selected data to map dataframe for colouring of ggplot
 plot.median.jan.jul <- merge(USA.df,lin.reg.median.jan.jul, by.x='STATE_FIPS',by.y='fips')
@@ -378,16 +362,16 @@ plot.function.median.jan.jul <- function(sex.sel) {
 }
 
 # male
-pdf('jan_july_median_m.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'jan_july_median_m.pdf'),height=0,width=0,paper='a4r')
 plot.function.median.jan.jul(1)
 dev.off()
 
 # female
-pdf('jan_july_median_f.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'jan_july_median_f.pdf'),height=0,width=0,paper='a4r')
 plot.function.median.jan.jul(2)
 dev.off()
 
-# 2. difference in rate of change of maximum and minimum mortality change map
+# 3. difference in rate of change of maximum and minimum mortality change map
 
 # merge selected data to map dataframe for colouring of ggplot
 plot.grad.max.min <- merge(USA.df,lin.reg.grad.max.min,by.x='STATE_FIPS',by.y='fips')
@@ -416,16 +400,16 @@ plot.function.grad.max.min <- function(sex.sel) {
 }
 
 # male
-pdf('jan_july_grad_m.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'jan_july_grad_m.pdf'),height=0,width=0,paper='a4r')
 plot.function.grad.max.min(1)
 dev.off()
 
 # female
-pdf('jan_july_grad_f.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'jan_july_grad_f.pdf'),height=0,width=0,paper='a4r')
 plot.function.grad.max.min(2)
 dev.off()
 
-# 3. average co-efficient of variation map
+# 4. average co-efficient of variation map
 plot.var.state <- merge(USA.df,dat.var.state,by.x='STATE_FIPS',by.y='fips')
 plot.var.state <- with(plot.var.state, plot.var.state[order(sex,age,DRAWSEQ,order),])
 
@@ -451,12 +435,12 @@ plot.function.var.state <- function(sex.sel) {
 }
 
 # male
-pdf('jan_july_var_grad_m.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'jan_july_var_grad_m.pdf'),height=0,width=0,paper='a4r')
 plot.function.var.state(1)
 dev.off()
 
 # female
-pdf('jan_july_var_grad_f.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'jan_july_var_grad_f.pdf'),height=0,width=0,paper='a4r')
 plot.function.var.state(2)
 dev.off()
 
@@ -466,7 +450,7 @@ dev.off()
 median.df <- ddply(lin.reg.grad, .(month,sex,age), summarise, med = median(grad.total))
 
 # plot
-pdf('change_mort_across_all_months.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'change_mort_across_all_months.pdf'),height=0,width=0,paper='a4r')
 ggplot(lin.reg.grad, aes(x=factor(age),fill=age,y=grad.total)) +
 geom_line(data = median.df, aes(x=factor(age),y = med, group = factor(month),color=as.factor(month))) +
 #geom_line(data = var.median.df, alpha=0.7,aes(group=factor(sex),y = med,x=age.print),linetype=2, size=0.5,colour='black') +
@@ -493,7 +477,7 @@ median.stats.df <- ddply(median.median.df, .(sex,age), summarise, min=min(med),m
 median.stats.df$min.max.diff <- with(median.stats.df, max-min)
 
 # plot deviations from median
-pdf('diff_change_mort_across_all_months.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'diff_change_mort_across_all_months.pdf'),height=0,width=0,paper='a4r')
 ggplot(lin.reg.grad, aes(x=age,fill=age,y=grad.total)) +
 geom_line(alpha=0.1,linetype=2,data = median.median.df,aes(y = diff.median, colour = factor(month))) +
 geom_point(data = median.median.df, aes(y = diff.median, colour = factor(month))) +
@@ -513,7 +497,7 @@ dev.off()
 #median.median.df$month <- factor(median.median.df$month, levels=c(10:12,1:9))
 
 # plot heatmap
-pdf('diff_change_mort_across_all_months_heatmap.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'diff_change_mort_across_all_months_heatmap.pdf'),height=0,width=0,paper='a4r')
 ggplot(data=median.median.df, aes(x=as.factor(age),y=as.factor(month))) +
 geom_tile(aes(fill=diff.median)) +
 scale_fill_gradient2(low='green',mid='white',high='red',guide = guide_legend(title = '%\ndifference\nfrom\nmedian\nchange')) +
@@ -533,7 +517,7 @@ median.total.df <- merge(median.df, median.total.df, by=c('sex','age'))
 median.total.df$diff.median <- with(median.total.df, med - med.total)
 
 # plot
-#pdf('diff_change_mort_across_all_months.pdf',height=0,width=0,paper='a4r')
+#pdf(paste0(file.loc.nat.sum,'diff_change_mort_across_all_months.pdf'),height=0,width=0,paper='a4r')
 #ggplot(lin.reg.grad, aes(x=age,fill=age,y=grad.total)) +
 #geom_line(alpha=0.1,linetype=2,data = median.total.df,aes(y = diff.median, colour = factor(month))) +
 #geom_point(data = median.total.df, aes(y = diff.median, colour = factor(month))) +
@@ -586,7 +570,7 @@ dat.var.grad$age.print <- mapvalues(dat.var.grad$age, from=unique(dat.var.grad$a
 dat.var.grad$age.print <- reorder(dat.var.grad$age.print,dat.var.grad$age)
 
 # plot male facetted by region
-#pdf('change_coeff_var_all_ages_male.pdf',paper='a4r',height=0,width=0)
+#pdf(paste0(file.loc.nat.sum,'change_coeff_var_all_ages_male.pdf'),paper='a4r',height=0,width=0)
 #print(ggplot() +
 #geom_jitter(data=subset(dat.var.grad,sex=='male'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(SUB_REGION))) +
 #geom_jitter(data=subset(transform(dat.var.grad,SUB_REGION='All'),sex=='male'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
@@ -606,7 +590,7 @@ dat.var.grad$age.print <- reorder(dat.var.grad$age.print,dat.var.grad$age)
 #dev.off()
 
 # plot female facetted by region
-#pdf('change_coeff_var_all_ages_female.pdf',paper='a4r',height=0,width=0)
+#pdf(paste0(file.loc.nat.sum,'change_coeff_var_all_ages_female.pdf'),paper='a4r',height=0,width=0)
 #print(ggplot() +
 #geom_jitter(data=subset(dat.var.grad,sex=='female'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(SUB_REGION))) +
 #geom_jitter(data=subset(transform(dat.var.grad,SUB_REGION='All'),sex=='female'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
@@ -625,7 +609,7 @@ dat.var.grad$age.print <- reorder(dat.var.grad$age.print,dat.var.grad$age)
 #dev.off()
 
 # plot male facetted by climate region
-pdf('change_coeff_var_all_ages_male_climate.pdf',paper='a4r',height=0,width=0)
+pdf(paste0(file.loc.nat.sum,'change_coeff_var_all_ages_male_climate.pdf'),paper='a4r',height=0,width=0)
 print(ggplot() +
 geom_jitter(data=subset(dat.var.grad,sex=='male'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
 geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='male'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
@@ -645,7 +629,7 @@ axis.text.x = element_text(angle=90)))
 dev.off()
 
 # plot female facetted by climate region
-pdf('change_coeff_var_all_ages_female_climate.pdf',paper='a4r',height=0,width=0)
+pdf(paste0(file.loc.nat.sum,'change_coeff_var_all_ages_female_climate.pdf'),paper='a4r',height=0,width=0)
 print(ggplot() +
 geom_jitter(data=subset(dat.var.grad,sex=='female'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
 geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='female'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
@@ -670,7 +654,7 @@ var.median.df <- ddply(dat.var.grad, .(sex, age), summarise, med = median(grad.t
 var.median.df$age.print <- mapvalues(var.median.df$age, from=unique(var.median.df$age), to=age.print)
 var.median.df$age.print <- reorder(var.median.df$age.print,var.median.df$age)
 
-#pdf('change_coeff_var_all_ages.pdf',paper='a4r',height=0,width=0)
+#pdf(paste0(file.loc.nat.sum,'change_coeff_var_all_ages.pdf'),paper='a4r',height=0,width=0)
 #print(ggplot() +
 #geom_jitter(data=dat.var.grad,width=0.4,aes(x=as.factor(age.print),y=grad.total,color=as.factor(SUB_REGION))) +
 #geom_line(data = var.median.df, alpha=0.7,aes(group=factor(sex),y = med,x=age.print),linetype=2, size=0.5,colour='black') +
@@ -688,7 +672,7 @@ var.median.df$age.print <- reorder(var.median.df$age.print,var.median.df$age)
 #axis.text.x = element_text(angle=90)))
 #dev.off()
 
-pdf('change_coeff_var_all_ages_climate.pdf',paper='a4r',height=0,width=0)
+pdf(paste0(file.loc.nat.sum,'change_coeff_var_all_ages_climate.pdf'),paper='a4r',height=0,width=0)
 print(ggplot() +
 geom_jitter(data=dat.var.grad,width=0.4,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
 geom_line(data = var.median.df, alpha=0.7,aes(group=factor(sex),y = med,x=age.print),linetype=2, size=0.5,colour='black') +
@@ -732,12 +716,12 @@ plot.function.var.grad <- function(sex.sel) {
 }
 
 # male
-pdf('jan_july_var_grad_m.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'jan_july_var_grad_m.pdf'),height=0,width=0,paper='a4r')
 plot.function.var.grad('male')
 dev.off()
 
 # female
-pdf('jan_july_var_grad_f.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'jan_july_var_grad_f.pdf'),height=0,width=0,paper='a4r')
 plot.function.var.grad('female')
 dev.off()
 
@@ -758,7 +742,7 @@ nat.median$sex <- as.factor(nat.median$sex)
 levels(nat.median$sex) <- sex.lookup
 
 # plot heatmap
-pdf('mortality_rank_heatmap.pdf',height=0,width=0,paper='a4r')
+pdf(paste0(file.loc.nat.sum,'mortality_rank_heatmap.pdf'),height=0,width=0,paper='a4r')
 ggplot(data=nat.median, aes(x=as.factor(age),y=as.factor(month))) +
 geom_tile(aes(fill=rank)) +
 scale_fill_gradient(low='red',high='green',guide = guide_legend(title = 'rank')) +
@@ -775,18 +759,16 @@ dev.off()
 # if choosing to print the entire all age group summary togeter, this finishes the pdf
 #dev.off()
 
-setwd('..')
-
 ###############################################################
 # ENTIRE PERIOD SUMMARIES FOR A PARTICULAR AGE 
 ###############################################################
 
 # function to choose summary of particular age
 graph.function.age <- function(age.selected=0,together=1) {
-    
-# change path to write files to
-dir.create(as.character(age.selected))
-setwd(as.character(age.selected))
+
+# create directory for age specific summaries
+file.loc.age.sum <- paste0(file.loc.age.sum,age.selected,'/')
+ifelse(!dir.exists(file.loc.age.sum), dir.create(file.loc.age.sum), FALSE)
     
 # select the data for the age
 dat <- subset(dat, age==age.selected)
@@ -815,7 +797,7 @@ jitterplot.median.line <- function() {
 }
 
 # plot
-#if(together==0){pdf(paste0(age.selected,'_line_jitterplot_region.pdf'),paper='a4r',height=0,width=0)}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_jitterplot_region.pdf'),paper='a4r',height=0,width=0)}
 #print(jitterplot.median.line())
 #if(together==0){dev.off()}
 
@@ -835,7 +817,7 @@ jitterplot.median.line.2 <- function() {
 }
 
 # plot
-if(together==0){pdf(paste0(age.selected,'_line_jitterplot_climate.pdf'),paper='a4r',height=0,width=0)}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_jitterplot_climate.pdf'),paper='a4r',height=0,width=0)}
 print(jitterplot.median.line.2())
 if(together==0){dev.off()}
 
@@ -925,7 +907,7 @@ jitterplot.rate.line <- function() {
 }
 
 # plot
-#if(together==0){pdf(paste0(age.selected,'_line_rate_region.pdf'),paper='a4r',height=0,width=0)}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_rate_region.pdf'),paper='a4r',height=0,width=0)}
 #print(jitterplot.rate.line())
 #if(together==0){dev.off()}
 
@@ -946,7 +928,7 @@ jitterplot.rate.line.2 <- function() {
 }
 
 # plot
-if(together==0){pdf(paste0(age.selected,'_line_rate_climate.pdf'),paper='a4r',height=0,width=0)}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_rate_climate.pdf'),paper='a4r',height=0,width=0)}
 print(jitterplot.rate.line.2())
 if(together==0){dev.off()}
 
@@ -976,12 +958,12 @@ plot.function.median <- function(sex.sel) {
 # plot
 
 # male
-if(together==0){pdf(paste0(age.selected,'_median_map_m.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_median_map_m.pdf'),height=0,width=0,paper='a4r')}
 plot.function.median('male')
 if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(age.selected,'_median_map_f.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_median_map_f.pdf'),height=0,width=0,paper='a4r')}
 plot.function.median('female')
 if(together==0){dev.off()}
 
@@ -1012,12 +994,12 @@ plot.function.grad <- function(sex.sel) {
 # plot
 
 # male
-if(together==0){pdf(paste0(age.selected,'_grad_map_m.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_grad_map_m.pdf'),height=0,width=0,paper='a4r')}
 plot.function.grad('male')
 if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(age.selected,'_grad_map_f.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_grad_map_f.pdf'),height=0,width=0,paper='a4r')}
 plot.function.grad('female')
 if(together==0){dev.off()}
 
@@ -1076,12 +1058,12 @@ plot.function.variation.region.2 <- function(sex.sel) {
 }
 
 # male
-#if(together==0){pdf(paste0(age.selected,'_coeff_var_points_region_m.pdf'),height=0,width=0,paper='a4r')}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_coeff_var_points_region_m.pdf'),height=0,width=0,paper='a4r')}
 #plot.function.variation.region.2(1)
 #if(together==0){dev.off()}
 
 # female
-#if(together==0){pdf(paste0(age.selected,'_coeff_var_points_region_f.pdf'),height=0,width=0,paper='a4r')}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_coeff_var_points_region_f.pdf'),height=0,width=0,paper='a4r')}
 #plot.function.variation.region.2(2)
 #if(together==0){dev.off()}
 
@@ -1106,12 +1088,12 @@ plot.function.variation.region.3 <- function(sex.sel) {
 # plot
 
 # male
-if(together==0){pdf(paste0(age.selected,'_coeff_var_line_climate_m.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_coeff_var_line_climate_m.pdf'),height=0,width=0,paper='a4r')}
 plot.function.variation.region.3(1)
 if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(age.selected,'_coeff_var_line_climate_f.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_coeff_var_line_climate_f.pdf'),height=0,width=0,paper='a4r')}
 plot.function.variation.region.3(2)
 if(together==0){dev.off()}
 
@@ -1135,12 +1117,12 @@ plot.function.variation.region.4 <- function(sex.sel) {
 }
 
 # male
-if(together==0){pdf(paste0(age.selected,'_coeff_var_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_coeff_var_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
 plot.function.variation.region.4(1)
 if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(age.selected,'_coeff_var_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_coeff_var_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
 plot.function.variation.region.4(2)
 if(together==0){dev.off()}
 
@@ -1179,13 +1161,67 @@ if(together==0){dev.off()}
 
 #if(together==1){dev.off()}
 
-setwd('..')
-
 # closes bracket at beginning of function
 }
 
 # use mapply to perform age specific function chosen ages (0 at end means pdfs separate)
 mapply(graph.function.age,age.filter,0)
+
+###############################################################
+# ALL AGES FOR A PARTICULAR MONTH 
+###############################################################
+
+jitterplot.grad.by.month <- function(month.selected) {
+
+        # make sure the months are in the correct order for plotting
+        lin.reg.grad$month.short <- reorder(lin.reg.grad$month.short,lin.reg.grad$month)
+       
+        median.df <- ddply(lin.reg.grad, .(sex, age), summarise, med = median(grad.total))
+          
+        print(ggplot(subset(lin.reg.grad,month==month.selected), aes(x=age,fill=age,y=grad.total)) +
+        geom_jitter(aes(colour=climate_region,group=factor(sex)),position = position_dodge(width = 3)) +
+        geom_line(data = median.df, aes(y = med,group=factor(sex)),linetype=2, size=0.5,colour='forest green') +
+        geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+        xlab('age group') +
+        ylab('percentage change of death rate') +
+        #ggtitle(paste0(month.short[month.selected]," : percentage change of mortality across age groups by state")) +
+        guides(fill=FALSE) +
+        scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'geographic region')) +
+        theme(legend.position='bottom',panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")))
+}
+
+pdf(paste0(file.loc.mon.sum,'percentage_change_across_age_groups_all_months.pdf'),paper='a4r',height=0,width=0)
+mapply(jitterplot.grad.by.month, c(1:12))
+dev.off()
+
+for(i in c(1:12)){
+    pdf.name <- paste0(month.names[i],'_percentage_change_across_age_groups.pdf')
+    pdf(paste0(file.loc.mon.sum,pdf.name),paper='a4r',height=0,width=0)
+    jitterplot.grad.by.month(i)
+    dev.off()
+}
+
+###############################################################
+# MAPS
+###############################################################
+
+# map of the use by state in case needed
+pdf(paste0(file.loc.maps,'usa_map_region.pdf'),height=0,width=0,paper='a4r')
+ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
+geom_polygon(aes(fill=SUB_REGION),color='black',size=0.1) +
+scale_fill_manual(values=map.region.colour,guide = guide_legend(title = '')) +
+theme_map() +
+theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom')
+dev.off()
+
+pdf(paste0(file.loc.maps,'usa_map_climate.pdf'),height=0,width=0,paper='a4r')
+ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
+geom_polygon(aes(fill=climate_region),color='black',size=0.1) +
+scale_fill_manual(values=map.climate.colour,guide = guide_legend(title = '')) +
+theme_map() +
+theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom')
+dev.off()
 
 ###############################################################
 # TIME SNAPSHOTS FOR A PARTICULAR AGE 
@@ -1279,69 +1315,3 @@ dev.off()
 
 # closes bracket at beginning of function
 }
-
-###############################################################
-# ALL AGES FOR A PARTICULAR MONTH 
-###############################################################
-
-dir.create('month_summaries')
-setwd('month_summaries')
-
-jitterplot.grad.by.month <- function(month.selected) {
-
-        # make sure the months are in the correct order for plotting
-        lin.reg.grad$month.short <- reorder(lin.reg.grad$month.short,lin.reg.grad$month)
-       
-        median.df <- ddply(lin.reg.grad, .(sex, age), summarise, med = median(grad.total))
-          
-        print(ggplot(subset(lin.reg.grad,month==month.selected), aes(x=age,fill=age,y=grad.total)) +
-        geom_jitter(aes(colour=climate_region,group=factor(sex)),position = position_dodge(width = 3)) +
-        geom_line(data = median.df, aes(y = med,group=factor(sex)),linetype=2, size=0.5,colour='forest green') +
-        geom_hline(yintercept=0, linetype=2,alpha=0.5) +
-        xlab('age group') +
-        ylab('percentage change of death rate') +
-        #ggtitle(paste0(month.short[month.selected]," : percentage change of mortality across age groups by state")) +
-        guides(fill=FALSE) +
-        scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'geographic region')) +
-        theme(legend.position='bottom',panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black")))
-}
-
-pdf('percentage_change_across_age_groups_all_months.pdf',paper='a4r',height=0,width=0)
-mapply(jitterplot.grad.by.month, c(1:12))
-dev.off()
-
-for(i in c(1:12)){
-    pdf.name <- paste0(month.names[i],'_percentage_change_across_age_groups.pdf')
-    pdf(pdf.name,paper='a4r',height=0,width=0)
-    jitterplot.grad.by.month(i)
-    dev.off()
-}
-
-setwd('..')
-
-###############################################################
-# MAPS
-###############################################################
-
-dir.create('maps')
-setwd('maps')
-
-# map of the use by state in case needed
-pdf('usa_map_region.pdf',height=0,width=0,paper='a4r')
-ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
-geom_polygon(aes(fill=SUB_REGION),color='black',size=0.1) +
-scale_fill_manual(values=map.region.colour,guide = guide_legend(title = '')) +
-theme_map() +
-theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom')
-dev.off()
-
-pdf('usa_map_climate.pdf',height=0,width=0,paper='a4r')
-ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
-geom_polygon(aes(fill=climate_region),color='black',size=0.1) +
-scale_fill_manual(values=map.climate.colour,guide = guide_legend(title = '')) +
-theme_map() +
-theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom')
-dev.off()
-
-setwd('..')

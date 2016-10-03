@@ -29,9 +29,13 @@ for (i in seq(length(sex.filter))) {
     }
 }
 
-# create directory for output
-file.loc <- paste0('~/data/mortality/US/state/predicted/type_',model,'/combined/')
+# create directories for output
+file.loc.local <- paste0('~/data/mortality/US/state/predicted/type_',model,'/combined/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
+file.loc.git <- paste0('../../data/predicted/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
+# save bound posterior
 save.name <- paste0(country,'_rate_pred_',model,'_',year.start,'_',year.end)
-saveRDS(dat,paste0(file.loc,save.name))
+saveRDS(dat,paste0(file.loc.local,save.name))
+saveRDS(dat,paste0(file.loc.git,save.name))
