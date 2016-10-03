@@ -20,6 +20,8 @@ do
 
 echo "processing raw files from $year";
 
+echo "extacting files from tape format for $year";
+
 # extracts file for year from tape format into something intelligible
 Rscript ~/git/mortality/USA/state/prog/format_mort/format_mort.R $year USPART2
 Rscript ~/git/mortality/USA/state/prog/format_mort/format_mort.R $year PSPART2
@@ -27,6 +29,8 @@ Rscript ~/git/mortality/USA/state/prog/format_mort/format_mort.R $year PSPART2
 #################################################
 # 2. REMOVE FOREIGN DEATHS
 #################################################
+
+echo "removing foreign deaths for $year";
 
 # filter deaths of people who were not residents of the USA
 Rscript ~/git/mortality/USA/state/prog/format_mort/rmv_foreign_dths.R $year USPART2
@@ -36,6 +40,8 @@ Rscript ~/git/mortality/USA/state/prog/format_mort/rmv_foreign_dths.R $year PSPA
 # 3. RECODE AGE
 #################################################
 
+echo "recoding age for $year";
+
 # recode age format
 Rscript ~/git/mortality/USA/state/prog/format_mort/recode_age.R $year USPART2
 Rscript ~/git/mortality/USA/state/prog/format_mort/recode_age.R $year PSPART2
@@ -44,12 +50,16 @@ Rscript ~/git/mortality/USA/state/prog/format_mort/recode_age.R $year PSPART2
 # 4. FORMAT DATA FOR NEXT STAGE OF PROCESSING
 #################################################
 
+echo "emulating inherited data format for $year";
+
 # emulate Harvard output data form
 Rscript ~/git/mortality/USA/state/prog/format_mort/reformat_data.R $year
 
 #################################################
 # 5. CHECK OLD AGAINST NEW DATA EXPORT
 #################################################
+
+echo "compare old against new data for $year";
 
 # check if the old data and new data match up
 Rscript ~/git/mortality/USA/state/prog/format_mort/old_against_new.R $year
