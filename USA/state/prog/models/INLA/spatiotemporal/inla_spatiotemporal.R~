@@ -24,12 +24,18 @@ ifelse(!dir.exists(paste0('~/data/mortality/US/state/predicted/type_',type.selec
 # load USA data
 dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
 
+# available ages
+age.filter <- unique(dat.inla.load$age)
+
 library(dplyr)
 
-# lookups
-age.filter <- unique(dat.inla.load$age)
+# state lookup
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
+
+# gender code
 sex.lookup <- c('male','female')
+
+# month lookup
 month.lookup <- c('January','February','March','April','May','June','July','August','September','October','November','December')
 
 # adjacency matrix with connections Hawaii -> California, Alaska -> Washington

@@ -10,6 +10,8 @@ year.start.arg <- as.numeric(args[3])
 year.end.arg <- as.numeric(args[4])
 type.arg <- as.numeric(args[5])
 cluster.arg <- as.numeric(args[6])
+dname.arg <- as.numeric(args[7])
+metric.arg <- as.numeric(args[8])
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','4a')
@@ -18,32 +20,37 @@ type.selected <- types[type.arg]
 require(mailR)
 
 # create files for output
-ifelse(!dir.exists(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/')), dir.create(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/')), FALSE)
-ifelse(!dir.exists(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/age_groups')), FALSE)
+ifelse(!dir.exists('~/data/mortality/US/state/climate_effects/'), dir.create('~/data/mortality/US/state/climate_effects/'), FALSE)
+ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/type_',type.selected,'/')), dir.create(paste0('~/data/mortality/US/state/climate_effects/type_',type.selected,'/')), FALSE)
+ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/type_',type.selected,'/age_groups')), FALSE)
 
 # load USA data
-dat.inla.load <- readRDS('../../output/prep_data/datus_state_rates_1982_2010')
+dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_2013'))
 
-# available ages
-age.filter <- unique(dat.inla.load$age)
+# load climate data
+dat.climate <- readRDS(paste0('~/git/climate/countries/USA/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/state_weighted_summary_',metric.arg,'_',year.start.arg,'_',year.end.arg,'.rds'))
+dat.climate$state.fips <- as.numeric(dat.climate$state.fips)
+
+# merge mortality and climate data and reorder
+dat.merged <- merge(dat.inla.load,dat.climate,by.x=c('sex','age','year','month','fips'),by.y=c('sex','age','year','month','state.fips'),all.x=TRUE)
+dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+
+# rename rows and remove unnecessary columns
+dat.merged$id <- NULL
+rownames(dat.merged) <- 1:nrow(dat.merged)
+
+# CONSTRUCT THREE-PIECE LINEAR HERE FOR TEMPERATURE
 
 library(dplyr)
 
-# state lookup
+# lookups
+age.filter <- unique(dat.inla.load$age)
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
-
-# gender code
 sex.lookup <- c('male','female')
-
-# month lookup
 month.lookup <- c('January','February','March','April','May','June','July','August','September','October','November','December')
 
 # adjacency matrix with connections Hawaii -> California, Alaska -> Washington
 USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"
-
-# plot matrix if desired
-#H <- inla.read.graph(filename=USA.adj)
-#image(inla.graph2matrix(H),xlab="",ylab="")
 
 ##############
 
