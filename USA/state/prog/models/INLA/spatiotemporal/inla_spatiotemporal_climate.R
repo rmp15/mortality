@@ -39,7 +39,18 @@ dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat
 dat.merged$id <- NULL
 rownames(dat.merged) <- 1:nrow(dat.merged)
 
-# CONSTRUCT THREE-PIECE LINEAR HERE FOR TEMPERATURE
+# construct variables for three-piece linear
+names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
+dat.merged$variable.low <- dat.merged$variable.high <- dat.merged$variable
+
+# set knot points for low and high (will need to look at literature for this)
+# make these a
+knot.low <- 10
+knot.high <- 25
+
+# adjust variables to create correct data for slopes
+dat.merged$variable.low <- ifelse(dat.merged$variable.low<knot.low,dat.merged$variable.low,knot.low)
+dat.merged$variable.high <- ifelse(dat.merged$variable.high>knot.high,dat.merged$variable.high,knot.high)
 
 library(dplyr)
 
