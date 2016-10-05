@@ -26,7 +26,7 @@ ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg
 ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/type_',type.selected,'/')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/type_',type.selected,'/')), FALSE)
 ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/type_',type.selected,'/age_groups')), FALSE)
 
-# load USA data
+# load USA data NEED TO GENERALISE
 dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_2013'))
 
 # load climate data
@@ -43,7 +43,7 @@ rownames(dat.merged) <- 1:nrow(dat.merged)
 
 # construct variables for three-piece linear
 names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
-dat.merged$variable.low <- dat.merged$variable.high <- dat.merged$variable
+dat.merged$variable.low <- dat.merged$variable.mid <- dat.merged$variable.high <- dat.merged$variable
 
 # set knot points for low and high (will need to look at literature for this)
 # make these a
@@ -51,8 +51,9 @@ knot.low <- 10
 knot.high <- 25
 
 # adjust variables to create correct data for slopes
-dat.merged$variable.low <- ifelse(dat.merged$variable.low<knot.low,dat.merged$variable.low,knot.low)
-dat.merged$variable.high <- ifelse(dat.merged$variable.high>knot.high,dat.merged$variable.high,knot.high)
+dat.merged$variable.low  <- pmin(knot.low, dat.merged$variable)
+dat.merged$variable.mid  <- pmax(knot.low, pmin(knot.high, dat.merged$variable))
+dat.merged$variable.high <- pmax(25, dat.merged$variable)
 
 library(dplyr)
 
@@ -126,8 +127,9 @@ fml  <- deaths ~
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
-        variable.low +                                                                  # climate variable slope pre-knot
-        variable.high +                                                                 # climate variable slope post-knot
+        variable.low +                                                                  # climate variable slope pre-low knot
+        variable.mid +                                                                  # climate variable slope pre-mid knot
+        variable.high +                                                                 # climate variable slope post-high knot
 	# random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # overdispersion term
@@ -151,8 +153,9 @@ fml<- deaths ~
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
-        variable.low +                                                                  # climate variable slope pre-knot
-        variable.high +                                                                 # climate variable slope post-knot
+        variable.low +                                                                  # climate variable slope pre-low knot
+        variable.mid +                                                                  # climate variable slope pre-mid knot
+        variable.high +                                                                 # climate variable slope post-high knot
 	# random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # overdispersion term
@@ -173,8 +176,9 @@ fml <- deaths ~
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
-        variable.low +                                                                  # climate variable slope pre-knot
-        variable.high +                                                                 # climate variable slope post-knot
+        variable.low +                                                                  # climate variable slope pre-low knot
+        variable.mid +                                                                  # climate variable slope pre-mid knot
+        variable.high +                                                                 # climate variable slope post-high knot
 	# random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
 	# space-time interaction
@@ -203,8 +207,9 @@ fml <- deaths ~
         f(ID, model="bym",graph=USA.adj) +                                              # state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                                # state specific slope (BYM)
     # climate specific terms
-    variable.low +                                                                      # climate variable slope pre-knot
-    variable.high +                                                                     # climate variable slope post-knot
+        variable.low +                                                                  # climate variable slope pre-low knot
+        variable.mid +                                                                  # climate variable slope pre-mid knot
+        variable.high +                                                                 # climate variable slope post-high knot
 	# random walk across time
         f(year.month3, model="rw1") +                                                   # rw1
 	# space-time interaction
@@ -230,9 +235,9 @@ fml <- deaths ~
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
-        variable.low +                                                                  # climate variable slope pre-knot
-        variable.high +                                                                 # climate variable slope post-knot
-    # random walk terms
+        variable.low +                                                                  # climate variable slope pre-low knot
+        variable.mid +                                                                  # climate variable slope pre-mid knot
+        variable.high +                                                                 # climate variable slope post-high knot    # random walk terms
         f(year.month3, model="rw1") +                                           		# rw1
         #f(year.month4,model="iid", group=ID3,                                          # type III space-time interaction
         f(year.month4,model="rw1", group=ID3,                                           # variation on model
@@ -260,9 +265,9 @@ fml <- deaths ~
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
-        variable.low +                                                                  # climate variable slope pre-knot
-        variable.high +                                                                 # climate variable slope post-knot
-	# random walks terms
+        variable.low +                                                                  # climate variable slope pre-low knot
+        variable.mid +                                                                  # climate variable slope pre-mid knot
+        variable.high +                                                                 # climate variable slope post-high knot	# random walks terms
         #f(year.month3, model="rw1") +                                           		# rw1 across time (put back?)
         #f(year.month4,model="iid", group=ID3,                                          # type III space-time interaction
         f(year.month4,model="rw1", group=ID3,                                           # variation on model
@@ -288,9 +293,9 @@ fml <- deaths ~
         f(ID, model="bym",graph=USA.adj) +                                     		 	# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
-        variable.low +                                                                  # climate variable slope pre-knot
-        variable.high +                                                                 # climate variable slope post-knot
-    # overdispersion term
+        variable.low +                                                                  # climate variable slope pre-low knot
+        variable.mid +                                                                  # climate variable slope pre-mid knot
+        variable.high +                                                                 # climate variable slope post-high knot    # overdispersion term
         f(year.month3, model="rw1") +                                           		# rw1
         f(ID3,model="besag", graph=USA.adj,                                     		# type IV space-time interaction
         group=year.month4,
