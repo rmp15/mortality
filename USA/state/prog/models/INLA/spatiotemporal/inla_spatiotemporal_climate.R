@@ -72,7 +72,7 @@ library(INLA)
 # function to enable age group and sex to be selected
 inla.function <- function(age.sel=55,sex.sel=1,year.start=1982,year.end=2010,type=1,cluster=0) {
 
-dat.inla <- dat.inla.load
+dat.inla <- dat.merged
 
 # filter all data by sex age and month
 sex <- sex.sel
