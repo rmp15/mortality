@@ -123,6 +123,9 @@ fml  <- deaths ~
         # state specific terms
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        variable.low +                                                                  # climate variable slope pre-knot
+        variable.high +                                                                 # climate variable slope post-knot
 	# random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # overdispersion term
@@ -167,6 +170,9 @@ fml <- deaths ~
         # state specific terms
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        variable.low +                                                                  # climate variable slope pre-knot
+        variable.high +                                                                 # climate variable slope post-knot
 	# random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
 	# space-time interaction
@@ -186,14 +192,17 @@ fml <- deaths ~
         1 +                                                                                     # global intercept
         year.month +                                                                            # global slope
      	# month specific terms
-	f(month, model='rw1',cyclic = TRUE) +							# month specific intercept
-	f(month2, year.month2, model='rw1', cyclic= TRUE) + 					# month specific slope
+	f(month, model='rw1',cyclic = TRUE) +                                                       # month specific intercept
+	f(month2, year.month2, model='rw1', cyclic= TRUE) +                                         # month specific slope
 	# state-month specific terms
-        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+        		# state-month specific intercept (spatially-correlated)
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                     # state-month specific intercept (spatially-correlated)
         f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
         # state specific terms
         f(ID, model="bym",graph=USA.adj) +                                                      # state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                                        # state specific slope (BYM)
+    # climate specific terms
+    variable.low +                                                                              # climate variable slope pre-knot
+    variable.high +                                                                             # climate variable slope post-knot
 	# random walk across time
         f(year.month3, model="rw1") +                                                           # rw1
 	# space-time interaction
@@ -218,13 +227,16 @@ fml <- deaths ~
         # state specific terms
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
-	# random walk terms
+        # climate specific terms
+        variable.low +                                                                  # climate variable slope pre-knot
+        variable.high +                                                                 # climate variable slope post-knot
+        # random walk terms
         f(year.month3, model="rw1") +                                           		# rw1
-	#f(year.month4,model="iid", group=ID3,				        		# type III space-time interaction
-	f(year.month4,model="rw1", group=ID3,				        		# variation on model
-	control.group=list(model="I")) +
-	#control.group=list(model="besag", 							# variation on model  							
-	#graph=USA.adj)) +									# variation on model 
+        #f(year.month4,model="iid", group=ID3,                                          # type III space-time interaction
+        f(year.month4,model="rw1", group=ID3,                                           # variation on model
+        control.group=list(model="I")) +
+        #control.group=list(model="besag",                                              # variation on model
+        #graph=USA.adj)) +                                                                 # variation on model
         # overdispersion term
         f(e, model = "iid")                                                     		# overdispersion term
 }
@@ -245,6 +257,9 @@ fml <- deaths ~
         # state specific terms
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        variable.low +                                                                  # climate variable slope pre-knot
+        variable.high +                                                                 # climate variable slope post-knot
 	# random walks terms
         #f(year.month3, model="rw1") +                                           		# rw1 across time (put back?)
 	#f(year.month4,model="iid", group=ID3,				        		# type III space-time interaction
@@ -270,6 +285,9 @@ fml <- deaths ~
         # state specific terms
         f(ID, model="bym",graph=USA.adj) +                                     		 	# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        variable.low +                                                                  # climate variable slope pre-knot
+        variable.high +                                                                 # climate variable slope post-knot
         # overdispersion term
         f(year.month3, model="rw1") +                                           		# rw1
         f(ID3,model="besag", graph=USA.adj,                                     		# type IV space-time interaction
