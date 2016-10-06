@@ -7,16 +7,16 @@
 
 clear
 
-declare -a ages=(0 5 15 25 35 45 55 65 75 85)
-declare -a sexes=(1 2)
+declare -a ages=(85)
+declare -a sexes=(1)
 declare -a sexstrings=('male' 'female')
-declare -i model=2
+declare -i model=1
 declare -i start=1982
 declare -i end=1991
 declare country="USA"
 declare dname="t2m"
 declare metric="mean"
-declare -i knotl=10
+declare -i knotl=15
 declare -i knoth=25
 
 #################################################
@@ -27,7 +27,7 @@ for sex in "${sexes[@]}"; do
 
 for age in "${ages[@]}"; do
 
-echo "starting ${sexstrings[$sex-1]} $age INLA model $model with climate years $start - $end";
+echo "starting ${sexstrings[$sex-1]} $age INLA model $model, with climate variable $metric $dname, years $start - $end";
 
 # runs model
 Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric $knotl $knoth
@@ -38,14 +38,14 @@ done; done;
 # 2. COMBINE RESULTS
 #################################################
 
-echo "combining results into one file from INLA model $model years $start - $end";
+#echo "combining results into one file from INLA model $model years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior.R $start $end $country 2
+#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior.R $start $end $country 2
 
 #################################################
 # 3. PLOTTING PARAMETERS FROM MODEL
 #################################################
 
-echo "plotting parameters from INLA model $model years $start - $end";
+#echo "plotting parameters from INLA model $model years $start - $end";
 
 # PLOT PARAMETERS CODE

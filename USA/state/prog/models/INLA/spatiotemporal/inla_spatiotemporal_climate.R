@@ -10,8 +10,8 @@ year.start.arg <- as.numeric(args[3])
 year.end.arg <- as.numeric(args[4])
 type.arg <- as.numeric(args[5])
 cluster.arg <- as.numeric(args[6])
-dname.arg <- as.numeric(args[7])
-metric.arg <- as.numeric(args[8])
+dname.arg <- as.character(args[7])
+metric.arg <- as.character(args[8])
 knot.low.arg <- as.numeric(args[9])
 knot.high.arg <- as.numeric(args[10])
 
@@ -316,14 +316,14 @@ file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',me
 ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
 # save all parameters of INLA model
-parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_parameters')
+parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',knot.low.arg,'_',knot.high.arg,'_parameters')
 #mod$misc <- NULL
 #mod$.args$.parent.frame <- NULL
 if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
 if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
 
 # save summary of INLA model
-summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_summary.txt')
+summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',knot.low.arg,'_',knot.high.arg,'_summary.txt')
 inla.summary.mod <- summary(mod)
 if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
 if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
@@ -335,7 +335,7 @@ email.content <- capture.output(inla.summary.mod)
 plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
 
 # name of RDS output file then save
-RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg)
+RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',knot.low.arg,'_',knot.high.arg)
 if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
 if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
 
