@@ -12,10 +12,15 @@ type.arg <- as.numeric(args[5])
 cluster.arg <- as.numeric(args[6])
 dname.arg <- as.numeric(args[7])
 metric.arg <- as.numeric(args[8])
+knot.low.arg <- as.numeric(args[9])
+knot.high.arg <- as.numeric(args[10])
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','4a')
 type.selected <- types[type.arg]
+
+# range of years
+years <- year.start.arg:year.end.arg
 
 require(mailR)
 
@@ -29,8 +34,9 @@ ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg
 # load USA data NEED TO GENERALISE
 dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_2013'))
 
-# load climate data
-dat.climate <- readRDS(paste0('~/git/climate/countries/USA/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/state_weighted_summary_',metric.arg,'_',year.start.arg,'_',year.end.arg,'.rds'))
+# load climate data NEED TO GENERALISE
+#dat.climate <- readRDS(paste0('~/git/climate/countries/USA/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/state_weighted_summary_',metric.arg,'_',year.start.arg,'_',year.end.arg,'.rds'))
+dat.climate <- readRDS(paste0('~/git/climate/countries/USA/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/state_weighted_summary_',metric.arg,'_',dname.arg,'_1982_1991.rds'))
 dat.climate$state.fips <- as.numeric(dat.climate$state.fips)
 
 # merge mortality and climate data and reorder
@@ -43,17 +49,15 @@ rownames(dat.merged) <- 1:nrow(dat.merged)
 
 # construct variables for three-piece linear
 names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
-dat.merged$variable.low <- dat.merged$variable.mid <- dat.merged$variable.high <- dat.merged$variable
+dat.merged$variable.low <- dat.merged$variable.high <- dat.merged$variable
 
 # set knot points for low and high (will need to look at literature for this)
-# make these a
-knot.low <- 10
-knot.high <- 25
+knot.low <- knot.low.arg
+knot.high <- knot.high.arg
 
 # adjust variables to create correct data for slopes
-dat.merged$variable.low  <- pmin(knot.low, dat.merged$variable)
-dat.merged$variable.mid  <- pmax(knot.low, pmin(knot.high, dat.merged$variable))
-dat.merged$variable.high <- pmax(25, dat.merged$variable)
+dat.merged$variable.low  <- knot.low - pmin(knot.low, dat.merged$variable)
+dat.merged$variable.high <- pmax(knot.high, dat.merged$variable) - knot.high
 
 library(dplyr)
 
@@ -128,7 +132,6 @@ fml  <- deaths ~
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
         variable.low +                                                                  # climate variable slope pre-low knot
-        variable.mid +                                                                  # climate variable slope pre-mid knot
         variable.high +                                                                 # climate variable slope post-high knot
 	# random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
@@ -154,7 +157,6 @@ fml<- deaths ~
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
         variable.low +                                                                  # climate variable slope pre-low knot
-        variable.mid +                                                                  # climate variable slope pre-mid knot
         variable.high +                                                                 # climate variable slope post-high knot
 	# random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
@@ -177,7 +179,6 @@ fml <- deaths ~
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
         variable.low +                                                                  # climate variable slope pre-low knot
-        variable.mid +                                                                  # climate variable slope pre-mid knot
         variable.high +                                                                 # climate variable slope post-high knot
 	# random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
@@ -208,7 +209,6 @@ fml <- deaths ~
         f(ID2, year.month2, model="bym",graph=USA.adj) +                                # state specific slope (BYM)
     # climate specific terms
         variable.low +                                                                  # climate variable slope pre-low knot
-        variable.mid +                                                                  # climate variable slope pre-mid knot
         variable.high +                                                                 # climate variable slope post-high knot
 	# random walk across time
         f(year.month3, model="rw1") +                                                   # rw1
@@ -236,7 +236,6 @@ fml <- deaths ~
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
         variable.low +                                                                  # climate variable slope pre-low knot
-        variable.mid +                                                                  # climate variable slope pre-mid knot
         variable.high +                                                                 # climate variable slope post-high knot    # random walk terms
         f(year.month3, model="rw1") +                                           		# rw1
         #f(year.month4,model="iid", group=ID3,                                          # type III space-time interaction
@@ -266,7 +265,6 @@ fml <- deaths ~
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
         variable.low +                                                                  # climate variable slope pre-low knot
-        variable.mid +                                                                  # climate variable slope pre-mid knot
         variable.high +                                                                 # climate variable slope post-high knot	# random walks terms
         #f(year.month3, model="rw1") +                                           		# rw1 across time (put back?)
         #f(year.month4,model="iid", group=ID3,                                          # type III space-time interaction
@@ -294,7 +292,6 @@ fml <- deaths ~
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
     # climate specific terms
         variable.low +                                                                  # climate variable slope pre-low knot
-        variable.mid +                                                                  # climate variable slope pre-mid knot
         variable.high +                                                                 # climate variable slope post-high knot    # overdispersion term
         f(year.month3, model="rw1") +                                           		# rw1
         f(ID3,model="besag", graph=USA.adj,                                     		# type IV space-time interaction

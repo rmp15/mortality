@@ -16,6 +16,8 @@ declare -i end=1991
 declare country="USA"
 declare dname="t2m"
 declare metric="mean"
+declare -i knotl=10
+declare -i knoth=25
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL
@@ -28,7 +30,7 @@ for age in "${ages[@]}"; do
 echo "starting ${sexstrings[$sex-1]} $age INLA model $model with climate years $start - $end";
 
 # runs model
-Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric
+Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric $knotl $knoth
 
 done; done;
 
