@@ -36,7 +36,7 @@ echo "starting ${sexstrings[$sex-1]} $age INLA model $model, with climate variab
 # runs model
 Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric $knotlo $knothi
 
-done; done; done; done; done; done;
+done; done; done; done;
 
 #################################################
 # 2. COMBINE RESULTS
