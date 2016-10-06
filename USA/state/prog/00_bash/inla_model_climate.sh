@@ -16,12 +16,16 @@ declare -i end=1991
 declare country="USA"
 declare dname="t2m"
 declare metric="mean"
-declare -i knotl=15
-declare -i knoth=25
+declare -a knotl=(5 10 15)
+declare -a knoth=(20 25 30)
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL
 #################################################
+
+for knotlo in "${knotl[@]}"; do
+
+for knothi in "${knoth[@]}"; do
 
 for sex in "${sexes[@]}"; do
 
@@ -30,9 +34,9 @@ for age in "${ages[@]}"; do
 echo "starting ${sexstrings[$sex-1]} $age INLA model $model, with climate variable $metric $dname, years $start - $end";
 
 # runs model
-Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric $knotl $knoth
+Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric $knotlo $knothi
 
-done; done;
+done; done; done; done; done; done;
 
 #################################################
 # 2. COMBINE RESULTS
