@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# this script
+# runs the INLA age-separated model
+# binds the posterior results together
+# plots the parameters of the model run
+
+clear
+
+declare -a ages=(0 5 15 25 35 45 55 65 75 85)
+declare -a sexes=(1 2)
+declare -a sexstrings=('male' 'female')
+declare -i start=1982
+declare -i end=1991
+declare country="USA"
+declare dname="t2m"
+declare metric="mean"
+
+# NEED TO AUTOMATE AT SOME POINT
+declare -a metrics=("mean" "days_below_10" "days_above_30" "sd" "days_changing_by_5" "days_increasing_by_5" "days_decreasing_by_5" "number_of_min_3_day_above_25_upwaves" "number_of_min_3_day_below_5_downwaves")
+
+#################################################
+# 1. DEATH RATES AGAINST CLIMATE
+#################################################
+
+for metric in "${metrics[@]}"; do
+
+for sex in "${sexes[@]}"; do
+
+for age in "${ages[@]}"; do
+
+echo "starting ${sexstrings[$sex-1]} $age deaths rates with climate variable $metric $dname, years $start - $end";
+
+# runs model
+Rscript ~/git/mortality/USA/state/prog/mort_against_climate/mort_against_climate.R $age $sex $start $end $dname $metric
+
+done; done; done;
