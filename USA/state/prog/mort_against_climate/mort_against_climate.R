@@ -68,8 +68,8 @@ dat.merged$state.name <- reorder(dat.merged$state.name,dat.merged$fips)
 
 pdf(paste0(file.loc,'/','deaths_rates_together_',year.start.arg,'_',year.end.arg,'_',dname.arg,'_',metric.arg,'_',sex.lookup[sex.arg],'_',age.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot(data=dat.merged) + 
-geom_point(aes(x=variable,y=rate.adj*100,000)) +
-stat_smooth(aes(x=variable,y=rate.adj*100,000)) +
+geom_point(aes(x=variable,y=rate.adj*100000)) +
+stat_smooth(aes(x=variable,y=rate.adj*100000)) +
 ggtitle(paste0('Death rates ',year.start.arg,'-',year.end.arg,' against ',dname.arg,' ',metric.arg,' : ',sex.lookup[sex.arg],' ',age.arg)) +
 xlab(paste0(dname.arg,' ',metric.arg)) +
 ylab('death rate (per 100,000)') +
@@ -82,8 +82,8 @@ dev.off()
 
 pdf(paste0(file.loc,'/','deaths_rates_month_',year.start.arg,'_',year.end.arg,'_',dname.arg,'_',metric.arg,'_',sex.lookup[sex.arg],'_',age.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot(data=dat.merged) + 
-geom_point(aes(x=variable,y=rate.adj*100,000)) +
-stat_smooth(aes(x=variable,y=rate.adj*100,000)) +
+geom_point(aes(x=variable,y=rate.adj*100000)) +
+stat_smooth(aes(x=variable,y=rate.adj*100000)) +
 ggtitle(paste0('Death rates by month ',year.start.arg,'-',year.end.arg,' against ',dname.arg,' ',metric.arg,' : ',sex.lookup[sex.arg],' ',age.arg)) +
 xlab(paste0(dname.arg,' ',metric.arg)) +
 ylab('death rate (per 100,000)') +
@@ -97,8 +97,8 @@ dev.off()
 
 pdf(paste0(file.loc,'/','deaths_rates_state_',year.start.arg,'_',year.end.arg,'_',dname.arg,'_',metric.arg,'_',sex.lookup[sex.arg],'_',age.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot(data=dat.merged) + 
-geom_point(aes(x=variable,y=rate.adj*100,000)) +
-stat_smooth(aes(x=variable,y=rate.adj*100,000)) +
+geom_point(aes(x=variable,y=rate.adj*100000)) +
+stat_smooth(aes(x=variable,y=rate.adj*100000)) +
 ggtitle(paste0('Death rates by state ',year.start.arg,'-',year.end.arg,' against ',dname.arg,' ',metric.arg,' : ',sex.lookup[sex.arg],' ',age.arg)) +
 xlab(paste0(dname.arg,' ',metric.arg)) +
 ylab('death rate (per 100,000)') +
