@@ -119,7 +119,7 @@ pdf(paste0('../../output/wavelet/national/wavelet_national_males_',year.start.ar
 mapply(plot.wavelet.national,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
-pdf(paste0('../../output/wavelet/nataional/wavelet_national_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r')
+pdf(paste0('../../output/wavelet/national/wavelet_national_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r')
 mapply(plot.wavelet.national,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
