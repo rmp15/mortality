@@ -255,7 +255,7 @@ system.time(mod <-
     E = pop.adj,
     control.compute = list(dic=TRUE),
     control.predictor = list(link = 1),
-    verbose=TRUE
+    #verbose=TRUE
     ))
 
 # create directory for output

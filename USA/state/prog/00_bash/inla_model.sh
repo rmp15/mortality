@@ -7,7 +7,7 @@
 
 clear
 
-declare -a ages=(75 35)
+declare -a ages=(35 75)
 declare -a sexes=(1)
 declare -a sexstrings=('male' 'female')
 declare -i model=2
