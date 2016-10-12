@@ -178,5 +178,5 @@ return(dat.frame)
 #return(COM.bootstrap)
 }
 
-thirtyfive.female.calif <- circular.age.mean.subnational(35,2,6)
-thirtyfive.female.florid <- circular.age.mean.subnational(35,2,12)
+#thirtyfive.female.calif <- circular.age.mean.subnational(35,2,6)
+#thirtyfive.female.florid <- circular.age.mean.subnational(35,2,12)
