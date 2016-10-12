@@ -22,8 +22,8 @@ library(plyr)
 dat.national <- ddply(dat,.(year,month,sex,age),summarize,deaths=sum(deaths),pop.adj=sum(pop.adj))
 dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-saveRDS(dat.national,paste0('../../output/prep_data/datus_national_rates_',year.start.arg,'_',year.end.arg))
-dat.national <- readRDS(paste0('../../output/prep_data/datus_national_rates_',year.start.arg,'_',year.end.arg))
+saveRDS(dat.national,paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
+dat.national <- readRDS(paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
 
 # function to find centre of mass of seasonality
 circular.age.mean <- function(age.selected,sex.selected) {
