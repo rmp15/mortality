@@ -124,17 +124,22 @@ ifelse(!dir.exists("../../output/circular"), dir.create("../../output/circular",
 
 write.csv(dat.COM,paste0('../../output/circular/USA_COM_',year.start.arg,'_',year.end.arg,'.csv'))
 
-pdf(paste0('../../output/circular/USA_COM_',year.start.arg,'_',year.end.arg,'.pdf'))
+dat.COM <- read.csv(paste0('../../output/circular/USA_COM_',year.start.arg,'_',year.end.arg,'.csv'))
+dat.COM$sex <- factor(dat.COM$sex, c('male','female'))
+
 library(ggplot2)
+
+pdf(paste0('../../output/circular/USA_COM_',year.start.arg,'_',year.end.arg,'.pdf'))
 ggplot(data=dat.COM,aes(x=COM,y=factor(age))) +
-geom_point(fill='red',size=3,color='red') +
-geom_errorbarh(color='red',aes(xmin=lowerCI,xmax=upperCI),height=0) +
+geom_point(size=3,aes(color=as.factor(sex))) +
+geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
 xlab('month') +
 ylab('age group') +
-scale_x_discrete(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+scale_x_continuous(breaks=c(seq(1,12)),labels=month.short,expand=c(0,2)) +
 scale_y_discrete(labels=age.print) +
-facet_wrap(~sex)+
-theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+#xlim(1,12) + 
+facet_wrap(~sex) +
+theme(legend.position='none',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
 
