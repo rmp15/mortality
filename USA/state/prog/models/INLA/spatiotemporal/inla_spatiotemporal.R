@@ -18,8 +18,11 @@ type.selected <- types[type.arg]
 require(mailR)
 
 # create files for output
-ifelse(!dir.exists(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/')), dir.create(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/')), FALSE)
-ifelse(!dir.exists(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/age_groups')), FALSE)
+file.loc <- paste0('data/mortality/US/state/predicted/type_',type.selected,'/age_groups/')
+if(cluster.arg==0){file.loc <- paste0('~/',file.loc)}
+if(cluster.arg==1){file.loc <- paste0('~/projects/',file.loc)}
+
+ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # load USA data
 dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
@@ -51,7 +54,12 @@ fit.years <- year.start:year.end
 dat.inla <- dat.inla[dat.inla$sex==sex & dat.inla$age==age & dat.inla$year %in% fit.years,]
 
 # load drawseq lookup
+if(cluster.arg==0){
 drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
+}
+if(cluster.arg==1){
+drawseq.lookup <-readRDS('~/projects/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
+}
 
 dat.inla <- merge(dat.inla,drawseq.lookup, by='fips')
 
@@ -259,32 +267,26 @@ system.time(mod <-
     ))
 
 # create directory for output
-file.loc <- paste0('~/data/mortality/US/state/predicted/type_',type.selected,'/age_groups/',age.sel)
+file.loc <- paste0(file.loc,age.sel,'/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
 # save all parameters of INLA model
 parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_parameters')
 #mod$misc <- NULL
 #mod$.args$.parent.frame <- NULL
-if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
-if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
+saveRDS(mod,paste0(file.loc,parameters.name))
 
 # save summary of INLA model
 summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_summary.txt')
 inla.summary.mod <- summary(mod)
-if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
-if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
-
-# capture output for emailing purposes
-email.content <- capture.output(inla.summary.mod)
+capture.output(inla.summary.mod,file=paste0(file.loc,summary.name))
 
 # save RDS of INLA results
 plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
 
 # name of RDS output file then save
 RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end)
-if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
-if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
+saveRDS(plot.dat,paste0(file.loc,RDS.name))
 
 sender <- "emailr349@gmail.com"
 recipients <- c("r.parks15@imperial.ac.uk")
