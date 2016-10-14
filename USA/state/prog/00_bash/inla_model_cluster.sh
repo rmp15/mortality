@@ -7,7 +7,7 @@
 
 clear
 
-declare -a ages=(75)
+declare -a ages=(35 75)
 declare -a sexes=(1)
 declare -a sexstrings=('male' 'female')
 declare -i model=2
@@ -26,24 +26,6 @@ for age in "${ages[@]}"; do
 echo "starting ${sexstrings[$sex-1]} $age INLA model $model years $start - $end";
 
 # runs model
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal.R $age $sex $start $end $model 0
-Rscript ~/projects/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_cluster.R $age $sex $start $end $model 0
-
+Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal.R $age $sex $start $end $model 1
 
 done; done;
-
-#################################################
-# 2. COMBINE RESULTS
-#################################################
-
-echo "combining results into one file from INLA model $model years $start - $end";
-
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior.R $start $end $country 2
-
-#################################################
-# 3. PLOTTING PARAMETERS FROM MODEL
-#################################################
-
-echo "plotting parameters from INLA model $model years $start - $end";
-
-# PLOT PARAMETERS CODE
