@@ -31,7 +31,7 @@ age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85),
 month.names <- c('January','February','March','April','May','June',
                  'July','August','September','October','November','December')
 month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
-sex.lookup <- c('male','female')
+sex.lookup <- c('Men','Women')
 model <- paste0('type',model)
 
 ###############################################################
@@ -144,9 +144,9 @@ lin.reg.grad.max.min$percent.change <- with(lin.reg.grad.max.min, round(100*abs(
 
 # change name of genders
 lin.reg.median$sex <- as.factor(lin.reg.median$sex)
-levels(lin.reg.median$sex) <- c('male','female')
+levels(lin.reg.median$sex) <- c('Men','Women')
 lin.reg.grad$sex <- as.factor(lin.reg.grad$sex)
-levels(lin.reg.grad$sex) <- c('male','female')
+levels(lin.reg.grad$sex) <- c('Men','Women')
 
 ###############################################################
 # PREPARING MAP
@@ -312,7 +312,7 @@ dat.var.national$age.print <- reorder(dat.var.national$age.print,dat.var.nationa
 
 pdf(paste0(file.loc.nat.sum,'coeff_var_national_all_ages.pdf'),paper='a4r',height=0,width=0)
 dat.var.national$sex <- as.factor(dat.var.national$sex)
-levels(dat.var.national$sex) <- c('male','female')
+levels(dat.var.national$sex) <- c('Men','Women')
 print(ggplot(dat.var.national,aes(x=year,color=factor(age.print),y=coeff.var)) +
 geom_line(size=0.5) +
 #geom_vline(xintercept=c(1993) +
@@ -542,7 +542,7 @@ max.var.median.plot <- max(dat.var.median$median)
 
 #pdf('coeff_var_all_ages.pdf',paper='a4r',height=0,width=0)
 #dat.var.median$sex <- as.factor(dat.var.median$sex)
-#levels(dat.var.median$sex) <- c('male','female')
+#levels(dat.var.median$sex) <- c('Men','Women')
 #print(ggplot(dat.var.median,aes(x=year,color=factor(age.print),y=median)) +
 #geom_line(alpha=0.4,linetype=2, size=0.5) +
 #ylim(0,max.var.median.plot) +
@@ -565,7 +565,7 @@ max.var.grad.plot <- max(dat.var.grad$grad.total)
 shapefile.data$STATE_FIPS <- as.integer(as.character(shapefile.data$STATE_FIPS))
 dat.var.grad <- merge(dat.var.grad, shapefile.data, by.x='fips',by.y='STATE_FIPS')
 dat.var.grad$sex <- as.factor(dat.var.grad$sex)
-levels(dat.var.grad$sex) <- c('male','female')
+levels(dat.var.grad$sex) <- c('Men','Women')
 dat.var.grad$age.print <- mapvalues(dat.var.grad$age, from=unique(dat.var.grad$age), to=age.print)
 dat.var.grad$age.print <- reorder(dat.var.grad$age.print,dat.var.grad$age)
 
@@ -611,8 +611,8 @@ dat.var.grad$age.print <- reorder(dat.var.grad$age.print,dat.var.grad$age)
 # plot male facetted by climate region
 pdf(paste0(file.loc.nat.sum,'change_coeff_var_all_ages_male_climate.pdf'),paper='a4r',height=0,width=0)
 print(ggplot() +
-geom_jitter(data=subset(dat.var.grad,sex=='male'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
-geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='male'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
+geom_jitter(data=subset(dat.var.grad,sex=='Men'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
+geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='Men'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
 #geom_jitter(data=subset(dat.var.grad,sex=='male'),aes(x=as.factor(age.print),y=grad.total,color=as.factor(SUB_REGION),width=0.02)) +
 ##ggtitle('Percentage change in coefficient of seasonality in the USA for males, 1982-2010, by region') +
 scale_x_discrete(labels=age.print) +
@@ -631,8 +631,8 @@ dev.off()
 # plot female facetted by climate region
 pdf(paste0(file.loc.nat.sum,'change_coeff_var_all_ages_female_climate.pdf'),paper='a4r',height=0,width=0)
 print(ggplot() +
-geom_jitter(data=subset(dat.var.grad,sex=='female'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
-geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='female'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
+geom_jitter(data=subset(dat.var.grad,sex=='Women'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
+geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='Women'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
 ##ggtitle('Percentage change in coefficient of seasonality in the USA for females, 1982-2010, by region') +
 scale_x_discrete(labels=age.print) +
 xlab('age group') +
@@ -717,12 +717,12 @@ plot.function.var.grad <- function(sex.sel) {
 
 # male
 pdf(paste0(file.loc.nat.sum,'jan_july_var_grad_m.pdf'),height=0,width=0,paper='a4r')
-plot.function.var.grad('male')
+plot.function.var.grad('Men')
 dev.off()
 
 # female
 pdf(paste0(file.loc.nat.sum,'jan_july_var_grad_f.pdf'),height=0,width=0,paper='a4r')
-plot.function.var.grad('female')
+plot.function.var.grad('Women')
 dev.off()
 
 # 7. national summary of timing of peak mortality
@@ -829,7 +829,7 @@ jitterplot.median <- function() {
     ylab('median mortality rate (per 100,000)') +
     ##ggtitle(paste0(age.single,' : median of mortality over months for all states')) +
     guides(fill=FALSE) +
-    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('male','female')) +
+    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('Men','Women')) +
     theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
     panel.background = element_blank(), axis.line = element_line(colour = "black"),
     rect = element_blank(),legend.position='bottom')
@@ -846,7 +846,7 @@ jitterplot.median.5 <- function() {
     ylab('median mortality rate (per 100,000)') +
     ##ggtitle(paste0(age.single,' : 5-year median of mortality over months for all states')) +
     guides(fill=FALSE) +
-    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('male','female')) +
+    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('Men','Women')) +
     facet_wrap(~year.5) +
     theme_minimal()
 }
@@ -862,7 +862,7 @@ jitterplot.median.10 <- function() {
     ylab('median mortality rate (per 100,000)') +
     ##ggtitle(paste0(age.print,' : 10-year median of mortality over months for all states')) +
     guides(fill=FALSE) +
-    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('male','female')) +
+    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('Men','Women')) +
     facet_wrap(~year.10) +
     theme_minimal()
 }
@@ -881,7 +881,7 @@ jitterplot.rate <- function() {
     ylab('rate of change of mortality rate') +
     ##ggtitle(paste0(age.single,' : percentage change of mortality over months for all states')) +
     guides(fill=FALSE) +
-    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('male','female')) +
+    scale_colour_discrete(name='gender',breaks=c(1,2),labels=c('Men','Women')) +
     theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
     panel.background = element_blank(), axis.line = element_line(colour = "black"),
     rect = element_blank(),legend.position='bottom')
@@ -959,12 +959,12 @@ plot.function.median <- function(sex.sel) {
 
 # male
 if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_median_map_m.pdf'),height=0,width=0,paper='a4r')}
-plot.function.median('male')
+plot.function.median('Men')
 if(together==0){dev.off()}
 
 # female
 if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_median_map_f.pdf'),height=0,width=0,paper='a4r')}
-plot.function.median('female')
+plot.function.median('Women')
 if(together==0){dev.off()}
 
 # 4. rate of change of mortality by month map
@@ -995,12 +995,12 @@ plot.function.grad <- function(sex.sel) {
 
 # male
 if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_grad_map_m.pdf'),height=0,width=0,paper='a4r')}
-plot.function.grad('male')
+plot.function.grad('Men')
 if(together==0){dev.off()}
 
 # female
 if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_grad_map_f.pdf'),height=0,width=0,paper='a4r')}
-plot.function.grad('female')
+plot.function.grad('Women')
 if(together==0){dev.off()}
 
 # 5. coefficient of seasonality against time
