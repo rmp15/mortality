@@ -38,7 +38,7 @@ done; done;
 
 echo "combining results into one file from INLA model $model years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior.R $start $end $country 2
+#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior.R $start $end $country 2
 
 #################################################
 # 3. PLOTTING PARAMETERS FROM MODEL
