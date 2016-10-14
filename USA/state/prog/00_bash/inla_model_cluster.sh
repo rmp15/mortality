@@ -10,7 +10,7 @@ clear
 declare -a ages=(35 75)
 declare -a sexes=(1)
 declare -a sexstrings=('male' 'female')
-declare -i model=2
+declare -i model=1
 declare -i start=1982
 declare -i end=2013
 declare country="USA"
@@ -26,6 +26,6 @@ for age in "${ages[@]}"; do
 echo "starting ${sexstrings[$sex-1]} $age INLA model $model years $start - $end";
 
 # runs model
-Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal.R $age $sex $start $end $model 1
+Rscript ~/projects/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal.R $age $sex $start $end $model 1
 
 done; done;
