@@ -11,7 +11,8 @@ require(WaveletComp)
 age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
 age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85),
                        age.print=age.print)
-sex.lookup <- c('male','female')
+#sex.lookup <- c('male','female')
+sex.lookup <- c('Men','Women')
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 
 # load data and filter results
@@ -80,10 +81,10 @@ plot.wavelet.national <- function(sex.selected,age.selected) {
     make.pval= T, n.sim = 10)
     
     # plot wavelet analysis
-    plot.title <- paste0('USA: ',sex.lookup[sex.selected],' ',age.single)
+    plot.title <- paste0(sex.lookup[sex.selected],' ',age.single)
     wt.image(my.w, n.levels = 250,
-    legend.params = list(lab = "wavelet power levels"),
-    periodlab = "periods (months)", show.date = T,timelab = "",
+    legend.params = list(lab = "Wavelet power levels"),
+    periodlab = "Periods (months)", show.date = T,timelab = "",
     graphics.reset = F)
     abline(h = log(12)/log(2))
     mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)

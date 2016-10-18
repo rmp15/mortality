@@ -22,17 +22,21 @@ library(plyr)
 dat.national <- ddply(dat,.(year,month,sex,age),summarize,deaths=sum(deaths),pop.adj=sum(pop.adj))
 dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-saveRDS(dat.national,paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
-dat.national <- readRDS(paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
+#saveRDS(dat.national,paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
+#dat.national <- readRDS(paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
 
-# function to find centre of mass of seasonality
+# add max(deaths) - deaths
+dat$deaths.inv <- round((max(dat$deaths) - dat$deaths)/100)
+dat.national$deaths.inv <- round((max(dat.national$deaths) - dat.national$deaths)/100)
+
+# function to find inverse of centre of mass of seasonality
 circular.age.mean <- function(age.selected,sex.selected) {
 
 # take dates as subset
 dat <- subset(dat,age==age.selected & sex==sex.selected)
 
 # take months column and repeat death column times
-dat <- rep(dat$month,dat$deaths)
+dat <- rep(dat$month,dat$deaths.inv)
 
 # convert months -> radians
 conv <- 2*pi/12
@@ -64,7 +68,6 @@ std.error <- sqrt(var(COM.bootstrap))
 dat.frame <- c(age.selected,sex.selected,dat.mean,COM.bootstrap.5,COM.bootstrap.95)
 
 return(dat.frame)
-#return(COM.bootstrap)
 }
 
 zero.male <- circular.age.mean(0,1)
@@ -120,19 +123,19 @@ dat.COM$sex <- as.factor(dat.COM$sex)
 levels(dat.COM$sex) <- sex.lookup
 
 # create output directories
-ifelse(!dir.exists("../../output/circular"), dir.create("../../output/circular",recursive=TRUE), FALSE
+ifelse(!dir.exists("../../output/com"), dir.create("../../output/com",recursive=TRUE), FALSE)
 
-write.csv(dat.COM,paste0('../../output/circular/USA_COM_',year.start.arg,'_',year.end.arg,'.csv'))
+write.csv(dat.COM,paste0('../../output/com/USA_INV_COM_',year.start.arg,'_',year.end.arg,'.csv'))
 
-dat.COM <- read.csv(paste0('../../output/circular/USA_COM_',year.start.arg,'_',year.end.arg,'.csv'))
+dat.COM <- read.csv(paste0('../../output/com/USA_INV_COM_',year.start.arg,'_',year.end.arg,'.csv'))
 dat.COM$sex <- factor(dat.COM$sex, c('male','female'))
 
 library(ggplot2)
 
-pdf(paste0('../../output/circular/USA_COM_',year.start.arg,'_',year.end.arg,'.pdf'))
+pdf(paste0('../../output/com/USA_INV_COM_',year.start.arg,'_',year.end.arg,'.pdf'))
 ggplot(data=dat.COM,aes(x=COM,y=factor(age))) +
 geom_point(size=3,aes(color=as.factor(sex))) +
-geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
+#geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
 xlab('month') +
 ylab('age group') +
 scale_x_continuous(breaks=c(seq(1,12)),labels=month.short,expand=c(0,2)) +

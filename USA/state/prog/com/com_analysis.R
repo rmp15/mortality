@@ -19,11 +19,11 @@ dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg
 
 # perform for nationalised data
 library(plyr)
-dat.national <- ddply(dat,.(year,month,sex,age),summarize,deaths=sum(deaths),pop.adj=sum(pop.adj))
-dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
+#dat.national <- ddply(dat,.(year,month,sex,age),summarize,deaths=sum(deaths),pop.adj=sum(pop.adj))
+#dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-saveRDS(dat.national,paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
-dat.national <- readRDS(paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
+#saveRDS(dat.national,paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
+#dat.national <- readRDS(paste0('../../output/prep_data/datus_nat_rates_',year.start.arg,'_',year.end.arg))
 
 # function to find centre of mass of seasonality
 circular.age.mean <- function(age.selected,sex.selected) {
@@ -54,17 +54,17 @@ circ.bootstrap <-function(data.frame) {
 # calculate COM for each bootstrap sample
 set.seed(123)
 COM.bootstrap <- (sapply(resamples, circ.bootstrap))
-COM.bootstrap.5 <- sort(COM.bootstrap)[25]
-COM.bootstrap.95 <- sort(COM.bootstrap)[975]
+COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap.5 <- COM.bootstrap[25]
+COM.bootstrap.95 <- COM.bootstrap[975]
 
 # calculate bootstrap std. error
-std.error <- sqrt(var(COM.bootstrap))
+#std.error <- sqrt(var(COM.bootstrap))
 
 # compile information for output of function
 dat.frame <- c(age.selected,sex.selected,dat.mean,COM.bootstrap.5,COM.bootstrap.95)
 
 return(dat.frame)
-#return(COM.bootstrap)
 }
 
 zero.male <- circular.age.mean(0,1)

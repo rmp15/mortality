@@ -99,9 +99,38 @@ lin.reg.median$month.short <- mapvalues(lin.reg.median$month,from=unique(lin.reg
 # make sure the months are in the correct order for plotting
 lin.reg.median$month.short <- reorder(lin.reg.median$month.short,lin.reg.median$month)
 
+# work out the percentage difference between largest and smallest mortality month from COM analysis
+dat.COM <- read.csv(paste0('../../output/com/USA_COM_',year.start,'_',year.end,'.csv'))
+levels(dat.COM$sex) <- c('2','1')
+dat.COM$sex <- as.character(dat.COM$sex)
+dat.COM$type <- 'max'
+dat.inv.COM <- read.csv(paste0('../../output/com/USA_INV_COM_',year.start,'_',year.end,'.csv'))
+levels(dat.inv.COM$sex) <- c('2','1')
+dat.inv.COM$sex <- as.character(dat.inv.COM$sex)
+dat.inv.COM$type <- 'min'
+dat.COM.total <- rbind(dat.COM,dat.inv.COM)
+# round to get month required for merging
+dat.COM.total$COM <- round(dat.COM.total$COM)
+dat.COM.total$COM <- ifelse(dat.COM.total$COM==0,12,dat.COM.total$COM)
+dat.COM.total <- dat.COM.total[,c(2:4,7)]
+dat.COM.total$sex <- as.numeric(dat.COM.total$sex)
+dat.COM.total$month <- dat.COM.total$COM
+
+test <- merge(lin.reg.median,dat.COM.total,by=c('age','sex','month'),all.x=1)
+test <- na.omit(test)
+test <- ddply(test,.(fips,sex,age), summarize,max=median[type=='max'],month.max=month[type=='max'],min=median[type=='min'],month.min=month[type=='min'])
+test$percent.change <- round(100*exp((test$max - test$min)),1)-100
+test$percent.change <- ifelse(test$month.max %in% c(4:9),(-1*test$percent.change),test$percent.change)
+
 # work out the percentage difference between jan and jul for each fips,sex,age
 lin.reg.median.jan.jul <- ddply(lin.reg.median, .(fips,sex,age), summarize,jan=median[month==1],jul=median[month==7])
 lin.reg.median.jan.jul$percent.change <- round(100*exp((lin.reg.median.jan.jul$jan - lin.reg.median.jan.jul$jul)),1)-100
+
+# work out the percentage difference between max and min mortality for each fips,sex,age
+lin.reg.median.max.min.state <- ddply(lin.reg.median, .(fips,sex,age), summarize,max=max(median),month.max=month[median==max(median)],min=min(median),month.min=month[median==min(median)])
+lin.reg.median.max.min.state$percent.change <- round(100*exp((lin.reg.median.max.min.state$max - lin.reg.median.max.min.state$min)),1)-100
+lin.reg.median.max.min.state$percent.change <- ifelse(lin.reg.median.max.min.state$month.max %in% c(4:9),(-1*lin.reg.median.max.min.state$percent.change),lin.reg.median.max.min.state$percent.change)
+
 
 # add year to the nearest rounded-down 5/10
 dat$year.5 <- floor(dat$year/5)*5
@@ -371,6 +400,93 @@ dev.off()
 pdf(paste0(file.loc.nat.sum,'jan_july_median_f.pdf'),height=0,width=0,paper='a4r')
 plot.function.median.jan.jul(2)
 dev.off()
+
+# 2b. percentage difference between max and min mortality map per state
+
+# merge selected data to map dataframe for colouring of ggplot
+plot.median.max.min.state <- merge(USA.df,lin.reg.median.max.min.state, by.x='STATE_FIPS',by.y='fips')
+plot.median.max.min.state <- merge(plot.median.max.min.state, age.code, by ='age')
+plot.median.max.min.state <- with(plot.median.max.min.state, plot.median.max.min.state[order(sex,age,DRAWSEQ,order),])
+
+# find greatest and smallest variation within a single age group for summary statistics
+plot.median.max.min.state.max.min <- ddply(plot.median.max.min.state,.(age,sex),summarize,min=min(percent.change),max=max(percent.change))
+plot.median.max.min.state.max.min$diff <- with(plot.median.max.min.state.max.min,max-min)
+
+# make sure the age groups are in the correct order for plotting
+plot.median.max.min.state$age.print <- with(plot.median.max.min.state,reorder(age.print,age))
+
+# function to plot
+plot.function.median.max.min.state <- function(sex.sel) {
+    
+    # find limits for plot
+    min.plot <- min(plot.median.max.min.state$percent.change)
+    max.plot <- max(plot.median.max.min.state$percent.change)
+    
+    print(ggplot(data=subset(plot.median.max.min.state,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=percent.change),color='black',size=0.01) +
+    scale_fill_gradient2(limits=c(min.plot,max.plot),low="#990000", high="#000033",guide = guide_legend(title = 'Percentage\ndifference\nbetween\nmaximum\nand\nminimum')) +
+    facet_wrap(~age.print) +
+    xlab('') +
+    ylab('') +
+    ggtitle(sex.lookup[sex.sel]) +
+    ##ggtitle(paste0(sex.lookup[sex.sel],' : posterior percentage difference between median January and July mortality ',year.start,'-',year.end)) +
+    theme_map() +
+    theme(text = element_text(size = 15),legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+# male
+pdf(paste0(file.loc.nat.sum,'jan_july_maxmin_m.pdf'),height=0,width=0,paper='a4r')
+plot.function.median.max.min.state(1)
+dev.off()
+
+# female
+pdf(paste0(file.loc.nat.sum,'jan_july_maxmin_f.pdf'),height=0,width=0,paper='a4r')
+plot.function.median.max.min.state(2)
+dev.off()
+
+# 2c. percentage difference between max and min mortality map as defined by COM analysis
+
+# merge selected data to map dataframe for colouring of ggplot
+plot.median.max.min <- merge(USA.df,test, by.x='STATE_FIPS',by.y='fips')
+plot.median.max.min <- merge(plot.median.max.min, age.code, by ='age')
+plot.median.max.min <- with(plot.median.max.min, plot.median.max.min[order(sex,age,DRAWSEQ,order),])
+
+# find greatest and smallest variation within a single age group for summary statistics
+plot.median.max.min.max.min <- ddply(plot.median.max.min,.(age,sex),summarize,min=min(percent.change),max=max(percent.change))
+plot.median.max.min.max.min$diff <- with(plot.median.max.min.max.min,max-min)
+
+# make sure the age groups are in the correct order for plotting
+plot.median.max.min$age.print <- with(plot.median.max.min,reorder(age.print,age))
+
+# function to plot
+plot.function.median.max.min <- function(sex.sel) {
+    
+    # find limits for plot
+    min.plot <- min(plot.median.max.min$percent.change)
+    max.plot <- max(plot.median.max.min$percent.change)
+    
+    print(ggplot(data=subset(plot.median.max.min,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=percent.change),color='black',size=0.01) +
+    scale_fill_gradient2(limits=c(min.plot,max.plot),low="#990000", high="#000033",guide = guide_legend(title = 'Percentage\ndifference\nbetween\nmaximum\nand\nminimum')) +
+    facet_wrap(~age.print) +
+    xlab('') +
+    ylab('') +
+    ggtitle(sex.lookup[sex.sel]) +
+    ##ggtitle(paste0(sex.lookup[sex.sel],' : posterior percentage difference between median January and July mortality ',year.start,'-',year.end)) +
+    theme_map() +
+    theme(text = element_text(size = 15),legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+# male
+pdf(paste0(file.loc.nat.sum,'jan_july_maxmin_com_m.pdf'),height=0,width=0,paper='a4r')
+plot.function.median.max.min(1)
+dev.off()
+
+# female
+pdf(paste0(file.loc.nat.sum,'jan_july_maxmin_com_f.pdf'),height=0,width=0,paper='a4r')
+plot.function.median.max.min(2)
+dev.off()
+
 
 # 3. difference in rate of change of maximum and minimum mortality change map
 
