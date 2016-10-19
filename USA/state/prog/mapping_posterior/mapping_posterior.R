@@ -99,6 +99,10 @@ lin.reg.median$month.short <- mapvalues(lin.reg.median$month,from=unique(lin.reg
 # make sure the months are in the correct order for plotting
 lin.reg.median$month.short <- reorder(lin.reg.median$month.short,lin.reg.median$month)
 
+# figure out the ratio of max/min deaths over time by fips,sex,age,year
+state.max.min <-  ddply(dat, .(fips,sex,age,year), summarize, max=max(rate.pred),min=min(rate.pred))
+state.max.min$ratio <- with(state.max.min,max/min)
+
 # work out the percentage difference between largest and smallest mortality month from COM analysis
 dat.COM <- read.csv(paste0('../../output/com/USA_COM_',year.start,'_',year.end,'.csv'))
 levels(dat.COM$sex) <- c('2','1')
@@ -1290,6 +1294,45 @@ if(together==0){dev.off()}
 #if(together==0){dev.off()}
 
 #if(together==1){dev.off()}
+
+# 7. ratio of max/min mortality rate over time by state
+
+
+# merge with coords file to colour
+state.max.min <- merge(state.max.min, USA.coords, by.x='fips', by.y='STATE_FIPS')
+
+# function to plot
+plot.function.state.max.min <- function(sex.sel) {
+    
+    # variables for y-limits on variance graphs
+    #min.plot <- min(state.max.min$ratio[state.max.min$age==age.selected])
+    min.plot <- 1
+    max.plot <- max(state.max.min$ratio[state.max.min$age==age.selected])
+    
+    print(ggplot(subset(state.max.min,age==age.selected & sex==sex.sel)) +
+    geom_jitter(aes(x=year,color=climate_region,y=ratio),width=0.3) +
+    #geom_line(data=subset(dat.var.median,age==age.selected & sex==sex.lookup[sex.sel]),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=median)) +
+    ylim(1,max.plot) +
+    xlab('Year') +
+    ylab('Ratio between maximum and minimum death rates') +
+    ggtitle(sex.lookup[sex.sel]) +
+    #ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : Seasonality Index of mortality over time (coloured by geographic region)')) +
+    scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Climate region')) +
+    theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(), axis.line = element_line(colour = "black"),
+    rect = element_blank()))
+}
+
+# male
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
+plot.function.state.max.min(1)
+if(together==0){dev.off()}
+
+# female
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
+plot.function.state.max.min(2)
+if(together==0){dev.off()}
+
 
 # closes bracket at beginning of function
 }
