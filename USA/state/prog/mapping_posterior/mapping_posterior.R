@@ -103,11 +103,14 @@ lin.reg.median$month.short <- reorder(lin.reg.median$month.short,lin.reg.median$
 # figure out the ratio of max/min deaths over time by fips,sex,age,year
 state.max.min <-  ddply(dat, .(fips,sex,age,year), summarize, max=max(rate.pred),month.max=month[rate.pred==max(rate.pred)],min=min(rate.pred),month.min=month[rate.pred==min(rate.pred)])
 state.max.min$ratio <- with(state.max.min,max/min)
-
-#state.max.min$percent.change <- round(100*exp((state.max.min$max - state.max.min$min)),1)-100
 state.max.min$percent.change <- round(100*(state.max.min$ratio),1)-100
 
-#lin.reg.median.max.min.state$percent.change <- round(100*exp((lin.reg.median.max.min.state$max - lin.reg.median.max.min.state$min)),1)-100
+# apply linear regression to each grouping by fips, sex, age to find gradient
+state.max.min.grad <- ddply(state.max.min, .(fips,sex,age), function(z)coef(lm(ratio ~ year, data=z)))
+state.max.min.grad$grad <- with(state.max.min.grad,100*(exp(year)-1))
+
+# total percentage change over period
+state.max.min.grad$grad.total <- 100 * ((1 + state.max.min.grad$grad / 100) ^ num.years - 1)
 
 # work out the percentage difference between largest and smallest mortality month from COM analysis
 dat.COM <- read.csv(paste0('../../output/com/USA_COM_',year.start,'_',year.end,'.csv'))
@@ -136,11 +139,10 @@ test$percent.change <- ifelse(test$month.max %in% c(4:9),(-1*test$percent.change
 lin.reg.median.jan.jul <- ddply(lin.reg.median, .(fips,sex,age), summarize,jan=median[month==1],jul=median[month==7])
 lin.reg.median.jan.jul$percent.change <- round(100*exp((lin.reg.median.jan.jul$jan - lin.reg.median.jan.jul$jul)),1)-100
 
-# work out the percentage difference between max and min mortality for each fips,sex,age
+# work out the percentage increase of max from min death rates in year and min mortality for each fips,sex,age
 lin.reg.median.max.min.state <- ddply(lin.reg.median, .(fips,sex,age), summarize,max=max(median),month.max=month[median==max(median)],min=min(median),month.min=month[median==min(median)])
 lin.reg.median.max.min.state$percent.change <- round(100*exp((lin.reg.median.max.min.state$max - lin.reg.median.max.min.state$min)),1)-100
 lin.reg.median.max.min.state$percent.change <- ifelse(lin.reg.median.max.min.state$month.max %in% c(4:9),(-1*lin.reg.median.max.min.state$percent.change),lin.reg.median.max.min.state$percent.change)
-
 
 # add year to the nearest rounded-down 5/10
 dat$year.5 <- floor(dat$year/5)*5
@@ -411,7 +413,7 @@ plot.function.median.jan.jul <- function(sex.sel) {
 #plot.function.median.jan.jul(2)
 #dev.off()
 
-# 2b. percentage difference between max and min mortality map per state
+# 2b. Percentage increase of max from min death rates in year and min mortality map per state
 
 # merge selected data to map dataframe for colouring of ggplot
 plot.median.max.min.state <- merge(USA.df,lin.reg.median.max.min.state, by.x='STATE_FIPS',by.y='fips')
@@ -455,7 +457,7 @@ pdf(paste0(file.loc.nat.sum,'median_maxmin_ratio_f.pdf'),height=0,width=0,paper=
 plot.function.median.max.min.state(2)
 dev.off()
 
-# 2c. percentage difference between max and min mortality map as defined by COM analysis
+# 2c. percentage increase of max from min death rates in year and min mortality map as defined by COM analysis
 
 # merge selected data to map dataframe for colouring of ggplot
 plot.median.max.min <- merge(USA.df,test, by.x='STATE_FIPS',by.y='fips')
@@ -740,43 +742,43 @@ dat.var.grad$age.print <- reorder(dat.var.grad$age.print,dat.var.grad$age)
 #dev.off()
 
 # plot male facetted by climate region
-pdf(paste0(file.loc.nat.sum,'change_seas_indx_all_ages_male_climate.pdf'),paper='a4r',height=0,width=0)
-print(ggplot() +
-geom_jitter(data=subset(dat.var.grad,sex=='Men'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
-geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='Men'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
+#pdf(paste0(file.loc.nat.sum,'change_seas_indx_all_ages_male_climate.pdf'),paper='a4r',height=0,width=0)
+#print(ggplot() +
+#geom_jitter(data=subset(dat.var.grad,sex=='Men'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
+#geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='Men'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
 #geom_jitter(data=subset(dat.var.grad,sex=='male'),aes(x=as.factor(age.print),y=grad.total,color=as.factor(SUB_REGION),width=0.02)) +
 ##ggtitle('Percentage change in Seasonality Index in the USA for males, 1982-2010, by region') +
-scale_x_discrete(labels=age.print) +
-xlab('Age group') +
-ylab('Percentage change in Seasonality Index') +
-ylim(min.var.grad.plot,max.var.grad.plot) +
-geom_hline(yintercept=0, linetype=2,alpha=0.5) +
-scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Geographic region')) +
-guides(colour=FALSE) +
-facet_wrap(~climate_region) +
-theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
-axis.text.x = element_text(angle=90)))
-dev.off()
+#scale_x_discrete(labels=age.print) +
+#xlab('Age group') +
+#ylab('Percentage change in Seasonality Index') +
+#ylim(min.var.grad.plot,max.var.grad.plot) +
+#geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+#scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Geographic region')) +
+#guides(colour=FALSE) +
+#facet_wrap(~climate_region) +
+#theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+#panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
+#axis.text.x = element_text(angle=90)))
+#dev.off()
 
 # plot female facetted by climate region
-pdf(paste0(file.loc.nat.sum,'change_seas_indx_all_ages_female_climate.pdf'),paper='a4r',height=0,width=0)
-print(ggplot() +
-geom_jitter(data=subset(dat.var.grad,sex=='Women'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
-geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='Women'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
+#pdf(paste0(file.loc.nat.sum,'change_seas_indx_all_ages_female_climate.pdf'),paper='a4r',height=0,width=0)
+#print(ggplot() +
+#geom_jitter(data=subset(dat.var.grad,sex=='Women'),width=0.2,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
+#geom_jitter(data=subset(transform(dat.var.grad,climate_region='All'),sex=='Women'),width=0.2,colour ='black', aes(x=as.factor(age.print),y=grad.total)) +
 ##ggtitle('Percentage change in Seasonality Index in the USA for females, 1982-2010, by region') +
-scale_x_discrete(labels=age.print) +
-xlab('Age group') +
-ylab('Percentage change in Seasonality Index') +
-ylim(min.var.grad.plot,max.var.grad.plot) +
-facet_wrap(~climate_region) +
-geom_hline(yintercept=0, linetype=2,alpha=0.5) +
-scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Geographic region')) +
-guides(colour=FALSE) +
-theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
-axis.text.x = element_text(angle=90)))
-dev.off()
+#scale_x_discrete(labels=age.print) +
+#xlab('Age group') +
+#ylab('Percentage change in Seasonality Index') +
+#ylim(min.var.grad.plot,max.var.grad.plot) +
+#facet_wrap(~climate_region) +
+#geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+#scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Geographic region')) +
+#guides(colour=FALSE) +
+#theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+#panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
+#axis.text.x = element_text(angle=90)))
+#dev.off()
 
 # plot male and female on together
 
@@ -803,23 +805,23 @@ var.median.df$age.print <- reorder(var.median.df$age.print,var.median.df$age)
 #axis.text.x = element_text(angle=90)))
 #dev.off()
 
-pdf(paste0(file.loc.nat.sum,'change_seas_indx_all_ages_climate.pdf'),paper='a4r',height=0,width=0)
-print(ggplot() +
-geom_jitter(data=dat.var.grad,width=0.4,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
-geom_line(data = var.median.df, alpha=0.7,aes(group=factor(sex),y = med,x=age.print),linetype=2, size=0.5,colour='black') +
-###ggtitle('Percentage change in Seasonality Index in the USA, 1982-2010, by region') +
-scale_x_discrete(labels=age.print) +
-xlab('Age group') +
-ylab('Percentage change in Seasonality Index') +
-ylim(min.var.grad.plot,max.var.grad.plot) +
-facet_wrap(~sex) +
-geom_hline(yintercept=0, linetype=2,alpha=0.5) +
-scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Climate region')) +
-guides(colour=FALSE) +
-theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
-axis.text.x = element_text(angle=90)))
-dev.off()
+#pdf(paste0(file.loc.nat.sum,'change_seas_indx_all_ages_climate.pdf'),paper='a4r',height=0,width=0)
+#print(ggplot() +
+#geom_jitter(data=dat.var.grad,width=0.4,aes(x=as.factor(age.print),y=grad.total,color=as.factor(climate_region))) +
+#geom_line(data = var.median.df, alpha=0.7,aes(group=factor(sex),y = med,x=age.print),linetype=2, size=0.5,colour='black') +
+#ggtitle('Percentage change in Seasonality Index in the USA, 1982-2010, by region') +
+#scale_x_discrete(labels=age.print) +
+#xlab('Age group') +
+#ylab('Percentage change in Seasonality Index') +
+#ylim(min.var.grad.plot,max.var.grad.plot) +
+#facet_wrap(~sex) +
+#geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+#scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Climate region')) +
+#guides(colour=FALSE) +
+#theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+#panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
+#axis.text.x = element_text(angle=90)))
+#dev.off()
 
 # merge selected data to map dataframe for colouring of ggplot
 plot.var.grad <- merge(USA.df,dat.var.grad,by.x=c('STATE_FIPS','STATE_NAME','DRAWSEQ','SUB_REGION','STATE_ABBR','climate_region','id'),by.y=c('fips','STATE_NAME','DRAWSEQ','SUB_REGION','STATE_ABBR','climate_region','id'))
@@ -891,6 +893,92 @@ plot.function.var.grad <- function(sex.sel) {
 # if choosing to print the entire all age group summary together, this finishes the pdf
 #dev.off()
 
+# 8. change in percentage increase between max and min mortality over all states and ages for both sexes
+
+state.max.min.grad$age.print <- mapvalues(state.max.min.grad$age, from=unique(state.max.min.grad$age), to=age.print)
+state.max.min.grad$age.print <- reorder(state.max.min.grad$age.print,state.max.min.grad$age)
+state.max.min.grad$sex <- as.factor(state.max.min.grad$sex)
+levels(state.max.min.grad$sex) <- c('Men','Women')
+
+# merge selected data to map dataframe for colouring of ggplot
+state.max.min.grad <- merge(USA.coords,state.max.min.grad,by.x=c('STATE_FIPS'),by.y=c('fips'))
+#state.max.min.grad <- with(state.max.min.grad, state.max.min.grad[order(sex,age,DRAWSEQ,order),])
+
+# prepare median line
+state.max.min.median.df <- ddply(state.max.min.grad, .(sex, age), summarise, med = median(grad.total))
+state.max.min.median.df$age.print <- mapvalues(state.max.min.median.df$age, from=unique(state.max.min.median.df$age), to=age.print)
+state.max.min.median.df$age.print <- reorder(state.max.min.median.df$age.print,state.max.min.median.df$age)
+state.max.min.median.df$sex <- as.factor(state.max.min.median.df$sex)
+levels(state.max.min.median.df$sex) <- c('Men','Women')
+
+pdf(paste0(file.loc.nat.sum,'change_ratio_maxmin_all_ages.pdf'),paper='a4r',height=0,width=0)
+print(ggplot() +
+geom_jitter(data=state.max.min.grad,width=0.4,aes(color=as.factor(climate_region),x=as.factor(age.print),y=grad.total/100)) +
+geom_line(data = state.max.min.median.df, alpha=0.9,aes(group=factor(sex),y = med/100,x=age.print),linetype=2, size=0.5,colour='black') +
+###ggtitle('Percentage change in Seasonality Index in the USA, 1982-2010, by region') +
+scale_x_discrete(labels=age.print) +
+xlab('Age group') +
+ylab('Percentage change in ratio between max and min mortality') +
+scale_y_continuous(labels=percent) +
+#ylim(min.var.grad.plot,max.var.grad.plot) +
+facet_wrap(~sex) +
+geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Climate region')) +
+#guides(colour=FALSE) +
+theme(legend.justification=c(1,0), legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
+axis.text.x = element_text(angle=90)))
+dev.off()
+
+# prepare median lines for facetted regions
+state.max.min.median.facet.df <- ddply(state.max.min.grad, .(sex, age, climate_region), summarise, med = median(grad.total))
+state.max.min.median.facet.df$age.print <- mapvalues(state.max.min.median.facet.df$age, from=unique(state.max.min.median.facet.df$age), to=age.print)
+state.max.min.median.facet.df$age.print <- reorder(state.max.min.median.facet.df$age.print,state.max.min.median.facet.df$age)
+state.max.min.median.facet.df$sex <- as.factor(state.max.min.median.facet.df$sex)
+levels(state.max.min.median.facet.df$sex) <- c('Men','Women')
+
+pdf(paste0(file.loc.nat.sum,'change_ratio_maxmin_all_ages_faceted_m.pdf'),paper='a4r',height=0,width=0)
+print(ggplot() +
+geom_jitter(data=subset(state.max.min.grad,sex=='Men'),width=0.4,aes(color=as.factor(climate_region),x=as.factor(age.print),y=grad.total/100)) +
+geom_line(data =subset(state.max.min.median.facet.df,sex=='Men'), alpha=0.9,aes(group=factor(sex),y = med/100,x=age.print),linetype=2, size=0.5,colour='black') +
+ggtitle('Men') +
+scale_x_discrete(labels=age.print) +
+xlab('Age group') +
+ylab('Percentage change in ratio between max and min mortality') +
+scale_y_continuous(labels=percent) +
+#ylim(min.var.grad.plot,max.var.grad.plot) +
+facet_wrap(~sex) +
+geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Climate region')) +
+guides(colour=FALSE) +
+facet_wrap(~climate_region) +
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
+axis.text.x = element_text(angle=90)))
+dev.off()
+
+pdf(paste0(file.loc.nat.sum,'change_ratio_maxmin_all_ages_faceted_f.pdf'),paper='a4r',height=0,width=0)
+print(ggplot() +
+geom_jitter(data=subset(state.max.min.grad,sex=='Women'),width=0.4,aes(color=as.factor(climate_region),x=as.factor(age.print),y=grad.total/100)) +
+geom_line(data =subset(state.max.min.median.facet.df,sex=='Women'), alpha=0.9,aes(group=factor(sex),y = med/100,x=age.print),linetype=2, size=0.5,colour='black') +
+ggtitle('Women') +
+scale_x_discrete(labels=age.print) +
+xlab('Age group') +
+ylab('Percentage change in ratio between max and min mortality') +
+scale_y_continuous(labels=percent) +
+#ylim(min.var.grad.plot,max.var.grad.plot) +
+facet_wrap(~sex) +
+geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Climate region')) +
+guides(colour=FALSE) +
+facet_wrap(~climate_region) +
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank(),
+axis.text.x = element_text(angle=90)))
+dev.off()
+
+
+
 ###############################################################
 # ENTIRE PERIOD SUMMARIES FOR A PARTICULAR AGE 
 ###############################################################
@@ -949,9 +1037,9 @@ jitterplot.median.line.2 <- function() {
 }
 
 # plot
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_jitterplot_climate.pdf'),paper='a4r',height=0,width=0)}
-print(jitterplot.median.line.2())
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_jitterplot_climate.pdf'),paper='a4r',height=0,width=0)}
+#print(jitterplot.median.line.2())
+#if(together==0){dev.off()}
 
 # function to plot
 jitterplot.median <- function() {
@@ -1060,9 +1148,9 @@ jitterplot.rate.line.2 <- function() {
 }
 
 # plot
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_rate_climate.pdf'),paper='a4r',height=0,width=0)}
-print(jitterplot.rate.line.2())
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_rate_climate.pdf'),paper='a4r',height=0,width=0)}
+#print(jitterplot.rate.line.2())
+#if(together==0){dev.off()}
 
 # 3. median mortality by month map
 
@@ -1091,14 +1179,14 @@ plot.function.median <- function(sex.sel) {
 # plot
 
 # male
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_median_map_m.pdf'),height=0,width=0,paper='a4r')}
-plot.function.median('Men')
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_median_map_m.pdf'),height=0,width=0,paper='a4r')}
+#plot.function.median('Men')
+#if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_median_map_f.pdf'),height=0,width=0,paper='a4r')}
-plot.function.median('Women')
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_median_map_f.pdf'),height=0,width=0,paper='a4r')}
+#plot.function.median('Women')
+#if(together==0){dev.off()}
 
 # 4. rate of change of mortality by month map
 
@@ -1128,14 +1216,14 @@ plot.function.grad <- function(sex.sel) {
 # plot
 
 # male
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_grad_map_m.pdf'),height=0,width=0,paper='a4r')}
-plot.function.grad('Men')
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_grad_map_m.pdf'),height=0,width=0,paper='a4r')}
+#plot.function.grad('Men')
+#if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_grad_map_f.pdf'),height=0,width=0,paper='a4r')}
-plot.function.grad('Women')
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_grad_map_f.pdf'),height=0,width=0,paper='a4r')}
+#plot.function.grad('Women')
+#if(together==0){dev.off()}
 
 # 5. Seasonality Index against time
 
@@ -1259,14 +1347,14 @@ plot.function.variation.region.4 <- function(sex.sel) {
 }
 
 # male
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_seas_indx_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
-plot.function.variation.region.4(1)
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_seas_indx_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
+#plot.function.variation.region.4(1)
+#if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_seas_indx_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
-plot.function.variation.region.4(2)
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_seas_indx_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
+#plot.function.variation.region.4(2)
+#if(together==0){dev.off()}
 
 # 6. summary of timing of peak mortality
 
@@ -1322,7 +1410,7 @@ plot.function.state.max.min <- function(sex.sel) {
     geom_hline(yintercept=0, linetype=2,alpha=0.5) +
     ylim(min.plot,max.plot) +
     xlab('Year') +
-    ylab('Percentage difference between max and min death rates in year') +
+    ylab('Percentage increase of max from min death rates in year') +
     scale_y_continuous(labels=percent) +
     ggtitle(sex.lookup[sex.sel]) +
     #ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : Seasonality Index of mortality over time (coloured by geographic region)')) +
@@ -1333,14 +1421,14 @@ plot.function.state.max.min <- function(sex.sel) {
 }
 
 # male
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
-plot.function.state.max.min(1)
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_climate_m.pdf'),height=0,width=0,paper='a4r')}
+#plot.function.state.max.min(1)
+#if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
-plot.function.state.max.min(2)
-if(together==0){dev.off()}
+#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_climate_f.pdf'),height=0,width=0,paper='a4r')}
+#plot.function.state.max.min(2)
+#if(together==0){dev.off()}
 
 # 8. ratio of max/min mortality rate over time by state coloured by max mort month
 
@@ -1354,13 +1442,14 @@ plot.function.state.max.min.2 <- function(sex.sel) {
     max.plot <- max(state.max.min$percent.change[state.max.min$age==age.selected])
     
     print(ggplot() +
-    geom_jitter(data=subset(state.max.min,age==age.selected & sex==sex.sel & test==1),color='blue',aes(x=year,y=percent.change/100),width=0.3) +
-    geom_jitter(data=subset(state.max.min,age==age.selected & sex==sex.sel & test==0),color='red',aes(x=year,y=percent.change/100),width=0.3) +
+    geom_jitter(data=subset(state.max.min,age==age.selected & sex==sex.sel & test==1),aes(color=as.factor(month.max),x=year,y=percent.change/100),width=0.3) +
+    geom_jitter(data=subset(state.max.min,age==age.selected & sex==sex.sel & test==0),aes(color=as.factor(month.min),x=year,y=percent.change/100),width=0.3) +
+    scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'Month'),drop=FALSE,labels=month.short) +
     #geom_line(data=subset(dat.var.median,age==age.selected & sex==sex.lookup[sex.sel]),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=median)) +
     geom_hline(yintercept=0, linetype=2,alpha=0.5) +
     ylim(min.plot,max.plot) +
     xlab('Year') +
-    ylab('Percentage difference between max and min death rates in year') +
+    ylab('Percentage increase of max from min death rates in year') +
     scale_y_continuous(labels=percent) +
     ggtitle(sex.lookup[sex.sel]) +
     #ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : Seasonality Index of mortality over time (coloured by geographic region)')) +
@@ -1388,30 +1477,30 @@ plot.function.state.max.min.3 <- function(sex.sel) {
     max.plot <- max(state.max.min$percent.change[state.max.min$age==age.selected])
     
     print(ggplot() +
-    geom_jitter(data=subset(state.max.min,age==age.selected & sex==sex.sel & test==1),color='blue',aes(x=year,y=percent.change/100),width=0.3) +
-    geom_jitter(data=subset(state.max.min,age==age.selected & sex==sex.sel & test==0),color='red',aes(x=year,y=percent.change/100),width=0.3) +
+    geom_jitter(data=subset(state.max.min,age==age.selected & sex==sex.sel & test==1),aes(color=as.factor(month.max),x=year,y=percent.change/100),width=0.3) +
+    geom_jitter(data=subset(state.max.min,age==age.selected & sex==sex.sel & test==0),aes(color=as.factor(month.min),x=year,y=percent.change/100),width=0.3) +
+    scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'Month'),drop=FALSE,labels=month.short) +
     #geom_line(data=subset(dat.var.median,age==age.selected & sex==sex.lookup[sex.sel]),alpha=0.7,color='blue',size=1,linetype=1,aes(x=year,y=median)) +
     geom_hline(yintercept=0, linetype=2,alpha=0.5) +
     ylim(min.plot,max.plot) +
     xlab('Year') +
-    ylab('Percentage difference between max and min death rates in year') +
+    ylab('Percentage increase of max from min death rates in year') +
     scale_y_continuous(labels=percent) +
     ggtitle(sex.lookup[sex.sel]) +
     facet_wrap(~climate_region) +
     #ggtitle(paste0(age.single,' ',sex.lookup[sex.sel],' : Seasonality Index of mortality over time (coloured by geographic region)')) +
-    #scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Climate region')) +
     theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
     panel.background = element_blank(), axis.line = element_line(colour = "black"),
     rect = element_blank()))
 }
 
 # male
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_maxmonth_climate_m.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_maxmonth_facet_m.pdf'),height=0,width=0,paper='a4r')}
 plot.function.state.max.min.3(1)
 if(together==0){dev.off()}
 
 # female
-if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_maxmonth_climate_f.pdf'),height=0,width=0,paper='a4r')}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_ratio_maxmin_points_maxmonth_facet_f.pdf'),height=0,width=0,paper='a4r')}
 plot.function.state.max.min.3(2)
 if(together==0){dev.off()}
 
@@ -1446,16 +1535,16 @@ jitterplot.grad.by.month <- function(month.selected) {
         panel.background = element_blank(), axis.line = element_line(colour = "black")))
 }
 
-pdf(paste0(file.loc.mon.sum,'percentage_change_across_age_groups_all_months.pdf'),paper='a4r',height=0,width=0)
-mapply(jitterplot.grad.by.month, c(1:12))
-dev.off()
+#pdf(paste0(file.loc.mon.sum,'percentage_change_across_age_groups_all_months.pdf'),paper='a4r',height=0,width=0)
+#mapply(jitterplot.grad.by.month, c(1:12))
+#dev.off()
 
-for(i in c(1:12)){
-    pdf.name <- paste0(month.names[i],'_percentage_change_across_age_groups.pdf')
-    pdf(paste0(file.loc.mon.sum,pdf.name),paper='a4r',height=0,width=0)
-    jitterplot.grad.by.month(i)
-    dev.off()
-}
+#for(i in c(1:12)){
+#    pdf.name <- paste0(month.names[i],'_percentage_change_across_age_groups.pdf')
+#    pdf(paste0(file.loc.mon.sum,pdf.name),paper='a4r',height=0,width=0)
+#    jitterplot.grad.by.month(i)
+#    dev.off()
+#}
 
 ###############################################################
 # MAPS
