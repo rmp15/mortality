@@ -21,37 +21,39 @@ dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg
 # function to plot generally
 plot.wavelet.state <- function(fips.selected,sex.selected,age.selected) {
 
-dat <- subset(dat, fips==fips.selected & sex==sex.selected & age==age.selected)
+    dat <- subset(dat, fips==fips.selected & sex==sex.selected & age==age.selected)
 
-age.single <- as.matrix(age.code[age.code==age.selected,])[2]
-state.single <- state.lookup[state.lookup$fips==fips.selected,][[1]]
+    age.single <- as.matrix(age.code[age.code==age.selected,])[2]
+    state.single <- state.lookup[state.lookup$fips==fips.selected,][[1]]
 
-# prepare data frame for anaylsis
-#my.data <- data.frame(date=as.Date(as.character(dat$year),format='%Y'),log.rate=log(dat$rate.adj),log.deaths=log(dat$deaths))
-my.data <- data.frame(date=as.Date(as.character(dat$year),format='%Y'),rate=dat$rate.adj,log.deaths=log(dat$deaths))
+    # prepare data frame for anaylsis
+    my.data <- data.frame(date=as.Date(as.character(dat$year),format='%Y'),log.rate=log(dat$rate.adj),log.deaths=log(dat$deaths.pred))
 
-# perform wavelet analysis
-my.w <- analyze.wavelet(my.data, "rate",
+    # perform wavelet analysis
+    my.w <- analyze.wavelet(my.data, "log.rate",
 			lowerPeriod=2, upperPeriod=16,
 			loess.span = 3/26,
 			dt= 1, dj = 1/1000,
-			make.pval= T, n.sim = 10)
+			make.pval= T, n.sim = 100)
+            
+    # set up grid plot
+    layout(matrix(c(1,2,1,2), 2, 2, byrow = TRUE),widths=c(3,1), heights=c(1,2))
 
-# plot wavelet analysis
-plot.title <- paste0(state.single,': ',sex.lookup[sex.selected],' ',age.single)
-wt.image(my.w, n.levels = 250,
-	legend.params = list(lab = "wavelet power levels"),
-	periodlab = "periods (months)", show.date = T,timelab = "",
-	graphics.reset = F)
-abline(h = log(12)/log(2))
-mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
-title(main=plot.title)
+    # plot wavelet analysis
+    plot.title <- paste0(state.single,': ',sex.lookup[sex.selected],' ',age.single)
+        wt.image(my.w, n.levels = 250,
+        legend.params = list(lab = "wavelet power levels"),
+        periodlab = "periods (months)", show.date = T,timelab = "",
+        graphics.reset = F)
+        abline(h = log(12)/log(2))
+        mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
+        title(main=plot.title)
 
-# plot density graph
-#wt.avg(my.w)
+    # plot density graph
+    wt.avg(my.w)
 
-# reconstruct time series
-#reconstruct(my.w, plot.waves=F,lwd = c(1,2), legend.coords = "bottomleft")
+    # reconstruct time series
+    #reconstruct(my.w, plot.waves=F,lwd = c(1,2), legend.coords = "bottomleft")
 
 }
 
@@ -78,7 +80,10 @@ plot.wavelet.national <- function(sex.selected,age.selected) {
     lowerPeriod=2, upperPeriod=16,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 10)
+    make.pval= T, n.sim = 100)
+    
+    # set up grid plot
+    layout(matrix(c(1,2,1,2), 2, 2, byrow = TRUE),widths=c(3,1), heights=c(1,2))
     
     # plot wavelet analysis
     plot.title <- paste0(sex.lookup[sex.selected],' ',age.single)
@@ -91,7 +96,7 @@ plot.wavelet.national <- function(sex.selected,age.selected) {
     title(main=plot.title)
     
     # plot density graph
-    #wt.avg(my.w)
+    wt.avg(my.w)
     
     # reconstruct time series
     #reconstruct(my.w, plot.waves=F,lwd = c(1,2), legend.coords = "bottomleft")
@@ -104,24 +109,22 @@ ifelse(!dir.exists("../../output/wavelet/national"), dir.create("../../output/wa
 
 # output state wavelet files
 for(i in 1:nrow(age.code)){
-pdf(paste0('../../output/wavelet/state/wavelet_state_',age.code[i,1],'_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r')
+pdf(paste0('../../output/wavelet/state/wavelet_state_',age.code[i,1],'_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.state,fips.selected=unique(state.lookup$fips),sex.selected=1,age=age.code[i,1])
 dev.off()
 }
 
 for(i in 1:nrow(age.code)){
-    pdf(paste0('../../output/wavelet/state/wavelet_state_',age.code[i,1],'_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r')
+    pdf(paste0('../../output/wavelet/state/wavelet_state_',age.code[i,1],'_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
     mapply(plot.wavelet.state,fips.selected=unique(state.lookup$fips),sex.selected=2,age=age.code[i,1])
     dev.off()
 }
 
 # output national wavelet files
-pdf(paste0('../../output/wavelet/national/wavelet_national_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r')
+pdf(paste0('../../output/wavelet/national/wavelet_national_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.national,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
-pdf(paste0('../../output/wavelet/national/wavelet_national_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r')
+pdf(paste0('../../output/wavelet/national/wavelet_national_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.national,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
-
-
