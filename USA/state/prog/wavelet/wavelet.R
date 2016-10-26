@@ -16,14 +16,19 @@ sex.lookup <- c('Men','Women')
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 
 # load data and filter results
-dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_deaths_adj_',year.start.arg,'_',year.end.arg))
+dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
 
-# number of simulations for wavelet analysis
+# number of simulations for wavelet analysis (ultimately 1000 is the benchmark)
 num.sim <- 1
 
 # number of years for split wavelet analysis
 years <- c(year.start.arg:year.end.arg)
 num.years <- year.end.arg - year.start.arg + 1
+
+halfway <- floor(num.years/2)
+
+year.group.1 <- years[1:halfway]
+year.group.2 <- years[(halfway+1):(num.years)]
 
 # generate nationalised data
 dat$deaths.pred <- with(dat,pop.adj*rate.adj)
@@ -76,29 +81,28 @@ plot.wavelet.national <- function(sex.selected,age.selected) {
 }
 
 # function to plot national wavelet analysis for single sex split into two time periods
-plot.wavelet.national.sex <- function(age.selected) {
+plot.wavelet.national.split <- function(age.selected,sex.selected) {
     
-    dat <- subset(dat.national, age==age.selected)
+    dat <- subset(dat.national, age==age.selected & sex==sex.selected)
     
     age.single <- as.matrix(age.code[age.code==age.selected,])[2]
     
     # prepare data frame for anaylsis
-    my.data <- data.frame(date=as.Date(as.character(dat$year),format='%Y'),log.rate=log(dat$rate.adj),log.deaths=log(dat$deaths.pred),sex=dat$sex)
+    my.data <- data.frame(year=dat$year,date=as.Date(as.character(dat$year),format='%Y'),log.rate=log(dat$rate.adj),log.deaths=log(dat$deaths.pred))
     
-    # perform wavelet analysis for males
-    my.w.m <- analyze.wavelet(subset(my.data,sex==1), "log.deaths",
+    # perform wavelet analysis for first time period
+    my.w.1 <- analyze.wavelet(subset(my.data,year %in% year.group.1), "log.deaths",
     lowerPeriod=2, upperPeriod=16,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
     make.pval= T, n.sim = 10)
     
-    # perform wavelet analysis for females
-    my.w.f <- analyze.wavelet(subset(my.data,sex==2), "log.deaths",
+    # perform wavelet analysis for second time period
+    my.w.2 <- analyze.wavelet(subset(my.data,year %in% year.group.2), "log.deaths",
     lowerPeriod=2, upperPeriod=16,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
     make.pval= T, n.sim = 10)
-    
     
     # set up grid plot
     layout(rbind(c(1,2,3,4)),widths=c(5,2,5,2))
@@ -107,31 +111,31 @@ plot.wavelet.national.sex <- function(age.selected) {
     #with(my.data,plot((exp(log.rate)*100000),t='l'))
     #with(my.data,plot(log.rate,t='l'))
     
-    # plot wavelet analysis for males
-    plot.title.m <- paste0('Men ',age.single)
-    wt.image(my.w.m, n.levels = 250,
+    # plot wavelet analysis for first time period
+    plot.title.1 <- paste0(sex.lookup[sex.selected],' ',age.single,' :',min(year.group.1),'-',max(year.group.1))
+    wt.image(my.w.1, n.levels = 250,
     legend.params = list(lab = "wavelet power levels"),
     periodlab = "periods (months)", show.date = T,timelab = "",
     graphics.reset = F)
     abline(h = log(12)/log(2))
     mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
-    title(main=plot.title.m)
+    title(main=plot.title.1)
     
-    # plot density graphs for males
-    wt.avg(my.w.m)
+    # plot density graphs for first time period
+    wt.avg(my.w.1)
     
-    # plot wavelet analysis for females
-    plot.title.f <- paste0('Women ',age.single)
-    wt.image(my.w.f, n.levels = 250,
+    # plot wavelet analysis for second time period
+    plot.title.2 <- paste0(sex.lookup[sex.selected],' ',age.single,' :',min(year.group.2),'-',max(year.group.2))
+    wt.image(my.w.2, n.levels = 250,
     legend.params = list(lab = "wavelet power levels"),
     periodlab = "periods (months)", show.date = T,timelab = "",
     graphics.reset = F)
     abline(h = log(12)/log(2))
     mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
-    title(main=plot.title.f)
+    title(main=plot.title.2)
     
-    # plot density graphs for males
-    wt.avg(my.w.f)
+    # plot density graphs for second time period
+    wt.avg(my.w.2)
     
     # reconstruct time series
     #reconstruct(my.w, plot.waves=F,lwd = c(1,2), legend.coords = "bottomleft")
@@ -246,8 +250,8 @@ plot.wavelet.state <- function(fips.selected,sex.selected,age.selected) {
 }
 
 # create output directories
-ifelse(!dir.exists("../../output/wavelet_adj/state"), dir.create("../../output/wavelet_adj/state",recursive=TRUE), FALSE)
-ifelse(!dir.exists("../../output/wavelet_adj/national"), dir.create("../../output/wavelet_adj/national",recursive=TRUE), FALSE)
+ifelse(!dir.exists("../../output/wavelet/state"), dir.create("../../output/wavelet/state",recursive=TRUE), FALSE)
+ifelse(!dir.exists("../../output/wavelet/national"), dir.create("../../output/wavelet/national",recursive=TRUE), FALSE)
 
 # output national wavelet files sex separately
 pdf(paste0('../../output/wavelet/national/wavelet_national_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
@@ -256,6 +260,15 @@ dev.off()
 
 pdf(paste0('../../output/wavelet/national/wavelet_national_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.national,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85))
+dev.off()
+
+# output national wavelet files split time period
+pdf(paste0('../../output/wavelet/national/wavelet_national_split_time_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+mapply(plot.wavelet.national.split,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85))
+dev.off()
+
+pdf(paste0('../../output/wavelet/national/wavelet_national_split_time_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+mapply(plot.wavelet.national.split,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
 # output national wavelet files sex together

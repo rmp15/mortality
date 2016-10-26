@@ -56,7 +56,7 @@ Rscript ~/git/mortality/USA/state/prog/pop_us_infer/pop_us_infer_state_days.R
 
 echo "preparing monthly death rates for years $start2 - $end2";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data/US_state_monthly_prepare_data.R $start2 $end2
+Rscript ~/git/mortality/USA/state/prog/prep_data/US_state_monthly_prepare_data_deaths_adj.R $start2 $end2
 
 #################################################
 # 6. EXPLORE DATA
