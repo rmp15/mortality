@@ -55,6 +55,9 @@ plot.wavelet.national <- function(sex.selected,age.selected) {
     dt= 1, dj = 1/1000,
     make.pval= T, n.sim = 10)
     
+    # find maximum of power spectrum BUT NEEDS TO BE AT 12 MONTHS...
+    max.spectrum <- my.w$Power.avg
+    
     # set up grid plot
     layout(rbind(c(1,1,5),c(2,2,6),c(4,4,3)),heights=c(1,1,3))
     
