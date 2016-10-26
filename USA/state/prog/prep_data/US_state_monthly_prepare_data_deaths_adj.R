@@ -28,8 +28,13 @@ dat$leap <- as.integer(is.leapyear(dat$year))
 dat$deaths.adj <- ifelse(dat$month %in% c(1,3,5,7,8,10,12), dat$deaths,
                   ifelse(dat$month %in% c(4,6,9,11), dat$deaths*(31/30),
                   ifelse((dat$month==2 & dat$leap==0), dat$deaths*(31/28),
-                  dat$deaths*(31/29)
-                  )))
+                  ifelse((dat$month==2 & dat$leap==1), dat$deaths*(31/29),
+                  'ERROR'
+                  ))))
+dat$deaths.adj <- as.numeric(dat$deaths.adj)
 
 # calculate new rate.adj
 dat$rate.adj <- dat$deaths.adj / dat$pop.adj
+
+# output file as RDS
+saveRDS(dat,paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))

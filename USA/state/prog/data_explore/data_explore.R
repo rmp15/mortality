@@ -6,7 +6,8 @@ year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 
 # load data
-filename <- paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg)
+#filename <- paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg)
+filename <- paste0('../../output/prep_data/datus_state_rates_deaths_adj_',year.start.arg,'_',year.end.arg)
 dat <- readRDS(filename)
 
 # gender state and age lookup
