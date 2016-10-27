@@ -18,7 +18,7 @@ state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
 
 # number of simulations for wavelet analysis (ultimately 1000 is the benchmark)
-num.sim <- 1
+num.sim <- 100
 
 # number of years for split wavelet analysis
 years <- c(year.start.arg:year.end.arg)
@@ -28,6 +28,9 @@ halfway <- floor(num.years/2)
 
 year.group.1 <- years[1:halfway]
 year.group.2 <- years[(halfway+1):(num.years)]
+
+# FUNCTIONS REQUIRED
+# 4. sexes separately with all states on one map
 
 # generate nationalised data
 dat$deaths.pred <- with(dat,pop.adj*rate.adj)
@@ -54,7 +57,7 @@ plot.wavelet.national <- function(sex.selected,age.selected) {
     lowerPeriod=2, upperPeriod=32,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 10)
+    make.pval= T, n.sim = num.sim)
     
     # find maximum of power spectrum then normalise power spectrum
     dat.spectrum <- data.frame(period=my.w$Period,power=my.w$Power.avg)
@@ -107,7 +110,7 @@ plot.wavelet.national.split <- function(sex.selected,age.selected) {
     lowerPeriod=2, upperPeriod=32,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 10)
+    make.pval= T, n.sim = num.sim)
     
     # find maximum of power spectrum then normalise power spectrum
     dat.spectrum.1 <- data.frame(period=my.w.1$Period,power=my.w.1$Power.avg)
@@ -123,7 +126,7 @@ plot.wavelet.national.split <- function(sex.selected,age.selected) {
     lowerPeriod=2, upperPeriod=32,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 10)
+    make.pval= T, n.sim = num.sim)
     
     # find maximum of power spectrum then normalise power spectrum
     dat.spectrum.2 <- data.frame(period=my.w.2$Period,power=my.w.2$Power.avg)
@@ -194,7 +197,7 @@ plot.wavelet.national.sex <- function(age.selected) {
     lowerPeriod=2, upperPeriod=32,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 10)
+    make.pval= T, n.sim = num.sim)
     
     # find maximum of power spectrum then normalise power spectrum for males
     dat.spectrum.m <- data.frame(period=my.w.m$Period,power=my.w.m$Power.avg)
@@ -210,7 +213,7 @@ plot.wavelet.national.sex <- function(age.selected) {
     lowerPeriod=2, upperPeriod=32,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 10)
+    make.pval= T, n.sim = num.sim)
     
     # find maximum of power spectrum then normalise power spectrum for females
     dat.spectrum.f <- data.frame(period=my.w.f$Period,power=my.w.f$Power.avg)
@@ -273,14 +276,14 @@ plot.wavelet.national.sex <- function(age.selected) {
     lowerPeriod=2, upperPeriod=16,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 10)
+    make.pval= T, n.sim = num.sim)
     
     # perform wavelet analysis for females
     my.w.f <- analyze.wavelet(subset(my.data,sex==2), "log.rate",
     lowerPeriod=2, upperPeriod=16,
     loess.span = 3/26,
     dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 10)
+    make.pval= T, n.sim = num.sim)
 
 
     # set up grid plot
@@ -348,60 +351,3 @@ dev.off()
 pdf(paste0('../../output/wavelet/national/wavelet_national_mf_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.national.sex,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
-
-# function to plot state wavelet analysis for single sex
-plot.wavelet.state <- function(fips.selected,sex.selected,age.selected) {
-    
-    dat <- subset(dat, fips==fips.selected & sex==sex.selected & age==age.selected)
-    
-    age.single <- as.matrix(age.code[age.code==age.selected,])[2]
-    state.single <- state.lookup[state.lookup$fips==fips.selected,][[1]]
-    
-    # prepare data frame for anaylsis
-    my.data <- data.frame(date=as.Date(as.character(dat$year),format='%Y'),log.rate=log(dat$rate.adj),log.deaths=log(dat$deaths+1))
-    
-    # perform wavelet analysis
-    my.w <- analyze.wavelet(my.data, "log.rate",
-    lowerPeriod=2, upperPeriod=16,
-    loess.span = 3/26,
-    dt= 1, dj = 1/1000,
-    make.pval= T, n.sim = 1)
-    
-    # set up grid plot
-    layout(rbind(c(1,1,5),c(2,2,6),c(4,4,3)),heights=c(1,1,3))
-    
-    # plot time series and its log form
-    with(my.data,plot((exp(log.rate)*100000),t='l'))
-    with(my.data,plot(log.rate,t='l'))
-    
-    # plot density graph
-    wt.avg(my.w)
-    
-    # plot wavelet analysis
-    plot.title <- paste0(state.single,' ',sex.lookup[sex.selected],' ',age.single)
-    wt.image(my.w, n.levels = 250,
-    legend.params = list(lab = "wavelet power levels"),
-    periodlab = "periods (months)", show.date = T,timelab = "",
-    graphics.reset = F)
-    abline(h = log(12)/log(2))
-    mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
-    title(main=plot.title)
-    
-    
-    # reconstruct time series
-    #reconstruct(my.w, plot.waves=F,lwd = c(1,2), legend.coords = "bottomleft")
-    
-}
-
-# output state wavelet files
-#for(i in rev(1:nrow(age.code))){
-#    pdf(paste0('../../output/wavelet/state/wavelet_state_',age.code[i,1],'_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-#mapply(plot.wavelet.state,fips.selected=unique(state.lookup$fips),sex.selected=1,age=age.code[i,1])
-#   dev.off()
-}
-
-#for(i in rev(1:nrow(age.code))){
-#   pdf(paste0('../../output/wavelet/state/wavelet_state_',age.code[i,1],'_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-#   mapply(plot.wavelet.state,fips.selected=unique(state.lookup$fips),sex.selected=2,age=age.code[i,1])
-#   dev.off()
-#}
