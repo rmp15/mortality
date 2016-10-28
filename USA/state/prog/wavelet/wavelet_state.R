@@ -4,8 +4,14 @@ rm(list=ls())
 args <- commandArgs(trailingOnly=TRUE)
 year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
+num.sim <- as.numeric(args[3])
 
 require(WaveletComp)
+
+# create output directories
+file.loc <- paste0("../../output/wavelet/",year.start.arg,'_',year.end.arg,"/national/")
+file.loc <- paste0(file.loc,num.sim,'_sim/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # coding for graph-friendly information
 age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
@@ -16,9 +22,6 @@ state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 
 # load data and filter results
 dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
-
-# number of simulations for wavelet analysis (ultimately 1000 is the benchmark)
-num.sim <- 1
 
 # number of years for split wavelet analysis
 years <- c(year.start.arg:year.end.arg)
@@ -33,7 +36,8 @@ year.group.2 <- years[(halfway+1):(num.years)]
 # 1. sexes separately with states on separate pages
 # 2. sexes together with states on separate pages
 # 3. sexes separately with states split into 2 time periods
-# 4. sexes separately with all states on one map
+# 4. sexes separately with all states on one page
+# 5. sexes separately but on a map with each age and state
 
 # function to plot state wavelet analysis for single sex
 plot.wavelet.state <- function(fips.selected,sex.selected,age.selected) {

@@ -319,15 +319,25 @@ for(i in c(0,5,15,25,35,45,55,65,75,85)){
     dat.split <- rbind(dat.split,dat.temp.split.m,dat.temp.split.f)
 }
 
-# output plot of wavelet 12 month value from first period against second
+
 require(ggplot2)
 
-pdf(paste0(file.loc,'12_month_power_national_comparison_change_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+# output plot of wavelet 12 month value from first period against second
+pdf(paste0(file.loc,'12_month_power_national_comparison_xy_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot(data=dat.split) +
-xlab('Age group') +
-ylab('Change in power at 12 months') +
+geom_jitter(aes(x=twelve.month.value.1,y=twelve.month.value.2,color=as.factor(sex))) +
+xlab(paste0('12-month power from ',min(year.group.1),'-',max(year.group.1))) +
+ylab(paste0('12-month power from ',min(year.group.2),'-',max(year.group.2))) +
 ggtitle(paste0('National change in power at 12 months between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
-geom_point(aes(x=age,y=abs(twelve.month.value.1-twelve.month.value.2),color=as.factor(sex))) +
 theme_bw()
 dev.off()
 
+# output plot of wavelet 12 month value difference between first period and second
+pdf(paste0(file.loc,'12_month_power_national_comparison_change_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.split) +
+geom_jitter(aes(x=age,y=abs(twelve.month.value.1-twelve.month.value.2),color=as.factor(sex))) +
+xlab('Age group') +
+ylab('Change in power at 12 months') +
+ggtitle(paste0('National change in power at 12 months between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
+theme_bw()
+dev.off()
