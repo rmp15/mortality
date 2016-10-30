@@ -160,6 +160,10 @@ shapefile.data$climate_region <- c('Northwest','Northern Rockies and Plains','No
 USA.df <- merge(map, shapefile.data, by='id')
 USA.df$STATE_FIPS <- as.integer(as.character(USA.df$STATE_FIPS))
 
+###############################################################
+# WAVELET POWER AT 12 MONTHS MAP
+###############################################################
+
 # 1. map of average wavelet power at 12 months for entire period
 
 # merge selected data to map dataframe for colouring of ggplot
@@ -197,13 +201,7 @@ pdf(paste0(file.loc.state,'plots/12_month_power_state_map_women_',num.sim,'_sim_
 plot.function.state.entire(2)
 dev.off()
 
-pdf(paste0(file.loc.state,'plots/12_month_power_state_map_men_split_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-plot.function.state.entire(1)
-dev.off()
-
-pdf(paste0(file.loc.state,'plots/12_month_power_state_map_women_split_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-plot.function.state.entire(2)
-dev.off()
+# 2. map of average wavelet power change at 12 months for split period
 
 # function to plot
 plot.function.state.delta <- function(sex.sel) {
