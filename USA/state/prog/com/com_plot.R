@@ -41,7 +41,7 @@ year.group.2 <- years[(halfway+1):(num.years)]
 
 # 1. NATIONAL
 
-# load national data
+# load entire national data
 file.loc.nat <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/national/")
 dat.COM <- read.csv(paste0(file.loc.nat,'USA_COM_',year.start.arg,'_',year.end.arg,'.csv'))
 levels(dat.COM$sex) <- c('Women','Men')
@@ -50,6 +50,10 @@ dat.inv.COM <- read.csv(paste0(file.loc.nat,'USA_INV_COM_',year.start.arg,'_',ye
 levels(dat.inv.COM$sex) <- c('Women','Men')
 dat.inv.COM$type <- 'min'
 dat.nat <- rbind(dat.COM,dat.inv.COM)
+levels(dat.nat$sex) <- c(2,1)
+dat.nat$sex <- as.integer(as.character(dat.nat$sex))
+dat.nat$sex <- as.factor(dat.nat$sex)
+levels(dat.nat$sex) <- c('Men','Women')
 
 pdf(paste0(file.loc.nat,'USA_COM_total_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
@@ -72,6 +76,51 @@ pdf(paste0(file.loc.nat,'USA_COM_total_axis_swapped_',year.start.arg,'_',year.en
 ggplot() +
 geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM),fill='red',shape=24,size=3) +
 geom_point(data=subset(dat.nat,type=='min'),aes(x=factor(age),y=COM),fill='green',shape=25,size=3) +
+geom_hline(aes(linetype=2),linetype=2, yintercept = 0:12, alpha=0.5) +
+geom_vline(aes(linetype=2),linetype=2, xintercept = 1:10) +
+#geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
+ylab('Month') +
+xlab('Age group') +
+scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short,month.short[1]),expand = c(0.01, 0)) +
+scale_x_discrete(labels=age.print) +
+#xlim(1,12) +
+facet_wrap(~sex, ncol=1) +
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+dev.off()
+
+# load split national data
+dat.COM <- readRDS(paste0(file.loc.nat,'com_national_split_values_',year.start.arg,'-',year.end.arg))
+dat.COM$sex <- as.factor(dat.COM$sex)
+levels(dat.COM$sex) <- c('Men','Women')
+dat.COM$type <- 'max'
+dat.inv.COM <- readRDS(paste0(file.loc.nat,'inv_com_national_split_values_',year.start.arg,'-',year.end.arg))
+dat.inv.COM$sex <- as.factor(dat.inv.COM$sex)
+levels(dat.inv.COM$sex) <- c('Men','Women')
+dat.inv.COM$type <- 'min'
+dat.nat <- rbind(dat.COM,dat.inv.COM)
+
+pdf(paste0(file.loc.nat,'USA_COM_total_axis_swapped_',min(year.group.1),'_',max(year.group.1),'.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM.period.1),fill='red',shape=24,size=3) +
+geom_point(data=subset(dat.nat,type=='min'),aes(x=factor(age),y=COM.period.1),fill='green',shape=25,size=3) +
+geom_hline(aes(linetype=2),linetype=2, yintercept = 0:12, alpha=0.5) +
+geom_vline(aes(linetype=2),linetype=2, xintercept = 1:10) +
+#geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
+ylab('Month') +
+xlab('Age group') +
+scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short,month.short[1]),expand = c(0.01, 0)) +
+scale_x_discrete(labels=age.print) +
+#xlim(1,12) +
+facet_wrap(~sex, ncol=1) +
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+dev.off()
+
+pdf(paste0(file.loc.nat,'USA_COM_total_axis_swapped_',min(year.group.2),'_',max(year.group.2),'.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM.period.2),fill='red',shape=24,size=3) +
+geom_point(data=subset(dat.nat,type=='min'),aes(x=factor(age),y=COM.period.2),fill='green',shape=25,size=3) +
 geom_hline(aes(linetype=2),linetype=2, yintercept = 0:12, alpha=0.5) +
 geom_vline(aes(linetype=2),linetype=2, xintercept = 1:10) +
 #geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
