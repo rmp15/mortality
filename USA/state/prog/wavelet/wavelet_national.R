@@ -32,9 +32,6 @@ halfway <- floor(num.years/2)
 year.group.1 <- years[1:halfway]
 year.group.2 <- years[(halfway+1):(num.years)]
 
-# FUNCTIONS REQUIRED
-# 4. sexes separately with all states on one map
-
 # generate nationalised data
 dat$deaths.pred <- with(dat,pop.adj*rate.adj)
 library(plyr)
@@ -272,21 +269,82 @@ plot.wavelet.national.sex <- function(age.selected) {
     
 }
 
+# function to plot national wavelet analysis for all ages of single sex
+plot.wavelet.national.all <- function(sex.selected) {
+
+    dat <- subset(dat.national, sex==sex.selected)
+    
+    # set up grid plot
+    #layout(rbind(c(1:10),c(11:20)),widths=c(rep(c(1),10)),heights=c(1,1))
+    layout(rbind(c(1:5),c(6:10)),widths=c(rep(c(1),5)),heights=c(1,1))
+
+    for(i in c(0,5,15,25,35,45,55,65,75,85)){
+        
+        dat.temp <- subset(dat,age==i)
+    
+        age.single <- as.matrix(age.code[age.code==i,])[2]
+    
+        plot.title <- paste0(sex.lookup[sex.selected],' USA ',age.single)
+    
+        # prepare data frame for anaylsis
+        my.data <- data.frame(date=as.Date(as.character(dat.temp$year),format='%Y'),log.rate=log(dat.temp$rate.adj),log.deaths=log(dat.temp$deaths.pred+1))
+    
+        # perform wavelet analysis
+        my.w <- analyze.wavelet(my.data, "log.rate",
+        lowerPeriod=2, upperPeriod=32,
+        loess.span = 3/26,
+        dt= 1, dj = 1/1000,
+        make.pval= T, n.sim = num.sim)
+    
+        # find maximum of power spectrum then normalise power spectrum
+        dat.spectrum <- data.frame(period=my.w$Period,power=my.w$Power.avg)
+        max.spectrum.period <- dat.spectrum[dat.spectrum$power==max(dat.spectrum$power),][1]
+        dat.spectrum$power <- (100/max(dat.spectrum$power))*dat.spectrum$power
+        my.w$Power.avg <- (100/max(my.w$Power.avg))*my.w$Power.avg
+    
+        # find value of normalised power spectrum at 12 months and save
+        value.12.months <- dat.spectrum[abs(12-dat.spectrum$period)==min(abs(12-dat.spectrum$period)),][2]
+        #dat.export <- data.frame(age=age.selected,sex=sex.selected, twelve.month.value=as.numeric(value.12.months))
+        #file.loc.12 <- paste0(file.loc,'12_month_values/entire_period/')
+        #ifelse(!dir.exists(file.loc.12), dir.create(file.loc.12,recursive=TRUE), FALSE)
+        #saveRDS(dat.export,paste0(file.loc.12,age.selected,'_',sex.lookup[sex.selected]))
+        
+        # plot wavelet analysis
+        wt.image(my.w, n.levels = 250,
+        legend.params = list(lab = "wavelet power levels"),
+        periodlab = "periods (months)", show.date = T,timelab = "",
+        graphics.reset = F,
+        plot.legend=F)
+        #abline(h = log(12)/log(2))
+        #mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
+        abline(h=log(as.numeric(max.spectrum.period))/log(2))
+        mtext(text = as.character(round(max.spectrum.period,2)), side = 4, at = log(max.spectrum.period)/log(2), las = 1, line = 0.5)
+        title(main=plot.title)
+
+        # plot density graph
+        #wt.avg(my.w,label.avg.axis=T,show.legend=0)
+    
+    }
+    
+}
+
+ifelse(!dir.exists(paste0(file.loc,'plots/')), dir.create(paste0(file.loc,'plots/'),recursive=TRUE), FALSE)
+
 # output national wavelet files sex separately
-pdf(paste0(file.loc,'wavelet_national_males_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'plots/wavelet_national_males_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.national,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
-pdf(paste0(file.loc,'wavelet_national_females_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'plots/wavelet_national_females_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.national,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
 # output national wavelet files split time period
-pdf(paste0(file.loc,'wavelet_national_split_time_males_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'plots/wavelet_national_split_time_males_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.national.split,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
-pdf(paste0(file.loc,'wavelet_national_split_time_females_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'plots/wavelet_national_split_time_females_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 mapply(plot.wavelet.national.split,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
@@ -296,4 +354,11 @@ dev.off()
 #dev.off()
 
 # output national wavelet files sex separately all on one page
-# FINISH
+pdf(paste0(file.loc,'plots/wavelet_national_all_men_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.wavelet.national.all(1)
+dev.off()
+
+pdf(paste0(file.loc,'plots/wavelet_national_all_women_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.wavelet.national.all(2)
+dev.off()
+

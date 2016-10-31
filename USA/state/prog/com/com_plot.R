@@ -91,7 +91,17 @@ dev.off()
 file.loc.state <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/state/")
 dat.state <- readRDS(paste0(file.loc.state,'com_state_values_',year.start.arg,'-',year.end.arg))
 
-# plot  
+# plot first period COM against second period COM
+pdf(paste0(file.loc.state,'com_state_comparison_xy_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.state) +
+geom_jitter(aes(x=COM.period.1,y=COM.period.2,color=factor(sex)),width = 10) +
+geom_abline(linetype=2,intercept=0,slope=1) +
+xlab(paste0('COM during ',min(year.group.1),'-',max(year.group.1))) +
+ylab(paste0('COM during ',min(year.group.2),'-',max(year.group.2))) +
+#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(2,"RdYlBu")[c(1,11,12)]))(3),guide = guide_legend(title = 'Gender'),labels=sex.lookup) +
+ggtitle(paste0('COM state comparison between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
+theme_bw()
+dev.off()
 
 ###############################################################
 # PREPARING MAP
