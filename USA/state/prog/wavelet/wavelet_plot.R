@@ -78,33 +78,11 @@ dev.off()
 # load state data
 file.loc.state <- paste0("../../output/wavelet/",year.start.arg,'_',year.end.arg,"/state/")
 file.loc.state <- paste0(file.loc.state,num.sim,'_sim/')
-dat.state <- readRDS(paste0(file.loc,'12_month_values/combined_results/power_12_months_state_',year.start.arg,'_',year.end.arg))
+dat.state <- readRDS(paste0(file.loc.state,'12_month_values/combined_results/power_12_months_state_',year.start.arg,'_',year.end.arg))
 
-# output plot of wavelet 12 month value from first period against second
-pdf(paste0(file.loc.state,'plots/12_month_power_state_comparison_xy_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(data=dat.state) +
-geom_jitter(aes(x=twelve.month.value.1,y=twelve.month.value.2,color=factor(sex)),width = 10) +
-geom_abline(linetype=2,intercept=0,slope=1) +
-xlab(paste0('12-month power from ',min(year.group.1),'-',max(year.group.1))) +
-ylab(paste0('12-month power from ',min(year.group.2),'-',max(year.group.2))) +
-#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(2,"RdYlBu")[c(1,11,12)]))(3),guide = guide_legend(title = 'Gender'),labels=sex.lookup) +
-ggtitle(paste0('Wavelet power at 12 months comparison between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
-theme_bw()
-dev.off()
-
-# output plot of wavelet 12 month value difference between first period and second
-pdf(paste0(file.loc.state,'plots/12_month_power_state_comparison_change_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(data=dat.state) +
-geom_jitter(aes(x=as.factor(age),y=-1*(twelve.month.value.1-twelve.month.value.2))) +
-geom_hline(yintercept=0, linetype=2,alpha=0.5) +
-xlab('Age group') +
-scale_x_discrete(labels=age.print) +
-ylab('Change in power at 12 months') +
-#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(2,"RdYlBu")[c(1,12)]))(2),guide = guide_legend(title = 'Gender'),labels=sex.lookup) +
-ggtitle(paste0('National change in wavelet power at 12 months between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
-facet_wrap(~sex)+
-theme_bw()
-dev.off()
+# change values of gender
+dat.state$sex <- as.factor(as.character((dat.state$sex)))
+levels(dat.state$sex) <- c('Men','Women')
 
 ###############################################################
 # PREPARING MAP
@@ -159,6 +137,51 @@ shapefile.data$climate_region <- c('Northwest','Northern Rockies and Plains','No
 # merge selected data to map dataframe for colouring of ggplot
 USA.df <- merge(map, shapefile.data, by='id')
 USA.df$STATE_FIPS <- as.integer(as.character(USA.df$STATE_FIPS))
+
+# set colour scheme for climate colour map
+map.climate.colour <- colorRampPalette(rev(brewer.pal(12,"Accent")[c(1:3,5,6)]))(length(unique(USA.df$climate_region)))
+names(map.climate.colour) <- levels(as.factor(USA.df$climate_region))
+
+###############################################################
+# CHANGE IN WAVELET POWER AT 12 MONTHS PLOT
+###############################################################
+
+# Attached climate data to the 12 months power data
+shapefile.data$STATE_FIPS <- as.numeric(as.character(shapefile.data$STATE_FIPS))
+dat.state <- merge(dat.state,shapefile.data,by.y='STATE_FIPS',by.x='fips')
+
+# set colour scheme for climate colour map
+map.climate.colour <- colorRampPalette(rev(brewer.pal(12,"Accent")[c(1:3,5,6)]))(length(unique(USA.df$climate_region)))
+
+# output plot of wavelet 12 month value from first period against second
+pdf(paste0(file.loc.state,'plots/12_month_power_state_comparison_xy_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.state) +
+geom_jitter(aes(x=twelve.month.value.1,y=twelve.month.value.2,color=factor(sex)),width = 10) +
+geom_abline(linetype=2,intercept=0,slope=1) +
+xlab(paste0('12-month power from ',min(year.group.1),'-',max(year.group.1))) +
+ylab(paste0('12-month power from ',min(year.group.2),'-',max(year.group.2))) +
+#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(2,"RdYlBu")[c(1,11,12)]))(3),guide = guide_legend(title = 'Gender'),labels=sex.lookup) +
+ggtitle(paste0('Wavelet power at 12 months comparison between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
+theme_bw()
+dev.off()
+
+# output plot of wavelet 12 month value difference between first period and second
+pdf(paste0(file.loc.state,'plots/12_month_power_state_comparison_change_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.state) +
+geom_jitter(aes(x=as.factor(age),y=-1*(twelve.month.value.1-twelve.month.value.2),color=climate_region)) +
+geom_hline(yintercept=0, linetype=2,alpha=0.5) +
+xlab('Age group') +
+scale_x_discrete(labels=age.print) +
+ylab('Change in power at 12 months') +
+#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(2,"RdYlBu")[c(1,12)]))(2),guide = guide_legend(title = 'Gender'),labels=sex.lookup) +
+ggtitle(paste0('Change in wavelet power at 12 months between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
+facet_wrap(~sex) +
+scale_color_manual(values=map.climate.colour,guide = guide_legend(title = '')) +
+theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black")) +
+theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom')
+dev.off()
+
 
 ###############################################################
 # WAVELET POWER AT 12 MONTHS MAP

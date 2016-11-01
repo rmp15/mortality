@@ -276,7 +276,9 @@ plot.wavelet.national.all <- function(sex.selected) {
     
     # set up grid plot
     #layout(rbind(c(1:10),c(11:20)),widths=c(rep(c(1),10)),heights=c(1,1))
-    layout(rbind(c(1:5),c(6:10)),widths=c(rep(c(1),5)),heights=c(1,1))
+    par(mfrow=c(2,5),oma = c(0, 0, 2, 0))
+    #mtext('Title for Two Plots', outer = TRUE, cex = 1.5)
+    #layout(rbind(c(1:5),c(6:10)),widths=c(rep(c(1),5)),heights=c(1,1))
 
     for(i in c(0,5,15,25,35,45,55,65,75,85)){
         
@@ -284,7 +286,7 @@ plot.wavelet.national.all <- function(sex.selected) {
     
         age.single <- as.matrix(age.code[age.code==i,])[2]
     
-        plot.title <- paste0(sex.lookup[sex.selected],' USA ',age.single)
+        plot.title <- paste0(age.single)
     
         # prepare data frame for anaylsis
         my.data <- data.frame(date=as.Date(as.character(dat.temp$year),format='%Y'),log.rate=log(dat.temp$rate.adj),log.deaths=log(dat.temp$deaths.pred+1))
@@ -329,6 +331,9 @@ plot.wavelet.national.all <- function(sex.selected) {
     
     }
     
+    mtext(paste0(sex.lookup[sex.selected]), outer = TRUE, cex = 1.5)
+
+
 }
 
 # function to plot national wavelet analysis for all ages of single sex split time
@@ -338,7 +343,8 @@ plot.wavelet.national.all.split <- function(sex.selected) {
     
     # set up grid plot
     #layout(rbind(c(1:10),c(11:20)),widths=c(rep(c(1),10)),heights=c(1,1))
-    layout(rbind(c(1:10),c(11:20)),widths=c(rep(c(1),10)),heights=c(1,1))
+    par(mfrow=c(2,10),oma = c(0, 0, 0, 0),mai = c(1, 0.1, 0.1, 0.1))
+    #layout(rbind(c(1:10),c(11:20)),widths=c(rep(c(1),10)),heights=c(1,1))
     
     for(i in c(0,5,15,25,35,45,55,65,75,85)){
         
@@ -346,8 +352,10 @@ plot.wavelet.national.all.split <- function(sex.selected) {
         
         age.single <- as.matrix(age.code[age.code==i,])[2]
         
-        plot.title.1 <- paste0(age.single,' : ',min(year.group.1),'-',max(year.group.1))
-        plot.title.2 <- paste0(min(year.group.2),'-',max(year.group.2))
+        #plot.title.1 <- paste0(age.single,' : ',min(year.group.1),'-',max(year.group.1))
+        #plot.title.2 <- paste0(min(year.group.2),'-',max(year.group.2))
+        plot.title.1 <- paste0(age.single)
+        plot.title.2 <- paste0()
 
         # prepare data frame for anaylsis
         my.data <- data.frame(year=dat.temp$year,date=as.Date(as.character(dat.temp$year),format='%Y'),log.rate=log(dat.temp$rate.adj),log.deaths=log(dat.temp$deaths.pred))
@@ -423,6 +431,8 @@ plot.wavelet.national.all.split <- function(sex.selected) {
         
     }
     
+    mtext(paste0(sex.lookup[sex.selected],' USA '), outer = TRUE, cex = 1.5)
+
 }
 
 ifelse(!dir.exists(paste0(file.loc,'plots/')), dir.create(paste0(file.loc,'plots/'),recursive=TRUE), FALSE)
