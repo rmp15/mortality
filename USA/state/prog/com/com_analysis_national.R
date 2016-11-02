@@ -36,9 +36,6 @@ dat <- subset(dat,age==age.selected & sex==sex.selected)
 # take months column and repeat death column times
 dat <- rep(dat$month,round(dat$deaths.adj))
 
-# convert months -> radians
-conv <- 2*pi/12
-
 # find circular mean, where 1 is January and 0 is December.
 dat.mean <- circ.mean(conv*(dat))/conv
 dat.mean <- (dat.mean + 12) %% 12
@@ -61,7 +58,53 @@ COM.bootstrap.5 <- COM.bootstrap[25]
 COM.bootstrap.95 <- COM.bootstrap[975]
 
 # calculate bootstrap std. error
-#std.error <- sqrt(var(COM.bootstrap))
+std.error <- sqrt(var(COM.bootstrap))
+
+# compile information for output of function
+dat.frame <- c(age.selected,sex.selected,dat.mean,COM.bootstrap.5,COM.bootstrap.95)
+
+return(dat.frame)
+}
+
+# function to find centre of mass of seasonality NOW FIXED FOR WEIRD ONES
+circular.age.mean.2 <- function(age.selected,sex.selected) {
+
+# take dates as subset
+dat.temp <- subset(dat,age==age.selected & sex==sex.selected)
+
+# take months column and repeat death column times
+dat.temp <- rep(dat.temp$month,round(dat.temp$deaths.adj))
+
+# convert months -> radians
+conv <- 2*pi/12
+dat.conv <- dat.temp*conv
+
+# find circular mean in circular world
+dat.mean <- (circ.mean(dat.conv)) %% (2*pi)
+
+# centre dataset around dat.mean
+dat.conv.cent <- dat.conv - dat.mean
+
+# create 1000 bootstrap samples
+resamples <- lapply(1:1000, function(i)sample(dat.conv.cent, replace = T))
+
+# function for circular mean
+circ.bootstrap <-function(data.frame) {
+    dat.mean <- circ.mean(data.frame)
+    return(dat.mean)
+}
+
+# calculate COM for each bootstrap sample
+set.seed(123)
+COM.bootstrap <- (sapply(resamples, circ.bootstrap))
+COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap.5 <- COM.bootstrap[25]
+COM.bootstrap.95 <- COM.bootstrap[975]
+
+# decentre data and convert back to months units
+dat.mean <- (dat.mean)/conv
+COM.bootstrap.5 <- (COM.bootstrap.5/conv) + dat.mean
+COM.bootstrap.95<- (COM.bootstrap.95/conv) + dat.mean
 
 # compile information for output of function
 dat.frame <- c(age.selected,sex.selected,dat.mean,COM.bootstrap.5,COM.bootstrap.95)
