@@ -8,6 +8,14 @@ year.end.arg <- as.numeric(args[2])
 require(CircStats)
 library(plyr)
 
+# create output directories
+file.loc <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/national/")
+ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+file.loc.entire <- paste0(file.loc,'/values/entire_period/')
+ifelse(!dir.exists(file.loc.entire), dir.create(file.loc.entire,recursive=TRUE), FALSE)
+file.loc.split <- paste0(file.loc,'/values/split_period/')
+ifelse(!dir.exists(file.loc.split), dir.create(file.loc.split,recursive=TRUE), FALSE)
+
 # coding for graph-friendly information
 age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
 age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85), age.print=age.print)
@@ -19,16 +27,25 @@ state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
 
 # add max(deaths) - deaths
-dat$deaths.inv <- round((max(dat$deaths) - dat$deaths)/)#100)
+dat$deaths.inv <- round((max(dat$deaths.adj) - dat$deaths.adj)/10)
 
-# function to find inverse of centre of mass of seasonality
+# number of years for split wavelet analysis
+years <- c(year.start.arg:year.end.arg)
+num.years <- year.end.arg - year.start.arg + 1
+
+halfway <- floor(num.years/2)
+
+year.group.1 <- years[1:halfway]
+year.group.2 <- years[(halfway+1):(num.years)]
+
+# function to find centre of mass of seasonality
 circular.age.mean <- function(age.selected,sex.selected) {
 
 # take dates as subset
 dat <- subset(dat,age==age.selected & sex==sex.selected)
 
 # take months column and repeat death column times
-dat <- rep(dat$month,dat$deaths.inv)
+dat <- rep(dat$month,round(dat$deaths.inv))
 
 # convert months -> radians
 conv <- 2*pi/12
@@ -50,126 +67,186 @@ circ.bootstrap <-function(data.frame) {
 # calculate COM for each bootstrap sample
 set.seed(123)
 COM.bootstrap <- (sapply(resamples, circ.bootstrap))
-COM.bootstrap.5 <- sort(COM.bootstrap)[25]
-COM.bootstrap.95 <- sort(COM.bootstrap)[975]
+COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap.5 <- COM.bootstrap[25]
+COM.bootstrap.95 <- COM.bootstrap[975]
 
 # calculate bootstrap std. error
 std.error <- sqrt(var(COM.bootstrap))
 
 # compile information for output of function
-dat.frame <- c(age.selected,sex.selected,dat.mean,COM.bootstrap.5,COM.bootstrap.95)
+dat.frame <- data.frame(age=age.selected,sex=sex.selected,COM.mean=dat.mean,COM.5=COM.bootstrap.5,COM.95=COM.bootstrap.95)
+
+# output value for data processing
+file.loc.temp <- paste0(file.loc.entire,'method_1/')
+ifelse(!dir.exists(file.loc.temp), dir.create(file.loc.temp,recursive=TRUE), FALSE)
+saveRDS(dat.frame,paste0(file.loc.temp,'inv_com_',sex.lookup[sex.selected],'_',age.selected))
 
 return(dat.frame)
 }
 
-# function to find centre of mass of seasonality subnationally
-circular.split <- function(age.selected,sex.selected) {
-    
-    # take dates as subset
-    dat <- subset(dat,age==age.selected & sex==sex.selected)
-    
-    # take months column and repeat death column times
-    dat.1 <- subset(dat,year %in% year.group.1)
-    dat.1 <- rep(dat.1$month,round(dat.1$deaths.inv))
-    dat.2 <- subset(dat,year %in% year.group.2)
-    dat.2 <- rep(dat.2$month,round(dat.2$deaths.inv))
-    
-    # convert months -> radians
-    conv <- 2*pi/12
-    
-    # find circular mean, where 1 is January and 0 is December.
-    dat.mean.1 <- circ.mean(conv*(dat.1))/conv
-    dat.mean.1 <- (dat.mean.1 + 12) %% 12
-    dat.mean.2 <- circ.mean(conv*(dat.2))/conv
-    dat.mean.2 <- (dat.mean.2 + 12) %% 12
-    
-    # create 1000 bootstrap samples
-    #resamples <- lapply(1:1000, function(i)sample(dat, replace = T))
-    
-    # function for circular mean
-    circ.bootstrap <-function(data.frame) {
-        dat.mean <- circ.mean(conv*(data.frame))/conv
-        dat.mean <- (dat.mean + 12) %% 12
-        return(dat.mean)
-    }
-    
-    # calculate COM for each bootstrap sample
-    #set.seed(123)
-    #COM.bootstrap <- (sapply(resamples, circ.bootstrap))
-    #COM.bootstrap.5 <- sort(COM.bootstrap)[25]
-    #COM.bootstrap.95 <- sort(COM.bootstrap)[975]
-    
-    # calculate bootstrap std. error
-    #std.error <- sqrt(var(COM.bootstrap))
-    
-    # compile information for output of function
-    #dat.frame <- c(age.selected,sex.selected,dat.mean,COM.bootstrap.5,COM.bootstrap.95)
-    dat.frame <- data.frame(age=as.integer(age.selected),sex=as.integer(sex.selected),COM.period.1=dat.mean.1,COM.period.2=dat.mean.2)
-    
-    return(dat.frame)
+# function to find centre of mass of seasonality
+circular.age.mean.2 <- function(age.selected,sex.selected) {
+
+# take dates as subset
+dat.temp <- subset(dat,age==age.selected & sex==sex.selected)
+
+# take months column and repeat death column times
+dat.temp <- rep(dat.temp$month,round(dat.temp$deaths.inv))
+
+# convert months -> radians
+conv <- 2*pi/12
+dat.conv <- dat.temp*conv
+
+# find circular mean in circular world
+dat.mean <- (circ.mean(dat.conv)) %% (2*pi)
+
+# centre dataset around dat.mean
+dat.conv.cent <- dat.conv - dat.mean
+
+# create 1000 bootstrap samples
+resamples <- lapply(1:1000, function(i)sample(dat.conv.cent, replace = T))
+
+# function for circular mean
+circ.bootstrap <-function(data.frame) {
+    dat.mean <- circ.mean(data.frame)
+    return(dat.mean)
 }
 
-zero.male <- circular.age.mean(0,1)
-five.male <- circular.age.mean(5,1)
-fifteen.male <- circular.age.mean(15,1)
-twentyfive.male <- circular.age.mean(25,1)
-thirtyfive.male <- circular.age.mean(35,1)
-fortyfive.male <- circular.age.mean(45,1)
-fiftyfive.male <- circular.age.mean(55,1)
-sixtyfive.male <- circular.age.mean(65,1)
-seventyfive.male <- circular.age.mean(75,1)
-eightyfive.male <- circular.age.mean(85,1)
+# calculate COM for each bootstrap sample
+set.seed(123)
+COM.bootstrap <- (sapply(resamples, circ.bootstrap))
+COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap.5 <- COM.bootstrap[25]
+COM.bootstrap.95 <- COM.bootstrap[975]
 
-zero.female <- circular.age.mean(0,2)
-five.female <- circular.age.mean(5,2)
-fifteen.female <- circular.age.mean(15,2)
-twentyfive.female <- circular.age.mean(25,2)
-thirtyfive.female <- circular.age.mean(35,2)
-fortyfive.female <- circular.age.mean(45,2)
-fiftyfive.female <- circular.age.mean(55,2)
-sixtyfive.female <- circular.age.mean(65,2)
-seventyfive.female <- circular.age.mean(75,2)
-eightyfive.female <- circular.age.mean(85,2)
+# decentre data and convert back to months units
+dat.mean <- (dat.mean)/conv
+COM.bootstrap.5 <- (COM.bootstrap.5/conv) + dat.mean
+COM.bootstrap.95<- (COM.bootstrap.95/conv) + dat.mean
 
+# compile information for output of function
+dat.frame <- data.frame(age=age.selected,sex=sex.selected,COM.mean=dat.mean,COM.5=COM.bootstrap.5,COM.95=COM.bootstrap.95)
 
-# compile data frame of each age sex combination, with COM
-dat.COM <- rbind(   zero.male,
-                    five.male,
-                    fifteen.male,
-                    twentyfive.male,
-                    thirtyfive.male,
-                    fortyfive.male,
-                    fiftyfive.male,
-                    sixtyfive.male,
-                    seventyfive.male,
-                    eightyfive.male,
-                    zero.female,
-                    five.female,
-                    fifteen.female,
-                    twentyfive.female,
-                    thirtyfive.female,
-                    fortyfive.female,
-                    fiftyfive.female,
-                    sixtyfive.female,
-                    seventyfive.female,
-                    eightyfive.female)
+# output value for data processing
+file.loc.temp <- paste0(file.loc.entire,'method_2/')
+ifelse(!dir.exists(file.loc.temp), dir.create(file.loc.temp,recursive=TRUE), FALSE)
+saveRDS(dat.frame,paste0(file.loc.temp,'inv_com_',sex.lookup[sex.selected],'_',age.selected))
 
-dat.COM <- as.data.frame(dat.COM)
-names(dat.COM) <- c('age','sex','COM','lowerCI','upperCI')
+return(dat.frame)
+}
 
-# rename levels in table
-dat.COM$sex <- as.factor(dat.COM$sex)
-levels(dat.COM$sex) <- sex.lookup
+# function to find centre of mass of seasonality for first period of split years
+circular.age.mean.split.1 <- function(age.selected,sex.selected) {
 
-# create split dataset for national analysis
-dat.split <- data.frame()
-for(i in c(0,5,15,25,35,45,55,65,75,85)){
-    for(k in c(1,2)){
-        dat.split <- rbind(dat.split,circular.split(i,k))
-    }}
+# take dates as subset
+dat.temp <- subset(dat,age==age.selected & sex==sex.selected)
 
-# create output directories
-ifelse(!dir.exists("../../output/com"), dir.create("../../output/com",recursive=TRUE), FALSE)
+# filter for years
+dat.temp <- subset(dat.temp,year %in% year.group.1)
 
-write.csv(dat.COM,paste0('../../output/com/USA_INV_COM_',year.start.arg,'_',year.end.arg,'.csv'))
-saveRDS(dat.split,paste0(file.loc,'inv_com_national_split_values_',year.start.arg,'-',year.end.arg))
+# take months column and repeat death column times
+dat.temp <- rep(dat.temp$month,round(dat.temp$deaths.inv))
+
+# convert months -> radians
+conv <- 2*pi/12
+dat.conv <- dat.temp*conv
+
+# find circular mean in circular world
+dat.mean <- (circ.mean(dat.conv)) %% (2*pi)
+
+# centre dataset around dat.mean
+dat.conv.cent <- dat.conv - dat.mean
+
+# create 1000 bootstrap samples
+resamples <- lapply(1:1000, function(i)sample(dat.conv.cent, replace = T))
+
+# function for circular mean
+circ.bootstrap <-function(data.frame) {
+    dat.mean <- circ.mean(data.frame)
+    return(dat.mean)
+}
+
+# calculate COM for each bootstrap sample
+set.seed(123)
+COM.bootstrap <- (sapply(resamples, circ.bootstrap))
+COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap.5 <- COM.bootstrap[25]
+COM.bootstrap.95 <- COM.bootstrap[975]
+
+# decentre data and convert back to months units
+dat.mean <- (dat.mean)/conv
+COM.bootstrap.5 <- (COM.bootstrap.5/conv) + dat.mean
+COM.bootstrap.95<- (COM.bootstrap.95/conv) + dat.mean
+
+# compile information for output of function
+dat.frame <- data.frame(age=age.selected,sex=sex.selected,COM.mean=dat.mean,COM.5=COM.bootstrap.5,COM.95=COM.bootstrap.95)
+
+# output value for data processing
+file.loc.temp <- paste0(file.loc.split,'method_2/')
+ifelse(!dir.exists(file.loc.temp), dir.create(file.loc.temp,recursive=TRUE), FALSE)
+saveRDS(dat.frame,paste0(file.loc.temp,'inv_com_',sex.lookup[sex.selected],'_',age.selected,'_part_1'))
+
+return(dat.frame)
+}
+
+# function to find centre of mass of seasonality for first period of split years
+circular.age.mean.split.2 <- function(age.selected,sex.selected) {
+
+# take dates as subset
+dat.temp <- subset(dat,age==age.selected & sex==sex.selected)
+
+# filter for years
+dat.temp <- subset(dat.temp,year %in% year.group.2)
+
+# take months column and repeat death column times
+dat.temp <- rep(dat.temp$month,round(dat.temp$deaths.inv))
+
+# convert months -> radians
+conv <- 2*pi/12
+dat.conv <- dat.temp*conv
+
+# find circular mean in circular world
+dat.mean <- (circ.mean(dat.conv)) %% (2*pi)
+
+# centre dataset around dat.mean
+dat.conv.cent <- dat.conv - dat.mean
+
+# create 1000 bootstrap samples
+resamples <- lapply(1:1000, function(i)sample(dat.conv.cent, replace = T))
+
+# function for circular mean
+circ.bootstrap <-function(data.frame) {
+    dat.mean <- circ.mean(data.frame)
+    return(dat.mean)
+}
+
+# calculate COM for each bootstrap sample
+set.seed(123)
+COM.bootstrap <- (sapply(resamples, circ.bootstrap))
+COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap.5 <- COM.bootstrap[25]
+COM.bootstrap.95 <- COM.bootstrap[975]
+
+# decentre data and convert back to months units
+dat.mean <- (dat.mean)/conv
+COM.bootstrap.5 <- (COM.bootstrap.5/conv) + dat.mean
+COM.bootstrap.95<- (COM.bootstrap.95/conv) + dat.mean
+
+# compile information for output of function
+dat.frame <- data.frame(age=age.selected,sex=sex.selected,COM.mean=dat.mean,COM.5=COM.bootstrap.5,COM.95=COM.bootstrap.95)
+
+# output value for data processing
+file.loc.temp <- paste0(file.loc.split,'method_2/')
+ifelse(!dir.exists(file.loc.temp), dir.create(file.loc.temp,recursive=TRUE), FALSE)
+saveRDS(dat.frame,paste0(file.loc.temp,'inv_com_',sex.lookup[sex.selected],'_',age.selected,'_part_2'))
+
+return(dat.frame)
+}
+
+# perform function for each age, gender combination
+mapply(circular.age.mean.2, age.selected=c(0,5,15,25,35,45,55,65,75,85),sex.selected=c(1,2))
+mapply(circular.age.mean, age.selected=c(0,5,15,25,35,45,55,65,75,85),sex.selected=c(1,2))
+mapply(circular.age.means.split.1, age.selected=c(0,5,15,25,35,45,55,65,75,85),sex.selected=c(1,2))
+mapply(circular.age.means.split.2, age.selected=c(0,5,15,25,35,45,55,65,75,85),sex.selected=c(1,2))
+

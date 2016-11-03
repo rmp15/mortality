@@ -113,11 +113,11 @@ state.max.min.grad$grad <- with(state.max.min.grad,100*(exp(year)-1))
 state.max.min.grad$grad.total <- 100 * ((1 + state.max.min.grad$grad / 100) ^ num.years - 1)
 
 # work out the percentage difference between largest and smallest mortality month from COM analysis
-dat.COM <- read.csv(paste0('../../output/com/USA_COM_',year.start,'_',year.end,'.csv'))
+dat.COM <- read.csv(paste0('../../output/com/',year.start,'_',year.end,'/national/USA_COM_',year.start,'_',year.end,'.csv'))
 levels(dat.COM$sex) <- c('2','1')
 dat.COM$sex <- as.character(dat.COM$sex)
 dat.COM$type <- 'max'
-dat.inv.COM <- read.csv(paste0('../../output/com/USA_INV_COM_',year.start,'_',year.end,'.csv'))
+dat.inv.COM <- read.csv(paste0('../../output/com/',year.start,'_',year.end,'/national/USA_INV_COM_',year.start,'_',year.end,'.csv'))
 levels(dat.inv.COM$sex) <- c('2','1')
 dat.inv.COM$sex <- as.character(dat.inv.COM$sex)
 dat.inv.COM$type <- 'min'
@@ -1037,9 +1037,9 @@ jitterplot.median.line.2 <- function() {
 }
 
 # plot
-#if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_jitterplot_climate.pdf'),paper='a4r',height=0,width=0)}
-#print(jitterplot.median.line.2())
-#if(together==0){dev.off()}
+if(together==0){pdf(paste0(file.loc.age.sum,age.selected,'_line_jitterplot_climate.pdf'),paper='a4r',height=0,width=0)}
+print(jitterplot.median.line.2())
+if(together==0){dev.off()}
 
 # function to plot
 jitterplot.median <- function() {
