@@ -46,54 +46,10 @@ file.loc.nat.input <- paste0("../../output/com/",year.start.arg,'_',year.end.arg
 file.loc.nat.output <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/national/plots/")
 
 # produce dataset for national
-dat.COM <- readRDS(paste0(file.loc.nat.input,'com_national_values_method_2_entire_',year.start.arg,'_',year.end.arg))
-dat.COM$sex <- as.factor(as.character(dat.COM$sex))
-levels(dat.COM$sex) <- c('Men','Women')
-dat.COM$type <- 'max'
-dat.COM$size <- with(dat.COM,1/(COM.95-COM.5))
-dat.COM$size <- 3*(dat.COM$size/max(dat.COM$size))
-
-dat.inv.COM <- readRDS(paste0(file.loc.nat.input,'inv_com_national_values_method_2_entire_',year.start.arg,'_',year.end.arg))
-dat.inv.COM$sex <- as.factor(as.character(dat.inv.COM$sex))
-levels(dat.inv.COM$sex) <- c('Men','Women')
-dat.inv.COM$type <- 'min'
-dat.inv.COM$size <- with(dat.inv.COM,1/(COM.95-COM.5))
-dat.inv.COM$size <- 3*(dat.inv.COM$size/max(dat.inv.COM$size))
-
-dat.nat <- rbind(dat.COM,dat.inv.COM)
+dat.nat <- readRDS(paste0(file.loc.nat.input,'com_inv_com_national_values_method_2_entire_',year.start.arg,'_',year.end.arg))
 
 # load split national data
-dat.COM.1 <- readRDS(paste0(file.loc.nat.input,'com_national_values_method_2_split_1_',year.start.arg,'_',year.end.arg))
-dat.COM.1$period <- 1
-dat.COM.1$sex <- as.factor(dat.COM.1$sex)
-levels(dat.COM.1$sex) <- c('Men','Women')
-dat.COM.1$type <- 'max'
-dat.COM.1$size <- with(dat.COM.1,1/(COM.95-COM.5))
-dat.COM.1$size <- 3*(dat.COM.1$size/max(dat.COM.1$size))
-dat.COM.2 <- readRDS(paste0(file.loc.nat.input,'com_national_values_method_2_split_2_',year.start.arg,'_',year.end.arg))
-dat.COM.2$period <- 2
-dat.COM.2$sex <- as.factor(dat.COM.2$sex)
-levels(dat.COM.2$sex) <- c('Men','Women')
-dat.COM.2$type <- 'max'
-dat.COM.2$size <- with(dat.COM.2,1/(COM.95-COM.5))
-dat.COM.2$size <- 3*(dat.COM.2$size/max(dat.COM.2$size))
-
-dat.inv.COM.1 <- readRDS(paste0(file.loc.nat.input,'inv_com_national_values_method_2_split_1_',year.start.arg,'_',year.end.arg))
-dat.inv.COM.1$period <- 1
-dat.inv.COM.1$sex <- as.factor(dat.inv.COM.1$sex)
-levels(dat.inv.COM.1$sex) <- c('Men','Women')
-dat.inv.COM.1$type <- 'min'
-dat.inv.COM.1$size <- with(dat.inv.COM.1,1/(COM.95-COM.5))
-dat.inv.COM.1$size <- 3*(dat.inv.COM.1$size/max(dat.inv.COM.1$size))
-dat.inv.COM.2 <- readRDS(paste0(file.loc.nat.input,'inv_com_national_values_method_2_split_2_',year.start.arg,'_',year.end.arg))
-dat.inv.COM.2$period <- 2
-dat.inv.COM.2$sex <- as.factor(dat.COM.2$sex)
-levels(dat.inv.COM.2$sex) <- c('Men','Women')
-dat.inv.COM.2$type <- 'min'
-dat.inv.COM.2$size <- with(dat.COM.2,1/(COM.95-COM.5))
-dat.inv.COM.2$size <- 3*(dat.COM.2$size/max(dat.COM.2$size))
-
-dat.nat.split <- rbind(dat.COM.1,dat.inv.COM.1,dat.COM.2,dat.inv.COM.2)
+dat.nat.split <- readRDS(paste0(file.loc.nat.input,'com_inv_com_national_values_method_2_split_',year.start.arg,'_',year.end.arg))
 
 # entire period com plot
 pdf(paste0(file.loc.nat.output,'USA_COM_total_axis_swapped_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
