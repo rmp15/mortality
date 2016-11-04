@@ -30,7 +30,7 @@ echo "starting nationalised COM analysis for ${sexstrings[$sex-1]} $age, years $
 #Rscript ~/git/mortality/USA/state/prog/com/com_analysis_national.R $start $end $age $sex
 
 # runs anti-COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national.R $start $end $age $sex
+#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national.R $start $end $age $sex
 
 done; done;
 

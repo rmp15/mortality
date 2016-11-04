@@ -14,7 +14,7 @@ year.start <- as.numeric(args[1])
 year.end <- as.numeric(args[2])
 
 # load the data
-dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
+dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_',year.end))
 
 # add fips lookup
 fips.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
@@ -27,11 +27,12 @@ month.names <- c('January','February','March','April','May','June',
                  'July','August','September','October','November','December')
 month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
 sex.lookup <- c('Men','Women')
-model <- paste0('type',model)
 
 ###############################################################
 # DATA PROCESSING
 ###############################################################
+
+# DYNAMIC MAX MIN
 
 # generate nationalised data
 dat$deaths.pred <- with(dat,pop.adj*rate.adj)
@@ -49,6 +50,27 @@ dat.max.min$abs.diff <- with(dat.max.min,100000*(max-min))
 dat.max.min$sex.long <- as.factor(as.character(dat.max.min$sex))
 levels(dat.max.min$sex.long) <- sex.lookup
 
+# STATIC MAX MIN DEFINED BY COM
+
+# load com data to establish max min locations
+dat.COM <- readRDS(paste0('../../output/com/',year.start,'_',year.end,'/national/values/combined_results/com_national_values_method_2_entire_',year.start,'_',year.end))
+dat.COM$sex <- as.character(dat.COM$sex)
+dat.COM$type <- 'max'
+dat.inv.COM <- readRDS(paste0('../../output/com/',year.start,'_',year.end,'/national/values/combined_results/inv_com_national_values_method_2_entire_',year.start,'_',year.end))
+dat.inv.COM$type <- 'min'
+dat.COM.total <- rbind(dat.COM,dat.inv.COM)
+
+# round to get month required for merging
+dat.COM.total$COM.mean <- round(dat.COM.total$COM.mean)
+dat.COM.total$COM.mean <- ifelse(dat.COM.total$COM.mean==0,12,dat.COM.total$COM.mean)
+dat.COM.total <- dat.COM.total[,c(1:3,6)]
+dat.COM.total$month <- dat.COM.total$COM.mean
+
+# figure out the ratio of max/min deaths over time with fixed max/min by sex, age, year
+dat.max.min.fixed <- merge(dat.national,dat.COM.total,by=c('age','sex','month'))
+dat.max.min.fixed <- ddply(dat.max.min.fixed,.(sex,age,year), summarize,max=rate.adj[type=='max'],month.max=month[type=='max']),min=median[type=='min'],month.min=month[type=='min'])
+dat.max.min.fixed$percent.change <- with(dat.max.min.fixed,round(100*exp((max - min)),1)-100)
+
 ###############################################################
 # DIRECTORY CREATION
 ###############################################################
@@ -58,7 +80,7 @@ file.loc <- paste0('../../output/seasonality_index/national/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
 ###############################################################
-# RATIO OF MAX/MIN MORTALITY RATE OVER TIME BY STATE
+# RATIO OF MAX/MIN MORTALITY RATE OVER TIME BY STATE EACH YEAR
 ###############################################################
 
 # 1. ratio of difference sexes
@@ -116,9 +138,9 @@ pdf(paste0(file.loc,'seasonality_index_mf_',year.start,'_',year.start,'.pdf'),he
 plot.function.nat.rel.both()
 dev.off()
 
-###############################################################
-# DIFFERENCE BETWEEN MAX/MIN MORTALITY RATE OVER TIME BY STATE
-###############################################################
+########################################################################
+# DIFFERENCE BETWEEN MAX/MIN MORTALITY RATE OVER TIME BY STATE EACH YEAR
+########################################################################
 
 # 2. abs difference
 

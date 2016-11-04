@@ -48,62 +48,62 @@ saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_enti
 # construct dataset for first period national analysis method 2
 dat.entire <- data.frame()
 for(k in c(1,2)){
-	for(i in c(0,5,15,25,35)){
+	for(i in c(0,5,15,25,35,45,55,65,75,85)){
 	    dat.temp <- readRDS(paste0(file.loc.nat.split,'method_2/com_',sex.lookup[k],'_',i,'_part1'))
             dat.entire <- rbind(dat.entire,dat.temp)
 	    #print(dat.entire)
 }}
-saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_split_1',year.start.arg,'_',year.end.arg))
+saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_split_1_',year.start.arg,'_',year.end.arg))
 
 # construct dataset for first period national analysis method 2
 dat.entire <- data.frame()
 for(k in c(1,2)){
-	for(i in c(0,5,15,25,35)){
+	for(i in c(0,5,15,25,35,45,55,65,75,85)){
 	    dat.temp <- readRDS(paste0(file.loc.nat.split,'method_2/com_',sex.lookup[k],'_',i,'_part2'))
             dat.entire <- rbind(dat.entire,dat.temp)
 	    #print(dat.entire)
 }}
-saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_split_2',year.start.arg,'_',year.end.arg))
+saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_split_2_',year.start.arg,'_',year.end.arg))
 
 # NATIONAL
 # INV COM
 
 # construct dataset for entire period national analysis method 1
-dat.entire <- data.frame()
-for(k in c(1,2)){
-	for(i in c(0,5,15,25,35,45,55,65,75,85)){
-	    dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_1/com_',sex.lookup[k],'_',i))
-            dat.entire <- rbind(dat.entire,dat.temp)
+#dat.entire <- data.frame()
+#for(k in c(1,2)){
+#	for(i in c(0,5,15,25,35,45,55,65,75,85)){
+#	    dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_1/inv_com_',sex.lookup[k],'_',i))
+#            dat.entire <- rbind(dat.entire,dat.temp)
 	    #print(dat.entire)
-}}
-saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_1_entire_',year.start.arg,'_',year.end.arg))
+#}}
+#saveRDS(dat.entire,paste0(file.loc.nat.output,'inv_com_national_values_method_1_entire_',year.start.arg,'_',year.end.arg))
 
 # construct dataset for entire period national analysis method 2
 dat.entire <- data.frame()
 for(k in c(1,2)){
 	for(i in c(0,5,15,25,35,45,55,65,75,85)){
-	    dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_2/com_',sex.lookup[k],'_',i))
+	    dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_2/anti_com_',sex.lookup[k],'_',i))
             dat.entire <- rbind(dat.entire,dat.temp)
 	    #print(dat.entire)
 }}
-saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_entire_',year.start.arg,'_',year.end.arg))
+saveRDS(dat.entire,paste0(file.loc.nat.output,'inv_com_national_values_method_2_entire_',year.start.arg,'_',year.end.arg))
 
 # construct dataset for first period national analysis method 2
 dat.entire <- data.frame()
 for(k in c(1,2)){
-	for(i in c(0,5,15,25,35)){
-	    dat.temp <- readRDS(paste0(file.loc.nat.split,'method_2/com_',sex.lookup[k],'_',i,'_part1'))
+	for(i in c(0,5,15,25,35,45,55,65,75,85)){
+	    dat.temp <- readRDS(paste0(file.loc.nat.split,'method_2/anti_com_',sex.lookup[k],'_',i,'_part1'))
             dat.entire <- rbind(dat.entire,dat.temp)
 	    #print(dat.entire)
 }}
-saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_split_1',year.start.arg,'_',year.end.arg))
+saveRDS(dat.entire,paste0(file.loc.nat.output,'inv_com_national_values_method_2_split_1_',year.start.arg,'_',year.end.arg))
 
 # construct dataset for first period national analysis method 2
 dat.entire <- data.frame()
 for(k in c(1,2)){
-	for(i in c(0,5,15,25,35)){
-	    dat.temp <- readRDS(paste0(file.loc.nat.split,'method_2/com_',sex.lookup[k],'_',i,'_part2'))
+	for(i in c(0,5,15,25,35,45,55,65,75,85)){
+	    dat.temp <- readRDS(paste0(file.loc.nat.split,'method_2/anti_com_',sex.lookup[k],'_',i,'_part2'))
             dat.entire <- rbind(dat.entire,dat.temp)
 	    #print(dat.entire)
 }}
-saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_split_2',year.start.arg,'_',year.end.arg))
+saveRDS(dat.entire,paste0(file.loc.nat.output,'inv_com_national_values_method_2_split_2_',year.start.arg,'_',year.end.arg))
