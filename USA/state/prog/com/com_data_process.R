@@ -39,9 +39,9 @@ saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_1_enti
 dat.entire <- data.frame()
 for(k in c(1,2)){
 	for(i in c(0,5,15,25,35,45,55,65,75,85)){
-	    dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_2/com_',sex.lookup[k],'_',i))
+	    dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_2/com_',tolower(sex.lookup[k]),'_',i))
             dat.entire <- rbind(dat.entire,dat.temp)
-	    #print(dat.entire)
+            print(dat.entire)
 }}
 saveRDS(dat.entire,paste0(file.loc.nat.output,'com_national_values_method_2_entire_',year.start.arg,'_',year.end.arg))
 

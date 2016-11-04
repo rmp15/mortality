@@ -42,8 +42,10 @@ year.group.2 <- years[(halfway+1):(num.years)]
 # 1. NATIONAL
 
 # load entire national data
-file.loc.nat <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/national/values/combined_results/")
-dat.COM <- readRDS(paste0(file.loc.nat,'com_national_values_method_2_',year.start.arg,'_',year.end.arg))
+file.loc.nat.input <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/national/values/combined_results/")
+file.loc.nat.output <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/national/plots/")
+
+dat.COM <- readRDS(paste0(file.loc.nat.input,'com_national_values_method_2_entire_',year.start.arg,'_',year.end.arg))
 dat.COM$sex <- as.factor(as.character(dat.COM$sex))
 levels(dat.COM$sex) <- c('Men','Women')
 dat.COM$type <- 'max'
@@ -60,7 +62,7 @@ dat.inv.COM$type <- 'min'
 dat.nat <- dat.COM
 dat.nat$size <- with(dat.nat,1/(COM.95-COM.5))
 
-pdf(paste0(file.loc.nat,'USA_COM_total_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc.nat.output,'USA_COM_total_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
 geom_point(data=subset(dat.nat,type=='max'),aes(x=COM.mean,y=factor(age),size=size),fill='red',shape=24) +
 #geom_point(data=subset(dat.nat,type=='min'),aes(x=COM.mean,y=factor(age)),fill='green',shape=25,size=3) +
@@ -73,14 +75,15 @@ scale_x_continuous(breaks=c(seq(0,12)),labels=c(month.short,month.short[1]),expa
 scale_y_discrete(labels=age.print) +
 #xlim(1,12) +
 facet_wrap(~sex, ncol=1) +
+scale_size(guide='none') +
 theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
 
-pdf(paste0(file.loc.nat,'USA_COM_total_axis_swapped_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc.nat.output,'USA_COM_total_axis_swapped_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
-geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM),fill='red',shape=24,size=3) +
-geom_point(data=subset(dat.nat,type=='min'),aes(x=factor(age),y=COM),fill='green',shape=25,size=3) +
+geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM.mean,size=size),fill='red',shape=24) +
+#geom_point(data=subset(dat.nat,type=='min'),aes(x=factor(age),y=COM),fill='green',shape=25,size=3) +
 geom_hline(aes(linetype=2),linetype=2, yintercept = 0:12, alpha=0.5) +
 geom_vline(aes(linetype=2),linetype=2, xintercept = 1:10) +
 #geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
@@ -90,12 +93,13 @@ scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short,month.short[1]),expa
 scale_x_discrete(labels=age.print) +
 #xlim(1,12) +
 facet_wrap(~sex, ncol=1) +
+scale_size(guide='none') +
 theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
 
 # load split national data
-dat.COM <- readRDS(paste0(file.loc.nat,'com_national_split_values_',year.start.arg,'-',year.end.arg))
+dat.COM <- readRDS(paste0(file.loc.nat.output,'com_national_split_values_',year.start.arg,'-',year.end.arg))
 dat.COM$sex <- as.factor(dat.COM$sex)
 levels(dat.COM$sex) <- c('Men','Women')
 dat.COM$type <- 'max'
@@ -105,7 +109,7 @@ levels(dat.inv.COM$sex) <- c('Men','Women')
 dat.inv.COM$type <- 'min'
 dat.nat <- rbind(dat.COM,dat.inv.COM)
 
-pdf(paste0(file.loc.nat,'USA_COM_total_axis_swapped_',min(year.group.1),'_',max(year.group.1),'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc.nat.output,'USA_COM_total_axis_swapped_',min(year.group.1),'_',max(year.group.1),'.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
 geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM.period.1),fill='red',shape=24,size=3) +
 geom_point(data=subset(dat.nat,type=='min'),aes(x=factor(age),y=COM.period.1),fill='green',shape=25,size=3) +
@@ -122,7 +126,7 @@ theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.g
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
 
-pdf(paste0(file.loc.nat,'USA_COM_total_axis_swapped_',min(year.group.2),'_',max(year.group.2),'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc.nat.output,'USA_COM_total_axis_swapped_',min(year.group.2),'_',max(year.group.2),'.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
 geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM.period.2),fill='red',shape=24,size=3) +
 geom_point(data=subset(dat.nat,type=='min'),aes(x=factor(age),y=COM.period.2),fill='green',shape=25,size=3) +

@@ -56,19 +56,18 @@ dat.mean <- circ.mean(conv*(dat))/conv
 dat.mean <- (dat.mean + 12) %% 12
 
 # create 1000 bootstrap samples
-resamples <- lapply(1:1000, function(i)sample(dat, replace = T))
-
-# function for circular mean
-circ.bootstrap <-function(data.frame) {
-    dat.mean <- circ.mean(conv*(data.frame))/conv
-    dat.mean <- (dat.mean + 12) %% 12
-    return(dat.mean)
+dat.sample <- vector()
+for(i in 1:1000){
+    sample <- sample(dat, replace = T)
+    dat.temp.mean <- circ.mean(conv*sample)/conv
+    dat.temp.mean <- (dat.temp.mean + 12) %% 12
+    print(dat.temp.mean)
+    dat.sample[i] <- dat.temp.mean
 }
 
+
 # calculate COM for each bootstrap sample
-set.seed(123)
-COM.bootstrap <- (sapply(resamples, circ.bootstrap))
-COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap <- sort(dat.sample)
 COM.bootstrap.5 <- COM.bootstrap[25]
 COM.bootstrap.95 <- COM.bootstrap[975]
 
@@ -108,18 +107,16 @@ dat.mean <- (circ.mean(dat.conv)) %% (2*pi)
 dat.conv.cent <- dat.conv - dat.mean
 
 # create 1000 bootstrap samples
-resamples <- lapply(1:1000, function(i)sample(dat.conv.cent, replace = T))
-
-# function for circular mean
-circ.bootstrap <-function(data.frame) {
-    dat.mean <- circ.mean(data.frame)
-    return(dat.mean)
+dat.sample <- vector()
+for(i in 1:1000){
+    sample <- sample(dat.conv.cent, replace = T)
+    dat.temp.mean <- circ.mean(sample)
+    print(dat.temp.mean/conv)
+    dat.sample[i] <- dat.temp.mean
 }
 
 # calculate COM for each bootstrap sample
-set.seed(123)
-COM.bootstrap <- (sapply(resamples, circ.bootstrap))
-COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap <- sort(dat.sample)
 COM.bootstrap.5 <- COM.bootstrap[25]
 COM.bootstrap.95 <- COM.bootstrap[975]
 
@@ -164,18 +161,16 @@ dat.mean <- (circ.mean(dat.conv)) %% (2*pi)
 dat.conv.cent <- dat.conv - dat.mean
 
 # create 1000 bootstrap samples
-resamples <- lapply(1:1000, function(i)sample(dat.conv.cent, replace = T))
-
-# function for circular mean
-circ.bootstrap <-function(data.frame) {
-    dat.mean <- circ.mean(data.frame)
-    return(dat.mean)
+dat.sample <- vector()
+for(i in 1:1000){
+    sample <- sample(dat.conv.cent, replace = T)
+    dat.temp.mean <- circ.mean(sample)
+    print(dat.temp.mean/conv)
+    dat.sample[i] <- dat.temp.mean
 }
 
 # calculate COM for each bootstrap sample
-set.seed(123)
-COM.bootstrap <- (sapply(resamples, circ.bootstrap))
-COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap <- sort(dat.sample)
 COM.bootstrap.5 <- COM.bootstrap[25]
 COM.bootstrap.95 <- COM.bootstrap[975]
 
@@ -209,6 +204,8 @@ dat.temp <- subset(dat.temp,year %in% year.group.2)
 # take months column and repeat death column times
 dat.temp <- rep(dat.temp$month,round(dat.temp$deaths.adj))
 
+print(length(dat.temp))
+
 # convert months -> radians
 conv <- 2*pi/12
 dat.conv <- dat.temp*conv
@@ -220,18 +217,16 @@ dat.mean <- (circ.mean(dat.conv)) %% (2*pi)
 dat.conv.cent <- dat.conv - dat.mean
 
 # create 1000 bootstrap samples
-resamples <- lapply(1:1000, function(i)sample(dat.conv.cent, replace = T))
-
-# function for circular mean
-circ.bootstrap <-function(data.frame) {
-    dat.mean <- circ.mean(data.frame)
-    return(dat.mean)
+dat.sample <- vector()
+for(i in 1:1000){
+    sample <- sample(dat.conv.cent, replace = T)
+    dat.temp.mean <- circ.mean(sample)
+    print(dat.temp.mean/conv)
+    dat.sample[i] <- dat.temp.mean
 }
 
 # calculate COM for each bootstrap sample
-set.seed(123)
-COM.bootstrap <- (sapply(resamples, circ.bootstrap))
-COM.bootstrap <- sort(COM.bootstrap)
+COM.bootstrap <- sort(dat.sample)
 COM.bootstrap.5 <- COM.bootstrap[25]
 COM.bootstrap.95 <- COM.bootstrap[975]
 
@@ -254,60 +249,5 @@ return(dat.frame)
 # perform function for each age, gender combination
 mapply(circular.age.mean.2, age.selected=age.arg,sex.selected=sex.arg)
 mapply(circular.age.mean, age.selected=age.arg,sex.selected=sex.arg)
-mapply(circular.age.means.split.1, age.selected=age.arg,sex.selected=sex.arg)
-mapply(circular.age.means.split.2, age.selected=age.arg,sex.selected=sex.arg)
-
-#mapply(circular.age.mean.2, age.selected=c(0,5,15,25,35,45,55,65,75,85),sex.selected=c(2,1))
-#mapply(circular.age.mean, age.selected=c(0,5,15,25,35,45,55,65,75,85),sex.selected=c(1,2))
-#mapply(circular.age.means.split.1, age.selected=c(0,5,15,25,35,45,55,65,75,85),sex.selected=c(1,2))
-#mapply(circular.age.means.split.2, age.selected=c(0,5,15,25,35,45,55,65,75,85),sex.selected=c(1,2))
-
-# function to find centre of mass of seasonality subnationally LEGACY
-#circular.split <- function(age.selected,sex.selected) {
-#    
-#    # take dates as subset
-#    dat <- subset(dat,age==age.selected & sex==sex.selected)
-#    
-#    # take months column and repeat death column times
-#    dat.1 <- subset(dat,year %in% year.group.1)
-#    dat.1 <- rep(dat.1$month,round(dat.1$deaths.adj))
-#    dat.2 <- subset(dat,year %in% year.group.2)
-#    dat.2 <- rep(dat.2$month,round(dat.2$deaths.adj))
-#    
-#    # convert months -> radians
-#    conv <- 2*pi/12
-#    
-#    # find circular mean, where 1 is January and 0 is December.
-#    dat.mean.1 <- circ.mean(conv*(dat.1))/conv
-#    dat.mean.1 <- (dat.mean.1 + 12) %% 12
-#    dat.mean.2 <- circ.mean(conv*(dat.2))/conv
-#    dat.mean.2 <- (dat.mean.2 + 12) %% 12
-#    
-#    # create 1000 bootstrap samples
-#    #resamples <- lapply(1:1000, function(i)sample(dat, replace = T))
-#    
-#    # function for circular mean
-#    circ.bootstrap <-function(data.frame) {
-#        dat.mean <- circ.mean(conv*(data.frame))/conv
-#        dat.mean <- (dat.mean + 12) %% 12
-#        return(dat.mean)
-#    }
-#    
-#    # calculate COM for each bootstrap sample
-#    #set.seed(123)
-#    #COM.bootstrap <- (sapply(resamples, circ.bootstrap))
-#    #COM.bootstrap.5 <- sort(COM.bootstrap)[25]
-#    #COM.bootstrap.95 <- sort(COM.bootstrap)[975]
-#    
-#    # calculate bootstrap std. error
-#    #std.error <- sqrt(var(COM.bootstrap))
-#   
-#   # compile information for output of function
-#    #dat.frame <- c(age.selected,sex.selected,dat.mean,COM.bootstrap.5,COM.bootstrap.95)
-#    dat.frame <- data.frame(age=as.integer(age.selected),sex=as.integer(sex.selected),COM.period.1=dat.mean.1,COM.period.2=dat.mean.2)
-#    
-#    return(dat.frame)
-#}
-
-
-
+mapply(circular.age.mean.split.1, age.selected=age.arg,sex.selected=sex.arg)
+mapply(circular.age.mean.split.2, age.selected=age.arg,sex.selected=sex.arg)
