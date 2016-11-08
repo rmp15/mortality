@@ -5,6 +5,7 @@ args <- commandArgs(trailingOnly=TRUE)
 year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 num.sim <- as.numeric(args[3])
+sig.arg <- as.numeric(args[4])
 
 require(WaveletComp)
 
