@@ -135,38 +135,28 @@ theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.g
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
 
-# 2. STATE
-
-# load state data
-file.loc.state <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/state/")
-dat.state <- readRDS(paste0(file.loc.state,'com_state_values_',year.start.arg,'-',year.end.arg))
-
-# round com data for each state
-dat.state$COM.entire.round <- round(dat.state$COM.entire)
-dat.state$COM.entire.round <- ifelse(dat.state$COM.entire.round==0,12,dat.state$COM.entire.round)
-dat.state$COM.entire.period.1.round <- round(dat.state$COM.period.1)
-dat.state$COM.entire.period.1.round <- ifelse(dat.state$COM.entire.period.1.round==0,12,dat.state$COM.entire.period.1.round)
-dat.state$COM.entire.period.2.round <- round(dat.state$COM.period.2)
-dat.state$COM.entire.period.2.round <- ifelse(dat.state$COM.entire.period.2.round==0,12,dat.state$COM.entire.period.2.round)
-
-# plot first period COM against second period COM
-pdf(paste0(file.loc.state,'com_state_comparison_xy_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(data=dat.state) +
-geom_jitter(aes(x=COM.period.1,y=COM.period.2,color=as.factor(sex)),width = 10) +
-geom_abline(linetype=2,intercept=0,slope=1) +
-xlab(paste0('COM during ',min(year.group.1),'-',max(year.group.1))) +
-ylab(paste0('COM during ',min(year.group.2),'-',max(year.group.2))) +
-#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(2,"RdYlBu")[c(1,11,12)]))(3),guide = guide_legend(title = 'Gender'),labels=sex.lookup) +
-ggtitle(paste0('COM state comparison between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
-theme_bw()
-dev.off()
-
 ###############################################################
 # PREPARING MAP
 ###############################################################
 
 # for theme_map
-devtools::source_gist("33baa3a79c5cfef0f6df")
+#devtools::source_gist("33baa3a79c5cfef0f6df")
+theme_map <- function(base_size=9, base_family=""){
+    require(grid)
+    theme_bw(base_size=base_size,base_family=base_family) %+replace%
+    theme(axis.line=element_blank(),
+    axis.text=element_blank(),
+    axis.ticks=element_blank(),
+    axis.title=element_blank(),
+    panel.background=element_blank(),
+    panel.border=element_blank(),
+    panel.grid=element_blank(),
+    panel.margin=unit(0,"lines"),
+    plot.background=element_blank(),
+    legend.justification = c(0,0),
+    legend.position = c(0,0)
+    )
+}
 
 # load shapefile
 us <- readOGR(dsn="../../data/shapefiles",layer="states")
@@ -214,6 +204,87 @@ shapefile.data$climate_region <- c('Northwest','Northern Rockies and Plains','No
 # merge selected data to map dataframe for colouring of ggplot
 USA.df <- merge(map, shapefile.data, by='id')
 USA.df$STATE_FIPS <- as.integer(as.character(USA.df$STATE_FIPS))
+
+# 2. REGION
+
+# load region data
+file.loc.region <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/region/")
+dat.state <- readRDS(paste0(file.loc.region,'values/combined_results/com_regional_values_method_2_entire_',year.start.arg,'_',year.end.arg))
+
+# round com data for each region
+dat.state$COM.entire.round <- round(dat.state$COM.mean)
+dat.state$COM.entire.round <- ifelse(dat.state$COM.entire.round==0,12,dat.state$COM.entire.round)
+
+# fix climate region names
+dat.state$climate_region <- gsub('_',' ',dat.state$region)
+
+###############################################################
+# COM MAPS
+###############################################################
+
+# merge selected data to map dataframe for colouring of ggplot
+
+dat.state.map <- merge(USA.df,dat.state,by='climate_region')
+dat.state.map <- merge(dat.state.map, age.code, by ='age')
+dat.state.map <- with(dat.state.map, dat.state.map[order(sex,age,DRAWSEQ,order),])
+
+# make sure the age groups are in the correct order for plotting
+dat.state.map$age.print <- with(dat.state.map,reorder(age.print,age))
+
+# ROUNDED
+# set colour scheme for months map
+map.climate.colour <- colorRampPalette(rev(brewer.pal(12,"Accent")[c(1:3,5,6)]))(12)
+
+# 1. map of average wavelet power at 12 months for entire period
+
+# function to plot
+plot.function.state.entire.round <- function(sex.sel) {
+    
+    print(ggplot(data=subset(dat.state.map,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=as.factor(COM.entire.round)),color='black',size=0.01) +
+    scale_fill_manual(values=map.climate.colour,labels=month.short,guide = guide_legend(title = 'Month')) +
+    #scale_fill_brewer(palette='Spectral', 'month') +
+    facet_wrap(~age.print) +
+    xlab('') +
+    ylab('') +
+    ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
+    theme_map() +
+    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+pdf(paste0(file.loc.region,'com_region_map_men_rounded_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.function.state.entire.round(1)
+dev.off()
+
+pdf(paste0(file.loc.region,'com_region_map_women_rounded_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.function.state.entire.round(2)
+dev.off()
+
+# 3. STATE
+
+# load state data
+file.loc.state <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/state/")
+dat.state <- readRDS(paste0(file.loc.state,'com_state_values_',year.start.arg,'-',year.end.arg))
+
+# round com data for each state
+dat.state$COM.entire.round <- round(dat.state$COM.entire)
+dat.state$COM.entire.round <- ifelse(dat.state$COM.entire.round==0,12,dat.state$COM.entire.round)
+dat.state$COM.entire.period.1.round <- round(dat.state$COM.period.1)
+dat.state$COM.entire.period.1.round <- ifelse(dat.state$COM.entire.period.1.round==0,12,dat.state$COM.entire.period.1.round)
+dat.state$COM.entire.period.2.round <- round(dat.state$COM.period.2)
+dat.state$COM.entire.period.2.round <- ifelse(dat.state$COM.entire.period.2.round==0,12,dat.state$COM.entire.period.2.round)
+
+# plot first period COM against second period COM
+pdf(paste0(file.loc.state,'com_state_comparison_xy_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.state) +
+geom_jitter(aes(x=COM.period.1,y=COM.period.2,color=as.factor(sex)),width = 10) +
+geom_abline(linetype=2,intercept=0,slope=1) +
+xlab(paste0('COM during ',min(year.group.1),'-',max(year.group.1))) +
+ylab(paste0('COM during ',min(year.group.2),'-',max(year.group.2))) +
+#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(2,"RdYlBu")[c(1,11,12)]))(3),guide = guide_legend(title = 'Gender'),labels=sex.lookup) +
+ggtitle(paste0('COM state comparison between ',min(year.group.1),'-',max(year.group.1),' and ',min(year.group.2),'-',max(year.group.2))) +
+theme_bw()
+dev.off()
 
 ###############################################################
 # COM MAPS

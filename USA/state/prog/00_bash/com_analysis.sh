@@ -2,6 +2,7 @@
 
 # this script
 # runs a nationalised COM analysis using circular statistics
+# runs a regional COM analysis using circular statistics
 # runs a state COM analysis using circular statistics
 # processes data
 # plots results
@@ -14,6 +15,8 @@ declare -a sexstrings=('male' 'female')
 declare -i start=1982
 declare -i end=2013
 declare country="USA"
+
+declare -a regions=("Northeast" "Northern_Rockies_and_Plains" "Northwest" "Ohio_Valley" "South" "Southeast" "Southwest" "Upper_Midwest" "West")
 
 #################################################
 # 1. NATIONALISED COM ANALYSIS
@@ -35,7 +38,27 @@ echo "starting nationalised COM analysis for ${sexstrings[$sex-1]} $age, years $
 done; done;
 
 #################################################
-# 2. STATE COM ANALYSIS
+# 2. REGION COM ANALYSIS
+#################################################
+
+#for sex in "${sexes[@]}"; do
+
+#for age in "${ages[@]}"; do
+
+#for region in "${regions[@]}"; do
+
+echo "starting regional COM analysis for years $start - $end";
+
+# runs COM analysis
+Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region.R $start $end
+
+# runs anti-COM analysis
+#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national.R $start $end $age $sex
+
+#done; done; done;
+
+#################################################
+# 3. STATE COM ANALYSIS
 #################################################
 
 echo "starting state COM analysis for $country, years $start - $end";
@@ -47,7 +70,7 @@ echo "starting state COM analysis for $country, years $start - $end";
 #Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_state.R $start $end
 
 #################################################
-# 3. PROCESSING COM DATA
+# 4. PROCESSING COM DATA
 #################################################
 
 echo "starting state COM analysis for $country, years $start - $end";
@@ -56,11 +79,10 @@ echo "starting state COM analysis for $country, years $start - $end";
 Rscript ~/git/mortality/USA/state/prog/com/com_data_process.R $start $end
 
 #################################################
-# 3. PLOTTING COM ANALYSIS
+# 5. PLOTTING COM ANALYSIS
 #################################################
 
 echo "plotting COM analysis for $country, years $start - $end";
 
 # plots
-Rscript ~/git/mortality/USA/state/prog/com/com_plot.R $start $end
-
+#Rscript ~/git/mortality/USA/state/prog/com/com_plot.R $start $end

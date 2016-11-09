@@ -22,6 +22,12 @@ file.loc.nat.split <- paste0(file.loc.nat,"split_period/")
 file.loc.nat.output <- paste0(file.loc.nat,"combined_results/")
 ifelse(!dir.exists(file.loc.nat.output), dir.create(file.loc.nat.output,recursive=TRUE), FALSE)
 
+file.loc.reg <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,'/region/values/')
+file.loc.reg.entire <- paste0(file.loc.reg,"entire_period/")
+file.loc.reg.split <- paste0(file.loc.reg,"split_period/")
+file.loc.reg.output <- paste0(file.loc.reg,"combined_results/")
+ifelse(!dir.exists(file.loc.reg.output), dir.create(file.loc.reg.output,recursive=TRUE), FALSE)
+
 # NATIONAL
 # COM
 
@@ -164,3 +170,51 @@ saveRDS(dat.nat,paste0(file.loc.nat.input,'com_inv_com_national_values_method_2_
 
 saveRDS(dat.nat.split,paste0(file.loc.nat.input,'com_inv_com_national_values_method_2_split_',year.start.arg,'_',year.end.arg))
 
+# REGIONAL
+# COM
+
+# load region data
+dat.region <- readRDS(paste0('../../output/mapping_posterior/INLA/type1a/1982_2013/maps/USA_state_data'))
+dat.region$climate_region <- gsub(' ','_',dat.region$climate_region)
+region.lookup <- unique(dat.region$climate_region)
+
+# construct dataset for entire period national analysis method 1
+#dat.entire <- data.frame()
+#for(k in c(1,2)){
+#    for(i in c(0,5,15,25,35,45,55,65,75,85)){
+#        dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_1/com_',sex.lookup[k],'_',i))
+#        dat.entire <- rbind(dat.entire,dat.temp)
+#        #print(dat.entire)
+#    }}
+#saveRDS(dat.entire,paste0(file.loc.nat.output,'com_regional_values_method_1_entire_',year.start.arg,'_',year.end.arg))
+
+# construct dataset for entire period national analysis method 2
+dat.entire <- data.frame()
+for(j in region.lookup) {
+    for(k in c(1,2)){
+        for(i in c(0,5,15,25,35,45,55,65,75,85)){
+            dat.temp <- readRDS(paste0(file.loc.reg.entire,'method_2/com_',tolower(sex.lookup[k]),'_',i,'_',j))
+            dat.entire <- rbind(dat.entire,dat.temp)
+            print(dat.entire)
+}}}
+saveRDS(dat.entire,paste0(file.loc.reg.output,'com_regional_values_method_2_entire_',year.start.arg,'_',year.end.arg))
+
+# construct dataset for first period national analysis method 2
+#dat.entire <- data.frame()
+#for(k in c(1,2)){
+#    for(i in c(0,5,15,25,35,45,55,65,75,85)){
+#        dat.temp <- readRDS(paste0(file.loc.nat.split,'method_2/com_',sex.lookup[k],'_',i,'_part1'))
+#        dat.entire <- rbind(dat.entire,dat.temp)
+        #print(dat.entire)
+#    }}
+#saveRDS(dat.entire,paste0(file.loc.nat.output,'com_regional_values_method_2_split_1_',year.start.arg,'_',year.end.arg))
+
+# construct dataset for first period national analysis method 2
+#dat.entire <- data.frame()
+#for(k in c(1,2)){
+#    for(i in c(0,5,15,25,35,45,55,65,75,85)){
+#        dat.temp <- readRDS(paste0(file.loc.nat.split,'method_2/com_',sex.lookup[k],'_',i,'_part2'))
+#        dat.entire <- rbind(dat.entire,dat.temp)
+        #print(dat.entire)
+#    }}
+#saveRDS(dat.entire,paste0(file.loc.nat.output,'com_regional_values_method_2_split_2_',year.start.arg,'_',year.end.arg))
