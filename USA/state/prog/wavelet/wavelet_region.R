@@ -46,7 +46,7 @@ dat$deaths.pred <- with(dat,pop.adj*rate.adj)
 dat.national <- ddply(dat,.(year,climate_region,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
 
 # adjust if 0 deaths IS THIS OK?
-dat.national$deaths.pred <- ifelse(dat.national$rate.adj==0,1,dat.national$deaths.pred)
+dat.national$deaths.pred <- ifelse(dat.national$deaths.pred==0,1,dat.national$deaths.pred)
 
 dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
 
