@@ -327,13 +327,17 @@ ifelse(!dir.exists(file.loc.nat.sum), dir.create(file.loc.nat.sum), FALSE)
 file.loc.age.sum <- paste0(file.loc,'individual_age_summaries/')
 ifelse(!dir.exists(file.loc.age.sum), dir.create(file.loc.age.sum), FALSE)
 
-# create directory for age specific summaries
+# create directory for month specific summaries
 file.loc.mon.sum <- paste0(file.loc,'month_summaries/')
 ifelse(!dir.exists(file.loc.mon.sum), dir.create(file.loc.mon.sum), FALSE)
 
-# create directory for age specific summaries
+# create directory for map specific summaries
 file.loc.maps <- paste0(file.loc,'maps/')
 ifelse(!dir.exists(file.loc.maps), dir.create(file.loc.maps), FALSE)
+
+# export shapefile.data for reference table
+saveRDS(shapefile.data,paste0(file.loc.maps,'USA_state_data'))
+
 
 ###############################################################
 # ENTIRE PERIOD SUMMARIES FOR ALL AGES 

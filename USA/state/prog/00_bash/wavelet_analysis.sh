@@ -17,14 +17,29 @@ declare country="USA"
 # 1. NATIONALISED WAVELET ANALYSIS
 #################################################
 
+clear
+
 echo "starting nationalised wavelet analysis for $country, years $start - $end";
 
 # runs wavelet analysis
 Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national.R $start $end $numsim
 
 #################################################
-# 2. STATE WAVELET ANALYSIS
+# 2. REGION WAVELET ANALYSIS
 #################################################
+
+clear
+
+echo "starting region wavelet analysis for $country, years $start - $end";
+
+# runs wavelet analysis
+Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_state.R $start $end $numsim
+
+#################################################
+# 3. STATE WAVELET ANALYSIS
+#################################################
+
+clear
 
 echo "starting state wavelet analysis for $country, years $start - $end";
 
@@ -32,19 +47,23 @@ echo "starting state wavelet analysis for $country, years $start - $end";
 Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_state.R $start $end $numsim
 
 #################################################
-# 3. WAVELET DATA PROCESSING
+# 4. WAVELET DATA PROCESSING
 #################################################
+
+clear
 
 echo "starting wavelet analysis data processing for $country, years $start - $end";
 
 # runs wavelet analysis
-Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_data_process.R $start $end $numsim
+#Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_data_process.R $start $end $numsim
 
 #################################################
-# 4. WAVELET DATA PLOTTING
+# 5. WAVELET DATA PLOTTING
 #################################################
+
+clear
 
 echo "starting state wavelet analysis plotting for $country, years $start - $end";
 
 # runs wavelet analysis
-Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_plot.R $start $end $numsim
+#Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_plot.R $start $end $numsim

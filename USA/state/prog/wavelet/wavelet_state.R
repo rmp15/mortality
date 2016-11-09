@@ -23,6 +23,10 @@ state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 # load data and filter results
 dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
 
+# adjust if 0 deaths IS THIS OK?
+dat$deaths.adj <- ifelse(dat$rate.adj==0,1,dat$deaths.adj)
+dat$rate.adj <- with(dat,deaths.adj/pop.adj)
+
 # number of years for split wavelet analysis
 years <- c(year.start.arg:year.end.arg)
 num.years <- year.end.arg - year.start.arg + 1
@@ -31,9 +35,6 @@ halfway <- floor(num.years/2)
 
 year.group.1 <- years[1:halfway]
 year.group.2 <- years[(halfway+1):(num.years)]
-
-# FUNCTIONS REQUIRED
-# 4. sexes separately with all states on one page
 
 # function to plot state wavelet analysis for single sex
 plot.wavelet.state <- function(fips.selected,sex.selected,age.selected) {
@@ -84,6 +85,7 @@ plot.wavelet.state <- function(fips.selected,sex.selected,age.selected) {
     legend.params = list(lab = "wavelet power levels"),
     periodlab = "periods (months)", show.date = T,timelab = "",
     graphics.reset = F,
+    plot.ridge = F,
     plot.legend=F)
     #abline(h = log(12)/log(2))
     #mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
@@ -259,14 +261,14 @@ for(i in 1:nrow(age.code)){
 }
 
 # output state wavelet files sex separately split time period
-for(i in 1:nrow(age.code)){
-    pdf(paste0(file.loc,'plots/wavelet_state_',age.code[i,1],'_split_time_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-    mapply(plot.wavelet.state.split,fips.selected=unique(state.lookup$fips),sex.selected=1,age=age.code[i,1])
-    dev.off()
-}
+#for(i in 1:nrow(age.code)){
+#    pdf(paste0(file.loc,'plots/wavelet_state_',age.code[i,1],'_split_time_males_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+#    mapply(plot.wavelet.state.split,fips.selected=unique(state.lookup$fips),sex.selected=1,age=age.code[i,1])
+#    dev.off()
+#}
 
-for(i in 1:nrow(age.code)){
-    pdf(paste0(file.loc,'plots/wavelet_state_',age.code[i,1],'_split_time_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-    mapply(plot.wavelet.state.split,fips.selected=unique(state.lookup$fips),sex.selected=2,age=age.code[i,1])
-    dev.off()
-}
+#for(i in 1:nrow(age.code)){
+#    pdf(paste0(file.loc,'plots/wavelet_state_',age.code[i,1],'_split_time_females_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+#mapply(plot.wavelet.state.split,fips.selected=unique(state.lookup$fips),sex.selected=2,age=age.code[i,1])
+#   dev.off()
+#}
