@@ -236,7 +236,7 @@ dat.mark$region <- gsub(' ','_',dat.mark$region)
 dat.state <- merge(dat.state,dat.mark)
 
 # mark rounded COM with a 0 if missing
-dat.state$test <- ifelse(dat.state$color.test==0,0,dat.state$COM.entire.round)
+dat.state$COM.entire.round <- ifelse(dat.state$color.test==0,0,dat.state$COM.entire.round)
 
 ###############################################################
 # COM MAPS
@@ -254,7 +254,9 @@ dat.state.map$age.print <- with(dat.state.map,reorder(age.print,age))
 # ROUNDED
 
 # set colour scheme for months map
-map.climate.colour <- colorRampPalette(rev(brewer.pal(12,"Paired")[c(1:12)]),rev(brewer.pal(12,"Paired")[c(1:12)]))(12)
+map.climate.colour.1 <- '#FFFFFF'
+map.climate.colour.2 <- colorRampPalette(rev(brewer.pal(12,"Paired")[c(1:12)]))(12)
+map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
 
 # 1. map of average wavelet power at 12 months for entire period
 
@@ -262,8 +264,8 @@ map.climate.colour <- colorRampPalette(rev(brewer.pal(12,"Paired")[c(1:12)]),rev
 plot.function.state.entire.round <- function(sex.sel) {
     
     print(ggplot(data=subset(dat.state.map,sex==sex.sel),aes(x=long,y=lat,group=group)) +
-    geom_polygon(aes(fill=as.factor(COM.entire.round)),color=NA,size=0) +
-    scale_fill_manual(values=map.climate.colour,labels=month.short,drop=FALSE,guide = guide_legend(title = 'Month')) +
+    geom_polygon(aes(fill=as.factor(COM.entire.round)),color='Black',size=0) +
+    scale_fill_manual(aes(drop=FALSE),values=map.climate.colour,labels=c(' ', month.short),drop=FALSE,guide = guide_legend(title = 'Month')) +
     #discrete_scale(drop=FALSE) + 
     facet_wrap(~age.print) +
     xlab('') +
