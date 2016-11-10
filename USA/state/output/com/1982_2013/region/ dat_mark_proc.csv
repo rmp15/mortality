@@ -116,24 +116,24 @@ sex,age,region,color.test
 2,15,Southwest,1
 2,15,South,1
 2,15,Southeast,0
-2,25,Northwest,1
-2,25,Northern Rockies and Plains,1
+2,25,Northwest,0
+2,25,Northern Rockies and Plains,0
 2,25,Northeast,1
-2,25,Upper Midwest,1
-2,25,Ohio Valley,1
-2,25,West,1
-2,25,Southwest,1
-2,25,South,1
-2,25,Southeast,1
-2,35,Northwest,0
-2,35,Northern Rockies and Plains,0
-2,35,Northeast,0
-2,35,Upper Midwest,0
-2,35,Ohio Valley,0
-2,35,West,0
-2,35,Southwest,0
-2,35,South,0
-2,35,Southeast,0
+2,25,Upper Midwest,0
+2,25,Ohio Valley,0
+2,25,West,0
+2,25,Southwest,0
+2,25,South,0
+2,25,Southeast,0
+2,35,Northwest,1
+2,35,Northern Rockies and Plains,1
+2,35,Northeast,1
+2,35,Upper Midwest,1
+2,35,Ohio Valley,1
+2,35,West,1
+2,35,Southwest,1
+2,35,South,1
+2,35,Southeast,1
 2,45,Northwest,1
 2,45,Northern Rockies and Plains,0
 2,45,Northeast,1
