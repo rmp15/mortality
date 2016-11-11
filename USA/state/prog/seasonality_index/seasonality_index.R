@@ -214,22 +214,25 @@ dev.off()
 # RATIO OF MAX/MIN MORTALITY RATE OVER TIME BY STATE FIXED OVER PERIOD
 ######################################################################
 
-# 0. comparison of start and end values by 
+# 0. comparison of start and end values
+
+age.colours <- c('#00ff00','#00cc00','#009900','#006600','#003300','#ff0000','#cc0000','#990000','#660000','#330000')
 
 # plot coefficient of seasonality for each age nationally at start and end of period
 plot.function.diff.seas <- function() {
 
-	lin.reg.grad$shape.code <- ifelse(lin.reg.grad$sex==1,77,87)
+	lin.reg.grad$shape.code <- ifelse(lin.reg.grad$sex==1,3,4)
 	lin.reg.grad$shape.code <- lin.reg.grad$shape.code
 
-    	print(ggplot() +
-	scale_shape_identity() + 
+    print(ggplot() +
+    scale_shape_identity() +
 	geom_point(data=subset(lin.reg.grad,sex==1|2),aes(shape=shape.code, color=as.factor(age),x=start.value,y=end.value),size=6) +
 	geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
     	xlab('Percentage excess between max/min death rates at start of period') +
    	ylab('Percentage excess between max/min death rates at end of period') +
-    	scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"Dark2")[c(1:8)]))(length  (unique(dat.max.min$age))),guide = guide_legend(title = 'Age group')) +
-    	theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),values=age.colours,guide = guide_legend(title = 'Age group')) +
+    #scale_shape_manual(values=c(3,4)) +
+    theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
     panel.background = element_blank(), axis.line = element_line(colour = "black"),
     rect = element_blank())
 	)

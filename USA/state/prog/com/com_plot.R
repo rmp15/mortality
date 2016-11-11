@@ -53,28 +53,8 @@ dat.nat <- subset(dat.nat,!(age==35 & sex=='Men'))
 dat.nat <- subset(dat.nat,!(age==5 & sex=='Women'))
 dat.nat <- subset(dat.nat,!(age==25 & sex=='Women'))
 
-
 # load split national data
 dat.nat.split <- readRDS(paste0(file.loc.nat.input,'com_inv_com_national_values_method_2_split_',year.start.arg,'_',year.end.arg))
-
-# entire period com plot
-pdf(paste0(file.loc.nat.output,'USA_COM_total_axis_swapped_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-ggplot() +
-geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM.mean,size=size),fill='red',shape=21) +
-geom_point(data=subset(dat.nat,type=='min'),aes(y=COM.mean,x=factor(age),size=size),fill='green',shape=21) +
-geom_hline(aes(linetype=2),linetype=2, yintercept = 0:12, alpha=0.5) +
-geom_vline(aes(linetype=2),linetype=2, xintercept = 1:10) +
-#geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
-ylab('Month') +
-xlab('Age group') +
-scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
-scale_x_discrete(labels=age.print) +
-#xlim(1,12) +
-facet_wrap(~sex, ncol=1) +
-scale_size(guide='none') +
-theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
-dev.off()
 
 # entire period com plot v1
 pdf(paste0(file.loc.nat.output,'USA_COM_total_axis_swapped_v1_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
@@ -273,6 +253,10 @@ dat.state.map <- merge(USA.df,dat.state,by='climate_region')
 dat.state.map <- merge(dat.state.map, age.code, by ='age')
 dat.state.map <- with(dat.state.map, dat.state.map[order(sex,age,DRAWSEQ,order),])
 
+# keep all months in legend
+dat.state.map$test <- as.factor(as.character(dat.state.map$COM.entire.round))
+
+
 # make sure the age groups are in the correct order for plotting
 dat.state.map$age.print <- with(dat.state.map,reorder(age.print,age))
 
@@ -280,7 +264,10 @@ dat.state.map$age.print <- with(dat.state.map,reorder(age.print,age))
 
 # set colour scheme for months map
 map.climate.colour.1 <- '#FFFFFF'
-map.climate.colour.2 <- colorRampPalette(rev(brewer.pal(12,"Paired")[c(1:12)]))(12)
+#map.climate.colour.2 <- colorRampPalette(rev(brewer.pal(12,"Paired")[c(1:12)]))(12)
+map.climate.colour.2 <- c('#000066','#0000FF','#B2B2FF','#ff7f7f','#ff0000','#990000')
+map.climate.colour.3 <- c('#330f53','#551A8b','#9975B9','#F4A460','#AA7243','#7A5230')
+map.climate.colour.2 <- c(map.climate.colour.2,rev(map.climate.colour.3))
 map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
 
 # 1. map of average wavelet power at 12 months for entire period
@@ -289,9 +276,8 @@ map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
 plot.function.state.entire.round <- function(sex.sel) {
     
     print(ggplot(data=subset(dat.state.map,sex==sex.sel),aes(x=long,y=lat,group=group)) +
-    geom_polygon(aes(fill=as.factor(COM.entire.round)),color='Black',size=0) +
-    scale_fill_manual(aes(drop=FALSE),values=map.climate.colour,labels=c(' ', month.short),drop=FALSE,guide = guide_legend(title = 'Month')) +
-    #discrete_scale(drop=FALSE) + 
+    geom_polygon(aes(fill=test),color='Black',size=0) +
+    scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(title = 'Month')) +
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +

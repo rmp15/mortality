@@ -90,12 +90,12 @@ sex,age,region,color.test
 1,85,South,1
 1,85,Southeast,1
 2,0,Northwest,1
-2,0,Northern Rockies and Plains,0
+2,0,Northern Rockies and Plains,1
 2,0,Northeast,1
 2,0,Upper Midwest,1
 2,0,Ohio Valley,1
 2,0,West,1
-2,0,Southwest,0
+2,0,Southwest,1
 2,0,South,1
 2,0,Southeast,1
 2,5,Northwest,0
