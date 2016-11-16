@@ -244,18 +244,26 @@ USA.df$STATE_FIPS <- as.integer(as.character(USA.df$STATE_FIPS))
 # load region data
 file.loc.region <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/region/")
 dat.state <- readRDS(paste0(file.loc.region,'values/combined_results/com_regional_values_method_2_entire_',year.start.arg,'_',year.end.arg))
+dat.state.inv <- readRDS(paste0(file.loc.region,'values/combined_results/anti_com_regional_values_method_2_entire_',year.start.arg,'_',year.end.arg))
+
 
 # fix region names
 dat.state$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state$region)
 dat.state$region <- gsub('Ohio_Valley', 'East_North_Central', dat.state$region)
+dat.state.inv$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state$region)
+dat.state.inv$region <- gsub('Ohio_Valley', 'East_North_Central', dat.state$region)
 
 # round com data for each region
 dat.state$COM.entire.round <- round(dat.state$COM.mean)
 dat.state$COM.entire.round <- ifelse(dat.state$COM.entire.round==0,12,dat.state$COM.entire.round)
+dat.state.inv$COM.entire.round <- round(dat.state.inv$COM.mean)
+dat.state.inv$COM.entire.round <- ifelse(dat.state.inv$COM.entire.round==0,12,dat.state.inv$COM.entire.round)
 
 # fix climate region names
 #dat.state$climate_region <- dat.state$region
 dat.state$climate_region <- gsub('_',' ',dat.state$region)
+dat.state.inv$climate_region <- gsub('_',' ',dat.state.inv$region)
+
 
 # region lookup
 region.lookup <- unique(dat.state$climate_region)
@@ -277,9 +285,11 @@ dat.mark$region <- gsub(' ','_',dat.mark$region)
 
 # merge colour marker with state region COM data
 dat.state <- merge(dat.state,dat.mark)
+dat.state.inv <- merge(dat.state.inv,dat.mark)
 
 # mark rounded COM with a 0 if missing
 dat.state$COM.entire.round <- ifelse(dat.state$color.test==0,0,dat.state$COM.entire.round)
+dat.state.inv$COM.entire.round <- ifelse(dat.state.inv$color.test==0,0,dat.state.inv$COM.entire.round)
 
 ###############################################################
 # COM MAPS
@@ -291,11 +301,18 @@ dat.state.map <- merge(USA.df,dat.state,by='climate_region')
 dat.state.map <- merge(dat.state.map, age.code, by ='age')
 dat.state.map <- with(dat.state.map, dat.state.map[order(sex,age,DRAWSEQ,order),])
 
+dat.state.map.inv <- merge(USA.df,dat.state.inv,by='climate_region')
+dat.state.map.inv <- merge(dat.state.map.inv, age.code, by ='age')
+dat.state.map.inv <- with(dat.state.map.inv, dat.state.map.inv[order(sex,age,DRAWSEQ,order),])
+
 # keep all months in legend
 dat.state.map$test <- as.factor(as.character(dat.state.map$COM.entire.round))
+dat.state.map.inv$test <- as.factor(as.character(dat.state.map.inv$COM.entire.round))
 
 # make sure the age groups are in the correct order for plotting
 dat.state.map$age.print <- with(dat.state.map,reorder(age.print,age))
+dat.state.map.inv$age.print <- with(dat.state.map.inv,reorder(age.print,age))
+
 
 # ROUNDED
 
@@ -307,7 +324,7 @@ map.climate.colour.3 <- c('#330f53','#551A8b','#9975B9','#F4A460','#AA7243','#7A
 map.climate.colour.2 <- c(map.climate.colour.2,rev(map.climate.colour.3))
 map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
 
-# 1. map of average wavelet power at 12 months for entire period
+# 1. map of com for entire period
 
 # function to plot
 plot.function.state.entire.round <- function(sex.sel) {
@@ -330,6 +347,28 @@ dev.off()
 
 pdf(paste0(file.loc.region,'com_region_map_women_rounded_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 plot.function.state.entire.round(2)
+dev.off()
+
+plot.function.state.entire.round.inv <- function(sex.sel) {
+    
+    print(ggplot(data=subset(dat.state.map.inv,sex==sex.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=test),linetype=2,size=0) +
+    geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
+    scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(title = 'Month')) +
+    facet_wrap(~age.print) +
+    xlab('') +
+    ylab('') +
+    ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
+    theme_map() +
+    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+}
+
+pdf(paste0(file.loc.region,'anti_com_region_map_men_rounded_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.function.state.entire.round.inv(1)
+dev.off()
+
+pdf(paste0(file.loc.region,'anti_com_region_map_women_rounded_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.function.state.entire.round.inv(2)
 dev.off()
 
 # 3. STATE

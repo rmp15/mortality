@@ -53,7 +53,7 @@ echo "starting regional COM analysis for years $start - $end";
 #Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region.R $start $end
 
 # runs anti-COM analysis
-#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national.R $start $end $age $sex
+#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national.R $start $end
 
 #done; done; done;
 
