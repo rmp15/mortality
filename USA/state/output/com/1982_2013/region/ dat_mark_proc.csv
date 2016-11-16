@@ -1,180 +1,180 @@
 sex,age,region,color.test
 1,0,Northwest,1
-1,0,Northern Rockies and Plains,1
+1,0,West_North_Central,1
 1,0,Northeast,1
 1,0,Upper Midwest,1
-1,0,Ohio Valley,1
+1,0,East_North_Central,1
 1,0,West,1
 1,0,Southwest,1
 1,0,South,1
 1,0,Southeast,1
 1,5,Northwest,1
-1,5,Northern Rockies and Plains,1
+1,5,West_North_Central,1
 1,5,Northeast,1
 1,5,Upper Midwest,1
-1,5,Ohio Valley,1
+1,5,East_North_Central,1
 1,5,West,1
 1,5,Southwest,1
 1,5,South,1
 1,5,Southeast,1
 1,15,Northwest,1
-1,15,Northern Rockies and Plains,1
+1,15,West_North_Central,1
 1,15,Northeast,1
 1,15,Upper Midwest,1
-1,15,Ohio Valley,1
+1,15,East_North_Central,1
 1,15,West,1
 1,15,Southwest,1
 1,15,South,1
 1,15,Southeast,1
 1,25,Northwest,1
-1,25,Northern Rockies and Plains,1
+1,25,West_North_Central,1
 1,25,Northeast,1
 1,25,Upper Midwest,1
-1,25,Ohio Valley,1
+1,25,East_North_Central,1
 1,25,West,1
 1,25,Southwest,1
 1,25,South,1
 1,25,Southeast,1
 1,35,Northwest,0
-1,35,Northern Rockies and Plains,0
+1,35,West_North_Central,0
 1,35,Northeast,0
 1,35,Upper Midwest,0
-1,35,Ohio Valley,0
+1,35,East_North_Central,0
 1,35,West,0
 1,35,Southwest,0
 1,35,South,0
 1,35,Southeast,0
 1,45,Northwest,0
-1,45,Northern Rockies and Plains,1
+1,45,West_North_Central,1
 1,45,Northeast,1
 1,45,Upper Midwest,1
-1,45,Ohio Valley,1
+1,45,East_North_Central,1
 1,45,West,1
 1,45,Southwest,1
 1,45,South,1
 1,45,Southeast,1
 1,55,Northwest,1
-1,55,Northern Rockies and Plains,1
+1,55,West_North_Central,1
 1,55,Northeast,1
 1,55,Upper Midwest,1
-1,55,Ohio Valley,1
+1,55,East_North_Central,1
 1,55,West,1
 1,55,Southwest,1
 1,55,South,1
 1,55,Southeast,1
 1,65,Northwest,1
-1,65,Northern Rockies and Plains,1
+1,65,West_North_Central,1
 1,65,Northeast,1
 1,65,Upper Midwest,1
-1,65,Ohio Valley,1
+1,65,East_North_Central,1
 1,65,West,1
 1,65,Southwest,1
 1,65,South,1
 1,65,Southeast,1
 1,75,Northwest,1
-1,75,Northern Rockies and Plains,1
+1,75,West_North_Central,1
 1,75,Northeast,1
 1,75,Upper Midwest,1
-1,75,Ohio Valley,1
+1,75,East_North_Central,1
 1,75,West,1
 1,75,Southwest,1
 1,75,South,1
 1,75,Southeast,1
 1,85,Northwest,1
-1,85,Northern Rockies and Plains,1
+1,85,West_North_Central,1
 1,85,Northeast,1
 1,85,Upper Midwest,1
-1,85,Ohio Valley,1
+1,85,East_North_Central,1
 1,85,West,1
 1,85,Southwest,1
 1,85,South,1
 1,85,Southeast,1
 2,0,Northwest,1
-2,0,Northern Rockies and Plains,1
+2,0,West_North_Central,1
 2,0,Northeast,1
 2,0,Upper Midwest,1
-2,0,Ohio Valley,1
+2,0,East_North_Central,1
 2,0,West,1
 2,0,Southwest,1
 2,0,South,1
 2,0,Southeast,1
 2,5,Northwest,0
-2,5,Northern Rockies and Plains,0
+2,5,West_North_Central,0
 2,5,Northeast,0
 2,5,Upper Midwest,0
-2,5,Ohio Valley,0
+2,5,East_North_Central,0
 2,5,West,0
 2,5,Southwest,0
 2,5,South,0
 2,5,Southeast,0
 2,15,Northwest,1
-2,15,Northern Rockies and Plains,1
+2,15,West_North_Central,1
 2,15,Northeast,1
 2,15,Upper Midwest,1
-2,15,Ohio Valley,1
+2,15,East_North_Central,1
 2,15,West,1
 2,15,Southwest,1
 2,15,South,1
 2,15,Southeast,0
 2,25,Northwest,0
-2,25,Northern Rockies and Plains,0
+2,25,West_North_Central,0
 2,25,Northeast,1
 2,25,Upper Midwest,0
-2,25,Ohio Valley,0
+2,25,East_North_Central,0
 2,25,West,0
 2,25,Southwest,0
 2,25,South,0
 2,25,Southeast,0
 2,35,Northwest,1
-2,35,Northern Rockies and Plains,1
+2,35,West_North_Central,1
 2,35,Northeast,1
 2,35,Upper Midwest,1
-2,35,Ohio Valley,1
+2,35,East_North_Central,1
 2,35,West,1
 2,35,Southwest,1
 2,35,South,1
 2,35,Southeast,1
 2,45,Northwest,1
-2,45,Northern Rockies and Plains,0
+2,45,West_North_Central,0
 2,45,Northeast,1
 2,45,Upper Midwest,1
-2,45,Ohio Valley,1
+2,45,East_North_Central,1
 2,45,West,1
 2,45,Southwest,1
 2,45,South,1
 2,45,Southeast,1
 2,55,Northwest,1
-2,55,Northern Rockies and Plains,1
+2,55,West_North_Central,1
 2,55,Northeast,1
 2,55,Upper Midwest,1
-2,55,Ohio Valley,1
+2,55,East_North_Central,1
 2,55,West,1
 2,55,Southwest,1
 2,55,South,1
 2,55,Southeast,1
 2,65,Northwest,1
-2,65,Northern Rockies and Plains,1
+2,65,West_North_Central,1
 2,65,Northeast,1
 2,65,Upper Midwest,1
-2,65,Ohio Valley,1
+2,65,East_North_Central,1
 2,65,West,1
 2,65,Southwest,1
 2,65,South,1
 2,65,Southeast,1
 2,75,Northwest,1
-2,75,Northern Rockies and Plains,1
+2,75,West_North_Central,1
 2,75,Northeast,1
 2,75,Upper Midwest,1
-2,75,Ohio Valley,1
+2,75,East_North_Central,1
 2,75,West,1
 2,75,Southwest,1
 2,75,South,1
 2,75,Southeast,1
 2,85,Northwest,1
-2,85,Northern Rockies and Plains,1
+2,85,West_North_Central,1
 2,85,Northeast,1
 2,85,Upper Midwest,1
-2,85,Ohio Valley,1
+2,85,East_North_Central,1
 2,85,West,1
 2,85,Southwest,1
 2,85,South,1

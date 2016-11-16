@@ -231,9 +231,9 @@ map.superregions <- fortify(superregions)
 
 # plot superregions
 # NEED TO IDENTIFY HOW TO UNIQUELY IDENTIFY SUPERREGIONS
-ggplot() +
+#ggplot() +
 #geom_polygon(data=map,aes(x=long,y=lat,group=group),fill='white',color='Black',size=1) +
-geom_polygon(data=subset(map.superregions,id2=1),aes(x=long,y=lat,group=group),alpha=0,fill='Red',color='Red',size=1.2)
+#geom_polygon(data=subset(map.superregions,id2=1),aes(x=long,y=lat,group=group),alpha=0,fill='Red',color='Red',size=1.2)
 
 # merge selected data to map dataframe for colouring of ggplot
 USA.df <- merge(map, shapefile.data, by='id')
@@ -245,11 +245,16 @@ USA.df$STATE_FIPS <- as.integer(as.character(USA.df$STATE_FIPS))
 file.loc.region <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/region/")
 dat.state <- readRDS(paste0(file.loc.region,'values/combined_results/com_regional_values_method_2_entire_',year.start.arg,'_',year.end.arg))
 
+# fix region names
+dat.state$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state$region)
+dat.state$region <- gsub('Ohio_Valley', 'East_North_Central', dat.state$region)
+
 # round com data for each region
 dat.state$COM.entire.round <- round(dat.state$COM.mean)
 dat.state$COM.entire.round <- ifelse(dat.state$COM.entire.round==0,12,dat.state$COM.entire.round)
 
 # fix climate region names
+#dat.state$climate_region <- dat.state$region
 dat.state$climate_region <- gsub('_',' ',dat.state$region)
 
 # region lookup
@@ -265,6 +270,10 @@ write.csv(dat.mark,paste(file.loc.region,'dat_mark_unproc.csv'))
 # load csv TEMP
 dat.mark <- read.csv(paste(file.loc.region,'dat_mark_proc.csv'))
 dat.mark$region <- gsub(' ','_',dat.mark$region)
+
+# fix region names
+#dat.mark$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state$region)
+#dat.mark$region <- gsub('Ohio_Valley', 'East_North_Central', dat.state$region)
 
 # merge colour marker with state region COM data
 dat.state <- merge(dat.state,dat.mark)
@@ -285,7 +294,6 @@ dat.state.map <- with(dat.state.map, dat.state.map[order(sex,age,DRAWSEQ,order),
 # keep all months in legend
 dat.state.map$test <- as.factor(as.character(dat.state.map$COM.entire.round))
 
-
 # make sure the age groups are in the correct order for plotting
 dat.state.map$age.print <- with(dat.state.map,reorder(age.print,age))
 
@@ -294,7 +302,7 @@ dat.state.map$age.print <- with(dat.state.map,reorder(age.print,age))
 # set colour scheme for months map
 map.climate.colour.1 <- '#FFFFFF'
 #map.climate.colour.2 <- colorRampPalette(rev(brewer.pal(12,"Paired")[c(1:12)]))(12)
-map.climate.colour.2 <- c('#000066','#0000FF','#B2B2FF','#ff7f7f','#ff0000','#990000')
+map.climate.colour.2 <- c('#0000CC','#0000FF','#B2B2FF','#ff7f7f','#ff0000','#990000')
 map.climate.colour.3 <- c('#330f53','#551A8b','#9975B9','#F4A460','#AA7243','#7A5230')
 map.climate.colour.2 <- c(map.climate.colour.2,rev(map.climate.colour.3))
 map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
@@ -305,7 +313,8 @@ map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
 plot.function.state.entire.round <- function(sex.sel) {
     
     print(ggplot(data=subset(dat.state.map,sex==sex.sel),aes(x=long,y=lat,group=group)) +
-    geom_polygon(aes(fill=test),color='Black',size=0) +
+    geom_polygon(aes(fill=test),linetype=2,size=0) +
+    geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
     scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(title = 'Month')) +
     facet_wrap(~age.print) +
     xlab('') +

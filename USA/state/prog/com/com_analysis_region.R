@@ -57,7 +57,7 @@ region.lookup <- unique(dat.national$climate_region)
 # function to find centre of mass of seasonality
 circular.age.mean <- function(age.selected,sex.selected,region.selected) {
 
-print(paste0('Working on national COM method 1 for ',sex.lookup[sex.selected],' ',age.selected,' ',region.selected))
+print(paste0('Working on regional COM method 1 for ',sex.lookup[sex.selected],' ',age.selected,' ',region.selected))
 
 # take dates as subset
 dat <- subset(dat.national,age==age.selected & sex==sex.selected & climate_region==region.selected)
@@ -104,7 +104,7 @@ return(dat.frame)
 # function to find centre of mass of seasonality
 circular.age.mean.2 <- function(age.selected,sex.selected,region.selected) {
 
-print(paste0('Working on national COM method 2 for ',sex.lookup[sex.selected],' ',age.selected,' ',region.selected))
+print(paste0('Working on regional COM method 2 for ',sex.lookup[sex.selected],' ',age.selected,' ',region.selected))
 
 # take dates as subset
 dat.temp <- subset(dat.national,age==age.selected & sex==sex.selected & climate_region==region.selected)
