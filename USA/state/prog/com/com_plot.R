@@ -247,7 +247,7 @@ for(i in c(0,5,15,25,35,45,55,65,75,85)) {
     dummy$sex <- j
     dat.super.temp <- rbind(dat.super.temp,dummy)
 }}
-
+dat.super.temp.inv <- dat.super.temp
 
 # plot superregions
 ggplot() +
@@ -320,6 +320,9 @@ dat.super.temp <- merge(dat.super.temp,dat.state,by=c('sex','age','region'))
 dat.super.temp$month <- dat.super.temp$COM.entire.round
 dat.super.temp <- merge(dat.super.temp,dat.temp.super,by=c('month','region'))
 
+dat.super.temp.inv <- merge(dat.super.temp.inv,dat.state.inv,by=c('sex','age','region'))
+dat.super.temp.inv$month <- dat.super.temp.inv$COM.entire.round
+dat.super.temp.inv <- merge(dat.super.temp.inv,dat.temp.super,by=c('month','region'))
 
 # merge selected data to map dataframe for colouring of ggplot
 
@@ -331,8 +334,8 @@ dat.state.map <- with(dat.state.map, dat.state.map[order(sex,age,DRAWSEQ,order),
 
 dat.state.map.inv <- merge(USA.df,dat.state.inv,by='climate_region')
 dat.state.map.inv <- merge(dat.state.map.inv, age.code, by ='age')
-#dat.state.map.inv <- merge(dat.state.map.inv,dat.temp.super,by.x=c('COM.entire.round','region'),by.y=c('month','region'),all.x=TRUE)
-#dat.state.map <- merge(dat.state.map.inv,superregion.coords[,c('long.txt','lat.txt','region')],by.x=c('region'),by.y=c('region'),all.x=1)
+dat.state.map.inv <- merge(dat.state.map.inv,dat.temp.super,by.x=c('COM.entire.round','region'),by.y=c('month','region'),all.x=TRUE)
+dat.state.map <- merge(dat.state.map.inv,superregion.coords[,c('long.txt','lat.txt','region')],by.x=c('region'),by.y=c('region'),all.x=1)
 dat.state.map.inv <- with(dat.state.map.inv, dat.state.map.inv[order(sex,age,DRAWSEQ,order),])
 
 # keep all months in legend
@@ -348,7 +351,6 @@ dat.super.temp$age.print <- with(dat.super.temp,reorder(age.print,age))
 
 # set colour scheme for months map
 map.climate.colour.1 <- '#FFFFFF'
-#map.climate.colour.2 <- colorRampPalette(rev(brewer.pal(12,"Paired")[c(1:12)]))(12)
 map.climate.colour.2 <- c('#0000CC','#0000FF','#B2B2FF','#ff7f7f','#ff0000','#990000')
 map.climate.colour.3 <- c('#330f53','#551A8b','#9975B9','#F4A460','#AA7243','#7A5230')
 map.climate.colour.2 <- c(map.climate.colour.2,rev(map.climate.colour.3))
@@ -383,10 +385,12 @@ dev.off()
 
 plot.function.state.entire.round.inv <- function(sex.sel) {
     
-    print(ggplot(data=subset(dat.state.map.inv,sex==sex.sel),aes(x=long,y=lat,group=group)) +
-    geom_polygon(aes(fill=test),linetype=2,size=0) +
+    print(ggplot(data=subset(dat.state.map.inv,sex==sex.sel),aes(x=long,y=lat)) +
+    geom_polygon(aes(fill=test,group=group),linetype=2,size=0) +
     geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
     #geom_text(data=superregion.coords,aes(x=long,y=lat,label=id)) +
+    geom_text(data=subset(dat.super.temp.inv,sex==sex.sel),color='white',size=3,aes(x=long.txt,y=lat.txt,label=temp_c)) +
+    geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
     scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(title = 'Month')) +
     facet_wrap(~age.print) +
     xlab('') +
