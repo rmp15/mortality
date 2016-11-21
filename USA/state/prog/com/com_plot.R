@@ -346,6 +346,8 @@ dat.state.map.inv$test <- as.factor(as.character(dat.state.map.inv$COM.entire.ro
 dat.state.map$age.print <- with(dat.state.map,reorder(age.print,age))
 dat.state.map.inv$age.print <- with(dat.state.map.inv,reorder(age.print,age))
 dat.super.temp$age.print <- with(dat.super.temp,reorder(age.print,age))
+dat.super.temp.inv$age.print <- with(dat.super.temp.inv,reorder(age.print,age))
+
 
 # ROUNDED
 
