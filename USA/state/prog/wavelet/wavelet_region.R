@@ -71,6 +71,8 @@ plot.wavelet.region <- function(region.selected,sex.selected,age.selected) {
     my.w <- analyze.wavelet(my.data, "log.rate",
     lowerPeriod=2, upperPeriod=32,
     loess.span = 3/26,
+    #method = 'AR',
+    method = 'white.noise',
     dt= 1, dj = 1/1000,
     make.pval= T, n.sim = num.sim)
     
