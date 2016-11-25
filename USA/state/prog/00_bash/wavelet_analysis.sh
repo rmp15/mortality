@@ -10,7 +10,7 @@ clear
 
 declare -i start=1982
 declare -i end=2013
-declare -i numsim=10
+declare -i numsim=100
 declare country="USA"
 
 #################################################
@@ -22,7 +22,7 @@ clear
 echo "starting nationalised wavelet analysis for $country, years $start - $end";
 
 # runs wavelet analysis
-#Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national.R $start $end $numsim
+Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national.R $start $end $numsim
 
 #################################################
 # 2. REGION WAVELET ANALYSIS
@@ -33,7 +33,7 @@ clear
 echo "starting region wavelet analysis for $country, years $start - $end";
 
 # runs wavelet analysis
-Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_region.R $start $end $numsim
+#Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_region.R $start $end $numsim
 
 #################################################
 # 3. STATE WAVELET ANALYSIS
