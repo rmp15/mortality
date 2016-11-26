@@ -16,7 +16,7 @@ declare -i start=1982
 declare -i end=2013
 declare country="USA"
 
-declare -a regions=("Northeast" "Northern_Rockies_and_Plains" "Northwest" "Ohio_Valley" "South" "Southeast" "Southwest" "Upper_Midwest" "West")
+declare -a regions=("Northeast" "West_North_Central" "Northwest" "Central" "South" "Southeast" "Southwest" "East_North_Central" "West")
 
 #################################################
 # 1. NATIONALISED COM ANALYSIS
@@ -41,21 +41,13 @@ done; done;
 # 2. REGION COM ANALYSIS
 #################################################
 
-#for sex in "${sexes[@]}"; do
-
-#for age in "${ages[@]}"; do
-
-#for region in "${regions[@]}"; do
-
 echo "starting regional COM analysis for years $start - $end";
 
 # runs COM analysis
-#Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region.R $start $end
+Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region.R $start $end
 
 # runs anti-COM analysis
-#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national.R $start $end
-
-#done; done; done;
+#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_region.R $start $end
 
 #################################################
 # 3. STATE COM ANALYSIS
@@ -76,7 +68,7 @@ echo "starting state COM analysis for $country, years $start - $end";
 echo "starting state COM analysis for $country, years $start - $end";
 
 # process COM data
-Rscript ~/git/mortality/USA/state/prog/com/com_data_process.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/com/com_data_process.R $start $end
 
 #################################################
 # 5. PLOTTING COM ANALYSIS
@@ -85,4 +77,4 @@ Rscript ~/git/mortality/USA/state/prog/com/com_data_process.R $start $end
 echo "plotting COM analysis for $country, years $start - $end";
 
 # plots
-Rscript ~/git/mortality/USA/state/prog/com/com_plot.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/com/com_plot.R $start $end

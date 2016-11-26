@@ -41,7 +41,6 @@ dat.national$rate.scaled <- round(1000000*(dat.national$rate.adj))
 dat$deaths.inv <- round((max(dat$deaths.adj) - dat$deaths.adj)/10)
 
 # add max(rate.scaled) - rate.scaled for each age-sex group
-#dat.national$rate.inv <- (max(dat.national$rate.scaled) - dat.national$rate.scaled)
 test <- ddply(dat.national,.(sex,age),summarize,rate.scaled.max=max(rate.scaled))
 dat.national <- merge(dat.national,test)
 dat.national$rate.inv <- dat.national$rate.scaled.max - dat.national$rate.scaled
