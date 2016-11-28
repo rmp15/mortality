@@ -467,7 +467,8 @@ plot.function.state.entire.round <- function(sex.sel) {
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
-    ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
+    ggtitle(paste0(sex.lookup[sex.sel])) +
+    #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
     theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
 }
@@ -492,7 +493,8 @@ plot.function.state.entire.round.inv <- function(sex.sel) {
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
-    ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
+    ggtitle(paste0(sex.lookup[sex.sel])) +
+    #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
     theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
 }
@@ -629,7 +631,8 @@ plot.function.state.entire.round <- function(sex.sel) {
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
-    ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
+    ggtitle(paste0(sex.lookup[sex.sel])) +
+    #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
     theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
 }
@@ -654,7 +657,8 @@ plot.function.state.entire.round.inv <- function(sex.sel) {
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
-    ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
+    ggtitle(paste0(sex.lookup[sex.sel])) +
+    #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
     theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
 }

@@ -238,8 +238,8 @@ plot.function.diff.seas <- function(shape.selected) {
     xlim(c(0,50)) +
     ylim(c(0,50)) +
     scale_shape_manual(values=c(16,shape.selected),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
-    xlab(paste0('Seasonal excess in ',year.start)) +
-    ylab(paste0('Seasonal excess in ',year.end)) +
+    xlab(paste0('Seasonal excess mortality in ',year.start)) +
+    ylab(paste0('Seasonal excess mortality in ',year.end)) +
     #guides(color = guide_legend(order=2),size = guide_legend(order=1)) +
     scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),values=age.colours,guide = guide_legend(title = 'Age group:')) +
     theme(legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"),rect = element_blank())
