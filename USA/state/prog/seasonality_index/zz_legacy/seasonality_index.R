@@ -66,8 +66,6 @@ dat.COM$COM.mean <- ifelse(dat.COM$COM.mean==0,12,dat.COM$COM.mean)
 dat.COM$month <- dat.COM$COM.mean
 levels(dat.COM$sex) <- c(1,2)
 
-# METHOD NOT TAKING ACCCOUNT OF POPULATION
-
 # figure out the ratio of max/min deaths over time with fixed max/min by sex, age, year
 dat.max.min.fixed <- merge(dat.national,dat.COM,by=c('age','sex','month'))
 dat.max.min.fixed <- ddply(dat.max.min.fixed,.(sex,age,year), summarize,rate.max=rate.adj[type=='max'],pop.max=pop.adj[type=='max'],month.max=month[type=='max'],rate.min=rate.adj[type=='min'],pop.min=pop.adj[type=='min'],month.min=month[type=='min'])
@@ -79,6 +77,9 @@ levels(dat.max.min.fixed$sex.long) <- sex.lookup
 
 # add time value that starts at 0
 dat.max.min.fixed$year.centre <- with(dat.max.min.fixed,year-year.start)
+
+# apply Poisson glm with population offsetting
+#dat.pois <- ddply(
 
 # apply linear regression to each group by sex, age, month to find gradient
 lin.reg.grad <- ddply(dat.max.min.fixed, .(sex,age), function(z)coef(lm(percent.change ~ year.centre, data=z)))
@@ -95,49 +96,6 @@ lin.reg.sig$sig.test.5 <- ifelse(lin.reg.sig[,6]<0.05,1,0)
 
 # merge with data about gradients
 lin.reg.grad <- merge(lin.reg.grad,lin.reg.sig,by=c('sex','age'))
-
-# METHOD TAKING ACCCOUNT OF POPULATION
-
-dat.pois <- merge(dat.national,dat.COM,by=c('age','sex','month'))
-dat.pois <- dat.pois[,c('age','sex','year','deaths.pred','pop.adj','type')]
-dat.pois$maxmonth <- ifelse(dat.pois$type=='max',1,0)
-dat.pois <- with(dat.pois,dat.pois[order(age,sex,year,maxmonth),])
-
-# plot to check if desired
-#ggplot() + geom_line(data=subset(dat.pois.summary,sex==1),aes(x=year,y=ratio,color=as.factor(age))
-
-# apply Poisson glm with population offsetting
-#dat.pois.coef <- ddply(dat.pois,.(sex,age,year), function(z)coef(glm(deaths.pred ~ maxmonth + offset(log(pop.adj)),family=poisson,data=z)))
-dat.pois.summary <- ddply(dat.pois,.(sex,age,year), function(z)coef(summary(glm(deaths.pred ~ maxmonth + offset(log(pop.adj)),family=poisson,data=z))))
-
-# generate exponential versions to get back into correct world
-#dat.pois.coef$ratio <- exp(dat.pois.coef$maxmonth)
-dat.pois.summary <- dat.pois.summary[!c(TRUE,FALSE),]
-dat.pois.summary$se <- dat.pois.summary$`Std. Error`
-dat.pois.summary$ratio <- exp(dat.pois.summary$Estimate)
-
-# add time value that starts at 0
-dat.pois.summary$year.centre <- with(dat.pois.summary,year-year.start)
-
-# apply linear regression to each group by sex, age, month to find gradient
-lin.reg.grad.weight  <- ddply(dat.pois.summary, .(sex,age), function(z)coef(lm(ratio ~ year.centre, data=z, weights=1/(se^2))))
-lin.reg.grad.weight$start.value <- lin.reg.grad.weight$`(Intercept)`
-lin.reg.grad.weight$end.value <- with(lin.reg.grad.weight,`(Intercept)`+year.centre*(num.years-1))
-lin.reg.grad.weight$sex.long <- with(lin.reg.grad.weight,as.factor(as.character(sex)))
-levels(lin.reg.grad.weight$sex.long) <- sex.lookup
-
-# obtain significance of slopes
-lin.reg.sig.weight <- ddply(dat.pois.summary, .(sex,age), function(z)coef(summary(lm(ratio ~ year.centre, data=z,weights=1/(se^2)))))
-lin.reg.sig.weight <- lin.reg.sig.weight[!c(TRUE,FALSE),]
-lin.reg.sig.weight$sig.test.10 <- ifelse(lin.reg.sig.weight[,6]<0.10,1,0)
-lin.reg.sig.weight$sig.test.5 <- ifelse(lin.reg.sig.weight[,6]<0.05,1,0)
-
-# merge with data about gradients
-lin.reg.grad.weight <- merge(lin.reg.grad.weight,lin.reg.sig.weight,by=c('sex','age'))
-
-# fix start and end values
-lin.reg.grad.weight$start.value.2 <- with(lin.reg.grad.weight,round(100*(start.value),1)-100)
-lin.reg.grad.weight$end.value.2 <- with(lin.reg.grad.weight,round(100*(end.value),1)-100)
 
 ###############################################################
 # DIRECTORY CREATION
@@ -272,12 +230,10 @@ dev.off()
 # remove com data that doesn't meet wavelet criteria (automate?)
 lin.reg.grad <- subset(lin.reg.grad,!(age==35 & sex==1))
 lin.reg.grad <- subset(lin.reg.grad,!(age==5 & sex==2))
-lin.reg.grad <- subset(lin.reg.grad,!(age==15 & sex==2))
 lin.reg.grad <- subset(lin.reg.grad,!(age==25 & sex==2))
+lin.reg.grad <- subset(lin.reg.grad,!(age==15 & sex==2))
 
 # 0. comparison of start and end values
-
-# METHOD NOT TAKING ACCCOUNT OF POPULATION
 
 age.colours <- c('#00ff00','#00cc00','#009900','#006600','#003300','#ff0000','#cc0000','#990000','#660000','#330000')
 
@@ -367,71 +323,6 @@ pdf(paste0(file.loc,'seasonality_index_change_sig5_',year.start,'_',year.end,'.p
 plot.function.diff.seas.sig.5(17)
 dev.off()
 
-# METHOD TAKING ACCCOUNT OF POPULATION
-
-# remove com data that doesn't meet wavelet criteria (automate?)
-lin.reg.grad.weight <- subset(lin.reg.grad.weight,!(age==35 & sex==1))
-lin.reg.grad.weight <- subset(lin.reg.grad.weight,!(age==5 & sex==2))
-lin.reg.grad.weight <- subset(lin.reg.grad.weight,!(age==25 & sex==2))
-lin.reg.grad.weight <- subset(lin.reg.grad.weight,!(age==15 & sex==2))
-
-# plot coefficient of seasonality for each age nationally at start and end of period with significance
-plot.function.diff.seas.sig.10 <- function(shape.selected) {
-    
-    #lin.reg.grad$shape.code <- ifelse(lin.reg.grad$sex==1,16,1)
-    #lin.reg.grad$shape.code <- as.factor(lin.reg.grad$shape.code)
-    
-    print(ggplot() +
-    geom_point(data=subset(lin.reg.grad.weight,sig.test.10==1),fill='blue',aes(shape=as.factor(sex),x=(start.value.2/100),y=(end.value.2/100)),size=8) +
-    geom_point(data=subset(lin.reg.grad.weight,sex==1|2),aes(shape=as.factor(sex), color=as.factor(age),x=(start.value.2/100),y=(end.value.2/100)),size=6) +
-    geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
-    scale_x_continuous(name=paste0('Seasonal excess mortality in ',year.start),labels=percent,limits=c(0,(50/100))) +
-    scale_y_continuous(name=paste0('Seasonal excess mortality in ',year.end),labels=percent,limits=c(0,(50/100))) +
-    scale_shape_manual(values=c(16,shape.selected),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
-    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),values=age.colours,guide = guide_legend(title = 'Age group:')) +
-    #guides(col = guide_legend(nrow = 1, byrow = TRUE)) +
-    theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"),
-    axis.line.y = element_line(colour = "black"),rect = element_blank())
-    )
-}
-
-# plot
-pdf(paste0(file.loc,'seasonality_index_change_sig10_weighted_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-plot.function.diff.seas.sig.10(1)
-dev.off()
-
-pdf(paste0(file.loc,'seasonality_index_change_sig10_weighted_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-plot.function.diff.seas.sig.10(17)
-dev.off()
-
-# plot coefficient of seasonality for each age nationally at start and end of period with significance
-plot.function.diff.seas.sig.5 <- function(shape.selected) {
-    
-    #lin.reg.grad$shape.code <- ifelse(lin.reg.grad$sex==1,16,1)
-    #lin.reg.grad$shape.code <- as.factor(lin.reg.grad$shape.code)
-    
-    print(ggplot() +
-    geom_point(data=subset(lin.reg.grad.weight,sig.test.5==1),fill='blue',aes(shape=as.factor(sex),x=(start.value.2/100),y=(end.value.2/100)),size=8) +
-    geom_point(data=subset(lin.reg.grad.weight,sex==1|2),aes(shape=as.factor(sex), color=as.factor(age),x=(start.value.2/100),y=(end.value.2/100)),size=6) +
-    geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
-    scale_x_continuous(name=paste0('Seasonal excess mortality in ',year.start),labels=percent,limits=c(0,(50/100))) +
-    scale_y_continuous(name=paste0('Seasonal excess mortality in ',year.end),labels=percent,limits=c(0,(50/100))) +
-    scale_shape_manual(values=c(16,shape.selected),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
-    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),values=age.colours,guide = guide_legend(title = 'Age group:')) +
-    #guides(col = guide_legend(nrow = 1, byrow = TRUE)) +
-    theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"),
-    axis.line.y = element_line(colour = "black"),rect = element_blank())
-    )
-}
-
-# plot
-pdf(paste0(file.loc,'seasonality_index_change_sig5_weighted_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-plot.function.diff.seas.sig.5(1)
-dev.off()
-
-pdf(paste0(file.loc,'seasonality_index_change_sig5_weighted_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-plot.function.diff.seas.sig.5(17)
-dev.off()
 
 # 1. ratio of difference sexes
 
