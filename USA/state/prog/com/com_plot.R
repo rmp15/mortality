@@ -28,6 +28,8 @@ age.print=age.print)
 month.names <- c('January','February','March','April','May','June',
 'July','August','September','October','November','December')
 month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
+month.lookup <- data.frame(month.short=c('None',month.short),test=c(0:12))
+month.lookup$month.short <- factor(month.lookup$month.short, levels=c('None',month.short))
 sex.lookup <- c('Men','Women')
 
 # number of years for split wavelet analysis
@@ -444,6 +446,14 @@ dat.state.map.inv$age.print <- with(dat.state.map.inv,reorder(age.print,age))
 dat.super.temp$age.print <- with(dat.super.temp,reorder(age.print,age))
 dat.super.temp.inv$age.print <- with(dat.super.temp.inv,reorder(age.print,age))
 
+# fix map test colouring
+dat.state.map <- merge(dat.state.map, month.lookup)
+dat.state.map.inv <- merge(dat.state.map.inv, month.lookup)
+
+# reorder again
+dat.state.map <- with(dat.state.map, dat.state.map[order(sex,age,DRAWSEQ,order),])
+dat.state.map.inv <- with(dat.state.map.inv, dat.state.map.inv[order(sex,age,DRAWSEQ,order),])
+
 # ROUNDED
 
 # set colour scheme for months map
@@ -459,11 +469,12 @@ map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
 plot.function.state.entire.round <- function(sex.sel) {
     
     print(ggplot(data=subset(dat.state.map,sex==sex.sel),aes(x=long,y=lat)) +
-    geom_polygon(aes(fill=test,group=group),linetype=2,size=0) +
+    geom_polygon(aes(fill=as.factor(month.short),group=group),linetype=2,size=0) +
     #geom_text(data=superregion.coords,color='black',aes(x=long.txt,y=lat.txt,label=id)) +
     geom_text(data=subset(dat.super.temp,sex==sex.sel),color='white',size=2.5,aes(x=long.txt,y=lat.txt,label=temp_c)) +
     geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
-    scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
+    #scale_fill_manual(values=map.climate.colour,labels=c('None', month.short[12], month.short[1:11]),drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
+    scale_fill_manual(values=map.climate.colour,drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
@@ -484,12 +495,13 @@ dev.off()
 plot.function.state.entire.round.inv <- function(sex.sel) {
     
     print(ggplot(data=subset(dat.state.map.inv,sex==sex.sel),aes(x=long,y=lat)) +
-    geom_polygon(aes(fill=test,group=group),linetype=2,size=0) +
+    geom_polygon(aes(fill=as.factor(month.short),group=group),linetype=2,size=0) +
     geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
     #geom_text(data=superregion.coords,aes(x=long,y=lat,label=id)) +
     geom_text(data=subset(dat.super.temp.inv,sex==sex.sel),color='white',size=2.5,aes(x=long.txt,y=lat.txt,label=temp_c)) +
     geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
-    scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
+    #scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
+    scale_fill_manual(values=map.climate.colour,drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
@@ -498,7 +510,6 @@ plot.function.state.entire.round.inv <- function(sex.sel) {
     theme_map() +
     theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
 }
-
 pdf(paste0(file.loc.region,'anti_com_region_map_men_rounded_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 plot.function.state.entire.round.inv(1)
 dev.off()
@@ -608,6 +619,14 @@ dat.state.map.inv$age.print <- with(dat.state.map.inv,reorder(age.print,age))
 dat.super.temp$age.print <- with(dat.super.temp,reorder(age.print,age))
 dat.super.temp.inv$age.print <- with(dat.super.temp.inv,reorder(age.print,age))
 
+# fix map test colouring
+dat.state.map <- merge(dat.state.map, month.lookup)
+dat.state.map.inv <- merge(dat.state.map.inv, month.lookup)
+
+# reorder again
+dat.state.map <- with(dat.state.map, dat.state.map[order(sex,age,DRAWSEQ,order),])
+dat.state.map.inv <- with(dat.state.map.inv, dat.state.map.inv[order(sex,age,DRAWSEQ,order),])
+
 # ROUNDED
 
 # set colour scheme for months map
@@ -623,11 +642,12 @@ map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
 plot.function.state.entire.round <- function(sex.sel) {
     
     print(ggplot(data=subset(dat.state.map,sex==sex.sel),aes(x=long,y=lat)) +
-    geom_polygon(aes(fill=test,group=group),linetype=2,size=0) +
+    geom_polygon(aes(fill=as.factor(month.short),group=group),linetype=2,size=0) +
     #geom_text(data=superregion.coords,color='black',aes(x=long.txt,y=lat.txt,label=id)) +
     geom_text(data=subset(dat.super.temp,sex==sex.sel),color='white',size=2.5,aes(x=long.txt,y=lat.txt,label=temp_c)) +
     geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
-    scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
+    #scale_fill_manual(values=map.climate.colour,labels=c('None', month.short[12], month.short[1:11]),drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
+    scale_fill_manual(values=map.climate.colour,drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
@@ -648,12 +668,13 @@ dev.off()
 plot.function.state.entire.round.inv <- function(sex.sel) {
     
     print(ggplot(data=subset(dat.state.map.inv,sex==sex.sel),aes(x=long,y=lat)) +
-    geom_polygon(aes(fill=test,group=group),linetype=2,size=0) +
+    geom_polygon(aes(fill=as.factor(month.short),group=group),linetype=2,size=0) +
     geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
     #geom_text(data=superregion.coords,aes(x=long,y=lat,label=id)) +
     geom_text(data=subset(dat.super.temp.inv,sex==sex.sel),color='white',size=2.5,aes(x=long.txt,y=lat.txt,label=temp_c)) +
     geom_polygon(data=map.superregions,aes(x=long,y=lat,group=group),alpha=0,fill='Black',color='Black',size=0.5) +
-    scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
+    #scale_fill_manual(values=map.climate.colour,labels=c('None', month.short),drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
+    scale_fill_manual(values=map.climate.colour,drop=FALSE,guide = guide_legend(nrow=1,title = 'Month')) +
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
