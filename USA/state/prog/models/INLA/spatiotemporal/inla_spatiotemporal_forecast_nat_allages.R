@@ -54,6 +54,9 @@ library(INLA)
 # function to enable sex to be selected
 inla.function <- function(sex.sel,year.start,year.end,pwl,type,forecast.length,knot.year) {
 
+#sex.sel = sex.arg ; year.start = year.start.arg ; year.end = year.end.arg ; pwl = pwl.arg ; type = type.arg
+#forecast.length = forecast.length.arg ; knot.year = knot.year.arg
+
 dat.inla <- dat.inla.load
 
 # choose test forecast years
@@ -84,15 +87,17 @@ knot.point <- max(dat.inla$year.month) - length(years.forecast)*12 - knot.month
 
 # create table of unique 'yearmonthc' id
 dat.knot <- unique(dat.inla[,c('year', 'year.month')])
+dat.knot$year.month <- as.numeric(dat.knot$year.month)
+dat.knot <- dat.knot[order(dat.knot$year.month),]
 
 # condition to find value of year.month when year.month=knot.point to create year.month.2a
 dat.knot$year.month1a <- ifelse(dat.knot$year.month<=knot.point, dat.knot$year.month, knot.point)
 
 # condition to create year.month.2b, going 1,2,3,.... after knot point
-dat.knot$year.month1b <- seq(nrow(dat.knot))
+dat.knot$year.month1b <- dat.knot$year.month
 dat.knot$year.month1b <- ifelse(dat.knot$year.month>knot.point, seq(nrow(dat.knot))-(max(nrow(dat.knot))-length(years.forecast)*12 - knot.month), 0)
 dat.knot <- dat.knot[c(2,3,4)]
-rownames(dat.knot) <- 1:nrow(dat.knot)
+#rownames(dat.knot) <- 1:nrow(dat.knot)
 
 # replicate knot variables
 dat.knot$year.month4a <- dat.knot$year.month3a <- dat.knot$year.month2a <- dat.knot$year.month1a
@@ -102,8 +107,7 @@ dat.knot <- dat.knot[order(dat.knot$year.month),]
 # Rejoin knots back to main table
 dat.inla <- merge(dat.inla,dat.knot, by=c('year.month'))
 
-# make sure that the order of the main data file matches that of the shapefile,
-# otherwise the model will not be valid
+# order file
 dat.inla <- dat.inla[order(dat.inla$sex,dat.inla$year.month),]
 
 # fix rownames
@@ -142,16 +146,15 @@ if(type==2){
 	if(pwl==1){
 	# no PWL
 	fml <- 	deaths.adj ~
-           		1 +                                                                                 # global intercept
+           		1 +                                                                             # global intercept
 			year.month +                                                                        # global slope
 			f(month2, year.month2, model='rw1', cyclic= TRUE)                                   # month specific slope
 	}
 
 	if(pwl==2){
 
-	dat.inla$month4a <- dat.inla$month2a <- dat.inla$month
-	dat.inla$month4b <- dat.inla$month2b <- dat.inla$month
-	dat.inla$ID2a <- dat.inla$ID2b <- dat.inla$ID
+	dat.inla$month2a <- dat.inla$month
+	dat.inla$month2b <- dat.inla$month
 
 	# PWL
 	fml <- 	deaths.adj ~
