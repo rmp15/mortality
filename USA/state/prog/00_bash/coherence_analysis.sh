@@ -2,6 +2,7 @@
 
 # this script
 # runs a nationalised coherence analysis
+# runs a region coherence analysis
 # runs a state coherence analysis
 # processes results
 # plots results on maps etc.
@@ -11,6 +12,8 @@ clear
 declare -i start=1982
 declare -i end=2013
 declare -i numsim=10
+declare -i sig=5
+declare -a ages=(85 75 65 55 45 35 25 15 5 0)
 declare country="USA"
 
 #################################################
@@ -19,24 +22,32 @@ declare country="USA"
 
 clear
 
-echo "starting nationalised coherence analysis for $country, years $start - $end";
+for age in "${ages[@]}"; do
+
+echo "starting nationalised coherence analysis for age $age, $country, years $start - $end";
 
 # runs coherence analysis
-Rscript ~/git/mortality/USA/state/prog/coherence/coherence_national.R $start $end $numsim
+#Rscript ~/git/mortality/USA/state/prog/coherence/coherence_national.R $start $end $numsim $sig $age
+
+done;
 
 #################################################
-# 2. REGION coherence ANALYSIS
+# 2. REGION COHERENCE ANALYSIS
 #################################################
 
 clear
 
-echo "starting region coherence analysis for $country, years $start - $end";
+for age in "${ages[@]}"; do
+
+echo "starting regional coherence analysis for age $age, $country, years $start - $end";
 
 # runs coherence analysis
-#Rscript ~/git/mortality/USA/state/prog/coherence/coherence_region.R $start $end $numsim
+Rscript ~/git/mortality/USA/state/prog/coherence/coherence_region.R $start $end $numsim $sig $age
+
+done;
 
 #################################################
-# 3. STATE coherence ANALYSIS
+# 3. STATE COHERENCE ANALYSIS
 #################################################
 
 clear

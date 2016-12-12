@@ -6,6 +6,7 @@ year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 num.sim <- as.numeric(args[3])
 sig.arg <- as.numeric(args[4])
+age.arg <- as.numeric(args[5])
 
 require(WaveletComp)
 
@@ -50,7 +51,7 @@ plot.coherence.national <- function(sex.selected.1,sex.selected.2,age.selected.1
     age.single.2 <- as.matrix(age.code[age.code==age.selected.2,])[2]
 
     plot.title.1 <- paste0('USA : ', sex.lookup[sex.selected.1],' ',age.single.1,' and ', sex.lookup[sex.selected.2],' ',age.single.2)
-    plot.title.2 <- paste0('USA : ', sex.lookup[sex.selected.2],' ',age.single.2)
+    #plot.title.2 <- paste0('USA : ', sex.lookup[sex.selected.2],' ',age.single.2)
 
     # prepare data frame for anaylsis
     my.data <- data.frame(date=as.Date(as.character(dat.1$year),format='%Y'),log.rate.1=log(dat.1$rate.adj),log.deaths.1=log(dat.1$deaths.pred+1),log.rate.2=log(dat.2$rate.adj),log.deaths.2=log(dat.2$deaths.pred+1))
@@ -78,7 +79,7 @@ plot.coherence.national <- function(sex.selected.1,sex.selected.2,age.selected.1
     abline(h = log(12)/log(2))
     mtext(text = "12", side = 2, at = log(12)/log(2), las = 1, line = 0.5)
     
-    wc.sel.phases(my.wc, sel.period = 12, only.sig = T, siglvl = 0.05,
+    wc.sel.phases(my.wc, sel.period = 12, only.sig = T, siglvl = 0.05, show.Angle=T,
     which.sig = "wp",
     legend.coords = "topright", legend.horiz = F, show.legend=F, show.date = T,
     phaselim = c(-pi,pi), main = "", sub = "")
@@ -87,6 +88,11 @@ plot.coherence.national <- function(sex.selected.1,sex.selected.2,age.selected.1
 ifelse(!dir.exists(paste0(file.loc,'plots/')), dir.create(paste0(file.loc,'plots/'),recursive=TRUE), FALSE)
 
 # output national coherence files
-pdf(paste0(file.loc,'plots/coherence_national_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-mapply(plot.coherence.national,sex.selected.1=c(1,2),sex.selected.2=c(1,2),age.selected.1=c(85),age.selected.2=c(0,5,15,25,35,45,55,65,75,85))
+pdf(paste0(file.loc,'plots/coherence_national_male_',age.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+mapply(plot.coherence.national,sex.selected.1=c(1),sex.selected.2=c(1),age.selected.1=c(age.arg),age.selected.2=c(0,5,15,25,35,45,55,65,75,85))
+dev.off()
+
+# output national coherence files
+pdf(paste0(file.loc,'plots/coherence_national_female_',age.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+mapply(plot.coherence.national,sex.selected.1=c(2),sex.selected.2=c(2),age.selected.1=c(age.arg),age.selected.2=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
