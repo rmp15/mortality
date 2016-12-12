@@ -19,6 +19,8 @@ month.cyclic.arg <- as.numeric(args[10])
 types <- c('1','1a','2','2a','3','3a','4','4a')
 type.selected <- types[type.arg]
 pwl.lookup <- c('nopwl','pwl')
+dist.lookup <- c('rw1','iid')
+cyclic.lookup <- c('cyclic','ncyclic')
 
 require(mailR)
 
@@ -51,10 +53,10 @@ month.lookup <- c('January','February','March','April','May','June','July','Augu
 library(INLA)
 
 # function to enable age group and sex to be selected
-inla.function <- function(age.sel,sex.sel,year.start,year.end,pwl,type,forecast.length,knot.year) {
+inla.function <- function(age.sel,sex.sel,year.start,year.end,pwl,type,forecast.length,knot.year,month.dist,month.cyclic) {
 
-sex.sel = sex.arg ; year.start = year.start.arg ; year.end = year.end.arg ; pwl = pwl.arg ; type = type.arg
-forecast.length = forecast.length.arg ; knot.year = knot.year.arg; age.sel <- age.arg
+#sex.sel = sex.arg ; year.start = year.start.arg ; year.end = year.end.arg ; pwl = pwl.arg ; type = type.arg
+#forecast.length = forecast.length.arg ; knot.year = knot.year.arg; age.sel <- age.arg
 
 dat.inla <- dat.inla.load
 
@@ -121,6 +123,7 @@ dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
 dat.inla$e <- 1:nrow(dat.inla)
 
 # INLA
+# ONLY TYPE 2 MAKES SENSE AT THE MOMENT
 
 if(type==1){
 
@@ -357,13 +360,15 @@ file.loc <- paste0(file.loc,age.sel,'/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # save all parameters of INLA model
-parameters.name <- paste0('USA_nat_rate_pred_type',type.selected,'_',pwl.lookup[pwl],'_',knot.year,'_knot_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_parameters')
+parameters.name <- 	paste0('USA_nat_rate_pred_type',type.selected,'_',pwl.lookup[pwl],'_',knot.year,'_knot_',age,'_',sex.lookup[sex],'_',
+			forecast.length,'_forecast_',dist.lookup[month.dist],'_',cyclic.lookup[month.cyclic+1],'_',year.start,'_',year.end,'_parameters')
 #mod$misc <- NULL
 #mod$.args$.parent.frame <- NULL
 saveRDS(mod,paste0(file.loc,parameters.name))
 
 # save summary of INLA model
-summary.name <- paste0('USA_nat_rate_pred_type',type.selected,'_',pwl.lookup[pwl],'_',knot.year,'_knot_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_summary.txt')
+summary.name <- paste0('USA_nat_rate_pred_type',type.selected,'_',pwl.lookup[pwl],'_',knot.year,'_knot_',age,'_',sex.lookup[sex],'_',
+			forecast.length,'_forecast_',dist.lookup[month.dist],'_',cyclic.lookup[month.cyclic+1],'_',year.start,'_',year.end,'_summary.txt')
 inla.summary.mod <- summary(mod)
 capture.output(inla.summary.mod,file=paste0(file.loc,summary.name))
 
@@ -371,14 +376,16 @@ capture.output(inla.summary.mod,file=paste0(file.loc,summary.name))
 plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
 
 # name of RDS output file then save
-RDS.name <- paste0('USA_nat_rate_pred_type',type.selected,'_',pwl.lookup[pwl],'_',knot.year,'_knot_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end)
+RDS.name <- paste0('USA_nat_rate_pred_type',type.selected,'_',pwl.lookup[pwl],'_',knot.year,'_knot_',age,'_',sex.lookup[sex],'_',
+			forecast.length,'_forecast_',dist.lookup[month.dist],'_',cyclic.lookup[month.cyclic+1],'_',year.start,'_',year.end)
 saveRDS(plot.dat,paste0(file.loc,RDS.name))
 
 sender <- "emailr349@gmail.com"
 recipients <- c("r.parks15@imperial.ac.uk")
 send.mail(from = sender,
           to = recipients,
-          subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' done'),
+          subject = paste0('USA_nat_rate_pred_type',type.selected,'_',pwl.lookup[pwl],'_',knot.year,'_knot_',age,'_',sex.lookup[sex],'_',
+			forecast.length,'_forecast_',dist.lookup[month.dist],'_',cyclic.lookup[month.cyclic+1],'_',year.start,'_',year.end,' done'),
           body = "Well done",
 	  #body= as.character(email.content[8]),
           smtp = list(host.name = "smtp.gmail.com", port = 465, 
