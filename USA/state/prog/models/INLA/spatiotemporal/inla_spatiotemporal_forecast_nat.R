@@ -401,5 +401,5 @@ send.mail(from = sender,
 
 # input arguments into function to perform inference
 mapply(inla.function,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.end.arg,pwl=pwl.arg,type=type.arg,
-	forecast.length=forecast.length.arg,knot.year=knot.year.arg,month.dist=month.dist.arg,month.cyclic=month.cyclic.arg,month.dist=month.dist.arg)
+	forecast.length=forecast.length.arg,knot.year=knot.year.arg,month.dist=month.dist.arg,month.dist=month.dist.arg,month.cyclic=month.cyclic.arg)
 
