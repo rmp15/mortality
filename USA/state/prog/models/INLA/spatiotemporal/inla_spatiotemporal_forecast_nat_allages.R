@@ -50,8 +50,8 @@ library(INLA)
 # function to enable sex to be selected
 inla.function <- function(sex.sel,year.start,year.end,pwl,type,forecast.length,knot.year) {
 
-sex.sel = sex.arg ; year.start = year.start.arg ; year.end = year.end.arg ; pwl = pwl.arg ; type = type.arg
-forecast.length = forecast.length.arg ; knot.year = knot.year.arg
+#sex.sel = sex.arg ; year.start = year.start.arg ; year.end = year.end.arg ; pwl = pwl.arg ; type = type.arg
+#forecast.length = forecast.length.arg ; knot.year = knot.year.arg
 
 dat.inla <- dat.inla.load
 
@@ -143,9 +143,9 @@ if(type==2){
 	if(pwl==1){
 	# no PWL
 	fml <- 	deaths.adj ~
-           		1 +                                                                             # global intercept
-			year.month +                                                                        # global slope
-			f(month2, year.month2, model='rw1', cyclic= TRUE)                                   # month specific slope
+           		1 +                                                                     # global intercept
+			year.month +                                                            # global slope
+			f(month2, year.month2, model='rw1', cyclic= TRUE)                       # month specific slope
 	}
 
 	if(pwl==2){
@@ -156,8 +156,8 @@ if(type==2){
 	# PWL
 	fml <- 	deaths.adj ~
             1 +                                                                                 # global intercept
-            year.month1a +                                                           			# global slope	pre-knot
-            year.month1b +                                                           			# global slope	post-knot
+            year.month1a +                                                           		# global slope	pre-knot
+            year.month1b +                                                           		# global slope	post-knot
             f(month2a, year.month2a, model='rw1', cyclic= TRUE) +                               # month specific slope pre-knot
             f(month2b, year.month2b, model='rw1', cyclic= TRUE)                                 # month specific slope post-knot
 	}

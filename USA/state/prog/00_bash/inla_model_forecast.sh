@@ -25,26 +25,26 @@ declare country="USA"
 
 # run no pwl
 
-for sex in "${sexes[@]}"; do
+#for sex in "${sexes[@]}"; do
 
-echo "starting ${sexstrings[$sex-1]} $age INLA model $model, forecast length $forecast_length, years $start - $end";
+#echo "starting ${sexstrings[$sex-1]} $age INLA model $model, forecast length $forecast_length, years $start - $end";
 
 # runs model
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_forecast_nat_allages.R $sex $start $end 1 $type $forecast_length 0 &
 
-done;
+#done;
 
 # run pwl
 
-for sex in "${sexes[@]}"; do
-for knot in "${knots[@]}"; do
+#for sex in "${sexes[@]}"; do
+#for knot in "${knots[@]}"; do
 
-echo "starting ${sexstrings[$sex-1]} $age INLA model $model, pwl with knot $knot years before forecast, forecast length $forecast_length, years $start - $end";
+#echo "starting ${sexstrings[$sex-1]} $age INLA model $model, pwl with knot $knot years before forecast, forecast length $forecast_length, years $start - $end";
 
 # runs model
-Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_forecast_nat_allages.R $sex $start $end 2 $type $forecast_length $knot &
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/spatiotemporal/inla_spatiotemporal_forecast_nat_allages.R $sex $start $end 2 $type $forecast_length $knot &
 
-done; done;
+#done; done;
 
 #################################################
 # 1. RUN AGE-SEPARATED NATIONAL MODEL

@@ -12,6 +12,8 @@ pwl.arg <- as.numeric(args[5])
 type.arg <- as.numeric(args[6])
 forecast.length.arg <- as.numeric(args[7])
 knot.year.arg <- as.numeric(args[8])
+month.dist.arg <- as.numeric(args[9])
+month.cyclic.arg <- as.numeric(args[10])
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','4a')
@@ -38,16 +40,11 @@ dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.nationa
 # rename for consistency in subsequent code of naming conventions
 dat.inla.load <- dat.national
 
-#library(dplyr)
-
 # lookups
 age.filter <- unique(dat.inla.load$age)
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 sex.lookup <- c('male','female')
 month.lookup <- c('January','February','March','April','May','June','July','August','September','October','November','December')
-
-# adjacency matrix with connections Hawaii -> California, Alaska -> Washington
-USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"
 
 ##############
 
@@ -55,6 +52,9 @@ library(INLA)
 
 # function to enable age group and sex to be selected
 inla.function <- function(age.sel,sex.sel,year.start,year.end,pwl,type,forecast.length,knot.year) {
+
+sex.sel = sex.arg ; year.start = year.start.arg ; year.end = year.end.arg ; pwl = pwl.arg ; type = type.arg
+forecast.length = forecast.length.arg ; knot.year = knot.year.arg; age.sel <- age.arg
 
 dat.inla <- dat.inla.load
 
@@ -84,8 +84,10 @@ dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
 knot.month <- knot.year.arg*12
 knot.point <- max(dat.inla$year.month) - length(years.forecast)*12 - knot.month
 
-# create table of unique 'yearmonthc' id
+# create table of unique 'yearmonth' id
 dat.knot <- unique(dat.inla[,c('year', 'year.month')])
+dat.knot$year.month <- as.numeric(dat.knot$year.month)
+dat.knot <- dat.knot[order(dat.knot$year.month),]
 
 # condition to find value of year.month when year.month=knot.point to create year.month.2a
 dat.knot$year.month1a <- ifelse(dat.knot$year.month<=knot.point, dat.knot$year.month, knot.point)
@@ -94,7 +96,7 @@ dat.knot$year.month1a <- ifelse(dat.knot$year.month<=knot.point, dat.knot$year.m
 dat.knot$year.month1b <- seq(nrow(dat.knot))
 dat.knot$year.month1b <- ifelse(dat.knot$year.month>knot.point, seq(nrow(dat.knot))-(max(nrow(dat.knot))-length(years.forecast)*12 - knot.month), 0)
 dat.knot <- dat.knot[c(2,3,4)]
-rownames(dat.knot) <- 1:nrow(dat.knot)
+#rownames(dat.knot) <- 1:nrow(dat.knot)
 
 # replicate knot variables
 dat.knot$year.month4a <- dat.knot$year.month3a <- dat.knot$year.month2a <- dat.knot$year.month1a
@@ -141,12 +143,33 @@ fml  <- deaths.adj ~
 
 if(type==2){
 
+# 1. Type Ia space-time interaction
+
 	if(pwl==1){
 	# no PWL
 	fml <- 	deaths.adj ~
-            1 +                                                                                 # global intercept
-			year.month +                                                                        # global slope
-			f(month2, year.month2, model='rw1', cyclic= TRUE)                                   # month specific slope
+            		1 +                                                                     # global intercept
+			year.month                                                              # global slope
+	if(month.dist==1){
+		if(month.cyclic==0) 	{
+				fml <- update(fml, ~ . +
+				f(month2, year.month2, model='rw1', cyclic= FALSE))             # month specific slope v1
+					}
+		if(month.cyclic==1) 	{
+				fml <- update(fml, ~ . +
+				f(month2, year.month2, model='rw1', cyclic= TRUE))              # month specific slope v2
+					}
+	}
+	if(month.dist==2){
+		if(month.cyclic==0) 	{
+				fml <- update(fml, ~ . +
+				f(month2, year.month2, model='iid', cyclic= FALSE))             # month specific slope v3
+					}
+		if(month.cyclic==1) 	{
+				fml <- update(fml, ~ . +
+				f(month2, year.month2, model='iid', cyclic= TRUE))              # month specific slope v4
+					}
+	}
 	}
 
 	if(pwl==2){
@@ -157,20 +180,77 @@ if(type==2){
 
 	# PWL
 	fml <- 	deaths.adj ~
-            1 +                                                                                 # global intercept
-			year.month1a +                                                           			# global slope	pre-knot
-			year.month1b +                                                           			# global slope	post-knot
-			f(month2a, year.month2a, model='rw1', cyclic= TRUE) +                               # month specific slope pre-knot
-			f(month2b, year.month2b, model='rw1', cyclic= TRUE)                                 # month specific slope post-knot
+            		1 +                                                                     # global intercept
+			year.month1a +                                                          # global slope	pre-knot
+			year.month1b                                                            # global slope	post-knot
+	if(month.dist==1){
+		if(month.cyclic==0) 	{
+				fml <- update(fml, ~ . +
+				f(month2a, year.month2a, model='rw1', cyclic= FALSE))           # month specific slope pre-knot v1
+					}
+		if(month.cyclic==1) 	{
+				fml <- update(fml, ~ . +
+				f(month2a, year.month2a, model='rw1', cyclic= TRUE))            # month specific slope pre-knot v2
+					}
+	}
+	if(month.dist==2){
+		if(month.cyclic==0) 	{
+				fml <- update(fml, ~ . +
+				f(month2a, year.month2a, model='iid', cyclic= FALSE))           # month specific slope pre-knot v3
+					}
+		if(month.cyclic==1) 	{
+				fml <- update(fml, ~ . +
+				f(month2a, year.month2a, model='iid', cyclic= TRUE))            # month specific slope pre-knot v4
+					}
+	}
+	if(month.dist==1){
+		if(month.cyclic==0) 	{
+				fml <- update(fml, ~ . +
+				f(month2b, year.month2b, model='rw1', cyclic= FALSE))           # month specific slope post-knot v1
+					}
+		if(month.cyclic==1) 	{
+				fml <- update(fml, ~ . +
+				f(month2b, year.month2b, model='rw1', cyclic= TRUE))            # month specific slope post-knot v2
+					}
+	}
+	if(month.dist==2){
+		if(month.cyclic==0) 	{
+				fml <- update(fml, ~ . +
+				f(month2b, year.month2b, model='iid', cyclic= FALSE))           # month specific slope post-knot v3
+					}
+		if(month.cyclic==1) 	{
+				fml <- update(fml, ~ . +
+				f(month2b, year.month2b, model='iid', cyclic= TRUE))            # month specific slope post-knot v4
+					}
 	}
 
-# 1. Type Ia space-time interaction
-fml <- update(fml, ~ . +
-        f(month, model='rw1',cyclic = TRUE) +                                                   # month specific intercept
+
+	if(month.dist==1){
+		if(month.cyclic==0) 	{
+				fml <- update(fml, ~ . +
+				f(month, model='rw1',cyclic =FALSE))           			# month specific intercept v1
+					}
+		if(month.cyclic==1) 	{
+				fml <- update(fml, ~ . +
+				f(month, model='rw1',cyclic = TRUE))           			# month specific intercept v2
+					}
+	}
+	if(month.dist==2){
+		if(month.cyclic==0) 	{
+				fml <- update(fml, ~ . +
+				f(month, model='iid',cyclic =FALSE))           			# month specific intercept v3
+					}
+		if(month.cyclic==1) 	{
+				fml <- update(fml, ~ . +
+				f(month, model='iid',cyclic = TRUE))            		# month specific intercept v4
+					}
+	}
+
+	fml <- update(fml, ~ . +
         f(year.month3, model="rw1") +                                                           # rw1
         f(e, model = "iid")                                                                     # overdispersion term
 	)
-}
+}}
 
 if(type==3) {
 
