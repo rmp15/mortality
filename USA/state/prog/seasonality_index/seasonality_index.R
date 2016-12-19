@@ -369,6 +369,11 @@ dev.off()
 
 # METHOD TAKING ACCCOUNT OF POPULATION
 
+# export file
+saveRDS(lin.reg.grad.weight,paste0(file.loc,'seasonality_index_nat_changes_',year.start,'_',year.end))
+write.csv(lin.reg.grad.weight,paste0(file.loc,'seasonality_index_nat_changes_',year.start,'_',year.end,'.csv'))
+
+
 # remove com data that doesn't meet wavelet criteria (automate?)
 lin.reg.grad.weight <- subset(lin.reg.grad.weight,!(age==35 & sex==1))
 lin.reg.grad.weight <- subset(lin.reg.grad.weight,!(age==5 & sex==2))
