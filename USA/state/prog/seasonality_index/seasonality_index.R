@@ -139,6 +139,17 @@ lin.reg.grad.weight <- merge(lin.reg.grad.weight,lin.reg.sig.weight,by=c('sex','
 lin.reg.grad.weight$start.value.2 <- with(lin.reg.grad.weight,round(100*(start.value),1)-100)
 lin.reg.grad.weight$end.value.2 <- with(lin.reg.grad.weight,round(100*(end.value),1)-100)
 
+# establish confidence intervals for linear regression start and end values
+dat.ci <- data.frame()
+for (j in c(1:2)) {
+    for (i in unique(dat.pois$age)){
+        lm = lm(ratio ~ year.centre, data=subset(dat.pois.summary,age==i & sex==j), weights=1/(se^2))
+        temp.start = predict(lm, data.frame(year.centre=min(dat.pois.summary$year.centre)),interval='confidence')
+        temp.end = predict(lm, data.frame(year.centre=max(dat.pois.summary$year.centre)),interval='confidence')
+        dat.ci <- rbind(dat.ci,cbind(i,j,temp.start,temp.end))
+    }}
+
+
 ###############################################################
 # DIRECTORY CREATION
 ###############################################################
