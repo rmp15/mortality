@@ -219,8 +219,8 @@ dev.off()
 # entire period com plot v3
 pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v3_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
-geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM.mean),fill='red',shape=21) +
-geom_point(data=subset(dat.nat,type=='min'),aes(y=COM.mean,x=factor(age)),fill='green',shape=21) +
+geom_point(data=subset(dat.nat,type=='max'),aes(x=factor(age),y=COM.mean),fill='red',color='red',shape=21) +
+geom_point(data=subset(dat.nat,type=='min'),aes(y=COM.mean,x=factor(age)),fill='green',color='green',shape=21) +
 geom_hline(linetype=2, yintercept = 0:12, alpha=0.2) +
 geom_vline(linetype=2, xintercept = 1:10,alpha=0.2) +
 geom_errorbar(data=subset(dat.nat,type=='max'),aes(x=factor(age),ymin=COM.5,ymax=COM.95),color='red',width=0.2) +
