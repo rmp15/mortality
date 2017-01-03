@@ -19,6 +19,7 @@ num.years <- year.end - year.start + 1
 
 # load the data
 dat <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_',year.end))
+dat$ID <- NULL
 
 # add fips lookup
 fips.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
@@ -35,6 +36,8 @@ sex.lookup <- c('Men','Women')
 ###############################################################
 # DATA PROCESSING
 ###############################################################
+
+# 1. NATIONAL
 
 # DYNAMIC MAX MIN
 
@@ -149,6 +152,56 @@ for (j in c(1:2)) {
         dat.ci <- rbind(dat.ci,cbind(i,j,temp.start,temp.end))
     }}
 
+# 2. REGIONAL
+
+# METHOD NOT TAKING ACCCOUNT OF POPULATION
+
+# load region data
+dat.region <- readRDS(paste0('../../output/mapping_posterior/INLA/type1a/1982_2013/maps/USA_state_data'))
+dat.region$fips <- as.numeric(as.character(dat.region$STATE_FIPS))
+
+# merge region data with death data
+dat.region <- merge(dat,dat.region,by='fips')
+
+# generate region data
+dat.region$deaths.pred <- with(dat.region,pop.adj*rate.adj)
+dat.region <- ddply(dat.region,.(year,climate_region,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
+dat.region$climate_region <- gsub(' ','_',dat.region$climate_region)
+
+# calculate rates per million and then round
+dat.region$rate.adj <- with(dat.region,deaths.pred+1/pop.adj)
+dat.region$rate.scaled <- round(1000000*(dat.region$rate.adj))
+
+# climate region lookup
+region.lookup <- unique(dat.region$climate_region)
+
+# figure out the ratio of max/min deaths over time with fixed max/min by sex, age, year
+dat.max.min.fixed.region <- merge(dat.region,dat.COM,by=c('age','sex','month'))
+dat.max.min.fixed.region <- ddply(dat.max.min.fixed.region,.(sex,age,climate_region,year), summarize,rate.max=rate.adj[type=='max'],pop.max=pop.adj[type=='max'],month.max=month[type=='max'],rate.min=rate.adj[type=='min'],pop.min=pop.adj[type=='min'],month.min=month[type=='min'])
+dat.max.min.fixed.region$percent.change <- with(dat.max.min.fixed.region,round(100*(rate.max/rate.min),1)-100)
+
+# establish correct sex names for plotting
+dat.max.min.fixed.region$sex.long <- as.factor(as.character(dat.max.min.fixed.region$sex))
+levels(dat.max.min.fixed.region$sex.long) <- sex.lookup
+
+# add time value that starts at 0
+dat.max.min.fixed.region$year.centre <- with(dat.max.min.fixed.region,year-year.start)
+
+# apply linear regression to each group by sex, age, month to find gradient
+lin.reg.grad.region <- ddply(dat.max.min.fixed.region, .(sex,age,climate_region), function(z)coef(lm(percent.change ~ year.centre, data=z)))
+lin.reg.grad.region$end.value <- with(lin.reg.grad.region,`(Intercept)`+year.centre*(num.years-1))
+lin.reg.grad.region$start.value <- lin.reg.grad.region$`(Intercept)`
+lin.reg.grad.region$sex.long <- with(lin.reg.grad.region,as.factor(as.character(sex)))
+levels(lin.reg.grad.region$sex.long) <- sex.lookup
+
+# obtain significance of slopes
+lin.reg.sig.region <- ddply(dat.max.min.fixed.region, .(sex,age,climate_region), function(z)coef(summary(lm(percent.change ~ year.centre, data=z))))
+lin.reg.sig.region <- lin.reg.sig.region[!c(TRUE,FALSE),]
+lin.reg.sig.region$sig.test.10 <- ifelse(lin.reg.sig.region[,6]<0.10,1,0)
+lin.reg.sig.region$sig.test.5 <- ifelse(lin.reg.sig.region[,6]<0.05,1,0)
+
+# merge with data about gradients
+lin.reg.grad <- merge(lin.reg.grad,lin.reg.sig,by=c('sex','age'))
 
 ###############################################################
 # DIRECTORY CREATION
@@ -157,6 +210,8 @@ for (j in c(1:2)) {
 # create directories for output
 file.loc <- paste0('../../output/seasonality_index/national/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
+file.loc.regional <- paste0('../../output/seasonality_index/regional/')
+ifelse(!dir.exists(file.loc.regional), dir.create(file.loc.regional, recursive=TRUE), FALSE)
 
 ###############################################################
 # RATIO OF MAX/MIN MORTALITY RATE OVER TIME BY STATE EACH YEAR
@@ -502,4 +557,28 @@ plot.function.nat.rel.both.fixed <- function() {
 # plot
 pdf(paste0(file.loc,'seasonality_index_fixed_months_mf_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
 plot.function.nat.rel.both.fixed()
+dev.off()
+
+######################################################################
+# REGIONAL PLOTS (IN PROGRESS)
+######################################################################
+
+pdf(paste0(file.loc.regional,'seasonality_index_regional_male_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+ggplot(data=subset(lin.reg.grad.region, sex==1 &  climate_region!='Northern_Rockies_and_Plains')) +
+geom_point(aes(x=start.value,y=end.value,color=as.factor(climate_region))) +
+geom_vline(xintercept=0,linetype=2) +
+geom_abline(slope=1,intercept=0,linetype=2) +
+geom_hline(yintercept=0,linetype=2) +
+ggtitle('Men') +
+facet_wrap(~age)
+dev.off()
+
+pdf(paste0(file.loc.regional,'seasonality_index_regional_female_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+ggplot(data=subset(lin.reg.grad.region, sex==2 &  climate_region!='Northern_Rockies_and_Plains')) +
+geom_point(aes(x=start.value,y=end.value,color=as.factor(climate_region))) +
+geom_vline(xintercept=0,linetype=2) +
+geom_abline(slope=1,intercept=0,linetype=2) +
+geom_hline(yintercept=0,linetype=2) +
+ggtitle('Women') +
+facet_wrap(~age)
 dev.off()
