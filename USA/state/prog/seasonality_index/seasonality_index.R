@@ -237,6 +237,11 @@ dat.climate$climate_region <- gsub(' ','_',dat.climate$climate_region)
 # merge mortality data and climate data
 dat.mort.climate <- merge(dat.climate,lin.reg.grad.climate,by=c('sex','age','climate_region'))
 
+# calculate differnce in mort
+dat.mort.climate$diff.mort <- with(dat.mort.climate,end.value.mort-start.value.mort)
+dat.mort.climate$diff.climate <- with(dat.mort.climate,end.value.climate-start.value.climate)
+
+
 ###############################################################
 # DIRECTORY CREATION
 ###############################################################
@@ -619,24 +624,74 @@ dev.off()
 
 # against climate
 
-pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_male_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-#ggplot(data=subset(dat.mort.climate, sex==1 &  climate_region!='Northern_Rockies_and_Plains')) +
-ggplot(data=subset(dat.mort.climate, sex==1)) +
-geom_point(aes(x=start.value.climate,y=start.value.mort,color=as.factor(climate_region))) +
-geom_vline(xintercept=0,linetype=2) +
-geom_abline(slope=1,intercept=0,linetype=2) +
-geom_hline(yintercept=0,linetype=2) +
-ggtitle('Men') +
-facet_wrap(~age)
+# remove com data that doesn't meet wavelet criteria (automate?)
+dat.mort.climate <- subset(dat.mort.climate,!(age==35 & sex==1))
+dat.mort.climate <- subset(dat.mort.climate,!(age==5 & sex==2))
+dat.mort.climate <- subset(dat.mort.climate,!(age==25 & sex==2))
+dat.mort.climate <- subset(dat.mort.climate,!(age==15 & sex==2))
 
-ggplot(data=subset(dat.mort.climate, sex==1)) +
-geom_point(aes(x=start.value.climate,y=start.value.mort,color=as.factor(climate_region))) +
+pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+ggplot() +
+geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=start.value.climate,y=start.value.mort,color=as.factor(climate_region))) +
+scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
+xlim(c(0,15)) + ylim(c(-10,75)) +
+xlab(paste0('Temperature excess in ',year.start.2)) +
+ylab(paste0('Mortality excess in ',year.start.2)) +
 geom_vline(xintercept=0,linetype=2) +
-geom_abline(slope=1,intercept=0,linetype=2) +
 geom_hline(yintercept=0,linetype=2) +
-ggtitle('Men') +
-facet_wrap(~age)
+ggtitle(paste0('Seasonal excess mortality against ',dname,'.',metric,' in ',year.start.2)) +
+facet_wrap(~age) +
+scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
+theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+rect = element_blank())
 
+ggplot() +
+geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=end.value.climate,y=end.value.mort,color=as.factor(climate_region))) +
+scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
+xlim(c(0,15)) + ylim(c(-10,75)) +
+xlab(paste0('Temperature excess in ',year.end.2)) +
+ylab(paste0('Mortality excess in ',year.end.2)) +
+geom_vline(xintercept=0,linetype=2) +
+geom_hline(yintercept=0,linetype=2) +
+ggtitle(paste0('Seasonal excess mortality against ',dname,'.',metric,' in ',year.end.2)) +
+facet_wrap(~age) +
+scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
+theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+rect = element_blank())
+
+ggplot() +
+geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=diff.climate,y=diff.mort,color=as.factor(climate_region))) +
+scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
+#xlim(c(-15,5)) + #ylim(c(-10,75)) +
+xlab(paste0('Change in temperature excess from ',year.start.2,' to ', year.end.2)) +
+ylab(paste0('Change in mortality excess from ',year.start.2,' to ', year.end.2)) +
+geom_vline(xintercept=0,linetype=2) +
+geom_hline(yintercept=0,linetype=2) +
+geom_abline(slope=1,intercept=0,linetype=2) +
+ggtitle(paste0('Change in seasonal excess mortality against change in ',dname,'.',metric,' from ',year.start.2,' to ',year.end.2)) +
+facet_wrap(~age) +
+scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
+theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+rect = element_blank())
+
+ggplot() +
+geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=diff.climate,y=diff.mort,color=as.factor(climate_region))) +
+scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
+xlim(c(-15,5)) + #ylim(c(-10,75)) +
+xlab(paste0('Change in temperature excess from ',year.start.2,' to ', year.end.2)) +
+ylab(paste0('Change in mortality excess from ',year.start.2,' to ', year.end.2)) +
+geom_vline(xintercept=0,linetype=2) +
+geom_hline(yintercept=0,linetype=2) +
+geom_abline(slope=1,intercept=0,linetype=2) +
+ggtitle(paste0('Change in seasonal excess mortality against change in ',dname,'.',metric,' from ',year.start.2,' to ',year.end.2)) +
+facet_wrap(~age) +
+scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
+theme(legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+rect = element_blank())
 
 dev.off()
 
