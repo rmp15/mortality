@@ -384,7 +384,8 @@ lin.reg.grad <- subset(lin.reg.grad,!(age==25 & sex==2))
 
 # METHOD NOT TAKING ACCCOUNT OF POPULATION
 
-age.colours <- c('#00ff00','#00cc00','#009900','#006600','#003300','#ff0000','#cc0000','#990000','#660000','#330000')
+age.colours <- rev(c('#00ff00','#00dd00','#00aa00','#009900','#007700'))
+age.colours <- c(age.colours,'#ff0000','#cc0000','#990000','#660000','#330000')
 
 # plot coefficient of seasonality for each age nationally at start and end of period
 plot.function.diff.seas <- function(shape.selected) {
@@ -478,7 +479,6 @@ dev.off()
 saveRDS(lin.reg.grad.weight,paste0(file.loc,'seasonality_index_nat_changes_',year.start,'_',year.end))
 write.csv(lin.reg.grad.weight,paste0(file.loc,'seasonality_index_nat_changes_',year.start,'_',year.end,'.csv'))
 
-
 # remove com data that doesn't meet wavelet criteria (automate?)
 lin.reg.grad.weight <- subset(lin.reg.grad.weight,!(age==35 & sex==1))
 lin.reg.grad.weight <- subset(lin.reg.grad.weight,!(age==5 & sex==2))
@@ -521,7 +521,7 @@ plot.function.diff.seas.sig.5 <- function(shape.selected) {
     #lin.reg.grad$shape.code <- as.factor(lin.reg.grad$shape.code)
     
     print(ggplot() +
-    geom_point(data=subset(lin.reg.grad.weight,sig.test.5==1),fill='blue',aes(shape=as.factor(sex),x=(start.value.2/100),y=(end.value.2/100)),size=8) +
+    geom_point(data=subset(lin.reg.grad.weight,sig.test.5==1),colour='black',aes(shape=as.factor(sex),x=(start.value.2/100),y=(end.value.2/100)),size=8) +
     geom_point(data=subset(lin.reg.grad.weight,sex==1|2),aes(shape=as.factor(sex), color=as.factor(age),x=(start.value.2/100),y=(end.value.2/100)),size=6) +
     geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
     scale_x_continuous(name=paste0('Seasonal excess mortality in ',year.start),labels=percent,limits=c(0,(50/100))) +

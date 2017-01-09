@@ -28,8 +28,8 @@ age.print=age.print)
 month.names <- c('January','February','March','April','May','June',
 'July','August','September','October','November','December')
 month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
-month.lookup <- data.frame(month.short=c('None',month.short),test=c(0:12))
-month.lookup$month.short <- factor(month.lookup$month.short, levels=c('None',month.short))
+month.lookup <- data.frame(month.short=c('None   ',month.short),test=c(0:12))
+month.lookup$month.short <- factor(month.lookup$month.short, levels=c('None   ',month.short))
 sex.lookup <- c('Men','Women')
 
 # number of years for split wavelet analysis
@@ -629,12 +629,15 @@ dat.state.map.inv <- with(dat.state.map.inv, dat.state.map.inv[order(sex,age,DRA
 
 # ROUNDED
 
-# set colour scheme for months map
-map.climate.colour.1 <- '#FFFFFF'
-map.climate.colour.2 <- c('#0000CC','#0000FF','#B2B2FF','#ff7f7f','#ff0000','#990000')
-map.climate.colour.3 <- c('#330F53','#551A8B','#9975B9','#FF6207','#A94F43','#B52A27')
-map.climate.colour.2 <- c(map.climate.colour.2,rev(map.climate.colour.3))
-map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
+# set colour scheme for months map (OLD commented out)
+#map.climate.colour.1 <- '#FFFFFF'
+#map.climate.colour.2 <- c('#0000CC','#0000FF','#B2B2FF','#ff7f7f','#ff0000','#990000')
+#map.climate.colour.3 <- c('#330F53','#551A8B','#9975B9','#FF6207','#A94F43','#B52A27')
+#map.climate.colour.2 <- c(map.climate.colour.2,rev(map.climate.colour.3))
+#map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
+
+map.climate.colour <- colorRampPalette(c("red","hotpink","brown","navy","cyan","green","orange"))(20)[c(10,12,13,15,18,19,20,1,5,6,7,9)]
+map.climate.colour <- c('#FFFFFF',map.climate.colour)
 
 # 1. map of com for entire period
 
@@ -654,7 +657,7 @@ plot.function.state.entire.round <- function(sex.sel) {
     ggtitle(paste0(sex.lookup[sex.sel])) +
     #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
-    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank(),legend.background = element_rect(fill = "grey95")))
 }
 
 pdf(paste0(file.loc.region,'com_rates_region_map_men_rounded_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
@@ -681,7 +684,7 @@ plot.function.state.entire.round.inv <- function(sex.sel) {
     ggtitle(paste0(sex.lookup[sex.sel])) +
     #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
-    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank(),legend.background = element_rect(fill = "grey95")))
 }
 
 pdf(paste0(file.loc.region,'anti_com_rates_region_map_men_rounded_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
