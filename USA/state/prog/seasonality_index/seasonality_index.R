@@ -13,6 +13,10 @@ library(scales)
 args <- commandArgs(trailingOnly=TRUE)
 year.start <- as.numeric(args[1])
 year.end <- as.numeric(args[2])
+year.start.2 <- as.numeric(args[3])
+year.end.2 <- as.numeric(args[4])
+dname <- as.character(args[5])
+metric <- as.character(args[6])
 
 # length of analysis period
 num.years <- year.end - year.start + 1
@@ -211,7 +215,27 @@ lin.reg.sig.region$sig.test.10 <- ifelse(lin.reg.sig.region[,6]<0.10,1,0)
 lin.reg.sig.region$sig.test.5 <- ifelse(lin.reg.sig.region[,6]<0.05,1,0)
 
 # merge with data about gradients
-lin.reg.grad <- merge(lin.reg.grad,lin.reg.sig,by=c('sex','age'))
+lin.reg.grad.region <- merge(lin.reg.grad.region,lin.reg.sig.region,by=c('sex','age','climate_region'))
+
+# MORTALITY SEASONALITY INDEX AGAINST CLIMATE VARIABLE SEASONALITY INDEX
+
+# load climate data
+file.loc.climate <- paste0('~/git/climate/countries/USA//output/seasonality_index_climate_region/',dname,'/',metric,'/')
+dat.climate <- readRDS(paste0(file.loc.climate,'seasonality_index_',dname,'_',metric,'_',year.start.2,'_',year.end.2))
+dat.climate$start.value.climate <- dat.climate$start.value
+dat.climate$end.value.climate <- dat.climate$end.value
+dat.climate <- dat.climate[,c('sex','age','climate_region','start.value.climate','end.value.climate')]
+
+lin.reg.grad.climate <- lin.reg.grad.region[,c('sex','age','climate_region','start.value','end.value')]
+lin.reg.grad.climate$start.value.mort <- lin.reg.grad.climate$start.value
+lin.reg.grad.climate$end.value.mort <- lin.reg.grad.climate$end.value
+lin.reg.grad.climate <- lin.reg.grad.climate[,c('sex','age','climate_region','start.value.mort','end.value.mort')]
+
+# fix names of climate regions to match each other
+dat.climate$climate_region <- gsub(' ','_',dat.climate$climate_region)
+
+# merge mortality data and climate data
+dat.mort.climate <- merge(dat.climate,lin.reg.grad.climate,by=c('sex','age','climate_region'))
 
 ###############################################################
 # DIRECTORY CREATION
@@ -592,3 +616,27 @@ geom_hline(yintercept=0,linetype=2) +
 ggtitle('Women') +
 facet_wrap(~age)
 dev.off()
+
+# against climate
+
+pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_male_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+#ggplot(data=subset(dat.mort.climate, sex==1 &  climate_region!='Northern_Rockies_and_Plains')) +
+ggplot(data=subset(dat.mort.climate, sex==1)) +
+geom_point(aes(x=start.value.climate,y=start.value.mort,color=as.factor(climate_region))) +
+geom_vline(xintercept=0,linetype=2) +
+geom_abline(slope=1,intercept=0,linetype=2) +
+geom_hline(yintercept=0,linetype=2) +
+ggtitle('Men') +
+facet_wrap(~age)
+
+ggplot(data=subset(dat.mort.climate, sex==1)) +
+geom_point(aes(x=start.value.climate,y=start.value.mort,color=as.factor(climate_region))) +
+geom_vline(xintercept=0,linetype=2) +
+geom_abline(slope=1,intercept=0,linetype=2) +
+geom_hline(yintercept=0,linetype=2) +
+ggtitle('Men') +
+facet_wrap(~age)
+
+
+dev.off()
+
