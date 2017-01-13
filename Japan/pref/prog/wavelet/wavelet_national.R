@@ -16,8 +16,8 @@ file.loc <- paste0(file.loc,num.sim,'_sim/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # coding for graph-friendly information
-age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94','95+'))))
-age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85,95),
+age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
+age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85),
                        age.print=age.print)
 sex.lookup <- c('Men','Women')
 noise.lookup <- c('white_noise','red_noise')
@@ -275,11 +275,11 @@ plot.wavelet.national.all <- function(sex.selected) {
     
     # set up grid plot
     #layout(rbind(c(1:10),c(11:20)),widths=c(rep(c(1),10)),heights=c(1,1))
-    par(mfrow=c(2,6),oma = c(0, 0, 2, 0))
+    par(mfrow=c(2,5),oma = c(0, 0, 2, 0))
     #mtext('Title for Two Plots', outer = TRUE, cex = 1.5)
     #layout(rbind(c(1:5),c(6:10)),widths=c(rep(c(1),5)),heights=c(1,1))
 
-    for(i in c(0,5,15,25,35,45,55,65,75,85,95)){
+    for(i in c(0,5,15,25,35,45,55,65,75,85)){
         
         dat.temp <- subset(dat,age==i)
     
@@ -310,7 +310,7 @@ plot.wavelet.national.all <- function(sex.selected) {
         #ifelse(!dir.exists(file.loc.12), dir.create(file.loc.12,recursive=TRUE), FALSE)
         #saveRDS(dat.export,paste0(file.loc.12,age.selected,'_',sex.lookup[sex.selected]))
         
-        tf <- ifelse(i %in% c(0,55),T,F)
+        tf <- ifelse(i %in% c(0,45),T,F)
         
         # plot wavelet analysis
         wt.image(my.w, n.levels = 250,
@@ -325,8 +325,8 @@ plot.wavelet.national.all <- function(sex.selected) {
         #abline(h=log(as.numeric(max.spectrum.period))/log(2))
         #mtext(text = as.character(round(max.spectrum.period)), side = 4, at = log(max.spectrum.period)/log(2), las = 1, line = 0.5)
         # manually fix significant ages
-        if(sex.selected==1){age.sig <- c(0,15,35,45,55,65,75,85,95)}
-        if(sex.selected==2){age.sig <- c(0,35,45,55,65,75,85,95)}
+        if(sex.selected==1){age.sig <- c(0,15,35,45,55,65,75,85)}
+        if(sex.selected==2){age.sig <- c(0,35,45,55,65,75,85)}
         if(i %in% age.sig){
         box(lty = 1, lwd=5, col = 'black')
         }
@@ -454,25 +454,25 @@ dev.off()
 
 # output national wavelet files sex separately
 pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_males_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-mapply(plot.wavelet.national,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85,95))
+mapply(plot.wavelet.national,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
 pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_females_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-mapply(plot.wavelet.national,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85,95))
+mapply(plot.wavelet.national,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
 # output national wavelet files split time period
 pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_split_time_males_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-mapply(plot.wavelet.national.split,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85,95))
+mapply(plot.wavelet.national.split,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
 pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_split_time_females_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-mapply(plot.wavelet.national.split,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85,95))
+mapply(plot.wavelet.national.split,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
 # output national wavelet files sex together
 pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/,'wavelet_national_mf_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-mapply(plot.wavelet.national.sex,age=c(0,5,15,25,35,45,55,65,75,85,95))
+mapply(plot.wavelet.national.sex,age=c(0,5,15,25,35,45,55,65,75,85))
 dev.off()
 
 

@@ -106,7 +106,7 @@ dat.merged <- merge(dat.mort.nat,dat.pop.nat.complete,by=c('year','month','age',
 
 # add agegroup groupings
 dat.age <- data.frame(  age=c(0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100),
-                        age.new=c(0,5,5,15,15,25,25,35,35,45,45,55,55,65,65,75,75,85,85,95,95))
+                        age.new=c(0,5,5,15,15,25,25,35,35,45,45,55,55,65,65,75,75,85,85,85,85))
 dat.merged <- merge(dat.merged,dat.age,by='age',all.x=1)
 
 # summarise by age group

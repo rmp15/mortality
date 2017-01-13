@@ -10,9 +10,9 @@ clear
 
 declare -i start=1981
 declare -i end=2009
-declare -a numsims=(1 10 100)
+declare -a numsims=(100)
 declare -i sig=5
-declare -a noises=(2 1)
+declare -a noises=(1 2)
 declare country="Japan"
 
 #################################################
