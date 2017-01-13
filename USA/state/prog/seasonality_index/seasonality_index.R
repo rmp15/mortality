@@ -487,6 +487,8 @@ plot.function.diff.seas.sig.5 <- function(shape.selected) {
     geom_point(data=subset(lin.reg.grad,sig.test.5==1),fill='blue',aes(shape=as.factor(sex),x=(start.value/100),y=(end.value/100)),size=8) +
     geom_point(data=subset(lin.reg.grad,sex==1|2),aes(shape=as.factor(sex), color=as.factor(age),x=(start.value/100),y=(end.value/100)),size=6) +
     geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
+    
+    
     scale_x_continuous(name=paste0('Seasonal excess mortality in ',year.start),labels=percent,limits=c(0,(50/100))) +
     scale_y_continuous(name=paste0('Seasonal excess mortality in ',year.end),labels=percent,limits=c(0,(50/100))) +
     scale_shape_manual(values=c(16,shape.selected),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
@@ -559,11 +561,13 @@ plot.function.diff.seas.sig.5 <- function(shape.selected) {
     geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
     scale_x_continuous(name=paste0('Seasonal excess mortality in ',year.start),labels=percent,limits=c(0,(50/100))) +
     scale_y_continuous(name=paste0('Seasonal excess mortality in ',year.end),labels=percent,limits=c(0,(50/100))) +
+    geom_hline(linetype=2, yintercept = seq(0,0.5,0.1), alpha=0.2) +
+    geom_vline(linetype=2, xintercept = seq(0,0.5,0.1), alpha=0.2) +
     scale_shape_manual(values=c(16,shape.selected),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
     scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),values=age.colours,guide = guide_legend(title = 'Age group:')) +
     #guides(col = guide_legend(nrow = 1, byrow = TRUE)) +
     theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"),
-    axis.line.y = element_line(colour = "black"),rect = element_blank())
+    axis.line.y = element_line(colour = "black"),rect = element_blank(),legend.background = element_rect(fill = "grey95"))
     )
 }
 
@@ -635,25 +639,27 @@ dev.off()
 # REGIONAL PLOTS (IN PROGRESS)
 ######################################################################
 
-pdf(paste0(file.loc.regional,'seasonality_index_regional_male_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-ggplot(data=subset(lin.reg.grad.region, sex==1 &  climate_region!='Northern_Rockies_and_Plains')) +
-geom_point(aes(x=start.value,y=end.value,color=as.factor(climate_region))) +
-geom_vline(xintercept=0,linetype=2) +
-geom_abline(slope=1,intercept=0,linetype=2) +
-geom_hline(yintercept=0,linetype=2) +
-ggtitle('Men') +
-facet_wrap(~age)
-dev.off()
 
-pdf(paste0(file.loc.regional,'seasonality_index_regional_female_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-ggplot(data=subset(lin.reg.grad.region, sex==2 &  climate_region!='Northern_Rockies_and_Plains')) +
-geom_point(aes(x=start.value,y=end.value,color=as.factor(climate_region))) +
-geom_vline(xintercept=0,linetype=2) +
-geom_abline(slope=1,intercept=0,linetype=2) +
-geom_hline(yintercept=0,linetype=2) +
-ggtitle('Women') +
-facet_wrap(~age)
-dev.off()
+
+#pdf(paste0(file.loc.regional,'seasonality_index_regional_male_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+#ggplot(data=subset(lin.reg.grad.region, sex==1 &  climate_region!='Northern_Rockies_and_Plains')) +
+#geom_point(aes(x=start.value,y=end.value,color=as.factor(climate_region))) +
+#geom_vline(xintercept=0,linetype=2) +
+#geom_abline(slope=1,intercept=0,linetype=2) +
+#geom_hline(yintercept=0,linetype=2) +
+#ggtitle('Men') +
+#facet_wrap(~age)
+#dev.off()
+
+#pdf(paste0(file.loc.regional,'seasonality_index_regional_female_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+#ggplot(data=subset(lin.reg.grad.region, sex==2 &  climate_region!='Northern_Rockies_and_Plains')) +
+#geom_point(aes(x=start.value,y=end.value,color=as.factor(climate_region))) +
+#geom_vline(xintercept=0,linetype=2) +
+#geom_abline(slope=1,intercept=0,linetype=2) +
+#geom_hline(yintercept=0,linetype=2) +
+#ggtitle('Women') +
+#facet_wrap(~age)
+#dev.off()
 
 # against climate
 
@@ -664,6 +670,13 @@ dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(age==35 & sex==1))
 dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(age==5 & sex==2))
 dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(age==25 & sex==2))
 dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(age==15 & sex==2))
+
+# fix names of climate regions
+dat.mort.climate.fixed$climate_region <- gsub('_',' ', dat.mort.climate.fixed$climate_region)
+
+# set colour scheme for climate colour map
+#map.climate.colour <- colorRampPalette(rev(brewer.pal(9,"Accent")[c(1:3,5,6)]))(length(unique(dat.mort.climate.fixed$climate_region)))
+map.climate.colour <- colorRampPalette(c("red","hotpink","brown","navy","cyan","green","orange"))(20)[c(10,12,13,15,18,19,20,1,5)]
 
 pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_fixed_com_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
 #ggplot() +
@@ -681,17 +694,18 @@ pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_fixed_c
 
 
 ggplot() +
-geom_point(data=subset(dat.mort.climate.fixed, sex==1|2),aes(shape=as.factor(sex),x=end.value.climate,y=end.value.mort,color=as.factor(climate_region))) +
+geom_point(data=subset(dat.mort.climate.fixed, sex==1|2),aes(shape=as.factor(sex),x=end.value.climate,y=end.value.mort/100,color=as.factor(climate_region)),size=2) +
 scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
-#xlim(c(0,15)) + ylim(c(-10,75)) +
-xlab(paste0('Temperature difference between maximum and minimum months')) +
-ylab(paste0('Mortality excess')) +
-geom_vline(xintercept=0,linetype=2) +
-geom_hline(yintercept=0,linetype=2) +
-#ggtitle(paste0('Seasonal excess mortality against ',dname,'.',metric,' in ',year.end.2)) +
+scale_x_continuous(name=expression(paste("Temperature difference (",degree,"C) between maximum and minimum months"))) +
+scale_y_continuous(name=paste0('Seasonal excess mortality in ',year.end.2),labels=percent) +
+geom_hline(linetype=2, yintercept = seq(-1,1,0.1), alpha=0.2) +
+#geom_vline(linetype=2, xintercept = seq(-100,100,10), alpha=0.2) +
+geom_vline(xintercept=0,linetype=1) +
+geom_hline(yintercept=0,linetype=1) +
 facet_wrap(~age.print) +
-scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
-theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),rect = element_blank())
+scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Region:')) +
+theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),rect = element_blank(),legend.background = element_rect(fill = "grey95"))
+
 
 
 #ggplot() +
@@ -726,7 +740,6 @@ theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bott
 
 dev.off()
 
-
 # DYNAMIC MAX/MIN
 
 # remove com data that doesn't meet wavelet criteria (automate?)
@@ -735,7 +748,7 @@ dat.mort.climate <- subset(dat.mort.climate,!(age==5 & sex==2))
 dat.mort.climate <- subset(dat.mort.climate,!(age==25 & sex==2))
 dat.mort.climate <- subset(dat.mort.climate,!(age==15 & sex==2))
 
-pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+#pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
 #ggplot() +
 #geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=start.value.climate,y=start.value.mort,color=as.factor(climate_region))) +
 #scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
@@ -749,31 +762,18 @@ pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_',year.
 #scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
 #theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),rect = element_blank())
 
-ggplot() +
-geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=end.value.climate,y=end.value.mort,color=as.factor(climate_region))) +
-scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
-#xlim(c(0,15)) + ylim(c(-10,75)) +
-xlab(paste0('Temperature difference between maximum and minimum months')) +
-ylab(paste0('Mortality excess')) +
-geom_vline(xintercept=0,linetype=2) +
-geom_hline(yintercept=0,linetype=2) +
+#ggplot() +
+#geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=end.value.climate,y=end.value.mort/100,color=as.factor(climate_region))) +
+#scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
+#ylim(c(-30,50)) +
+#xlab(paste0('Temperature difference between maximum and minimum months')) +
+#ylab(paste0('Seasonal excess mortality in ',year.end.2)) +
+#scale_x_continuous(name=expression(paste("Temperature difference (",degree,"C) between maximum and minimum months"))) +
+#scale_y_continuous(name=paste0('Seasonal excess mortality in ',year.end.2),labels=percent) +
+#geom_vline(xintercept=0,linetype=2) +
+#geom_hline(yintercept=0,linetype=2) +
 #ggtitle(paste0('Seasonal excess mortality against ',dname,'.',metric,' in ',year.end.2)) +
-facet_wrap(~age.print) +
-scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
-theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),rect = element_blank())
-
-
-#ggplot() +
-#geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=diff.climate,y=diff.mort,color=as.factor(climate_region))) +
-#scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
-#xlim(c(-15,5)) + #ylim(c(-10,75)) +
-#xlab(paste0('Change in temperature excess from ',year.start.2,' to ', year.end.2)) +
-#ylab(paste0('Change in mortality excess from ',year.start.2,' to ', year.end.2)) +
-#geom_vline(xintercept=0,linetype=2) +
-#geom_hline(yintercept=0,linetype=2) +
-#geom_abline(slope=1,intercept=0,linetype=2) +
-#ggtitle(paste0('Change in seasonal excess mortality against change in ',dname,'.',metric,' from ',year.start.2,' to ',year.end.2)) +
-#facet_wrap(~age) +
+#facet_wrap(~age.print) +
 #scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
 #theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),rect = element_blank())
 
@@ -793,5 +793,20 @@ theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bott
 #theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),rect = element_blank())
 
 
-dev.off()
+#ggplot() +
+#geom_point(data=subset(dat.mort.climate, sex==1|2),aes(shape=as.factor(sex),x=diff.climate,y=diff.mort,color=as.factor(climate_region))) +
+#scale_shape_manual(values=c(16,17),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
+#xlim(c(-15,5)) + #ylim(c(-10,75)) +
+#xlab(paste0('Change in temperature excess from ',year.start.2,' to ', year.end.2)) +
+#ylab(paste0('Change in mortality excess from ',year.start.2,' to ', year.end.2)) +
+#geom_vline(xintercept=0,linetype=2) +
+#geom_hline(yintercept=0,linetype=2) +
+#geom_abline(slope=1,intercept=0,linetype=2) +
+#ggtitle(paste0('Change in seasonal excess mortality against change in ',dname,'.',metric,' from ',year.start.2,' to ',year.end.2)) +
+#facet_wrap(~age) +
+#scale_colour_manual(values=age.colours,guide = guide_legend(title = 'Climate region:')) +
+#theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),rect = element_blank())
+
+
+#dev.off()
 
