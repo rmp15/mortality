@@ -27,7 +27,7 @@ clear
 echo "starting nationalised wavelet analysis for $country, years $start - $end";
 
 # runs wavelet analysis
-Rscript ~/git/mortality/Japan/pref/prog/wavelet/wavelet_national.R $start $end $numsim $sig $noise
+Rscript ~/git/mortality/Japan/pref/prog/wavelet/wavelet_national.R $start $end $numsim $sig $noise &
 
 done; done;
 
