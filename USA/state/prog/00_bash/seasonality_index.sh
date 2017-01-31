@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # this script
-# runs a nationalised wavelet analysis
-# runs a state wavelet analysis
-# processes results
-# plots results on maps etc.
+# runs seasonality index analysis
 
 clear
 
@@ -24,5 +21,5 @@ clear
 
 echo "starting seasonality index analysis for $country, years $start - $end";
 
-# runs wavelet analysis
+# runs seasonality index analysis
 Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index.R $start $end $start2 $end2 $dname $metric

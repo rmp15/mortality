@@ -433,8 +433,10 @@ lin.reg.grad <- subset(lin.reg.grad,!(age==25 & sex==2))
 
 # METHOD NOT TAKING ACCCOUNT OF POPULATION
 
-age.colours <- rev(c('#00ff00','#00dd00','#00aa00','#009900','#007700'))
-age.colours <- c(age.colours,'#ff0000','#cc0000','#990000','#660000','#330000')
+age.colours <- c('#FF1493','#B8860B','#808080','#00BFFF','#00CED1')
+age.colours <- c(age.colours,'#66CDAA','#9ACD32','#ADFF2F','#9932CC','#FF8C00')
+#age.colours <- rev(c('#00ff00','#00dd00','#00aa00','#009900','#007700'))
+#age.colours <- c(age.colours,'#ff0000','#cc0000','#990000','#660000','#330000')
 
 # plot coefficient of seasonality for each age nationally at start and end of period
 plot.function.diff.seas <- function(shape.selected) {
