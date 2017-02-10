@@ -74,6 +74,7 @@ dat.merged$state.name <- reorder(dat.merged$state.name,dat.merged$fips)
 
 # output file
 saveRDS(dat.merged,paste0(file.loc,'/mort_against_climate_',age.arg,'_',sex.arg,'_',year.start.mort.arg,'_',year.end.mort.arg,'_',dname.arg,'_',metric.arg))
+write.csv(dat.merged,paste0(file.loc,'/mort_against_climate_',age.arg,'_',sex.arg,'_',year.start.mort.arg,'_',year.end.mort.arg,'_',dname.arg,'_',metric.arg,'.csv'))
 
 #############################################
 # 1. PLOT ALL TOGETHER
