@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys
+# something
 
 # get total number of arguments
 total = len(sys.argv)
