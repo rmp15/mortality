@@ -211,7 +211,11 @@ dat.pref <- data.frame(pref=unique(dat.pop.complete$pref),pref_id=1:nrow(dat.pre
 dat.pop.complete <- merge(dat.pop.complete,dat.pref,by='pref')
 
 # interpolate missing populations using zoo and ddply package
-dat.pop.complete2 <- ddply(dat.pop.complete,.(sex,age,pref_id),function(z) (na.approx(zoo(z))))
+dat.pop.complete2 <- ddply(dat.pop.complete$population,.(sex,age,pref_id),function(z) (na.approx((z))))
+test <- ddply(dat.pop.complete,.(sex,age,pref),function(z) (sum(is.na(z))))
+test2 <- ddply(dat.pop.complete,.(sex,age,pref),function(z) (nrow(z)))
+test3 <- merge(
+
 
 # plot by age by prefecture
 ggplot(data=subset(dat.pop.complete, sex == 2 & age==60)) +
