@@ -11,14 +11,18 @@ age <- as.numeric(args[1])
 sex <- as.character(args[2])
 year.start <- as.numeric(args[3])
 year.end <- as.numeric(args[4])
-model <- as.character(args[5])
+model <- as.numeric(args[5])
 
 # selected data attributes
-age <- 85
-sex <- 'male'
-model <- '1a'
-year.start <- 1982
-year.end <- 2013
+#age <- 85
+#sex <- 'male'
+#year.start <- 1982
+#year.end <- 2013
+#model <- '1a'
+
+# models to choose from
+models <- c('1','1a','2','2a','3','3a','4','4a')
+model <- models[model]
 
 # coding for graph-friendly information
 age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
@@ -43,11 +47,9 @@ file.loc <- paste0('../../output/parameters_posterior/',year.start,'_',year.end,
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 ifelse(!dir.exists(paste0(file.loc,'statemonth_intercepts')), dir.create(paste0(file.loc,'statemonth_intercepts'), recursive=TRUE), FALSE)
 
-
 # lookup for state codes from INLA
 drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
-
 
 #######################################
 # 1. Plotting intercepts
@@ -82,7 +84,7 @@ geom_line(aes(x=ID,y=mean,color=as.factor(full_name))) +
 scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
 xlab('month') +
 ylab('state month intercept') +
-ggtitle(paste0(age,' state-month intercept')) +
+ggtitle(paste0(age,' ',sex,' state-month intercept')) +
 scale_colour_discrete(name="State") +
 guides(col = guide_legend(ncol = 10, byrow=TRUE)) +
 theme(legend.position="bottom")
