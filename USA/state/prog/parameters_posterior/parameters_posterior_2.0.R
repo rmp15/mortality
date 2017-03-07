@@ -2,6 +2,7 @@ rm(list=ls())
 
 library(INLA)
 library(ggplot2)
+library(plyr)
 
 # arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
@@ -37,7 +38,6 @@ sex.lookup <- c('Men','Women')
 file.loc <- paste0('~/data/mortality/US/state/predicted/type_',model,'/age_groups/',age,'/USA_rate_pred_type',model,'_',age,'_',sex,'_',year.start,'_',year.end,'_parameters')
 dat <- readRDS(file.loc)
 
-
 # lists of marginals
 marginals.fixed 	<- 	names(dat$marginals.fixed)
 marginals.random 	<- 	names(dat$marginals.random)
@@ -46,6 +46,7 @@ marginals.random 	<- 	names(dat$marginals.random)
 file.loc <- paste0('../../output/parameters_posterior/',year.start,'_',year.end,'/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 ifelse(!dir.exists(paste0(file.loc,'statemonth_intercepts')), dir.create(paste0(file.loc,'statemonth_intercepts'), recursive=TRUE), FALSE)
+ifelse(!dir.exists(paste0(file.loc,'statemonth_heatmaps')), dir.create(paste0(file.loc,'statemonth_heatmaps'), recursive=TRUE), FALSE)
 
 # lookup for state codes from INLA
 drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
@@ -88,6 +89,20 @@ ggtitle(paste0(age,' ',sex,' state-month intercept')) +
 scale_colour_discrete(name="State") +
 guides(col = guide_legend(ncol = 10, byrow=TRUE)) +
 theme(legend.position="bottom")
+
+dev.off()
+
+pdf(paste0(file.loc,'statemonth_heatmaps/statemonth_heatmap_',age,'_',sex,'_',model,'_',year.start,'_',year.end,'.pdf'),paper='a4r',height=0,width=0)
+
+dat.heatmap <- ddply(month3,.(fips,full_name),summarize,month=ID,rank=rank(mean))
+
+ggplot(data=dat.heatmap, aes(x=as.factor(month),y=as.factor(full_name))) +
+geom_tile(aes(fill=rank)) +
+scale_fill_gradient(low='green',high='red',guide = guide_legend(title = 'Rank')) +
+xlab('Month') +
+ylab('State') +
+scale_x_discrete(labels=month.short) +
+ggtitle(paste0(age,' ',sex,' state-month intercept ranking'))
 
 dev.off()
 
