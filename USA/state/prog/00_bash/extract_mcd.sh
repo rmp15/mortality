@@ -21,7 +21,7 @@ for year in "${years[@]}"; do
 echo "removing foreign deaths for $year";
 
 # filter deaths of people who were not residents of the USA
-Rscript ~/git/mortality/USA/state/prog/format_mort/mcd/rmv_foreign_dths.R $year
+#Rscript ~/git/mortality/USA/state/prog/format_mort/mcd/rmv_foreign_dths.R $year
 
 #################################################
 # 2. RECODE AGE
@@ -30,7 +30,7 @@ Rscript ~/git/mortality/USA/state/prog/format_mort/mcd/rmv_foreign_dths.R $year
 echo "recoding age for $year";
 
 # recode age format
-Rscript ~/git/mortality/USA/state/prog/format_mort/mcd/recode_age.R $year
+#Rscript ~/git/mortality/USA/state/prog/format_mort/mcd/recode_age.R $year
 
 #################################################
 # 3. FIX STATE CODES
@@ -39,7 +39,7 @@ Rscript ~/git/mortality/USA/state/prog/format_mort/mcd/recode_age.R $year
 echo "fixing state code for $year";
 
 # recode age format
-Rscript ~/git/mortality/USA/state/prog/format_mort/mcd/recode_state.R $year
+#Rscript ~/git/mortality/USA/state/prog/format_mort/mcd/recode_state.R $year
 
 #################################################
 # 4. FORMAT DATA FOR NEXT STAGE OF PROCESSING

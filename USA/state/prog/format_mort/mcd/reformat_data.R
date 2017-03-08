@@ -13,6 +13,9 @@ year <- as.numeric(args[1])
 # read file
 dat <- readRDS(paste0('~/data/mortality/US/state/raw/mcd/mcd',year,'_state_recode.rds'))
 
+# fix year
+dat$year <- year
+
 # filter only relevant values of interest
 dat <- dat[, c('monthdth','age','stateres_fips','sex','year')]
 
