@@ -10,8 +10,8 @@ args <- commandArgs(trailingOnly=TRUE)
 year.start <- as.numeric(args[1])
 year.end <- as.numeric(args[2])
 
-# gender state and age lookup
-gender.lookup <- c('Men','Women')
+# add sourced data
+source('../../data/objects/objects.R')
 
 # load population data
 filename <- paste0('../../data/population/original/datpopjapan20160307')
@@ -205,17 +205,16 @@ rownames(dat.pop.complete) <- 1:nrow(dat.pop.complete)
 dat.pop.complete$pref_IHME <- NULL
 
 # create a lookup table of prefectures and create unique numerical lookup
-dat.pref <- data.frame(pref=unique(dat.pop.complete$pref),pref_id=1:nrow(dat.pref))
+dat.pref <- data.frame(pref=unique(dat.pop.complete$pref))
+dat.pref$pref_id=1:nrow(dat.pref)
 
 # merge with population complete table
 dat.pop.complete <- merge(dat.pop.complete,dat.pref,by='pref')
 
 # interpolate missing populations using zoo and ddply package
-dat.pop.complete2 <- ddply(dat.pop.complete$population,.(sex,age,pref_id),function(z) (na.approx((z))))
-test <- ddply(dat.pop.complete,.(sex,age,pref),function(z) (sum(is.na(z))))
-test2 <- ddply(dat.pop.complete,.(sex,age,pref),function(z) (nrow(z)))
-test3 <- merge(
-
+dat.pop.complete <- ddply(dat.pop.complete[,c('year','month','sex','age','pref_id','population')],.(sex,age,pref_id), function(z) (na.approx((zoo(z)))))
+#test <- ddply(dat.pop.complete,.(sex,age,pref),function(z) (sum(is.na(z))))
+#test2 <- ddply(dat.pop.complete,.(sex,age,pref),function(z) (nrow(z)))
 
 # plot by age by prefecture
 ggplot(data=subset(dat.pop.complete, sex == 2 & age==60)) +
