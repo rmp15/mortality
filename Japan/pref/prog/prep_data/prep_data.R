@@ -213,10 +213,87 @@ dat.pop.complete <- merge(dat.pop.complete,dat.pref,by='pref')
 
 # interpolate missing populations using zoo and ddply package
 dat.pop.complete <- ddply(dat.pop.complete[,c('year','month','sex','age','pref_id','population')],.(sex,age,pref_id), function(z) (na.approx((zoo(z)))))
-#test <- ddply(dat.pop.complete,.(sex,age,pref),function(z) (sum(is.na(z))))
-#test2 <- ddply(dat.pop.complete,.(sex,age,pref),function(z) (nrow(z)))
 
-# plot by age by prefecture
-ggplot(data=subset(dat.pop.complete, sex == 2 & age==60)) +
-geom_point(aes(x=year,y=population,color=as.factor(pref))) +
-theme_bw()
+############################
+# organise mortality data
+############################
+
+# rename columns and add pref id
+dat.mort <- rename(dat.mort,c('deathyear'='year','deathmonth'='month','age5'='age'))
+dat.mort <- merge(dat.mort,dat.pref)
+
+# create list of prefecture ids to create a complete grid
+pref_ids <- unique(dat.pref$pref_id)
+
+# rename sexes
+dat.mort$sex <- as.numeric(as.character(revalue(dat.mort$sex, c("Male"="1", "Female"="2"))))
+
+# create new complete grid and merge
+complete.grid <- expand.grid(year=years, month=months,sex=sexes,age=ages, pref_id=pref_ids)
+dat.mort.complete <- merge(complete.grid,dat.mort,by=c('year','month','sex','age','pref_id'),all.x=TRUE)
+
+# replace NA deaths with zeroes
+dat.mort.complete$deaths <- ifelse(is.na(dat.mort.complete$deaths)==TRUE,0,dat.mort.complete$deaths)
+
+# remove unknown records
+dat.mort.complete <- na.omit(dat.mort.complete)
+
+# leap year test
+is.leapyear=function(year){
+    return(((year %% 4 == 0) & (year %% 100 != 0)) | (year %% 400 == 0))
+}
+
+dat.mort.complete$leap <- as.integer(is.leapyear(dat.mort.complete$year))
+
+# adjust deaths to a 31-day month
+# 30-day months = April, June, September, November (4,6,9,11)
+# 31-day months = January, March, May, July, August, October, December (1,3,5,7,8,10,12)
+# 28/29-day months = Februray (2)
+dat.mort.complete$deaths.adj <- ifelse(dat.mort.complete$month %in% c(1,3,5,7,8,10,12), dat.mort.complete$deaths,
+ifelse(dat.mort.complete$month %in% c(4,6,9,11), dat.mort.complete$deaths*(31/30),
+ifelse((dat.mort.complete$month==2 & dat.mort.complete$leap==0), dat.mort.complete$deaths*(31/28),
+ifelse((dat.mort.complete$month==2 & dat.mort.complete$leap==1), dat.mort.complete$deaths*(31/29),
+'ERROR'
+))))
+
+# remove IHME and pref column
+dat.mort.complete$pref_IHME <- NULL
+
+dat.mort.complete$deaths.adj <- as.numeric(dat.mort.complete$deaths.adj)
+
+############################
+# merge population and mortality data
+############################
+
+#FIX FROM HERE
+
+dat.merged <- merge(dat.mort.complete,dat.pop.complete,by=c('year','month','age','sex','pref_id'),all.x=1)
+
+# add agegroup groupings
+dat.age <- data.frame(  age=c(0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100),
+                        age.new=c(0,5,5,15,15,25,25,35,35,45,45,55,55,65,65,75,75,85,85,85,85))
+dat.merged <- merge(dat.merged,dat.age,by='age',all.x=1)
+
+# summarise by age group
+dat.merged <- ddply(dat.merged,.(age.new,sex,year,month,pref_id),summarize,deaths.adj=sum(deaths.adj),population=sum(population))
+
+# rename columns
+dat.merged <- rename(dat.merged,c('age.new'='age'))
+
+# reorder complete file
+dat.merged <- dat.merged[order(dat.merged$age,dat.merged$sex,dat.merged$sex,dat.merged$year,dat.merged$month),]
+rownames(dat.merged) <- 1:nrow(dat.merged)
+
+# only keep 1981-2009
+dat.merged <- subset(dat.merged,year %in% c(1981:2009))
+
+# calculate death rates
+dat.merged$rate.adj <- with(dat.merged,deaths.adj/population)
+
+# OUTPUT
+
+# create directory for output
+file.loc <- paste0('../../output/prep_data/national/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
+
+saveRDS(dat.merged,paste0(file.loc,'datjp_nat_rate_',year.start,'_',year.end))
