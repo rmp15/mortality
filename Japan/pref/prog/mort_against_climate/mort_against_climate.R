@@ -37,26 +37,23 @@ dat <- readRDS(paste0('../../output/prep_data/datjp_pref_rate_',year.start.mort.
 dat <- subset(dat, year %in% years & sex == sex.arg & age== age.arg)
 
 # load climate data and filter for relevant years
-dat.climate <- readRDS(paste0('~/git/climate/countries/USA/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/state_weighted_summary_',metric.arg,'_',dname.arg,'_',year.start.clim.arg,'_',year.end.clim.arg,'.rds'))
+dat.climate <- readRDS(paste0('~/git/climate/countries/Japan/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/state_weighted_summary_',metric.arg,'_',dname.arg,'_',year.start.clim.arg,'_',year.end.clim.arg,'.rds'))
 dat.climate <- subset(dat.climate, year %in% years)
-dat.climate$state.fips <- as.numeric(dat.climate$state.fips)
+dat.climate$state_id <- as.numeric(dat.climate$state_id)
+
+# load prefecture lookup and merge with climate data
+dat.pref <- read.csv('../../data/pref/pref_lookup.csv')
+dat.climate <- merge(dat.climate,dat.pref,by='state_id')
 
 # merge mortality and climate data and reorder
-dat.merged <- merge(dat,dat.climate,by.x=c('sex','age','year','month','fips'),by.y=c('sex','age','year','month','state.fips'),all.x=TRUE)
-dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
-
-# exclude Hawaii and Alaska
-state.lookup <- subset(state.lookup, fips !=2) 
-state.lookup <- subset(state.lookup, fips !=15)
-state.names <- as.character(state.lookup$full_name)
-dat.merged <- subset(dat.merged, fips !=2) 
-dat.merged <- subset(dat.merged, fips !=15) 
+dat.merged <- merge(dat,dat.climate,by.x=c('year','month','pref_id'),by.y=c('year','month','pref_id'),all.x=TRUE)
+dat.merged <- dat.merged[order(dat.merged$pref_id,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
 
 # generalise variable name
 names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
 
 # rename rows and remove unnecessary columns
-dat.merged$id <- NULL
+dat.merged$X <- NULL
 rownames(dat.merged) <- 1:nrow(dat.merged)
 
 library(ggplot2)
@@ -65,9 +62,6 @@ library(plyr)
 # variables for pretty and easy to read plots
 dat.merged$month.short <- mapvalues(dat.merged$month,from=unique(dat.merged$month),to=month.short)
 dat.merged$month.short <- reorder(dat.merged$month.short,dat.merged$month)
-# variables for pretty and easy to read plots
-dat.merged$state.name <- mapvalues(dat.merged$fips,from=unique(dat.merged$fips),to=state.names)
-dat.merged$state.name <- reorder(dat.merged$state.name,dat.merged$fips)
 
 # output file
 saveRDS(dat.merged,paste0(file.loc,'/mort_against_climate_',age.arg,'_',sex.arg,'_',year.start.mort.arg,'_',year.end.mort.arg,'_',dname.arg,'_',metric.arg))
@@ -116,7 +110,7 @@ stat_smooth(aes(x=variable,y=rate.adj*100000)) +
 ggtitle(paste0('Death rates by state ',year.start.arg,'-',year.end.arg,' against ',dname.arg,' ',metric.arg,' : ',sex.lookup[sex.arg],' ',age.arg)) +
 xlab(paste0(dname.arg,' ',metric.arg)) +
 ylab('death rate (per 100,000)') +
-facet_wrap(~state.name) +
+facet_wrap(~pref) +
 scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
 theme_bw()
 dev.off()
@@ -140,16 +134,16 @@ dev.off()
 #############################################
 
 pdf(paste0(file.loc,'/','deaths_rates_states_month_fit_lm_',year.start.arg,'_',year.end.arg,'_',dname.arg,'_',metric.arg,'_',sex.lookup[sex.arg],'_',age.arg,'.pdf'),paper='a4r',height=0,width=0)
-for(i in unique(dat.merged$fips)) {
+for(i in unique(dat.merged$state_id)) {
 print(
-ggplot(data=subset(dat.merged,fips==i)) + 
+ggplot(data=subset(dat.merged,state_id==i)) +
 geom_point(aes(x=variable,y=rate.adj*100000,alpha=0.2,color=factor(month))) +
 stat_smooth(se=FALSE,method='lm',span=0.8, aes(x=variable,y=rate.adj*100000,color=factor(month))) +
 ggtitle(paste0('Death rates by state fitted by month ',year.start.arg,'-',year.end.arg,' against ',dname.arg,' ',metric.arg,' : ',sex.lookup[sex.arg],' ',age.arg)) +
 xlab(paste0(dname.arg,' ',metric.arg)) +
 ylab('death rate (per 100,000)') +
 scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
-facet_wrap(~state.name) +
+facet_wrap(~pref) +
 theme_bw()
 )
 }
@@ -159,21 +153,21 @@ dev.off()
 # 5b. PLOT BY STATE WITH MONTHS FIT (LOESS)
 #############################################
 
-pdf(paste0(file.loc,'/','deaths_rates_states_month_fit_loess_',year.start.arg,'_',year.end.arg,'_',dname.arg,'_',metric.arg,'_',sex.lookup[sex.arg],'_',age.arg,'.pdf'),paper='a4r',height=0,width=0)
-for(i in unique(dat.merged$fips)) {
-print(
-ggplot(data=subset(dat.merged,fips==i)) + 
-geom_point(aes(x=variable,y=rate.adj*100000,alpha=0.2,color=factor(month))) +
-stat_smooth(se=FALSE,span=0.8, aes(x=variable,y=rate.adj*100000,color=factor(month))) +
-ggtitle(paste0('Death rates by state fitted by month ',year.start.arg,'-',year.end.arg,' against ',dname.arg,' ',metric.arg,' : ',sex.lookup[sex.arg],' ',age.arg)) +
-xlab(paste0(dname.arg,' ',metric.arg)) +
-ylab('death rate (per 100,000)') +
-scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
-facet_wrap(~state.name) +
-theme_bw()
-)
-}
-dev.off()
+#pdf(paste0(file.loc,'/','deaths_rates_states_month_fit_loess_',year.start.arg,'_',year.end.arg,'_',dname.arg,'_',metric.arg,'_',sex.lookup[sex.arg],'_',age.arg,'.pdf'),paper='a4r',height=0,width=0)
+#for(i in unique(dat.merged$state_id)) {
+#print(
+#ggplot(data=subset(dat.merged,state_id==i)) +
+#geom_point(aes(x=variable,y=rate.adj*100000,alpha=0.2,color=factor(month))) +
+#stat_smooth(se=FALSE,span=0.8, aes(x=variable,y=rate.adj*100000,color=factor(month))) +
+#ggtitle(paste0('Death rates by state fitted by month ',year.start.arg,'-',year.end.arg,' against ',dname.arg,' ',metric.arg,' : ',sex.lookup[sex.arg],' ',age.arg)) +
+#xlab(paste0(dname.arg,' ',metric.arg)) +
+#ylab('death rate (per 100,000)') +
+#scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
+#facet_wrap(~pref) +
+#theme_bw()
+#)
+#}
+#dev.off()
 
 #############################################
 # 5. PLOT BY MONTH WITH STATES SEPARATE FIT
