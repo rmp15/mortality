@@ -12,8 +12,7 @@ type.arg <- as.numeric(args[5])
 cluster.arg <- as.numeric(args[6])
 dname.arg <- as.character(args[7])
 metric.arg <- as.character(args[8])
-knot.low.arg <- as.numeric(args[9])
-knot.high.arg <- as.numeric(args[10])
+
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','4a')

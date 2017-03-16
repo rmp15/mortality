@@ -35,7 +35,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     # variables for INLA model
     
     dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
-    dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
+    dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
     dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
     dat.inla$e <- 1:nrow(dat.inla)
     
@@ -44,7 +44,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     if(type==1){
         
         # 1. Type I space-time interaction
-        fml  <- deaths ~
+        fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
         year.month +                                                            		# global slope
@@ -55,8 +55,8 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
         # climate specific terms
-        f(month4, year.month2, model="rw1",cyclic = TRUE, group=ID)+                    # state-month specific climate slope
-        #f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID)+                       # state-month specific climate slope
+        #f(month5, variable, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
         # random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # overdispersion term
@@ -66,7 +66,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     if(type==2){
         
         # 1. Type Ia space-time interaction
-        fml<- deaths ~
+        fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
         year.month +                                                           			# global slope
@@ -80,8 +80,8 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
         # climate specific terms
-        f(month4, year.month2, model="rw1",cyclic = TRUE, group=ID)+                    # state-month specific climate slope
-        #f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID)+                       # state-month specific climate slope
+        #f(month5, variable, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
         # random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # overdispersion term
@@ -91,7 +91,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     if(type==3) {
         
         # 2. Type II space-time interaction
-        fml <- deaths ~
+        fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
         year.month +                                                            		# global slope
@@ -102,8 +102,8 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
         # climate specific terms
-        f(month4, year.month2, model="rw1",cyclic = TRUE, group=ID)+                    # state-month specific climate slope
-        #f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID)+                       # state-month specific climate slope
+        #f(month5, variable, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
         # random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # space-time interaction
@@ -118,7 +118,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     if(type==4) {
         
         # 2. Type IIa space-time interaction
-        fml <- deaths ~
+        fml  <- deaths.adj ~
         # global terms
         1 +                                                                             # global intercept
         year.month +                                                                    # global slope
@@ -132,8 +132,8 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
         f(ID, model="bym",graph=USA.adj) +                                              # state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                                # state specific slope (BYM)
         # climate specific terms
-        f(month4, year.month2, model="rw1",cyclic = TRUE, group=ID)+                    # state-month specific climate slope
-        #f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID)+                       # state-month specific climate slope
+        #f(month5, variable, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
         # random walk across time
         f(year.month3, model="rw1") +                                                   # rw1
         # space-time interaction
@@ -148,7 +148,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     if(type==5) {
         
         # 3. Type III space-time interaction
-        fml <- deaths ~
+        fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
         year.month +                                                           		 	# global slope
@@ -159,8 +159,8 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
         # climate specific terms
-        f(month4, year.month2, model="rw1",cyclic = TRUE, group=ID)+                    # state-month specific climate slope
-        #f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID)+                       # state-month specific climate slope
+        #f(month5, variable, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
         # random walk terms
         f(year.month3, model="rw1") +                                           		# rw1
         #f(year.month4,model="iid", group=ID3,                                          # type III space-time interaction
@@ -175,7 +175,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     if(type==6) {
         
         # 3. Type IIIa space-time interaction
-        fml <- deaths ~
+        fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
         year.month +                                                           		 	# global slope
@@ -189,8 +189,8 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
         # climate specific terms
-        f(month4, year.month2, model="rw1",cyclic = TRUE, group=ID)+                    # state-month specific climate slope
-        #f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID)+                       # state-month specific climate slope
+        #f(month5, variable, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
         #f(year.month3, model="rw1") +                                           		# rw1 across time (put back?)
         #f(year.month4,model="iid", group=ID3,                                          # type III space-time interaction
         f(year.month4,model="rw1", group=ID3,                                           # variation on model
@@ -205,7 +205,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
         
         # 4. Type IV space-time interaction
         
-        fml <- deaths ~
+        fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
         year.month +                                                            		# global slope
@@ -216,8 +216,8 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
         f(ID, model="bym",graph=USA.adj) +                                     		 	# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
         # climate specific terms
-        f(month4, year.month2, model="rw1",cyclic = TRUE, group=ID)+                    # state-month specific climate slope
-        #f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID)+                       # state-month specific climate slope
+        #f(month5, variable, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
         # random walk terms
         f(year.month3, model="rw1") +                                           		# rw1
         f(ID3,model="besag", graph=USA.adj,                                     		# type IV space-time interaction
@@ -270,7 +270,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     recipients <- c("r.parks15@imperial.ac.uk")
     send.mail(from = sender,
     to = recipients,
-    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,' done'),
+    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,' non-pw done'),
     body = "Well done",
     smtp = list(host.name = "smtp.gmail.com", port = 465,
     user.name = "emailr349@gmail.com",
@@ -330,7 +330,7 @@ dat.inla$e <- 1:nrow(dat.inla)
 if(type==1){
 
 # 1. Type I space-time interaction
-fml  <- deaths ~
+fml  <- deaths.adj ~
 	# global terms
         1 +                                                                     		# global intercept
         year.month +                                                            		# global slope
@@ -352,7 +352,7 @@ fml  <- deaths ~
 if(type==2){
 
 # 1. Type Ia space-time interaction
-fml<- deaths ~
+fml  <- deaths.adj ~
 	# global terms
         1 +                                                                     		# global intercept
         year.month +                                                           			# global slope
@@ -377,7 +377,7 @@ fml<- deaths ~
 if(type==3) {
 
 # 2. Type II space-time interaction
-fml <- deaths ~
+fml<- deaths.adj ~
 	# global terms
         1 +                                                                     		# global intercept
         year.month +                                                            		# global slope
@@ -404,7 +404,7 @@ fml <- deaths ~
 if(type==4) {
 
 # 2. Type IIa space-time interaction
-fml <- deaths ~
+fml<- deaths.adj ~
 	# global terms
         1 +                                                                             # global intercept
         year.month +                                                                    # global slope
@@ -434,7 +434,7 @@ fml <- deaths ~
 if(type==5) {
 
 # 3. Type III space-time interaction
-fml <- deaths ~
+fml<- deaths.adj ~
 	# global terms
         1 +                                                                     		# global intercept
         year.month +                                                           		 	# global slope
@@ -460,7 +460,7 @@ fml <- deaths ~
 if(type==6) {
 
 # 3. Type IIIa space-time interaction
-fml <- deaths ~
+fml<- deaths.adj ~
 	# global terms
         1 +                                                                     		# global intercept
         year.month +                                                           		 	# global slope
@@ -490,7 +490,7 @@ if(type==7) {
 
 # 4. Type IV space-time interaction
 
-fml <- deaths ~
+fml<- deaths.adj ~
 	# global terms
         1 +                                                                     		# global intercept
         year.month +                                                            		# global slope
