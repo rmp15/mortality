@@ -62,4 +62,4 @@ library(INLA)
 source('../models/INLA/03_spatiotemporal/inla_functions.R')
 
 # input arguments into function to perform inference
-mapply(inla.function.climate,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.start.arg,type=type.arg,cluster=cluster.arg)
+mapply(inla.function.climate,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.end.arg,type=type.arg,cluster=cluster.arg)
