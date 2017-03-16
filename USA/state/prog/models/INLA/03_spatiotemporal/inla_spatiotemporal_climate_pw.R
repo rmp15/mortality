@@ -42,15 +42,25 @@ dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat
 dat.merged$id <- NULL
 rownames(dat.merged) <- 1:nrow(dat.merged)
 
-# generalise climate variable name
+# construct variables for three-piece linear
 names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
+dat.merged$variable.low <- dat.merged$variable.high <- dat.merged$variable
+
+# set knot points for low and high (will need to look at literature for this)
+knot.low <- knot.low.arg
+knot.high <- knot.high.arg
+
+# adjust variables to create correct data for slopes
+dat.merged$variable.low  <- knot.low - pmin(knot.low, dat.merged$variable)
+dat.merged$variable.high <- pmax(knot.high, dat.merged$variable) - knot.high
 
 library(dplyr)
 
 # lookups
-source('../../data/objects/objects.R')
 age.filter <- unique(dat.inla.load$age)
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
+sex.lookup <- c('male','female')
+month.lookup <- c('January','February','March','April','May','June','July','August','September','October','November','December')
 
 # adjacency matrix with connections Hawaii -> California, Alaska -> Washington
 USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"
@@ -63,4 +73,4 @@ library(INLA)
 source('../models/INLA/03_spatiotemporal/inla_functions.R')
 
 # input arguments into function to perform inference
-mapply(inla.function.climate,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.end.arg,type=type.arg,cluster=cluster.arg)
+mapply(inla.function.climate.pw,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.end.arg,type=type.arg,cluster=cluster.arg)
