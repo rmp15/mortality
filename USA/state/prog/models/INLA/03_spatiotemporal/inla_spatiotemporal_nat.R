@@ -55,5 +55,5 @@ source('../models/INLA/03_spatiotemporal/inla_functions.R')
 ################
 
 # input arguments into function to perform inference
-mapply(inla.function.nat,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.end.arg,pwl=pwl.arg,type=type.arg,
-forecast.length=forecast.length.arg,knot.year=knot.year.arg,month.dist=month.dist.arg,month.cyclic=month.cyclic.arg)
+mapply(inla.function.nat,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,year.end=year.end.arg,type=type.arg,
+        month.dist=month.dist.arg,month.cyclic=month.cyclic.arg)
