@@ -24,7 +24,7 @@ years <- year.start.arg:year.end.arg
 require(mailR)
 
 # create files for output
-ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/type_',type.selected,'/age_groups',recursive=TRUE)), FALSE)
+ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
 
 # load USA data NEED TO GENERALISE
 dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
