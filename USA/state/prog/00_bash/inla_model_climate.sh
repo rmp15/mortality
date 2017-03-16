@@ -7,17 +7,17 @@
 
 clear
 
-declare -a ages=(75 85 65 55 45 35 25 15 5 0)
-declare -a sexes=(2 1)
+declare -a ages=(75)
+declare -a sexes=(2)
 declare -a sexstrings=('male' 'female')
-declare -i model=1
+declare -i model=2
 declare -i start=1982
 declare -i end=2013
 declare country="USA"
 declare dname="t2m"
 declare metric="mean"
 #declare -a knotl=(5 10 15)
-#declare -a knoth=(20 25 30)
+#declare -a knoth=(20 25 30
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL
