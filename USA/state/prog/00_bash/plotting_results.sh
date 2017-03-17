@@ -16,22 +16,28 @@ declare country="USA"
 #Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior.R $start $end $country $model
 
 #################################################
-# 1. PLOT PARAMETERS OF POSTERIOR
+# 1. PLOT PARAMETERS OF NAT POSTERIORS
 #################################################
 
 for age in "${ages[@]}"; do
 
 for sex in "${sexes[@]}"; do
 
-Rscript ~/git/mortality/USA/state/prog/parameters_posterior/parameters_posterior_2.0.R $age $sex $start $end $model
+Rscript ~/git/mortality/USA/state/prog/parameters_posterior/parameters_posterior_nat.R $age $sex $start $end $model
 
 done; done;
 
 #################################################
-# 2. PLOT 1
+# 1. PLOT PARAMETERS OF STATE POSTERIORS
 #################################################
 
-# PLOT SOMETHING
+for age in "${ages[@]}"; do
+
+for sex in "${sexes[@]}"; do
+
+#Rscript ~/git/mortality/USA/state/prog/parameters_posterior/parameters_posterior_state.R $age $sex $start $end $model
+
+done; done;
 
 #################################################
 # 3. PLOT 2
