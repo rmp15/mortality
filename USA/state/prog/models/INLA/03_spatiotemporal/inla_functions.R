@@ -6,7 +6,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     # filter all data by sex age and month
     sex <- sex.sel
     age <- age.sel
-    fit.years <- year.start:2001
+    fit.years <- year.start:year.end
     dat.inla <- dat.inla[dat.inla$sex==sex & dat.inla$age==age & dat.inla$year %in% fit.years,]
     
     # load drawseq lookup
