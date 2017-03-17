@@ -15,7 +15,7 @@ metric.arg <- as.character(args[8])
 
 
 # types character for file strings
-types <- c('1','1a','2','2a','3','3a','4','4a')
+types <- c('1','1a','2','2a','3','3a','4','4a','1b','1c','1d','1e')
 type.selected <- types[type.arg]
 
 # range of years
