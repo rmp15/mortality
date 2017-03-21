@@ -15,7 +15,9 @@ declare -i start=1982
 declare -i end=2013
 declare country="USA"
 declare dname="t2m"
-declare metric="mean"
+#declare metric="mean"
+declare metric="number_of_min_3_day_above_99_upwaves"
+#declare metric="sd"
 #declare -a knotl=(5 10 15)
 #declare -a knoth=(20 25 30)
 
