@@ -23,7 +23,9 @@ for age in "${ages[@]}"; do
 
 for sex in "${sexes[@]}"; do
 
-Rscript ~/git/mortality/USA/state/prog/parameters_posterior/parameters_posterior_nat.R $age $sex $start $end $model
+:
+
+#Rscript ~/git/mortality/USA/state/prog/parameters_posterior/parameters_posterior_nat.R $age $sex $start $end $model
 
 done; done;
 
@@ -35,15 +37,24 @@ for age in "${ages[@]}"; do
 
 for sex in "${sexes[@]}"; do
 
+:
+
 #Rscript ~/git/mortality/USA/state/prog/parameters_posterior/parameters_posterior_state.R $age $sex $start $end $model
 
 done; done;
 
 #################################################
-# 3. PLOT 2
+# 3. PLOT PARAMETERS OF STATE CLIMATE POSTERIORS
 #################################################
 
-# PLOT SOMETHING ELSE
+for age in "${ages[@]}"; do
+
+#for sex in "${sexes[@]}"; do
+
+#Rscript ~/git/mortality/USA/state/prog/parameters_posterior/parameters_posterior_climate.R $age 1 $start 1991 10 't2m' 'mean'
+Rscript ~/git/mortality/USA/state/prog/parameters_posterior/parameters_posterior_climate.R $age 1 $start 1991 11 't2m' 'mean'
+
+done; #done;
 
 #################################################
 # 4. PLOT 3
