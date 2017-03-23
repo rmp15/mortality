@@ -229,7 +229,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     
     if(type==8){
         
-        # 1. Type Ia space-time interaction with besag state interaction terms and national variable slope
+        # 1. Type Ib space-time interaction with besag state interaction terms and national variable slope
         fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
@@ -253,7 +253,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     
     if(type==9){
         
-        # 1. Type Ia space-time interaction with besag state interaction terms and state specific variable slope
+        # 1. Type Ic space-time interaction with besag state interaction terms and state specific variable slope
         fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
@@ -277,7 +277,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     
     if(type==10){
         
-        # 1. Type Ia space-time interaction with besag state interaction terms and state-month specific variable slope (iid)
+        # 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (iid)
         fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
@@ -301,7 +301,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     
     if(type==11){
         
-        # 1. Type Ia space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
+        # 1. Type Ie space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
         fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
@@ -327,7 +327,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     
     if(type==12){
         
-        # 1. Type Ia space-time interaction with besag state interaction terms and spatially-correlated state-month specific variable slope (rw1)
+        # 1. Type If space-time interaction with besag state interaction terms and spatially-correlated state-month specific variable slope (rw1)
         fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
