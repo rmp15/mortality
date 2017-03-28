@@ -50,8 +50,6 @@ vector<Type> U = W * exp(0.5 * log_sigma2_U);
 	for (size_t i = 0; i < N; i++) nll -= dpois(deaths(i), exp(log_deaths_pred(i)), 1);
 	for (size_t i = 0; i < N; i++) mu(i) = exp(alpha + V(i) + U(i));
 
-
-
 	ADREPORT(U);
 	ADREPORT(deaths_pred);
 	ADREPORT(mu);
