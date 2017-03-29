@@ -241,6 +241,93 @@ if(model=='1e'){
         pdf(paste0(file.loc,'climate_age_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
         for(i in c(1:12)){plot.function.month.odds(2,i)}
         dev.off()
-        
+
+        # establish change in number of deaths for a slice in time (at the moment it's 2010)
+        # load death rate data
+        dat.mort <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_2013'))
+
+        # merge odds and deaths files and reorder
+        dat.merged <- merge(dat.mort,dat,by.x=c('sex','age','month','fips'),by.y=c('sex','age','ID','fips'),all.x=TRUE)
+        dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+
+        # calculate additional deaths
+        dat.merged$deaths.added <- with(dat.merged,odds.mean*rate.adj*pop.adj)
+
+        # take one year
+        dat.merged.sub <- subset(dat.merged,year==2010)
+
+        # merge selected data to map dataframe for colouring of ggplot
+        plot <- merge(USA.df,dat.merged.sub,by.x=c('STATE_FIPS'),by.y=c('fips'))
+        plot <- with(plot, plot[order(sex,age,DRAWSEQ,order),])
+
+    # function to plot posterior probability of increased odds for all months subnationally
+    plot.function.age.deaths <- function(sex.sel,age.sel) {
+    
+        # find limits for plot
+        min.plot <- ceiling(min(plot$deaths.added))
+        max.plot <- ceiling(max(plot$deaths.added))
+    
+        # attach long month names
+        plot$month.short <- mapvalues(plot$month,from=sort(unique(plot$month)),to=month.short)
+        plot$month.short <- reorder(plot$month.short,plot$month)
+    
+        # long age name for title
+        age.long <- as.character(age.code[age.code$age==age.sel,2])
+    
+        print(ggplot(data=subset(plot,sex==sex.sel & age==age.sel),aes(x=long,y=lat,group=group)) +
+        geom_polygon(aes(fill=deaths.added),color='black',size=0.01) +
+        scale_fill_gradient(low="green",high="red",guide = guide_legend(title = '')) +
+        facet_wrap(~month.short) +
+        ggtitle(sex.sel) +
+        ggtitle(paste0(age.long,' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' changes in deaths expected with one degree of warming ',' ',year.start,'-',year.end)) +
+        theme_map() +
+        theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+    
+}
+
+    # male output to pdf
+    pdf(paste0(file.loc,'climate_month_deaths_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    for(i in sort(unique(dat$age))){plot.function.age.deaths(1,i)}
+    dev.off()
+
+    # female output to pdf
+    pdf(paste0(file.loc,'climate_month_deaths_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    for(i in sort(unique(dat$age))){plot.function.age.deaths(2,i)}
+    dev.off()
+
+# function to plot posterior probability of increased odds for all months subnationally
+plot.function.month.deaths <- function(sex.sel,month.sel) {
+    
+    # find limits for plot
+    min.plot <- min(plot$deaths.added)
+    max.plot <- max(plot$deaths.added)
+    
+    # attach long month names
+    plot$age.long <- mapvalues(plot$age,from=sort(unique(plot$age)),to=as.character(age.code[,2]))
+    plot$age.long <- reorder(plot$age.long,plot$age)
+    
+    print(ggplot(data=subset(plot,sex==sex.sel & month==month.sel),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=deaths.added),color='black',size=0.01) +
+    scale_fill_gradient(low="green",high="red",guide = guide_legend(title = '')) +
+    facet_wrap(~age.long) +
+    ggtitle(sex.sel) +
+    ggtitle(paste0(month.short[month.sel],' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' changes in deaths expected with one degree of warming ',' ',year.start,'-',year.end)) +
+    theme_map() +
+    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+    
+}
+
+# male output to pdf
+pdf(paste0(file.loc,'climate_age_deaths_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+for(i in c(1:12)){plot.function.month.deaths(1,i)}
+dev.off()
+
+# female output to pdf
+pdf(paste0(file.loc,'climate_age_deaths_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+for(i in c(1:12)){plot.function.month.deaths(2,i)}
+dev.off()
+
+
+
 }
 
