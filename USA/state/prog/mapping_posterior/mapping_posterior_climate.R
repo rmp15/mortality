@@ -31,20 +31,14 @@ ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 # load the data
 dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric))
 
-# add odds parameters
-#dat$odds.mean <- (with(dat,exp(mean))-1)
-#dat$odds.ul <- (with(dat,exp(`0.025quant`))-1)
-#dat$odds.ll <- (with(dat,exp(`0.975quant`))-1)
-
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
-# for state model, plot climate parameters on map all on one page, one for men and one for women
-
 if(model=='1d'){
 
 # attach long age names
 dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
 dat$age.long <- reorder(dat$age.long,dat$age)
 
+# PARAMETER
 # function to plot
 plot.function <- function(sex.sel){
 print(ggplot(data=subset(dat,sex==sex.sel)) +
@@ -55,6 +49,7 @@ scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
 xlab('month') +
 ylab('Percentage increase in odds') +
 scale_y_continuous(labels=percent) +
+coord_cartesian(ylim = c(-0.025,0.025)) +
 ggtitle(paste0(sex.lookup2[sex.sel],' national percentage change in odds by month ',metric,' ',dname)) +
 guides(col = guide_legend(ncol = 10, byrow=TRUE)) +
 facet_wrap(~age.long) +
@@ -71,8 +66,35 @@ pdf(paste0(file.loc,'climate_month_params_female_',model,'_',year.start,'_',year
 plot.function(2)
     dev.off()
     
+# PROBABILITY OVER ODDS INCREASING FROM POSTERIOR
+# function to plot
+plot.posterior <- function(sex.sel){
+    print(ggplot(data=subset(dat,sex==sex.sel)) +
+    geom_line(aes(x=ID,y=odds.prob)) +
+    geom_hline(yintercept=0,alpha=0.5,linetype=2) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    xlab('month') +
+    ylab('Posterior probability of increase in odds') +
+    scale_y_continuous(labels=percent) +
+    ggtitle(paste0(sex.lookup2[sex.sel],' national posterior probabilites of increased odds ',metric,' ',dname)) +
+    guides(col = guide_legend(ncol = 10, byrow=TRUE)) +
+    facet_wrap(~age.long) +
+    theme(legend.position="bottom"))
 }
 
+# national posterior probability male
+pdf(paste0(file.loc,'climate_month_posterior_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+plot.posterior(1)
+dev.off()
+
+# national posterior probability female
+pdf(paste0(file.loc,'climate_month_posterior_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+plot.posterior(2)
+dev.off()
+
+}
+
+# for state model, plot climate parameters on map all on one page, one for men and one for women
 if(model=='1e'){
     
     # source map
@@ -116,7 +138,46 @@ if(model=='1e'){
         pdf(paste0(file.loc,'climate_month_params_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
         for(i in sort(unique(dat$age))){plot.function.age(2,i)}
         dev.off()
-                
+        
+        # function to plot posterior probability of increased odds for all months subnationally
+        plot.function.age.odds <- function(sex.sel,age.sel) {
+            
+            # find limits for plot
+            min.plot <- min(plot$mean)
+            max.plot <- max(plot$mean)
+            
+            # attach long month names
+            plot$month.short <- mapvalues(plot$ID,from=sort(unique(plot$ID)),to=month.short)
+            plot$month.short <- reorder(plot$month.short,plot$ID)
+            
+            # long age name for title
+            age.long <- as.character(age.code[age.code$age==age.sel,2])
+            
+            print(ggplot(data=subset(plot,sex==sex.sel & age==age.sel),aes(x=long.x,y=lat.x,group=group)) +
+            geom_polygon(aes(fill=odds.prob),color='black',size=0.01) +
+            #geom_polygon(aes(fill=cut(odds.prob, c(-Inf,seq(0.1,0.9,0.1),Inf))),color='black',size=0.01) +
+            #scale_fill_brewer(palette = "Greens") +
+            scale_fill_gradient(limits=c(0,1),low="green",high="purple",guide = guide_legend(title = ''),labels=percent) +
+            facet_wrap(~month.short) +
+            ggtitle(sex.sel) +
+            ggtitle(paste0(age.long,' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' posterior probabilites of increased odds by month for ',' ',year.start,'-',year.end)) +
+            theme_map() +
+            theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+            
+        }
+        
+        # male output to pdf
+        pdf(paste0(file.loc,'climate_month_posterior_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.age.odds(1,i)}
+        dev.off()
+        
+        # female output to pdf
+        pdf(paste0(file.loc,'climate_month_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.age.odds(2,i)}
+        dev.off()
+        
+}
+
     # function to plot age for all months subnationally
     plot.function.month <- function(sex.sel,month.sel) {
                     
@@ -147,6 +208,38 @@ if(model=='1e'){
         # female output to pdf
         pdf(paste0(file.loc,'climate_age_params_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
         for(i in c(1:12)){plot.function.month(2,i)}
+        dev.off()
+        
+        # function to plot posterior probability of increased odds for all months subnationally
+        plot.function.month.odds <- function(sex.sel,month.sel) {
+            
+            # find limits for plot
+            min.plot <- min(plot$mean)
+            max.plot <- max(plot$mean)
+            
+            # attach long month names
+            plot$age.long <- mapvalues(plot$age,from=sort(unique(plot$age)),to=as.character(age.code[,2]))
+            plot$age.long <- reorder(plot$age.long,plot$age)
+            
+            print(ggplot(data=subset(plot,sex==sex.sel & ID==month.sel),aes(x=long.x,y=lat.x,group=group)) +
+            geom_polygon(aes(fill=odds.prob),color='black',size=0.01) +
+            scale_fill_gradient(limits=c(0,1),low="green",high="purple",guide = guide_legend(title = ''),labels=percent) +
+            facet_wrap(~age.long) +
+            ggtitle(sex.sel) +
+            ggtitle(paste0(month.short[month.sel],' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' posterior probabilites of increased odds by age for ',' ',year.start,'-',year.end)) +
+            theme_map() +
+            theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+            
+        }
+        
+        # male output to pdf
+        pdf(paste0(file.loc,'climate_age_posterior_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in c(1:12)){plot.function.month.odds(1,i)}
+        dev.off()
+        
+        # female output to pdf
+        pdf(paste0(file.loc,'climate_age_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in c(1:12)){plot.function.month.odds(2,i)}
         dev.off()
         
 }
