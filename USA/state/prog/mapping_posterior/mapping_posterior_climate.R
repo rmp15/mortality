@@ -242,9 +242,12 @@ if(model=='1e'){
         for(i in c(1:12)){plot.function.month.odds(2,i)}
         dev.off()
 
-        # establish change in number of deaths for a slice in time (at the moment it's 2010)
+        # establish change in number of deaths for a slice in time (at the moment it's 2013)
         # load death rate data
         dat.mort <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_2013'))
+
+        # load the data again
+        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric))
 
         # merge odds and deaths files and reorder
         dat.merged <- merge(dat.mort,dat,by.x=c('sex','age','month','fips'),by.y=c('sex','age','ID','fips'),all.x=TRUE)
@@ -254,7 +257,33 @@ if(model=='1e'){
         dat.merged$deaths.added <- with(dat.merged,odds.mean*rate.adj*pop.adj)
 
         # take one year
-        dat.merged.sub <- subset(dat.merged,year==2010)
+        dat.merged.sub <- subset(dat.merged,year==2013)
+
+        # output a summary file with sum of additional deaths nationally by age and month
+        dat.deaths.nat <- ddply(dat.merged.sub,.(sex,age,month),summarize,deaths=as.numeric(sum(deaths.added)))
+
+        # plot for male and female
+    pdf(paste0(file.loc,'additional_deaths_nat_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+        ggplot(data=subset(dat.deaths.nat,sex==1)) +
+        geom_line(aes(x=month,y=deaths)) +
+        scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+        geom_hline(yintercept=0)+
+        facet_wrap(~age) +
+        xlab('Month') +
+        ylab('Change in deaths from unit change') +
+        theme_bw()
+        dev.off()
+
+pdf(paste0(file.loc,'additional_deaths_nat_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=subset(dat.deaths.nat,sex==2)) +
+geom_line(aes(x=month,y=deaths)) +
+scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+geom_hline(yintercept=0)+
+facet_wrap(~age) +
+xlab('Month') +
+ylab('Change in deaths from unit change') +
+theme_bw()
+dev.off()
 
         # merge selected data to map dataframe for colouring of ggplot
         plot <- merge(USA.df,dat.merged.sub,by.x=c('STATE_FIPS'),by.y=c('fips'))
@@ -264,7 +293,7 @@ if(model=='1e'){
     plot.function.age.deaths <- function(sex.sel,age.sel) {
     
         # find limits for plot
-        min.plot <- ceiling(min(plot$deaths.added))
+        min.plot <- floor(min(plot$deaths.added))
         max.plot <- ceiling(max(plot$deaths.added))
     
         # attach long month names
@@ -275,8 +304,9 @@ if(model=='1e'){
         age.long <- as.character(age.code[age.code$age==age.sel,2])
     
         print(ggplot(data=subset(plot,sex==sex.sel & age==age.sel),aes(x=long,y=lat,group=group)) +
-        geom_polygon(aes(fill=deaths.added),color='black',size=0.01) +
-        scale_fill_gradient(low="green",high="red",guide = guide_legend(title = '')) +
+        geom_polygon(aes(fill=cut(deaths.added,c(-Inf,1,10,20,Inf))),color='black',size=0.01) +
+        #scale_fill_gradient2(limits=c(min.plot,50),low="green",mid="white",high="red",midpoint=0,guide = guide_legend(title = '')) +
+        scale_fill_manual(labels=c('<1','1-10','10-20','>20'),name="Number of additional deaths",values=c('light green','dark green','red','dark red')) +
         facet_wrap(~month.short) +
         ggtitle(sex.sel) +
         ggtitle(paste0(age.long,' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' changes in deaths expected with one degree of warming ',' ',year.start,'-',year.end)) +
@@ -307,8 +337,9 @@ plot.function.month.deaths <- function(sex.sel,month.sel) {
     plot$age.long <- reorder(plot$age.long,plot$age)
     
     print(ggplot(data=subset(plot,sex==sex.sel & month==month.sel),aes(x=long,y=lat,group=group)) +
-    geom_polygon(aes(fill=deaths.added),color='black',size=0.01) +
-    scale_fill_gradient(low="green",high="red",guide = guide_legend(title = '')) +
+    geom_polygon(aes(fill=cut(deaths.added,c(-Inf,1,10,20,Inf))),color='black',size=0.01) +
+    #scale_fill_gradient(low="green",high="red",guide = guide_legend(title = '')) +
+    scale_fill_manual(labels=c('<1','1-10','10-20','>20'),name="Number of additional deaths",values=c('light green','dark green','red','dark red')) +
     facet_wrap(~age.long) +
     ggtitle(sex.sel) +
     ggtitle(paste0(month.short[month.sel],' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' changes in deaths expected with one degree of warming ',' ',year.start,'-',year.end)) +
