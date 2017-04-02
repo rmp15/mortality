@@ -453,6 +453,321 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     # this bracket ends the function at the top of the script
 }
 
+# function to enable age group and sex to be selected
+inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,cluster) {
+    
+    dat.inla <- dat.merged
+    
+    # filter all data by sex age and month
+    sex <- sex.sel
+    age <- age.sel
+    fit.years <- year.start:year.end
+    dat.inla <- dat.inla[dat.inla$sex==sex & dat.inla$age==age & dat.inla$year %in% fit.years,]
+    
+    # load drawseq lookup
+    drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
+    
+    dat.inla <- merge(dat.inla,drawseq.lookup, by='fips')
+    
+    # extract unique table of year and months to generate year.month
+    dat.year.month <- unique(dat.inla[,c('year', 'month')])
+    dat.year.month$month <- as.integer(dat.year.month$month)
+    dat.year.month$year.month <- seq(nrow(dat.year.month))
+    
+    # merge year.month table with population table to create year.month id
+    dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
+    
+    # make sure that the order of the main data file matches that of the shapefile,
+    # otherwise the model will not be valid
+    dat.inla <- dat.inla[order(dat.inla$DRAWSEQ,dat.inla$sex,dat.inla$age,dat.inla$year.month),]
+    
+    # add ID column for INLA
+    dat.inla$ID <- dat.inla$DRAWSEQ
+    
+    # fix rownames
+    rownames(dat.inla) <- 1:nrow(dat.inla)
+    
+    # variables for INLA model
+    
+    dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
+    dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
+    dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
+    dat.inla$e <- 1:nrow(dat.inla)
+    
+    # INLA
+    
+    #f(year5,model="ar1",hyper=list( rho=list(initial=log((1+0.99)/(1-0.99)), fixed=TRUE) ),
+    #group=ID3,control.group=list(model="besag",graph=adj))  +                                          # rw over time for each district
+    #f(year3,model="ar1",                                                hyper=list( rho=list(initial=log((1+0.99)/(1-0.99)), fixed=TRUE) ),
+    #group=ag3,control.group=list(model="ar1", hyper=list( rho=list(initial=log((1+0.99)/(1-0.99)), fixed=TRUE) ))) + # rw over time for each age
+    
+    
+    
+    if(type==2){
+        
+        # 1. Type Ia space-time interaction
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID)+                       # state-month specific climate slope
+        # random walk across time
+        #f(year.month3, model="rw1") +                                           		# rw1
+        f(year.month3,model="ar1",hyper=list(rho=list(initial=log((1+0.99)/(1-0.99)), fixed=TRUE)),
+        group=ID,control.group=list(model="besag",graph=USA.adj))  +                    # pseudo rw1 model (ar1 with forced rho)
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+
+    if(type==8){
+        
+        # 1. Type Ib space-time interaction with besag state interaction terms and national variable slope
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        variable +                                                                      # national variable slope
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+    
+    if(type==9){
+        
+        # 1. Type Ic space-time interaction with besag state interaction terms and state specific variable slope
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(ID3, variable, model='iid') +                                                 # state specific climate slope
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+    
+    if(type==10){
+        
+        # 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (iid)
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(month5, variable, model="iid") +                                              # month specific climate slope
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+    
+    if(type==11){
+        
+        # 1. Type Ie space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(month5, variable, model="rw1",cyclic = TRUE, group=ID) +                      # state-month specific climate slope
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+    
+    
+    
+    if(type==12){
+        
+        # 1. Type If space-time interaction with besag state interaction terms and spatially-correlated state-month specific variable slope (rw1)
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(month5, variable, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific climate slope (spatially-correlated)
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+    
+    if(type==13){
+        
+        # 1. Type Ief space-time interaction with besag state interaction terms and spatially-correlated state-month specific variable slope (rw1)
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(ID3, variable, model='iid') +                                                 # state specific climate slope
+        f(month5, variable, model="iid") +                                              # month specific climate slope
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+    
+    if(type==14){
+        
+        # 1. Type Ide space-time interaction with besag state interaction terms and separate month- and state-specific variable slope (iid)
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(ID3, variable, model='iid') +                                                 # state specific climate slope
+        f(month5, variable, model="iid") +                                              # month specific climate slope
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+    
+    # INLA model rough
+    system.time(mod.rough <-
+    inla(formula = fml,
+    family = "poisson",
+    data = dat.inla,
+    E = pop.adj,
+    control.compute = list(dic=TRUE),
+    control.predictor = list(link = 1),
+    control.inla=list(diagonal=10000,int.strategy = "eb", strategy = "gaussian"),
+    verbose=TRUE
+    ))
+    
+    # INLA model proper
+    system.time(mod <-
+    inla(formula = fml,
+    family = "poisson",
+    data = dat.inla,
+    E = pop.adj,
+    control.compute = list(dic=TRUE),
+    control.predictor = list(link = 1),
+    control.inla=list(diagonal=0),
+    control.mode = list(result = mod.rough, restart = TRUE),
+    verbose=TRUE
+    ))
+    
+    # create directory for output
+    file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.sel)
+    ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
+    
+    # save all parameters of INLA model
+    parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_parameters')
+    #mod$misc <- NULL
+    #mod$.args$.parent.frame <- NULL
+    if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
+    if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
+    
+    # save summary of INLA model
+    summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_summary.txt')
+    inla.summary.mod <- summary(mod)
+    if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
+    if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
+    
+    # capture output for emailing purposes
+    email.content <- capture.output(inla.summary.mod)
+    
+    # save RDS of INLA results
+    plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
+    
+    # name of RDS output file then save
+    RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg)
+    if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
+    if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
+    
+    sender <- "emailr349@gmail.com"
+    recipients <- c("r.parks15@imperial.ac.uk")
+    send.mail(from = sender,
+    to = recipients,
+    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,' non-pw done'),
+    body = "Well done",
+    smtp = list(host.name = "smtp.gmail.com", port = 465,
+    user.name = "emailr349@gmail.com",
+    passwd = "inlaisthebest", ssl = TRUE),
+    authenticate = TRUE,
+    send = TRUE)
+    
+    # this bracket ends the function at the top of the script
+}
 
 
 
