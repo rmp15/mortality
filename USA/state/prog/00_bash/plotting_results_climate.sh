@@ -9,8 +9,8 @@ declare -i start=1982
 declare -i end=2013
 declare -a models=(10 11 12)
 declare country="USA"
-declare -a dnames=("t2m" "sd")
-declare -a metrics=("meanc")
+declare -a dnames=("t2m")
+declare -a metrics=("sd")
 
 #################################################
 # 1. PLOT PARAMETERS OF STATE CLIMATE POSTERIORS

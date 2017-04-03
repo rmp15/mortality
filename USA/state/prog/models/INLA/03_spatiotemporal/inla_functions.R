@@ -277,7 +277,11 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     
     if(type==10){
         
+<<<<<<< Updated upstream
         # 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (iid)
+=======
+        # 1. Type Ia space-time interaction with besag state interaction terms and month specific variable slope (iid)
+>>>>>>> Stashed changes
         fml  <- deaths.adj ~
         # global terms
         1 +                                                                     		# global intercept
