@@ -1,4 +1,4 @@
-# function to enable age group and sex to be selected
+# functions to enable age group and sex to be selected
 inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,cluster) {
     
     dat.inla <- dat.merged
