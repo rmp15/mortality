@@ -20,5 +20,5 @@ month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','No
 fips.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 
 # INLA model versions
-models <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f')
+models <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1ef')
 

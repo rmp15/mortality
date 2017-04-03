@@ -13,7 +13,6 @@ cluster.arg <- as.numeric(args[6])
 dname.arg <- as.character(args[7])
 metric.arg <- as.character(args[8])
 
-
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f')
 type.selected <- types[type.arg]
