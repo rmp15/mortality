@@ -7,23 +7,16 @@
 
 clear
 
-declare -a ages=(85 75 65 55 45 0 5 15 25 35)
+declare -a ages=(85 75 65 55 45 35 25 15 0)
 declare -a sexes=(1 2)
-declare -a sexstrings=('male')
-declare -a models=(10 11 12)
+declare -a sexstrings=('male' 'female')
+declare -a models=(10 11 12 13)
 declare -i start=1982
 declare -i end=2013
 declare country="USA"
 declare dname="t2m"
-#declare metric="mean"
-<<<<<<< HEAD
 declare -a metrics=("meanc" "sd")
-=======
-declare -a metrics=("sd")
->>>>>>> da0b06655dd903c86f11572baee89b78287da78b
 #declare metric="number_of_min_3_day_above_99_upwaves"
-#declare metric="sd"
-#declare metric="meanc"
 #declare -a knotl=(5 10 15)
 #declare -a knoth=(20 25 30)
 
@@ -43,6 +36,7 @@ for model in "${models[@]}"; do
 :
 # runs model
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R $age $sex $start $end $model 0 $dname $metric
 
 done; done; done; done;
 
@@ -55,7 +49,7 @@ for model in "${models[@]}"; do
 
 echo "combining results into one file from INLA model $model years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate.R $start $end $country $model $dname $metric
+#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate.R $start $end $country $model $dname $metric
 
 done;
 
