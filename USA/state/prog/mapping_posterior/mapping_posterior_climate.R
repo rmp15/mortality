@@ -140,9 +140,9 @@ plot.posterior <- function(sex.sel){
     dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
     
     # calculate additional deaths
-    dat.merged$deaths.added <- with(dat.merged,odds.mean*rate.adj*pop.adj)
-    dat.merged$deaths.ll <- with(dat.merged,odds.ll*rate.adj*pop.adj)
-    dat.merged$deaths.ul <- with(dat.merged,odds.ul*rate.adj*pop.adj)
+    dat.merged$deaths.added <- with(dat.merged,odds.mean*deaths.pred)
+    dat.merged$deaths.ll <- with(dat.merged,odds.ll*deaths.pred)
+    dat.merged$deaths.ul <- with(dat.merged,odds.ul*deaths.pred)
 
     # take one year
     dat.merged.sub <- subset(dat.merged,year==2013)

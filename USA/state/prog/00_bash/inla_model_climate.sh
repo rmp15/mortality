@@ -7,15 +7,15 @@
 
 clear
 
-declare -a ages=(75)
+declare -a ages=(85 75 65 55 45 35 25 15 5 0)
 declare -a sexes=(1 2)
 declare -a sexstrings=('male' 'female')
-declare -a models=(11)
+declare -a models=(10)
 declare -i start=1982
-declare -i end=1991
+declare -i end=2013
 declare country="USA"
 declare dname="t2m"
-declare -a metrics=("number_of_min_3_day_above_99_upwaves")
+declare -a metrics=("meanc" "sd" "number_of_min_3_day_above_99_upwaves")
 #declare metric="number_of_min_3_day_above_99_upwaves"
 #declare -a knotl=(5 10 15)
 #declare -a knoth=(20 25 30)
@@ -26,62 +26,58 @@ declare -a metrics=("number_of_min_3_day_above_99_upwaves")
 
 for metric in "${metrics[@]}"; do
 
+for model in "${models[@]}"; do
+
 for sex in "${sexes[@]}"; do
 
 for age in "${ages[@]}"; do
 
-for model in "${models[@]}"; do
+echo "starting ${sexstrings[$sex-1]} $age INLA model $model, with climate variable $metric $dname, years $start - $end";
 
-#echo "starting ${sexstrings[$sex-1]} $age INLA model $model, with climate variable $metric $dname, years $start - $end";
-:
 # runs model
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric
-<<<<<<< HEAD
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R $age $sex $start $end $model 0 $dname $metric
-=======
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R $age $sex $start $end $model 0 $dname $metric &
->>>>>>> 6c74e4dfa41df8f910b8df1c6e9142043167f43c
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R $age $sex $start $end $model 0 $dname $metric
 
 done; done; done; done;
 
-(
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 5  1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 5  2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0  1 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0  2 1982 2013 11 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 2 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 2 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 2 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 2 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 2 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 2 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 2 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 5  1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 5  2 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0  1 1982 2013 10 0 't2m' 'meanc' ;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0  2 1982 2013 10 0 't2m' 'meanc' ;
-) &
+#(
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 5  1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 5  2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0  1 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0  2 1982 2013 11 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 2 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 2 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 2 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 2 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 2 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 2 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 2 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 5  1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 5  2 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0  1 1982 2013 10 0 't2m' 'meanc' ;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0  2 1982 2013 10 0 't2m' 'meanc' ;
+#) &
 
 #################################################
 # 2. COMBINE RESULTS

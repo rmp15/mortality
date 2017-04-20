@@ -407,7 +407,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     E = pop.adj,
     control.compute = list(dic=TRUE),
     control.predictor = list(link = 1),
-    verbose=TRUE
+    #verbose=TRUE
     ))
     
     # create directory for output
@@ -867,7 +867,7 @@ inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,
     control.compute = list(dic=TRUE),
     control.predictor = list(link = 1),
     control.inla = list(diagonal=10000, int.strategy='eb',strategy='gaussian'),
-    verbose=TRUE
+    #verbose=TRUE
     ))
     
     # INLA model proper
@@ -880,7 +880,7 @@ inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,
     control.predictor = list(link = 1),
     control.inla=list(diagonal=0),
     control.mode = list(result = mod.rough, restart = TRUE),
-    verbose=TRUE
+    #verbose=TRUE
     ))
     
    # create directory for output
