@@ -1340,7 +1340,7 @@ inla.function.climate.faster <- function(age.sel,sex.sel,year.start,year.end,typ
     control.compute = list(dic=TRUE),
     control.predictor = list(link = 1),
     control.inla = list(diagonal=10000, int.strategy='eb',strategy='gaussian'),
-    verbose=TRUE
+    #verbose=TRUE
     ))
     
     # INLA model proper
