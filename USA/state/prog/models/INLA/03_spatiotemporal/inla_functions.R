@@ -453,7 +453,7 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     # this bracket ends the function at the top of the script
 }
 
-# functions to enable age group and sex to be selected
+# functions to enable age group and sex to be selected with rough run to improve speed
 inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,cluster) {
     
     dat.inla <- dat.merged
@@ -926,7 +926,7 @@ inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,
     # this bracket ends the function at the top of the script
 }
 
-# functions to enable age group and sex to be selected with faster AR1 structure
+# functions to enable age group and sex to be selected with faster AR1 structure in addition to rough run
 inla.function.climate.faster <- function(age.sel,sex.sel,year.start,year.end,type,cluster) {
     
     dat.inla <- dat.merged
@@ -1340,7 +1340,7 @@ inla.function.climate.faster <- function(age.sel,sex.sel,year.start,year.end,typ
     control.compute = list(dic=TRUE),
     control.predictor = list(link = 1),
     control.inla = list(diagonal=10000, int.strategy='eb',strategy='gaussian'),
-    #verbose=TRUE
+    verbose=TRUE
     ))
     
     # INLA model proper

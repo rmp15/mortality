@@ -15,7 +15,7 @@ declare -i start=1982
 declare -i end=2013
 declare country="USA"
 declare dname="t2m"
-declare -a metrics=("meanc" "sd" "number_of_min_3_day_above_99_upwaves")
+declare -a metrics=("meanc")
 #declare metric="number_of_min_3_day_above_99_upwaves"
 #declare -a knotl=(5 10 15)
 #declare -a knoth=(20 25 30)
@@ -36,7 +36,8 @@ echo "starting ${sexstrings[$sex-1]} $age INLA model $model, with climate variab
 
 # runs model
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R $age $sex $start $end $model 0 $dname $metric
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R $age $sex $start $end $model 0 $dname $metric
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_faster.R $age $sex $start $end $model 0 $dname $metric
 
 done; done; done; done;
 
