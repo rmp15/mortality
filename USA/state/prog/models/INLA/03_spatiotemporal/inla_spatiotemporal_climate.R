@@ -12,6 +12,8 @@ type.arg <- as.numeric(args[5])
 cluster.arg <- as.numeric(args[6])
 dname.arg <- as.character(args[7])
 metric.arg <- as.character(args[8])
+year.start.analysis.arg <- as.numeric(args[9])
+year.end.analysis.arg <- as.numeric(args[10])
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0')
@@ -93,6 +95,6 @@ library(INLA)
 source('../models/INLA/03_spatiotemporal/inla_functions.R')
 
 # input arguments into function to perform inference
-mapply(inla.function.climate,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.arg,
+mapply(inla.function.climate,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.analysis.arg,
 	#year.end=year.end.arg,type=type.arg,cluster=cluster.arg)
-	year.end=year.end.arg,type=type.arg,cluster=cluster.arg)
+	year.end=year.end.analysis.arg,type=type.arg,cluster=cluster.arg)
