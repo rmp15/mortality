@@ -28,12 +28,7 @@ declare metric="meanc"
 # 1. RUN AGE-SEPARATED MODEL
 #################################################
 
-(Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 1 $start $end 15 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 45 2 $start $end 15 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 1 $start $end 15 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 55 2 $start $end 15 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 1 $start $end 15 0 $dname $metric $start2 $end2;) &
-
+(Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 0 1 $start $end 15 0 $dname $metric $start2 $end2;) &
 
 for metric in "${metrics[@]}"; do
 
