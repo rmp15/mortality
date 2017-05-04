@@ -66,6 +66,54 @@ pdf(paste0(file.loc,'climate_month_params_female_',model,'_',year.start,'_',year
 plot.function(2)
     dev.off()
     
+# FOREST PLOTS OF PARAMETERS
+forest.plot.national.age <- function() {
+    print(ggplot(data=dat) +
+    geom_pointrange(aes(x=ID,y=odds.mean,ymin=odds.ll,ymax=odds.ul,color=as.factor(sex))) +
+    geom_hline(yintercept=0, lty=2) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_continuous(labels=percent) +
+    ggtitle(paste0('National percentage change in risk by age group ',dname,' ',metric,' ',year.start,'-',year.end)) +
+    coord_flip() +
+    facet_wrap(~age.long) +
+    xlab("Month") + ylab("Change in risk (95% CI)") +
+    labs(color = "Sex\n") +
+    scale_color_manual(labels = c("Men", "Women"), values = c("blue", "red")) +
+    theme_bw()
+    )
+}
+
+forest.plot.national.month <- function() {
+    
+    # attach long month names
+    dat$month.short <- mapvalues(dat$ID,from=sort(unique(dat$ID)),to=month.short)
+    dat$month.short <- reorder(dat$month.short,dat$ID)
+    
+    print(ggplot(data=dat) +
+    geom_pointrange(aes(x=age,y=odds.mean,ymin=odds.ll,ymax=odds.ul,color=as.factor(sex))) +
+    geom_hline(yintercept=0, lty=2) +
+    #scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_continuous(labels=percent) +
+    ggtitle(paste0('National percentage change in risk by month ',dname,' ',metric,' ',year.start,'-',year.end)) +
+    coord_flip() +
+    facet_wrap(~month.short) +
+    xlab("Age") + ylab("Change in risk (95% CI)") +
+    labs(color = "Sex\n") +
+    scale_color_manual(labels = c("Men", "Women"), values = c("blue", "red")) +
+    theme_bw()
+    )
+}
+
+# national month intercept male
+pdf(paste0(file.loc,'climate_month_params_forest_age_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+forest.plot.national.age()
+dev.off()
+
+# national month intercept female
+pdf(paste0(file.loc,'climate_month_params_forest_month_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+forest.plot.national.month()
+dev.off()
+
 # PROBABILITY OVER ODDS INCREASING FROM POSTERIOR
 # function to plot
 plot.posterior <- function(sex.sel){
