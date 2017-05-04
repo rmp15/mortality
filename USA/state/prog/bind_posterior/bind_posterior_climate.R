@@ -145,7 +145,7 @@ dat <- data.frame()
 #for (j in seq(length(age.filter))) {
 # temporarily without 35-44 year olds
 for (i in c(1,2)) {
-    for (j in c(1,2,3,4,6,7,8,9,10)) {
+    for (j in seq(length(age.filter))) {
         file.name <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],'/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast')
         print(file.name)
         model.current <- readRDS(file.name)

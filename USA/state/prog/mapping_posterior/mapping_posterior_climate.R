@@ -537,14 +537,12 @@ if(model %in% c('1g')){
     for(i in sort(unique(dat$age))){plot.function.age(2,i)}
     dev.off()
     
-    # FINISH
-    
     # FOREST PLOTS OF PARAMETERS
     forest.plot.climate.age <- function() {
         
         # attach long age names
-        #dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
-        #dat$age.long <- reorder(dat$age.long,dat$age)
+        dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
+        dat$age.long <- reorder(dat$age.long,dat$age)
         
         print(ggplot(data=dat) +
         geom_point(aes(x=ID,y=odds.mean,color=as.factor(sex))) +
@@ -553,13 +551,50 @@ if(model %in% c('1g')){
         scale_y_continuous(labels=percent) +
         ggtitle(paste0('Subnational percentage change in risk by age group ',dname,' ',metric,' ',year.start,'-',year.end)) +
         coord_flip() +
-        facet_wrap(~age) +
+        facet_wrap(~age.long) +
         xlab("Month") + ylab("Change in risk (95% CI)") +
         labs(color = "Sex\n") +
         scale_color_manual(labels = c("Men", "Women"), values = c("blue", "red")) +
         theme_bw()
         )
     }
+    
+    forest.plot.climate.age.sex <- function(sex.sel) {
+        
+        # attach long age names
+        dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
+        dat$age.long <- reorder(dat$age.long,dat$age)
+        
+        f <- function(pal) brewer.pal(brewer.pal.info[pal, "maxcolors"], pal)
+        mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724", "#74D944", "#CE50CA", "#3F4921", "#C0717C", "#CBD588", "#5F7FC7", "#673770", "#D3D93E", "#38333E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD", "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D", "#8A7C64", "#599861" )
+        #plot(1:length(mycols),col=mycols[1:length(mycols)],pch=16,cex=3)
+        
+        # attach long month names
+        dat$month.short <- mapvalues(dat$ID,from=sort(unique(dat$ID)),to=month.short)
+        dat$month.short <- reorder(dat$month.short,dat$ID)
+        
+        print(ggplot(data=subset(dat,sex==sex.sel)) +
+        geom_point(aes(x=month.short,y=odds.mean,color=as.factor(climate_region))) +
+        geom_hline(yintercept=0, lty=2) +
+        #scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +) +
+        scale_y_continuous(labels=percent) +
+        ggtitle(paste0('Subnational ',sex.lookup[sex.sel],' percentage change in risk by month ',dname,' ',metric,' ',year.start,'-',year.end)) +
+        coord_flip() +
+        facet_wrap(~age.long) +
+        xlab("Age") + ylab("Change in risk (95% CI)") +
+        labs(color = "Sex\n") +
+        scale_color_manual(values = mycols[c(1:9)]) +
+        theme_bw()
+        )
+    }
+    pdf(paste0(file.loc,'climate_age_params_forest_month_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    forest.plot.climate.age.sex(1)
+    dev.off()
+    
+    pdf(paste0(file.loc,'climate_age_params_forest_month_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    forest.plot.climate.age.sex(2)
+    dev.off()
+    
     
     forest.plot.climate.month <- function() {
         
@@ -582,16 +617,48 @@ if(model %in% c('1g')){
         )
     }
     
-    # national month intercept male
+    # national month intercept by age
     pdf(paste0(file.loc,'climate_month_params_forest_age_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
     forest.plot.climate.age()
     dev.off()
-    
-    # national month intercept female
+
+    # national month intercept by month
     pdf(paste0(file.loc,'climate_month_params_forest_month_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
     forest.plot.climate.month()
     dev.off()
-
+    
+    forest.plot.climate.month.sex <- function(sex.sel) {
+        
+        f <- function(pal) brewer.pal(brewer.pal.info[pal, "maxcolors"], pal)
+        mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724", "#74D944", "#CE50CA", "#3F4921", "#C0717C", "#CBD588", "#5F7FC7", "#673770", "#D3D93E", "#38333E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD", "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D", "#8A7C64", "#599861" )
+        #plot(1:length(mycols),col=mycols[1:length(mycols)],pch=16,cex=3)
+        
+        # attach long month names
+        dat$month.short <- mapvalues(dat$ID,from=sort(unique(dat$ID)),to=month.short)
+        dat$month.short <- reorder(dat$month.short,dat$ID)
+        
+        print(ggplot(data=subset(dat,sex==sex.sel)) +
+        geom_point(aes(x=age,y=odds.mean,color=as.factor(climate_region))) +
+        geom_hline(yintercept=0, lty=2) +
+        #scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +) +
+        scale_y_continuous(labels=percent) +
+        ggtitle(paste0('Subnational ',sex.lookup[sex.sel],' percentage change in risk by month ',dname,' ',metric,' ',year.start,'-',year.end)) +
+        coord_flip() +
+        facet_wrap(~month.short) +
+        xlab("Age") + ylab("Change in risk (95% CI)") +
+        labs(color = "Sex\n") +
+        scale_color_manual(values = mycols[c(1:9)]) +
+        theme_bw()
+        )
+    }
+    pdf(paste0(file.loc,'climate_month_params_forest_month_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    forest.plot.climate.month.sex(1)
+    dev.off()
+    
+    pdf(paste0(file.loc,'climate_month_params_forest_month_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    forest.plot.climate.month.sex(2)
+    dev.off()
+    
     
     # function to plot posterior probability of increased risk for all months subnationally
     plot.function.age.odds <- function(sex.sel,age.sel) {
