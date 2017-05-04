@@ -11,31 +11,31 @@ declare -a ages=(15 5 0)
 declare -a sexes=(2)
 declare -a sexstrings=('male' 'female')
 declare -a models=(10)
-declare -i start=1982
+declare -i start=1980
 declare -i end=2013
-declare -i start2=1982
+declare -i start2=1980
 declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
-#declare -a metrics=("number_of_min_3_day_above_90_upwaves" "number_of_min_3_day_above_95_upwaves")
-#declare -a metrics=("meanc")
-declare metric="meanc"
-#declare metric="number_of_min_3_day_above_99_upwaves"
-#declare -a knotl=(5 10 15)
-#declare -a knoth=(20 25 30)
+declare metric="days_changing_by_5"
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL
 #################################################
 
 (
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_faster.R 0 2 $start $end 10 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_faster.R 5 2 $start $end 10 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_faster.R 15 2 $start $end 10 0 $dname $metric $start2 $end2;
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_faster.R 0 1 $start $end 15 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_faster.R 0 2 $start $end 15 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 85 2 $start $end 15 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 85 1 $start $end 15 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 2 $start $end 15 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 1 $start $end 15 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 2 $start $end 15 0 $dname $metric $start2 $end2;
 
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 85 2 $start $end 10 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 85 1 $start $end 10 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 2 $start $end 10 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 75 1 $start $end 10 0 $dname $metric $start2 $end2;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 65 2 $start $end 10 0 $dname $metric $start2 $end2;
 
 ) &
 
