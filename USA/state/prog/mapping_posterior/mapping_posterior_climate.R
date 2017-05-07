@@ -48,8 +48,8 @@ geom_hline(yintercept=0,alpha=0.5,linetype=2) +
 scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
 xlab('month') +
 ylab('Percentage increase in risk') +
-scale_y_continuous(labels=percent) +
-coord_cartesian(ylim = c(-0.025,0.025)) +
+#scale_y_continuous(labels=percent) +
+coord_cartesian(ylim = c(-0.05,0.05)) +
 ggtitle(paste0(sex.lookup2[sex.sel],' national percentage change in risk by month ',metric,' ',dname)) +
 guides(col = guide_legend(ncol = 10, byrow=TRUE)) +
 facet_wrap(~age.long) +
@@ -786,8 +786,6 @@ if(model %in% c('1g')){
     pdf(paste0(file.loc,'climate_age_posterior_map_female_decreased',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
     for(i in c(1:12)){plot.function.month.odds.decreased(2,i)}
     dev.off()
-    
-    # NEED TO EDIT FROM HERE!!!
     
     # establish change in number of deaths for a slice in time (at the moment it's 2013)
     # load death rate data
