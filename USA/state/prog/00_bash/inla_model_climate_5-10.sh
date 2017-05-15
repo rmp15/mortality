@@ -25,11 +25,11 @@ declare metric="number_of_min_3_day_above_nonnormal_95_upwaves"
 
 (
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 1 $start $end 10 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 2 $start $end 10 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 1 $start $end 10 0 $dname $metric $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 1 $start $end 10 0 $dname $metric $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 35 2 $start $end 10 0 $dname $metric $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 1 $start $end 10 0 $dname $metric $start2 $end2;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 25 2 $start $end 10 0 $dname $metric $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 1 $start $end 10 0 $dname $metric $start2 $end2; 
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R 15 1 $start $end 10 0 $dname $metric $start2 $end2;
 
 ) &
 
