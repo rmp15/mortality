@@ -48,8 +48,8 @@ geom_hline(yintercept=0,alpha=0.5,linetype=2) +
 scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
 xlab('month') +
 ylab('Percentage increase in risk') +
-#scale_y_continuous(labels=percent) +
-coord_cartesian(ylim = c(-0.05,0.05)) +
+scale_y_continuous(labels=percent) +
+coord_cartesian(ylim = c(-0.02,0.02)) +
 ggtitle(paste0(sex.lookup2[sex.sel],' national percentage change in risk by month ',metric,' ',dname)) +
 guides(col = guide_legend(ncol = 10, byrow=TRUE)) +
 facet_wrap(~age.long) +

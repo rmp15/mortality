@@ -11,7 +11,7 @@ declare -i start=1980
 declare -i end=2013
 declare country="USA"
 declare dname="t2m"
-declare metric="number_of_min_3_days_above_nonnormal_90_upwaves"
+declare -a metrics=("number_of_min_3_days_above_nonnormal_90_upwaves" "number_of_days_above_nonnormal_90" "number_of_min_3_days_above_nonnormal_95_upwaves")
 
 #################################################
 # 1. COMBINE RESULTS
@@ -23,7 +23,7 @@ for model in "${models[@]}"; do
 
 echo "combining results into one file from INLA model $model years $start - $end";
 
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate.R $start $end $country $model $dname $metric
+Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate.R $start $end $country $model $dname $metric
 
 done; done;
 
