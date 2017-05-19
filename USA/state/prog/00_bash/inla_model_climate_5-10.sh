@@ -17,7 +17,7 @@ declare -i start2=1980
 declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
-declare metric="1opercc3"
+declare metric="10percc3"
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL
