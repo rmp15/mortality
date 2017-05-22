@@ -1,0 +1,268 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% a0poster Landscape Poster
+% LaTeX Template
+% Version 1.0 (22/06/13)
+%
+% The a0poster class was created by:
+% Gerlinde Kettl and Matthias Weiser (tex@kettl.de)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a0,landscape]{a0poster}
+
+\usepackage{multicol} % This is so we can have multiple columns of text side-by-side
+\columnsep=100pt % This is the amount of white space between the columns in the poster
+\columnseprule=0pt % This is the thickness of the black line between the columns in the poster
+
+\usepackage[svgnames]{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
+
+\usepackage{times} % Use the times font
+%\usepackage{palatino} % Uncomment to use the Palatino font
+
+\usepackage{graphicx} % Required for including images
+\graphicspath{{figures/}} % Location of the graphics files
+\usepackage{booktabs} % Top and bottom rules for table
+\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
+\usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
+\usepackage{wrapfig} % Allows wrapping text around tables and figures
+\usepackage{epstopdf}
+\usepackage{amsthm} % Required for theorem environments
+\usepackage{bm} % Required for bold math symbols (used in the footer of the slides)
+\usepackage{graphicx} % Required for including images in figures
+\usepackage{tikz} % Required for colored boxes
+\usepackage{booktabs} % Required for horizontal rules in tables
+\usepackage{multicol} % Required for creating multiple columns in slides
+\usepackage{lastpage} % For printing the total number of pages at the bottom of each slide
+\usepackage[english]{babel} % Document language - required for customizing section titles
+\usepackage{microtype} % Better typography
+\usepackage{tocstyle} % Required for customizing the table of contents
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{soul}
+\usepackage{wrapfig}
+
+%\fontfamily{cmss}\selectfont
+\renewcommand{\familydefault}{\sfdefault}
+
+% Colors
+\usepackage{xcolor}	 % Required for custom colors
+% Define a few colors for making text stand out within the presentation
+\definecolor{mygreen}{RGB}{44,85,17}
+\definecolor{myblue}{RGB}{0,62,116}
+\definecolor{mybrown}{RGB}{194,164,113}
+\definecolor{myred}{RGB}{255,66,56}
+% Use these colors within the presentation by enclosing text in the commands below
+\newcommand*{\mygreen}[1]{\textcolor{mygreen}{#1}}
+\newcommand*{\myblue}[1]{\textcolor{myblue}{#1}}
+\newcommand*{\mybrown}[1]{\textcolor{mybrown}{#1}}
+\newcommand*{\myred}[1]{\textcolor{myred}{#1}}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	POSTER HEADER 
+%----------------------------------------------------------------------------------------
+
+% The header is divided into three boxes:
+% The first is 55% wide and houses the title, subtitle, names and university/organization
+% The second is 25% wide and houses contact information
+% The third is 19% wide and houses a logo for your university/organization or a photo of you
+% The widths of these boxes can be easily edited to accommodate your content as you see fit
+\begin{minipage}{\linewidth}
+%\begin{wrapfigure}{L}{\textwidth}
+%\begin{flushleft}
+%\includegraphics[width=0.1\linewidth]{../figures/imperial_logo}
+%\end{flushleft}
+%\end{wrapfigure}
+\begin{wrapfigure}{r}{\textwidth}
+\begin{flushright}
+\includegraphics[width=0.1\linewidth]{../figures/wellcome_issf.jpg}
+\includegraphics[width=0.02\linewidth]{../figures/whitespace.jpg}
+\includegraphics[width=0.3\linewidth]{../figures/mrcphe.png}
+\end{flushright}
+\end{wrapfigure}
+\end{minipage}%%%
+\begin{minipage}[b]{\linewidth}
+\Huge \color{myblue} \textbf{Seasonal dynamics of mortality in the United States from 1982 to 2013} \color{Black}\\ % Title
+\huge \textbf{Robbie Parks\textsuperscript{$\alpha$}, James Bennett\textsuperscript{$\alpha$}, Kyle Foreman\textsuperscript{$\beta$}, Ralf Toumi\textsuperscript{$\gamma$}, Majid Ezzati\textsuperscript{$\alpha$}}\\ % Author(s)
+\huge
+\textsuperscript{$\alpha$}MRC-PHE Centre for Environment and Health, Dept Epidemiology and Biostatistics, School of Public Health, Imperial College London \\ 
+\textsuperscript{$\beta$}Institute for Health Metrics and Evaluation, University of Washington, Seattle, USA\\ 
+\textsuperscript{$\gamma$}Space and Atmopheric Physics, Faculty of Natural Sciences, Department of Physics, Imperial College London\\ 
+%Institute for Health Metrics and Evaluation, University of Washington, Seattle, USA 
+%\huge{Contact: robbie.parks@imperial.ac.uk}\\ %email address
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\end{minipage} %%%
+
+
+%\begin{minipage}[b]{0.3\linewidth}
+%\includegraphics{../figures/imperial_logo} % Logo or a photo of you, adjust its dimensions here
+%\end{minipage}
+
+\vspace{1cm} % A bit of extra whitespace between the header and poster content
+
+%----------------------------------------------------------------------------------------
+
+\begin{multicols}{4} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
+
+%----------------------------------------------------------------------------------------
+%	BACKGROUND
+%----------------------------------------------------------------------------------------
+
+%\color{myred} % SaddleBrown color for the introduction
+
+\section*{\color{myblue}{Background}}
+
+%It has been hypothesised that a warmer world may lower winter mortality in temperate climates.  There is however limited data to characterise the seasonality of mortality in relation to age, sex, and local climate, or to understand how it has changed over time.  
+
+\begin{itemize}
+\item It has been hypothesised that a warmer world may lower winter mortality in temperate climates.
+\item There is however limited data to characterise the seasonality of mortality in relation to age, sex, and local climate, or to understand how it has changed over time.  
+%\item WHO: lack of quantitative knowledge on the vulnerability of populations to temperature
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	METHODS
+%----------------------------------------------------------------------------------------
+
+\section*{\color{myblue}{Data and methods}}
+
+%We used data on all deaths in the USA from 1982 to 2013 from the National Center for Health Statistics, with information on age, sex, state and county of residence, and month of death. We used wavelet analytical techniques to analyse the seasonality of mortality by age group and sex, nationally and in subnational climatic regions as used by the National Oceanic and Atmospheric Administration. We used gridded four-times-daily estimates at a resolution of 80km to generate monthly population-weighted temperature by climate region throughout the analysis period.
+
+\begin{itemize}
+\item All deaths in the USA from 1982 to 2013 from the National Center for Health Statistics, with information on age, sex, state and county of residence, and month of death.
+\item Gridded four-times-daily estimates at a resolution of 80km to generate monthly population-weighted temperature by climate region. %(as used by the National Oceanic and Atmospheric Administration) throughout the analysis period.
+\item Wavelet analytical techniques to analyse the seasonality of mortality by age group and sex, nationally and by climate region.
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	RESULTS 
+%----------------------------------------------------------------------------------------
+
+\section*{\color{myblue}{Results}}
+
+%%%
+\subsection*{\color{myblue}{National wavelet analysis}}
+%%%
+
+\begin{center}%\vspace{1cm}
+\includegraphics[width=\linewidth,keepaspectratio=true]{../figures/figure_1A.pdf}
+%\includegraphics[width=\linewidth,keepaspectratio=true]{../figures/figure_1B.pdf}
+\captionof{figure}{Wavelet power spectra for national time series data for 1982-2013, by age group for men. Wavelet power values increase from blue to red, with white contour lines indicating the 5\% significance level against a white noise spectrum.}
+\label{wavelet_national_men}
+\end{center}\vspace{1cm}
+
+\begin{itemize}
+\item All-cause male mortality had a statistically significant 12-month seasonality in all age groups except in ages 35-44 years, who displayed statistically significant periodicity at 6 months (Figure \ref{wavelet_national_men}).
+\item In females, there was no significant 12-month seasonality in ages 5 to 34 years (Figure \ref{wavelet_national_women}); girls aged 5-14 years exhibited periodicity at 6 months for most of the analysis period.
+\item While seasonality persisted throughout the entire analysis period in older ages, it largely disappeared after late 1990s in children aged 0-4 years in both sexes and in women aged 15-24 years. 
+\end{itemize}
+
+\begin{center}%\vspace{1cm}
+%\includegraphics[width=\linewidth,keepaspectratio=true]{../figures/figure_1A.pdf}
+\includegraphics[width=\linewidth,keepaspectratio=true]{../figures/figure_1B.pdf}
+\captionof{figure}{Wavelet power spectra for national time series data for 1982-2013, by age group for women.}
+\label{wavelet_national_women}
+\end{center}\vspace{1cm}
+
+%%%
+\subsection*{\color{myblue}{National mean timing of seasonal mortality}}
+%%%
+
+\begin{center}%\vspace{1cm}
+\includegraphics[width=\linewidth,keepaspectratio=true]{../figures/figure_2.pdf}
+\captionof{figure}{Mean timing of national maximum and minimum all-cause mortality, by sex and age group for 1982-2013. Red dots indicate the month of maximum mortality, and green dots that of minimum mortality. Vertical segments represent 95\% confidence intervals. Only age-sex groups with statistically significant 12-month seasonality are included.}
+\label{nat_mean_timing}
+\end{center}%\vspace{1cm}
+
+\begin{itemize}
+
+\item Death rates in men aged $\geq$45 years and women aged $\geq$35 years peaked in January and February, and were lowest in July and August (Figure \ref{nat_mean_timing}). 
+\item Children younger than five years of age mortality was highest in February and lowest in August.
+\item Peak and minimum of mortality in older boys and young men (ages 5-34 years) occurred in June/July and December/January. 
+\end{itemize}
+
+%%%
+\subsection*{\color{myblue}{Change in percent difference between max/min mortality over time}}
+%%%
+
+\begin{center}%\vspace{1cm}
+\includegraphics[width=\linewidth,keepaspectratio=true]{../figures/figure_3.pdf}
+\captionof{figure}{National percent difference in death rates between the maximum and minimum mortality months in 2013 versus 1982 by sex and age group. Age-sex groups with a statistically significant change at the 5\% level are highlighted with a bold black outline.}
+\label{mortality_decrease}
+\end{center}%\vspace{1cm}
+
+\begin{itemize}
+\item Declined by less than seven percentage points for people older than 45 years of age from 1982 to 2013 (Figure \ref{mortality_decrease}). 
+\item Difference between peak (summer) and minimum (winter) declined significantly in younger ages, by nearly 25 percentage points in males aged 5-14 years and 15-24-years.
+\item Under five years of age, percent seasonal difference declined by a statistically-significant 13.2 percentage points (95\% CI 8.1 to 18.2) for boys but only a statistically insignificant 5.0 percentage points (-12.0 to 2.0) for girls.
+\end{itemize}
+
+%%
+\subsection*{\color{myblue}{Subnational mean timing of seasonal mortality}}
+%%
+
+\begin{center}%\vspace{1cm}
+\includegraphics[width=\linewidth,keepaspectratio=true]{../figures/figure_4A1.pdf}
+\captionof{figure}{Mean timing of maximum all-cause mortality, by climate region and age group for males 1982-2013. Only age-sex groups with significant 12-month seasonality in the national analysis are included. Average temperatures (in degrees Celsius) are included in white for the corresponding month of maximum mortality for each climate region.}
+\label{subnat_mean_timing}
+\end{center}%\vspace{1cm}
+
+\begin{itemize}
+\item Relative homogeneity of the timing of maximum mortality is evident (Figure \ref{subnat_mean_timing}), despite the large variation in temperatures that exist between climate regions during the same months.
+\item Similar homogeneity for females of all ages.
+\end{itemize}
+
+
+%%%
+\subsection*{\color{myblue}{The relationship between percent difference between max/min mortality and temperature difference}}
+%%%
+
+\begin{center}%\vspace{1cm}
+\includegraphics[width=\linewidth,keepaspectratio=true]{../figures/figure_5.pdf}
+\captionof{figure}{The relationship between percent difference in death rates and temperature difference between months in which mortality peaks versus troughs across climate regions, by sex and age group in 2013. Only age-sex groups with significant 12-month seasonality in the national analysis are included.}
+\label{temp_relation}
+\end{center}%\vspace{1cm}
+
+\begin{itemize}
+%\item \textbf{Figure \ref{mortality_decrease_heatmap}} centres each age group from figure \ref{mortality_decrease_lines} on a heat map.
+\item Above 45 years of age, there is little inter-region variation in the percent seasonal difference, despite the large variation in temperature difference between the peak and minimum months (Figure \ref{temp_relation}).
+\item The absence of association between the magnitude of mortality seasonality and seasonal temperature difference indicates that different regions in the USA are similarly adapted to temperature seasonality. 
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	SUMMARY
+%----------------------------------------------------------------------------------------
+
+\section*{\color{myblue}{Summary}}
+
+%Death rates of populations living in temperate climates exhibit opposite seasonal peaks and minima in young adults compared to older adults, especially for men. Currently, all parts of USA are similarly adapted to temperature seasonality, although impacts on mortality depend on age. 
+
+\begin{itemize}
+\item Comprehensive analysis of seasonality over three decades in relation to age, sex, and geography
+\item Analysing by these strata allowed us to identify distinct seasonal behaviours in relation to age and sex.
+\end{itemize}
+
+ %----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+%\nocite{*} % Print all references regardless of whether they were cited in the poster or not
+%\bibliographystyle{plain} % Plain referencing style
+%\bibliography{sample} % Use the example bibliography file sample.bib
+
+
+%----------------------------------------------------------------------------------------
+
+\end{multicols}
+\end{document}
