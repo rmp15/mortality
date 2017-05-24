@@ -11,7 +11,7 @@ declare -i start=1980
 declare -i end=2013
 declare country="USA"
 declare dname="t2m"
-declare -a metrics=("meanc3" "10percc3" "90percc3" "number_of_min_3_day_below_nonnormal_90_downwaves" "number_of_min_3_day_below_+5_jumpdownwaves")
+declare -a metrics=("number_of_min_3_day_below_+5_jumpdownwaves")
 
 #################################################
 # 1. COMBINE RESULTS
