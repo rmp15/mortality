@@ -17,7 +17,7 @@ declare -i start2=1980
 declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
-declare metric="number_of_min_3_day_below_+5_jumpdownwaves"
+declare metric="number_of_min_3_day_above_+5_jumpupwaves_2"
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL
