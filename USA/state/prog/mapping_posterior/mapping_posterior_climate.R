@@ -217,6 +217,8 @@ plot.posterior <- function(sex.sel){
         ylim(c(min(dat.merged$deaths.ll),max(dat.merged$deaths.ul))) +
         geom_hline(yintercept=0) +
         facet_wrap(~age.long) +
+        scale_fill_manual(labels = c("Men", "Women"), values = c("blue", "red")) +
+        scale_color_manual(labels = c("Men", "Women"), values = c("blue", "red")) +
         xlab('Month') +
         ylab('Change in deaths from unit change') +
         guides(fill=FALSE,color=FALSE) +
@@ -926,7 +928,8 @@ forest.plot.climate.age.sex <- function(sex.sel) {
     geom_hline(yintercept=0, lty=2) +
     scale_y_continuous(labels=percent) +
     ggtitle(paste0('Subnational ',sex.lookup[sex.sel],' percentage change in risk by month ',dname,' ',metric,' ',year.start,'-',year.end)) +
-    coord_flip() +
+    #coord_flip() +
+    coord_flip(ylim = c(-0.03,0.03)) +
     facet_wrap(~age.long) +
     xlab("Age") + ylab("Change in risk (95% CI)") +
     labs(color = "Sex\n") +
