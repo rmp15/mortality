@@ -29,7 +29,7 @@ dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/ty
 
 # lookups for units
 temp = c("10percc3", "90percc3", "meanc3")
-episodes = c("number_of_min_3_day_above_+5_jumpupwaves", "number_of_min_3_day_above_nonnormal_90_upwaves", "number_of_min_3_day_below_+5_jumpdownwaves", "number_of_min_3_day_below_nonnormal_90_downwaves")
+episodes = c("number_of_min_3_day_above_+5_jumpupwaves_2", "number_of_min_3_day_above_nonnormal_90_upwaves", "number_of_min_3_day_below_+5_jumpdownwaves_2", "number_of_min_3_day_below_nonnormal_90_downwaves")
 unit.name = ifelse(metric %in% temp, paste0('per °C'), ifelse(metric %in% episodes, 'per episode','error'))
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
@@ -38,6 +38,16 @@ if(model=='1d'){
 # attach long age names
 dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
 dat$age.long <- reorder(dat$age.long,dat$age)
+
+# export table in form that is digestible to human eyes
+dat.csv = dat[,c('age.long','sex','ID','odds.mean','odds.ll','odds.ul')]
+dat.csv$ID = mapvalues(dat.csv$ID, from=sort(unique(dat.csv$ID)),to=month.short)
+dat.csv$sex = mapvalues(dat.csv$sex, from=sort(unique(dat.csv$sex)),to=c('Men','Women'))
+dat.csv$odds.mean = round(100*(dat.csv$odds.mean),3)
+dat.csv$odds.ll = round(100*(dat.csv$odds.ll),3)
+dat.csv$odds.ul = round(100*(dat.csv$odds.ul),3)
+names(dat.csv) = c('age','sex','month','mean','2.5%','97.5%')
+write.csv(dat.csv,paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast.csv'))
 
 # PARAMETER
 # function to plot
