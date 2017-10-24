@@ -5,14 +5,16 @@
 
 clear
 
-declare -a years=(seq($(1982 2012)))
-declare -a years2=(2013)
-declare -i start=1982
-declare -i end= 2013
+declare -a years=($(seq 1980 2010) 2012)
+declare -a years2=(2011 2013)
+declare -i start=1980
+declare -i end=2013
 
 #################################################
 # 1. PROCESS MCD FILES
 #################################################
+
+# files which are preprocessed by Kyle and just need to be formatted correctly
 
 for year in "${years[@]}"; do
 
@@ -22,11 +24,13 @@ Rscript ~/git/mortality/USA/state/prog/format_mort_cod/prep_mcd_counties_cod.R $
 
 done;
 
+# files which are derived directly from the raw files
+
 for year2 in "${years2[@]}"; do
 
 echo "formatting mcd files for $year2";
 
-Rscript ~/git/mortality/USA/state/prog/format_mort_cod/reformat_data_cod.R $year
+#Rscript ~/git/mortality/USA/state/prog/format_mort_cod/reformat_data_cod.R $year
 
 done;
 
@@ -34,15 +38,15 @@ done;
 # 2. PROCESS DEATH RATES (NOT FINISHED!!)
 #################################################
 
-echo "preparing monthly death rates for years $start2 - $end2";
+echo "preparing monthly death rates for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R $start $end
-Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_deaths_adj_cod.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_deaths_adj_cod.R $start $end
 
 #################################################
 # 3. EXPLORE DATA (NOT FINISHED!!)
 #################################################
 
-echo "exploring death rates for years $start2 - $end2";
+echo "exploring death rates for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cod.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cod.R $start $end
