@@ -131,6 +131,24 @@ pdf(paste0(file.loc,'climate_month_params_forest_month_',model,'_',year.start,'_
 forest.plot.national.month()
 dev.off()
 
+# HEATMAPS (SEXY ALTERNATIVE TO FOREST PLOTS)
+heatmap.national.age <- function() {
+    
+    dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
+    
+    print(ggplot(data=subset(dat)) +
+    geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
+    scale_fill_gradient2(low='green',mid='white',high='red',limits=c(-0.02,0.02),labels=percent,guide = guide_legend(title = paste0("Excess risk ",unit.name))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_discrete(labels=age.print) +
+    facet_wrap(~sex.long) +
+    xlab("Month") + ylab('Age') +
+    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+    )
+}
+
+
 # PROBABILITY OVER ODDS INCREASING FROM POSTERIOR
 # function to plot
 plot.posterior <- function(sex.sel){

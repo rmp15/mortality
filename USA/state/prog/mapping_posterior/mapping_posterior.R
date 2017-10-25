@@ -668,8 +668,9 @@ pdf(paste0(file.loc.nat.sum,'diff_change_mort_across_all_months_heatmap.pdf'),he
 ggplot(data=median.median.df, aes(x=as.factor(age),y=as.factor(month))) +
 geom_tile(aes(fill=diff.median)) +
 scale_fill_gradient2(low='green',mid='white',high='red',guide = guide_legend(title = 'Percentage\npoint\ndifference\nfrom\nmedian\nchange')) +
-xlab('Age group') +
-ylab('Month') +
+ggplot(data=subset(dat)) +
+geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
+scale_fill_gradient2(low='green',mid='white',high='red',labels=percent,guide = guide_legend(title = paste0("Excess risk ",unit.name)))
 scale_x_discrete(labels=age.print) +
 scale_y_discrete(breaks=c(seq(1,12,by=1)),labels=month.short)   +
 facet_wrap(~sex) +
