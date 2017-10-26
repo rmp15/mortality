@@ -39,6 +39,9 @@ if(model=='1d'){
 dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
 dat$age.long <- reorder(dat$age.long,dat$age)
 
+# add significance marker
+dat$sig = ifelse(dat$odds.ll*dat$odds.ul>0,1,0)
+
 # export table in form that is digestible to human eyes
 dat.csv = dat[,c('age.long','sex','ID','odds.mean','odds.ll','odds.ul')]
 dat.csv$ID = mapvalues(dat.csv$ID, from=sort(unique(dat.csv$ID)),to=month.short)
@@ -131,17 +134,24 @@ pdf(paste0(file.loc,'climate_month_params_forest_month_',model,'_',year.start,'_
 forest.plot.national.month()
 dev.off()
 
-# HEATMAPS (SEXY ALTERNATIVE TO FOREST PLOTS)
+# HEATMAPS OF PARAMETERS (SEXY ALTERNATIVE TO FOREST PLOTS)
 heatmap.national.age <- function() {
     
     dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
     
+    # set color ramp
+    gr <- colorRampPalette(c("darkgreen","green","lightgreen"))(200)
+    bl <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)
+    re <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
+    
     # ADD SIGNIFICANCE HIGHLIGHTS
     print(ggplot(data=subset(dat)) +
-    geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
-    scale_fill_gradient2(low='green',mid='white',high='red',limits=c(-0.03,0.05),labels=percent,guide = guide_legend(title = paste0("Excess risk ",unit.name))) +
+    geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean,alpha=sig)) +
+    #scale_fill_gradient2(low='green',mid='white',high='red',limits=c(-0.05,0.05),labels=percent,guide = guide_legend(title = paste0("Excess\nrisk\n",unit.name))) +
+    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-0.05, 0.05),labels=percent,guide = guide_legend(title = paste0("Excess\nrisk\n",unit.name))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
+    scale_alpha(guide = 'none') +
     facet_wrap(~sex.long) +
     xlab("Month") + ylab('Age') +
     theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
@@ -153,7 +163,6 @@ heatmap.national.age <- function() {
 pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
 heatmap.national.age()
 dev.off()
-
 
 # PROBABILITY OVER ODDS INCREASING FROM POSTERIOR
 # function to plot
@@ -173,16 +182,46 @@ plot.posterior <- function(sex.sel){
     }
 
     # national posterior probability male
-    pdf(paste0(file.loc,'climate_month_posterior_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'climate_month_posterior_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
     plot.posterior(1)
     dev.off()
     
     # national posterior probability female
-    pdf(paste0(file.loc,'climate_month_posterior_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'climate_month_posterior_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
     plot.posterior(2)
     dev.off()
     
-# PROBABILITY OVER ODDS DECREASING FROM POSTERIOR
+    # HEATMAPS OF ODDS INCREASING (SEXY ALTERNATIVE TO FOREST PLOTS)
+    heatmap.posterior.increase.national <- function() {
+    
+    dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
+    
+    # set color ramp
+    gr <- colorRampPalette(c("darkgreen","green","lightgreen"))(200)
+    bl <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)
+    re <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
+    
+    # ADD SIGNIFICANCE HIGHLIGHTS
+    print(ggplot(data=subset(dat)) +
+    geom_tile(aes(x=ID,y=as.factor(age),fill=odds.prob)) +
+    #scale_fill_gradient2(low='green',mid='white',high='red',limits=c(-0.05,0.05),labels=percent,guide = guide_legend(title = paste0("Excess\nrisk\n",unit.name))) +
+    scale_fill_gradientn(colours=c("white", rev(bl)), na.value = "grey98",limits = c(0, 1),labels=percent,guide = guide_legend(title = paste0("Probability\nof\nincrease\nin\nrisk"))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_discrete(labels=age.print) +
+    scale_alpha(guide = 'none') +
+    facet_wrap(~sex.long) +
+    xlab("Month") + ylab('Age') +
+    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+    )
+}
+    
+    # national posterior increase probability
+pdf(paste0(file.loc,'climate_month_posterior_heatmap_increase_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.posterior.increase.national()
+    dev.off()
+    
+    # PROBABILITY OVER ODDS DECREASING FROM POSTERIOR
 
     # function to plot
     plot.posterior <- function(sex.sel){
@@ -210,8 +249,36 @@ plot.posterior <- function(sex.sel){
     plot.posterior(2)
     dev.off()
 
-
+# HEATMAPS OF ODDS DECREASING (SEXY ALTERNATIVE TO FOREST PLOTS)
+heatmap.posterior.decrease.national <- function() {
     
+    dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
+    
+    # set color ramp
+    gr <- colorRampPalette(c("darkgreen","green","lightgreen"))(200)
+    bl <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)
+    re <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
+    
+    # ADD SIGNIFICANCE HIGHLIGHTS
+    print(ggplot(data=subset(dat)) +
+    geom_tile(aes(x=ID,y=as.factor(age),fill=1-odds.prob)) +
+    #scale_fill_gradient2(low='green',mid='white',high='red',limits=c(-0.05,0.05),labels=percent,guide = guide_legend(title = paste0("Excess\nrisk\n",unit.name))) +
+    scale_fill_gradientn(colours=c("white", rev(bl)), na.value = "grey98",limits = c(0, 1),labels=percent,guide = guide_legend(title = paste0("Probability\nof\ndecrease\nin\nrisk"))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_discrete(labels=age.print) +
+    scale_alpha(guide = 'none') +
+    facet_wrap(~sex.long) +
+    xlab("Month") + ylab('Age') +
+    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
+    )
+}
+
+# national posterior increase probability
+pdf(paste0(file.loc,'climate_month_posterior_heatmap_decrease_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+heatmap.posterior.decrease.national()
+dev.off()
+
     # ADDITIONAL DEATHS NATIONALLY
     # establish change in number of deaths for a slice in time (at the moment it's 2013)
     # load death rate data and create national death rates
@@ -236,14 +303,26 @@ plot.posterior <- function(sex.sel){
     # take one year
     dat.merged.sub <- subset(dat.merged,year==2013)
     
+    # add YLL from a reference point
+    ref = 80
+    dat.merged.sub$yll.mean = ifelse((ref-(dat.merged.sub$age+5))>=0,
+                                (ref-(dat.merged.sub$age+5))*dat.merged.sub$deaths.added,
+                                0)
+    dat.merged.sub$yll.ll = ifelse((ref-(dat.merged.sub$age+5))>=0,
+                                (ref-(dat.merged.sub$age+5))*dat.merged.sub$deaths.ll,
+                                0)
+    dat.merged.sub$yll.ul = ifelse((ref-(dat.merged.sub$age+5))>=0,
+                                (ref-(dat.merged.sub$age+5))*dat.merged.sub$deaths.ul,
+                                0)
+    
     # export table in form that is digestible to human eyes
-    dat.merged.sub.csv <- dat.merged.sub[,c('sex','age','month','deaths.added','deaths.ll','deaths.ul')]
+    dat.merged.sub.csv <- dat.merged.sub[,c('sex','age','month','deaths.added','deaths.ll','deaths.ul','yll.mean','yll.ll','yll.ul')]
     dat.merged.sub.csv$month = mapvalues(dat.merged.sub.csv$month, from=sort(unique(dat.merged.sub.csv$month)),to=month.short)
     dat.merged.sub.csv$sex = mapvalues(dat.merged.sub.csv$sex, from=sort(unique(dat.merged.sub.csv$sex)),to=c('Men','Women'))
     dat.merged.sub.csv$age.long <- mapvalues(dat.merged.sub.csv$age,from=sort(unique(dat.merged.sub.csv$age)),to=as.character(age.code[,2]))
     dat.merged.sub.csv$age.long <- reorder(dat.merged.sub.csv$age.long,dat.merged.sub.csv$age)
-    dat.merged.sub.csv <- dat.merged.sub.csv[,c('sex','age.long','month','deaths.added','deaths.ll','deaths.ul')]
-    names(dat.merged.sub.csv) = c('sex','age','month','deaths added','2.5%','97.5%')
+    dat.merged.sub.csv <- dat.merged.sub.csv[,c('sex','age.long','month','deaths.added','deaths.ll','deaths.ul','yll.mean','yll.ll','yll.ul')]
+    names(dat.merged.sub.csv) = c('sex','age','month','deaths added','ll','ul','yll','ll','ul')
 
     write.csv(dat.merged.sub.csv,paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_deaths_added.csv'))
 
@@ -275,6 +354,8 @@ plot.posterior <- function(sex.sel){
         plot.deaths.nat()
         dev.off()
 }
+
+
 
 # for state model, plot climate parameters on map all on one page, one for men and one for women
 if(model %in% c('1e','1f')){

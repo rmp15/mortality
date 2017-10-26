@@ -16,8 +16,8 @@ for(year in years){
     
 }
 
-# loop to load deaths for each post-processed year
-years = c(1982:2010,2012)
+# loop to load deaths for each post-processed year for cod
+years = c(1980:2013)
 for(year in years){
     
     dat <- read.dta(paste0("~/data/mortality/US/state/processed/cod/deathscod",year,'.dta'))

@@ -20,7 +20,7 @@ for year in "${years[@]}"; do
 
 echo "formatting mcd files for $year";
 
-Rscript ~/git/mortality/USA/state/prog/format_mort_cod/prep_mcd_counties_cod.R $year
+#Rscript ~/git/mortality/USA/state/prog/format_mort_cod/prep_mcd_counties_cod.R $year
 
 done;
 
@@ -30,7 +30,7 @@ for year2 in "${years2[@]}"; do
 
 echo "formatting mcd files for $year2";
 
-#Rscript ~/git/mortality/USA/state/prog/format_mort_cod/reformat_data_cod.R $year
+Rscript ~/git/mortality/USA/state/prog/format_mort_cod/reformat_data_cod.R $year2
 
 done;
 

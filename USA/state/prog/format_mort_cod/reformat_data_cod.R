@@ -9,10 +9,13 @@ args <- commandArgs(trailingOnly=TRUE)
 
 # break down arguments from Rscript
 year <- as.numeric(args[1])
+print(year)
 
 # read files
 dat.us <- read.dta(paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.USPART2.processed.age_recode.dta'))
+#head(dat.us)
 try(dat.ps <- read.dta(paste0('~/data/mortality/US/state/raw/cdc/',year,'/MULT',year,'.PSPART2.processed.age_recode.dta')))
+#if(exists('dat.ps')==TRUE){head(dat.ps)}
 
 # append datasets if necessary
 dat <- dat.us
@@ -21,13 +24,10 @@ if(exists('dat.ps')==TRUE){dat <- rbind(dat.us,dat.ps)}
 # filter only relevant values of interest
 dat <- dat[, c('monthdth','age','stateres_fips','countyres_fips','sex','year', 'cause')]
 
-# only take first letter of COD NOT SURE ASK MAJID
-dat$cause_letter = substr(dat$cause,1,1)
-
 # match state names to fips codes
 state.lookup <- read.csv('~/git/mortality/USA/state/data/fips_lookup/name_fips_lookup.csv')
 dat <- merge(dat,state.lookup[,c('code_name','fips')],by.x='stateres_fips',by.y='code_name',all.x=TRUE)
-dat <- dat[,c('monthdth','age','sex','year','countyres_fips','fips','cause')]
+dat <- dat[,c('cause','monthdth','sex','age','fips','countyres_fips','year')]
 
 # add '0' to fips codes
 dat$fips<- paste0('0',as.character(dat$fips))
@@ -73,6 +73,10 @@ dat.summarised <- plyr::rename(dat.summarised,c('sum(dummy)'='deaths'))
 
 # convert month of death into number
 dat.summarised$monthdth <- as.numeric(dat.summarised$monthdth)
+
+# sort file
+dat.summarised = dat.summarised[,c('cause','monthdth','sex','age','fips','deaths','year')]
+dat.summarised = dat.summarised[order(dat.summarised$cause,dat.summarised$sex,dat.summarised$age,dat.summarised$fips,dat.summarised$year,dat.summarised$monthdth),]
 
 # output file for next stage of processing
 write.dta(dat.summarised,paste0("~/data/mortality/US/state/processed/cod/deathscod",year,'.dta'))

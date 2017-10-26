@@ -69,13 +69,12 @@ if((year >= 1980) & (year <= 1981)){
     # temp fix for countyres_fips
     dat$countyres_fips = dat$countyres
 }
-#if((year >= 1982) & (year <= 1999)){
-    # SOMETHING?
-#}
-#if(year >= 2000) {
-    # SOMETHING?
-#}
 
+# remove state code of ZZ
+dat = subset(dat, stateres_fips!='ZZ')
+dat <- subset(dat,countyres_fips!='000')
+
+# get rid of empty fips codes
 dat <- subset(dat,stateres_fips!='')
 dat <- subset(dat,countyres_fips!='')
 
