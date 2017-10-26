@@ -26,7 +26,7 @@ dat <- dat[, c('monthdth','age','stateres_fips','countyres_fips','sex','year', '
 
 # match state names to fips codes
 state.lookup <- read.csv('~/git/mortality/USA/state/data/fips_lookup/name_fips_lookup.csv')
-dat <- merge(dat,state.lookup[,c('code_name','fips')],by.x='stateres_fips',by.y='code_name',all.x=TRUE)
+dat <- merge(dat,state.lookup[,c('code_name','fips')],by.x='stateres_fips',by.y='code_name')
 dat <- dat[,c('cause','monthdth','sex','age','fips','countyres_fips','year')]
 
 # add '0' to fips codes

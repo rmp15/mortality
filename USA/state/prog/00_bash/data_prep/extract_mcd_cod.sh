@@ -5,7 +5,8 @@
 
 clear
 
-declare -a years=($(seq 1980 2010) 2012)
+#declare -a years=($(seq 1980 2010) 2012)
+declare -a years=(1981)
 declare -a years2=(2011 2013)
 declare -i start=1980
 declare -i end=2013
@@ -20,7 +21,7 @@ for year in "${years[@]}"; do
 
 echo "formatting mcd files for $year";
 
-#Rscript ~/git/mortality/USA/state/prog/format_mort_cod/prep_mcd_counties_cod.R $year
+Rscript ~/git/mortality/USA/state/prog/format_mort_cod/prep_mcd_counties_cod.R $year
 
 done;
 
@@ -30,7 +31,7 @@ for year2 in "${years2[@]}"; do
 
 echo "formatting mcd files for $year2";
 
-Rscript ~/git/mortality/USA/state/prog/format_mort_cod/reformat_data_cod.R $year2
+#Rscript ~/git/mortality/USA/state/prog/format_mort_cod/reformat_data_cod.R $year2
 
 done;
 
