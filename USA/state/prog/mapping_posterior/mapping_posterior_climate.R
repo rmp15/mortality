@@ -44,7 +44,8 @@ dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age
 dat$age.long <- reorder(dat$age.long,dat$age)
 
 # add significance marker
-dat$sig = ifelse(dat$odds.ll*dat$odds.ul>0,1,0)
+#dat$sig = ifelse(dat$odds.ll*dat$odds.ul>0,1,0)
+dat$sig = ifelse(dat$odds.ll*dat$odds.ul>0,1,NA)
 
 # export table in form that is digestible to human eyes
 dat.csv = dat[,c('age.long','sex','ID','odds.mean','odds.ll','odds.ul')]
@@ -151,18 +152,15 @@ heatmap.national.age <- function() {
     # ADD SIGNIFICANCE HIGHLIGHTS
     print(ggplot(data=subset(dat)) +
     geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
-    #geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean,alpha=sig)) +
     geom_point(aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='s') +
     scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-0.05, 0.05),labels=percent,guide = guide_legend(title = paste0("Excess risk ",unit.name))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
-    scale_alpha(guide = 'none') +
     scale_size(guide = 'none') +
     facet_wrap(~sex.long) +
     xlab("Month") + ylab('Age') +
-    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification=c(1,0))
-    )
+    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
+    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
 }
 
 # national month intercept
@@ -170,70 +168,50 @@ pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',yea
 heatmap.national.age()
 dev.off()
 
-# under different climate scenarios FIX THIS
-heatmap.national.age.scenarios <- function() {
+# under different climate scenarios
+heatmap.national.age.scenarios <- function(sex.sel) {
     
     dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
     
-    layout(rbind(c(1,2,3),c(1,2,3),c(1,2,3)),widths=c(1,1,1),heights=c(1,1,1))
+    # create a set of results for different temperature changes
+    dat.1 = dat ; dat.1$scenario = '+1°C' ;
+    dat.2 = dat ; dat.2$scenario = '+2°C' ; dat.2$odds.mean = exp(2)*dat.2$odds.mean
+    dat.4 = dat ; dat.4$scenario = '+4°C' ; dat.4$odds.mean = exp(4)*dat.4$odds.mean
     
-    #dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
-    require(gridExtra)
+    dat.test = rbind(dat.1,dat.2,dat.4)
     
     # set color ramp
     gr <- colorRampPalette(c("darkgreen","green","lightgreen"))(200)
     bl <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)
     re <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
     
-    a <- ggplot(data=subset(dat,sex==1)) +
+    # only choose selected sex
+    dat.test = subset(dat.test,sex==sex.sel)
+    
+    print(ggplot(data=subset(dat.test)) +
     geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
-    #geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean,alpha=sig)) +
-    geom_point(aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='s') +
-    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-0.05, 0.05),labels=percent,guide = guide_legend(title = paste0("Excess risk ",unit.name))) +
+    geom_point(aes(x=ID,y=as.factor(age),size = sig),shape='s') +
+    #geom_point(data=subset(dat,sex==sex.sel),aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='s') +
+    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(exp(4)*-0.05, exp(4)*0.05),labels=percent,guide = guide_legend(title = paste0("Excess risk ",unit.name),override.aes = list(color = "white"))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
-    scale_alpha(guide = 'none') +
     scale_size(guide = 'none') +
-    #facet_wrap(~sex.long) +
+    #ggtitle('+1°C') +
+    facet_wrap(~scenario) +
     xlab("Month") + ylab('Age') +
-    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification=c(1,0))
-    
-    b <- ggplot(data=subset(dat,sex==1)) +
-    geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
-    #geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean,alpha=sig)) +
-    geom_point(aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='s') +
-    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-0.05, 0.05),labels=percent,guide = guide_legend(title = paste0("Excess risk ",unit.name))) +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    scale_y_discrete(labels=age.print) +
-    scale_alpha(guide = 'none') +
-    scale_size(guide = 'none') +
-    facet_wrap(~sex.long) +
-    xlab("Month") + ylab('Age') +
-    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification=c(1,0))
-    
-    c <- ggplot(data=subset(dat,sex==1)) +
-    geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
-    #geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean,alpha=sig)) +
-    geom_point(aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='s') +
-    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-0.05, 0.05),labels=percent,guide = guide_legend(title = paste0("Excess risk ",unit.name))) +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    scale_y_discrete(labels=age.print) +
-    scale_alpha(guide = 'none') +
-    scale_size(guide = 'none') +
-    facet_wrap(~sex.long) +
-    xlab("Month") + ylab('Age') +
-    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification=c(1,0))
-    
-    print(grid.arrange(a,b,c))
+    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
+    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
     
 }
 
+# national month intercept scenarios male
+pdf(paste0(file.loc,'climate_month_params_heatmap_scenarios_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+heatmap.national.age.scenarios(1)
+dev.off()
+
 # national month intercept scenarios
-pdf(paste0(file.loc,'climate_month_params_heatmap_scenarios_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
-heatmap.national.age.scenarios()
+pdf(paste0(file.loc,'climate_month_params_heatmap_scenarios_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+heatmap.national.age.scenarios(2)
 dev.off()
 
 # PROBABILITY OVER ODDS INCREASING FROM POSTERIOR
@@ -283,9 +261,8 @@ plot.posterior <- function(sex.sel){
     scale_alpha(guide = 'none') +
     facet_wrap(~sex.long) +
     xlab("Month") + ylab('Age') +
-    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification=c(1,0))
-    )
+    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
+    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
 }
     
     # national posterior increase probability
@@ -340,9 +317,8 @@ heatmap.posterior.decrease.national <- function() {
     scale_alpha(guide = 'none') +
     facet_wrap(~sex.long) +
     xlab("Month") + ylab('Age') +
-    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification=c(1,0))
-    )
+    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
+    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
 }
 
 # national posterior decrease probability
@@ -400,8 +376,6 @@ dev.off()
     dat.merged.sub$yll.mean = ifelse(dat.merged.sub$sex==1,dat.merged.sub$yll.mean.m,dat.merged.sub$yll.mean.f)
     dat.merged.sub$yll.ll =   ifelse(dat.merged.sub$sex==1,dat.merged.sub$yll.ll.m,dat.merged.sub$yll.ll.f)
     dat.merged.sub$yll.ul =   ifelse(dat.merged.sub$sex==1,dat.merged.sub$yll.ul.m,dat.merged.sub$yll.ul.f)
-                                
-
     
     # export table in form that is digestible to human eyes
     dat.merged.sub.csv <- dat.merged.sub[,c('sex','age','month','deaths.added','deaths.ll','deaths.ul','yll.mean','yll.ll','yll.ul')]
@@ -468,15 +442,51 @@ dev.off()
         scale_shape(guide = 'none') +
         facet_wrap(~sex.long) +
         xlab("Month") + ylab('Age') +
-        theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-        panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification=c(1,0))
-        #theme(text = element_text(size = 15),,strip.background = element_blank()))
-
-        )
+        theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
+        panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
     }
     
-    pdf(paste0(file.loc,'yll_nat_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
-    heatmap.yll.national()
+    # under different climate scenarios
+    heatmap.national.yll.scenarios <- function(sex.sel) {
+        
+        dat = ddply(dat.merged.sub,.(sex,age,month),summarize,yll.mean=sum(yll.mean),yll.ll=sum(yll.ll),yll.ul=sum(yll.ul))
+        
+        dat$sig = ifelse(dat$yll.ll*dat$yll.ul>0,1,NA)
+
+        # create a set of results for different temperature changes
+        dat.1 = dat ; dat.1$scenario = '+1°C' ;
+        dat.2 = dat ; dat.2$scenario = '+2°C' ; dat.2$yll.mean = exp(2)*dat.2$yll.mean
+        dat.4 = dat ; dat.4$scenario = '+4°C' ; dat.4$yll.mean = exp(4)*dat.4$yll.mean
+        
+        dat.test = rbind(dat.1,dat.2,dat.4)
+        
+        # set color ramp
+        gr <- colorRampPalette(c("darkgreen","green","lightgreen"))(200)
+        bl <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)
+        re <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
+        
+        # only choose selected sex
+        dat.test = subset(dat.test,sex==sex.sel)
+        
+        print(ggplot(data=subset(dat.test)) +
+        geom_tile(aes(x=month,y=as.factor(age),fill=yll.mean)) +
+        geom_point(aes(x=month,y=as.factor(age),size = sig),shape='s') +
+      scale_fill_gradientn(colours=c(bl, "white", rev(gr)), na.value = "grey98",labels = scales::comma,limits = c(exp(4)*-5000, exp(4)*5000), guide = guide_legend(title = paste0("YLL"))) +
+        scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+        scale_y_discrete(labels=age.print) +
+        scale_size(guide = 'none') +
+        #ggtitle('+1°C') +
+        facet_wrap(~scenario) +
+        xlab("Month") + ylab('Age') +
+        theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
+        panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+        
+    }
+    pdf(paste0(file.loc,'yll_nat_heatmap_scenarios_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.national.yll.scenarios(1)
+    dev.off()
+    pdf(paste0(file.loc,'yll_nat_heatmap_scenarios_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.national.yll.scenarios(2)
     dev.off()
     
     # ADDITIONAL DEATHS SUBNATIONALLY
@@ -632,7 +642,7 @@ dev.off()
         scale_fill_gradientn(colours=c(bl, "white", rev(gr)), limits = c(-2000, 2000),na.value = "grey98",guide = guide_legend(title = paste0("YLL"))) +
         ggtitle('')+
         theme_map() +
-        theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
+        theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"),strip.background = element_blank()))
     }
     
     # male output to pdf

@@ -10,8 +10,8 @@ declare -i end=2013
 declare -a models=(10)
 declare country="USA"
 declare -a dnames=("t2m")
-declare -a metrics=('meanc3')
-#declare -a metrics=("10percc3" "90percc3" "meanc3" "number_of_min_3_day_above_+5_jumpupwaves_2" "number_of_min_3_day_above_nonnormal_90_upwaves_2" "number_of_min_3_day_below_+5_jumpdownwaves_2" "number_of_min_3_day_below_nonnormal_90_downwaves_2")
+#declare -a metrics=('meanc3')
+declare -a metrics=("10percc3" "90percc3" "meanc3" "number_of_min_3_day_above_+5_jumpupwaves_2" "number_of_min_3_day_above_nonnormal_90_upwaves_2" "number_of_min_3_day_below_+5_jumpdownwaves_2" "number_of_min_3_day_below_nonnormal_90_downwaves_2")
 
 #################################################
 # 1. PLOT PARAMETERS OF STATE CLIMATE POSTERIORS
