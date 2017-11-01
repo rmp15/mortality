@@ -18,6 +18,8 @@ model <- as.numeric(args[4])
 dname <- as.character(args[5])
 metric <- as.character(args[6])
 
+multiple = 0
+
 # source variables
 source('../../data/objects/objects.R')
 
