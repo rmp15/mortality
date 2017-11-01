@@ -24,10 +24,6 @@ source('../../data/objects/objects.R')
 # models to choose from
 model <- models[model]
 
-# create directories for output
-file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
-ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
-
 # load the data
 dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
 
@@ -36,6 +32,9 @@ temp = c("10percc3", "90percc3", "meanc3")
 episodes = c("number_of_min_3_day_above_+5_jumpupwaves_2", "number_of_min_3_day_above_nonnormal_90_upwaves_2", "number_of_min_3_day_below_+5_jumpdownwaves_2", "number_of_min_3_day_below_nonnormal_90_downwaves_2")
 unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
 
+# lookups for human-readable variable names
+#dat.var = data.frame(metric)
+
 # set color ramps
 gr <- colorRampPalette(c("darkgreen","green","lightgreen"))(200)
 bl <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)
@@ -43,6 +42,79 @@ re <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
 pr <- colorRampPalette(c("plum","orchid","darkmagenta"))(200)
 yl <- colorRampPalette(c("lightgoldenrod", "gold","darkorange"))(200)
 sm <- colorRampPalette(c("tan1","salmon2","salmon4"))(200)
+
+if(mulitple==1){
+    
+    # NEED TO GENERALISE!!!!
+    
+    # PLOT MULTIPLE METRICS ON ONE PLOT
+    metric.1 = 'meanc3'
+    metric.2 = 'number_of_min_3_day_above_+5_jumpupwaves_2'
+    metric.3 = 'number_of_min_3_day_below_nonnormal_90_downwaves_2'
+    
+    # create directories for output
+    file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',dname,'/multiple/',metric.1,'/non_pw/type_',model,'/parameters/')
+    ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+    
+    # load the data
+    dat.1 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.1,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.1,'_fast'))
+    dat.1$var = 'Mean'
+    dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.2,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.2,'_fast'))
+    dat.2$var = 'AWA'
+    dat.3 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.3,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.3,'_fast'))
+    dat.3$var = 'RCA'
+    
+    # bind the files
+    dat <- rbind(dat.1,dat.2,dat.3)
+    
+    # attach long age names
+    dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
+    dat$age.long <- reorder(dat$age.long,dat$age)
+    
+    # add significance marker
+    dat$sig = ifelse(dat$odds.ll*dat$odds.ul>0,1,NA)
+    
+    # under different climate scenarios
+    heatmap.national.age.multiple <- function() {
+        
+        dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
+        
+        dat.test = dat
+        
+        lims <- range(abs(dat.test$odds.mean))
+        
+        # only choose selected sex
+        dat.test = subset(dat.test)
+        
+        print(ggplot(data=subset(dat.test)) +
+        geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
+        geom_point(aes(x=ID,y=as.factor(age),size = sig),shape='*') +
+        #geom_point(data=subset(dat,sex==sex.sel),aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='*') +
+        scale_fill_gradientn(colours=c(rev(pr),"white", yl), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(title = paste0("Excess risk of unit change"),override.aes = list(color = "white"))) +
+        scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+        scale_y_discrete(labels=age.print) +
+        scale_size(guide = 'none') +
+        #ggtitle('+1°C') +
+        facet_grid(sex.long ~ var) +
+        xlab("Month") + ylab('Age') +
+        theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
+        panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+        
+    }
+    
+    # national month intercept scenarios male
+    pdf(paste0(file.loc,'climate_month_params_heatmap_scenarios_bothsexes_',model,'_',year.start,'_',year.end,'_',dname,'_',metric.1,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.national.age.multiple()
+    dev.off()
+    
+}
+
+# make a if clause for multiple is no here
+
+# create directories for output
+file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
 if(model=='1d'){
@@ -716,7 +788,6 @@ dev.off()
     #dev.off()
 
 }
-
 
 # for state model, plot climate parameters on map all on on e page, one for men and one for women
 if(model %in% c('1e','1f')){
