@@ -69,6 +69,15 @@ dat.climate2 <- readRDS(paste0(file.loc2,'state_weighted_summary_',metric2.arg,'
 dat.climate1$state.fips <- as.numeric(as.character(dat.climate1$state.fips))
 dat.climate2$state.fips <- as.numeric(as.character(dat.climate2$state.fips))
 
+# leap year test
+is.leapyear=function(year){
+    return(((year %% 4 == 0) & (year %% 100 != 0)) | (year %% 400 == 0))
+}
+
+# add leap year if not already there
+dat.climate1$leap <- as.integer(is.leapyear(dat.climate1$year))
+dat.climate2$leap <- as.integer(is.leapyear(dat.climate2$year))
+
 # merge mortality and climate data and reorder
 dat.merged <- merge(dat.inla.load,dat.climate1,by.x=c('sex','age','year','month','fips','leap'),by.y=c('sex','age','year','month','state.fips','leap'),all.x=TRUE)
 dat.merged <- merge(dat.merged,dat.climate2,by.x=c('sex','age','year','month','fips','leap'),by.y=c('sex','age','year','month','state.fips','leap'),all.x=TRUE)
