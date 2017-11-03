@@ -31,7 +31,7 @@ require(mailR)
 metric.arg = paste(sort(c(metric1.arg,metric2.arg)),collapse='_')
 
 # create files for output
-ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/2var/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/2var/',metric.arg,'/non_pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
+ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/3var/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/3var/',metric.arg,'/non_pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
 
 # load USA data
 dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
@@ -105,8 +105,8 @@ USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"
 library(INLA)
 
 # load inla function
-source('../models/INLA/03_spatiotemporal/inla_functions_2var.R')
+source('../models/INLA/03_spatiotemporal/inla_functions_3var.R')
 
 # input arguments into function to perform inference
-mapply(inla.function.climate.2var.faster,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.analysis.arg,
-year.end=year.end.analysis.arg,type=type.arg,cluster=cluster.arg)
+mapply(inla.function.climate.3var,age.sel=age.arg,sex.sel=sex.arg,year.start=year.start.analysis.arg,
+	year.end=year.end.analysis.arg,type=type.arg,cluster=cluster.arg)
