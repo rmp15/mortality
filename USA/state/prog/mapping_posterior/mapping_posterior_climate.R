@@ -232,7 +232,7 @@ heatmap.national.age <- function() {
     print(ggplot(data=subset(dat)) +
     geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
     geom_point(aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='* ') +
-    scale_fill_gradientn(colours=c(rev(pr),"white", yl), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
+    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
     scale_size(guide = 'none') +
@@ -254,13 +254,15 @@ heatmap.national.age.scenarios <- function(sex.sel) {
     # create a set of results for different temperature changes
     dat.1 = dat ; dat.1$scenario = paste0('+1',unit.name) ;
     dat.2 = dat ; dat.2$scenario = paste0('+2',unit.name) ; dat.2$odds.mean = exp(2)*dat.2$odds.mean
+    dat.3 = dat ; dat.3$scenario = paste0('+3',unit.name) ; dat.3$odds.mean = exp(3)*dat.3$odds.mean
     dat.4 = dat ; dat.4$scenario = paste0('+4',unit.name) ; dat.4$odds.mean = exp(4)*dat.4$odds.mean
     
     dat.1$scenario = 'RCP2.6'
     dat.2$scenario = 'RCP4.5'
+    dat.3$scenario = 'RCP6.0'
     dat.4$scenario = 'RCP8.5'
     
-    dat.test = rbind(dat.1,dat.2,dat.4)
+    dat.test = rbind(dat.2,dat.3,dat.4)
     
     lims <- range(abs(dat.test$odds.mean))
     
@@ -271,7 +273,7 @@ heatmap.national.age.scenarios <- function(sex.sel) {
     geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
     geom_point(aes(x=ID,y=as.factor(age),size = sig),shape='*') +
     #geom_point(data=subset(dat,sex==sex.sel),aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='*') +
-    scale_fill_gradientn(colours=c(rev(pr),"white", yl), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(title = paste0("Excess risk"),override.aes = list(color = "white"))) +
+    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(title = paste0("Excess risk"),override.aes = list(color = "white"))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
     scale_size(guide = 'none') +
@@ -301,13 +303,15 @@ heatmap.national.age.both.sex.scenarios <- function() {
     # create a set of results for different temperature changes
     dat.1 = dat ; dat.1$scenario = paste0('+1',unit.name) ;
     dat.2 = dat ; dat.2$scenario = paste0('+2',unit.name) ; dat.2$odds.mean = exp(2)*dat.2$odds.mean
+    dat.3 = dat ; dat.3$scenario = paste0('+3',unit.name) ; dat.3$odds.mean = exp(3)*dat.3$odds.mean
     dat.4 = dat ; dat.4$scenario = paste0('+4',unit.name) ; dat.4$odds.mean = exp(4)*dat.4$odds.mean
     
     dat.1$scenario = 'RCP2.6'
     dat.2$scenario = 'RCP4.5'
+    dat.3$scenario = 'RCP6.0'
     dat.4$scenario = 'RCP8.5'
     
-    dat.test = rbind(dat.1,dat.2,dat.4)
+    dat.test = rbind(dat.2,dat.3,dat.4)
     
     lims <- range(abs(dat.test$odds.mean))
     
@@ -317,7 +321,7 @@ heatmap.national.age.both.sex.scenarios <- function() {
     print(ggplot(data=subset(dat.test)) +
     geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
     geom_point(aes(x=ID,y=as.factor(age),size = sig),shape='*') +
-    scale_fill_gradientn(colours=c(rev(pr),"white", yl), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(title = paste0("Excess risk"),override.aes = list(color = "white"))) +
+    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(title = paste0("Excess risk"),override.aes = list(color = "white"))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
     scale_size(guide = 'none') +
@@ -567,13 +571,15 @@ dev.off()
         # create a set of results for different temperature changes
         dat.1 = dat ; dat.1$scenario = paste0('+1',unit.name) ;
         dat.2 = dat ; dat.2$scenario = paste0('+2',unit.name) ; dat.2$yll.mean = exp(2)*dat.2$yll.mean
+        dat.3 = dat ; dat.3$scenario = paste0('+3',unit.name) ; dat.3$yll.mean = exp(3)*dat.3$yll.mean
         dat.4 = dat ; dat.4$scenario = paste0('+4',unit.name) ; dat.4$yll.mean = exp(4)*dat.4$yll.mean
-        
+
         dat.1$scenario = 'RCP2.6'
         dat.2$scenario = 'RCP4.5'
+        dat.3$scenario = 'RCP6.0'
         dat.4$scenario = 'RCP8.5'
 
-        dat.test = rbind(dat.1,dat.2,dat.4)
+        dat.test = rbind(dat.2,dat.3,dat.4)
         
         lims <- range(abs(dat.test$yll.mean))
         
@@ -612,15 +618,16 @@ dev.off()
         # create a set of results for different temperature changes
         dat.1 = dat ; dat.1$scenario = paste0('+1',unit.name) ;
         dat.2 = dat ; dat.2$scenario = paste0('+2',unit.name) ; dat.2$yll.mean = exp(2)*dat.2$yll.mean
+        dat.3 = dat ; dat.3$scenario = paste0('+3',unit.name) ; dat.3$yll.mean = exp(3)*dat.3$yll.mean
         dat.4 = dat ; dat.4$scenario = paste0('+4',unit.name) ; dat.4$yll.mean = exp(4)*dat.4$yll.mean
         
         dat.1$scenario = 'RCP2.6'
         dat.2$scenario = 'RCP4.5'
+        dat.3$scenario = 'RCP6.0'
         dat.4$scenario = 'RCP8.5'
         
-        dat.test = rbind(dat.1,dat.2,dat.4)
-        
-        
+        dat.test = rbind(dat.2,dat.3,dat.4)
+
         lims <- range(abs(dat.test$yll.mean))
         
         # only choose selected sex
