@@ -55,23 +55,6 @@ Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatio
 
 ) &
 
-for metric in "${metrics[@]}"; do
-
-for model in "${models[@]}"; do
-
-for sex in "${sexes[@]}"; do
-
-for age in "${ages[@]}"; do
-
-echo "starting ${sexstrings[$sex-1]} $age INLA model $model, with climate variable $metric $dname, years $start2 - $end2";
-
-# runs model
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate.R $age $sex $start $end $model 0 $dname $metric $start2 $end2
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_fast.R $age $sex $start $end $model 0 $dname $metric $start2 $end2
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_faster.R $age $sex $start $end $model 0 $dname $metric $start2 $end2
-
-done; done; done; done;
-
 #################################################
 # 2. COMBINE RESULTS
 #################################################
@@ -80,14 +63,6 @@ for model in "${models[@]}"; do
 
 echo "combining results into one file from INLA model $model years $start - $end";
 
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate.R $start $end $country $model $dname $metric
+#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_3var.R $start $end $country $model $dname $metric
 
 done;
-
-#################################################
-# 3. PLOTTING PARAMETERS FROM MODEL
-#################################################
-
-#echo "plotting parameters from INLA model $model years $start - $end";
-
-# PLOT PARAMETERS CODE
