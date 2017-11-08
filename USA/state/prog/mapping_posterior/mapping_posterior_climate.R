@@ -233,6 +233,7 @@ heatmap.national.age <- function() {
     geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
     geom_point(aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='* ') +
     scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
+    guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
     scale_size(guide = 'none') +
@@ -274,6 +275,7 @@ heatmap.national.age.scenarios <- function(sex.sel) {
     geom_point(aes(x=ID,y=as.factor(age),size = sig),shape='*') +
     #geom_point(data=subset(dat,sex==sex.sel),aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='*') +
     scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(title = paste0("Excess risk"),override.aes = list(color = "white"))) +
+    guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk"))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
     scale_size(guide = 'none') +
@@ -322,6 +324,7 @@ heatmap.national.age.both.sex.scenarios <- function() {
     geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
     geom_point(aes(x=ID,y=as.factor(age),size = sig),shape='*') +
     scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(title = paste0("Excess risk"),override.aes = list(color = "white"))) +
+    guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk"))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
     scale_size(guide = 'none') +
@@ -546,6 +549,7 @@ dev.off()
         #geom_text(aes(month, as.factor(age), label = yll.mean), color = "black", size = 4) +
         #scale_fill_gradient2(low = "purple", high ="brown" , mid = "white",    midpoint = 0,limits = c(-lims[2],lims[2]),guide = guide_legend(title = paste0("YLL per ",unit.name))) +
         scale_fill_gradientn(colours=c(bl, "white", sm), na.value = "grey98", limits = c(-lims[2], lims[2]), guide = guide_legend(title = paste0("YLL for 1 additional ",unit.name))) +
+        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("YLL for 1 additional ",unit.name))) +
         scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
         scale_y_discrete(labels=age.print) +
         scale_alpha(guide = 'none') +
@@ -589,7 +593,8 @@ dev.off()
         print(ggplot(data=subset(dat.test)) +
         geom_tile(aes(x=month,y=as.factor(age),fill=yll.mean)) +
         geom_point(aes(x=month,y=as.factor(age),size = sig),shape='*') +
-      scale_fill_gradientn(colours=c(bl, "white", sm), na.value = "grey98",labels = scales::comma,limits = c(-lims[2], lims[2]), guide = guide_legend(title = paste0("YLL"))) +
+        scale_fill_gradientn(colours=c(bl, "white", sm), na.value = "grey98",labels = scales::comma,limits = c(-lims[2], lims[2]), guide = guide_legend(title = paste0("YLL"))) +
+        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("YLL"))) +
         scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
         scale_y_discrete(labels=age.print) +
         scale_size(guide = 'none') +
@@ -637,6 +642,7 @@ dev.off()
         geom_tile(aes(x=month,y=as.factor(age),fill=yll.mean)) +
         geom_point(aes(x=month,y=as.factor(age),size = sig),shape='*') +
         scale_fill_gradientn(colours=c(bl, "white", sm), na.value = "grey98",labels = scales::comma,limits = c(-lims[2], lims[2]), guide = guide_legend(title = paste0("YLL"))) +
+        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("YLL"))) +
         scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
         scale_y_discrete(labels=age.print) +
         scale_size(guide = 'none') +
