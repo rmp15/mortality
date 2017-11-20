@@ -20,7 +20,7 @@ metric1 <- as.character(args[6])
 metric2 <- as.character(args[7])
 metric3 <- as.character(args[8])
 
-#year.start=1980;year.end=2013;country='t2m';model=10;dname='t2m';metric1='meanc3';metric2='number_of_min_3_day_below_nonnormal_90_downwaves_2';metric3='number_of_min_3_day_above_nonnormal_90_upwaves_2'
+#year.start=1980;year.end=2013;country='t2m';model=10;dname='t2m';metric1='meanc3';metric2='number_of_min_3_day_above_+5_jumpupwaves_2';metric3='number_of_min_3_day_above_+5_jumpupwaves_2'
 
 multiple = 0
 
@@ -34,7 +34,8 @@ model <- models[model]
 metric = paste(sort(c(metric1,metric2,metric3)),collapse='_')
 
 # create dictionary for variables
-dat.dict = data.frame(metric=c('meanc3','number_of_min_3_day_below_nonnormal_90_downwaves_2','number_of_min_3_day_above_nonnormal_90_upwaves_2'),name=c('Mean','RCA','RWA'))
+dat.dict = data.frame(metric=c('meanc3','number_of_min_3_day_below_nonnormal_90_downwaves_2','number_of_min_3_day_above_nonnormal_90_upwaves_2','number_of_min_3_day_below_+5_jumpdownwaves_2','number_of_min_3_day_above_+5_jumpupwaves_2'),
+name=c('Mean','RCA','RWA','ACA','AWA'))
 
 # load the data
 dat <- readRDS(paste0('../../data/climate_effects/',dname,'/3var/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
@@ -49,8 +50,8 @@ dat$var = ifelse(dat$var==1,as.character(dat.dict[which(dat.dict$metric==metric1
 if(model=='1d'){
 
 # attach long age names
-#dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
-dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[c(3:10),2]))
+dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
+#dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[c(3:10),2]))
 dat$age.long <- reorder(dat$age.long,dat$age)
 
 # add significance marker
