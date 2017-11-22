@@ -95,13 +95,15 @@ names(dat.test)[c(ncol(dat.test)-2,ncol(dat.test)-1,ncol(dat.test))] = c('odds.m
 year.event = 1995 ;month.event = 7 ;fips.event = 17 # Illinois July 1995
 dat.event = subset(dat.test,year==year.event&month==month.event&fips==fips.event)
 
-# calculate the final value of the perturbtion from the average death count
-dat.event$perturbation.mean = with(dat.event,exp(variable1)*odds.mean.variable1+exp(variable2)*odds.mean.variable2+exp(variable3)*odds.mean.variable3)
-dat.event$perturbation.ll = with(dat.event,exp(variable1)*odds.ll.variable1+exp(variable2)*odds.ll.variable2+exp(variable3)*odds.ll.variable3)
-dat.event$perturbation.ul = with(dat.event,exp(variable1)*odds.ul.variable1+exp(variable2)*odds.ul.variable2+exp(variable3)*odds.ul.variable3)
-#dat.event$deaths.additional.mean = with(dat.event, perturbation.mean*deaths.adj)
-#dat.event$deaths.additional.ll = with(dat.event, perturbation.ll*deaths.adj)
-#dat.event$deaths.additional.ul = with(dat.event, perturbation.ul*deaths.adj)
+# calculate the final value of the perturbtion from the average death count CHECK THIS BIT
+#dat.event$perturbation.mean.test = with(dat.event,exp(variable1*log(odds.mean.variable1+1)+variable2*log(odds.mean.variable2+1)+variable3*log(odds.mean.variable3+1)))
+dat.event$perturbation.mean = with(dat.event,exp(variable1*odds.mean.variable1+variable2*odds.mean.variable2+variable3*odds.mean.variable3))
+dat.event$perturbation.mean = dat.event$perturbation.mean - 1
+dat.event$perturbation.ll = with(dat.event,exp(variable1*odds.ll.variable1+variable2*odds.ll.variable2+variable3*odds.ll.variable3))
+dat.event$perturbation.ll = dat.event$perturbation.ll - 1
+dat.event$perturbation.ul = with(dat.event,exp(variable1*odds.ul.variable1+variable2*odds.ul.variable2+variable3*odds.ul.variable3))
+dat.event$perturbation.ul = dat.event$perturbation.ul - 1
+
 dat.event$deaths.additional.mean = with(dat.event, perturbation.mean*rate.adj*pop.adj)
 dat.event$deaths.additional.ll = with(dat.event, perturbation.ll*rate.adj*pop.adj)
 dat.event$deaths.additional.ul = with(dat.event, perturbation.ul*rate.adj*pop.adj)
