@@ -93,6 +93,7 @@ names(dat.test)[c(ncol(dat.test)-2,ncol(dat.test)-1,ncol(dat.test))] = c('odds.m
 
 # pick an event (e.g. Chicago 1995, Philedelphia 95, to generate excess deaths)
 year.event = 1995 ;month.event = 7 ;fips.event = 17 # Illinois July 1995
+year.event = 1995 ;month.event = 7 ;fips.event = 17 # Illinois July 1995
 dat.event = subset(dat.test,year==year.event&month==month.event&fips==fips.event)
 
 # calculate the final value of the perturbtion from the average death count CHECK THIS BIT
@@ -116,9 +117,16 @@ print(dat.event.summary)
 file.loc <- paste0('../../output/attribution_climate/',year.start,'_',year.end,'/',dname,'/3var/',metric,'/non_pw/type_',model,'/parameters/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
-#dat$var = ifelse(dat$var==1,as.character(dat.dict[which(dat.dict$metric==metric1),][,2]),ifelse(dat$var==2,as.character(dat.dict[which(dat.dict$metric==metric2),][,2]),ifelse(dat$var==3,as.character(dat.dict[which(dat.dict$metric==metric3),][,2]),NA)))
+dat.event$sex.long = mapvalues(dat.event$sex,from=sort(unique(dat.event$sex)),to=c('Men','Women'))
 
-# for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
-if(model=='1d'){
+pdf(paste0(file.loc,'illinois_additional_deaths_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.event) +
+geom_point(aes(x=age,y=deaths.additional.mean)) +
+geom_errorbar(aes(x=age,ymin=deaths.additional.ll,ymax=deaths.additional.ul)) +
+ggtitle('Illinois July 1995 additional heat deaths') +
+ylab('Additional deaths')+
+facet_wrap(~sex.long) +
+geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
+theme(legend.position="none")
+dev.off()
 
-}
