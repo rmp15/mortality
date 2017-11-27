@@ -9,6 +9,8 @@ library(mapproj)
 library(rgeos)
 library(rgdal)
 
+# FINISH!!!! BY TAKING AWAY THE TWO VARIABLES
+
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
 year.start <- as.numeric(args[1])
