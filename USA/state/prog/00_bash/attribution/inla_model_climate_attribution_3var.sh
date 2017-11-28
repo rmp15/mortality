@@ -13,8 +13,8 @@ declare country="USA"
 declare -a models=(10)
 declare dname="t2m"
 declare -a metrics1=('meanc3')
-declare -a metrics2=('number_of_min_3_day_below_nonnormal_90_downwaves_2')
-declare -a metrics3=('number_of_min_3_day_above_nonnormal_90_upwaves_2')
+declare -a metrics2=("number_of_days_above_nonnormal_90_2")
+declare -a metrics3=("number_of_min_3_day_above_nonnormal_90_upwaves_2")
 declare -i start2=1979
 declare -i end2=2015
 

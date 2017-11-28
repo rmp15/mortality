@@ -22,7 +22,7 @@ metric3 <- as.character(args[8])
 
 print(args)
 
-#year.start=1980;year.end=2013;country='USA';model=10;dname='t2m';metric1='meanc3';metric2='number_of_min_3_day_below_nonnormal_90_downwaves_2';metric3='number_of_min_3_day_above_nonnormal_90_upwaves_2'
+#year.start=1980;year.end=2013;country='USA';model=10;dname='t2m';metric1='meanc3';metric2='number_of_days_above_nonnormal_90_2';metric3='number_of_min_3_day_above_nonnormal_90_upwaves_2'
 
 multiple = 0
 
@@ -36,8 +36,13 @@ model <- models[model]
 metric = paste(sort(c(metric1,metric2,metric3)),collapse='_')
 
 # create dictionary for variables
-dat.dict = data.frame(metric=c('meanc3','number_of_min_3_day_below_nonnormal_90_downwaves_2','number_of_min_3_day_above_nonnormal_90_upwaves_2','number_of_min_3_day_below_+5_jumpdownwaves_2','number_of_min_3_day_above_+5_jumpupwaves_2'),
-name=c('Mean','RCA','RWA','ACA','AWA'))
+dat.dict = data.frame(metric=c('meanc3','number_of_min_3_day_below_nonnormal_90_downwaves_2','number_of_min_3_day_above_nonnormal_90_upwaves_2','number_of_min_3_day_below_+5_jumpdownwaves_2','number_of_min_3_day_above_+5_jumpupwaves_2','number_of_days_above_nonnormal_90_2','number_of_days_below_nonnormal_10','number_of_days_above_+5_2','number_of_days_below_-5_2'),
+name=c('Mean','RCA','RWA','ACA','AWA','DA90','DB10','DA+5','DB-5'))
+
+# identify which variables by short name
+var1.short = as.character(dat.dict[which(dat.dict$metric==metric1),][,2])
+var2.short = as.character(dat.dict[which(dat.dict$metric==metric2),][,2])
+var3.short = as.character(dat.dict[which(dat.dict$metric==metric3),][,2])
 
 # load the data
 dat <- readRDS(paste0('../../data/climate_effects/',dname,'/3var/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
@@ -98,17 +103,17 @@ heatmap.national.age.single <- function(metric.arg) {
 
 # national month intercept
 pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
-heatmap.national.age.single('Mean')
+heatmap.national.age.single(var1.short)
 dev.off()
 
 # national month intercept
 pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_2_',metric,'.pdf'),paper='a4r',height=0,width=0)
-heatmap.national.age.single('RCA')
+heatmap.national.age.single(var2.short)
 dev.off()
 
 # national month intercept
 pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_3_',metric,'.pdf'),paper='a4r',height=0,width=0)
-heatmap.national.age.single('RWA')
+heatmap.national.age.single(var3.short)
 dev.off()
 
 # HEATMAPS OF PARAMETERS (SEXY ALTERNATIVE TO FOREST PLOTS)
