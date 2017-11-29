@@ -22,7 +22,7 @@ metric1 <- as.character(args[6])
 year.start2 <- as.numeric(args[7])
 year.end2 <- as.numeric(args[8])
 
-#year.start=1980;year.end=2013;country='USA';model=10;dname='t2m';metric1='number_of_min_3_day_above_+5_jumpupwaves_2';year.start2=1979;year.end2=2015;
+#year.start=1980;year.end=2013;country='USA';model=10;dname='t2m';metric1='number_of_days_below_nonnormal_90';year.start2=1979;year.end2=2015;
 
 multiple = 0
 
@@ -36,7 +36,7 @@ model <- models[model]
 metric = metric1
 
 # create dictionary for variables
-dat.dict = data.frame(metric=c('meanc3','number_of_min_3_day_below_nonnormal_90_downwaves_2','number_of_min_3_day_above_nonnormal_90_upwaves_2','number_of_min_3_day_below_+5_jumpdownwaves_2','number_of_min_3_day_above_+5_jumpupwaves_2','number_of_days_above_nonnormal_90_2','number_of_days_below_nonnormal_10','number_of_days_above_+5_2','number_of_days_below_-5_2'),
+dat.dict = data.frame(metric=c('meanc3','number_of_min_3_day_below_nonnormal_90_downwaves_2','number_of_min_3_day_above_nonnormal_90_upwaves_2','number_of_min_3_day_below_+5_jumpdownwaves_2','number_of_min_3_day_above_+5_jumpupwaves_2','number_of_days_above_nonnormal_90_2','number_of_days_below_nonnormal_90','number_of_days_above_+5_2','number_of_days_below_-5_2'),
 name=c('Mean','RCA','RWA','ACA','AWA','DA90','DB10','DA+5','DB-5'))
 
 # load the mortality data and convert state to numerical
@@ -222,5 +222,76 @@ geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
 theme(legend.position="none")
 dev.off()
 
+# pick an event
+year.event = 2004 ;month.event = 1 ;fips.event = 25 # Massachussetts January 2004
+dat.event = subset(dat.test,year==year.event&month==month.event&fips==fips.event)
 
+# make time series of death rates for particular location
+dat.timeseries = subset(dat.test,month==month.event&fips==fips.event)
 
+# make time series for climate variable for particular location
+dat.climate.timeseries = subset(dat.merged,month==month.event&fips==fips.event)
+
+# calculate the final value of the perturbtion from the average death count
+dat.event$perturbation.mean = with(dat.event,exp(variable1*odds.mean.variable1))
+dat.event$perturbation.ll = with(dat.event,exp(variable1*odds.ll.variable1))
+dat.event$perturbation.ul = with(dat.event,exp(variable1*odds.ul.variable1))
+
+dat.event$deaths.additional.mean = with(dat.event, (perturbation.mean-1)*rate.adj*pop.adj)
+dat.event$deaths.additional.ll = with(dat.event, (perturbation.ll-1)*rate.adj*pop.adj)
+dat.event$deaths.additional.ul = with(dat.event, (perturbation.ul-1)*rate.adj*pop.adj)
+
+dat.event.summary = ddply(dat.event,.(fips),summarize,sum.mean=sum(deaths.additional.mean),sum.ul=sum(deaths.additional.ul),sum.ll=sum(deaths.additional.ll))
+print(dat.event.summary)
+
+# create directories for output
+file.loc <- paste0('../../output/attribution_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+
+dat.event$sex.long = mapvalues(dat.event$sex,from=sort(unique(dat.event$sex)),to=c('Men','Women'))
+dat.timeseries$sex.long = mapvalues(dat.timeseries$sex,from=sort(unique(dat.timeseries$sex)),to=c('Men','Women'))
+
+short.name = as.character(dat.dict[dat.dict$metric==metric1,2])
+
+pdf(paste0(file.loc,'Massachusetts_additional_deaths_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.event) +
+#geom_point(aes(x=age,y=deaths.adj)) +
+geom_point(aes(x=age,y=deaths.additional.mean)) +
+geom_errorbar(aes(x=age,ymin=deaths.additional.ll,ymax=deaths.additional.ul)) +
+ggtitle(paste0('Massachusetts January 2004 additional cold deaths ', short.name)) +
+ylab('Additional deaths')+ ylim(c(-20,100))+
+facet_wrap(~sex.long) +
+geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
+theme(legend.position="none")
+dev.off()
+
+pdf(paste0(file.loc,'Massachusetts_additional_deaths_percentage',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.event) +
+geom_point(aes(x=age,y=deaths.adj)) +
+geom_point(aes(x=age,y=deaths.additional.mean)) +
+geom_errorbar(aes(x=age,ymin=deaths.additional.ll,ymax=deaths.additional.ul)) +
+ggtitle(paste0('Massachusetts January 2004 additional heat deaths ', short.name)) +
+ylab('Additional deaths')+ ylim(c(-20,100))+
+facet_wrap(~sex.long) +
+geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
+theme(legend.position="none")
+dev.off()
+
+pdf(paste0(file.loc,'Massachusetts_deaths_july_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.timeseries) +
+geom_line(aes(x=year,y=rate.adj*100000,color=as.factor(age))) +
+ggtitle('Massachusetts January death rates') +
+ylab('Deaths per 100,000')+
+facet_wrap(~sex.long) +
+geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
+theme(legend.position="none")
+dev.off()
+
+pdf(paste0(file.loc,'Massachusetts_',metric,'_july_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.climate.timeseries) +
+geom_line(aes(x=year,y=variable1,color=as.factor(age))) +
+ggtitle(paste0('Massachusetts January ',short.name)) +
+ylab(short.name) +
+geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
+theme(legend.position="none")
+dev.off()

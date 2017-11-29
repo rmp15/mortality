@@ -159,5 +159,38 @@ geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
 theme(legend.position="none")
 dev.off()
 
+# pick an event (e.g. Chicago 1995, Philedelphia 95, to generate excess deaths)
+year.event = 2004 ;month.event = 1 ;fips.event = 25 # Massachussetts January 2004
+dat.event = subset(dat.test,year==year.event&month==month.event&fips==fips.event)
+
+# calculate the final value of the perturbtion from the average death count
+dat.event$perturbation.mean = with(dat.event,exp(variable1*odds.mean.variable1+variable2*odds.mean.variable2+variable3*odds.mean.variable3))
+dat.event$perturbation.ll = with(dat.event,exp(variable1*odds.ll.variable1+variable2*odds.ll.variable2+variable3*odds.ll.variable3))
+dat.event$perturbation.ul = with(dat.event,exp(variable1*odds.ul.variable1+variable2*odds.ul.variable2+variable3*odds.ul.variable3))
+
+dat.event$deaths.additional.mean = with(dat.event, (perturbation.mean-1)*rate.adj*pop.adj)
+dat.event$deaths.additional.ll = with(dat.event, (perturbation.ll-1)*rate.adj*pop.adj)
+dat.event$deaths.additional.ul = with(dat.event, (perturbation.ul-1)*rate.adj*pop.adj)
+
+dat.event.summary = ddply(dat.event,.(fips),summarize,sum.mean=sum(deaths.additional.mean),sum.ul=sum(deaths.additional.ul),sum.ll=sum(deaths.additional.ll))
+print(dat.event.summary)
+
+# create directories for output
+file.loc <- paste0('../../output/attribution_climate/',year.start,'_',year.end,'/',dname,'/3var/',metric,'/non_pw/type_',model,'/parameters/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+
+dat.event$sex.long = mapvalues(dat.event$sex,from=sort(unique(dat.event$sex)),to=c('Men','Women'))
+
+pdf(paste0(file.loc,'massachusetts_additional_deaths_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=dat.event) +
+#geom_point(aes(x=age,y=deaths.adj)) +
+geom_point(aes(x=age,y=deaths.additional.mean)) +
+geom_errorbar(aes(x=age,ymin=deaths.additional.ll,ymax=deaths.additional.ul)) +
+ggtitle(paste0('Massachusetts January 2004 additional cold deaths')) +
+ylab('Additional deaths')+ ylim(c(-20,100))+
+facet_wrap(~sex.long) +
+geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
+theme(legend.position="none")
+dev.off()
 
 
