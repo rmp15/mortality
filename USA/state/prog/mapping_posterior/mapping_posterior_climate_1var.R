@@ -34,8 +34,11 @@ temp = c("10percc3", "90percc3", "meanc3")
 episodes = c("number_of_min_3_day_above_+5_jumpupwaves_2", "number_of_min_3_day_above_nonnormal_90_upwaves_2", "number_of_min_3_day_below_+5_jumpdownwaves_2", "number_of_min_3_day_below_nonnormal_90_downwaves_2")
 unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
 
-# lookups for human-readable variable names
-#dat.var = data.frame(metric)
+# create dictionary for variables
+dat.dict = data.frame(metric=c('meanc3','number_of_min_3_day_below_nonnormal_90_downwaves_2','number_of_min_3_day_above_nonnormal_90_upwaves_2','number_of_min_3_day_below_+5_jumpdownwaves_2','number_of_min_3_day_above_+5_jumpupwaves_2','number_of_days_above_nonnormal_90_2','number_of_days_below_nonnormal_10','number_of_days_above_+5_2','number_of_days_below_-5_2'),
+name=c('Mean','RCA','RWA','ACA','AWA','DA90','DB10','DA+5','DB-5'),
+order=c(1,2,6,4,5,3,7,8,9))
+
 
 # set color ramps
 gr <- colorRampPalette(c("darkgreen","green","lightgreen"))(200)
@@ -51,8 +54,8 @@ if(multiple==1){
     
     # PLOT MULTIPLE METRICS ON ONE PLOT
     metric.1 = 'meanc3'
-    metric.2 = 'number_of_min_3_day_above_nonnormal_90_upwaves_2'
-    metric.3 = 'number_of_min_3_day_below_nonnormal_90_downwaves_2'
+    metric.2 = 'number_of_days_above_nonnormal_90'
+    metric.3 = 'number_of_min_3_day_above_nonnormal_90_upwaves_2'
     
     # create directories for output
     file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',dname,'/multiple/',metric.1,'/non_pw/type_',model,'/parameters/')
@@ -62,9 +65,9 @@ if(multiple==1){
     dat.1 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.1,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.1,'_fast'))
     dat.1$var = 'Mean'
     dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.2,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.2,'_fast'))
-    dat.2$var = 'RWA'
+    dat.2$var = 'DA90'
     dat.3 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.3,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.3,'_fast'))
-    dat.3$var = 'RCA'
+    dat.3$var = 'RWA'
     
     # bind the files
     dat <- rbind(dat.1,dat.2,dat.3)
@@ -87,6 +90,11 @@ if(multiple==1){
         
         # only choose selected sex
         dat.test = subset(dat.test)
+        
+        # merge with data dictionary for correct plotting order
+        dat = merge(dat.test,dat.dict,by.x=c('var'),by.y=c('name'))
+        dat$var <- reorder(dat$var,dat$order)
+        dat$metric = NULL ; dat$order = NULL
         
         print(ggplot(data=subset(dat.test)) +
         geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +

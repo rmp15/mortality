@@ -37,7 +37,8 @@ metric = paste(sort(c(metric1,metric2,metric3)),collapse='_')
 
 # create dictionary for variables
 dat.dict = data.frame(metric=c('meanc3','number_of_min_3_day_below_nonnormal_90_downwaves_2','number_of_min_3_day_above_nonnormal_90_upwaves_2','number_of_min_3_day_below_+5_jumpdownwaves_2','number_of_min_3_day_above_+5_jumpupwaves_2','number_of_days_above_nonnormal_90_2','number_of_days_below_nonnormal_10','number_of_days_above_+5_2','number_of_days_below_-5_2'),
-name=c('Mean','RCA','RWA','ACA','AWA','DA90','DB10','DA+5','DB-5'))
+name=c('Mean','RCA','RWA','ACA','AWA','DA90','DB10','DA+5','DB-5'),
+order=c(1,2,6,4,5,3,7,8,9))
 
 # identify which variables by short name
 var1.short = as.character(dat.dict[which(dat.dict$metric==metric1),][,2])
@@ -51,14 +52,19 @@ dat <- readRDS(paste0('../../data/climate_effects/',dname,'/3var/',metric,'/non_
 file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',dname,'/3var/',metric,'/non_pw/type_',model,'/parameters/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
+# add names of variables to dataframe
 dat$var = ifelse(dat$var==1,as.character(dat.dict[which(dat.dict$metric==metric1),][,2]),ifelse(dat$var==2,as.character(dat.dict[which(dat.dict$metric==metric2),][,2]),ifelse(dat$var==3,as.character(dat.dict[which(dat.dict$metric==metric3),][,2]),NA)))
+
+# reorder dataframe variables for plotting
+dat = merge(dat,dat.dict,by.x=c('var'),by.y=c('name'))
+dat$var <- reorder(dat$var,dat$order)
+dat$metric = NULL ; dat$order = NULL
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
 if(model=='1d'){
 
 # attach long age names
 dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
-#dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[c(3:10),2]))
 dat$age.long <- reorder(dat$age.long,dat$age)
 
 # add significance marker
