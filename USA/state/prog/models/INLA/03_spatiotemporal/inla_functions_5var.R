@@ -633,7 +633,7 @@ inla.function.climate.5var.fast <- function(age.sel,sex.sel,year.start,year.end,
     # variables for INLA model
     
     dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
-    dat.inla$month7 <- dat.inla$month6 <- dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
+    dat.inla$month9 <- dat.inla$month8 <- dat.inla$month7 <- dat.inla$month6 <- dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
     dat.inla$ID7 <- dat.inla$ID6 <- dat.inla$ID5 <- dat.inla$ID4 <- dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
     dat.inla$e <- 1:nrow(dat.inla)
     
@@ -1246,7 +1246,7 @@ inla.function.climate.5var.faster <- function(age.sel,sex.sel,year.start,year.en
     # variables for INLA model
     
     dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
-    dat.inla$month6 <- dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
+    dat.inla$month9 <- dat.inla$month8 <- dat.inla$month7 <- dat.inla$month6 <- dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
     dat.inla$ID4 <- dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
     dat.inla$e <- 1:nrow(dat.inla)
     
