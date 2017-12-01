@@ -31,7 +31,7 @@ years <- year.start.arg:year.end.arg
 require(mailR)
 
 # combine two metrics in alphabetical order in a single string
-metric.arg = paste(sort(c(metric1.arg,metric2.arg,metric3,metric4,metric5)),collapse='_')
+metric.arg = paste(sort(c(metric1.arg,metric2.arg,metric3.arg,metric4.arg,metric5.arg)),collapse='_')
 
 # create files for output
 ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/5var/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/5var/',metric.arg,'/non_pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
