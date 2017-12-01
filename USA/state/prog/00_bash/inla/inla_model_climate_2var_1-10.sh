@@ -24,31 +24,31 @@ declare metric2="number_of_min_3_day_above_nonnormal_90_upwaves_2"
 # 1. RUN AGE-SEPARATED MODEL
 #################################################
 
-(
+#(
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 85 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 85 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 75 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 75 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 65 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 85 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 85 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 75 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 75 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 65 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 65 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 55 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 55 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 45 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 45 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 65 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 55 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 55 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 45 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 45 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 35 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 35 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 25 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 25 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 15 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 35 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 35 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 25 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 25 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 15 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 15 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R  5 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R  5 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R  0 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R  0 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 15 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R  5 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R  5 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R  0 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R  0 1 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
 
 #) &
 
