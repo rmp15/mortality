@@ -16,7 +16,9 @@ year.end <- as.numeric(args[2])
 country <- as.character(args[3])
 model <- as.numeric(args[4])
 dname <- as.character(args[5])
-metric <- as.character(args[6])
+metric1 <- as.character(args[6])
+metric2 <- as.character(args[7])
+
 
 print(args)
 
@@ -78,7 +80,7 @@ if(model=='1d'){
     dat.csv$odds.ll = round(100*(dat.csv$odds.ll),3)
     dat.csv$odds.ul = round(100*(dat.csv$odds.ul),3)
     names(dat.csv) = c('age','sex','month','mean','2.5%','97.5%','var')
-    write.csv(dat.csv,paste0('../../data/climate_effects/',dname,'/3var/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast.csv'))
+    write.csv(dat.csv,paste0('../../data/climate_effects/',dname,'/2var/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast.csv'))
     
     # HEATMAPS OF PARAMETERS (SEXY ALTERNATIVE TO FOREST PLOTS)
     heatmap.national.age.single <- function(metric.arg) {
@@ -110,11 +112,6 @@ if(model=='1d'){
     # national month intercept
     pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_2_',metric,'.pdf'),paper='a4r',height=0,width=0)
     heatmap.national.age.single(var2.short)
-    dev.off()
-    
-    # national month intercept
-    pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_3_',metric,'.pdf'),paper='a4r',height=0,width=0)
-    heatmap.national.age.single(var3.short)
     dev.off()
     
     # HEATMAPS OF PARAMETERS (SEXY ALTERNATIVE TO FOREST PLOTS)
