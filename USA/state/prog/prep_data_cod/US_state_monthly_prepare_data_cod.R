@@ -26,7 +26,13 @@ yearsummary  <- function(x=2000) {
 
 	# COD look-up
 	cod.lookup.9 <- data.frame()
-	cod.lookup.10 <- data.frame(letter=as.character(toupper(letters)),cause.group=c()) # FILL IN THE LARGE SCALE CAUSES
+	cod.lookup.10 <- data.frame(letter=as.character(toupper(letters)),
+								cause.group=c('Other','Other','Cancer','Cancer','Other', # A-E
+											'Other','Other','Other','Cardiopulmonary','Cardiopulmonary', # F-J
+											'Other','Other','Other','Other','Other', # K-O
+											'Other','Other','Other','External','External', # P-T
+											'Other','External','External','External','External', # U-Y
+											'External')) # Z
 
 
 	# add extra label for CODs based on
