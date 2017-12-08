@@ -10,7 +10,7 @@ library(foreign)
 
 # Function to summarise a year's data. x is the year in 2 number form (e.g. 1989 -> 89).
 # y is the number of rows. default (-1) is all rows.
-yearsummary  <- function(x=2000,y=-1) {
+yearsummary  <- function(x=2000) {
 
 	print(paste0('year ',x,' now being processed'))
   
@@ -20,18 +20,32 @@ yearsummary  <- function(x=2000,y=-1) {
 	dat <- read.dta(dat.name)
 
 	# load lookup for fips CHANGE TO SUBSTR OF FIPS
-	dat$fips = substr()
+	dat$fips = substr(dat$fips,1,2)
 	#fips.lookup <- read.csv('~/data/mortality/US/state/lookup/fipsMap.csv')
 	dat$fips <- as.numeric(dat$fips)
 
-    if(x>=1982){
-        # merge files by fips code and keep stateFips info
-        dat.merged <- merge(dat,fips.lookup,by='fips',all.x='TRUE')
-    }
-    if(x<1982){
+    #if(x>=1982){
+    #    # merge files by fips code and keep stateFips info
+    #    dat.merged <- merge(dat,fips.lookup,by='fips',all.x='TRUE')
+    #}
+    #if(x<1982){
         # fil already has correct form of fips
-        dat.merged <- dat
-    }
+    #    dat.merged <- dat
+    #}
+
+	# COD look-up
+	cod.lookup.9 <- data.frame()
+	cod.lookup.10 <- data.frame(letter=as.character(toupper(letters)),cause.group=c()) # FILL IN THE LARGE SCALE CAUSES
+
+
+	# add extra label for CODs based on
+	start_year = 1999
+	if(x>=start_year) {
+		# merge cod
+	}
+	if(x<start_year){
+
+	}
 
 	# add agegroup groupings
   	dat.merged$agegroup <-  
