@@ -24,15 +24,6 @@ yearsummary  <- function(x=2000) {
 	#fips.lookup <- read.csv('~/data/mortality/US/state/lookup/fipsMap.csv')
 	dat$fips <- as.numeric(dat$fips)
 
-    #if(x>=1982){
-    #    # merge files by fips code and keep stateFips info
-    #    dat.merged <- merge(dat,fips.lookup,by='fips',all.x='TRUE')
-    #}
-    #if(x<1982){
-        # fil already has correct form of fips
-    #    dat.merged <- dat
-    #}
-
 	# COD look-up
 	cod.lookup.9 <- data.frame()
 	cod.lookup.10 <- data.frame(letter=as.character(toupper(letters)),cause.group=c()) # FILL IN THE LARGE SCALE CAUSES
