@@ -17,6 +17,6 @@ declare -i end=2013
 
 echo "preparing monthly death rates for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data/US_state_monthly_prepare_data_cod.R $start $end
-Rscript ~/git/mortality/USA/state/prog/prep_data/US_state_monthly_prepare_data_deaths_adj_cod.R $start $end
+Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R $start $end
+Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_deaths_adj_cod.R $start $end
 
