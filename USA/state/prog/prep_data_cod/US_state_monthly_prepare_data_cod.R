@@ -139,9 +139,9 @@ dat.merged$rate.adj <- dat.merged$deaths / dat.merged$pop.adj
 ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_data_cod"), FALSE)
 
 # plot to check rates
-png(paste0('../../output/prep_data/rate_compared_',year.start.arg,'_',year.end.arg,'.png'))
+png(paste0('../../output/prep_data_cod/rate_compared_',year.start.arg,'_',year.end.arg,'.png'))
 plot(dat.merged$rate,dat.merged$rate.adj)
 dev.off()
 
 # output file as RDS
-saveRDS(dat.merged,paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
+saveRDS(dat.merged,paste0('../../output/prep_data_cod/datus_state_rates_',year.start.arg,'_',year.end.arg))
