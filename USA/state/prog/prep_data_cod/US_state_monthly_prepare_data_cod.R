@@ -21,7 +21,6 @@ yearsummary  <- function(x=2000) {
 
 	# load lookup for fips CHANGE TO SUBSTR OF FIPS
 	dat$fips = substr(dat$fips,1,2)
-	#fips.lookup <- read.csv('~/data/mortality/US/state/lookup/fipsMap.csv')
 	dat$fips <- as.numeric(dat$fips)
 
 	# COD look-up
