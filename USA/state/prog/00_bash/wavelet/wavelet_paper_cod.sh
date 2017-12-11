@@ -65,7 +65,7 @@ for cod in "${cods[@]}"; do
 echo "processing data for $country, years $start - $end";
 
 # process COM data
-Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end
+Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 done;
 
