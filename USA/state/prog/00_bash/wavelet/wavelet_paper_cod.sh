@@ -13,9 +13,9 @@ declare country="USA"
 # 1. NATIONAL WAVELET ANALYSIS
 #################################################
 
-declare -a numsims=(10 1000)
+declare -a numsims=(10)
 declare -i sig=5
-declare -a noises=(1)
+declare -a noises=(1 2)
 declare -a cods=('All Cause' 'Cancer' 'Cardiopulmonary' 'External' 'Other')
 
 for noise in "${noises[@]}"; do
@@ -63,12 +63,12 @@ echo "starting regional COM analysis for years $start - $end";
 echo "processing data for $country, years $start - $end";
 
 # process COM data
-Rscript ~/git/mortality/USA/state/prog/com/com_data_process.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/com/com_data_process.R $start $end
 
 echo "plotting COM analysis for $country, years $start - $end";
 
 # plots
-Rscript ~/git/mortality/USA/state/prog/com/com_plot.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/com/com_plot.R $start $end
 
 #################################################
 # 3. NATIONAL CLIMATE SEASONALITY INDEX
@@ -78,7 +78,7 @@ declare dname="t2m"
 declare metric="mean"
 
 # create seasonality index climate values
-Rscript ~/git/climate/countries/USA/prog/10_seasonality_index/seasonality_index_climate_regions.R $start $end $start $end $dname $metric
+#Rscript ~/git/climate/countries/USA/prog/10_seasonality_index/seasonality_index_climate_regions.R $start $end $start $end $dname $metric
 
 #################################################
 # 4. NATIONAL SEASONALITY INDEX ANALYSIS
@@ -87,6 +87,6 @@ Rscript ~/git/climate/countries/USA/prog/10_seasonality_index/seasonality_index_
 echo "starting seasonality index analysis for $country, years $start - $end";
 
 # runs seasonality index analysis
-Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index.R $start $end $start $end $dname $metric
+#Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index.R $start $end $start $end $dname $metric
 
 

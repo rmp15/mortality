@@ -48,13 +48,13 @@ ifelse(!dir.exists(paste0(file.loc,noise.lookup[noise.arg],'/plots/')), dir.crea
 source('../01_functions/wavelet_functions.R')
 
 # output national wavelet files sex separately
-#pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_men_',cod.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-#mapply(plot.wavelet.national,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85),cod=cod.arg)
-#dev.off()
+pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_men_',cod.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+mapply(plot.wavelet.national,sex.selected=1,age=c(0,5,15,25,35,45,55,65,75,85),cod=cod.arg)
+dev.off()
 
-#pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_women_',cod.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-#mapply(plot.wavelet.national,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85),cod=cod.arg)
-#dev.off()
+pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_women_',cod.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+mapply(plot.wavelet.national,sex.selected=2,age=c(0,5,15,25,35,45,55,65,75,85),cod=cod.arg)
+dev.off()
 
 # output national wavelet files split time period
 #pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_split_time_males_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
