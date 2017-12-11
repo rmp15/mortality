@@ -221,15 +221,12 @@ plot.wavelet.national.sex <- function(age.selected) {
 }
 
 # function to plot national wavelet analysis for all ages of single sex
-plot.wavelet.national.all <- function(sex.selected) {
+plot.wavelet.national.all <- function(sex.selected,cause='All cause') {
 
     dat <- subset(dat.national, sex==sex.selected)
     
     # set up grid plot
-    #layout(rbind(c(1:10),c(11:20)),widths=c(rep(c(1),10)),heights=c(1,1))
     par(mfrow=c(2,5),oma = c(0, 0, 2, 0))
-    #mtext('Title for Two Plots', outer = TRUE, cex = 1.5)
-    #layout(rbind(c(1:5),c(6:10)),widths=c(rep(c(1),5)),heights=c(1,1))
 
     for(i in c(0,5,15,25,35,45,55,65,75,85)){
         
@@ -288,8 +285,9 @@ plot.wavelet.national.all <- function(sex.selected) {
         #wt.avg(my.w,label.avg.axis=T,show.legend=0)
     
     }
-    
-    mtext(paste0(sex.lookup[sex.selected]), outer = TRUE, cex = 1.5)
+
+    # main title of entire thing
+    mtext(paste0(sex.lookup2[sex.selected],' ',cause), outer = TRUE, cex = 1.5)
 
 
 }
