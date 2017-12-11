@@ -16,7 +16,7 @@ declare country="USA"
 declare -a numsims=(10)
 declare -i sig=5
 declare -a noises=(1)
-declare -a cods=('Cancer' 'Cardiopulmonary' 'External' 'Other')
+declare -a cods=('All Cause' 'Cancer' 'Cardiopulmonary' 'External' 'Other')
 
 for noise in "${noises[@]}"; do
 for numsim in "${numsims[@]}"; do

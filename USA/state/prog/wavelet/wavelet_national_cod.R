@@ -22,7 +22,9 @@ source('../../data/objects/objects.R')
 
 # load data and filter results
 dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
-dat <- subset(dat,cause==cod.arg)
+if(cod.arg!='All Cause'){
+    dat <- subset(dat,cause==cod.arg)
+}
 
 # number of years for split wavelet analysis
 years <- c(year.start.arg:year.end.arg)
@@ -36,7 +38,7 @@ year.group.2 <- years[(halfway+1):(num.years)]
 # generate nationalised data
 dat$deaths.pred <- with(dat,pop.adj*rate.adj)
 library(plyr)
-dat.national <- ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
+dat.national <- ddply(dat,.(year,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
 dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
 dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
