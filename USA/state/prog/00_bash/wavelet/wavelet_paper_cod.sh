@@ -16,19 +16,20 @@ declare country="USA"
 declare -a numsims=(10)
 declare -i sig=5
 declare -a noises=(1)
-declare -a causes=('Cancer' 'Cardiopulmonary' 'External' 'Other')
+declare -a cods=('Cancer' 'Cardiopulmonary' 'External' 'Other')
 
 for noise in "${noises[@]}"; do
 for numsim in "${numsims[@]}"; do
+for cod in "${cods[@]}"; do
 
 clear
 
-echo "starting nationalised wavelet analysis for $country, years $start - $end";
+echo "starting nationalised wavelet analysis for $country, $cod, years $start - $end";
 
 # runs wavelet analysis
-#Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national_cod.R $start $end $numsim $sig $noise
+Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national_cod.R $start $end $numsim $sig $noise $cod
 
-done; done;
+done; done; done;
 
 #################################################
 # 2. NATIONAL AND REGIONAL COM ANALYSIS
@@ -44,20 +45,20 @@ for age in "${ages[@]}"; do
 echo "starting nationalised COM analysis for ${sexstrings[$sex-1]} $age, years $start - $end";
 
 # runs COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/com_analysis_national.R $start $end $age $sex
+#Rscript ~/git/mortality/USA/state/prog/com/com_analysis_national.R $start $end $age $sex
 
 # runs anti-COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national.R $start $end $age $sex
+#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national.R $start $end $age $sex
 
 done; done;
 
 echo "starting regional COM analysis for years $start - $end";
 
 # runs regional COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region.R $start $end
 
 # runs regional anti-COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_region.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_region.R $start $end
 
 echo "processing data for $country, years $start - $end";
 

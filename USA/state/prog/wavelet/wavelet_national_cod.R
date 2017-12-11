@@ -70,11 +70,11 @@ source('../01_functions/wavelet_functions.R')
 
 # output national wavelet files sex separately all on one page
 pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_all_men_',cod.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-plot.wavelet.national.all(1,cause.arg)
+plot.wavelet.national.all(1,cod.arg)
 dev.off()
 
 pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_all_women_',cod.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-plot.wavelet.national.all(2,cause.arg)
+plot.wavelet.national.all(2,cod.arg)
 dev.off()
 
 # output national wavelet files sex separately split time period all on one page
