@@ -280,7 +280,7 @@ plot.wavelet.national.all <- function(sex.selected) {
         if(sex.selected==1){age.sig <- c(0,5,15,25,45,55,65,75,85)}
         if(sex.selected==2){age.sig <- c(0,35,45,55,65,75,85)}
         if(i %in% age.sig){
-        box(lty = 1, lwd=5, col = 'black')
+        #box(lty = 1, lwd=5, col = 'black')
         }
         title(main=plot.title)
 
