@@ -253,7 +253,7 @@ circular.age.mean.rate.2 <- function(age.selected,sex.selected,cod='Allcause') {
     # output value for data processing
     file.loc.temp <- paste0(file.loc.entire,'method_2/')
     ifelse(!dir.exists(file.loc.temp), dir.create(file.loc.temp,recursive=TRUE), FALSE)
-    saveRDS(dat.frame,paste0(file.loc.temp,'anti_com_rate_cod_',sex.lookup[sex.selected],'_',age.selected))
+    saveRDS(dat.frame,paste0(file.loc.temp,'anti_com_rate_cod_',sex.lookup[sex.selected],'_',age.selected,'_',cod))
 
     return(dat.frame)
 }
