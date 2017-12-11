@@ -13,7 +13,7 @@ declare country="USA"
 # 1. NATIONAL WAVELET ANALYSIS
 #################################################
 
-declare -a numsims=(10)
+declare -a numsims=(10 1000)
 declare -i sig=5
 declare -a noises=(1)
 declare -a cods=('All Cause' 'Cancer' 'Cardiopulmonary' 'External' 'Other')
