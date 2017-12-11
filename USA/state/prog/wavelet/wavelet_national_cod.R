@@ -24,7 +24,7 @@ source('../../data/objects/objects.R')
 
 # load data and filter results
 dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
-if(cod.arg!='All Cause'){
+if(cod.arg!='AllCause'){
     dat <- subset(dat,cause==cod.arg)
 }
 
