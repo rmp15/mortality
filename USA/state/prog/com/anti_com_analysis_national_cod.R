@@ -53,6 +53,9 @@ halfway <- floor(num.years/2)
 year.group.1 <- years[1:halfway]
 year.group.2 <- years[(halfway+1):(num.years)]
 
+# source anti com functions
+source('../01_functions/anti_com_functions.R')
+
 # USING DEATH COUNTS
 
 # perform function for each age, gender combination
