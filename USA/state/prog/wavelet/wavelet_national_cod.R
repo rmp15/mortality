@@ -9,6 +9,8 @@ sig.arg <- as.numeric(args[4])
 noise.arg <- as.numeric(args[5])
 cod.arg <- as.character(args[6])
 
+print(args)
+
 require(WaveletComp)
 require(RColorBrewer)
 
