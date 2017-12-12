@@ -1116,7 +1116,7 @@ inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,
     recipients <- c("r.parks15@imperial.ac.uk")
     send.mail(from = sender,
     to = recipients,
-    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,' fast non-pw done'),
+    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,'_',cause,' fast non-pw done'),
     body = "Well done",
     smtp = list(host.name = "smtp.gmail.com", port = 465,
     user.name = "emailr349@gmail.com",
@@ -1687,7 +1687,7 @@ inla.function.climate.faster <- function(age.sel,sex.sel,year.start,year.end,typ
     recipients <- c("r.parks15@imperial.ac.uk")
     send.mail(from = sender,
     to = recipients,
-    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,' faster non-pw done'),
+    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,'_',cause,' faster non-pw done'),
     body = "Well done",
     smtp = list(host.name = "smtp.gmail.com", port = 465,
     user.name = "emailr349@gmail.com",
