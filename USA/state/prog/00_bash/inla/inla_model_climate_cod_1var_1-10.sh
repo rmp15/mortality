@@ -18,7 +18,7 @@ declare -i end2=1981
 declare country="USA"
 declare dname="t2m"
 declare metric="meanc3"
-declare cod = "AllCause"
+declare cod="AllCause"
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL
