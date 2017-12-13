@@ -4,10 +4,10 @@ library(RColorBrewer)
 library(ggplot2)
 library(plyr)
 library(scales)
-library(maptools)
-library(mapproj)
-library(rgeos)
-library(rgdal)
+#library(maptools)
+#library(mapproj)
+#library(rgeos)
+#library(rgdal)
 
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
@@ -25,11 +25,14 @@ multiple = 0
 source('../../data/objects/objects.R')
 model <- models[model]
 
+# unit data for plotting
+unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
+
 # load the data
-if(cod.arg!='AllCause'){
+if(model!='AllCause'){
     dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
 }
-if(cod.arg=='AllCause'){
+if(model=='AllCause'){
     dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
 }
 
@@ -226,6 +229,7 @@ heatmap.national.age <- function() {
     guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
+    ggtitle(cause) +
     scale_size(guide = 'none') +
     facet_wrap(~sex.long) +
     xlab("Month") + ylab('Age') +
@@ -233,7 +237,7 @@ heatmap.national.age <- function() {
 }
 
 # national month intercept
-pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
 heatmap.national.age()
 dev.off()
 
@@ -269,7 +273,7 @@ heatmap.national.age.scenarios <- function(sex.sel) {
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
     scale_size(guide = 'none') +
-    #ggtitle('+1°C') +
+    ggtitle(cause) +
     facet_wrap(~scenario) +
     xlab("Month") + ylab('Age') +
     theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
@@ -317,6 +321,7 @@ heatmap.national.age.both.sex.scenarios <- function() {
     guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk"))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
+    ggtitle(cause) +
     scale_size(guide = 'none') +
     facet_grid(sex.long ~ scenario) +
     xlab("Month") + ylab('Age') +
@@ -326,7 +331,7 @@ heatmap.national.age.both.sex.scenarios <- function() {
 }
 
 # national month intercept scenarios male
-pdf(paste0(file.loc,'climate_month_params_heatmap_scenarios_bothsexes_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'climate_month_params_heatmap_scenarios_bothsexes_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
 heatmap.national.age.both.sex.scenarios()
 dev.off()
 
