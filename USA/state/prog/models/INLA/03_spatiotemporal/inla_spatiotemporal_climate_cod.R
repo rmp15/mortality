@@ -16,6 +16,10 @@ year.start.analysis.arg <- as.numeric(args[9])
 year.end.analysis.arg <- as.numeric(args[10])
 cod.arg <- as.character(args[11])
 
+# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2013 ; type.arg = 10 ;
+# cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
+# year.end.analysis.arg = 1989 ; cod.arg = 'Cancer'
+
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','minus1')
 type.selected <- types[type.arg]

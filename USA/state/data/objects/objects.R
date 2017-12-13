@@ -50,4 +50,4 @@ noise.lookup <- noise.lookup <- c('white_noise','red_noise')
 
 # models to choose from
 models <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0')
-model <- models[model]
+#model <- models[model]

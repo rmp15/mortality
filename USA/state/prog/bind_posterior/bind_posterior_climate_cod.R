@@ -14,6 +14,7 @@ library(INLA)
 
 # lookups
 source('../../data/objects/objects.R')
+model <- models[model]
 
 # MODEL 1D
 if(model=='1d'){

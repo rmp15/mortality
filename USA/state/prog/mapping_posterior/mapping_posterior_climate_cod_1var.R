@@ -23,6 +23,7 @@ multiple = 0
 
 # source variables
 source('../../data/objects/objects.R')
+model <- models[model]
 
 # load the data
 if(cod.arg!='AllCause'){
