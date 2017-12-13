@@ -36,7 +36,7 @@ if(cod.arg!='AllCause'){
 	dat.inla.load <- subset(dat.inla.load,cause==cod.arg)
 }
 if(cod.arg=='AllCause'){
-	dat.inla.load <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_',year.start.arg,'_',year.end.arg))
+	dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
 }
 
 # load climate region data
