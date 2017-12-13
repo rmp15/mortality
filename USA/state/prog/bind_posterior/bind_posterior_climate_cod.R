@@ -26,14 +26,13 @@ if(model=='1d'){
     # find the posterior exponential mean
     for (i in seq(length(sex.filter))) {
         for (j in seq(length(age.filter))) {
-
-            if(cod.arg!='AllCause'){
+            # load data
+            if(cause!='AllCause'){
                 file.name <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],'/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast')
             }
-            if(cod.arg=='AllCause'){
+            if(cause=='AllCause'){
                 file.name <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],'/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast')
             }
-
             #file.name <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],'/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast')
             print(file.name)
             model.current <- readRDS(file.name)
@@ -69,10 +68,10 @@ file.loc.git <- paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/t
 ifelse(!dir.exists(file.loc.git), dir.create(file.loc.git, recursive=TRUE), FALSE)
 
 # save bound posterior
-if(cod.arg!='AllCause'){
+if(cause!='AllCause'){
     save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast')
 }
-if(cod.arg=='AllCause'){
+if(cause=='AllCause'){
     save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast')
 }
 
