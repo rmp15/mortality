@@ -26,11 +26,11 @@ declare cod="Cancer"
 
 (
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 85 2 $start $end 10 0 $dname $metric $start2 $end2 $cod;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 85 1 $start $end 10 0 $dname $metric $start2 $end2 $cod;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 75 2 $start $end 10 0 $dname $metric $start2 $end2 $cod;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 75 1 $start $end 10 0 $dname $metric $start2 $end2 $cod;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 65 2 $start $end 10 0 $dname $metric $start2 $end2 $cod;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 85 2 $start $end 10 0 $dname $metric $start2 $end2 $cod;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 85 1 $start $end 10 0 $dname $metric $start2 $end2 $cod;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 75 2 $start $end 10 0 $dname $metric $start2 $end2 $cod;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 75 1 $start $end 10 0 $dname $metric $start2 $end2 $cod;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 65 2 $start $end 10 0 $dname $metric $start2 $end2 $cod;
 
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 65 1 $start $end 10 0 $dname $metric $start2 $end2 $cod;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_fast.R 55 2 $start $end 10 0 $dname $metric $start2 $end2 $cod;

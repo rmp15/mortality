@@ -24,9 +24,6 @@ multiple = 0
 # source variables
 source('../../data/objects/objects.R')
 
-# models to choose from
-model <- models[model]
-
 # load the data
 if(cod.arg!='AllCause'){
     dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
@@ -34,9 +31,6 @@ if(cod.arg!='AllCause'){
 if(cod.arg=='AllCause'){
     dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
 }
-
-# lookups
-source('../../data/objects/objects.R')
 
 if(multiple==1){
     
@@ -1475,9 +1469,6 @@ if(model %in% c('1g')){
 
 
 }
-
-
-
 
 # combined plot of national and climate region model
 # create directories for output

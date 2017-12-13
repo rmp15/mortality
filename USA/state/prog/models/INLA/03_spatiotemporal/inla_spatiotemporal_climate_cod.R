@@ -93,8 +93,6 @@ library(dplyr)
 
 # lookups
 source('../../data/objects/objects.R')
-age.filter <- unique(dat.inla.load$age)
-state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 
 # adjacency matrix with connections Hawaii -> California, Alaska -> Washington
 USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"
