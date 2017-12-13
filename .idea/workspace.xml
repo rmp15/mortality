@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a0955925-28ef-4974-88ac-9f337af19082" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,8 +45,8 @@
       <file leaf-file-name="inla_model_climate_cod_1var_7-10.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="52" column="1" lean-forward="false" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+            <state relative-caret-position="735">
+              <caret line="62" column="96" lean-forward="false" selection-start-line="62" selection-start-column="96" selection-end-line="62" selection-end-column="96" />
               <folding />
             </state>
           </provider>
@@ -415,13 +416,6 @@
       <option name="presentableId" value="Default" />
       <updated>1486989512159</updated>
     </task>
-    <task id="LOCAL-00012" summary="updated wavelet title">
-      <created>1513002663123</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1513002663123</updated>
-    </task>
     <task id="LOCAL-00013" summary="updated wavelet title">
       <created>1513002729782</created>
       <option name="number" value="00013" />
@@ -758,7 +752,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513205901599</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="updated cod mortality models">
+      <created>1513205910798</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1513205910799</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1190,8 +1191,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="52" column="1" lean-forward="false" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
+        <state relative-caret-position="735">
+          <caret line="62" column="96" lean-forward="false" selection-start-line="62" selection-start-column="96" selection-end-line="62" selection-end-column="96" />
           <folding />
         </state>
       </provider>
