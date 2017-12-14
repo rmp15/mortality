@@ -17,7 +17,7 @@ declare -i start2=1980
 declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
-declare metric="meanc3"
+declare metric="meanc3" # need also DA90 and DB10
 declare cod="External"
 
 #################################################
