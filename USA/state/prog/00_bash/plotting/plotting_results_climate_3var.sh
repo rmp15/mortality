@@ -12,7 +12,7 @@ declare country="USA"
 declare -a dnames=("t2m")
 declare metric1="meanc3"
 declare metric2="number_of_days_above_nonnormal_90_2"
-declare metric3="number_of_min_3_day_above_nonnormal_90_upwaves_2"
+declare metric3="number_of_days_below_nonnormal_90_2"
 
 #################################################
 # 1. PLOT PARAMETERS OF STATE CLIMATE POSTERIORS
