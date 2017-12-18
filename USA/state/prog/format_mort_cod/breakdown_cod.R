@@ -11,8 +11,15 @@ args <- commandArgs(trailingOnly=TRUE)
 year <- as.numeric(args[1])
 print(year)
 
+# source variables
+source('../../data/objects/objects.R')
+
 # read files
 dat = read.dta(paste0("~/data/mortality/US/state/processed/cod/deathscod",year,'.dta'))
+
+# create directories for output
+file.loc <- paste0('../../output/breakdown_cod/',year,'/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 if(year<1999){
     # SOMETHING FOR ICD 9
@@ -58,24 +65,61 @@ if(year>=1999){
                    	85)))))))))
 
     # establish the percentage of deaths by broad cause of death
-    dat.count = as.data.frame(count(dat.merged,agegroup,sex,cause.group,letter))
+    dat.count = as.data.frame(dplyr::count(dat.merged,agegroup,sex,cause.group,letter))
+    dat.count = plyr::ddply(dat.count,c('agegroup','sex','cause.group'),mutate,percentage=round(100*n/sum(n),1))
+    dat.count$age.long = plyr::mapvalues(dat.count$age,from=sort(unique(dat.count$agegroup)),to=as.character(age.code[,2]))
+    dat.count$age.long <- reorder(dat.count$age.long,dat.count$agegroup)
+
+    dat.count.app = as.data.frame(dplyr::count(dat.merged,sex,cause.group,letter))
+    dat.count.app = plyr::ddply(dat.count.app,c('sex','cause.group'),mutate,percentage=round(100*n/sum(n),1))
+    dat.count.app$age.long = 'All ages'
+    dat.count.app$agegroup = -1
+
+    dat.count = rbind(dat.count.app,dat.count)
+
     dat.count = merge(dat.count,cod.lookup.10,by=c('cause.group','letter'),all.x=1)
-    #dat.count$percentage = with(dat.count,(n/sum(n))*100)
 
-    #dat.count.sum = plyr::ddply(dat.count,('cause.group'),summarize,sum=sum(n))
-    #dat.count = merge(dat.count,dat.count.sum,by='cause.group')
-    #dat.count$percentage = round(100 * (dat.count$n / dat.count$sum),1)
+    # friendly names for plotting
+    dat.count$sex.long = plyr::mapvalues(dat.count$sex,from=sort(unique(dat.count$sex)),to=c('Men','Women'))
 
-    ggplot(data=dat.count) +
-    geom_bar(aes(y = n, x = cause.group, fill=description),stat="identity") +
-    facet_wrap(~sex + agegroup,scales='free') +
-    theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=45), plot.title = element_text(hjust = 0.5),
-    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    # function to plot absolutely or relatively
+    plot = function(age.sel=-1,y.measure=1){
+
+        dat.count.sub = subset(dat.count,agegroup==age.sel)
+
+        p = ggplot(data=dat.count.sub) +
+        facet_wrap(~sex.long) +
+        xlab('Cause Group') + ylab('Number of deaths') + ggtitle(paste0(year,', ',unique(dat.count.sub$age.long))) +
+        theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        axis.text.x = element_text(angle=30), plot.title = element_text(hjust = 0.5),
+        panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
+        legend.position = 'bottom',legend.justification='center', legend.text=element_text(size=8),
+        legend.background = element_rect(fill="gray90", size=.4, linetype="dotted"))
+
+        if(y.measure==1){p = p + geom_bar(aes(y = n, x = cause.group, fill=description),stat="identity")+ ylab('Number of deaths')}
+        if(y.measure==2){p = p + geom_bar(aes(y = percentage, x = cause.group, fill=description),stat="identity")+ ylab('Percentage')}
+
+        print(p)
+
+    }
+
+    pdf(paste0(file.loc,year,'_absolute.pdf'),height=0,width=0,paper='a4r')
+    for(i in c(-1,0,5,15,25,35,45,55,65,75,85)){
+        plot(i,1)
+    }
+    dev.off()
+
+    pdf(paste0(file.loc,year,'_relative.pdf'),height=0,width=0,paper='a4r')
+    for(i in c(-1,0,5,15,25,35,45,55,65,75,85)){
+        plot(i,2)
+    }
+    dev.off()
 
     ##################################################
     ### 2. breakdown of cod by gbd
     ##################################################
 
+    # TO COMPLETE
 
 }
 
