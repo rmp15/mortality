@@ -4,7 +4,7 @@
 # plots breakdowns of cods for different years nationally
 
 clear
-declare -a years=(1980 2013)
+declare -a years=(1999 2013)
 
 for year in "${years[@]}"; do
 :
