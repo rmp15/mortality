@@ -31,11 +31,11 @@ model <- models[model]
 unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
 
 # load the data
-if(model!='AllCause'){
+if(cause!='AllCause'){
     dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
     country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
 }
-if(model=='AllCause'){
+if(cause=='AllCause'){
     dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
     ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
 }
@@ -238,8 +238,8 @@ heatmap.national.age <- function() {
     #scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),
     #labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
     scale_fill_gradientn(colours=c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred"),
-    breaks=c(-lims[2],-0.02, -0.01, 0, 0.01, 0.02, lims[2]),
-    na.value = "grey98",limits = c(-lims[2], lims[2]),
+    breaks=c(-0.025, -0.02, -0.015, -0.01, -0.005, 0, 0.005, 0.01, 0.015, 0.02, 0.025),
+    na.value = "grey98",limits = c(-0.027, 0.027),
     labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
     guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +

@@ -13,7 +13,7 @@ declare -a models=(10)
 declare country="USA"
 declare -a dnames=("t2m")
 declare -a metrics=('meanc3')
-declare -a cods=("External" "Cancer" "Cardiopulmonary" "Other")
+declare -a cods=("AllCause" "External" "Cancer" "Cardiopulmonary" "Other")
 
 #################################################
 # 1. PLOT PARAMETERS OF STATE CLIMATE POSTERIORS
@@ -27,7 +27,7 @@ for metric in "${metrics[@]}"; do
 
 for model in "${models[@]}"; do
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod.R $start $end $country $model $dname $metric $cod
+#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod.R $start $end $country $model $dname $metric $cod
 Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod
 
 done; done; done; done;
