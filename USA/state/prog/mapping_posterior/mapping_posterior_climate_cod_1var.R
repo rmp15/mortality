@@ -19,6 +19,8 @@ dname <- as.character(args[5])
 metric <- as.character(args[6])
 cause <- as.character(args[7])
 
+# year.start = 1980 ; year.end = 2013 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'External'
+
 multiple = 0
 
 # source variables
@@ -30,10 +32,12 @@ unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes,
 
 # load the data
 if(model!='AllCause'){
-    dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+    dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+    country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
 }
 if(model=='AllCause'){
-    dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+    dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+    ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
 }
 
 if(multiple==1){
@@ -46,15 +50,19 @@ if(multiple==1){
     metric.3 = 'number_of_min_3_day_above_nonnormal_90_upwaves_2'
     
     # create directories for output
-    file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',dname,'/multiple/',metric.1,'/non_pw/type_',model,'/parameters/')
+    file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',
+    dname,'/multiple/',metric.1,'/non_pw/type_',model,'/parameters/')
     ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
     
     # load the data
-    dat.1 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.1,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.1,'_fast'))
+    dat.1 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.1,'/non_pw/type_',model,
+    '/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.1,'_fast'))
     dat.1$var = 'Mean'
-    dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.2,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.2,'_fast'))
+    dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.2,'/non_pw/type_',model,
+    '/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.2,'_fast'))
     dat.2$var = 'DA90'
-    dat.3 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.3,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.3,'_fast'))
+    dat.3 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric.3,'/non_pw/type_',model,
+    '/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric.3,'_fast'))
     dat.3$var = 'RWA'
     
     # bind the files
@@ -88,7 +96,8 @@ if(multiple==1){
         geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
         geom_point(aes(x=ID,y=as.factor(age),size = sig),shape='*') +
         #geom_point(data=subset(dat,sex==sex.sel),aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='*') +
-        scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(title = paste0("Excess risk of unit change"),override.aes = list(color = "white"))) +
+        scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),
+        labels=percent,guide = guide_legend(title = paste0("Excess risk of unit change"),override.aes = list(color = "white"))) +
         guides(fill = guide_colorbar(barwidth = 10, barheight = 1,title = paste0("Excess risk for 1 additional unit change"))) +
         scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
         scale_y_discrete(labels=age.print) +
@@ -109,7 +118,8 @@ if(multiple==1){
 }
 
 # create directories for output
-file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
+file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,
+'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
@@ -225,7 +235,12 @@ heatmap.national.age <- function() {
     print(ggplot(data=subset(dat)) +
     geom_tile(aes(x=ID,y=as.factor(age),fill=odds.mean)) +
     geom_point(aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='* ') +
-    scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
+    #scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),
+    #labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
+    scale_fill_gradientn(colours=c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred"),
+    breaks=c(-lims[2],-0.02, -0.01, 0, 0.01, 0.02, lims[2]),
+    na.value = "grey98",limits = c(-lims[2], lims[2]),
+    labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
     guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_y_discrete(labels=age.print) +
