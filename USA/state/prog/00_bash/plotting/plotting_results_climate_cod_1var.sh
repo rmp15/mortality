@@ -3,10 +3,12 @@
 # this script
 # plots results of posterior climate terms of model
 
+cd ~/git/mortality/USA/state/prog/00_bash/
+
 clear
 
 declare -i start=1980
-declare -i end=2013
+declare -i end=1989
 declare -a models=(10)
 declare country="USA"
 declare -a dnames=("t2m")
@@ -25,7 +27,7 @@ for metric in "${metrics[@]}"; do
 
 for model in "${models[@]}"; do
 
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod.R $start $end $country $model $dname $metric $cod
+Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod.R $start $end $country $model $dname $metric $cod
 Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod
 
 done; done; done; done;
