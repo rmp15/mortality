@@ -3,6 +3,8 @@
 # this script
 # plots breakdowns of cods for different years nationally
 
+cd ~/git/mortality/USA/state/prog/00_bash/
+
 clear
 declare -a years=(1999 2013)
 

@@ -3,6 +3,7 @@ rm(list=ls())
 library(foreign)
 library(dplyr)
 library(ggplot2)
+library(RColorBrewer)
 
 # arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
@@ -20,6 +21,12 @@ dat = read.dta(paste0("~/data/mortality/US/state/processed/cod/deathscod",year,'
 # create directories for output
 file.loc <- paste0('../../output/breakdown_cod/',year,'/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+
+f <- function(pal) brewer.pal(brewer.pal.info[pal, "maxcolors"], pal)
+mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724", "#74D944", "#CE50CA",
+"#3F4921", "#C0717C", "#CBD588", "#5F7FC7", "#673770", "#D3D93E", "#38333E", "#508578", "#D7C1B1",
+"#689030", "#AD6F3B", "#CD9BCD", "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5",
+"#5E738F", "#D1A33D", "#8A7C64", "#599861" )
 
 if(year<1999){
     # SOMETHING FOR ICD 9
@@ -87,9 +94,10 @@ if(year>=1999){
 
         dat.count.sub = subset(dat.count,agegroup==age.sel)
 
-        p = ggplot(data=dat.count.sub) +
+        p = ggplot(data=subset(dat.count.sub,letter!='U')) +
         facet_wrap(~sex.long) +
         xlab('Cause Group') + ylab('Number of deaths') + ggtitle(paste0(year,', ',unique(dat.count.sub$age.long))) +
+        scale_fill_manual(values=mycols) +
         theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         axis.text.x = element_text(angle=30), plot.title = element_text(hjust = 0.5),
         panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
@@ -119,7 +127,7 @@ if(year>=1999){
     ### 2. breakdown of cod by gbd
     ##################################################
 
-    # TO COMPLETE
+    c('J00',sprintf('J%s',seq(1:99)))
 
 }
 
