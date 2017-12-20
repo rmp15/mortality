@@ -301,8 +301,8 @@ forest.plot.national.month <- function() {
     dat.merged.sub <- subset(dat.merged,year==2013)
     
     # add YLL from a reference point (2013)
-    ref.male  = 76.40
-    ref.female= 81.2
+    ref.male  = 90
+    ref.female= 90
     dat.merged.sub$yll.mean.m = ifelse((ref.male-(dat.merged.sub$age+5))>=0,
                                 (ref.male-(dat.merged.sub$age+5))*dat.merged.sub$deaths.added,
                                 0)
@@ -380,7 +380,7 @@ forest.plot.national.month <- function() {
         size=2,color='white') +
         scale_fill_gradientn(colours=c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred"),
         na.value = "grey98", limits = c(-lims[2], lims[2])) +
-        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Change in death for 1 additional ",unit.name))) +
+        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Change in number of deaths for 1 additional ",unit.name))) +
         scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
         scale_y_discrete(labels=age.print) +
         ggtitle(cause) +
@@ -765,14 +765,14 @@ if(model %in% c('1e','1f')){
         }
         
         # male output to pdf
-        pdf(paste0(file.loc,'climate_month_posterior_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in sort(unique(dat$age))){plot.function.age.odds(1,i)}
-        dev.off()
+        #pdf(paste0(file.loc,'climate_month_posterior_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        #for(i in sort(unique(dat$age))){plot.function.age.odds(1,i)}
+        #dev.off()
         
         # female output to pdf
-        pdf(paste0(file.loc,'climate_month_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in sort(unique(dat$age))){plot.function.age.odds(2,i)}
-        dev.off()
+        #pdf(paste0(file.loc,'climate_month_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        #for(i in sort(unique(dat$age))){plot.function.age.odds(2,i)}
+        #dev.off()
         
     # function to plot age for all months subnationally
     plot.function.month <- function(sex.sel,month.sel) {
@@ -825,14 +825,14 @@ if(model %in% c('1e','1f')){
         }
         
         # male output to pdf
-        pdf(paste0(file.loc,'climate_age_posterior_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in c(1:12)){plot.function.month.odds(1,i)}
-        dev.off()
+        #pdf(paste0(file.loc,'climate_age_posterior_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        #for(i in c(1:12)){plot.function.month.odds(1,i)}
+        #dev.off()
         
         # female output to pdf
-        pdf(paste0(file.loc,'climate_age_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in c(1:12)){plot.function.month.odds(2,i)}
-        dev.off()
+        #pdf(paste0(file.loc,'climate_age_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        #for(i in c(1:12)){plot.function.month.odds(2,i)}
+        #dev.off()
         
         # function to plot posterior probability of decreased risk for all months subnationally
         plot.function.month.odds.decreased <- function(sex.sel,month.sel) {
