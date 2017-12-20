@@ -30,6 +30,9 @@ model <- models[model]
 # unit data for plotting
 unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
 
+# bespoke colourway
+colorway = c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred")
+
 # load the data
 if(cause!='AllCause'){
     dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
@@ -237,7 +240,7 @@ forest.plot.national.month <- function() {
         geom_point(aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='* ') +
         #scale_fill_gradientn(colours=c(gr,"white", re), na.value = "grey98",limits = c(-lims[2], lims[2]),
         #labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
-        scale_fill_gradientn(colours=c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred"),
+        scale_fill_gradientn(colours=colorway,
         breaks=c(-0.025, -0.02, -0.015, -0.01, -0.005, 0, 0.005, 0.01, 0.015, 0.02, 0.025),
         na.value = "grey98",limits = c(-0.027, 0.027),
         labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
@@ -378,9 +381,9 @@ forest.plot.national.month <- function() {
         geom_tile(aes(x=month,y=as.factor(age),fill=deaths.added)) +
         geom_text(aes(x=month,y=as.factor(age),label=paste0(round(deaths.added,1),'\n(',round(deaths.ll,1),'-\n',round(deaths.ul,1),')')),
         size=2,color='white') +
-        scale_fill_gradientn(colours=c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred"),
+        scale_fill_gradientn(colours=colorway,
         na.value = "grey98", limits = c(-lims[2], lims[2])) +
-        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Change in number of deaths for 1 additional ",unit.name))) +
+        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Change in no. deaths for 1 additional ",unit.name))) +
         scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
         scale_y_discrete(labels=age.print) +
         ggtitle(cause) +
@@ -416,7 +419,7 @@ forest.plot.national.month <- function() {
         geom_tile(aes(x=month,y=as.factor(age),fill=round(yll.mean,1))) +
         geom_text(aes(x=month,y=as.factor(age),label=paste0(round(yll.mean,1),'\n(',round(yll.ll,1),'-\n',round(yll.ul,1),')')),
         size=2,color='white') +
-        scale_fill_gradientn(colours=c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred"),
+        scale_fill_gradientn(colours=colorway,
         na.value = "grey98", limits = c(-floor(max(lims[1],lims[2]))-100, ceiling(max(lims[1],lims[2]))+100),
         guide = guide_legend(title = paste0("YLL for 1 additional ",unit.name))) +
         guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Change in YLL for 1 additional ",unit.name))) +

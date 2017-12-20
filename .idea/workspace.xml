@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0955925-28ef-4974-88ac-9f337af19082" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/USA/state/output/mapping_posterior_climate/1980_2013/t2m/meanc3/non_pw/type_1d/parameters/climate_month_params_heatmap_1d_1980_2013_t2m_meanc3_Cardiopulmonary.pdf" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/data/climate_effects/t2m/meanc3/non_pw/type_1d/parameters/USA_rate_pred_type1d_1980_2013_t2m_meanc3_deaths_added.csv" afterPath="$PROJECT_DIR$/USA/state/data/climate_effects/t2m/meanc3/non_pw/type_1d/parameters/USA_rate_pred_type1d_1980_2013_t2m_meanc3_deaths_added.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/data/climate_effects/t2m/meanc3/non_pw/type_1d/parameters/USA_rate_pred_type1d_1980_2013_t2m_meanc3_fast.csv" afterPath="$PROJECT_DIR$/USA/state/data/climate_effects/t2m/meanc3/non_pw/type_1d/parameters/USA_rate_pred_type1d_1980_2013_t2m_meanc3_fast.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" afterPath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +24,8 @@
       <file leaf-file-name="plotting_results_climate_cod_1var.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+            <state relative-caret-position="30">
+              <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -37,21 +34,20 @@
       <file leaf-file-name="mapping_posterior_climate_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="397" column="5" lean-forward="true" selection-start-line="397" selection-start-column="5" selection-end-line="397" selection-end-column="5" />
+            <state relative-caret-position="255">
+              <caret line="385" column="96" lean-forward="false" selection-start-line="385" selection-start-column="96" selection-end-line="385" selection-end-column="96" />
               <folding>
-                <element signature="e#1320#5159#0" expanded="false" />
-                <element signature="e#10185#12047#0" expanded="false" />
-                <element signature="e#20389#22310#0" expanded="false" />
-                <element signature="e#22604#24759#0" expanded="false" />
-                <element signature="e#25258#27525#0" expanded="false" />
-                <element signature="e#29854#30985#0" expanded="false" />
-                <element signature="e#33704#35018#0" expanded="false" />
-                <element signature="e#35632#50140#0" expanded="false" />
-                <element signature="e#50262#71678#0" expanded="false" />
-                <element signature="e#72433#74234#0" expanded="false" />
-                <element signature="e#74688#76266#0" expanded="false" />
-                <element signature="e#76728#78324#0" expanded="false" />
+                <element signature="e#1446#5285#0" expanded="false" />
+                <element signature="e#10311#12088#0" expanded="false" />
+                <element signature="e#22469#24624#0" expanded="false" />
+                <element signature="e#25123#27390#0" expanded="false" />
+                <element signature="e#29719#30850#0" expanded="false" />
+                <element signature="e#33569#34883#0" expanded="false" />
+                <element signature="e#35497#50005#0" expanded="false" />
+                <element signature="e#50127#71543#0" expanded="false" />
+                <element signature="e#72298#74099#0" expanded="false" />
+                <element signature="e#74553#76131#0" expanded="false" />
+                <element signature="e#76593#78189#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -79,6 +75,7 @@
       <find>mapply</find>
       <find>colour</find>
       <find>posterio</find>
+      <find>c(&quot;navy&quot;,&quot;deepskyblue2&quot;,&quot;deepskyblue3&quot;,&quot;darkgreen&quot;,&quot;yellow3&quot;,&quot;gold&quot;,&quot;orange&quot;,&quot;red&quot;,&quot;darkred&quot;)</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -506,13 +503,6 @@
       <option name="presentableId" value="Default" />
       <updated>1486989512159</updated>
     </task>
-    <task id="LOCAL-00041" summary="updated cod mortality models">
-      <created>1513151784348</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1513151784348</updated>
-    </task>
     <task id="LOCAL-00042" summary="updated cod mortality models">
       <created>1513152170383</created>
       <option name="number" value="00042" />
@@ -849,7 +839,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513777020887</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="updated cod mortality models with 3 variables">
+      <created>1513777589287</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1513777589287</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1250,29 +1247,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+        <state relative-caret-position="30">
+          <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="397" column="5" lean-forward="true" selection-start-line="397" selection-start-column="5" selection-end-line="397" selection-end-column="5" />
+        <state relative-caret-position="255">
+          <caret line="385" column="96" lean-forward="false" selection-start-line="385" selection-start-column="96" selection-end-line="385" selection-end-column="96" />
           <folding>
-            <element signature="e#1320#5159#0" expanded="false" />
-            <element signature="e#10185#12047#0" expanded="false" />
-            <element signature="e#20389#22310#0" expanded="false" />
-            <element signature="e#22604#24759#0" expanded="false" />
-            <element signature="e#25258#27525#0" expanded="false" />
-            <element signature="e#29854#30985#0" expanded="false" />
-            <element signature="e#33704#35018#0" expanded="false" />
-            <element signature="e#35632#50140#0" expanded="false" />
-            <element signature="e#50262#71678#0" expanded="false" />
-            <element signature="e#72433#74234#0" expanded="false" />
-            <element signature="e#74688#76266#0" expanded="false" />
-            <element signature="e#76728#78324#0" expanded="false" />
+            <element signature="e#1446#5285#0" expanded="false" />
+            <element signature="e#10311#12088#0" expanded="false" />
+            <element signature="e#22469#24624#0" expanded="false" />
+            <element signature="e#25123#27390#0" expanded="false" />
+            <element signature="e#29719#30850#0" expanded="false" />
+            <element signature="e#33569#34883#0" expanded="false" />
+            <element signature="e#35497#50005#0" expanded="false" />
+            <element signature="e#50127#71543#0" expanded="false" />
+            <element signature="e#72298#74099#0" expanded="false" />
+            <element signature="e#74553#76131#0" expanded="false" />
+            <element signature="e#76593#78189#0" expanded="false" />
           </folding>
         </state>
       </provider>
