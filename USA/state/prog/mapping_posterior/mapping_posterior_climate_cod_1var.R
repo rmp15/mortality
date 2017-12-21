@@ -379,7 +379,7 @@ forest.plot.national.month <- function() {
         # ADD SIGNIFICANCE HIGHLIGHTS
         print(ggplot(data=dat.merged.sub) +
         geom_tile(aes(x=month,y=as.factor(age),fill=deaths.added)) +
-        geom_text(aes(x=month,y=as.factor(age),label=paste0(round(deaths.added,1),'\n(',round(deaths.ll,1),'-\n',round(deaths.ul,1),')')),
+        geom_text(aes(x=month,y=as.factor(age),label=paste0(round(deaths.added,1),'\n(',round(deaths.ll,1),',\n',round(deaths.ul,1),')')),
         size=2,color='white') +
         scale_fill_gradientn(colours=colorway,
         na.value = "grey98", limits = c(-lims[2], lims[2])) +
@@ -417,7 +417,7 @@ forest.plot.national.month <- function() {
         # ADD VALUE IN BOX
         print(ggplot(data=subset(dat),aes(x=month,y=as.factor(age))) +
         geom_tile(aes(x=month,y=as.factor(age),fill=round(yll.mean,1))) +
-        geom_text(aes(x=month,y=as.factor(age),label=paste0(round(yll.mean,1),'\n(',round(yll.ll,1),'-\n',round(yll.ul,1),')')),
+        geom_text(aes(x=month,y=as.factor(age),label=paste0(round(yll.mean),'\n(',round(yll.ll),',\n',round(yll.ul),')')),
         size=2,color='white') +
         scale_fill_gradientn(colours=colorway,
         na.value = "grey98", limits = c(-floor(max(lims[1],lims[2]))-100, ceiling(max(lims[1],lims[2]))+100),
