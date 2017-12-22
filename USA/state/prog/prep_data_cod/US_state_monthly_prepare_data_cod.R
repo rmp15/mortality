@@ -8,6 +8,10 @@ year.end.arg <- as.numeric(args[2])
 library(dplyr)
 library(foreign)
 
+# source only the 'intentional' variable (better way to do this a la python?)
+source('../../data/objects/objects.R')
+rm(list=setdiff(ls(), "intentional"))
+
 # Function to summarise a year's data. x is the year in 2 number form (e.g. 1989 -> 89).
 # y is the number of rows. default (-1) is all rows.
 yearsummary_cod  <- function(x=2000) {
@@ -52,6 +56,9 @@ yearsummary_cod  <- function(x=2000) {
 		# merge cod in ICD 10 coding
 		dat$letter = substr(dat$cause,1,1)
 		dat.merged = merge(dat,cod.lookup.10,by.x='letter',by.y='letter',all.x=1)
+
+		# Unintentional injuries TO FINISH TEMP SOLUTION
+    	#dat.merged$cause.description = ifelse(dat.merged$cause %in% intentional, 'Intentional','Other')
 	}
 
 	# add agegroup groupings
