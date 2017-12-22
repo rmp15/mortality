@@ -107,6 +107,13 @@ dat.event$deaths.additional.ul = with(dat.event, (perturbation.ul-1)*rate.adj*po
 dat.event.summary = ddply(dat.event,.(fips),summarize,sum.mean=round(sum(deaths.additional.mean),1),sum.ul=round(sum(deaths.additional.ul),1),sum.ll=round(sum(deaths.additional.ll),1))
 print(dat.event.summary)
 
+# attach to map
+
+# source variables
+dat = dat.event.summary
+source('../../prog/01_functions/map_generate.R')
+dat$long = NULL; dat$lat = NULL
+
 # create directories for output
 file.loc <- paste0('../../output/attribution_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
@@ -116,45 +123,24 @@ dat.timeseries$sex.long = mapvalues(dat.timeseries$sex,from=sort(unique(dat.time
 
 short.name = as.character(dat.dict[dat.dict$metric==metric1,2])
 
-pdf(paste0(file.loc,'Massachusetts_additional_deaths_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(data=dat.event) +
-#geom_point(aes(x=age,y=deaths.adj)) +
-geom_point(aes(x=age,y=deaths.additional.mean)) +
-geom_errorbar(aes(x=age,ymin=deaths.additional.ll,ymax=deaths.additional.ul)) +
-ggtitle(paste0('Massachusetts January 2004 additional cold deaths ', short.name)) +
-ylab('Additional deaths')+ ylim(c(-20,100))+
-facet_wrap(~sex.long) +
-geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
-theme(legend.position="none")
-dev.off()
+# merge selected data to map dataframe for colouring of ggplot
+plot <- merge(USA.df,dat[,c(1:4)], by.x=c('STATE_FIPS'),by.y=c('fips'))
+#plot<- merge(plot, age.code, by ='age')
+plot <- with(plot, plot[order(DRAWSEQ,order),])
 
-pdf(paste0(file.loc,'Massachusetts_additional_deaths_percentage',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(data=dat.event) +
-geom_point(aes(x=age,y=deaths.adj)) +
-geom_point(aes(x=age,y=deaths.additional.mean)) +
-geom_errorbar(aes(x=age,ymin=deaths.additional.ll,ymax=deaths.additional.ul)) +
-ggtitle(paste0('Massachusetts January 2004 additional heat deaths ', short.name)) +
-ylab('Additional deaths')+ ylim(c(-20,100))+
-facet_wrap(~sex.long) +
-geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
-theme(legend.position="none")
-dev.off()
+# function to plot
+plot.all.ages <- function(sex.sel) {
 
-pdf(paste0(file.loc,'Massachusetts_deaths_july_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(data=dat.timeseries) +
-geom_line(aes(x=year,y=rate.adj*100000,color=as.factor(age))) +
-ggtitle('Massachusetts January death rates') +
-ylab('Deaths per 100,000')+
-facet_wrap(~sex.long) +
-geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
-theme(legend.position="none")
-dev.off()
+    # find limits for plot
+    min.plot <- min(plot$sum.mean)
+    max.plot <- max(plot$sum.mean)
 
-pdf(paste0(file.loc,'Massachusetts_',metric,'_july_',model,'_',year.start,'_',year.end,'_',dname,'_1_',metric,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(data=dat.climate.timeseries) +
-geom_line(aes(x=year,y=variable1,color=as.factor(age))) +
-ggtitle(paste0('Massachusetts January ',short.name)) +
-ylab(short.name) +
-geom_hline(aes(yintercept=0, color="black", linetype="dashed")) +
-theme(legend.position="none")
-dev.off()
+    print(ggplot(data=subset(plot),aes(x=long,y=lat,group=group)) +
+    geom_polygon(aes(fill=sum.mean),color='black',size=0.01) +
+    scale_fill_gradient2(limits=c(-min.plot,max.plot),low="#990000", high="#000033",guide = guide_legend(title = 'Attributable\Temperature\Deaths\nfrom\nevent')) +
+    xlab('') +
+    ylab('') +
+    ggtitle('') +
+    theme_map() +
+    theme(text = element_text(size = 15),legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
+}
