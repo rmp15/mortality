@@ -118,15 +118,15 @@ dat$long = NULL; dat$lat = NULL
 file.loc <- paste0('../../output/attribution_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
-dat.event$sex.long = mapvalues(dat.event$sex,from=sort(unique(dat.event$sex)),to=c('Men','Women'))
-dat.timeseries$sex.long = mapvalues(dat.timeseries$sex,from=sort(unique(dat.timeseries$sex)),to=c('Men','Women'))
-
 short.name = as.character(dat.dict[dat.dict$metric==metric1,2])
 
 # merge selected data to map dataframe for colouring of ggplot
 plot <- merge(USA.df,dat[,c(1:4)], by.x=c('STATE_FIPS'),by.y=c('fips'))
 #plot<- merge(plot, age.code, by ='age')
 plot <- with(plot, plot[order(DRAWSEQ,order),])
+
+# bespoke colourway
+colorway = c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred")
 
 # function to plot
 plot.all.ages <- function(sex.sel) {
@@ -137,10 +137,19 @@ plot.all.ages <- function(sex.sel) {
 
     print(ggplot(data=subset(plot),aes(x=long,y=lat,group=group)) +
     geom_polygon(aes(fill=sum.mean),color='black',size=0.01) +
-    scale_fill_gradient2(limits=c(-min.plot,max.plot),low="#990000", high="#000033",guide = guide_legend(title = 'Attributable\Temperature\Deaths\nfrom\nevent')) +
+    #cale_fill_gradient2(limits=c(-min.plot,max.plot),low="#990000", high="#000033",guide = guide_legend(title = 'Attributable\Temperature\Deaths\nfrom\nevent')) +
+    scale_fill_gradientn(colours=colorway,
+    #breaks=c(-0.025, -0.02, -0.015, -0.01, -0.005, 0, 0.005, 0.01, 0.015, 0.02, 0.025),
+    #na.value = "grey98",limits = c(-0.027, 0.027),
+    guide = guide_legend(nrow = 1,title = 'Attributable temperature deaths from event')) +
     xlab('') +
     ylab('') +
-    ggtitle('') +
+    ggtitle(paste0(month.event,' ',year.event)) +
     theme_map() +
     theme(text = element_text(size = 15),legend.position = c(1,0),legend.justification=c(1,0),strip.background = element_blank()))
 }
+
+# SAVE TO PDF
+pdf(paste0(file.loc,month.event,'_',year.event,'_mapping_of_additional_deaths.pdf'),height=0,width=0,paper='a4r')
+plot.all.ages()
+dev.off()
