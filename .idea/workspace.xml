@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a0955925-28ef-4974-88ac-9f337af19082" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_stmarys.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_stmarys.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_6-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_6-10.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inla_model_climate_cod_2var_1-10.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="inla_model_climate_cod_2var_1-10.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_1-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+            <state relative-caret-position="315">
+              <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -44,7 +44,7 @@
       <file leaf-file-name="inla_model_climate_cod_2var_5-10.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_5-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1095">
+            <state relative-caret-position="1980">
               <caret line="132" column="3" lean-forward="false" selection-start-line="132" selection-start-column="3" selection-end-line="132" selection-end-column="3" />
               <folding />
             </state>
@@ -54,8 +54,8 @@
       <file leaf-file-name="inla_model_climate_cod_2var_6-10.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_6-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1095">
-              <caret line="132" column="3" lean-forward="false" selection-start-line="132" selection-start-column="3" selection-end-line="132" selection-end-column="3" />
+            <state relative-caret-position="315">
+              <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -64,18 +64,18 @@
       <file leaf-file-name="inla_model_climate_cod_2var_7-10.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_7-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1095">
+            <state relative-caret-position="1980">
               <caret line="132" column="3" lean-forward="false" selection-start-line="132" selection-start-column="3" selection-end-line="132" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inla_model_climate_cod_2var_stmarys.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="inla_model_climate_cod_2var_stmarys.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_stmarys.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -160,11 +160,11 @@
         <option value="$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_2var_fast.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_1-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_5-10.sh" />
-        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_6-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_7-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_2var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_cod_2var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_stmarys.sh" />
+        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_6-10.sh" />
       </list>
     </option>
   </component>
@@ -576,13 +576,6 @@
       <option name="presentableId" value="Default" />
       <updated>1486989512159</updated>
     </task>
-    <task id="LOCAL-00059" summary="updated cod mortality models">
-      <created>1513205854644</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1513205854645</updated>
-    </task>
     <task id="LOCAL-00060" summary="updated cod mortality models">
       <created>1513205901599</created>
       <option name="number" value="00060" />
@@ -919,7 +912,14 @@
       <option name="project" value="LOCAL" />
       <updated>1514397921090</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="updated cod mortality models with 3 variables">
+      <created>1514398773040</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1514398773040</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1324,17 +1324,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_1-10.sh">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_stmarys.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+        <state relative-caret-position="195">
+          <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_5-10.sh">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_7-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1095">
+        <state relative-caret-position="1980">
           <caret line="132" column="3" lean-forward="false" selection-start-line="132" selection-start-column="3" selection-end-line="132" selection-end-column="3" />
           <folding />
         </state>
@@ -1342,24 +1342,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_6-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1095">
+        <state relative-caret-position="315">
+          <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_5-10.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
           <caret line="132" column="3" lean-forward="false" selection-start-line="132" selection-start-column="3" selection-end-line="132" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_7-10.sh">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_1-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1095">
-          <caret line="132" column="3" lean-forward="false" selection-start-line="132" selection-start-column="3" selection-end-line="132" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_stmarys.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="315">
+          <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="21" />
           <folding />
         </state>
       </provider>
