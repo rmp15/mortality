@@ -3,6 +3,9 @@
 # this script
 # runs all the analysis necessary for the USA wavelet paper
 
+# to correct directory
+cd ~/git/mortality/USA/state/prog/00_bash/
+
 clear
 
 declare -i start=1980
@@ -92,7 +95,11 @@ declare metric="mean"
 # 4. NATIONAL SEASONALITY INDEX ANALYSIS
 #################################################
 
+for cod in "${cods[@]}"; do
+
 echo "starting seasonality index analysis for $country, years $start - $end";
 
 # runs seasonality index analysis
-#Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index.R $start $end $start $end $dname $metric
+Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod.R $start $end $start $end $dname $metric $cod
+
+done;

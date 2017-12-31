@@ -1,26 +1,20 @@
-# coding for graph-friendly information
-age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
-age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85), age.print=age.print)
-month.names <- c('January','February','March','April','May','June', 'July','August','September','October','November','December')
-month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
-sex.lookup <- c('Men','Women')
-
-
-# lookups
+# sex lookups
 sex.filter <- c('male','female')
-sex.lookup <- c('male','female')
+sex.lookup <- c('Men','Women')
 sex.lookup2 <- c('Men','Women')
 
+# age lookups
 age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'))))
 age.code <- data.frame(age=c(0,5,15,25,35,45,55,65,75,85),age.print=age.print)
 age.filter <- c(0,5,15,25,35,45,55,65,75,85)
 
+# month lookups
 month.lookup <- c('January','February','March','April','May','June','July','August','September','October','November','December')
 month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
 month.names <- c('January','February','March','April','May','June',
 'July','August','September','October','November','December')
 
-# add fips lookup
+# fips lookups
 fips.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 
