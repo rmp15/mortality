@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # this script
-# runs all the analysis necessary for the USA wavelet paper
+# runs all the analysis necessary for the USA wavelet paper for cod as well as all-cause
 
 # to correct directory
 cd ~/git/mortality/USA/state/prog/00_bash/
@@ -54,23 +54,6 @@ echo "starting nationalised COM analysis for ${sexstrings[$sex-1]} $age, years $
 #Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national_cod.R $start $end $age $sex $cod &
 
 done; done; done;
-
-echo "starting regional COM analysis for years $start - $end";
-
-# runs regional COM analysis
-#Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region.R $start $end
-
-# runs regional anti-COM analysis
-#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_region.R $start $end
-
-for cod in "${cods[@]}"; do
-
-echo "processing data for $country, years $start - $end";
-
-# process COM data
-#Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
-
-done;
 
 #################################################
 # 3. REGIONAL COM ANALYSIS
