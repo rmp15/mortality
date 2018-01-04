@@ -35,7 +35,7 @@ echo "starting nationalised wavelet analysis for $country, $cod, years $start - 
 done; done; done;
 
 #################################################
-# 2. NATIONAL AND REGIONAL COM ANALYSIS
+# 2. NATIONAL COM ANALYSIS
 #################################################
 
 declare -a ages=(0 5 15 25 35 45 55 65 75 85)
@@ -72,12 +72,36 @@ echo "processing data for $country, years $start - $end";
 
 done;
 
+#################################################
+# 3. REGIONAL COM ANALYSIS
+#################################################
+
 for cod in "${cods[@]}"; do
 
-echo "plotting COM analysis for $country, years $start - $end";
+echo "starting regional COM analysis for $cod for years $start - $end";
+
+# runs regional COM analysis
+Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region_cod.R $start $end $cod #DONE
+
+# runs regional anti-COM analysis
+Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_region_cod.R $start $end $cod
+
+echo "processing data for $country for $cod, years $start - $end";
+
+# process COM data
+Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
+
+done;
 
 # plots
-Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
+Rscript ~/git/mortality/USA/state/prog/com/com_plot.R $start $end
+
+for cod in "${cods[@]}"; do
+
+echo "plotting COM analysis for $country for $cod, years $start - $end";
+
+# plots
+#Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
 
 done;
 
