@@ -123,12 +123,15 @@ for(j in cod.broad) {
     dat = rbind(dat,dat.state,dat.state.inv)
 }
 
-# entire period com plot v1 for all causes
-
+# fix some variables
+dat$sex <- as.factor(as.character(dat$sex))
+levels(dat$sex) <- c('Men','Women')
 dat$size <- with(dat,1/(COM.95-COM.5))
 dat$size <- 3*(dat$size/max(dat.state$size))
+# entire period com plot v1 for all causes
 
-pdf(paste0(file.loc.reg.output,'USA_COM_rates_regional_axis_swapped_v1_',cod.arg,'_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+
+pdf(paste0(file.loc.reg.output,'USA_COM_rates_regional_axis_swapped_v1_all_causes_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
 geom_point(data=subset(dat,type=='max'),aes(x=factor(age),y=COM.mean,size=size),fill='red',shape=21) +
 geom_point(data=subset(dat,type=='min'),aes(y=COM.mean,x=factor(age),size=size),fill='green',shape=21) +
@@ -140,7 +143,7 @@ xlab('Age group') + #ggtitle(cod.arg) +
 scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 scale_x_discrete(labels=age.print) +
 #xlim(1,12) +
-facet_wrap(~sex+cause,nrow=2) +
+facet_grid(sex~cause) +
 scale_size(guide='none') +
 theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
