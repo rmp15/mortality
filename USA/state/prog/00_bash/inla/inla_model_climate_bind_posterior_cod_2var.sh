@@ -18,7 +18,7 @@ declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
 declare -a metrics1=("meanc3")
-declare -a metrics2=("sd") # also DB10 and SD
+declare -a metrics2=("number_of_days_above_nonnormal_90_2" "number_of_days_below_nonnormal_90_2") # also DB10 and SD
 declare cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other")
 
 #################################################
