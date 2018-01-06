@@ -17,7 +17,7 @@ metric2 <- as.character(args[7])
 cause <- as.character(args[8])
 
 # year.start = 1980 ; year.end = 2013 ; country = 'USA' ; model = 10 ; dname = 't2m' ;
-# metric1 = 'meanc3' ; metric2 = 'number_of_min_3_day_below_nonnormal_90_downwaves_2'; cause = 'Cardiopulmonary'
+# metric1 = 'meanc3' ; metric2 = 'number_of_days_above_nonnormal_90_2'; cause = 'Cardiopulmonary'
 
 # source variables
 source('../../data/objects/objects.R')
