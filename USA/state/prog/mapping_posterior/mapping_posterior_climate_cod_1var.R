@@ -341,15 +341,24 @@ forest.plot.national.month <- function() {
 
     write.csv(dat.merged.sub.csv,paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_deaths_added.csv'))
 
+    # load table of average earnings per age and sex (currently 2017 Q3)
+    dat.earnings <- read.csv('../../data/lifetime_earnings/average_earnings_usa_2017.csv')
+
+    # merge with merged file
+    dat.merged.sub <- merge(dat.merged.sub,dat.earnings)
+
+    dat.merged.sub$earnings_lost.mean = with(dat.merged.sub,lost_lifetime_earnings*deaths.added)
+    dat.merged.sub$earnings_lost.ll = with(dat.merged.sub,lost_lifetime_earnings*deaths.ll)
+    dat.merged.sub$earnings_lost.ul = with(dat.merged.sub,lost_lifetime_earnings*deaths.ul)
 
     # plot for male and female
     # function to plot
     plot.deaths.nat <- function(){
-    
+
         # attach long month names
         dat.merged.sub$age.long <- mapvalues(dat.merged.sub$age,from=sort(unique(dat.merged.sub$age)),to=as.character(age.code[,2]))
         dat.merged.sub$age.long <- reorder(dat.merged.sub$age.long,dat.merged.sub$age)
-        
+
         # plot
         print(ggplot(data=dat.merged.sub) +
         geom_line(aes(x=month,y=deaths.added,color=as.factor(sex))) +
@@ -403,6 +412,163 @@ forest.plot.national.month <- function() {
     pdf(paste0(file.loc,'additional_deaths_heatmap_nat_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
     heatmap.deaths.nat()
     dev.off()
+
+    # add significance marker
+    dat.merged.sub$sig = ifelse(dat.merged.sub$odds.ll*dat.merged.sub$odds.ul>0,1,0.9)
+
+    # heatmap for value of statistical life change
+    value_stat_life = 6000000
+
+    heatmap.stat.life = function(){
+    dat.merged.sub$sex.long <- mapvalues(dat.merged.sub$sex,from=sort(unique(dat.merged.sub$sex)),to=c('Men','Women'))
+
+    lims <- range(value_stat_life*abs(dat.merged.sub$deaths.added))
+
+    # ADD SIGNIFICANCE HIGHLIGHTS
+    print(ggplot(data=dat.merged.sub) +
+    geom_tile(aes(x=month,y=as.factor(age),fill=value_stat_life*deaths.added)) +
+    geom_text(aes(x=month,y=as.factor(age),label=paste0('$',prettyNum(round(value_stat_life*deaths.added),big.mark=','))),#'\n(',
+                                                        #round(value_stat_life*deaths.ll),',\n',
+                                                        #round(value_stat_life*deaths.ul),')')),
+                                                        size=1.8,color='white',angle=45) +
+    scale_fill_gradientn(labels=comma,colours=colorway,
+    na.value = "grey98", limits = c(-lims[2], lims[2])) +
+    guides(fill = guide_colorbar(labels=comma, barwidth = 30, barheight = 1,
+    title = paste0("Change in total ($) for additional ",unit.name))) +
+    scale_alpha(guide = 'none') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_discrete(labels=age.print) +
+    ggtitle(cause) +
+    scale_size(guide = 'none') +
+    facet_wrap(~sex.long) +
+    xlab("Month") + ylab('Age') +
+    theme(
+    text = element_text(size = 15), axis.text = element_text(size=15),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    strip.background = element_blank(), axis.line = element_line(colour = "black"),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+    }
+
+    pdf(paste0(file.loc,'value_state_life_heatmap_nat_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.stat.life()
+    dev.off()
+
+    heatmap.stat.life.only.sig = function(){
+    dat.merged.sub$sex.long <- mapvalues(dat.merged.sub$sex,from=sort(unique(dat.merged.sub$sex)),to=c('Men','Women'))
+
+    lims <- range(value_stat_life*abs(dat.merged.sub$deaths.added))
+
+    # ADD SIGNIFICANCE HIGHLIGHTS
+    print(ggplot(data=dat.merged.sub) +
+    geom_tile(aes(x=month,y=as.factor(age),fill=value_stat_life*deaths.added,alpha=sig)) +
+    geom_text(aes(x=month,y=as.factor(age),label=paste0('$',prettyNum(round(value_stat_life*deaths.added),big.mark=','))),#'\n(',
+                                                        #round(value_stat_life*deaths.ll),',\n',
+                                                        #round(value_stat_life*deaths.ul),')')),
+                                                        size=1.8,color='white',angle=45) +
+    scale_fill_gradientn(labels=comma,colours=colorway,
+    na.value = "grey98", limits = c(-lims[2], lims[2])) +
+    guides(fill = guide_colorbar(labels=comma, barwidth = 30, barheight = 1,
+    title = paste0("Change in total ($) for additional ",unit.name))) +
+    scale_alpha(guide = 'none') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_discrete(labels=age.print) +
+    ggtitle(cause) +
+    scale_size(guide = 'none') +
+    facet_wrap(~sex.long) +
+    xlab("Month") + ylab('Age') +
+    theme(
+    text = element_text(size = 15), axis.text = element_text(size=15),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    strip.background = element_blank(), axis.line = element_line(colour = "black"),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+    }
+
+    pdf(paste0(file.loc,'value_state_life_sig_heatmap_nat_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.stat.life.only.sig()
+    dev.off()
+
+    # heatmap for value of statistical life change
+
+    heatmap.lost.earnings = function(){
+    dat.merged.sub$sex.long <- mapvalues(dat.merged.sub$sex,from=sort(unique(dat.merged.sub$sex)),to=c('Men','Women'))
+
+    lims <- range(abs(dat.merged.sub$earnings_lost.mean))
+
+    # ADD SIGNIFICANCE HIGHLIGHTS
+    print(ggplot(data=dat.merged.sub) +
+    geom_tile(aes(x=month,y=as.factor(age),fill=earnings_lost.mean)) +
+    geom_text(aes(x=month,y=as.factor(age),label=paste0('$',prettyNum(round(earnings_lost.mean),big.mark=','))),#'\n(',
+                                                        #round(value_stat_life*deaths.ll),',\n',
+                                                        #round(value_stat_life*deaths.ul),')')),
+                                                        size=1.8,color='white',angle=45) +
+    scale_fill_gradientn(labels=comma,colours=colorway,
+    na.value = "grey98", limits = c(-lims[2], lims[2])) +
+    guides(fill = guide_colorbar(labels=comma, barwidth = 30, barheight = 1,
+    title = paste0("Change in lifetime earnings ($) per ",unit.name))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_discrete(labels=age.print) +
+    ggtitle(cause) +
+    scale_size(guide = 'none') +
+    facet_wrap(~sex.long) +
+    xlab("Month") + ylab('Age') +
+    theme(
+    text = element_text(size = 15), axis.text = element_text(size=15),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    strip.background = element_blank(), axis.line = element_line(colour = "black"),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+}
+
+    pdf(paste0(file.loc,'lost_lifetime_earnings_life_heatmap_nat_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.lost.earnings()
+    dev.off()
+
+    heatmap.lost.earnings.sig = function(){
+    dat.merged.sub$sex.long <- mapvalues(dat.merged.sub$sex,from=sort(unique(dat.merged.sub$sex)),to=c('Men','Women'))
+
+    lims <- range(abs(dat.merged.sub$earnings_lost.mean))
+
+    # ADD SIGNIFICANCE HIGHLIGHTS
+    print(ggplot(data=dat.merged.sub) +
+    geom_tile(aes(x=month,y=as.factor(age),fill=earnings_lost.mean,alpha=sig)) +
+    geom_text(aes(x=month,y=as.factor(age),label=paste0('$',prettyNum(round(earnings_lost.mean),big.mark=','))),#'\n(',
+                                                        #round(value_stat_life*deaths.ll),',\n',
+                                                        #round(value_stat_life*deaths.ul),')')),
+                                                        size=1.8,color='white',angle=45) +
+    scale_fill_gradientn(labels=comma,colours=colorway,
+    na.value = "grey98", limits = c(-lims[2], lims[2])) +
+    guides(fill = guide_colorbar(labels=comma, barwidth = 30, barheight = 1,
+    title = paste0("Change in lifetime earnings ($) per ",unit.name))) +
+    scale_alpha(guide = 'none') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_y_discrete(labels=age.print) +
+    ggtitle(cause) +
+    scale_size(guide = 'none') +
+    facet_wrap(~sex.long) +
+    xlab("Month") + ylab('Age') +
+    theme(
+    text = element_text(size = 15), axis.text = element_text(size=15),
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    strip.background = element_blank(), axis.line = element_line(colour = "black"),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+}
+
+    pdf(paste0(file.loc,'lost_lifetime_earnings_life_sig_heatmap_nat_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.lost.earnings.sig()
+    dev.off()
+
+
         
     # heatmap for YLLs
     heatmap.yll.national <- function() {
@@ -438,7 +604,43 @@ forest.plot.national.month <- function() {
     pdf(paste0(file.loc,'yll_nat_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
     heatmap.yll.national()
     dev.off()
-    
+
+    # heatmap for YLLs
+    heatmap.yll.national.sig <- function() {
+
+        dat = ddply(dat.merged.sub,.(sex,age,month),summarize,yll.mean=sum(yll.mean),yll.ll=sum(yll.ll),yll.ul=sum(yll.ul))
+
+        dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
+        dat$sig = ifelse(dat$yll.ll*dat$yll.ul>0,1,0)
+
+        lims <- range(abs(dat$yll.mean))
+
+        # ADD VALUE IN BOX
+        print(ggplot(data=subset(dat),aes(x=month,y=as.factor(age))) +
+        geom_tile(aes(x=month,y=as.factor(age),fill=round(yll.mean,1),alpha=sig)) +
+        geom_text(aes(x=month,y=as.factor(age),label=paste0(round(yll.mean),'\n(',round(yll.ll),',\n',round(yll.ul),')')),
+        size=2,color='white') +
+        scale_fill_gradientn(colours=colorway,
+        na.value = "grey98", limits = c(-floor(max(lims[1],lims[2]))-100, ceiling(max(lims[1],lims[2]))+100),
+        guide = guide_legend(title = paste0("YLL for 1 additional ",unit.name))) +
+        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Change in YLL for 1 additional ",unit.name))) +
+        scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+        scale_y_discrete(labels=age.print) +
+        scale_alpha(guide = 'none') +
+        ggtitle(cause) +
+        scale_size(guide = 'none') +
+        scale_shape(guide = 'none') +
+        facet_wrap(~sex.long) +
+        xlab("Month") + ylab('Age') +
+        theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
+        panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+    }
+
+    pdf(paste0(file.loc,'yll_nat_sig_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+    heatmap.yll.national.sig()
+    dev.off()
+
+
     # under different climate scenarios
     heatmap.national.yll.scenarios <- function(sex.sel) {
         
