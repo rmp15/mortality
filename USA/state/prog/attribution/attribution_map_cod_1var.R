@@ -25,7 +25,7 @@ month.event <- as.numeric(args[11])
 
 #year.start=1980;year.end=2013;country='USA';model=10;dname='t2m';metric1='meanc3';
 # year.start2=1979;year.end2=2015; cause = 'Cardiopulmonary'
-# month.event = 1 ; year.event = 2004
+# month.event = 7 ; year.event = 2006
 
 multiple = 0
 
@@ -105,8 +105,23 @@ dat.event$deaths.additional.mean = with(dat.event, (perturbation.mean-1)*rate.ad
 dat.event$deaths.additional.ll = with(dat.event, (perturbation.ll-1)*rate.adj*pop.adj)
 dat.event$deaths.additional.ul = with(dat.event, (perturbation.ul-1)*rate.adj*pop.adj)
 
-dat.event.summary = ddply(dat.event,.(fips),summarize,sum.mean=round(sum(deaths.additional.mean),1),sum.ul=round(sum(deaths.additional.ul),1),sum.ll=round(sum(deaths.additional.ll),1))
-print(dat.event.summary)
+# load table of average earnings per age and sex (currently 2017 Q3)
+dat.earnings <- read.csv('../../data/lifetime_earnings/average_earnings_usa_2017.csv')
+
+dat.merged.sub <- merge(dat.event,dat.earnings)
+
+dat.merged.sub$earnings_lost.mean = with(dat.merged.sub,lost_lifetime_earnings*deaths.additional.mean)
+dat.merged.sub$earnings_lost.ll = with(dat.merged.sub,lost_lifetime_earnings*deaths.additional.ll)
+dat.merged.sub$earnings_lost.ul = with(dat.merged.sub,lost_lifetime_earnings*deaths.additional.ul)
+
+dat.event.summary = ddply(dat.merged.sub,.(fips),summarize,sum.mean=round(sum(deaths.additional.mean),1),
+                        sum.ul=round(sum(deaths.additional.ul),1),sum.ll=round(sum(deaths.additional.ll),1),
+                        sum.earnings.mean=round(sum(earnings_lost.mean),1),
+                        sum.earnings.ll=round(sum(earnings_lost.ll),1),
+                        sum.earnings.ul=round(sum(earnings_lost.ul),1)
+)
+
+print(paste(sum(dat.event.summary$sum.earnings.mean),sum(dat.event.summary$sum.earnings.ll),sum(dat.event.summary$sum.earnings.ul)))
 
 # attach to map
 
