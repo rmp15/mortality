@@ -27,10 +27,31 @@ if(model=='1d'){
         for (j in seq(length(age.filter))) {
             # load data
             if(cause!='AllCause'){
-                file.name <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],'/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast')
+                file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+                dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
+                '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',
+                year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast')
             }
             if(cause=='AllCause'){
-                file.name <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],'/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast')
+                file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+                dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
+                '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],
+                '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast')
+            }
+            print(file.name)
+            model.current <- try(readRDS(file.name))
+            if(inherits(model.current,"try-error")){
+                if(cause!='AllCause'){
+                file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+                dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
+                '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],'_',
+                year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast')
+            }
+                if(cause=='AllCause'){
+                file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+                dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
+                '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
+                '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast')
             }
             #file.name <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],'/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast')
             print(file.name)
