@@ -17,7 +17,7 @@ declare -i start2=1980
 declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
-declare metric="number_of_days_below_nonnormal_90_2"
+declare metric="Cancer"
 declare cod="Cardiopulmonary"
 
 #################################################

@@ -38,7 +38,6 @@ if(model=='1d'){
                 '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],
                 '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast')
             }
-            print(file.name)
             model.current <- try(readRDS(file.name))
             if(inherits(model.current,"try-error")){
                 if(cause!='AllCause'){
