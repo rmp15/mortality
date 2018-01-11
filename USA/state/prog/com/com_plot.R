@@ -357,16 +357,16 @@ USA.df$STATE_FIPS <- as.integer(as.character(USA.df$STATE_FIPS))
 
 # load region data
 file.loc.region <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/region/")
-dat.state <- readRDS(paste0(file.loc.region,'values/combined_results/com_regional_values_method_2_entire_',year.start.arg,'_',year.end.arg))
-dat.state.inv <- readRDS(paste0(file.loc.region,'values/combined_results/anti_com_regional_values_method_2_entire_',year.start.arg,'_',year.end.arg))
+dat.state <- readRDS(paste0(file.loc.region,'values/combined_results/com_rates_regional_values_method_2_entire_AllCause_',year.start.arg,'_',year.end.arg))
+dat.state.inv <- readRDS(paste0(file.loc.region,'values/combined_results/anti_com_rates_regional_values_method_2_entire_AllCause_',year.start.arg,'_',year.end.arg))
 
 # fix region names
-dat.state$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state$region)
-dat.state$region <- gsub('Ohio_Valley', 'Central', dat.state$region)
-dat.state$region <- gsub('Upper_Midwest', 'East_North_Central', dat.state$region)
-dat.state.inv$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state.inv$region)
-dat.state.inv$region <- gsub('Ohio_Valley', 'Central', dat.state.inv$region)
-dat.state.inv$region <- gsub('Upper_Midwest', 'East_North_Central', dat.state.inv$region)
+#dat.state$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state$region)
+#dat.state$region <- gsub('Ohio_Valley', 'Central', dat.state$region)
+#dat.state$region <- gsub('Upper_Midwest', 'East_North_Central', dat.state$region)
+#dat.state.inv$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state.inv$region)
+#dat.state.inv$region <- gsub('Ohio_Valley', 'Central', dat.state.inv$region)
+#dat.state.inv$region <- gsub('Upper_Midwest', 'East_North_Central', dat.state.inv$region)
 
 # round com data for each region
 dat.state$COM.entire.round <- round(dat.state$COM.mean)
@@ -559,8 +559,8 @@ dat.state <- merge(dat.state,dat.mark)
 dat.state.inv <- merge(dat.state.inv,dat.mark)
 
 # mark rounded COM with a 0 if missing
-dat.state$COM.entire.round <- ifelse(dat.state$color.test==0,0,dat.state$COM.entire.round)
-dat.state.inv$COM.entire.round <- ifelse(dat.state.inv$color.test==0,0,dat.state.inv$COM.entire.round)
+#dat.state$COM.entire.round <- ifelse(dat.state$color.test==0,0,dat.state$COM.entire.round)
+#dat.state.inv$COM.entire.round <- ifelse(dat.state.inv$color.test==0,0,dat.state.inv$COM.entire.round)
 
 # load climate data for 1982-2013 for superregions
 dat.temp.super <- read.csv('../../data/temperature/climate_region_temp.csv')
@@ -624,13 +624,6 @@ dat.state.map <- with(dat.state.map, dat.state.map[order(sex,age,DRAWSEQ,order),
 dat.state.map.inv <- with(dat.state.map.inv, dat.state.map.inv[order(sex,age,DRAWSEQ,order),])
 
 # ROUNDED
-
-# set colour scheme for months map (OLD commented out)
-#map.climate.colour.1 <- '#FFFFFF'
-#map.climate.colour.2 <- c('#0000CC','#0000FF','#B2B2FF','#ff7f7f','#ff0000','#990000')
-#map.climate.colour.3 <- c('#330F53','#551A8B','#9975B9','#FF6207','#A94F43','#B52A27')
-#map.climate.colour.2 <- c(map.climate.colour.2,rev(map.climate.colour.3))
-#map.climate.colour <- c(map.climate.colour.1,map.climate.colour.2)
 
 map.climate.colour <- colorRampPalette(c("red","hotpink","brown","navy","cyan","green","orange"))(20)[c(10,12,13,15,18,19,20,1,5,6,7,9)]
 map.climate.colour <- c('#FFFFFF',map.climate.colour)

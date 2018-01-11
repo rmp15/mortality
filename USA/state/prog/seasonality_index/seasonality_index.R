@@ -18,6 +18,9 @@ year.end.2 <- as.numeric(args[4])
 dname <- as.character(args[5])
 metric <- as.character(args[6])
 
+# year.start = 1980 ; year.end = 2013 ; year.start.2 = 1979 ; year.end.2 = 2015 ;
+# dname = 't2m' ; metric = 'mean'
+
 # length of analysis period
 num.years <- year.end - year.start + 1
 
@@ -66,7 +69,7 @@ levels(dat.max.min$sex.long) <- sex.lookup
 
 # load com data to establish max min locations
 file.loc.nat.input <- paste0("../../output/com/",year.start,'_',year.end,"/national/values/combined_results/")
-dat.COM <- readRDS(paste0(file.loc.nat.input,'com_inv_com_national_values_method_2_entire_',year.start,'_',year.end))
+dat.COM <- readRDS(paste0(file.loc.nat.input,'com_inv_com_rates_national_values_method_2_entire_AllCause_',year.start,'_',year.end))
 
 # round to get month required for merging
 dat.COM$COM.mean <- round(dat.COM$COM.mean)
@@ -224,7 +227,7 @@ lin.reg.grad.region <- merge(lin.reg.grad.region,lin.reg.sig.region,by=c('sex','
 
 # load climate data
 file.loc.climate.fixed <- paste0('~/git/climate/countries/USA/output/seasonality_index_climate_region/',dname,'/',metric,'/')
-dat.climate.fixed <- readRDS(paste0(file.loc.climate.fixed,'seasonality_index_com_fixed_',dname,'_',metric,'_',year.start.2,'_',year.end.2))
+dat.climate.fixed <- readRDS(paste0(file.loc.climate.fixed,'seasonality_index_com_fixed_',dname,'_',metric,'_AllCause_',year.start.2,'_',year.end.2))
 dat.climate.fixed$start.value.climate <- dat.climate.fixed$start.value
 dat.climate.fixed$end.value.climate <- dat.climate.fixed$end.value
 dat.climate.fixed <- dat.climate.fixed[,c('sex','age','climate_region','start.value.climate','end.value.climate')]
