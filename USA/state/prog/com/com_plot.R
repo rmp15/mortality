@@ -361,12 +361,16 @@ dat.state <- readRDS(paste0(file.loc.region,'values/combined_results/com_rates_r
 dat.state.inv <- readRDS(paste0(file.loc.region,'values/combined_results/anti_com_rates_regional_values_method_2_entire_AllCause_',year.start.arg,'_',year.end.arg))
 
 # fix region names
+# CHECK THIS!!!
 #dat.state$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state$region)
 #dat.state$region <- gsub('Ohio_Valley', 'Central', dat.state$region)
-#dat.state$region <- gsub('Upper_Midwest', 'East_North_Central', dat.state$region)
+#dat.state$region <- gsub('Upper_Midwest', 'East_North_Central', dat.state$region)#
+dat.state$region <- gsub('Upper_Midwest', 'Central', dat.state$region)
 #dat.state.inv$region <- gsub('Northern_Rockies_and_Plains', 'West_North_Central', dat.state.inv$region)
 #dat.state.inv$region <- gsub('Ohio_Valley', 'Central', dat.state.inv$region)
 #dat.state.inv$region <- gsub('Upper_Midwest', 'East_North_Central', dat.state.inv$region)
+dat.state.inv$region <- gsub('Upper_Midwest', 'Central', dat.state.inv$region)
+
 
 # round com data for each region
 dat.state$COM.entire.round <- round(dat.state$COM.mean)
