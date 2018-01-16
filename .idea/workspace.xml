@@ -4,7 +4,6 @@
     <list default="true" id="a0955925-28ef-4974-88ac-9f337af19082" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_2var.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_2var.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_2var.R" afterPath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_2var.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,8 +44,8 @@
       <file leaf-file-name="plotting_results_climate_cod_2var.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_2var.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="35" lean-forward="false" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+            <state relative-caret-position="240">
+              <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -694,13 +693,6 @@
       <option name="presentableId" value="Default" />
       <updated>1486989512159</updated>
     </task>
-    <task id="LOCAL-00111" summary="updated cod mortality models with 3 variables">
-      <created>1514638035820</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1514638035822</updated>
-    </task>
     <task id="LOCAL-00112" summary="updated cod mortality models with 3 variables">
       <created>1514638777738</created>
       <option name="number" value="00112" />
@@ -1037,7 +1029,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516098863977</updated>
     </task>
-    <option name="localTasksCounter" value="160" />
+    <task id="LOCAL-00160" summary="updated cod mortality models with 3 variables">
+      <created>1516099979636</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1516099979636</updated>
+    </task>
+    <option name="localTasksCounter" value="161" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1479,8 +1478,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_2var.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="35" lean-forward="false" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+        <state relative-caret-position="240">
+          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding />
         </state>
       </provider>
