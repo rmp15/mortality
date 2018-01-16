@@ -18,6 +18,9 @@ declare metric3="number_of_days_below_nonnormal_90_2"
 # 1. PLOT PARAMETERS OF STATE CLIMATE POSTERIORS
 #################################################
 
+# to correct directory
+cd ~/git/mortality/USA/state/prog/00_bash/
+
 for dname in "${dnames[@]}"; do
 
 for model in "${models[@]}"; do
