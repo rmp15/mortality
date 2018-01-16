@@ -24,6 +24,9 @@ declare metric2="number_of_days_below_nonnormal_90_2"
 # 1. RUN AGE-SEPARATED MODEL
 #################################################
 
+# to correct directory
+cd ~/git/mortality/USA/state/prog/00_bash/
+
 (
 
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_2var_fast.R 85 2 $start $end 10 0 $dname $metric1 $metric2 $start2 $end2;
