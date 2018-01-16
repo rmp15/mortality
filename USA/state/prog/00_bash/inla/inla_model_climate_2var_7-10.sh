@@ -18,7 +18,7 @@ declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
 declare metric1="meanc3"
-declare metric2="number_of_min_3_day_below_nonnormal_90_downwaves_2"
+declare metric2="number_of_days_below_nonnormal_90_2"
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL

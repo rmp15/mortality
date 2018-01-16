@@ -17,8 +17,8 @@ declare -i start2=1980
 declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
-declare metric1="number_of_days_above_nonnormal_90_2"
-declare metric2="number_of_days_below_nonnormal_90_2"
+declare metric1="meanc3"
+declare metric2="number_of_days_above_nonnormal_90_2"
 
 #################################################
 # 1. RUN AGE-SEPARATED MODEL
