@@ -6,6 +6,10 @@ year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 cod.arg <- as.character(args[3])
 
+year.start.arg = 1980
+year.end.arg = 2013
+cod.arg = 'External'
+
 library(rgeos)
 require(ggplot2)
 library(rgdal)
@@ -358,11 +362,11 @@ region.lookup <- unique(dat.state$climate_region)
 dat.mark <- expand.grid(sex=c(1:2),age=c(0,5,15,25,35,45,55,65,75,85),region=region.lookup)
 dat.mark <- with(dat.mark, dat.mark[order(sex,age,region),])
 
-# save as csv TEMP
-#write.csv(dat.mark,paste(file.loc.region,'dat_mark_unproc.csv'))
+# save as csv TEMP (currently done outside of R)
+#write.csv(dat.mark,paste0(file.loc.region,'dat_mark_unproc_',cod.arg,'.csv'))
 
-# load csv TEMP
-#dat.mark <- read.csv(paste(file.loc.region,'dat_mark_proc.csv'))
+# load csv TEMP (currently done outside of R)
+dat.mark <- read.csv(paste0(file.loc.region,'dat_mark_unproc_',cod.arg,'.csv'))
 dat.mark$region <- gsub(' ','_',dat.mark$region)
 
 # merge colour marker with state region COM data
@@ -370,8 +374,8 @@ dat.state <- merge(dat.state,dat.mark)
 dat.state.inv <- merge(dat.state.inv,dat.mark)
 
 # mark rounded COM with a 0 if missing
-#dat.state$COM.entire.round <- ifelse(dat.state$color.test==0,0,dat.state$COM.entire.round)
-#dat.state.inv$COM.entire.round <- ifelse(dat.state.inv$color.test==0,0,dat.state.inv$COM.entire.round)
+dat.state$COM.entire.round <- ifelse(dat.state$color.test==0,0,dat.state$COM.entire.round)
+dat.state.inv$COM.entire.round <- ifelse(dat.state.inv$color.test==0,0,dat.state.inv$COM.entire.round)
 
 # load climate data for 1982-2013 for superregions
 dat.temp.super <- read.csv('../../data/temperature/climate_region_temp.csv')
@@ -573,10 +577,10 @@ plot.function.state.entire.round <- function(sex.sel) {
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
-    ggtitle(paste0(sex.lookup[sex.sel],' ',cod.arg)) +
+    ggtitle(paste0(sex.lookup[sex.sel]))+#,' ',cod.arg)) +
     #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
-    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank(),legend.background = element_rect(fill = "grey95")))
+    theme(text = element_text(size = 15),legend.position = 'bottom', legend.justification=c(1,0),strip.background = element_blank(),legend.background = element_rect(fill = "grey95")))
 }
 
 pdf(paste0(file.loc.region,'com_rates_region_map_men_rounded_',cod.arg,'_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
@@ -600,7 +604,7 @@ plot.function.state.entire.round.inv <- function(sex.sel) {
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
-    ggtitle(paste0(sex.lookup[sex.sel],' ',cod.arg)) +
+    ggtitle(paste0(sex.lookup[sex.sel]))+#,' ',cod.arg)) +
     #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
     theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank(),legend.background = element_rect(fill = "grey95")))

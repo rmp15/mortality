@@ -8,9 +8,14 @@ library(RColorBrewer)
 # arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
 
+# go to correct location
+setwd('~/git/mortality/USA/state/prog/00_bash')
+
 # break down arguments from Rscript
 year <- as.numeric(args[1])
 print(year)
+
+year=2013
 
 # source variables
 source('../../data/objects/objects.R')
@@ -88,6 +93,8 @@ if(year>=1999){
 
     # friendly names for plotting
     dat.count$sex.long = plyr::mapvalues(dat.count$sex,from=sort(unique(dat.count$sex)),to=c('Men','Women'))
+
+    write.csv(dat.count,paste0(file.loc,year,'_breakdown_cod.csv'))
 
     # function to plot absolutely or relatively
     plot = function(age.sel=-1,y.measure=1){
