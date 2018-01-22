@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0955925-28ef-4974-88ac-9f337af19082" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_climate_region_against_temp_grads_1982_2013" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_1982_2013.pdf" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_AllCause_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_AllCause_1980_2013.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/prog/map_usa/map_usa.R" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R" afterPath="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,31 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="seasonality_index_cod.R" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R">
+      <file leaf-file-name="map_usa.R" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/map_usa/map_usa.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="276" column="62" lean-forward="true" selection-start-line="276" selection-start-column="62" selection-end-line="276" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="com_plot_cod.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="178" column="1" lean-forward="false" selection-start-line="178" selection-start-column="1" selection-end-line="195" selection-end-column="93" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inla_spatiotemporal_climate_cod_2var.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_2var.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state relative-caret-position="397">
+              <caret line="144" column="80" lean-forward="true" selection-start-line="144" selection-start-column="80" selection-end-line="144" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -58,11 +35,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fix map test</find>
-      <find>1980_2013</find>
-      <find>dat_mark_pro</find>
-      <find>month.lookup</find>
-      <find>../../data</find>
       <find>scale_fill_gradientn</find>
       <find>colorway</find>
       <find>v2</find>
@@ -88,6 +60,11 @@
       <find>dat.COM</find>
       <find>start.value.2</find>
       <find>lin.reg.grad.weight</find>
+      <find>climate</find>
+      <find>file.loc</find>
+      <find>USA.df</find>
+      <find>lin.reg</find>
+      <find>grey</find>
     </findStrings>
     <replaceStrings>
       <replace>sex.filter</replace>
@@ -99,7 +76,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_3var_stmarys.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/cod_breakdown.sh" />
@@ -150,12 +126,13 @@
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/map_usa/map_usa.R" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-136" />
-    <option name="y" value="37" />
+    <option name="x" value="-18" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
   </component>
@@ -266,29 +243,18 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/USA/state/prog/seasonality_index/zz_legacy" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/USA/state/prog/map_usa" />
       <recent name="$PROJECT_DIR$/USA/state/prog/seasonality_index" />
       <recent name="$PROJECT_DIR$/USA/state/prog/00_bash/plotting" />
       <recent name="$PROJECT_DIR$/USA/state/prog/00_bash/inla" />
       <recent name="$PROJECT_DIR$/USA/state/prog/com" />
-      <recent name="$PROJECT_DIR$/USA/state/prog/mapping_posterior" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/USA/state/prog/seasonality_index/zz_legacy" />
     </key>
   </component>
-  <component name="RunManager" selected="R.seasonality_index_cod">
-    <configuration default="false" name="wavelet_paper_cod.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="INTERPRETER_PATH" value="/bin/bash" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
-      <option name="PARAMETERS" value="" />
-      <module name="mortality" />
-      <envs />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="R.map_usa">
     <configuration default="false" name="seasonality_index_cod_plot_all" type="RRunConfigurationType" factoryName="R" temporary="true">
       <option name="SCRIPT_PATH" value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R" />
       <option name="SCRIPT_ARGS" value="" />
@@ -317,6 +283,14 @@
       <option name="SCRIPT_PATH" value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R" />
       <option name="SCRIPT_ARGS" value="" />
       <option name="WORKING_DIRECTORY_PATH" value="$PROJECT_DIR$/USA/state/prog/seasonality_index" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="map_usa" type="RRunConfigurationType" factoryName="R" temporary="true">
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/USA/state/prog/map_usa/map_usa.R" />
+      <option name="SCRIPT_ARGS" value="" />
+      <option name="WORKING_DIRECTORY_PATH" value="$PROJECT_DIR$/USA/state/prog/map_usa" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <envs />
       <method />
@@ -475,19 +449,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Bash.wavelet_paper_cod.sh" />
-      <item index="1" class="java.lang.String" itemvalue="R.seasonality_index_cod_plot_all" />
-      <item index="2" class="java.lang.String" itemvalue="R.breakdown_cod" />
-      <item index="3" class="java.lang.String" itemvalue="R.com_plot_cod" />
-      <item index="4" class="java.lang.String" itemvalue="R.seasonality_index_cod" />
+      <item index="0" class="java.lang.String" itemvalue="R.seasonality_index_cod_plot_all" />
+      <item index="1" class="java.lang.String" itemvalue="R.breakdown_cod" />
+      <item index="2" class="java.lang.String" itemvalue="R.com_plot_cod" />
+      <item index="3" class="java.lang.String" itemvalue="R.seasonality_index_cod" />
+      <item index="4" class="java.lang.String" itemvalue="R.map_usa" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="R.seasonality_index_cod" />
-        <item index="1" class="java.lang.String" itemvalue="R.com_plot_cod" />
-        <item index="2" class="java.lang.String" itemvalue="R.seasonality_index_cod_plot_all" />
-        <item index="3" class="java.lang.String" itemvalue="R.breakdown_cod" />
-        <item index="4" class="java.lang.String" itemvalue="Bash.wavelet_paper_cod.sh" />
+        <item index="0" class="java.lang.String" itemvalue="R.map_usa" />
+        <item index="1" class="java.lang.String" itemvalue="R.seasonality_index_cod" />
+        <item index="2" class="java.lang.String" itemvalue="R.com_plot_cod" />
+        <item index="3" class="java.lang.String" itemvalue="R.seasonality_index_cod_plot_all" />
+        <item index="4" class="java.lang.String" itemvalue="R.breakdown_cod" />
       </list>
     </recent_temporary>
   </component>
@@ -504,13 +478,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1486989512159</updated>
-    </task>
-    <task id="LOCAL-00117" summary="updated cod mortality models with 3 variables">
-      <created>1515090871222</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1515090871222</updated>
     </task>
     <task id="LOCAL-00118" summary="updated cod mortality models with 3 variables">
       <created>1515098090160</created>
@@ -848,14 +815,21 @@
       <option name="project" value="LOCAL" />
       <updated>1516543571887</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="updated cod mortality models with 3 variables">
+      <created>1516580228327</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1516580228327</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-136" y="37" width="1440" height="877" extended-state="0" />
+    <frame x="-18" y="23" width="1440" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31875" sideWeight="0.4912075" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31875" sideWeight="0.4912075" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -913,34 +887,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_analysis_national_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="59" column="7" lean-forward="true" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/com_functions.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1031">
-          <caret line="309" column="22" lean-forward="true" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_2var_6-10.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/anti_com_analysis_national_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="28" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_analysis_region.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
@@ -1116,13 +1062,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="65" lean-forward="false" selection-start-line="42" selection-start-column="65" selection-end-line="42" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_cod_2var.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -1155,13 +1094,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_2var.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="90" column="50" lean-forward="false" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1204,7 +1136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
           <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1212,7 +1143,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1365">
           <caret line="91" column="45" lean-forward="false" selection-start-line="91" selection-start-column="45" selection-end-line="91" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1220,35 +1150,42 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="40" column="51" lean-forward="false" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/map_generate_climate.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all_new.R" />
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/zz_legacy/seasonality_index_cod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1245">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="675">
+          <caret line="275" column="0" lean-forward="false" selection-start-line="275" selection-start-column="0" selection-end-line="275" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="178" column="1" lean-forward="false" selection-start-line="178" selection-start-column="1" selection-end-line="195" selection-end-column="93" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_2var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
+        <state relative-caret-position="750">
           <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_3var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="102" column="40" lean-forward="false" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
+        <state relative-caret-position="-1365">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all_new.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_1var.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1256,26 +1193,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/zz_legacy/seasonality_index_cod.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_2var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="275" column="0" lean-forward="false" selection-start-line="275" selection-start-column="0" selection-end-line="275" selection-end-column="0" />
+        <state relative-caret-position="1350">
+          <caret line="90" column="50" lean-forward="false" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="178" column="1" lean-forward="false" selection-start-line="178" selection-start-column="1" selection-end-line="195" selection-end-column="93" />
+        <state relative-caret-position="236">
+          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="327" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="65" lean-forward="false" selection-start-line="42" selection-start-column="65" selection-end-line="42" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/map_generate_climate.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="78" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="102" column="40" lean-forward="false" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="276" column="62" lean-forward="true" selection-start-line="276" selection-start-column="62" selection-end-line="276" selection-end-column="62" />
+        <state relative-caret-position="206">
+          <caret line="320" column="37" lean-forward="true" selection-start-line="320" selection-start-column="37" selection-end-line="320" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/map_usa/map_usa.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="144" column="80" lean-forward="true" selection-start-line="144" selection-start-column="80" selection-end-line="144" selection-end-column="80" />
           <folding />
         </state>
       </provider>
