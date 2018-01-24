@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0955925-28ef-4974-88ac-9f337af19082" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_AllCause_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_AllCause_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_Cancer_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_Cancer_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_Cardiopulmonary_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_Cardiopulmonary_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_External_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_External_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_Other_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v1_Other_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_AllCause_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_AllCause_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_Cancer_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_Cancer_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_Cardiopulmonary_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_Cardiopulmonary_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_External_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_External_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_Other_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v2_Other_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_AllCause_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_AllCause_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_Cancer_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_Cancer_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_Cardiopulmonary_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_Cardiopulmonary_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_External_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_External_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_Other_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/national/plots/USA_COM_rates_total_axis_swapped_v3_Other_1980_2013.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2013/region/plots/USA_COM_rates_regional_axis_swapped_v1_all_causes_1980_2013.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2013/region/plots/USA_COM_rates_regional_axis_swapped_v1_all_causes_1980_2013.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" afterPath="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -676,13 +659,6 @@
       <option name="presentableId" value="Default" />
       <updated>1486989512159</updated>
     </task>
-    <task id="LOCAL-00124" summary="updated cod mortality models with 3 variables">
-      <created>1515167178481</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1515167178481</updated>
-    </task>
     <task id="LOCAL-00125" summary="updated cod mortality models with 3 variables">
       <created>1515270905537</created>
       <option name="number" value="00125" />
@@ -1019,12 +995,19 @@
       <option name="project" value="LOCAL" />
       <updated>1516796113023</updated>
     </task>
-    <option name="localTasksCounter" value="173" />
+    <task id="LOCAL-00173" summary="updated cod mortality models with 3 variables">
+      <created>1516798293831</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1516798293831</updated>
+    </task>
+    <option name="localTasksCounter" value="174" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30114448" sideWeight="0.4912075" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
