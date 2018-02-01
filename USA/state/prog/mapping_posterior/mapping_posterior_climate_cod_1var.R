@@ -19,7 +19,9 @@ dname <- as.character(args[5])
 metric <- as.character(args[6])
 cause <- as.character(args[7])
 
-# year.start = 1980 ; year.end = 2013 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'
+
+
+#year.start = 1980 ; year.end = 2013 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'
 
 multiple = 0
 
@@ -233,6 +235,14 @@ forest.plot.national.month <- function() {
         dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
 
         lims <- range(abs(dat$odds.mean))
+
+        # fix name fo plotting
+        cause = ifelse(cause=='AllCause', 'All cause',
+                ifelse(cause=='Cancer', 'Cancer',
+                ifelse(cause=='Cardiopulmonary' 'Cardiorespiratory',
+                ifelse(cause=='External', 'Injuries',
+                ifelse(cause=='Other', 'Other'
+                )))))
 
         # ADD SIGNIFICANCE HIGHLIGHTS
         print(ggplot(data=subset(dat)) +
