@@ -16,8 +16,8 @@ declare -i end=2013
 declare -i start2=1980
 declare -i end2=2013
 declare country="USA"
-declare dname="t2m"
-declare metric="number_of_days_below_nonnormal_90_2"
+declare dname="tapp"
+declare metric="meanc3"
 declare cod="Other"
 
 #################################################
