@@ -67,10 +67,10 @@ done;
 # 2. COMBINE RESULTS
 #################################################
 
-for model in "${models[@]}"; do
+#for model in "${models[@]}"; do
 
-echo "combining results into one file from INLA model $model years $start - $end";
+#echo "combining results into one file from INLA model $model years $start - $end";
 
 #Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod.R $start $end $country $model $dname $metric $cod
 
-done;
+#done;
