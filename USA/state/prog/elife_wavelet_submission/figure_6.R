@@ -1,16 +1,8 @@
 rm(list=ls())
 
-library(maptools)
-library(mapproj)
-library(rgeos)
-library(rgdal)
-library(RColorBrewer)
-library(ggplot2)
-library(plyr)
-library(scales)
-
-# correct location to start at
-setwd('~/git/mortality/USA/state/prog/00_bash')
+# load required packages
+packages = c('maptools', 'mapproj','rgeos','rgdal','RColorBrewer','ggplot2','plyr','scales')
+lapply(packages, require, character.only=TRUE)
 
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
@@ -21,9 +13,6 @@ year.end.2 <- as.numeric(args[4])
 dname <- as.character(args[5])
 metric <- as.character(args[6])
 cod <- as.character(args[7])
-
-#year.start = 1980 ; year.end = 2013 ; year.start.2 = 1980 ; year.end.2 = 2013 ; dname = 't2m' ; metric = 'mean'
-#cod ='Cardiopulmonary'
 
 # length of analysis period
 num.years <- year.end - year.start + 1
