@@ -62,7 +62,8 @@ map <- fortify(us_aea)
 # extract data from shapefile
 shapefile.data <- us_aea@data
 
-shapefile.data$climate_region <- 	c('Northwest','West North Central','Northeast','West North Central','West North Central',
+shapefile.data$climate_region <-
+c('Northwest','West North Central','Northeast','West North Central','West North Central',
 'West North Central','East North Central','Northwest','Northeast','East North Central',
 'Northwest','Northeast','East North Central','Northeast','West North Central',
 'Northeast','Northeast','Northeast','Northeast','Northeast',
@@ -92,7 +93,7 @@ map.climate.colour <- colorRampPalette(c("red","hotpink","brown","navy","cyan","
 ###############################################################
 
 # create directories for output
-file.loc <- paste0('../../output/map_usa/')
+file.loc <- paste0('map_usa/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc), FALSE)
 
 # create directory for map specific summaries
@@ -102,17 +103,6 @@ ifelse(!dir.exists(file.loc.maps), dir.create(file.loc.maps), FALSE)
 ###############################################################
 # MAPS
 ###############################################################
-
-# map of the use by state in case needed
-pdf(paste0(file.loc.maps,'usa_map_region.pdf'))#,height=0,width=0,paper='a4r')
-print(ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
-geom_polygon(aes(fill=SUB_REGION),color='black',size=0.1) +
-scale_fill_manual(values=map.region.colour,guide = guide_legend(title = '')) +
-theme_map() +
-theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom',
-	legend.background = element_rect(fill = "grey95"),legend.box = "horizontal")
-)
-dev.off()
 
 pdf(paste0(file.loc.maps,'usa_map_climate.pdf'))#,height=0,width=0,paper='a4r')
 print(ggplot(data=USA.df,aes(x=long,y=lat,group=group)) +
