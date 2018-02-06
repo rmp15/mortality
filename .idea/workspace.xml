@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="62b91b4b-6761-4ef0-820a-b55e2d811d0d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_5.R" afterPath="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_5.R" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_6.R" afterPath="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_6.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,21 +63,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="figure_5.R" pinned="false" current-in-tab="false">
+      <file leaf-file-name="figure_5.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_5.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="27" selection-end-column="24" />
-              <folding />
+            <state relative-caret-position="641">
+              <caret line="383" column="24" lean-forward="false" selection-start-line="383" selection-start-column="24" selection-end-line="383" selection-end-column="24" />
+              <folding>
+                <element signature="e#1288#3092#0" expanded="false" />
+                <element signature="e#3217#4947#0" expanded="false" />
+                <element signature="e#5017#5163#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="figure_6.R" pinned="false" current-in-tab="true">
+      <file leaf-file-name="figure_6.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_6.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="87" lean-forward="false" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="87" />
+            <state relative-caret-position="540">
+              <caret line="36" column="6" lean-forward="false" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -133,8 +138,8 @@
         <option value="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_4.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_1.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/com/com_data_process_cod.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_5.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_6.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_5.R" />
       </list>
     </option>
   </component>
@@ -756,7 +761,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517933412766</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="test commit">
+      <created>1517933558445</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1517933558445</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1201,19 +1213,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_5.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_6.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="27" selection-end-column="24" />
+        <state relative-caret-position="540">
+          <caret line="36" column="6" lean-forward="false" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_6.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_5.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="87" lean-forward="false" selection-start-line="32" selection-start-column="87" selection-end-line="32" selection-end-column="87" />
-          <folding />
+        <state relative-caret-position="641">
+          <caret line="383" column="24" lean-forward="false" selection-start-line="383" selection-start-column="24" selection-end-line="383" selection-end-column="24" />
+          <folding>
+            <element signature="e#1288#3092#0" expanded="false" />
+            <element signature="e#3217#4947#0" expanded="false" />
+            <element signature="e#5017#5163#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

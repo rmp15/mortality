@@ -21,8 +21,7 @@ dat = readRDS(input.loc)
 map.climate.colour = colorRampPalette(c("red","hotpink","brown","navy","cyan","green","orange"))(20)[c(10,12,13,15,18,19,20,1,5)]
 
 pdf(paste0('seasonality_index_regional_against_climate_fixed_com_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-ggplot(data=subset(dat, sex==1|2),aes(shape=as.factor(sex),x=abs(end.value.climate),
-y=end.value.mort/100)) +
+ggplot(data=subset(dat, sex==1|2),aes(shape=as.factor(sex),x=abs(end.value.climate), y=end.value.mort/100)) +
 geom_point(aes(color=as.factor(climate_region)),size=2) +
 scale_shape_manual(values=c(16,17),labels=c('Male','Female'),guide = guide_legend(title = '')) +
 scale_x_continuous(name=expression(paste("Absolute temperature difference (",degree,"C)"))) +

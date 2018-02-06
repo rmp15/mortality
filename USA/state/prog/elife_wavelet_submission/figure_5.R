@@ -272,12 +272,6 @@ for(i in c(0,5,15,25,35,45,55,65,75,85)) {
 }}
 dat.super.temp.inv <- dat.super.temp
 
-# plot superregions
-# ggplot() +
-# geom_polygon(data=map,aes(x=long,y=lat,group=group),fill='white',color='Black',size=1) +
-# geom_polygon(data=subset(map.superregions),aes(x=long,y=lat,group=group),alpha=0,fill='Red',color='Red',size=1.2) +
-# geom_text(data=superregion.coords,aes(x=long.txt,y=lat.txt,label=region))
-
 # merge selected data to map dataframe for colouring of ggplot
 USA.df <- merge(map, shapefile.data, by='id')
 USA.df$STATE_FIPS <- as.integer(as.character(USA.df$STATE_FIPS))
@@ -366,11 +360,11 @@ plot.function.state.entire.round <- function(sex.sel) {
     strip.background = element_blank(),legend.background = element_rect(fill = "grey95")))
 }
 
-pdf(paste0(file.loc.region,'com_rates_region_map_men_rounded_',cod.arg,'_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0('com_max_men_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 plot.function.state.entire.round(1)
 dev.off()
 
-pdf(paste0(file.loc.region,'com_rates_region_map_women_rounded_',cod.arg,'_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0('com_max_women_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 plot.function.state.entire.round(2)
 dev.off()
 
@@ -387,17 +381,17 @@ plot.function.state.entire.round.inv <- function(sex.sel) {
     facet_wrap(~age.print) +
     xlab('') +
     ylab('') +
-    ggtitle(paste0(sex.filter2[sex.sel],' ',cod.print,' minimum')) +
+    ggtitle(paste0(sex.filter2[sex.sel],' minimum')) +
     #ggtitle(paste0(sex.lookup[sex.sel],' : ',year.start.arg,'-',year.end.arg)) +
     theme_map() +
     theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),
     strip.background = element_blank(),legend.background = element_rect(fill = "grey95")))
 }
 
-pdf(paste0(file.loc.region,'anti_com_rates_region_map_men_rounded_',cod.arg,'_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0('com_min_men_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 plot.function.state.entire.round.inv(1)
 dev.off()
 
-pdf(paste0(file.loc.region,'anti_com_rates_region_map_women_rounded_',cod.arg,'_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0('com_min_women_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 plot.function.state.entire.round.inv(2)
 dev.off()
