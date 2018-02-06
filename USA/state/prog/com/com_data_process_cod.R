@@ -74,7 +74,7 @@ saveRDS(dat.nat,paste0(file.loc.nat.input,'com_inv_com_rates_national_values_met
 #REGIONAL DEATH RATES
 #COM
 
-#construct dataset for entire period national analysis method 2
+# construct dataset for entire period national analysis method 2
 dat.entire <- data.frame()
 for(j in region.lookup) {
    for(k in c(1,2)){
