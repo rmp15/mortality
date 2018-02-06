@@ -6,13 +6,9 @@ lapply(packages, require, character.only=TRUE)
 
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
-year.start <- as.numeric(args[1])
-year.end <- as.numeric(args[2])
-year.start.2 <- as.numeric(args[3])
-year.end.2 <- as.numeric(args[4])
-dname <- as.character(args[5])
-metric <- as.character(args[6])
-cod <- as.character(args[7])
+year.start <- as.numeric(args[1])   ; year.end <- as.numeric(args[2])
+year.start.2 <- as.numeric(args[3]) ; year.end.2 <- as.numeric(args[4])
+dname <- as.character(args[5])      ; metric <- as.character(args[6])
 
 # length of analysis period
 num.years <- year.end - year.start + 1
