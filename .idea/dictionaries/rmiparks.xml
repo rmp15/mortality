@@ -321,6 +321,14 @@
       <w>.__C__integrate</w>
       <w>.__C__internalDispatchMethod</w>
       <w>.__C__isparseVector</w>
+      <w>.__C__jarrayRef</w>
+      <w>.__C__jbyte</w>
+      <w>.__C__jchar</w>
+      <w>.__C__jclassName</w>
+      <w>.__C__jfloat</w>
+      <w>.__C__jlong</w>
+      <w>.__C__jobjRef</w>
+      <w>.__C__jrectRef</w>
       <w>.__C__lMatrix</w>
       <w>.__C__language</w>
       <w>.__C__ldenseMatrix</w>
@@ -542,7 +550,68 @@
       <w>.isMethodsDispatchOn</w>
       <w>.isOpen</w>
       <w>.isPOSIX</w>
+      <w>.jaddClassPath</w>
+      <w>.jaddLibrary</w>
+      <w>.jarray</w>
+      <w>.jbyte</w>
+      <w>.jcache</w>
+      <w>.jcall</w>
+      <w>.jcast</w>
+      <w>.jcastToArray</w>
+      <w>.jchar</w>
+      <w>.jcheck</w>
+      <w>.jclass</w>
+      <w>.jclass.boolean</w>
+      <w>.jclass.double</w>
+      <w>.jclass.float</w>
+      <w>.jclass.int</w>
+      <w>.jclass.void</w>
+      <w>.jclassClass</w>
+      <w>.jclassLoader</w>
+      <w>.jclassObject</w>
+      <w>.jclassPath</w>
+      <w>.jclassRef</w>
+      <w>.jclassString</w>
+      <w>.jclear</w>
+      <w>.jcompare</w>
+      <w>.jconstructors</w>
+      <w>.jengine</w>
+      <w>.jequals</w>
+      <w>.jevalArray</w>
+      <w>.jfield</w>
+      <w>.jfields</w>
+      <w>.jfindClass</w>
+      <w>.jfirst</w>
+      <w>.jfloat</w>
+      <w>.jgetEx</w>
+      <w>.jidenticalRef</w>
+      <w>.jinherits</w>
+      <w>.jinit</w>
+      <w>.jinit.merge.error</w>
+      <w>.jinstanceof</w>
+      <w>.jlong</w>
+      <w>.jmemprof</w>
+      <w>.jmergeClassPath</w>
+      <w>.jmethods</w>
+      <w>.jmkref</w>
+      <w>.jnew</w>
+      <w>.jniInitialized</w>
+      <w>.jnull</w>
+      <w>.joptions</w>
+      <w>.jpackage</w>
+      <w>.jproperty</w>
+      <w>.jrcall</w>
+      <w>.jrmLibrary</w>
+      <w>.jserialize</w>
+      <w>.jsetJConvertor</w>
+      <w>.jsetRConvertor</w>
+      <w>.jshort</w>
+      <w>.jsimplify</w>
+      <w>.jstrVal</w>
+      <w>.jthrow</w>
       <w>.julian</w>
+      <w>.junserialize</w>
+      <w>.jzeroRef</w>
       <w>.kappa_tri</w>
       <w>.knownS3Generics</w>
       <w>.kronecker</w>
@@ -580,6 +649,8 @@
       <w>.primUntrace</w>
       <w>.print.via.format</w>
       <w>.pt</w>
+      <w>.r2j</w>
+      <w>.rJava.base.path</w>
       <w>.rbind.data.table</w>
       <w>.readRDS</w>
       <w>.rmpkg</w>
@@ -1180,6 +1251,7 @@
       <w>Isle_of_Man</w>
       <w>Istanbul</w>
       <w>Istat</w>
+      <w>J</w>
       <w>JPAutumnalEquinox</w>
       <w>JPBankHolidayDec31</w>
       <w>JPBankHolidayJan2</w>
@@ -2124,6 +2196,7 @@
       <w>`%ia%`</w>
       <w>`%in%`</w>
       <w>`%inrange%`</w>
+      <w>`%instanceof%`</w>
       <w>`%like%`</w>
       <w>`%m+%`</w>
       <w>`%m-%`</w>
@@ -2192,7 +2265,11 @@
       <w>`.__T__-:base`</w>
       <w>`.__T__.DollarNames:utils`</w>
       <w>`.__T__/:base`</w>
+      <w>`.__T__&lt;:base`</w>
+      <w>`.__T__&lt;=:base`</w>
       <w>`.__T__==:base`</w>
+      <w>`.__T__&gt;:base`</w>
+      <w>`.__T__&gt;=:base`</w>
       <w>`.__T__AIC:stats`</w>
       <w>`.__T__Arith:base`</w>
       <w>`.__T__BIC:stats`</w>
@@ -2228,6 +2305,7 @@
       <w>`.__T__all:base`</w>
       <w>`.__T__animate:raster`</w>
       <w>`.__T__any:base`</w>
+      <w>`.__T__anyDuplicated:base`</w>
       <w>`.__T__anyNA:base`</w>
       <w>`.__T__append.poly:rgeos`</w>
       <w>`.__T__approxNA:raster`</w>
@@ -2293,6 +2371,7 @@
       <w>`.__T__click:raster`</w>
       <w>`.__T__clone:RCurl`</w>
       <w>`.__T__clone:git2r`</w>
+      <w>`.__T__clone:rJava`</w>
       <w>`.__T__close:base`</w>
       <w>`.__T__closeDataset:rgdal`</w>
       <w>`.__T__clump:raster`</w>
@@ -2382,6 +2461,7 @@
       <w>`.__T__distance:raster`</w>
       <w>`.__T__drop:base`</w>
       <w>`.__T__dropLayer:raster`</w>
+      <w>`.__T__duplicated:base`</w>
       <w>`.__T__elide:maptools`</w>
       <w>`.__T__erase:raster`</w>
       <w>`.__T__exclude:usdm`</w>
@@ -2475,10 +2555,12 @@
       <w>`.__T__make.db.names:DBI`</w>
       <w>`.__T__mask:raster`</w>
       <w>`.__T__match:base`</w>
+      <w>`.__T__max:base`</w>
       <w>`.__T__maxValue:raster`</w>
       <w>`.__T__mean:base`</w>
       <w>`.__T__merge:base`</w>
       <w>`.__T__merge_base:git2r`</w>
+      <w>`.__T__min:base`</w>
       <w>`.__T__minValue:raster`</w>
       <w>`.__T__minute&lt;-:lubridate`</w>
       <w>`.__T__modal:raster`</w>
@@ -2493,6 +2575,7 @@
       <w>`.__T__names&lt;-:base`</w>
       <w>`.__T__ncell:raster`</w>
       <w>`.__T__ncol:base`</w>
+      <w>`.__T__new:methods`</w>
       <w>`.__T__nlayers:raster`</w>
       <w>`.__T__nnzero:Matrix`</w>
       <w>`.__T__nobs:stats`</w>
@@ -2539,6 +2622,7 @@
       <w>`.__T__qr.resid:base`</w>
       <w>`.__T__qr:base`</w>
       <w>`.__T__quantile:stats`</w>
+      <w>`.__T__range:base`</w>
       <w>`.__T__raster:raster`</w>
       <w>`.__T__rasterize:raster`</w>
       <w>`.__T__rbind2:methods`</w>
@@ -2566,6 +2650,7 @@
       <w>`.__T__reset:git2r`</w>
       <w>`.__T__resid:stats`</w>
       <w>`.__T__residuals:stats`</w>
+      <w>`.__T__rev:base`</w>
       <w>`.__T__revparse_single:git2r`</w>
       <w>`.__T__reweightPred:MatrixModels`</w>
       <w>`.__T__rm_file:git2r`</w>
@@ -2594,6 +2679,7 @@
       <w>`.__T__solarpos:maptools`</w>
       <w>`.__T__solve:base`</w>
       <w>`.__T__solveCoef:MatrixModels`</w>
+      <w>`.__T__sort:base`</w>
       <w>`.__T__sp.lineLabel:maptools`</w>
       <w>`.__T__sp.pointLabel:maptools`</w>
       <w>`.__T__spCbind:maptools`</w>
@@ -2617,6 +2703,7 @@
       <w>`.__T__stash_drop:git2r`</w>
       <w>`.__T__stash_list:git2r`</w>
       <w>`.__T__status:git2r`</w>
+      <w>`.__T__str:utils`</w>
       <w>`.__T__subs:raster`</w>
       <w>`.__T__subset:base`</w>
       <w>`.__T__sum:base`</w>
@@ -2680,6 +2767,7 @@
       <w>`.__T__zonal:raster`</w>
       <w>`.__T__zoom:raster`</w>
       <w>`.__T__|:base`</w>
+      <w>`.jfield&lt;-`</w>
       <w>`/.difftime`</w>
       <w>`/`</w>
       <w>`:::`</w>
@@ -7209,6 +7297,7 @@
       <w>is.integer</w>
       <w>is.interval</w>
       <w>is.irts</w>
+      <w>is.jnull</w>
       <w>is.language</w>
       <w>is.leaf</w>
       <w>is.levelsMap</w>
@@ -7464,6 +7553,7 @@
       <w>jagam</w>
       <w>james.stein</w>
       <w>jarque.bera.test</w>
+      <w>javaImport</w>
       <w>jerr</w>
       <w>jerr.coxnet</w>
       <w>jerr.elnet</w>
@@ -7947,6 +8037,7 @@
       <w>magma</w>
       <w>magrittr</w>
       <w>mahalanobis</w>
+      <w>mailR</w>
       <w>maintainer</w>
       <w>make.contrasts</w>
       <w>make.db.names</w>
@@ -9733,6 +9824,7 @@
       <w>r.test</w>
       <w>r2dtable</w>
       <w>rBind</w>
+      <w>rJava</w>
       <w>rMultinom</w>
       <w>rTweedie</w>
       <w>rWishart</w>
@@ -10555,6 +10647,7 @@
       <w>semester</w>
       <w>semi_join</w>
       <w>semi_join_query</w>
+      <w>send.mail</w>
       <w>sendToConsole</w>
       <w>sensitivity</w>
       <w>sensuc</w>
@@ -12082,6 +12175,7 @@
       <w>toFileListTree.character</w>
       <w>toHTML</w>
       <w>toJSON</w>
+      <w>toJava</w>
       <w>toLatex</w>
       <w>toRd</w>
       <w>toSigned</w>
@@ -12592,6 +12686,7 @@
       <w>wireframe</w>
       <w>with</w>
       <w>with.default</w>
+      <w>with.jobjRef</w>
       <w>withCallingHandlers</w>
       <w>withCapture</w>
       <w>withLocale</w>
