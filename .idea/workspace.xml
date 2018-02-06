@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62b91b4b-6761-4ef0-820a-b55e2d811d0d" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/USA/state/prog/elife_submission/figure_2.R" afterPath="$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_2.R" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/elife_submission/figure_2.R" afterPath="$PROJECT_DIR$/USA/state/prog/elife_submission/figure_2.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +19,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="figure_2.R" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_submission/figure_2.R">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_2.R">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="809">
               <caret line="62" column="13" lean-forward="false" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
@@ -230,7 +230,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="elife_submission" />
+              <option name="myItemId" value="elife_wavelet_submission" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -581,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517914011364</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="test commit">
+      <created>1517914398053</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1517914398053</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1020,7 +1027,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_submission/figure_2.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/elife_wavelet_submission/figure_2.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="809">
           <caret line="62" column="13" lean-forward="false" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
