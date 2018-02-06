@@ -19,21 +19,9 @@ age.print <- as.vector(levels(factor(levels=c('0-4','5-14','15-24','25-34','35-4
 sex.lookup = c('Men','Women')
 month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
 
-# load data
+# load regional data
 input.loc = 'file_here'
 dat = readRDS(input.loc)
-
-# load region data
-dat.region <- 'region_file_here'
-dat.region$fips <- as.numeric(as.character(dat.region$STATE_FIPS))
-
-# merge region data with death data
-dat <- merge(dat,dat.region,by='fips')
-
-# generate region data
-dat$deaths.pred <- with(dat,pop.adj*rate.adj)
-dat.national <- ddply(dat,.(year,climate_region,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
-dat.national$climate_region <- gsub(' ','_',dat.national$climate_region)
 
 # calculate rates per million and then round
 dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
