@@ -9,8 +9,7 @@ library(dplyr)
 library(foreign)
 
 # source only the 'intentional' variable (better way to do this a la python?)
-source('../../data/objects/objects.R')
-rm(list=setdiff(ls(), c("icd9.lookup","icd10.lookup")))
+ rm(list=setdiff(ls(), c("icd9.lookup","icd10.lookup")))
 
 # Function to summarise a year's data. x is the year in 2 number form (e.g. 1989 -> 89).
 # y is the number of rows. default (-1) is all rows.
@@ -111,7 +110,6 @@ dat.appended <- appendyears(year.start.arg,year.end.arg)
 dat.appended <- dat.appended[order(dat.appended$cause,dat.appended$fips,dat.appended$sex,dat.appended$age,dat.appended$year,dat.appended$month),]
 
 # Filter missing age results and complete results
-#dat.appended.NA <- dat.appended[is.na(dat.appended$age),]
 dat.appended   <- na.omit(dat.appended)
 
 # Add USA label
@@ -134,10 +132,10 @@ dat.merged$rate.adj <- dat.merged$deaths / dat.merged$pop.adj
 # create output directory
 ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_data_cod"), FALSE)
 
-# plot to check rates
-png(paste0('../../output/prep_data_cod/rate_compared_cod_',year.start.arg,'_',year.end.arg,'.png'))
-plot(dat.merged$rate,dat.merged$rate.adj)
-dev.off()
+# # plot to check rates
+# png(paste0('../../output/prep_data_cod/rate_compared_cod_',year.start.arg,'_',year.end.arg,'.png'))
+# plot(dat.merged$rate,dat.merged$rate.adj)
+# dev.off()
 
 # output file as RDS
-saveRDS(dat.merged,paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
+saveRDS(dat.merged,paste0('../../output/prep_data_cod/datus_state_rates_cod_injuries_ons_',year.start.arg,'_',year.end.arg))
