@@ -27,7 +27,7 @@ dat <- merge(dat,dat.year.month, by=c('year','month'))
 library(plyr)
 
 # create nationalised data
-dat.national = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths),pop.adj=sum(pop.adj))
+dat.national = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
 dat.national$rate.adj = with(dat.national,deaths/pop.adj)
 dat.national = dat.national[order(dat.national$cause,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
@@ -38,6 +38,9 @@ dat.national.com.sex = merge(dat.national.com.sex,StdPopMF,by='age',all.x=1)
 dat.national.com.sex = dat.national.com.sex[order(dat.national.com.sex$cause,dat.national.com.sex$age,dat.national.com.sex$year,
                                             dat.national.com.sex$month),]
 dat.national.com.sex = ddply(dat.national.com.sex,.(cause,year,month), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
+dat.national.com.sex = merge(dat.national.com.sex,dat.year.month, by=c('year','month'))
+dat.national.com.sex$ID = mapvalues(dat.national.com.sex$month, from=sort(unique(dat.national.com.sex$month)),to=month.short)
+dat.national.com.sex$ID = with(dat.national.com.sex,reorder(dat.national.com.sex$ID,month))
 
 library(ggplot2)
 
@@ -62,7 +65,7 @@ library(RColorBrewer)
 ggplot(data=dat.last.year) +
     geom_point(aes(x=as.factor(age),y=1000000*rate.adj,color=as.factor(ID))) +
     xlab('Age group') +
-    ylab('Mortality rate per million') +
+    ylab('Death rate per million') +
     scale_x_discrete(breaks=age.filter,labels=age.print) +
     scale_colour_discrete(guide = guide_legend(nrow = 1,title = paste0("Month"))) +
     geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
@@ -79,7 +82,7 @@ ggplot(data=dat.last.year) +
 ggplot(data=dat.last.year) +
     geom_point(aes(x=as.factor(month),y=1000000*rate.adj,color=as.factor(age))) +
     xlab('Age group') +
-    ylab('Mortality rate per million') +
+    ylab('Death rate  per million') +
     scale_x_discrete(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
     scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
@@ -133,11 +136,59 @@ legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 # for nationalised ASDR data
 ############################
 
-
-# 3. time trends for injuries across time, age-standarised (annual time) STACKED PLOT
+pdf('~/Desktop/plots.pdf',paper='a4r',height=0,width=0)
+# 1.
 ggplot(dat=dat.national.com.sex, aes(x=year,y=1000000*ASDR,fill=cause)) +
-    ggtitle('ASDR for injuries in the USA')
+    ggtitle('ASDRs for injuries in the USA (ONS coding)') +
     geom_area(position='stack') +
-    facet_grid(~month)
+    facet_grid(~ID) +
+    xlab('Year') +
+    ylab('Death rate per million') +
+    theme_bw() + theme( panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank())
 
+# 2.
+ggplot(dat=dat.national.com.sex, aes(x=year,y=1000000*ASDR,fill=cause)) +
+    ggtitle('ASDRs for injuries in the USA (ONS coding)') +
+    geom_area(position='stack') +
+    facet_grid(cause~ID) +
+    xlab('Year') +
+    ylab('Death rate per million') +
+    theme_bw() + theme( panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank())
 
+# 3.
+ggplot(dat=dat.national.com.sex, aes(x=year.month,y=1000000*ASDR,fill=cause)) +
+    ggtitle('ASDRs for injuries in the USA (ONS coding)') +
+    geom_area(position='stack') +
+    xlab('Time') +
+    ylab('Death rate per million') +
+    theme_bw() + theme( panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank())
+
+# 4.
+ggplot(dat=dat.national.com.sex, aes(x=year.month,y=1000000*ASDR,fill=cause)) +
+    ggtitle('ASDRs for injuries in the USA (ONS coding)') +
+    geom_area(position='stack') +
+    xlab('Time') +
+    ylab('Death rate per million') +
+    facet_grid(~cause) +
+        theme_bw() + theme( panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank())
+
+# 5.
+ggplot(dat=dat.national.com.sex, aes(x=as.factor(month),y=1000000*ASDR,colour=year)) +
+    ggtitle('ASDRs for injuries in the USA (ONS coding)') +
+    geom_point() +
+    xlab('Time') +
+    ylab('Death rate per million') +
+    facet_grid(~cause) +
+        theme_bw() + theme( panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank())
+
+dev.off()
