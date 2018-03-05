@@ -1,0 +1,1187 @@
+\documentclass[11pt]{article}
+\usepackage{pgfgantt}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{setspace} 
+\definecolor{mygreen}{rgb}{0,0.6,0} 
+\definecolor{mygray}{rgb}{0.5,0.5,0.5} 
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage[version=3]{mhchem}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage{csvsimple}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{lscape}
+\usepackage{array}
+\usepackage{multirow}
+
+\geometry{
+a4paper,
+top=20mm,
+bottom=20mm,
+left=20mm,
+right= 20mm
+}
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\begin{document}
+
+\begin{center}
+    
+\small{Imperial College London}\\
+
+\onehalfspacing
+School of Public Health\\
+Space and Atmospheric Physics\\
+
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+
+\LARGE{Climate change and health: statistical and stochastic modelling of mortality and anomalous temperature stress events}\\ %something which climate change and human health
+\LARGE{\textbf{Late Stage Review}}\\
+~\\
+\large{Robbie Parks, PhD candidate}\\
+~\\
+\large{January 2018†}\\
+    
+\vspace*{1cm}
+           
+\vfill
+        
+\end{center}
+        
+\noindent Supervisors: Professor Majid Ezzati, Professor Ralf Toumi\\  
+       
+\noindent Submitted in part fulfilment of the requirements for the degree of Doctor of Philosophy at Imperial College London\\
+        
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% table of contents, list of tables and figures
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+\newpage
+
+\listoffigures
+
+\listoftables
+
+\newpage
+ 
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction} \label{sec:background}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Relevance of climate change and health under a United Nations framework}
+
+It is incumbent upon the scientific and health community to work together to analyse patterns and trends in mortality due to changing weather patterns, and to provide means for political institutions to understand and act upon the findings.(9 11) The need to understand and manage a changing climate to preserve and improve human health is a key requirement of United Nations Sustainable Development Goal 3.D. Identifying the risk to communities is crucial for fulfilling this goal.(12)
+
+\subsection{Seasonal dynamics of mortality}
+
+It is well-established that death rates vary throughout the year, and in temperate climates there tend to be more deaths overall in winter than in summer.(3-6) Therefore, it has been hypothesized that a warmer world may lower winter mortality in temperate climates.(1, 2) In a large country like the USA, which possesses distinct climate regions, not only do average annual death rates vary geographically, but also the seasonality of mortality may vary, due to both localized weather patterns and regional differences in adaptation measures such as heating, air conditioning, and healthcare.(7-10) Different causes of death also possess distinct seasonal dynamics.[REF]\\ 
+
+The presence and extent of seasonal variation in mortality may also itself change over time, due to shifts in weather regimes, lifestyle, adaptation technologies, and healthcare.(11-13) A thorough understanding of the long-term dynamics of seasonality of mortality by cause of death, and its geographical and demographic patterns, is needed to identify at-risk groups, plan responses at the present time as well as under changing climate conditions. There is however limited data to characterize the seasonality of mortality in relation to cause of death, age, sex, and local climate, or to understand how it has changed over time.
+
+\subsection{Mortality under stress from anomalous temperature}
+
+Each year, deaths occur from exposure to anomalous temperature patterns.(1) Such patterns include not only extreme heat and cold stress events, but also deviations from average long-term ambient temperature.(2) The Intergovernmental Panel on Climate Change (IPCC) has predicted with high confidence that the Earth’s changing climate will result in a long-term paradigm shift in weather patterns, including higher average temperatures, along with more varied weather episodes.(3,4) Changes in anomalous heat event characteristics have also been observed in the USA, with statistically significant increases in heat events.(5–7) More common and more severe winter weather events in the USA are also possible.(8) As such, the response of human mortality due to weather patterns is set to evolve and potentially amplify due to forthcoming climate change.\\
+
+Temperature patterns for every country will change under climate change.(13) Although exposure to changing temperature patterns is a global-scale phenomenon, vulnerability of a community will be affected by local socioeconomic, political, and geographical factors. As such, within even a single country, it is of importance to provide analysis of risk to different age-sex groups. This may be especially true for a country like the United States, which contains several distinct climates, as well as a variable political landscape, and where future population exposure to heat extremes is forecast to increase up to 6-fold when comparing the end of the 21st century to the 20th century base level.(14)
+
+\subsection{Modelling anomalous temperature stress events and their impact on mortality}
+
+There exists an ensemble of physics-based models, known as Global Climate Models (GCMs), produced by Regional Climate Centers (RCCs) throughout the world.[REF] These GCMs project future global climatic conditions under several plausible Representative Concentration Pathways (RCPs). Due to the computing expense of produce the GCMs, it is possible to project forward by a limited number of years. This results in being able to compute anomalous heat for return periods defined by the length of the time series, here up to 2100. [REF]\\
+
+Stochastic weather generators can use meteorological data from the past or projections of the future as an input to generate much longer synthetic time series of weather.[REF] Such time series of arbitrary length can produce realistic time series of various weather metrics while preserving the spatial and temporal statistics of the input data. One state-of-the-art example of a stochastic weather generator is the Imperial College Weather Generator (IMAGE). The main advantage of using a stochastic weather generator like IMAGE is its ability to generate heat stress events at scales larger than the input data.\\
+
+With a framework to understand the relationship between mortality and heat stress, outputs on returns periods from IMAGE can be used to make risk assessments of potential anomalous temperature stress events. These will be of value to decision-makers on a national and sub-national level for both planning for and mitigating the most harmful effects of climate change and extreme weather on health.\\
+
+\newpage
+
+ %%%%%%%%%%%%%%%%%%%%%%%
+\section{Aim and objectives}
+ %%%%%%%%%%%%%%%%%%%%%%%
+ 
+ \subsection{Aim}
+
+The overall aim of my thesis is to establish a logical framework of identifying and describing seasonality of monthly mortality, to implement a realistic model of monthly mortality which successfully captures its response to measures of heat stress, to attribute historical mortality to anomalous heat stress, and to estimate the potential effect of climate change on monthly mortality.
+
+\subsection{Objectives}
+
+My thesis research has three primary objectives that will together help achieve this aim:
+
+\begin{enumerate}
+\item To develop a method of identifying and describing seasonal dynamics of mortality.
+\item To develop a mathematical model which can establish how monthly mortality is associated with measures of heat stress.
+\item To estimate the effect of climate change scenarios on mortality by cause of death, gender, age, and geography, using both future scenario climate model data and/or data generated from stochastic weather generators such as the Imperial College Weather Generator (IMAGE).[REF]
+
+\end{enumerate}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objective 1: Seasonal dynamics of cause-specific mortality in the USA} \label{sec:obj1}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Background}
+
+Here, we comprehensively characterize the demographic, spatial and temporal patterns of cause-specific mortality seasonality in the entire USA, through the application of wavelet analytical techniques that have been used to study the dynamics of weather phenomena(14) and infectious diseases(15) to over three decades of national mortality data.\\
+
+The work for objective 1 in chapter \ref{sec:obj1} is currently submitted and under review for publication.
+
+\subsection{Data} \label{sec:data}
+
+\subsubsection{Mortality data}
+
+We used data on all 77,771,264 deaths in the USA from 1980 to 2013 from the National Center for Health Statistics (NCHS). Age, sex, state of residence, and month of death were available for each record. Yearly population counts were available from NCHS for 1990 to 2013 and from the US Census Bureau prior to 1990.(27) We inferred monthly population counts through linear interpolation, assigning each yearly count to July. We also subdivided the national data geographically by climate regions used by the National Oceanic and Atmospheric Administration (Figure XX).(28) \\
+
+We also divided up the the deaths into 4 broad groups: cancer, cardiopulmonary, external, and other deaths. As the period of our study crossed between coding methods for the coding of death by the International Classification of Diseases (ICD) from ICD9 to ICD10 (with ICD10 used from 1999 to the present day), it was necessary to create a look-up table for equivalent causes of death from ICD9 to ICD10 (Table \ref{tbl:icdlookup}), with `Other' being all codes not collected in Cancer, Cardiopulmonary or External.[ref]\\
+
+\begin{table}[h]
+\begin{center}
+\caption{ICD9 and ICD10 lookups for causes of deaths used in this study}
+\label{tbl:icdlookup} 
+\begin{tabular}{ |p{5cm}|p{5cm}|p{5cm}| }
+\hline
+\textbf{Cause of death} & \textbf{ICD9 coding} & \textbf{ICD10 coding}\\
+\hline
+Cancer & 140.0 - 239.9 & C00 - D48\\
+Cardiopulmonary &390.0 - 519.9 & I00 - J99\\
+External &800.0 - 999.9 & S00 - Z99\\
+
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+  
+Data were divided by sex and age in the following 10 age groups: 0-4, 5-14, 15-24, 25-34, 35-44, 45-54, 55-64, 65-74, 75-84, 85+ years. We calculated monthly death rates for each age and sex group, both nationally and for sub-national climate regions. Death rate calculations accounted for varying length of months, by multiplying each month’s death count by a factor that would make it equivalent to a 31-day month.
+
+\subsubsection{Temperature data}
+
+We obtained data on temperature from ERA-Interim, which combines predictions from a physical model with ground-based and satellite measurements.(29) We used gridded four-times-daily estimates at a resolution of 80km to generate monthly population-weighted temperature by climate region throughout the analysis period.
+
+\subsection{Methods}
+
+For each cause of death, as well as for all-cause mortality, we used wavelet analysis to investigate seasonality, both nationally and sub-nationally, for each age-sex group. Wavelet analysis uncovers the presence, and frequency, of repeated maxima and minima in each age-sex-specific death rate time series. In brief, a Morlet wavelet, described in detail elsewhere,(30) is equivalent to using a moving window on the death rate time series and analyzing periodicity in each window using a short-form Fourier transform, hence generating a dynamic spectral analysis. The resulting coefficients can be presented on a two-dimensional plot of time against frequency (Figure XX). Importantly, wavelet analysis is able to measure dynamic seasonal behavior, in which the periodicity of death rates may disappear, emerge, or change over time. This is not possible in standard Fourier analysis or when fitting a statistical model with a period basis function. We used the R package WaveletComp (version 1.0) for the wavelet analysis. Before analysis, we logarithmically transformed death rates, detrended using a polynomial regression, and rescaled each all-cause mortality death rate time series so as to range between 1 and -1.\\
+
+We identified age-sex groups whose wavelet power spectra differed from that of a white noise spectrum, which represents random fluctuations, at 5\% significance level, for the entire study period (1980-2013).  We then calculated the centre of gravity and the negative centre of gravity of monthly death rates. These parameters estimate when in the year, on average, maximum and minimum death rates occur, respectively. For calculating centre of gravity, each month was weighted by its death rate; for negative centre of gravity, each month was weighted by the difference between its death rate and the year’s maximum death rate. In taking the weighted average, we allowed January (month 1) to neighbour December (month 12), a technique known as circular statistics. Along with each circular mean, a 95\% confidence interval (CI) was calculated by using 1000 bootstrap samples. The R package CircStats (version 0.2.4) was used for this purpose.\\
+
+For each age-sex group and year, we used a Poisson model to estimate the percentage difference in death rates between the maximum and minimum mortality months for each year, and its standard error which accounts for population size. We then fitted a linear regression to the time series of seasonal differences for each age and sex group, weighting each by the inverse of the square of its standard error. We calculated change in the fitted values from 1980 to 2013, reported as percentage point difference, as a quantitative measure of how the seasonality of death rates has changed over time.
+
+\subsection{Results}
+
+\subsubsection{Wavelet analysis}
+
+All-cause mortality in males had a statistically significant 12-month seasonality in all age groups, except in ages 35-44 years, where it displayed statistically significant periodicity at 6 months (Figure XX). In females, there was no significant 12-month seasonality in ages 5 to 34 years (Figure XX); however, girls aged 5-14 years exhibited periodicity at 6 months for most of the analysis period. While seasonality persisted throughout the entire analysis period in older ages, it largely disappeared after late 1990s in children aged 0-4 years in both sexes and in women aged 15-24 years.\\
+
+In males and females, Cancer mortality was statistically significant from $\geq$ 55 years (Figure XX). Cardiopumonary mortality was statistically significant for all ages for both males and females, though is relatively across time for ages 5-34 in both sexes. Distinct dynamics between men and women was evident in external deaths (Figure XX - XX). All age groups apart from 65-74 years in men exhibited significant seasonality across the study period, thought the 55-64 age group seasonality only began to emerge in the early 1990s, with the 75-84 years group disappearing at 12 months by the end of the study period (Figure XX - XX). Women, in contrast, bore no significant 12-month seasonality from 45-64 years. While 25-34 year olds were significant for the entire period, the 12-month seasonality had disappeared by the mid 2000s (Figure XX - XX). 12-month significance in 65-74 years in women was also patchy throughout the time period.
+
+%\begin{figure}[H]
+%\includegraphics[width=0.9\textwidth]{../../../output/wavelet/1980_2013/national/10_sim/white_noise/plots/wavelet_national_all_men_AllCause_10_sim_1980_2013.pdf }
+%\centering
+%\caption{USA divided by climate region.}
+%\label{fig:x}     
+%\end{figure}
+
+\subsubsection{Centre of gravity analysis}
+
+Death rates in men aged $\geq$45 years and women aged $\geq$35 years peaked in January and February, and were lowest in July and August (Figure XX). A similar temporal pattern was seen in children younger than five years of age, whose mortality was highest in February and lowest in August. In contrast, the peak and minimum of mortality in older boys and young men (ages 5-34 years) occurred in June/July and December/January, respectively.\\
+
+For ages $\geq$45, Cancer mortality for both men and women were maximum in December/January and were at a minimum in July (Figure XX). The rest of the age groups' uncertainties were too large below 45 to draw any meaningful conclusion from them. Cardiopulmonary mortality consistently peaked in January/February and was at a minimum in July/August for both men and women, although uncertainty was too large in ages 5-24 to take the central figure as a representative statistic (Figure XX). External deaths in men were stable (i.e. with low uncertainty) from 0-64 and $\geq$75 years, although the 0-64 years deaths peaked in June/July and were minimal in December/January, with $\geq$75 demonstrating external deaths peaking in December/January and at a minimum for June/July (Figure XX). External deaths in women were stable from 0-34, where they peaked and troughed the same as men. Women $\geq$75 were the same as men also. Other deaths for men and women were stable at $\geq$35 years, at a maximum in December/January and a minimum in July/August (Figure XX).
+
+\subsubsection{Change in percentage difference in death rates between maximum and minimum mortality}
+
+Percent difference in death rates between mortality in peak and minimum months declined by less than seven percentage points for people older than 45 years of age from 1982 to 2013 (Figure XX). In contrast, the difference between peak (summer) and minimum (winter) death rates declined significantly in younger ages, by nearly 25 percentage points in males aged 5-14 years and 15-24 years. Under five years of age, percent seasonal difference declined by a statistically-significant 13.2 percentage points (95\% CI 8.1 to 18.2) for boys but only a statistically insignificant 5.0 percentage points (-12.0 to 2.0) for girls.\\
+
+Cancer possessed no significant changes in percentage difference for any age group and is not shown here. Cardiovascular deaths showed significant percentage increase 25-34 men, and a significant decrease in 0-4 boys (Figure XX). Significant decreases were evident in many of the age groups for both men and women in external deaths, though the 0-4 age group experienced an increase in both boys and girls (Figure XX). There was only one significant change in other deaths in 0-4 boys, and is not shown here.
+
+\subsubsection{Sub-national centre of gravity analysis}
+
+The sub-national centre of gravity analysis shows that mortality peaks and minima in different climate regions (Figure 1) are consistent with the national ones (Figure 5), indicating the seasonality is largely independent of geography. The relative homogeneity of the timing of maximum and mortality is evident, despite the large variation in temperatures that exist between climate regions during the same months. For example, in men and women aged 65-74 years, mortality peaked in February in the Northeast and Southeast, even though the average temperatures for those regions were different by over 13 degrees Celsius (9.3 in the Southeast compared with -3.8 in the Northeast). Furthermore, above 45 years of age, there is little inter-region variation in the percent seasonal difference, despite the large variation in temperature difference between the peak and minimum months (Figure 6; none of the associations with temperature difference were statistically significant above 45 years of age). The observed geographical consistency in seasonal mortality variation in the USA, also seen in a study of 36 cities using deaths aggregated across age groups and over time,(16) contrasts from the pattern observed across Europe, where the difference between winter and summer mortality tends to be lower in the colder Nordic countries than in warmer southern European nations, possibly because the former have put in place environmental (e.g., housing insulation and heating) and health system measures to counter the effects of cold winters.(3, 4, 6) The absence of association between the magnitude of mortality seasonality and seasonal temperature difference indicates that different regions in the USA are similarly adapted to temperature seasonality.
+
+% OTHER CAUSE OF DEATH STUFF
+
+\subsection{Discussion}
+
+In a novel analysis of mortality seasonality, we used wavelet and centre of gravity analyses, which allowed not only systematically identifying and characterizing seasonality, but also examining how it changes or disappears over time. Analyzing seasonality over three decades in relation to age, sex, and geography allowed us to identify distinct seasonal behaviors in relation to age and sex, including the higher summer mortality in young men which has rarely been reported,(17) and to establish that mortality seasonality is consistent sub-nationally in terms of both timing and magnitude. Insights of this kind would not have been possible analyzing data averaged over time or fixed to pre-specified frequencies.\\
+
+The substantial decline in seasonal mortality differences in adolescents and young adults are related to diminishing role of external causes of deaths (as discussed above), especially from road traffic crashes, which are more likely to occur in the summer months,(20, 21) and are more common in men. The weakening of seasonality in children under five years of age may be related to the reduction of deaths from respiratory causes, which have a strong seasonality, and the accompanying increase in the proportion of deaths that occur in the neonatal period, which do not vary noticeably throughout the year.(17, 20, 22, 23) Further elucidation on the causes of deseasonalization in these age groups requires analyzing changes in the composition of causes of deaths, as well as shifts in seasonality of causes of death themselves.\\
+
+In contrast to young and middle ages, mortality in older ages, where death rates are highest, maintained persistent seasonality over a period of three decades (we note that although the percent seasonal difference in mortality has remained largely unchanged in these ages, the absolute difference in death rates between the peak and minimum months has declined because total mortality has a declining long-term trend). This finding demonstrates the need for environmental and health service interventions targeted towards this group irrespective of geography and local climate. Examples of such interventions include enhancing the availability of both environmental and medical protective factors, such as better insulation of homes, winter heating provision and flu vaccinations, for the vulnerable older population.(24) Social interventions, including regular visits to the isolated elderly during peak mortality periods to ensure that they are optimally prepared for adverse conditions, and responsive and high-quality emergency care, are also important to protect this vulnerable group.(4, 24, 25) In many countries such services are increasingly under strain in an era of austerity. Emergent new technologies, such as always-connected hands-free communications devices with the outside world, in-house cameras, and personal sensors also provide an opportunity to enhance care for the older, more vulnerable groups in the population, especially in winter when the elderly have fewer social interactions.(26) Such interventions are important today, and will remain so as the population ages and climate change increases the within- and between-season weather variability.\\
+
+%\subsection{Strengths and limitations}
+
+The strengths of our study are its innovative methods of characterizing seasonality of mortality dynamically over space and time; using wavelet and centre of gravity analyses; using ERA-Interim data output to compare the association between temperature and seasonality of death.\\
+
+%The main limitation of our study is that we have analyzed all-cause mortality. Different diseases and injuries may be differentially affected by environmental and behavioral factors associated with season and hence differ in their seasonal behavior. For example, suicides have been found to peak in early spring,(17) and cardiovascular disease mortality may peak earlier in the winter than that from respiratory conditions.(18) In contrast deaths from cancer show little or no seasonality.(19) All-cause mortality measures total mortality burden, and has the advantage of not being affected by errors and variations over time and space in assignment of cause of death. Nonetheless future work should apply our methods to specific causes of death.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objective 2: Impact of large-scale ambient temperature changes on cause-specific mortality by age-sex group in the USA} \label{sec:obj2}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Background}
+
+While previous work has focused on how mortality could be affected from hot and cold episodes in the days after a heat or cold event,(15) there is a lack of evidence to suggest how living in a generally-changed climate will affect mortality patterns, both by demographic and geography. Humans have evolved and adapted to a steady-state climate over the past few thousand years. The rapid large-scale climate change which occurs over the next century or so could prove too fast for humans to adequately prepare for, and so deviations from long-term mean temperatures could have deadly consequences for communities around the world. [ref]\\
+
+Previous studies have explored the relationship between temperature and mortality, but there remains a large set of climate phenomena which are not captured by looking at only the mean in isolation.(16,17) There also is evidence to suggest that changes in the mean and in the heaviness of the tails of a temperature distribution will be significant to the risk profile of human health. The number of extreme heat and cold anomalous events (e.g. heat and cold waves) and variability of weather could also cause changes in risk, and so should also be included in an analysis of future risk to climate change (Table 1).\\
+
+Our work thus attempts to address a broader research question, i.e. what the excess risk of mortality could be for different parts of society under future temperature distributions potentially influenced by climate change. We have developed a framework to capture several potential changes climate change could cause. Also of interest to those reporting metrics in the meteorological community will be information on which statistics will be most relevant to health, as clarifying and simplifying data sharing is a key goal of the Lancet Countdown.(11,18)\\
+
+This framework will also help address the question of how overall year-total mortality will be affected due to a changing climate, as there is ongoing discussion as to whether climate change could bring benefits to the numbers of deaths in a year.(19,20)
+
+\subsection{Data}
+
+The data sources are the same in this study as described in subsection \ref{sec:data}.
+
+\subsection{Methods}
+
+\subsection{Generation of temperature statistics}
+
+We obtained data on temperature from ERA-Interim, which combines predictions from a physical model with ground-based and satellite measurements.(23) Other datasets were considered, but were not used as they did not assimilate ground data. [ref MERRA-2 and NARR] We used gridded four-times-daily estimates at a resolution of 80km to generate monthly population-weighted temperature statistics by state throughout the analysis period. The method of taking daily averages to represent a measure of average heat stress has precedent.(5)\\
+
+We developed a repertoire of summary statistics for a month based on daily values (Table X), built to comprehensively reflect both how climate change could affect long-term patterns of health, as well as weather. Where we looked at heat or cold anomalies, we used the mean daily temperature. Mean daily temperature is a good summary of day and night temperature, which is significant to include as the lack of relief during the night time is known as a key risk factor in premature mortality.(4) We generated 30-year average temperature values for each state-month combination, as well as 10th and 90th percentiles, using 1980-2009 as the reference period to measure against. \\
+
+Where each statistic summarised the number of days or episodes in a month, a scaled value was calculated to account for varying length of months, by multiplying each month’s value by a factor that would make it equivalent to a 31-day month.
+
+\newpage
+\begin{landscape}
+\begin{table}
+\begin{center}
+\caption{Names of temperature statistics, their descriptions and why they are of interest. All centred statistics are based around a state-month long-term normal ($^{\circ}$C), calculated from 1980-2009}
+\label{tbl:climstats} 
+\begin{tabular}{ |p{5cm}|c|p{6cm}|p{6cm}| }
+\hline
+\textbf{Name} & \textbf{Unit} & \textbf{Description} & \textbf{Why of interest?} \\
+\hline
+Mean 			& $^{\circ}$C 	& Deviation from state-month long-term normal 						& How shift in centre of temperature distribution may affect human health\\
+Standard deviation 	&	 		& Standard deviation of temperature for a state-month 					& How much variation around the mean of a distribution may affect human health\\
+10th Percentile &	& Deviation of the 10th percentile temperature of a month from state-month long-term normal 	& How change in heaviness of tails of temperature distribution may affect human health\\
+90th Percentile &	& Deviation of the 10th percentile temperature of a month from state-month long-term normal	& \\
+
+\hline
+Relative Warm Anomaly 	& Number of episodes	& Number of episodes of warm anomalies (more than 3 days in a row above the 90th percentile of state-month long-term normal from 1980-2009) & How changes in episodes of anomalous temperature may affect human health \\
+Relative Cold Anomaly 	&					& Number of episodes of cold anomalies (more than 3 days in a row below the 10th percentile of state-month long-term normal from 1980-2009)  & \\
+
+ \hline
+\end{tabular}
+\end{center}
+\end{table}
+\end{landscape}
+
+\subsubsection{Statistical analysis}
+
+Initial empirical analysis showed distinct behaviour between neighbouring age-sex groups for monthly mortality and susceptibility to changes in climate. For this reason, as well as computational limitations, we ran each age-sex group model separately.\\
+
+For each age-sex group, we used a Bayesian spatiotemporal model that was formulated to incorporate features of deaths rates in relation to location of residence, month of the year, and climate statistic, over space and time. A Bayesian structure allows the full distribution of the target parameters to be inferred, allowing for a more natural expression of the probability of changing risk from a changing climate. The model specification is provided fully in the appendix.\\
+
+For all-cause mortality, death rates vary with the month of the year, with rates highest for older age groups of both sexes in the winter months, and lowest in the summer months, with the reverse true for younger men (as demonstrated in section XX above).  The rate of change of deaths rates is also different when comparing months in the year. Therefore, we allowed each month of the year to possess a different mortality level and trend. We used a random walk structure for both monthly intercepts and slopes, which is widely used to characterise smoothly varying associations, as evident in monthly variation.\\
+
+Death rates are also variable by state, both in intercept and trend. We thus allowed death rates to vary by state. In addition, states closer in geography might be more similar than those further away. We employed the Besag, York, and Mollie spatial model, described in the appendix and elsewhere, to reflect this. This allows death rates of a state and their trends to be estimated based on their own data as well as using those of their neighbours, producing more stable estimates of death rates and trends. The level to which information is shared between neighbouring states depends on the uncertainty of death rates in a state and the empirical similarity of neighbouring states.\\
+
+We included a temperature summary term to infer risk nationally for a single age-sex group (equation \ref{eq:tempmod}) The terms in equation \ref{eq:tempmod} are described in detail in section XX in the appendix. In brief, $\sum_{i=1}^{n} \gamma_{i} VAR_{i} $ in equation \ref{eq:tempmod} describes the climate variable part of the model where $n$ ($n=0,1,2,3...)$ climate statistics can be included.\\
+
+\begin{equation}
+\begin{split}
+\label{eq:tempmod}
+\textrm{log}(\mu_{m,s,t}) =  & \alpha_{0} + \alpha_{M[m]} + \alpha_{S[s]} + \alpha_{X[m,s]} +\\
+ 					& (\beta_{0} +\beta_{M[m]} + \beta_{S[s]} + \beta_{X[m,s]})t + \\
+ 					& \sum_{i=1}^{n} \gamma_{i} VAR_{i} + \pi_{t} + \epsilon_{m,s,t}.
+\end{split}
+\end{equation}
+
+Since time trends can also be non-linear, we modelled the time trends using the linear terms described above along with smoothly varying non-linear terms, specified with a random walk term over time, as well as an overdispersion term to capture any additional non-linearity.\\
+
+\subsection{Results}
+
+\subsection{Discussion}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%
+\section{Objective 3: Risk assessment of large-scale ambient temperature changes using climate projections and IMAGE} \label{sec:obj3}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Background}
+
+%SOMETHING ABOUT ECONOMIC COST
+%SOMETHING ABOUT YLLs and ADDITIONAL DEATHS
+
+\subsection{Data}
+
+The data sources are the same in this study as described in subsection \ref{sec:data}.
+
+\subsection{Methods}
+
+\subsection{Results}
+
+%GRAPHS OF ECONOMIC COST AS WELL AS YLL AND DEATHS
+
+\subsection{Discussion}
+
+\newpage
+
+\section{Future work}
+
+\end{document}
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%
+\section{Modelling seasonal mortality} \label{sec:bayesmodel}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+Modelling seasonality of mortality requires two distinct but complementary analytical stages. 
+
+\vspace{2mm}
+
+First, it is necessary to establish whether seasonality is present in the data. If seasonality is present, a quantitative method to compare and contrast behaviour of different age-sex groups is also required. To do this, I utilise wavelet analysis as well as establishing the centre of mass of mortality, as described in section \ref{sec:identseason} below.
+
+\vspace{2mm}
+
+Second, once seasonality of mortality has been identified, an adequate model is required to identify patterns and trends in mortality over space and time. There are several options available to do this. Presently I am utilising a Bayesian statistical framework, with the methods described in section \ref{sec:considmodel}. Further on in this report (section \ref{sec:future}), I detail other potential methods. These will become a focus further on in my research.
+
+\subsection{Identifying seasonality of mortality} \label{sec:identseason}
+
+Wavelet analysis coupled with analysis of the centre of mass of mortality within a year informs about whether mortality exhibits a mortality, and if so, where the peak of mortality occurs within the year.
+
+\subsubsection{Wavelet analysis} \label{sec:waveletdesc}
+
+If death rates over time by month possesses a periodicity, the time series of deaths rates can be thought of as a wave with a particular frequency and period. Due to potential for the period of mortality to change through time, wavelet analysis is a good candidate for studying the phenomena in evolving univariate seasonal time series, such as monthly mortality data.
+
+\vspace{2mm}
+
+Using short-form Fourier transform via Morlet wavelets allows a signal to be decomposed into frequency and phase content over time \textsuperscript{\cite{Morlet11982, Morlet21982}}. The R WaveletComp package utilises Morlet wavelets to allow streamlined wavelet analysis. The package has previously been used to demonstrate the seasonality of meningitis in a multi-country study \textsuperscript{\cite{paireau16}}. I use the same method in section \ref{sec:wavlet} to describe national trends in seasonality using a wavelet analysis on the raw data.
+
+% DIAGRAM?
+
+%The Morlet wavelet dates back to the early 1980s, when the continuous wavelet transform was identified as such, cf. Morlet et al. [10], [11], Goupillaud et al. [9]. It builds on a Gaussian-windowed sinusoid, the Gabor transform, which was introduced in 1946 by Gabor [7] to decompose a signal into its frequency and phase content as time evolves. Unlike the Gabor transform, the Morlet wavelet keeps its shape through frequency shifts, thus providing a “reasonable” separation of contributions from different frequency bands “without excessive loss” in time resolution (Goupillaud et al. [9]), and the feasibility of series reconstruction
+
+%WaveletComp analyzes the frequency structure of uni- and bivariate time series using the Morlet wavelet. This continuous, complex-valued wavelet leads to a continuous, complex-valued wavelet transform of the time series at hand, and is therefore information-preserving with any careful selection of time and frequency resolution parameters. The transform can be separated into its real part and its imaginary part, thus providing information on both local amplitude and instantaneous phase of any periodic process across time — a prerequisite for the investigation of coherency between two time series. 
+
+% DESCRIBE ANALYTICALLY WHAT WAVELET ANALYSIS DOES...
+
+\subsubsection{Centre of mass of mortality within year} \label{sec:comdesc}
+
+While the presence of seasonality is identified from a wavelet analysis, it is of interest to understand the peak of seasonal mortality signal throughout the year per age group and sex. This analysis would help contrast whether peak mortality for different age-sex groups occurs at different times.
+
+\vspace{2mm}
+
+Due to the cyclical nature of months, with month 12 neighbouring month 1 in the year, I use circular statistics to calculate the centre of mass of mortality within a year \textsuperscript{\cite{pewsey2013circular}}. The results of this analysis for the USA are in section \ref{sec:com}.
+
+\vspace{2mm}
+
+
+\vspace{2mm}
+
+%\subsection{Modelling aim}
+
+%My aim is to establish a framework to both analyse historic patterns and trends of seasonal all-cause mortality and simultaneously and coherently to forecast death rates by month and demographic. 
+
+\subsection{Modelling seasonal mortality} \label{sec:considmodel}
+
+Demographic factors, such as age, sex, and location of residence need to be factored into the model build, as well as the month of the year. A Bayesian spatiotemporal model allows borrowing of strength to occur across neighbouring time and spatial regions. The considerations made in designing a model to fit seasonal mortality data follow.
+
+\subsubsection{Current modelling framework}
+
+Bayesian methodology for mortality modelling has gained increasing interest with the rise of computational power. Previous research has modelled mortality using a Bayesian spatiotemporal hierarchical model on a yearly scale  \textsuperscript{\cite{Bennett2015}}. However, this necessarily negates any insight of the intra-year seasonality. Here, I describe how I developed a model based on previous work to fit monthly mortality data.
+
+\vspace{2mm}
+
+As is common in the field, I model death counts using a Poisson likelihood with the logarithm of deaths rates. This is useful as it does not allow rates to turn negative. The Bayesian hierarchical model borrows strength across time, space, and month of death. So that differences between groups are not shrunk towards a mean, each age-sex group is considered separately.
+
+\vspace{2mm}
+
+The work undertaken in modelling past trends using Bayesian methods will complement the methods necessary for forecasting mortality. % Work has been done in estimating future seasonal patterns also. Forecasting work has also been done for temperature-related deaths for Manhattan, New York  \textsuperscript{\cite{Li2013}}. 
+
+
+\subsubsection{Poisson likelihood}
+
+Death counts during a particular month, $m$, per state, $s$, at time $t$, $deaths_{[m,s,t]}$, is thus modelled by equation \ref{eq:x}:
+
+\vspace{2mm}
+
+\begin{equation} \label{eq:x} deaths_{[m,s,t]} \sim Poisson(\mu_{[m,s,t]}{E_{[m,s,t]}}),\end{equation}
+
+\noindent where $\mu_{[m,s,t]}$ is the predicted death rate and  $E_{[m,s,t]}$ is the offset of population. The log-transformed value of $\mu_{[m,s,t]}$ is modelled via a link function as:
+
+% CHANGE TO INCLUDE COD
+\begin{align}
+\begin{split}
+ \label{eq:lambdax}\textrm{log}(\mu_{[m,s,t]}) =&{\alpha_{0} + \alpha_{M[m]} + \alpha_{S[s]} + \alpha_{X[m,s]}} +\\ 
+ 					         &({\beta_{0} +\beta_{M[m]} + \beta_{S[s]} + \beta_{X[m,s]}})t +\\ 
+ 					         &{\pi_{[t]} + \epsilon_{[m,s,t]}.} %+\\
+ 					      %   &{E_{[m,s,t]}}.
+\end{split}			    
+\end{align}
+
+where the $\alpha$ parameters are intercepts, $\beta$ parameters are temporal slopes, the $\pi$ parameter is a random walk, and the $\epsilon$ parameter is the overdispersion term.% Equation \ref{eq:lambdax} is hereupon referred to as the National Random Walk (NRW) model.
+
+\subsubsection{Terms in model}
+
+The parameters and their priors from equation \ref{eq:lambdax} are included in table \ref{tbl:params} and table \ref{tbl:priors} respectively for convenient reference. An exposition of the terms in equation \ref{eq:lambdax} follows. 
+
+\begin{table}
+\begin{center}
+\caption{Model parameters}
+\label{tbl:params}
+\begin{tabular}{| l | l |}
+\hline
+\textbf{Intercepts} 	& \\
+\hline
+${\alpha_{0}}$ 		& global intercept \\
+${\alpha_{M[m]}}$ 	& month intercept \\
+${\alpha_{S[s]}}$ 	& state intercept \\
+${\alpha_{X[m,s]}}$ 	& month-state interaction intercept \\
+\hline
+\textbf{Slopes} 		& \\
+\hline
+${\beta_{0}}$ 		& global slope \\
+${\beta_{M[m]}}$ 	& month slope \\
+${\beta_{S[s]}}$ 		& state slope \\
+${\beta_{X[m,s]}}$ 	& month-state interaction slope \\
+\hline
+\textbf{Random walk} 	& \\
+\hline
+${\pi_{[t]}}$ 		& random walk on time \\
+\hline
+\textbf{Overdispersion} & \\
+\hline
+${\epsilon_{[m,s,t]}}$ 	& overdispersion term \\
+\hline
+\textbf{Offset} 		& \\
+\hline
+${E_{[m,s,t]}}$ 		& population offset \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\caption{Model priors}
+\label{tbl:priors}
+\begin{tabular}{| l | l l |}
+\hline
+\textbf{Intercepts} & & \\
+\hline
+% TIDY THIS UP
+${\alpha_{0}}$ 					& Uniform(-$\infty$,$\infty$) 						& \\
+${\alpha_{M[m]}}$ 					& N($\alpha_{M[m-1]}$ ,$\tau_{\alpha_{M}}^{-1}$) 		& (cyclical) \\
+$\textrm{log}({\tau_{\alpha_{M}}})$ 		& logGamma$(1,0.00005)$ 						& \\
+${\alpha_{S[s]}}$				 	& $u_{S[s]} + v_{S[s]}$ 							& (BYM) \\
+$u_{S[s]}| \textbf{u}_{-S[s]}$ & N($\frac{1}{N_{s}}\sum_{s=1}^{n}w_{st}u_{t},\tau_{u[s]}^{-1}$) & \\
+$\textrm{log}({\tau_{u[s]}})$ & logGamma$(1,0.00005)$ & \\
+$v_{S[s]}$ & N(0,$\tau_{v[s]}^{-1}$) & \\
+$\textrm{log}({\tau_{v[s]}})$ & logGamma$(1,0.00005)$ & \\
+${\alpha_{X[m,s]}}$ & MVN(0 ,$[\tau_{\alpha_{X}}(D-\textbf{W})]^{-1}$) & (CAR) \\
+$\tau_{\alpha_{X}}$ & logGamma$(1,0.00005)$ & \\
+\hline
+\textbf{Slopes} & & \\
+\hline
+${\beta_{0}}$ & N(0, $1000$) & \\
+${\beta_{M[m]}}$ & N($\beta_{M[m-1]}$ ,$\tau_{\beta_{M}}^{-1}$) & (cyclical) \\
+$\textrm{log}({\tau_{\beta_{M}}})$ & logGamma$(1,0.00005)$ & \\
+${\beta_{S[s]}}$ & $u_{S[s]} + v_{S[s]}$ & (BYM) \\
+$u_{S[s]}| \textbf{u}_{-S[s]}$ & N($\frac{1}{N_{s}}\sum_{s=1}^{n}w_{st}u_{t},\tau_{u[s]}^{-1}$) & \\
+$\textrm{log}({\tau_{u[s]}})$ & logGamma$(1,0.00005)$ & \\
+$v_{S[s]}$ & N(0,$\tau_{v[s]}^{-1}$) & \\
+$\textrm{log}({\tau_{v[s]}})$ & logGamma$(1,0.00005)$ & \\
+${\beta_{X[m,s]}}$ & MVN(0 ,$[\tau_{\beta_{X}}(D-\textbf{W})]^{-1}$) & (CAR) \\
+$\tau_{\beta_{X}}$ & logGamma$(1,0.00005)$ & \\
+\hline
+\textbf{Random walk} & &\\
+\hline
+${\pi_{[t]}}$ & N($\pi_{[t-1]}$ ,$\tau_{\pi}^{-1}$) & \\
+$\textrm{log}({\tau_{\pi}})$ & logGamma$(1,0.00005)$ & \\
+\hline
+\textbf{Overdispersion} & &\\
+\hline
+${\epsilon_{[m,s,t]}}$ & N(0 ,$\tau_{\epsilon}^{-1}$) & \\
+$\textrm{log}({\tau_{\epsilon}})$ & logGamma$(1,0.00005)$ & \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection*{Intercepts}
+
+$\alpha_{0}$ corresponds to the average national log of death rate for the initial month, across states. There is an intercept parameter for each month of the year in $\alpha_{M}$, reflecting how each month's death rate deviates from the yearly mortality, designed to capture the seasonality present intra-year. We specify this term by a cyclical random walk of order 1, such that month 12 is a neighbour of month 1, with mean 0 and precision $\tau_{\alpha_{M}}$. $\tau_{\alpha_{M}}$ possesses a prior on its log-transformed value $\textrm{log}(\tau_{\alpha_{M}})$, defined via a logGamma$(1,0.00005)$.  
+
+\vspace{2mm}
+
+$\alpha_{S}$ is the set of state-specific intercepts, corresponding to the deviation from the national mortality. The $\alpha_{S}$ parameters are specified as multivariate normal. The specification of the prior pertaining to $\alpha_{S}$  corresponds to a Besag, York and Mollie (BYM) model, as shown in table \ref{tbl:priors}. This enables information to be shared amongst neighbouring states via spatially-structured random effects with a Conditional AutoRegressive (CAR) prior ($\textbf{u}$), and globally through spatially-unstructured Gaussian random effects ($\textbf{v}$), creating smooth spatial patterns. The spatial structure of the CAR prior is imposed via an adjacency matrix $\textbf{W}$, where the off-diagonal elements of the matrix are specified as $w_{s,t}$, which is 1 if $s$ and $t$ are neighbours, and 0 otherwise. $D$ represents the diagonal matrix of the number of neighbours for each point on the spatial region. The Gaussian Markov Random Field (GMRF) property in the formulation of the BYM gives rise to a sparse precision matrix. This gives computational benefits to inference, with considerable gain in processing speeds \textsuperscript{\cite{GMRFbook, Steinsland2010}}. %Rue and Held 2005
+
+\vspace{2mm}
+
+Finally, there are the intercept terms $\alpha_{X[m,s]}$, which correspond to the interaction between month and state of death. Each month has an independent Conditional AutoRegressive (CAR) specification with the spatially-structured random effect via a CAR prior as described for $\alpha_{S}$. This set of terms allows each month to have a spatial pattern that differs from the mean month pattern.%look in Marta's book.
+
+\subsubsection*{Linear time trends} \label{sec:linear}
+
+$\beta_{0}$ is the global component of the time trend. It captures the average change in log mortality over time across states and months. $\beta_{M}$ is the set of trend parameters which allowed the rate of change of log mortality to deviate for each month of the year. $\beta_{M}$ is modelled as a Gaussian cyclic random walk of order 1, such that month 12 is a neighbour of month 1. The prior on its precision, $\tau_{\beta_{M}}$, is defined on its log-transformed value $\textrm{log}(\tau_{\beta_{M}})$, via a logGamma$(1,0.00005)$.
+
+\vspace{2mm}
+
+$\beta_{S}$ is the set of linear time trend parameters which allow the rate of change of log mortality to deviate for each state. It is modelled with the same formulation as the terms $\alpha_{S}$ described above.
+
+\vspace{2mm}
+
+Finally, there are the linear time trend terms $\beta_{X[m,s]}$, with the same CAR formulation as described in the intercepts $\alpha_{X[m,s]}$ above.
+
+\subsubsection*{Non-linear time trends} \label{sec:nonlinear}
+
+As well as the state-specific and seasonal linear time trends, the term $\pi_{[t]}$ is included to account for non-linearity over time. Since all-cause mortality is subject to shifts caused by external factors, such as extreme climatic conditions, a non-linear component is necessary in the model.
+
+\vspace{2mm}
+
+A national random walk of order 1 (RW1) across the time period was added to my model. Along with the linear time trend parameters described in section \ref{sec:linear}, we form a random walk with drift. % components. This is comparable to the Lee-Carter method, which is a special case of a random walk with drift model \textsuperscript{\cite{GirKin07}}.This description is stipulated with a view to the forecasting that will be made using a similar model to the one described by equation \ref{eq:lambdax}.
+
+\vspace{2mm}
+
+The random walk models the differences between adjacent time points as a Gaussian random effect with mean 0 and precision $\tau_{\pi}$. The prior on its precision, $\tau_{\pi}$, was defined on its log-transformed value $\textrm{log}(\tau_{\pi})$, via a logGamma$(1,0.00005)$. To ensure identifiability, the random walk has a sum-to-zero constraint. 
+
+\subsubsection*{Overdispersion term}
+
+The overdispersion term, $\epsilon_{[m,s,t]}$, is added to pick up any extra-Poisson variability. It is modelled as independent and identically distributed (IID) Gaussian white noise, with mean 0 and precision $\tau_{\epsilon}$. The prior on its precision, $\tau_{\epsilon}$, was defined on its log-transformed value $\textrm{log}(\tau_{\epsilon})$, via a logGamma$(1,0.00005)$
+
+\subsubsection{Alternative models}
+
+Equation \ref{eq:mualt} was explored as an alternative model to the version described in equation \ref{eq:lambdax}:
+
+\begin{align}
+\begin{split}
+ \label{eq:mualt}\textrm{log}(\mu_{[m,s,t]}) =&{\alpha_{0} + \alpha_{M[m]} + \alpha_{S[s]} + \alpha_{X[m,s]}} +\\ 
+ 					         &({\beta_{0} +\beta_{M[m]} + \beta_{S[s]} + \beta_{X[m,s]}})t +\\ 
+ 					         &{\pi_{[t]} + \pi_{S[s,t]} + \epsilon_{[m,s,t]}} %+\\
+ 					         %&{E_{[m,s,t]}}.
+\end{split}
+\end{align}
+
+%\begin{align}
+%\begin{split}
+% \label{eq:mualt2}\textrm{log}(\mu_{[m,s,t]}) =&{\alpha_{0} + \alpha_{M[m]} + \alpha_{S[s]}} +\\ 
+% 					         &({\beta_{0} +\beta_{M[m]} + \beta_{S[s]}})t +\\ 
+% 					         &{\pi_{[t]} + \pi_{S[s,t]} + \epsilon_{[m,s,t]}} +\\
+% 					         &{E_{[m,s,t]}}.
+%\end{split}
+%\end{align}
+ 
+\noindent where equation \ref{eq:mualt} included the extra non-linear time trend term, $\pi_{S[s,t]}$. This term contains independent random walks for each state and reflects any residual non-linearity not captured by the national random walk term, ${\pi_{[t]}}$.% an IID random walk per geographic district to act as a residual random walk, which is thought of here as a random walk of the residuals of the fit. %Equation \ref{eq:mualt2} is similar to equation \ref{eq:mualt}, but without the interaction terms between month and state ($\alpha_{X[m,s]}$ and $\beta_{X[m,s]}$).
+
+%Equation \ref{eq:mualt} is hereupon referred to as the State Random Walk (SRW) model.
+
+%However, the time expense was increased by a considerable amount, while the estimates of the intercepts and linear time trends were not significantly altered. It was thus decided to perform the analysis with the model described in equation \ref{eq:lambdax}. Section \ref{sec:modelus} below ofers a model comparison for several age groups in the US.
+
+\subsubsection{Model evaluation}
+
+When considering the fit of the models to the data, in a Bayesian setting, it is common to use the Deviation Information Criterion (DIC)  \textsuperscript{\cite{Spiegelhalter2002}}. It is a good candidate for evaluating hierarchical models as it values parsimony as well as overall model fit. %It consists of two components. The first component is the expectation of the deviance evaluating the fit. The second component measures the effective number of parameters. Minimising the value of the DIC is a method of finding the best balance between model fit and complexity. As such, it was used here in exploration of choice of model. 
+
+%\vspace{2mm}
+
+%Given that the current model is built to examine historical patterns and trends in seasonal all-cause mortality, as opposed to forecasting mortality, we decided to use the Deviation Information Criterion (DIC) to judge how each model was performing. 
+
+\vspace{2mm}
+
+I ran both of the potential models (equations \ref{eq:lambdax} and \ref{eq:mualt}) for the male age groups for the years 1982-1991, in order to compare the DIC values, described in table \ref{tbl:dic}. Runtimes as well as DIC were compared between the two models for deciding which one to use in the full analysis.  Differences in DIC were small where values from equation \ref{eq:mualt} were lower, and larger when values from equation \ref{eq:lambdax} were lower, as can be seen by comparing the DIC values for younger and older age groups respectively. When considering the runtimes in conjunction with the DIC values, for the sake of parsimony, I decided to perform the analysis with the model described in equation \ref{eq:lambdax}. Results for females exhibited similar patterns for the DIC and runtimes.
+
+\begin{table}[h]
+\begin{center}
+\caption{DIC values and runtimes from potential models evaluated for the male age groups in the years 1982-1991}
+\label{tbl:dic}
+\csvautotabular{../tables/test_dic_values.csv}
+\end{center}
+\end{table}
+
+%add delta column
+
+%\begin{table}[h]
+%\begin{center}
+%\caption{DIC values from three potential models evaluated for the 85+ age group in the years 1982-1991}
+%\label{tbl:dic}
+%\begin{tabular} {| c | c c c |}
+%\hline
+%Equation 	& \ref{eq:lambdax} 	& \ref{eq:mualt} 	& \ref{eq:mualt2} \\
+%\hline
+%DIC 		& 48933.66 		& 49344.09 	& 48940.52 \\
+%\hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+When forecasting, I will judge the performance of the models (variations of equation \ref{eq:lambdax} and potentially \ref{eq:mualt}) based on the out-of-sample performance, which has precedent in forecasting performed previously \textsuperscript{\cite{Bennett2015}}. %Bennett paper in Lancet.
+
+\subsubsection{Model fitting}
+
+Difficulties arise in death rate forecasts by month due to the computationally expensive multiplicative factor of twelve when transitioning from year- to month-based data. As such, a robust computational framework is required. Traditional Markov Chain Monte Carlo (MCMC) methods have a high cost computationally, which can provide obstruction to method development and application.
+
+\vspace{2mm}
+
+However, recent developments in Bayesian computing programs using the Laplacian Approximation, such as Integrated Nested Laplace Approximation (INLA), coupled with fast differentiation methods, such as Template Model Builder (TMB), are faster than older Gibbs Algorithm-based sampling methods by orders of magnitude  \textsuperscript{\cite{rue2009,Kristensen2016}}. New software has thus opened up a possibility of exploring this avenue of interest.
+
+\vspace{2mm}
+
+As such, I initially used INLA to build the models for the project. While I performed analysis on the INLA outputs of the models, the models are also currently being built in TMB. TMB will potentially run faster and be able to handle higher dimensionality. TMB may potentially allow a tractable all-age model to be constructed. As TMB is a newer package, the results could be benchmarked against the INLA results to establish the success of the model builds. The results in section \ref{sec:modelres} are all from the INLA builds.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data} \label{sec:datausa}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+Data in this study focus on all-cause mortality in the USA during the period 1982-2010.
+
+\subsection{USA mortality records}
+
+We utilised anonymised all-cause mortality data from the USA, via the National Center for Health Statistics (NCHS). These data possess information including: the deceased's month and year of death, gender, age at death, place of usual residence (at county level). The data available were from the years 1982-2010. This included a total of 66,162,388 death records, of which 66,149,269 are complete. There were a total of 13,119 (0.02\%) incomplete results, all due to missing age. These records are broken down in table \ref{tbl:usadeaths} for each age group and gender.
+\vspace{2mm}
+
+\begin{table}[H]
+\begin{center}
+\caption{Deaths by age group and sex in the USA 1982-2010}
+\label{tbl:usadeaths}
+\csvautotabular{../tables/US_deaths_2.csv}
+\end{center}
+\end{table}
+
+\vspace{2mm}
+
+The data were grouped by the following 10 age groups: 0-4, 5-14, 15-24, 25-34, 35- 44, 45-54, 55-64, 65-74, 75-84, 85+. Mortality figures were summarised by state and by month for each age group. All-cause mortality was used for the model fit.
+
+\subsection{USA population}
+
+Population by county data were available by year. However, population by month data are required for the study. Thus, population was inferred using an exponential model between known data points for each demographic combination by county. A linear interpolation model was performed, but did  not affect the results. This was then summarised by state. Each yearly figure was placed in the middle of a year, at the beginning of July. Figure \ref{fig:popinfer} provides a visualisation of this process.
+
+\begin{figure}[H]
+\includegraphics[width=0.6\textwidth]{../figures//popinfer/popinfer}
+\centering
+\caption{Illustrative example to demonstrate population inferred from yearly population. The red line represents the published yearly values, with the blue line representing the July-centred inferred monthly values.}
+\label{fig:popinfer}   
+\end{figure}
+
+\vspace{2mm}
+
+Death rates were calculated for a particular age ($a$), gender ($g$), state ($s$), and time ($t$), $\mu_{a,g,s,t}$, from the number of deaths, $deaths_{a,g,s,t}$ , and the population, $pop_{a,g,s,t}$ :
+
+\begin{equation} \mu_{a,g,m,s} = \frac{deaths_{[a,g,s,t]}}{pop_{[a,g,s,t]}}.\end{equation}
+
+
+\subsection{Classification of states}
+
+The USA is a large country of distinct climate and demographic variation \textsuperscript{\cite{gleasonkaroly2008}}. An attempt to divide the country into sub-regions is seen in figure \ref{fig:usa_regions_climate}, where the geographic climate regions match those used for classification by the National Centers for Environmental Information \textsuperscript{\cite{gleasonkaroly2008}}
+
+% http://www.census.gov/econ/census/help/geography/regions_and_divisions.html
+% http://www.ncdc.noaa.gov/monitoring-references/maps/us-climate-regions.php.
+
+\vspace{2mm}
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{../figures/maps/usa_map_climate.pdf}
+\centering
+\caption{USA divided by climate region.}
+\label{fig:usa_regions_climate}     
+\end{figure}
+
+`Queen' neighbouring logic was used for the spatial smoothing element of the model, specifically the BYM elements of equation \ref{eq:lambdax}, such that for example Arizona and Colorado were regarded as neighbours. All states must border at least one other state, so Alaska was connected to Washington and Hawaii was connected to California. %Alaska and Hawaii were given no neighbourhood interaction.
+
+\subsection{Data sources from other countries}
+
+Future work will be based on other national studies, with data sources from England and Wales, Japan and South Korea all available.
+
+\newpage
+ 
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Seasonal mortality in the USA} \label{sec:unitedstates}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Background}
+
+Seasonal mortality of humans in the USA has long been recognised \textsuperscript{\cite{Crum12}}. It is a potentially rich source of study when looking for patterns and trends in seasonality of mortality, as there are varied climate regions, as well as rich health and mortality data over a long time series.
+
+\subsection{Identifying seasonality of mortality in the USA} \label{sec:rawdeath}
+
+National data (i.e. the data from section \ref{sec:datausa} summarised nationally, instead of by state), exhibits distinct patterns of seasonal mortality are evident for age groups. This played a factor in the method or running the model. The evidence for this is expounded in the following section.
+
+%We define the deviation of the log-transformed death rate of month from the log-transformed average death rate of the total year $y$, $\mu_{y}$, as:
+
+%\begin{equation} \label{eq:delta} \Delta_{a,g,m,s,y}= log(\mu_{a,g,m,s})-log(\mu_{y}).\end{equation}
+
+%\subsubsection{Distinct age group seasonality}
+
+%For national data (i.e. the data from section \ref{sec:datausa} summarised nationally, instead of by state), distinct patterns of seasonal mortality are evident for age groups. Figure \ref{fig:75b} summarises the values of $\Delta$ taken nationally for males aged 75-84. This profile exhibits peak in the winter months, with a relative lull during the summer. This contrasts with Figure \ref{fig:25b} for males aged 25-34, where a peak in mortality is evident in the summer season. 
+
+%\begin{figure}[h]
+%\includegraphics[width=0.6\textwidth]{../figures/boxplots/boxplot_residual_log_75_m}
+%\centering
+%\caption{$\Delta$ boxplot for male 75-84 age group by month, from USA national records from 1982-2010}
+%\label{fig:75b}   
+%\end{figure}
+
+%\vspace{2mm}
+
+%As a result of this initial analysis, it was decided to run each age gender group separately to avoid blurring the distinct behaviour of mortality evident in the raw data. Tractability of a joint age model due to computing resource available was also a consideration which influenced the choice. At this time, joint-age runs prove to be intractible with the high dimensionality of the data.
+
+%\begin{figure}[h]
+%\includegraphics[width=0.6\textwidth]{../figures/boxplots/boxplot_residual_log_25_m}
+%\centering
+%\caption{$\Delta$ boxplot for male 25-34 age group by month, from national records from 1982-2010}
+%\label{fig:25b}     
+%\end{figure}
+
+\subsubsection{Wavelet analysis} \label{sec:wavlet}
+
+%Death rates over time by month possesses a periodicity, and as such can be thought of as a wave travelling through time. However, individual analyses of age groups reveal different distinct behaviours and characteristics of the nature of the wave. It is of interest to systematically examine how the period of the wave is characterised over time, as well as whether it is there at all. 
+
+%\vspace{2mm}
+
+%The R WaveletComp package has previously been used to demonstrate the seasonality of meningitis in a multi-country study \textsuperscript{\cite{paireau16}}. Here, I use the same method to describe national trends in seasonality using a wavelet analysis on the raw data.
+
+%\vspace{2mm}
+
+Individual analyses of age groups reveal different distinct behaviours and characteristics of the nature of the wave. It is of interest to systematically examine how the period of the wave is characterised over time, if established that wave behaviour is there at all.
+
+Four male age groups (0-4, 25-34, 35-44, 75-84) are chosen here to illustrate the variety of seasonal behaviour evident in the raw data.
+
+\vspace{2mm}
+
+The left side of figure \ref{fig:rawnat0} shows the raw deaths rates for the male 0-4 age group over the time period. Over time, the overall trend has been for death rate to decrease over all months. The wavelet analysis in figure \ref{fig:rawnat0} informs that the timing of the wavelet analysis was strongly on 12 months at the beginning of the period, before falling away in the mid-1990s. This is to be interpreted as a weakening of the amplitude of the mortality wave over time, at least in the national picture.
+
+\vspace{2mm}
+
+\begin{figure}[h]
+\includegraphics[width=0.49\textwidth]{../figures/national_death_rates/male/male_0_national_death_rates.pdf}
+\includegraphics[width=0.49\textwidth]{../figures/wavelets/wavelet_male_0.pdf}
+\centering
+\caption{Raw national death rates (left) and wavelet power spectrum (right) over time for 0-4 males in USA, 1982-2010. Wavelet power values increase from blue to red, and white contour lines indicate the 5\% significance level.}
+\label{fig:rawnat0}     
+\end{figure}
+
+This contrasts with the national picture for males 25-34, shown in figure \ref{fig:rawnat25}, which is a good example of young adult age groups. Throughout the period, the age groups possesses a clear mortality seasonality centred around 12 months. The national rise and then subsequent fall in death rates here are timed with the spread of HIV/AIDS, and the development of antiretroviral treatment for it  \textsuperscript{\cite{aids2001}}.
+
+\vspace{2mm}
+
+\begin{figure}
+\includegraphics[width=0.49\textwidth]{../figures/national_death_rates/male/male_25_national_death_rates.pdf}
+\includegraphics[width=0.49\textwidth]{../figures/wavelets/wavelet_male_25.pdf}
+\centering
+\caption{Raw national death rates (left) and wavelet power spectrum (right) over time for 25-34 males in USA, 1982-2010. Wavelet power values increase from blue to red, and white contour lines indicate the 5\% significance level.}
+\label{fig:rawnat25}     
+\end{figure}
+
+The 35-44 male age group, illustrative of middle age groups, as shown in figure \ref{fig:rawnat35}, exhibits a similar mortality profile over time due to HIV/AIDS as 25-34 males. The wavelet analysis, however, shows no seasonality signal, based around 12 months or anywhere else, to be evident.
+
+\vspace{2mm}
+
+\begin{figure}
+\includegraphics[width=0.49\textwidth]{../figures/national_death_rates/male/male_35_national_death_rates.pdf}
+\includegraphics[width=0.49\textwidth]{../figures/wavelets/wavelet_male_35.pdf}
+\centering
+\caption{Raw national death rates (left) and wavelet power spectrum (right) over time for 35-44 males in USA, 1982-2010. Wavelet power values increase from blue to red, and white contour lines indicate the 5\% significance level.}
+\label{fig:rawnat35}     
+\end{figure}
+
+Figure \ref{fig:rawnat75}  is a good example of the older age groups for both sexes, where the seasonality of mortality is evident throughout the period after the signal was absent in the middle age groups.
+
+\vspace{2mm}
+
+\begin{figure}
+\includegraphics[width=0.49\textwidth]{../figures/national_death_rates/male/male_75_national_death_rates.pdf}
+\includegraphics[width=0.49\textwidth]{../figures/wavelets/wavelet_male_75.pdf}
+\centering
+\caption{Raw national death rates (left) and wavelet power spectrum (right) over time for 75-84 males in USA, 1982-2010. Wavelet power values increase from blue to red, and white contour lines indicate the 5\% significance level.}
+\label{fig:rawnat75}     
+\end{figure}
+
+An example of the variation of seasonality subnationally is given by figure \ref{fig:rawsubwav35}, where comparing state wavelets of Idaho and Texas for 35-44 males to the national picture in figure \ref{fig:rawnat35}. It is clear that while the national wavelet picture is broadly informative, it is worth examining the states as a sub-unit also. The same variation is evident in most other age groups.
+
+\begin{figure}
+\includegraphics[width=0.49\textwidth]{../figures/wavelets/wavelet_35_idaho.pdf}
+\includegraphics[width=0.49\textwidth]{../figures/wavelets/wavelet_35_texas.pdf}
+\centering
+\caption{Wavelet power spectrum over time for Idaho (left) and Texas (right) for 35-44 males in USA, 1982-2010. Wavelet power values increase from blue to red, and white contour lines indicate the 5\% significance level.}
+\label{fig:rawsubwav35}     
+\end{figure}
+
+\subsubsection{Centre of mass of mortality within year} \label{sec:com}
+
+As per the method described in section \ref{sec:comdesc} I performed a centre of mass analysis for each age-sex group. I worked out the 95\% confidence interval (CI) for each centre of mass with a Bootstrap of 1000 samples from the data. 
+
+% DOES THIS FLOW?
+
+Figure \ref{fig:mortality_rank_heatmap_2} demonstrates where the centre of mass of mortality is by age group throughout the year, as in Paireau et al. \textsuperscript{\cite{paireau16}} . The graph illustrates the marked difference in the peak of mortality between the younger and older age groups which exhibit a seasonality of mortality. Whereas the younger age groups show a peak in mortality in the summer months, the older age groups show a peak in the winter months.
+
+\vspace{2mm}
+
+The large horizontal segment for the 35-44 year old female group shows that there was no real centre of mass in that age group, as seasonality of mortality was not present.
+
+\begin{figure}[h]
+\includegraphics[width=0.8\textwidth]{../figures/com/USA_COM_1982_2010.pdf}
+\centering
+\caption{Centre of mass of mortality within year by age-sex group. Dots represent the centre of mass of the monthly distribution of cases. Horizontal segments show 95\% CI.}
+\label{fig:mortality_rank_heatmap_2}     
+\end{figure}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Patterns and trends in seasonal mortality in the USA} \label{sec:modelres}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following results are the output of the model as described by equation \ref{eq:lambdax}.
+
+% think of the triangle between age time and space
+
+\subsubsection{Ratio of winter and summer mortality by age group}
+
+The results from sections \ref{sec:rawdeath} and \ref{sec:com} demonstrate that the  age groups in the study possess distinct patterns of median seasonal mortality, when seasonality is present. The gradual movement of peak mortality in the summer from lower age groups, such as the 5-14, 15-24, 25-34 age groups, transitions to a peak mortality in the summer in older age groups. This contrast is strongest when comparing the 5-14 age group with the 85+ age group.
+
+ \vspace{2mm}
+
+To demonstrate the relative difference between summer and winter mortality, January and July were taken as reference points within a year. The median ratio of the death rates at these two points in the year are then compared by state and age group throughout the period.
+
+\vspace{2mm}
+
+Figure \ref{fig:jan_july_median_m}, a map of the ratio between median mortality in January and July for males by state, demonstrates this distinction geographically and age groups. Figure \ref{fig:jan_july_median_f} shows this is also true for females, although to a lesser absolute degree, as is clear from the consistent scale of both figures mentioned. The variation by sex, age and location is evident.
+
+\vspace{2mm}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/all_age_summary/jan_july_median_m.pdf}
+\centering
+\caption{Map of percentage difference between winter and summer mortality by age group for males, 1982 - 2010.}
+\label{fig:jan_july_median_m}     
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/all_age_summary/jan_july_median_f.pdf}
+\centering
+\caption{Map of percentage difference between winter and summer mortality by age group for females, 1982 - 2010.}
+\label{fig:jan_july_median_f}     
+\end{figure}
+
+%A median of … \% between the ratio of January and July median mortality is evident for the 85+ age group, with a range from … to … sub-nationally. This contrasts with a median of … in the 15-24 age group, with a range from … to … sub-nationally. Other age groups are summarised for male and females in table …
+
+\subsubsection{Percentage change of monthly mortality by age group}
+
+Death rates are generally changing over time across all age groups. Figure \ref{fig:change_mort_across_all_months} shows the change in death rates across the time period 1982 -2010 by age group. Decreases in mortality across the time period are greatest for younger and older age groups, with the change in mortality less improved across the middle ages.
+
+\vspace{2mm}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/all_age_summary/change_mort_across_all_months.pdf}
+\centering
+\caption{Median percentage change of mortality across age groups by month in the USA, 1982 - 2010. Spring/summer months are in red, autumn/winter in blue.}
+\label{fig:change_mort_across_all_months}     
+\end{figure}
+
+The 12 lines in each of the male and female set of results in figure \ref{fig:change_mort_across_all_months} are the same analysis performed for each month of the year. Thus, each line represents a change in death rate profile for a particular month of the year across age groups. While the change in mortality profile is similar over each month, the magnitudes are not the same, and it is of interest to analyse difference in change of death rate between months within an age group. For example, it is clear that the range of change in death rates across months of the year for the 15-24 male age group is not the same as the 55-64 male age group.
+
+\vspace{2mm}
+
+The relative difference in mortality decrease over months is highlighted in figure \ref{fig:diff_change_mort_across_all_months_heatmap}.  Here, each age group profile is centred around its median change of death rate across the 12 months, with green indicating a better than average change, and red a worse than average change. The figure makes clear the strong relative decease in mortality evident in summer months (June, July, August) for 5-14, 15-24, 25-34 age groups for both sexes when compared with the winter months (December, January, February).
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/all_age_summary/diff_change_mort_across_all_months_heatmap.pdf}
+\centering
+\caption{Heat map of median percentage change of mortality across age groups by month in the USA, 1982 - 2010. Better than average change in death rate is green, with worse than average in red.}
+\label{fig:diff_change_mort_across_all_months_heatmap}    
+\end{figure}
+
+\subsubsection{National seasonality of mortality over time by age group}
+
+The coefficient of seasonality, $S$, is given for a particular age ($a$), sex ($s$), year ($y$) as the ratio of within-year variation of mortality ($\sigma_{a,s,y}$) over mean mortality in each year ($\mu_{a,s,y}$):
+
+\begin{equation} \label{eq:season}
+S_{[a,s,y]} = \sigma_{[a,s,y]} / \mu_{[a,s,y]}.
+\end{equation}
+
+It is a metric developed to measure the variability of deaths rates for an age group within a given year. The presence of the denominator in equation \ref{eq:season} renders $S$ dimensionless, and as such comparisons of $S$ are able to be made between age groups. The national picture of $S$ by sex and age group is shown in figure \ref{fig:coeff_var_all_ages}. 
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/all_age_summary/coeff_var_all_ages.pdf}
+\centering
+\caption{Values of the coefficient of seasonality, $S$, nationally by sex and age group over study period. Younger ages are represented by green, with older as red. A linear fit is for each age group is in bold.}
+\label{fig:coeff_var_all_ages}    
+\end{figure}
+
+The subnational change in the value of $S$ is important, as it demonstrates that $S$ varies by geography over time as well as by sex and age. Figure \ref{fig:change_coeff_var_all_ages_climate} displays the subnational picture. Of note is the distinct decrease in $S$ of the 5-14 and 15-24 year old male age groups, which is in contrast to the median increase in $S$ overall for the female age groups. Figures \ref{fig:change_coeff_var_all_ages_climate_facet_male} and \ref{fig:change_coeff_var_all_ages_climate_facet_female} separate the climate regions for easy comparison.
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/all_age_summary/change_coeff_var_all_ages_climate.pdf}
+\centering
+\caption{Percentage change in the coefficient of seasonality, $S$, in the USA, 1982 - 2010,
+by age and sex, coloured by climate region. Each point represents a state. The dotted line represents the median change in $S$ across age groups and sexes.}
+\label{fig:change_coeff_var_all_ages_climate}    
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/all_age_summary/change_coeff_var_all_ages_male_climate.pdf}
+\centering
+\caption{Percentage change in the coefficient of seasonality, $S$,  in the USA, 1982 - 2010,
+by age for males, facetted by climate region. Each point represents a state.}
+\label{fig:change_coeff_var_all_ages_climate_facet_male}    
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/all_age_summary/change_coeff_var_all_ages_female_climate.pdf}
+\centering
+\caption{Percentage change in the coefficient of seasonality, $S$, in the USA, 1982 - 2010,
+by age for females, facetted by climate region. Each point represents a state.}
+\label{fig:change_coeff_var_all_ages_climate_facet_female}    
+\end{figure}
+
+\subsubsection{Sub-national seasonality of mortality over time by age group}
+
+While figures \ref{fig:coeff_var_all_ages} - \ref{fig:change_coeff_var_all_ages_climate_facet_female} are illustrative of the change of $S$ over time, it is worth examining a few age groups in isolation. Figure  \ref{fig:5_coeff_var_points_climate_m} shows the change of $S$ over time for the 5-14 age group. It demonstrates that while the Northeast's $S$ values have changed as much as other regions, it remains consistently lower than the median. The spread of values of $S$ is increasing over time, with a fanning effect of the state clear.
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/5/5_coeff_var_points_climate_m.pdf}
+\centering
+\caption{Change of the coefficient of seasonality, $S$ over time for 5-14 male age group. The blue line represents the median from figure \ref{fig:coeff_var_all_ages}. Each points represents a state.}
+\label{fig:5_coeff_var_points_climate_m}    
+\end{figure}
+
+Figure \ref{fig:75_coeff_var_points_climate_m} is an example of the change of $S$ over time for an older age group. Of note are the sudden jumps between consecutive years, where many state move up or down together to vary their value of $S$. This is posited to be related to climate, but this remains analytically unexplored. 
+
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{../figures/75/75_coeff_var_points_climate_m.pdf}
+\centering
+\caption{Change of the coefficient of seasonality, $S$ over time for 75-84 male age group. The blue line represents the median from figure \ref{fig:coeff_var_all_ages}. Each point represents a state.}
+\label{fig:75_coeff_var_points_climate_m}    
+\end{figure}
+
+\newpage
+
+\subsection{Conclusions}
+
+\subsubsection{Added value of this study}
+
+This study is novel in examining seasonality of all-cause mortality in the USA by age-sex group within a national spatiotemporal model.  Previous studies have examined seasonality in the USA, but have been restricted to cities, have examined the entire population, or have focussed on particular causes of mortality \textsuperscript{\cite{rosenwaike1966seasonal, Sheridan2009, Sheridan2010, Marti-Soler2014}}. 
+
+\vspace{2mm}
+
+The analysis of the current data provides novel insights into past trends of seasonality of mortality in the USA.  Overall, the study demonstrates the distinct behaviour for death rate profiles within a year, where:
+
+\begin{itemize}
+\item Younger and older age groups exhibit distinct differences in peak mortality.
+\item Change in death rate from 1982 to 2010 varies by month within age groups. 
+\item Geographic variation within age group of relative strength of seasonality. 
+\item Seasonality of mortality, as described by the coefficient of seasonality, $S$, is changing over time, with trends varying across demographic groups.
+\end{itemize}
+
+\subsubsection{Challenges in data and fitting model}
+
+I have made substantial progress in building the model to fit the seasonal mortality data. The current framework of the model has been chosen to remove random noise from the raw data and to subsequently analyse patterns and trends on seasonality in the USA during the time period.
+
+\vspace{2mm}
+
+I used data from the years 1982 - 2010. Although data are available up to 2013, there was an error on the 2011 data, where the month of death was not included as a column. A goal in the short term is to obtain the corrected data, to extend the time period by an additional 3 years.
+
+\vspace{2mm}
+
+The high dimensionality of the data has provided a challenge in summarising the results. When considering the model build, I chose INLA. The other R package in consideration is TMB, which may be able to produce a complete (i.e. all-age) model. I will continue to explore the current Bayesian model within possible viable frameworks, as well as other methods, described in section \ref{sec:future}.
+
+
+%\section{Forecasting seasonal mortality in the United States}
+
+%Given the variations in mortality trends, it is expected that the best performing model will not necessarily be identical over varying geography and gender. It is also expected that individual models will have varying performance depending on the length of the forecast and the location of its inception. To account for this, I will combine forecasts from the ensemble of candidate models using a Bayesian model averaging approach \textsuperscript{\cite{HoetingVolinsky1999}}. 
+
+%\vspace{2mm}
+
+%Each individual model will be run separately by gender for each geography. The performance of each model will be assessed by holding back data for later years, making forecasts using only data from earlier years, and comparing the forecasted mortality to the available data for the period which had been held back. This procedure make it possible to define appropriate model weights. All candidate models will contribute to the forecast, but only proportionally to how well they perform in external forecast validity tests.
+
+\newpage
+
+%There are examples of such analysis in temperature. Gasparrini et al. 2015 employs a lag non-linear model to estimate the association between a death and the most recent 21 days \textsuperscript{\cite{Gasparrini2015}}. An RR against temperature spectrum is established by location using a multivariate metaregression. This novel technique will be used as a basis for my analysis of RR for climate variables.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Thesis plan}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Work completed}
+
+To date, I have completed the following portions of my research plan:
+
+\begin{itemize}
+\item Collected and prepared data for the USA, Japan, England and Wales, South Korea.
+\item Constructed an R environment with R-INLA where quick and easy changes and updates to models can be made.
+\item Iteratively built up to a model which borrows strength across geography, time, and month of death.
+\item Designed graphs and plots which summarise findings of model clearly and succinctly.
+\item Performed analyses on the USA data, including a draft of a paper on seasonality trends in the US.
+\item Presented at an international conference (BAYSM 2016) based on current work.
+\end{itemize}	
+
+\subsection{Next steps}
+
+\subsubsection{Climate variables in models}
+
+Given the model performance, the next challenge will be to incorporate the climate variables as covariates. I have constructed a framework to summarise monthly temperatures measures by state using the ERA-Interim reanalysis data, which runs globally from 1979-present \textsuperscript{\cite{dee2011}}. Some measures include, monthly mean ($T_{mean}$), monthly maximum/minimum ($T_{max}$ / $T_{min}$), standard deviation of temperature ($\sigma_{T}$) among others.
+
+\vspace{2mm}
+
+I am developing a suite of summary variables using the novel ERA-Interim dataset. These will potentially serve as covariates to my statistical model. 
+
+\subsubsection{Urban and rural populations}
+
+Urban and rural populations are expected to exhibit differing trends in seasonality over time. This will be examined in the next period of study and research.
+
+%\subsection{Additional plans}
+
+%Remaining steps for carrying out my research plan include:
+
+%\begin{itemize}
+%\item Test model sensitivity to changing priors on hyperparameters.
+%\item Writing up findings of current work for publishing.
+%\item Constructing forecasting framework.
+%\item Establishing methods for extensive testing of forecasting capabilities of model and its variants.
+%\item Making forecasts.
+%\item Including climatic covariates to explain patterns and trends of seasonality.
+%\item Performing similar analysis with Japan, UK, South Korea data.
+%\item Building complete all-age model in TMB.
+%\end{itemize}
+
+\subsection{Timeline}
+
+Figure \ref{fig:gantt} shows the proposed timetable of activity for the duration of the PhD project.\\
+
+\newpage
+
+\begin{landscape}
+
+\begin{figure}[h]
+\begin{ganttchart}[bar/.append style={fill=black!50},vgrid={draw=none, dotted},today=10, today label=Current progress, today rule/.style=%
+{draw=blue, ultra thick}]{1}{36}
+\gantttitle{Month}{36} \\
+%\gantttitlelist{3,6,9,12,15,18,21,24,27,30,33,36}{2} \\
+\gantttitlelist{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36}{1} \\
+
+\ganttbar{\small{Attend statistics, computing classes}}{1}{24} \\
+\ganttbar{\small{Research plan}}{1}{3} \\
+\ganttbar{\small{Literature review}}{1}{3} \\
+\ganttbar{\small{Collect mortality data for USA}}{1}{3} \\
+\ganttbar{\small{Select and test models}}{4}{8} \\
+\ganttbar{\small{Fit and evaluate models}}{9}{12} \\
+\ganttbar{\small{Analyse seasonality in urban and rural populations}}{13}{22} \\
+\ganttbar{\small{Collect climate model data}}{13}{16} \\
+\ganttbar{\small{Investigate additional available mortality data}}{17}{21} \\
+\ganttbar{\small{Associate temperature with seasonal mortality }}{19}{24} \\
+\ganttbar{\small{Explore additional methods, such as machine learning }}{25}{31} \\
+\ganttbar{\small{Forecast seasonal mortality}}{30}{32} \\
+\ganttbar{\small{Assess risk of climate change}}{32}{34} \\
+\ganttbar{\small{Write-up}}{34}{36}
+\label{figu:gantt} 
+\end{ganttchart}
+
+\caption{Gantt chart of activity during PhD project. The vertical blue line demonstrates the current level of progress at the production of this report.}
+\label{fig:gantt}
+\end{figure}
+
+\end{landscape}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Potential future modelling methods} \label{sec:future}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Trigonometric seasonal models} \label{sec:fourier}
+
+%Seasonality is prevalent throughout markets \textsuperscript{\cite{BreymannEmbrechts2003,ContrerasConeji2003}}. A Fourier decomposition of a time series will return a weighted sum of the sinusoidal functions which contribute to this periodicity.% De Livera has proposed a way to represent seasonal components based on Fourier series (see equations \ref{eq:fourier2} - \ref{eq:fourier4} in the Appendix) \textsuperscript{\cite{DeLiveraSnyder2011}}.
+
+%\vspace{2mm}
+
+%The seasonality inherent in mortality rates throughout a year will be complicated by the moving of important dates and periods, such as overlapping calendars and variation of Easter dates. This may create higher-frequency `harmonics' which a model assuming one seasonal frequency may not pick up, leading to errors in subsequent forecasting. De Livera's TBATS model, includes elements of a Box-Cox transform, ARMA errors, Trend, and Trigonometric Seasonal components attempts to provide a robust model to incorporate a potentially large number of harmonics \textsuperscript{\cite{DeLiveraSnyder2011}}.
+
+%\vspace{2mm}
+
+%De Livera's research, along with Hyndman's R module `Forecasting', will be the basis of my initial exploration into modelling seasonal variation within mortality.
+
+\subsection{Kalman filters}
+
+Forecasting in econometrics often uses Kalman filters to produce future trends in stock markets. Such forecasts aid decision-making with the clear objective to maximise return on investment \textsuperscript{\cite{pindyck1998econometric}}.  A Bayesian method developed in the 1960s, it predicts one time step ahead at a time given a prior distribution $p(\lambda)$ of a variable we are interested in and current measurement information $\lambda$. This is then updated using an equation of motion to take current measurement information, $\lambda_t$, into a future prediction $\lambda_{t+1| t}$.
+
+\vspace{2mm}
+
+A strength of the Kalman filter is the `online' nature of the model. After each step forward in a forecast, the Kalman filter will dynamically adapt its equation of motion given new information. An application relevant to my thesis would the ability to allow mortality rates to be influenced by variables from climate forecasts. Kalman filters have been used to forecast daily pollutant concentrations in the Netherlands \textsuperscript{\cite{ZolghadriCazaurang2006}}. Another strength is that since the Kalman filter is a linear function, its computational cost is relatively low.
+
+%\subsubsection{Exponential smoothing models for seasonal data}
+
+%Hyndman and all that
+
+%\subsection{Further modelling methods}
+
+%\subsection{Lee-Carter models}
+
+%Lee and Carter set a standard for yearly forecasting methods in 1992 \textsuperscript{\cite{LeeCarter1992}}. Their method has been acknowledged as a gold standard of mortality forecasting, and has been widely used. Their model will be included in the ensemble of models to aid a performance comparison of the models built with that of an established model. An Autoregressive Integrated Moving Average (ARIMA) model would be used in conjunction to estimate the mortality index in the model.
+
+\subsection{Machine learning}
+
+Latent force models (LFMs) combine a purely data driven approach from machine learning with an analytical approach from physical systems \textsuperscript{\cite{alvarez2009latent}}. Recent advances have examined applications of looking at periodicity within functions \textsuperscript{\cite{ReeceJennings2014}}. Periodic Linear Force Models (PLFMs) and their application to mortality forecasting will be explored.
+
+\newpage
+
+\section{Glossary of terms}
+
+\begin{tabular}{m{6cm} | m {10cm}}
+\textbf{Bayesian inference:} & Statistical inference where uncertainty of a parameter is modelled using a probability function.\\
+\hline
+\textbf{Borrowing strength:} & Feature of hierarchical model which allows neighbouring groups in space and time to share information.\\
+\hline
+\textbf{Centre of mass of mortality:} & Mean month of mortality within a year for a given subset of population, identified using circular statistics.\\
+\hline
+\textbf{Circular statistics:} & Branch of statistics where techniques are developed for use with cyclical data, such as data which exhibits a seasonality.\\
+\hline
+\textbf{Coefficient of seasonality, $S$:} & Standard deviation of death rates divided by the mean death rate within a given year.\\
+\hline
+\textbf{Death rate:} & Number of deaths divided by the population for a given time period and subset of population.\\
+\hline
+\textbf{Demographic:} & A particular subset of a population, usually defined via age, sex, location, and socioeconomic status.\\
+\hline
+%\textbf{Deviation Information Criterion (DIC):} & Words.\\
+%\hline
+\textbf{ERA-Interim:} & ERA-Interim is a global atmospheric reanalysis from 1979, continuously updated in real time..\\
+\hline
+\textbf{Hierarchical model:} & A Bayesian model with a multi-levelled structure, where various parameters are estimated at each level.\\
+\hline
+\textbf{Laplacian Approximation:} & Approximation of a probability distribution to a Gaussian distribution, which allows analytical solutions to complex hierarchical models.\\
+\hline
+\textbf{Mortality:} & Used interchangably with death rate.\\
+\hline
+\textbf{Reanalysis:} & A climate reanalysis provides a numerical description of the recent climate, produced by combining models with observations.\\
+\hline
+\textbf{Seasonality:} & A characteristic of a time series whereby a pattern recurs predictably over an identified time period. potentially changing over time.\\
+\hline
+\textbf{Spatiotemporal model:} & A model which allows results to evolve over time as well as space, with potential interactions between time and space.\\
+\hline
+\textbf{Wavelet analysis:} & Decomposition of signal via Morlet wavelets (or otherwise) into frequency and phase over time to enable analysis of seasonality of a signal.\\
+
+
+%\textbf{description} & words \\
+\end{tabular}
+
+\newpage
+
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{acm}
+\bibliography{../bib/esa}
+
+
+\end{document}
