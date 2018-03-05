@@ -9,10 +9,12 @@ year.end.arg <- as.numeric(args[2])
 filename <- paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg)
 dat <- readRDS(filename)
 
-# gender state and age lookup
-gender.lookup <- c('male','female')
-state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
-age.lookup <- unique(dat$age)
+# year palette
+colorfunc = colorRampPalette(brewer.pal(6 , "RdBu" ))
+yearpalette = colorfunc(year.end.arg-year.start.arg +1)
+
+# lookups
+source('../../data/objects/objects.R')
 
 # extract unique table of year and months to generate year.month
 dat.year.month <- unique(dat[,c('year', 'month')])

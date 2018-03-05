@@ -2,16 +2,14 @@ rm(list=ls())
 
 library(RColorBrewer)
 
-# to correct colours
-f <- function(pal) brewer.pal(brewer.pal.info[pal, "maxcolors"], pal)
-mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724", "#74D944", "#CE50CA", "#3F4921", "#C0717C", "#CBD588", "#5F7FC7", "#673770", "#D3D93E", "#38333E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD", "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D", "#8A7C64", "#599861" )
-#to make picking the number of the colour you want easier:
-plot(1:length(mycols),col=mycols[1:length(mycols)],cex=4,pch=20); abline(v=c(10,20,30,40,50,60))
-
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
 year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
+
+# year palette
+colorfunc = colorRampPalette(brewer.pal(6 , "RdBu" ))
+yearpalette = colorfunc(year.end.arg-year.start.arg +1)
 
 # load data
 filename <- paste0('../../output/prep_data_cod/datus_state_rates_cod_injuries_ons_',year.start.arg,'_',year.end.arg)
@@ -20,8 +18,6 @@ dat <- readRDS(filename)
 # gender state and age lookup
 source('../../data/objects/objects.R')
 
-# bespoke colorway
-colorway = c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred")
 
 # extract unique table of year and months to generate year.month
 dat.year.month <- unique(dat[,c('year', 'month')])
@@ -155,7 +151,7 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=1000000*ASDR,colour=as.factor(yea
     xlab('Time') +
     ylab('Age standardised death rate (per 1,000,000)') +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    scale_colour_discrete(guide = guide_legend(nrow = 1,title = paste0("Year"))) +
+    scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 1,title = paste0("Year"))) +
     facet_grid(~cause) +
         theme_bw() + theme( panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
@@ -170,8 +166,8 @@ ggplot(dat=dat.national.com.sex, aes(x=year,y=1000000*ASDR,fill=cause)) +
     facet_grid(~ID) +
     xlab('Year') +
     ylab('Age standardised death rate (per 1,000,000)') +
-    scale_fill_discrete(guide = guide_legend(nrow = 1,title = paste0("Type"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    scale_fill_manual(values=mycols[c(1,11,50)], guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    theme_bw() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
@@ -184,7 +180,7 @@ ggplot(dat=dat.national.com.sex, aes(x=year,y=1000000*ASDR,fill=cause)) +
     facet_grid(cause~ID) +
     xlab('Year') +
     ylab('Age standardised death rate (per 1,000,000)') +
-    scale_fill_discrete(guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    scale_fill_manual(values=mycols[c(1,11,50)], guide = guide_legend(nrow = 1,title = paste0("Type"))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -197,8 +193,8 @@ ggplot(dat=dat.national.com.sex, aes(x=date,y=1000000*ASDR,fill=cause)) +
     geom_area(position='stack') +
     xlab('Year') +
     ylab('Age standardised death rate (per 1,000,000)') +
-    scale_x_date(labels = date_format("%Y")) +
-    scale_fill_discrete(guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    scale_x_date(labels = date_format("%Y"),date_breaks = "1 year") +
+    scale_fill_manual(values=mycols[c(1,11,50)], guide = guide_legend(nrow = 1,title = paste0("Type"))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -211,8 +207,8 @@ ggplot(dat=dat.national.com.sex, aes(x=date,y=1000000*ASDR,color=cause)) +
     geom_line() +
     xlab('Year') +
     ylab('Age standardised death rate (per 1,000,000)') +
-    scale_x_date(labels = date_format("%Y")) +
-    scale_fill_discrete(guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    scale_x_date(labels = date_format("%Y"),date_breaks = "1 year") +
+    scale_color_manual(values=mycols[c(1,11,50)], guide = guide_legend(nrow = 1,title = paste0("Type"))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
