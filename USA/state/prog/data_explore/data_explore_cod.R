@@ -66,7 +66,7 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=1000000*ASDR,colour=as.factor(yea
 
 # 2.
 ggplot(dat=dat.national.com.sex,color='black', aes(x=year,y=1000000*ASDR,fill=cause)) +
-    ggtitle('ASDRs in the USA') +
+    ggtitle('ASDRs in the USA over time') +
     geom_area(position='stack') +
     facet_grid(~ID) +
     xlab('Year') +
@@ -80,12 +80,12 @@ ggplot(dat=dat.national.com.sex,color='black', aes(x=year,y=1000000*ASDR,fill=ca
 
 # 3.
 ggplot(dat=dat.national.com.sex, aes(x=year,y=1000000*ASDR,fill=cause)) +
-    ggtitle('ASDRs in the USA') +
+    ggtitle('ASDRs in the USA over time') +
     geom_area(position='stack') +
     facet_grid(cause~ID) +
     xlab('Year') +
     ylab('Age standardised death rate (per 1,000,000)') +
-    scale_fill_manual(values=mycols[c(1:4)], guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -94,12 +94,12 @@ ggplot(dat=dat.national.com.sex, aes(x=year,y=1000000*ASDR,fill=cause)) +
 
 # 4.
 ggplot(dat=dat.national.com.sex, aes(x=date,y=1000000*ASDR,fill=cause)) +
-    ggtitle('ASDRs in the USA') +
+    ggtitle('ASDRs in the USA over time') +
     geom_area(position='stack') +
     xlab('Year') +
     ylab('Age standardised death rate (per 1,000,000)') +
     scale_x_date(labels = date_format("%Y"),date_breaks = "1 year") +
-    scale_fill_manual(values=mycols[c(1:4)], guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -108,12 +108,12 @@ ggplot(dat=dat.national.com.sex, aes(x=date,y=1000000*ASDR,fill=cause)) +
 
 # 5.
 ggplot(dat=dat.national.com.sex, aes(x=date,y=1000000*ASDR,color=cause)) +
-    ggtitle('ASDRs in the USA') +
+    ggtitle('ASDRs in the USA over time') +
     geom_line() +
     xlab('Year') +
     ylab('Age standardised death rate (per 1,000,000)') +
     scale_x_date(labels = date_format("%Y"),date_breaks = "1 year") +
-    scale_fill_manual(values=mycols[c(1:4)], guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    scale_color_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),

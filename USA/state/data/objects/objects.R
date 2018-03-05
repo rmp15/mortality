@@ -22,7 +22,10 @@ mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724
 
 
 # colors for causes of death
-colors.broad.cod = mycols[c(4,4,1,4)]
+colors.broad.cod = mycols[c(    14,  # Cancer
+                                9,  # Cardio
+                                24, # Injuries
+                                11)] # Other
 
 # month lookups
 month.lookup <- c('January','February','March','April','May','June','July','August','September','October','November','December')
@@ -127,7 +130,7 @@ unintentional = c()
 # cod lookups
 cod.broad = c('Allcause','Cancer','Cardiopulmonary','External','Other')
 
-# for ASDRs
+# ASDR weightings
 # from http://apps.who.int/healthinfo/statistics/mortality/whodpms/definitions/pop.htm
 StdPopMF =      c(1822+7033,        # 0-4
                 8687+8597,          # 5-14
