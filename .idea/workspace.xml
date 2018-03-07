@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="62b91b4b-6761-4ef0-820a-b55e2d811d0d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/data/objects/objects.R" afterPath="$PROJECT_DIR$/USA/state/data/objects/objects.R" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/data_prep/data_prep_cod.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/data_prep/data_prep_cod.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons.R" afterPath="$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons.R" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R" afterPath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="217">
-              <caret line="52" column="28" lean-forward="false" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
+              <caret line="60" column="108" lean-forward="false" selection-start-line="60" selection-start-column="108" selection-end-line="60" selection-end-column="108" />
               <folding />
             </state>
           </provider>
@@ -131,7 +128,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="901" />
+    <option name="width" value="871" />
     <option name="height" value="900" />
   </component>
   <component name="ProjectView">
@@ -479,13 +476,6 @@
       <option name="presentableId" value="Default" />
       <updated>1517410459211</updated>
     </task>
-    <task id="LOCAL-00016" summary="test commit">
-      <created>1517917373384</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1517917373384</updated>
-    </task>
     <task id="LOCAL-00017" summary="test commit">
       <created>1517918077179</created>
       <option name="number" value="00017" />
@@ -822,11 +812,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520376146963</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="test commit">
+      <created>1520442606002</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1520442606002</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="901" height="900" extended-state="6" />
+    <frame x="0" y="0" width="871" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31991294" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1306,7 +1303,7 @@
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
-          <caret line="52" column="28" lean-forward="false" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
+          <caret line="60" column="108" lean-forward="false" selection-start-line="60" selection-start-column="108" selection-end-line="60" selection-end-column="108" />
           <folding />
         </state>
       </provider>
