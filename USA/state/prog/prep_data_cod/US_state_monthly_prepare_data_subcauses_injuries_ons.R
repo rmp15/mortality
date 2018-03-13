@@ -1,0 +1,151 @@
+rm(list=ls())
+
+# break down the arguments from Rscript
+args <- commandArgs(trailingOnly=TRUE)
+year.start.arg <- as.numeric(args[1])
+year.end.arg <- as.numeric(args[2])
+
+library(dplyr)
+library(foreign)
+
+# source only the 'intentional' variable
+source('../../data/objects/objects.R')
+rm(list=setdiff(ls(), c("icd9.lookup","icd10.lookup","cod.lookup.10")))
+
+# Function to summarise a year's data. x is the year in 2 number form (e.g. 1989 -> 89).
+# y is the number of rows. default (-1) is all rows.
+yearsummary_injuries  <- function(x=2000) {
+
+	print(paste0('year ',x,' now being processed'))
+  
+	# load year of deaths
+	file.loc <- '~/data/mortality/US/state/processed/cod/'
+	dat.name <- paste0(file.loc,"deathscod",x,".dta")
+	dat <- read.dta(dat.name)
+
+	# fix sex classification if in certain years
+	if(x %in% c(2003:2010,2012)){
+		dat$sex = plyr::mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c(2,1))
+	}
+
+	# load lookup for fips CHANGE TO SUBSTR OF FIPS
+	dat$fips = substr(dat$fips,1,2)
+	dat$fips <- as.numeric(dat$fips)
+
+	# add extra label for CODs based on relevant ICD year
+	start_year = 1999
+	if(x<start_year) {
+        # ICD 9 coding for broad cod coding
+		dat$cause[nchar(dat$cause)==3] <- paste0(dat$cause[nchar(dat$cause)==3],'0')
+		dat$cause.numeric = as.numeric(dat$cause)
+		dat$cause.group = 	ifelse(dat$cause.numeric>=1400&dat$cause.numeric<=2399,'Cancer',
+							ifelse(dat$cause.numeric>=3900&dat$cause.numeric<=5199,'Cardiopulmonary',
+							ifelse(dat$cause.numeric>=8000&dat$cause.numeric<=9999,'External',
+							'Other')))
+		dat.merged = dat
+
+        # only filter for external
+        dat.merged = subset(dat.merged,cause.group=='External')
+        dat.merged$cause.group = NULL
+
+        # cause subgroups
+        dat.merged$cause.sub =
+                            ifelse(dat.merged$cause.numeric>=8000&dat.merged$cause.numeric<=8079,'Railway Accidents',
+							ifelse(dat.merged$cause.numeric>=8100&dat.merged$cause.numeric<=8199,'Motor Vehicle Traffic Accidents',
+							ifelse(dat.merged$cause.numeric>=8200&dat.merged$cause.numeric<=8259,'Motor Vehicle Nontraffic Accidents',
+							ifelse(dat.merged$cause.numeric>=8260&dat.merged$cause.numeric<=8299,'Other Road Vehicle Accidents',
+							ifelse(dat.merged$cause.numeric>=8300&dat.merged$cause.numeric<=8389,'Water Transport Accidents',
+							ifelse(dat.merged$cause.numeric>=8400&dat.merged$cause.numeric<=8459,'Air and Space Transport Accidents',
+							ifelse(dat.merged$cause.numeric>=8460&dat.merged$cause.numeric<=8499,'Vehicle Accidents, Not Elsewhere Classifiable',
+							ifelse(dat.merged$cause.numeric>=8500&dat.merged$cause.numeric<=8589,'Accidental Poisoning By Drugs, Medicinal Substances, And Biologicals',
+							ifelse(dat.merged$cause.numeric>=8600&dat.merged$cause.numeric<=8699,'Accidental Poisoning By Other Solid And Liquid Substances, And Biologicals',
+							ifelse(dat.merged$cause.numeric>=8700&dat.merged$cause.numeric<=8769,'Misadventures To Patients During Surgical And Medical Care',
+							ifelse(dat.merged$cause.numeric>=8780&dat.merged$cause.numeric<=8799,'Non-Misadventures To Patients During Surigcal And Medical Care',
+							ifelse(dat.merged$cause.numeric>=8800&dat.merged$cause.numeric<=8889,'Accidental Falls',
+							ifelse(dat.merged$cause.numeric>=8900&dat.merged$cause.numeric<=8999,'Accidents Caused By Fire and Flames',
+							ifelse(dat.merged$cause.numeric>=9000&dat.merged$cause.numeric<=9099,'Accidents Due To Natural And Environmental Factors',
+							ifelse(dat.merged$cause.numeric>=9100&dat.merged$cause.numeric<=9159,'Accidents Caused By Submersion, Suffocation, And Foreign Bodies',
+							ifelse(dat.merged$cause.numeric>=9160&dat.merged$cause.numeric<=9289,'Other Accidents',
+							ifelse(dat.merged$cause.numeric>=9290&dat.merged$cause.numeric<=9299,'Late Effects Of Accidental Injury',
+							ifelse(dat.merged$cause.numeric>=9300&dat.merged$cause.numeric<=9499,'Drugs, Medicinal And Biological Substances Causing Adverse Effects In Therapeutic Use',
+							ifelse(dat.merged$cause.numeric>=9500&dat.merged$cause.numeric<=9599,'Suicide And Self-Inflicted Injury',
+							ifelse(dat.merged$cause.numeric>=9600&dat.merged$cause.numeric<=9699,'Homicide And Injury Purposely Inflicted By Other Persons',
+							ifelse(dat.merged$cause.numeric>=9700&dat.merged$cause.numeric<=9799,'Legal Intervention',
+							ifelse(dat.merged$cause.numeric>=9800&dat.merged$cause.numeric<=9899,'Injury Undetemined Whether Accidentlally Or Purposely Inflicted',
+							ifelse(dat.merged$cause.numeric>=9900&dat.merged$cause.numeric<=9999,'Injury Resulting From Operations Of War',
+							'NA')))))))))))))))))))))))
+
+		# merge cod in ICD 9 coding
+		icd9.lookup$cause = as.numeric(icd9.lookup$cause)
+		dat.merged = merge(dat.merged,icd9.lookup,by='cause',all.x=1)
+        dat.merged$cause.group = as.character(dat.merged$cause.group)
+        dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
+
+        dat.summarised = ddply(dat.merged,.(cause.numeric,cause.group,cause.sub),summarise,deaths=sum(deaths))
+        dat.summarised$year = x
+
+	}
+
+	if(x>=start_year){
+        # merge cod in ICD 10 coding for broad letter coding
+		dat$cause[nchar(dat$cause)==3] <- paste0(dat$cause[nchar(dat$cause)==3],'0')
+		dat$letter = substr(dat$cause,1,1)
+		dat.merged = merge(dat,cod.lookup.10,by.x='letter',by.y='letter',all.x=1)
+
+        # only filter for external
+        dat.merged = subset(dat.merged,cause.group=='External')
+        dat.merged$cause.group = NULL
+
+        # numerical cause
+        dat.merged$cause.numeric = as.numeric(as.character(substr(dat.merged$cause,2,4)))
+
+        # cause subgroups FINISH
+        dat.merged$cause.sub =
+                            ifelse(dat.merged$letter=='V'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=99,'Transport accidents',
+                            ifelse(dat.merged$letter=='X'&dat.merged$cause.numeric>=XXXX&dat.merged$cause.numeric<=XXXX,'XXXX',
+                            'NA'))
+
+		# merge cod in ICD 10 coding
+		dat.merged = merge(dat.merged,icd10.lookup,by='cause',all.x=1)
+        dat.merged$cause.group = as.character(dat.merged$cause.group)
+        dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
+	}
+
+
+	print(paste0('total deaths in year ',sum(dat$deaths),', total deaths for injuries ',sum(dat.merged$deaths),' ',sum(dat.summarised$deaths)))
+
+  	return(dat.summarised)
+}
+
+# Function to append all the years desired to be summarised into one file
+appendyears  <- function(x=1980, y=1981) {
+  	years <- x:y
+  	z     <- x
+  	dat   <- data.frame()
+  	while (z %in% years) {
+    		dat <- rbind(dat, yearsummary_injuries(z))
+    		print(paste0(z," done"))
+    		z <- z+1
+  	}
+  	return(dat)
+}
+
+# append summarised dataset
+dat.appended = appendyears(year.start.arg,year.end.arg)
+
+# reorder appended data
+dat.appended = dat.appended[order(dat.appended$year,dat.appended$cause.group,dat.appended$cause.numeric),]
+
+# obtain unique results
+dat.analyse = unique(dat.appended[,c(1,2,3)])
+
+# reorder appended data
+dat.appended = dat.appended[order(dat.appended$year,dat.appended$cause.group,dat.appended$cause.numeric),]
+
+
+# create output directory
+ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_data_cod"), FALSE)
+
+# output file as RDS and csv
+saveRDS(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg))
+write.csv(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg,'.csv'))
