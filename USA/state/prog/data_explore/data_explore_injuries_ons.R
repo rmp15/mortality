@@ -143,11 +143,33 @@ dat.last.year = subset(dat.national,year==year.end.arg)
 dat.last.year$sex.long <- mapvalues(dat.last.year$sex,from=sort(unique(dat.last.year$sex)),to=c('Male','Female'))
 dat.last.year$sex.long <- with(dat.last.year,reorder(dat.last.year$sex.long,sex))
 
+# fix names of ages
+dat.last.year$age.long <- mapvalues(dat.last.year$age,from=sort(unique(dat.last.year$age)),to=as.character(age.code[,2]))
+dat.last.year$age.long <- reorder(dat.last.year$age.long,dat.last.year$age)
+
 # fix names of months
 dat.last.year$ID = mapvalues(dat.last.year$month, from=sort(unique(dat.last.year$month)),to=month.short)
 dat.last.year$ID = with(dat.last.year,reorder(dat.last.year$ID,month))
 
 pdf(paste0(file.loc,'injury_ons_last_year_plots.pdf'),paper='a4r',height=0,width=0)
+
+# full bar chart per age-sex group with breakdown of types of injuries
+ggplot(data=dat.last.year, aes(x="",y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
+    geom_bar(width = 1, position='fill', stat = "identity") +
+    #coord_polar("y", start=0) +
+    xlab('Age') + ylab('Proportion of deaths') +
+    scale_fill_manual(values=colors.injuries, guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    scale_color_manual(values=colors.injuries, guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    ggtitle(year.end.arg) +
+    facet_grid(sex.long~age.long) +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+    axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+    axis.title.y=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
 # x axis age-group, y-axis death rate for last year
 ggplot(data=dat.last.year) +
@@ -221,17 +243,39 @@ dev.off()
 # subset of last 5-year's data
 last.years = c((year.end.arg-4):(year.end.arg))
 dat.last.years = subset(dat.national,year %in% last.years)
-dat.last.years = ddply(dat.last.years,.(cause,month,sex,age),summarize,rate.adj=mean(rate.adj))
+dat.last.years = ddply(dat.last.years,.(cause,month,sex,age),summarize,deaths=mean(deaths),rate.adj=mean(rate.adj))
 
 # fix names of sexes
 dat.last.years$sex.long <- mapvalues(dat.last.years$sex,from=sort(unique(dat.last.years$sex)),to=c('Male','Female'))
 dat.last.years$sex.long <- with(dat.last.years,reorder(dat.last.years$sex.long,sex))
+
+# fix names of ages
+dat.last.years$age.long <- mapvalues(dat.last.years$age,from=sort(unique(dat.last.years$age)),to=as.character(age.code[,2]))
+dat.last.years$age.long <- reorder(dat.last.years$age.long,dat.last.years$age)
 
 # fix names of months
 dat.last.years$ID = mapvalues(dat.last.years$month, from=sort(unique(dat.last.years$month)),to=month.short)
 dat.last.years$ID = with(dat.last.years,reorder(dat.last.years$ID,month))
 
 pdf(paste0(file.loc,'injury_ons_last_years_plots.pdf'),paper='a4r',height=0,width=0)
+
+# full bar chart per age-sex group with breakdown of types of injuries
+ggplot(data=dat.last.years, aes(x="",y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
+    geom_bar(width = 1, position='fill', stat = "identity") +
+    #coord_polar("y", start=0) +
+    xlab('Age') + ylab('Proportion of deaths') +
+    scale_fill_manual(values=colors.injuries, guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    scale_color_manual(values=colors.injuries, guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    facet_grid(sex.long~age.long) +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+    axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank(),
+    axis.title.y=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
 # x axis age-group, y-axis death rate for last year
 ggplot(data=dat.last.years) +

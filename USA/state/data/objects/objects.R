@@ -33,6 +33,7 @@ colors.broad.cod = mycols[c(    14,  # Cancer
 colors.injuries = mycols[c(     8,   # Intentional
                                 24,  # Unintentional
                                 33)] # Other
+
 colors.subinjuries = mycols[c(1:20)]
 
 # colors for years progression

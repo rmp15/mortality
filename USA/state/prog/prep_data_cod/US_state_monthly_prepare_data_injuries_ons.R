@@ -28,7 +28,7 @@ yearsummary_cod  <- function(x=2000) {
 		dat$sex = plyr::mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c(2,1))
 	}
 
-	# load lookup for fips CHANGE TO SUBSTR OF FIPS
+	# load lookup for fips
 	dat$fips = substr(dat$fips,1,2)
 	dat$fips <- as.numeric(dat$fips)
 
@@ -48,35 +48,6 @@ yearsummary_cod  <- function(x=2000) {
         dat.merged = subset(dat.merged,cause.group=='External')
         dat.merged$cause.group = NULL
 
-        # cause subgroups
-        # dat.merged$cause.sub =
-        #                     ifelse(dat.merged$cause.numeric>=8000&dat.merged$cause.numeric<=8079,'Railway Accidents',
-			# 				ifelse(dat.merged$cause.numeric>=8100&dat.merged$cause.numeric<=8199,'Motor Vehicle Traffic Accidents',
-			# 				ifelse(dat.merged$cause.numeric>=8200&dat.merged$cause.numeric<=8259,'Motor Vehicle Nontraffic Accidents',
-			# 				ifelse(dat.merged$cause.numeric>=8260&dat.merged$cause.numeric<=8299,'Other Road Vehicle Accidents',
-			# 				ifelse(dat.merged$cause.numeric>=8300&dat.merged$cause.numeric<=8389,'Water Transport Accidents',
-			# 				ifelse(dat.merged$cause.numeric>=8400&dat.merged$cause.numeric<=8459,'Air and Space Transport Accidents',
-			# 				ifelse(dat.merged$cause.numeric>=8460&dat.merged$cause.numeric<=8499,'Vehicle Accidents, Not Elsewhere Classifiable',
-			# 				ifelse(dat.merged$cause.numeric>=8500&dat.merged$cause.numeric<=8589,'Accidental Poisoning By Drugs, Medicinal Substances, And Biologicals',
-			# 				ifelse(dat.merged$cause.numeric>=8600&dat.merged$cause.numeric<=8699,'Accidental Poisoning By Other Solid And Liquid Substances, And Biologicals',
-			# 				ifelse(dat.merged$cause.numeric>=8700&dat.merged$cause.numeric<=8769,'Misadventures To Patients During Surgical And Medical Care',
-			# 				ifelse(dat.merged$cause.numeric>=8780&dat.merged$cause.numeric<=8799,'Non-Misadventures To Patients During Surigcal And Medical Care',
-			# 				ifelse(dat.merged$cause.numeric>=8800&dat.merged$cause.numeric<=8889,'Accidental Falls',
-			# 				ifelse(dat.merged$cause.numeric>=8900&dat.merged$cause.numeric<=8999,'Accidents Caused By Fire and Flames',
-			# 				ifelse(dat.merged$cause.numeric>=9000&dat.merged$cause.numeric<=9099,'Accidents Due To Natural And Environmental Factors',
-			# 				ifelse(dat.merged$cause.numeric>=9100&dat.merged$cause.numeric<=9159,'Accidents Caused By Submersion, Suffocation, And Foreign Bodies',
-			# 				ifelse(dat.merged$cause.numeric>=9160&dat.merged$cause.numeric<=9289,'Other Accidents',
-			# 				ifelse(dat.merged$cause.numeric>=9290&dat.merged$cause.numeric<=9299,'Late Effects Of Accidental Injury',
-			# 				ifelse(dat.merged$cause.numeric>=9300&dat.merged$cause.numeric<=9499,'Drugs, Medicinal And Biological Substances Causing Adverse Effects In Therapeutic Use',
-			# 				ifelse(dat.merged$cause.numeric>=9500&dat.merged$cause.numeric<=9599,'Suicide And Self-Inflicted Injury',
-			# 				ifelse(dat.merged$cause.numeric>=9600&dat.merged$cause.numeric<=9699,'Homicide And Injury Purposely Inflicted By Other Persons',
-			# 				ifelse(dat.merged$cause.numeric>=9700&dat.merged$cause.numeric<=9799,'Legal Intervention',
-			# 				ifelse(dat.merged$cause.numeric>=9800&dat.merged$cause.numeric<=9899,'Injury Undetemined Whether Accidentlally Or Purposely Inflicted',
-			# 				ifelse(dat.merged$cause.numeric>=9900&dat.merged$cause.numeric<=9999,'Injury Resulting From Operations Of War',
-			# 				'NA')))))))))))))))))))))))
-
-        # dat.summary = ddply(dat.merged,.(cause,cause.sub),summarise,deaths=sum(deaths))
-
 		# merge cod in ICD 9 coding
 		icd9.lookup$cause = as.numeric(icd9.lookup$cause)
 		dat.merged = merge(dat.merged,icd9.lookup,by='cause',all.x=1)
@@ -86,6 +57,7 @@ yearsummary_cod  <- function(x=2000) {
 	}
 	if(x>=start_year){
         # merge cod in ICD 10 coding for broad letter coding
+        dat$cause[nchar(dat$cause)==3] <- paste0(dat$cause[nchar(dat$cause)==3],'0')
 		dat$letter = substr(dat$cause,1,1)
 		dat.merged = merge(dat,cod.lookup.10,by.x='letter',by.y='letter',all.x=1)
 

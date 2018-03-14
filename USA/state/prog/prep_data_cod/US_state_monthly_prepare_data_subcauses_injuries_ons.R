@@ -1,7 +1,5 @@
 rm(list=ls())
 
-# FIX THIS BY AGE AND BY SEX
-
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
 year.start.arg <- as.numeric(args[1])
