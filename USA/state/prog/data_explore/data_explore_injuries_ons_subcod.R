@@ -36,12 +36,23 @@ dat$cause.sub <- gsub('Intentional self-harm', '6. Intentional self-harm', dat$c
 dat$cause.sub <- gsub('Legal intervention and operations of war', '4. Legal intervention and operations of war', dat$cause.sub)
 dat$cause.sub <- gsub('Other external causes of accidental injury', '2. Other external causes of accidental injury', dat$cause.sub)
 
-
 library(plyr)
 library(scales)
 
 # create nationalised data
-dat.national = ddply(dat,.(cause.sub,year),summarize,deaths=sum(deaths))
+dat.national = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
+dat.national$rate.adj = with(dat.national,deaths/pop.adj)
+dat.national = dat.national[order(dat.national$cause,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
+
+# create ASDR national data
+dat.national.com.sex = ddply(dat.national,.(cause,year,month,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
+dat.national.com.sex$rate.adj = with(dat.national.com.sex, deaths/pop.adj)
+dat.national.com.sex = merge(dat.national.com.sex,StdPopMF,by='age',all.x=1)
+dat.national.com.sex = dat.national.com.sex[order(dat.national.com.sex$cause,dat.national.com.sex$age,dat.national.com.sex$year,
+                                            dat.national.com.sex$month),]
+dat.national.com.sex = ddply(dat.national.com.sex,.(cause,year,month), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
+dat.national.com.sex$ID = mapvalues(dat.national.com.sex$month, from=sort(unique(dat.national.com.sex$month)),to=month.short)
+dat.national.com.sex$ID = with(dat.national.com.sex,reorder(dat.national.com.sex$ID,month))
 
 library(ggplot2)
 

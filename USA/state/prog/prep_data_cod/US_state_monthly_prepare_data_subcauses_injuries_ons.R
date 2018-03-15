@@ -187,9 +187,50 @@ dat.appended = appendyears(year.start.arg,year.end.arg)
 # reorder appended data
 dat.appended = dat.appended[order(dat.appended$year,dat.appended$cause.group,dat.appended$cause.sub),]
 
+# Add USA label
+dat.appended$iso3 <- "USA"
+
+# add inferred population data by day
+pop.state <- readRDS('../../output/pop_us_infer/statePopulations_infer_by_days_new_years')
+pop.state$fips <- as.integer(pop.state$fips)
+
+# merge deaths and population files
+dat.merged <- merge(dat.appended,pop.state,by=c('sex','age','year','month','fips'))
+
+# reorder
+dat.merged <- dat.merged[order(dat.merged$cause.group,dat.merged$cause.sub,dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+
+# add rates
+dat.merged$rate <- dat.merged$deaths / dat.merged$pop
+dat.merged$rate.adj <- dat.merged$deaths / dat.merged$pop.adj
+
+# move old adjusted rate
+dat.merged$rate.adj.old <- dat.merged$rate.adj
+
+# leap year test
+is.leapyear=function(year){
+    return(((year %% 4 == 0) & (year %% 100 != 0)) | (year %% 400 == 0))
+}
+
+dat.merged$leap <- as.integer(is.leapyear(dat.merged$year))
+
+# adjust deaths to a 31-day month
+# 30-day months = April, June, September, November (4,6,9,11)
+# 31-day months = January, March, May, July, August, October, December (1,3,5,7,8,10,12)
+# 28/29-day months = Februray (2)
+dat.merged$deaths.adj <- ifelse(dat.merged$month %in% c(1,3,5,7,8,10,12), dat.merged$deaths,
+                  ifelse(dat.merged$month %in% c(4,6,9,11), dat.merged$deaths*(31/30),
+                  ifelse((dat.merged$month==2 & dat.merged$leap==0), dat.merged$deaths*(31/28),
+                  ifelse((dat.merged$month==2 & dat.merged$leap==1), dat.merged$deaths*(31/29),
+                  'ERROR'
+                  ))))
+dat.merged$deaths.adj <- as.numeric(dat.merged$deaths.adj)
+
+# calculate new rate.adj
+dat.merged$rate.adj <- dat.merged$deaths.adj / dat.merged$pop.adj
+
 # obtain unique results
 # dat.analyse = unique(dat.appended[,c(1:3)])
-
 
 # create output directory
 ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_data_cod"), FALSE)
