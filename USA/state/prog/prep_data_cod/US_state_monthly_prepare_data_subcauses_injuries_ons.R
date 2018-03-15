@@ -236,7 +236,7 @@ dat.merged$rate.adj <- dat.merged$deaths.adj / dat.merged$pop.adj
 ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_data_cod"), FALSE)
 
 # output deaths file as RDS and csv
-saveRDS(dat.appended,paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start.arg,'_',year.end.arg))
+saveRDS(dat.merged,paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start.arg,'_',year.end.arg))
 
 # output summary file as RDS and csv
 # saveRDS(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg))
