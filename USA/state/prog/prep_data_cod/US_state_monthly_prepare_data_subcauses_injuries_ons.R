@@ -84,10 +84,6 @@ yearsummary_injuries  <- function(x=2000) {
 
         dat.merged$letter = ' '
 
-        #dat.summarised = ddply(dat.merged,.(cause.numeric,cause.group,cause.sub),summarise,deaths=sum(deaths))
-        #dat.summarised$year = x
-        #dat.summarised$letter = ' '
-
 	}
 
 	if(x>=start_year){
@@ -125,50 +121,51 @@ yearsummary_injuries  <- function(x=2000) {
         dat.merged$cause.group = as.character(dat.merged$cause.group)
         dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
 
-        dat.summarised = ddply(dat.merged,.(letter,cause.numeric,cause.group,cause.sub),summarise,deaths=sum(deaths))
-        dat.summarised$year = x
-
 	}
 
     # add agegroup groupings
-  	# dat.merged$agegroup <-
-     #          	ifelse (dat.merged$age<5,   0,
-     #            ifelse (dat.merged$age<15,  5,
-     #            ifelse (dat.merged$age<25,  15,
-     #            ifelse (dat.merged$age<35,  25,
-     #            ifelse (dat.merged$age<45,  35,
-     #            ifelse (dat.merged$age<55,  45,
-     #            ifelse (dat.merged$age<65,  55,
-     #            ifelse (dat.merged$age<75,  65,
-     #            ifelse (dat.merged$age<85,  75,
-     #               	85)))))))))
-    #
+  	dat.merged$agegroup <-
+              	ifelse (dat.merged$age<5,   0,
+                ifelse (dat.merged$age<15,  5,
+                ifelse (dat.merged$age<25,  15,
+                ifelse (dat.merged$age<35,  25,
+                ifelse (dat.merged$age<45,  35,
+                ifelse (dat.merged$age<55,  45,
+                ifelse (dat.merged$age<65,  55,
+                ifelse (dat.merged$age<75,  65,
+                ifelse (dat.merged$age<85,  75,
+                   	85)))))))))
+
 	# # summarise by state,year,month,sex,agegroup
-    # dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.group,fips,year,monthdth,sex,agegroup),deaths=sum(deaths))
-  	# names(dat.summarised)[1:7] <- c('cause','fips','year','month','sex','age','deaths')
-	# dat.summarised <- na.omit(dat.summarised)
+    dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.group,cause.sub,fips,year,monthdth,sex,agegroup),deaths=sum(deaths))
+  	names(dat.summarised)[1:8] <- c('cause.group','cause.sub','fips','year','month','sex','age','deaths')
+	dat.summarised <- na.omit(dat.summarised)
     #
-	# # create an exhaustive list of location sex age month (in this case it should be 51 * 2 * 10 * 12 * 4 = 12240 rows)
-	# fips 	=	c(1,2,4,5,6,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,
-	# 			26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
-	# 			41,42,44,45,46,47,48,49,50,51,53,54,55,56)
-	# month 	= 	c(1:12)
-	# sex 	= 	c(1:2)
-	# age 	= 	c(0,5,15,25,35,45,55,65,75,85)
-	# cause 	=	c('Unintentional','Intentional')
+	# create an exhaustive list of location sex age month (in this case it should be 51 * 2 * 10 * 12 * 4 = 12240 rows)
+	fips 	=	c(1,2,4,5,6,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,
+				26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
+				41,42,44,45,46,47,48,49,50,51,53,54,55,56)
+	month 	= 	c(1:12)
+	sex 	= 	c(1:2)
+	age 	= 	c(0,5,15,25,35,45,55,65,75,85)
+	cause.group 	=	c('Unintentional','Intentional')
+    cause.sub 	=	c(  'Assault','Intentional self-harm','Legal intervention and operations of war',
+                            'Other external causes of accidental injury',
+                            'Complications of medical and surgical care','Transport accidents')
+
     #
-	# complete.grid <- expand.grid(fips=fips,month=month,sex=sex,age=age,cause=cause)
-	# complete.grid$year <- unique(dat.summarised$year)
-    #
-	# # merge deaths counts with complete grid to ensure there are rows with zero deaths
-	# dat.summarised.complete <- merge(complete.grid,dat.summarised,by=c('cause','fips','year','month','sex','age'),all.x='TRUE')
-    #
+	complete.grid <- expand.grid(fips=fips,month=month,sex=sex,age=age,cause.group=cause.group,cause.sub=cause.sub)
+	complete.grid$year <- unique(dat.summarised$year)
+
+	# merge deaths counts with complete grid to ensure there are rows with zero deaths
+	dat.summarised.complete <- merge(complete.grid,dat.summarised,by=c('cause.group','cause.sub','fips','year','month','sex','age'),all.x='TRUE')
+
 	# # assign missing deaths to have value 0
-	# dat.summarised.complete$deaths <- ifelse(is.na(dat.summarised.complete$deaths)==TRUE,0,dat.summarised.complete$deaths)
-    #
-	# print(paste0('total deaths in year ',sum(dat$deaths),', total deaths for injuries ',sum(dat.merged$deaths),' ',sum(dat.summarised$deaths)))
-    #
-  	# return(dat.summarised.complete)
+	dat.summarised.complete$deaths <- ifelse(is.na(dat.summarised.complete$deaths)==TRUE,0,dat.summarised.complete$deaths)
+
+	print(paste0('total deaths in year ',sum(dat$deaths),', total deaths for injuries ',sum(dat.merged$deaths),' ',sum(dat.summarised$deaths)))
+
+  	return(dat.summarised.complete)
 }
 
 # Function to append all the years desired to be summarised into one file
@@ -188,13 +185,11 @@ appendyears  <- function(x=1980, y=1981) {
 dat.appended = appendyears(year.start.arg,year.end.arg)
 
 # reorder appended data
-dat.appended = dat.appended[order(dat.appended$year,dat.appended$cause.group,dat.appended$cause.numeric),]
+dat.appended = dat.appended[order(dat.appended$year,dat.appended$cause.group,dat.appended$cause.sub),]
 
 # obtain unique results
-dat.analyse = unique(dat.appended[,c(1:3)])
+# dat.analyse = unique(dat.appended[,c(1:3)])
 
-# reorder appended data
-dat.appended = dat.appended[order(dat.appended$year,dat.appended$cause.group,dat.appended$cause.numeric),]
 
 # create output directory
 ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_data_cod"), FALSE)
@@ -203,5 +198,5 @@ ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_
 saveRDS(dat.appended,paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start.arg,'_',year.end.arg))
 
 # output summary file as RDS and csv
-saveRDS(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg))
-write.csv(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg,'.csv'))
+# saveRDS(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg))
+# write.csv(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg,'.csv'))
