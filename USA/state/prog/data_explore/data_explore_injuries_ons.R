@@ -263,15 +263,16 @@ pdf(paste0(file.loc,'injury_ons_last_years_plots.pdf'),paper='a4r',height=0,widt
 ggplot(data=dat.last.years, aes(x="",y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
     geom_bar(width = 1, position='fill', stat = "identity") +
     #coord_polar("y", start=0) +
-    xlab('Age') + ylab('Proportion of deaths') +
-    scale_fill_manual(values=colors.injuries, guide = guide_legend(nrow = 1,title = paste0("Type"))) +
-    scale_color_manual(values=colors.injuries, guide = guide_legend(nrow = 1,title = paste0("Type"))) +
+    xlab('Age group') + ylab('Proportion of deaths') +
+    scale_fill_manual(values=colors.injuries, guide = guide_legend(nrow = 1,title = paste0("Injury type"))) +
+    scale_color_manual(values=colors.injuries, guide = guide_legend(nrow = 1,title = paste0("Injury type"))) +
     ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    scale_y_continuous(labels = scales::percent) +
     facet_grid(sex.long~age.long) +
     theme_bw() +
     theme(panel.grid.major = element_blank(),
-    axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank(),
-    axis.title.y=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank(),
+    axis.ticks.x=element_blank(),
+    #axis.title.y=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
