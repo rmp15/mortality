@@ -68,7 +68,7 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,colour=as.factor(year
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
     scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 2,title = paste0("Year"))) +
     facet_grid(~cause) +
-        theme_bw() + theme( panel.grid.major = element_blank(),
+    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',

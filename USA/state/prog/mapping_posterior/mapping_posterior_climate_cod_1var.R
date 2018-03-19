@@ -19,7 +19,7 @@ dname <- as.character(args[5])
 metric <- as.character(args[6])
 cause <- as.character(args[7])
 
-year.start = 1980 ; year.end = 2013 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'External'
+#year.start = 1980 ; year.end = 2013 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'External'
 
 multiple = 0
 
@@ -258,12 +258,19 @@ forest.plot.national.month <- function() {
         scale_size(guide = 'none') +
         facet_wrap(~sex.long) +
         xlab("Month") + ylab('Age') +
-        theme(text = element_text(size = 15),panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+        # theme(text = element_text(size = 15),panel.grid.major = element_blank(),
+        # panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+        # plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+        # strip.background = element_blank(), axis.line = element_line(colour = "black"),
+        # legend.position = 'bottom',legend.justification='center',
+        # legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+        theme_bw() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
         plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-        strip.background = element_blank(), axis.line = element_line(colour = "black"),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
         legend.position = 'bottom',legend.justification='center',
-        legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+        legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+        )
     }
 
     # national month intercept
