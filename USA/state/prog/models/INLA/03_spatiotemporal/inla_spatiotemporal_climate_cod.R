@@ -38,14 +38,14 @@ ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg
 if(cod.arg=='AllCause'){
 	dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start.arg,'_',year.end.arg))
 }
-if(cod.arg%in%c('Intentional','Unintentional'){
-	dat.inla.load <- readRDS(paste0('../../output/prep_data/datus_state_rates_cod_injuries_ons_',year.start.arg,'_',year.end.arg))
+if(cod.arg%in%c('Intentional','Unintentional')){
+	dat.inla.load <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_injuries_ons_',year.start.arg,'_',year.end.arg))
+    dat.inla.load <- subset(dat.inla.load,cause==cod.arg)
 }
 if(cod.arg!='AllCause'){
 	dat.inla.load <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
 	dat.inla.load <- subset(dat.inla.load,cause==cod.arg)
 }
-
 
 # load climate region data
 dat.region <- readRDS(paste0('~/git/mortality/USA/state/output/mapping_posterior/INLA/type1a/1982_2013/maps/USA_state_data'))
@@ -71,7 +71,7 @@ dat.region$id <- NULL
 # merge mortality data with climate region data and get new deaths rates
 dat.inla.load <- merge(dat.inla.load,dat.region,by.x=('fips'),by.y=('STATE_FIPS'),all.x=TRUE)
 
-# load climate data NEED TO GENERALISE
+# load climate data NEED TO GENERALISE?
 # create population-weighted climate regions temperatures
 file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
 dat.climate <- readRDS(paste0(file.loc,'state_weighted_summary_',metric.arg,'_',dname.arg,'_1979_2015.rds'))
