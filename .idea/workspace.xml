@@ -511,13 +511,6 @@
       <option name="presentableId" value="Default" />
       <updated>1517410459211</updated>
     </task>
-    <task id="LOCAL-00058" summary="test commit">
-      <created>1520266930544</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1520266930544</updated>
-    </task>
     <task id="LOCAL-00059" summary="test commit">
       <created>1520267783662</created>
       <option name="number" value="00059" />
@@ -854,7 +847,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521719992949</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="test commit">
+      <created>1521728346066</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1521728346066</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="ToolWindowManager">
