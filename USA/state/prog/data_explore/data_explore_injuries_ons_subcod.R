@@ -20,7 +20,6 @@ source('../../data/objects/objects.R')
 
 # year palette
 colorfunc = colorRampPalette(brewer.pal(6 , "RdBu" ))
-#colorfunc = colorRampPalette(colors.years)
 yearpalette = colorfunc(year.end.arg-year.start.arg +1)
 
 # fix cod names
@@ -39,7 +38,12 @@ dat$cause.sub <- gsub('Other external causes of accidental injury', '2. Other ex
 library(plyr)
 library(scales)
 
-# create nationalised data
+# create nationalised data for broad sub-causes
+dat.nat.broad = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
+dat.nat.broad $rate.adj = with(dat.nat.broad,deaths/pop.adj)
+dat.nat.broad  = dat.nat.broad[order(dat.nat.broad$cause,dat.nat.broad$sex,dat.nat.broad$age,dat.nat.broad$year,dat.nat.broad$month),]
+
+# create nationalised data for sub-sub-causes
 dat.national = ddply(dat,.(cause.sub,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
 dat.national$rate.adj = with(dat.national,deaths/pop.adj)
 dat.national = dat.national[order(dat.national$cause.sub,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
@@ -50,16 +54,63 @@ dat.national.com.sex$rate.adj = with(dat.national.com.sex, deaths/pop.adj)
 dat.national.com.sex = merge(dat.national.com.sex,StdPopMF,by='age',all.x=1)
 dat.national.com.sex = dat.national.com.sex[order(dat.national.com.sex$cause.sub,dat.national.com.sex$age,dat.national.com.sex$year),]
 dat.national.com.sex = ddply(dat.national.com.sex,.(cause.sub,year), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
-# dat.national.com.sex$ID = mapvalues(dat.national.com.sex$month, from=sort(unique(dat.national.com.sex$month)),to=month.short)
-#dat.national.com.sex$ID = with(dat.national.com.sex,reorder(dat.national.com.sex$ID,month))
 
 library(ggplot2)
+
+############################
+# for nationalised death rate data
+############################
+
+pdf(paste0(file.loc,'injury_subcod_age_sex_plots.pdf'),paper='a4r',height=0,width=0)
+
+# 1.
+for(i in c(1,2)){
+    for(j in c(0,5,15,25,35,45,55,65,75,85)){
+        print(ggplot(dat=subset(dat.nat.broad,age==j&sex==i), aes(x=month,y=100000*rate.adj,colour=as.factor(year))) +
+            geom_line() +
+            xlab('Time') +
+            ylab('Death rate (per 100,000)') +
+            ggtitle(paste0(sex.lookup[i],' ',j)) +
+            scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+            scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 2,title = paste0("Year"))) +
+            facet_grid(~cause) +
+            theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+            panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+            legend.position = 'bottom',legend.justification='center', strip.text = element_text(size=10),
+            legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+}}
+
+dev.off()
+
+pdf(paste0(file.loc,'injury_subsubcod_age_sex_plots.pdf'),paper='a4r',height=0,width=0)
+
+# 1.
+for(i in c(1,2)){
+    for(j in c(0,5,15,25,35,45,55,65,75,85)){
+        print(ggplot(dat=subset(dat.national,age==j&sex==i), aes(x=month,y=100000*rate.adj,colour=as.factor(year))) +
+            geom_line() +
+            xlab('Time') +
+            ylab('Death rate (per 100,000)') +
+            ggtitle(paste0(sex.lookup[i],' ',j)) +
+            scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+            scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 2,title = paste0("Year"))) +
+            facet_grid(~cause.sub) +
+            theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+            panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+            panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+            legend.position = 'bottom',legend.justification='center', strip.text = element_text(size=10),
+            legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+}}
+
+dev.off()
 
 ############################
 # for nationalised death count data
 ############################
 
 pdf(paste0(file.loc,'injury_ons_subcod_plots.pdf'),paper='a4r',height=0,width=0)
+
 # 1.
 ggplot(dat=dat.national.com.sex, aes(x=year,y=ASDR*100000,fill=cause.sub)) +
     geom_area(position='stack') +
