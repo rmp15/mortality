@@ -129,7 +129,7 @@ yearsummary_injuries  <- function(x=2000) {
                             'NA'))))))))))
 
         # to fix contraversal poisioning deaths to have their own category if desired
-        dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Other external causes of accidental injury',dat.merged$cause.sub)
+        dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Other external causes of injury',dat.merged$cause.sub)
 
 		# merge cod in ICD 10 coding
 		dat.merged = merge(dat.merged,icd10.lookup,by='cause',all.x=1)
