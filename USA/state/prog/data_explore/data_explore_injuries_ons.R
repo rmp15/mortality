@@ -136,6 +136,9 @@ dev.off()
 # for nationalised data
 ############################
 
+
+# 2.
+
 # subset of last year's data
 dat.last.year = subset(dat.national,year==year.end.arg)
 

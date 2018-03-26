@@ -136,6 +136,28 @@ dev.off()
 # for nationalised data
 ############################
 
+pdf(paste0(file.loc,'cod_plots_by_agesex.pdf'),paper='a4r',height=0,width=0)
+
+# 1.
+for(i in c(1,2)){
+    for(j in c(0,5,15,25,35,45,55,65,75,85)){
+print(ggplot(dat=subset(dat.national,age==j&sex==i), aes(x=month,y=rate.adj*100000,colour=as.factor(year))) +
+    geom_line() +
+    xlab('Time') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ggtitle(paste0(sex.lookup[i],' ',j)) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 2,title = paste0("Year"))) +
+    facet_grid(~cause) +
+    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
+}}
+
+dev.off()
+
 # subset of last year's data
 dat.last.year = subset(dat.national,year==year.end.arg)
 
