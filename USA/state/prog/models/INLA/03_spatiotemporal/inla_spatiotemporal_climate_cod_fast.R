@@ -43,6 +43,12 @@ if(cod.arg%in%c('Intentional','Unintentional')){
     dat.inla.load <- subset(dat.inla.load,cause==cod.arg)
 }
 
+# FINISH THE BELOW CONDITION
+if(cod.arg%in%c('FILL IN','')){
+	dat.inla.load <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start.arg,'_',year.end.arg))
+    dat.inla.load <- subset(dat.inla.load,cause.sub==cod.arg)
+}
+
 # load climate region data
 dat.region <- readRDS(paste0('~/git/mortality/USA/state/output/mapping_posterior/INLA/type1a/1982_2013/maps/USA_state_data'))
 
