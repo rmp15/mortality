@@ -13,6 +13,10 @@ library(foreign)
 source('../../data/objects/objects.R')
 rm(list=setdiff(ls(), c("year.start.arg","year.end.arg","icd9.lookup","icd10.lookup","cod.lookup.10")))
 
+# create output directory
+ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_data_cod"), FALSE)
+ifelse(!dir.exists("../../output/prep_data_cod/cods/"), dir.create("../../output/prep_data_cod/cods/"), FALSE)
+
 # Function to summarise a year's data. x is the year in 2 number form (e.g. 1989 -> 89).
 # y is the number of rows. default (-1) is all rows.
 yearsummary_injuries  <- function(x=2000) {
@@ -138,6 +142,11 @@ yearsummary_injuries  <- function(x=2000) {
 
 	}
 
+    # find unique values of causes of death and sub-groupings and save
+    dat.unique = unique(dat.merged[c('cause','cause.sub')])
+    saveRDS(dat.unique,paste0('../../output/prep_data_cod/cods/cods_',x))
+
+
     # add agegroup groupings
   	dat.merged$agegroup <-
               	ifelse (dat.merged$age<5,   0,
@@ -167,7 +176,7 @@ yearsummary_injuries  <- function(x=2000) {
     cause.sub 	=	c(  'Transport accidents','Accidental falls','Other external causes of injury',
                         'Accidental drowning and submersion','Intentional self-harm','Assault')
 
-    #
+    # create complete grid
 	complete.grid <- expand.grid(fips=fips,month=month,sex=sex,age=age,cause.group=cause.group,cause.sub=cause.sub)
 	complete.grid$year <- unique(dat.summarised$year)
 
@@ -246,11 +255,17 @@ dat.merged$rate.adj <- dat.merged$deaths.adj / dat.merged$pop.adj
 # obtain unique results
 # dat.analyse = unique(dat.appended[,c(1:3)])
 
-# create output directory
-ifelse(!dir.exists("../../output/prep_data_cod"), dir.create("../../output/prep_data_cod"), FALSE)
-
 # output deaths file as RDS and csv
 saveRDS(dat.merged,paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start.arg,'_',year.end.arg))
+
+# append cods and output to single file
+dat.cods = data.frame()
+for(x in c(year.start.arg:year.end.arg)){
+    dat.cod = readRDS(paste0('../../output/prep_data_cod/cods/cods_',x))
+    dat.cods = rbind(dat.cods,dat.cod)
+}
+dat.cods = unique(dat.cods[c('cause','cause.sub')])
+dat.cods = dat.cods[order(dat.cods$cause.sub,dat.cods$cause),]
 
 # output summary file as RDS and csv
 # saveRDS(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg))
