@@ -127,7 +127,7 @@ yearsummary_injuries  <- function(x=2000) {
                             ifelse(dat.merged$letter=='X'&dat.merged$cause.numeric>=850&dat.merged$cause.numeric<=999,'Assault',
                             ifelse(dat.merged$letter=='Y'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=99,'Assault',
                             ifelse(dat.merged$letter=='Y'&dat.merged$cause.numeric>=100&dat.merged$cause.numeric<=349,'Other external causes of injury', # 'event of undeterminded intent'
-                            ifelse(dat.merged$letter=='Y'&dat.merged$cause.numeric>=350&dat.merged$cause.numeric<=369,'LOther external causes of injury',
+                            ifelse(dat.merged$letter=='Y'&dat.merged$cause.numeric>=350&dat.merged$cause.numeric<=369,'Other external causes of injury',
                             ifelse(dat.merged$letter=='Y'&dat.merged$cause.numeric>=400&dat.merged$cause.numeric<=849,'Other external causes of injury',
                             ifelse(dat.merged$letter=='Y'&dat.merged$cause.numeric>=850&dat.merged$cause.numeric<=899,'Other external causes of injury',
                             'NA')))))))))))))
@@ -268,5 +268,5 @@ dat.cods = unique(dat.cods[c('cause','cause.sub')])
 dat.cods = dat.cods[order(dat.cods$cause.sub,dat.cods$cause),]
 
 # output summary file as RDS and csv
-# saveRDS(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg))
-# write.csv(dat.analyse,paste0('../../output/prep_data_cod/datus_injuries_ons_',year.start.arg,'_',year.end.arg,'.csv'))
+saveRDS(dat.cods,paste0('../../output/prep_data_cod/cods/cods_',year.start.arg,'_',year.end.arg))
+write.csv(dat.cods,paste0('../../output/prep_data_cod/cods/cods_',year.start.arg,'_',year.end.arg,'.csv'))
