@@ -267,11 +267,12 @@ for(x in c(year.start.arg:year.end.arg)){
     if(x<start_year) {
         dat.cod$icd = 9
         # merge code with cod lookup
-        dat.test = merge(dat.cod,dat.lookup,by.x='cause',by.y='icd9cm_eq',all.x=TRUE)
+        #dat.test = merge(dat.cod,dat.lookup,by.x='cause',by.y='icd9cm_eq',all.x=TRUE)
     }
     if(x>=start_year) {
         dat.cod$icd = 10
-        dat.test = merge(dat.cod,dat.lookup,by.x='cause',by.y='icd10_eq',all.x=TRUE)
+        # merge code with cod lookup
+        #dat.test = merge(dat.cod,dat.lookup,by.x='cause',by.y='icd10_eq',all.x=TRUE)
 
     }
     dat.cods = rbind(dat.cods,dat.cod)
