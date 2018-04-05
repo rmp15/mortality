@@ -8,7 +8,7 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 clear
 
 declare -i start=1980
-declare -i end=1998
+declare -i end=1989
 declare -a models=(10)
 declare country="USA"
 declare -a dnames=("t2m")
