@@ -31,8 +31,8 @@
       <file leaf-file-name="US_state_monthly_prepare_data_subcauses_injuries_ons_no_drugs.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons_no_drugs.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="135" column="189" lean-forward="false" selection-start-line="135" selection-start-column="189" selection-end-line="135" selection-end-column="189" />
+            <state relative-caret-position="697">
+              <caret line="285" column="1" lean-forward="false" selection-start-line="285" selection-start-column="1" selection-end-line="285" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -528,13 +528,6 @@
       <option name="presentableId" value="Default" />
       <updated>1517410459211</updated>
     </task>
-    <task id="LOCAL-00091" summary="test commit">
-      <created>1521455319557</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1521455319558</updated>
-    </task>
     <task id="LOCAL-00092" summary="test commit">
       <created>1521457126518</created>
       <option name="number" value="00092" />
@@ -871,7 +864,14 @@
       <option name="project" value="LOCAL" />
       <updated>1522943472666</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="test commit">
+      <created>1522943740498</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1522943740498</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1326,8 +1326,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons_no_drugs.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="135" column="189" lean-forward="false" selection-start-line="135" selection-start-column="189" selection-end-line="135" selection-end-column="189" />
+        <state relative-caret-position="697">
+          <caret line="285" column="1" lean-forward="false" selection-start-line="285" selection-start-column="1" selection-end-line="285" selection-end-column="1" />
           <folding />
         </state>
       </provider>
