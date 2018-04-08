@@ -12,7 +12,7 @@ file.loc <- paste0('../../output/data_explore_cod/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
 # load data
-filename <- paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start.arg,'_',year.end.arg)
+filename <- paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_no_drugs_',year.start.arg,'_',year.end.arg)
 dat <- readRDS(filename)
 
 # gender state and age lookup
@@ -42,10 +42,6 @@ library(scales)
 dat.nat.broad = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
 dat.nat.broad $rate.adj = with(dat.nat.broad,deaths/pop.adj)
 dat.nat.broad  = dat.nat.broad[order(dat.nat.broad$cause,dat.nat.broad$sex,dat.nat.broad$age,dat.nat.broad$year,dat.nat.broad$month),]
-
-# create yearly nationalised data for broad sub-causes
-dat.nat.broad.year = ddply(dat.nat.broad,.(cause,year,sex,age),summarize,deaths=sum(deaths),pop.adj=mean(pop.adj))
-dat.nat.broad.year$rate.adj = with(dat.nat.broad.year,deaths/pop.adj)
 
 # create monthly nationalised data for sub-sub-causes
 dat.national = ddply(dat,.(cause.sub,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
@@ -78,7 +74,7 @@ library(ggplot2)
 # for nationalised death rate data
 ############################
 
-pdf(paste0(file.loc,'injury_subcod_age_sex_plots.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'injury_subcod_age_sex_plots_no_drugs.pdf'),paper='a4r',height=0,width=0)
 
 # 1.
 for(i in c(1,2)){
@@ -100,7 +96,7 @@ for(i in c(1,2)){
 
 dev.off()
 
-pdf(paste0(file.loc,'injury_subsubcod_age_sex_plots.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'injury_subsubcod_age_sex_plots_no_drugs.pdf'),paper='a4r',height=0,width=0)
 
 # 1.
 for(i in c(1,2)){
@@ -126,7 +122,7 @@ dev.off()
 # for nationalised ASDR data
 ############################
 
-pdf(paste0(file.loc,'injury_ons_subcod_plots.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'injury_ons_subcod_plots_no_drugs.pdf'),paper='a4r',height=0,width=0)
 
 # 1.
 ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,colour=as.factor(year))) +
@@ -144,20 +140,6 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,colour=as.factor(year
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
 # 2.
-ggplot(dat=dat.nat.broad.year, aes(x=year,y=rate.adj*100000,color=cause)) +
-    #geom_area(position='stack') +
-    geom_line() +
-    xlab('Year') +
-    ylab('Death rate (per 100,000)') +
-    facet_wrap(~sex+age, scales='free') +
-    scale_fill_manual(values=colors.subinjuries, guide = guide_legend(byrow=TRUE,nrow = 2,title = paste0("Sub-cause"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# 3.
 ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause.sub)) +
     #geom_area(position='stack') +
     geom_line() +
@@ -175,11 +157,11 @@ dev.off()
 
 
 ############################
-# for nationalised death rate data by age and sex
+# for nationalised data
 ############################
 
 
-pdf(paste0(file.loc,'injury_ons_subcod_plots.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'injury_ons_subcod_plots_no_drugs.pdf'),paper='a4r',height=0,width=0)
 
 1.
 ggplot(dat=dat.national.com.sex.year, aes(x=year,y=ASDR*100000,fill=cause.sub)) +

@@ -19,7 +19,7 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 echo "plotting deaths rates by broad COD $start - $end";
 
 # runs code
-Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cod.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cod.R $start $end
 
 #################################################
 # 2. DEATH RATES BY INJURY DIVISIONS
@@ -28,7 +28,8 @@ Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cod.R $start $e
 echo "plotting deaths rates by injury sub-COD $start - $end";
 
 # runs code
-Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons.R $start $end
+
 
 #################################################
 # 2. DEATH RATES BY INJURY SUB-DIVISIONS
@@ -37,4 +38,4 @@ Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons.R 
 echo "plotting deaths rates by injury subsub-COD $start - $end";
 
 # runs code
-#Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R $start $end
+Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R $start $end
