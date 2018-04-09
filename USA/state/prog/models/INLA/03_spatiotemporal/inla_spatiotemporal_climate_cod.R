@@ -16,6 +16,7 @@ year.start.analysis.arg <- as.numeric(args[9])
 year.end.analysis.arg <- as.numeric(args[10])
 cod.arg <- as.character(args[11]) ; cod.arg <- gsub('_',' ',cod.arg)
 fast.arg <- as.numeric(args[12])
+contiguous.arg <- as.numeric(args[13])
 
 # age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2013 ; type.arg = 10 ;
 # cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
@@ -62,9 +63,6 @@ names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
 # create lookup table for climate regions
 regions.lookup <- data.frame(climate_region=sort(unique(dat.merged$climate_region)))
 regions.lookup$ID.clim <- seq(nrow(regions.lookup))
-
-# export climate region table
-#saveRDS(regions.lookup,'../../data/fips_lookup/climate_region_lookup')
 
 dat.merged <- merge(dat.merged,regions.lookup,by='climate_region')
 
