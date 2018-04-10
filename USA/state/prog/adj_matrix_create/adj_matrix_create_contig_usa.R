@@ -21,8 +21,10 @@ attr(USA.gen,'data') <- shapefile.data
 # create lookup for fips and DRAWSEQ
 drawseq.lookup <- as.data.frame(cbind(DRAWSEQ=shapefile.data$DRAWSEQ,fips=shapefile.data$fips))
 
-# load rgdal and spdep
-#library(rgdal)
+# convert DRAWSEQ row to go from 1-49 for INLA to work
+drawseq.lookup$DRAWSEQ = 1:nrow(drawseq.lookup)
+
+# load spdep
 library(spdep)
 
 # create adjacency matrix
