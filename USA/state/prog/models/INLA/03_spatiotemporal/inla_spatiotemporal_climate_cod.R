@@ -18,9 +18,10 @@ cod.arg <- as.character(args[11]) ; cod.arg <- gsub('_',' ',cod.arg)
 fast.arg <- as.numeric(args[12])
 contig.arg <- as.numeric(args[13])
 
+# for test runs
 # age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2013 ; type.arg = 10 ;
 # cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
-# year.end.analysis.arg = 1989 ; cod.arg = 'Cardiopulmonary'; fast.arg = 1 ; contiguous.arg = 0
+# year.end.analysis.arg = 1989 ; cod.arg = 'Cardiopulmonary'; fast.arg = 1 ; contig.arg = 1
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','minus1')
@@ -33,7 +34,7 @@ years <- year.start.arg:year.end.arg
 
 require(mailR)
 
-# create files for output
+# create file location for output
 ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
 
 # load data and filter results
@@ -136,66 +137,58 @@ if(fast.arg==2){
 }
 
 # prep data for output
-if(cod.arg!='AllCause'){
-    # save all parameters of INLA model
-    parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_parameters')
-    #mod$misc <- NULL ; mod$.args$.parent.frame <- NULL
-    if(fast.arg==1){parameters.name = paste0(parameters.name,'_fast')}
-    if(fast.arg==2){parameters.name = paste0(parameters.name,'_faster')}
-    if(contig == 1){parameters.name = paste0(parameters.name,'_contig')}
-    saveRDS(mod,paste0(file.loc,'/',parameters.name))
 
-    # save summary of INLA model
-    summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_summary')
-    inla.summary.mod <- summary(mod)
-    if(fast.arg==1){summary.name = paste0(summary.name,'_fast')}
-    if(fast.arg==2){summary.name = paste0(summary.name,'_faster')}
-    if(contig == 0){summary.name = paste0(summary.name,'.txt')}
-    if(contig == 1){summary.name = paste0(summary.name,'_contig.txt')}
-    capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))
+# output string for filenames
+output.string = paste0('USA_rate_pred_type',type.selected,'_',age.arg,'_',sex.lookup[sex.arg],'_',year.start.arg,'_',year.end.arg,'_',dname.arg,'_',metric.arg)
 
-    # save RDS of INLA results
-    plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
-    RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause)
-    if(fast.arg==1){RDS.name = paste0(RDS.name,'_fast')}
-    if(fast.arg==2){RDS.name = paste0(RDS.name,'_faster')}
-    if(contig == 1){RDS.name = paste0(RDS.name,'_contig')}
-    saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
-}
+# save all parameters of INLA model
+parameters.name <- paste0(output.string)
+if(cod.arg!='AllCause'){parameters.name = paste0(parameters.name,'_',cod.arg,'_parameters')}
+if(cod.arg=='AllCause'){parameters.name = paste0(parameters.name,'_parameters')}
+if(fast.arg==1){parameters.name = paste0(parameters.name,'_fast')}
+if(fast.arg==2){parameters.name = paste0(parameters.name,'_faster')}
+if(contig.arg == 1){parameters.name = paste0(parameters.name,'_contig')}
+#mod$misc <- NULL ; mod$.args$.parent.frame <- NULL
+saveRDS(mod,paste0(file.loc,'/',parameters.name))
 
-if(cod.arg =='AllCause'){
-    # save all parameters of INLA model
-    parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_parameters')
-    #mod$misc <- NULL ; mod$.args$.parent.frame <- NULL
-    if(contig == 1){parameters.name = paste0(parameters.name,'_contig')}
-    saveRDS(mod,paste0(file.loc,'/',parameters.name))
+# save summary of INLA model
+summary.name <- paste0(output.string)
+if(cod.arg!='AllCause'){summary.name = paste0(summary.name,'_',cod.arg,'_summary')}
+if(cod.arg=='AllCause'){summary.name = paste0(summary.name,'_summary')}
+if(fast.arg==1){summary.name = paste0(summary.name,'_fast')}
+if(fast.arg==2){summary.name = paste0(summary.name,'_faster')}
+if(contig.arg == 0){summary.name = paste0(summary.name,'.txt')}
+if(contig.arg == 1){summary.name = paste0(summary.name,'_contig.txt')}
+inla.summary.mod <- summary(mod)
+capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))
 
-    # save summary of INLA model
-    summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_summary')
-    inla.summary.mod <- summary(mod)
-    if(contig == 0){summary.name = paste0(summary.name,'.txt')}
-    if(contig == 1){summary.name = paste0(summary.name,'_contig.txt')}
-    capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))
+# save RDS of INLA results
+RDS.name <- paste0(output.string)
+if(cod.arg!='AllCause'){RDS.name = paste0(RDS.name,'_',cod.arg)}
+if(cod.arg=='AllCause'){RDS.name = paste0(RDS.name)}
+if(fast.arg==1){RDS.name = paste0(RDS.name,'_fast')}
+if(fast.arg==2){RDS.name = paste0(RDS.name,'_faster')}
+if(contig.arg == 1){RDS.name = paste0(RDS.name,'_contig')}
+plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
+saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
 
-    # save RDS of INLA results
-    plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
-    RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg)
-    if(contig == 1){RDS.name = paste0(RDS.name,'_contig')}
-    saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
-}
+# send email notification
 
 # subject for email
-subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cause,' ',year.start.arg,'-',year.end.arg)
-if(fast.arg==0){subject = paste0(subject,' non-pw done')}
-if(fast.arg==1){subject = paste0(subject,' fast non-pw done')}
-if(fast.arg==2){subject = paste0(subject,' faster non-pw done')}
+subject.arg = paste0(sex.lookup[sex.arg],' ',age.arg,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.arg,'-',year.end.arg)
+if(contig.arg == 1){subject.arg = paste0(subject.arg,' contig')}
+if(fast.arg==0){subject.arg = paste0(subject.arg,' non-pw done')}
+if(fast.arg==1){subject.arg = paste0(subject.arg,' fast non-pw done')}
+if(fast.arg==2){subject.arg = paste0(subject.arg,' faster non-pw done')}
+
+print(subject.arg)
 
 # email notification
 sender = "emailr349@gmail.com"
 recipients = c("r.parks15@imperial.ac.uk")
 send.mail(from = sender,
 to = recipients,
-subject = subject,
+subject = subject.arg,
 body = "Well done",
 smtp = list(host.name = "smtp.gmail.com", port = 465,
 user.name = "emailr349@gmail.com",
