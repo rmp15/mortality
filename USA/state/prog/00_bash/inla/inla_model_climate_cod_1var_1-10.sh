@@ -14,7 +14,7 @@ declare -a models=(10)
 declare -i start=1980
 declare -i end=2013
 declare -i start2=1980
-declare -i end2=1989
+declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
 declare metric="meanc3"
@@ -59,7 +59,7 @@ for model in "${models[@]}"; do
 
 echo "combining results into one file from INLA model $model years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start2 $end2 $country 10 $dname $metric $cod $contig;
+#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start2 $end2 $country 10 $dname $metric $cod $contig;
 
 done;
 
