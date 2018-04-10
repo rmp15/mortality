@@ -1,54 +1,52 @@
 # functions to enable age group and sex to be selected
-inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,cluster,cause='Allcause',contig) {
-    
-    dat.inla <- dat.merged
 
-    # filter Hawaii and Alaska if required
-    if(contig == 1){
-        dat.inla = subset(dat.inla,!(DRAWSEQ %in% c('1','51')))
-    }
-    
-    # filter all data by sex age and month
-    sex <- sex.sel
-    age <- age.sel
-    fit.years <- year.start:year.end
-    dat.inla <- dat.inla[dat.inla$sex==sex & dat.inla$age==age & dat.inla$year %in% fit.years,]
-    
-    # load correct drawseq lookup
-    if(contig == 0){
-        drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
-    }
-    if(contig == 1){
-        drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')
-    }
-    
-    # extract unique table of year and months to generate year.month
-    dat.year.month <- unique(dat.inla[,c('year', 'month')])
-    dat.year.month$month <- as.integer(dat.year.month$month)
-    dat.year.month$year.month <- seq(nrow(dat.year.month))
-    
-    # merge year.month table with population table to create year.month id
-    dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
-    
-    # make sure that the order of the main data file matches that of the shapefile,
-    # otherwise the model will not be valid
-    dat.inla <- dat.inla[order(dat.inla$DRAWSEQ,dat.inla$sex,dat.inla$age,dat.inla$year.month),]
-    
-    # add ID column for INLA
-    dat.inla$ID <- dat.inla$DRAWSEQ
-    
-    # fix rownames
-    rownames(dat.inla) <- 1:nrow(dat.inla)
-    
-    # variables for INLA model
-    
-    dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
-    dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
-    dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
-    dat.inla$e <- 1:nrow(dat.inla)
-    
-    # INLA models
-    source('../models/INLA/03_spatiotemporal/inla_models_cod.R')
+# filter all data by sex age and month
+sex <- sex.arg
+age <- age.arg
+fit.years <- year.start.arg:year.end.arg
+dat.inla <- dat.merged[dat.merged$sex==sex & dat.merged$age==age & dat.merged$year %in% fit.years,]
+
+# filter Hawaii and Alaska if required and load correct drawseq lookup
+if(contig == 0){
+    drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
+}
+if(contig == 1){
+    drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')
+    dat.inla = subset(dat.inla,!(DRAWSEQ %in% c('1','51')))
+}
+
+# extract unique table of year and months to generate year.month
+dat.year.month <- unique(dat.inla[,c('year', 'month')])
+dat.year.month$month <- as.integer(dat.year.month$month)
+dat.year.month$year.month <- seq(nrow(dat.year.month))
+
+# merge year.month table with population table to create year.month id
+dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
+
+# make sure that the order of the main data file matches that of the shapefile,
+# otherwise the model will not be valid
+dat.inla <- dat.inla[order(dat.inla$DRAWSEQ,dat.inla$sex,dat.inla$age,dat.inla$year.month),]
+
+# add ID column for INLA
+dat.inla$ID <- dat.inla$DRAWSEQ
+
+# fix rownames
+rownames(dat.inla) <- 1:nrow(dat.inla)
+
+# variables for INLA model
+dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
+dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
+dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
+dat.inla$e <- 1:nrow(dat.inla)
+
+# create directory for output
+file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age)
+ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
+
+# INLA models
+source('../models/INLA/03_spatiotemporal/inla_models_cod.R')
+
+inla.function.climate <- function(){
 
     # INLA model
     system.time(mod <-
@@ -58,151 +56,12 @@ inla.function.climate <- function(age.sel,sex.sel,year.start,year.end,type,clust
     E = pop.adj,
     control.compute = list(dic=TRUE),
     control.predictor = list(link = 1),
-    #verbose=TRUE
     ))
-    
-    # create directory for output
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.sel)
-    ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
-    
-    if(cod.arg!='AllCause'){
-        # save all parameters of INLA model
-        parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_parameters')
-        #mod$misc <- NULL
-        #mod$.args$.parent.frame <- NULL
-        if(contig == 1){
-            parameters.name = paste0(parameters.name,'_contig')
-            }
-        if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
-        if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
-
-        # save summary of INLA model
-        summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_summary.txt')
-        inla.summary.mod <- summary(mod)
-        if(contig == 1){
-            summary.name = paste0(summary.name,'_contig.txt')
-        }
-        if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
-        if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
-
-        # capture output for emailing purposes
-        email.content <- capture.output(inla.summary.mod)
-
-        # save RDS of INLA results
-        plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
-
-        # name of RDS output file then save
-        RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause)
-        if(contig == 1){
-            RDS.name = paste0(RDS.name,'_contig')
-        }
-        if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
-        if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
-    }
-
-    if(cod.arg =='AllCause'){
-        # save all parameters of INLA model
-        parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_parameters')
-        #mod$misc <- NULL
-        #mod$.args$.parent.frame <- NULL
-        if(contig == 1){
-            parameters.name = paste0(parameters.name,'_contig')
-            }
-        if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
-        if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
-
-        # save summary of INLA model
-        summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_summary.txt')
-        inla.summary.mod <- summary(mod)
-        if(contig == 1){
-            summary.name = paste0(summary.name,'_contig.txt')
-        }
-        if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
-        if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
-
-        # capture output for emailing purposes
-        email.content <- capture.output(inla.summary.mod)
-
-        # save RDS of INLA results
-        plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
-
-        # name of RDS output file then save
-        RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg)
-        if(contig == 1){
-            RDS.name = paste0(RDS.name,'_contig')
-        }
-        if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
-        if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
-    }
-    
-    sender <- "emailr349@gmail.com"
-    recipients <- c("r.parks15@imperial.ac.uk")
-    send.mail(from = sender,
-    to = recipients,
-    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,'_',cause,' non-pw done'),
-    body = "Well done",
-    smtp = list(host.name = "smtp.gmail.com", port = 465,
-    user.name = "emailr349@gmail.com",
-    passwd = "inlaisthebest", ssl = TRUE),
-    authenticate = TRUE,
-    send = TRUE)
-
-    
-    # this bracket ends the function at the top of the script
 }
 
 # functions to enable age group and sex to be selected with rough run to improve speed
-inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,cluster,cause='Allcause') {
-    
-    dat.inla <- dat.merged
+inla.function.climate.fast <- function() {
 
-    # filter Hawaii and Alaska if required
-    if(contig == 1){
-        dat.inla = subset(dat.inla,!(DRAWSEQ %in% c('1','51')))
-    }
-
-    # filter all data by sex age and month
-    sex <- sex.sel
-    age <- age.sel
-    fit.years <- year.start:year.end
-    dat.inla <- dat.inla[dat.inla$sex==sex & dat.inla$age==age & dat.inla$year %in% fit.years,]
-
-    # load correct drawseq lookup
-    if(contig == 0){
-        drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
-    }
-    if(contig == 1){
-        drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')
-    }
-
-    # extract unique table of year and months to generate year.month
-    dat.year.month <- unique(dat.inla[,c('year', 'month')])
-    dat.year.month$month <- as.integer(dat.year.month$month)
-    dat.year.month$year.month <- seq(nrow(dat.year.month))
-
-    # merge year.month table with population table to create year.month id
-    dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
-
-    # make sure that the order of the main data file matches that of the shapefile,
-    # otherwise the model will not be valid
-    dat.inla <- dat.inla[order(dat.inla$DRAWSEQ,dat.inla$sex,dat.inla$age,dat.inla$year.month),]
-
-    # add ID column for INLA
-    dat.inla$ID <- dat.inla$DRAWSEQ
-
-    # fix rownames
-    rownames(dat.inla) <- 1:nrow(dat.inla)
-
-    # variables for INLA model
-
-    dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
-    dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
-    dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
-    dat.inla$e <- 1:nrow(dat.inla)
-
-    # INLA models
-    source('../models/INLA/03_spatiotemporal/inla_models_cod.R')
-    
     # INLA model rough
     system.time(mod.rough <-
     inla(formula = fml,
@@ -212,7 +71,6 @@ inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,
     control.compute = list(dic=TRUE),
     control.predictor = list(link = 1),
     control.inla = list(diagonal=10000, int.strategy='eb',strategy='gaussian'),
-    #verbose=TRUE
     ))
     
     # INLA model proper
@@ -225,149 +83,11 @@ inla.function.climate.fast <- function(age.sel,sex.sel,year.start,year.end,type,
     control.predictor = list(link = 1),
     control.inla=list(diagonal=0),
     control.mode = list(result = mod.rough, restart = TRUE),
-    #verbose=TRUE
     ))
-    
-   # create directory for output
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.sel)
-    ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
-    
-    if(cod.arg!='AllCause'){
-        # save all parameters of INLA model
-        parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_parameters_fast')
-        #mod$misc <- NULL
-        #mod$.args$.parent.frame <- NULL
-        if(contig == 1){
-            parameters.name = paste0(parameters.name,'_contig')
-            }
-        if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
-        if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
-
-        # save summary of INLA model
-        summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_summary_fast.txt')
-        if(contig == 1){
-            summary.name = paste0(parameters.name,'_contig.txt')
-        }
-        inla.summary.mod <- summary(mod)
-        if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
-        if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
-
-        # capture output for emailing purposes
-        email.content <- capture.output(inla.summary.mod)
-
-        # save RDS of INLA results
-        plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
-
-        # name of RDS output file then save
-        RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_fast')
-        if(contig == 1){
-            RDS.name = paste0(RDS.name,'_contig')
-        }
-        if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
-        if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
-    }
-
-    if(cod.arg =='AllCause'){
-        # save all parameters of INLA model
-        parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_parameters_fast')
-        #mod$misc <- NULL
-        #mod$.args$.parent.frame <- NULL
-        if(contig == 1){
-            parameters.name = paste0(parameters.name,'_contig')
-            }
-        if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
-        if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
-
-        # save summary of INLA model
-        summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_summary_fast.txt')
-        inla.summary.mod <- summary(mod)
-        if(contig == 1){
-            summary.name = paste0(parameters.name,'_contig.txt')
-        }
-        if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
-        if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
-
-        # capture output for emailing purposes
-        email.content <- capture.output(inla.summary.mod)
-
-        # save RDS of INLA results
-        plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
-
-        # name of RDS output file then save
-        RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_fast')
-        if(contig == 1){
-            RDS.name = paste0(RDS.name,'_contig')
-        }
-        if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
-        if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
-    }
-
-    sender <- "emailr349@gmail.com"
-    recipients <- c("r.parks15@imperial.ac.uk")
-    send.mail(from = sender,
-    to = recipients,
-    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,'_',cause,' fast non-pw done'),
-    body = "Well done",
-    smtp = list(host.name = "smtp.gmail.com", port = 465,
-    user.name = "emailr349@gmail.com",
-    passwd = "inlaisthebest", ssl = TRUE),
-    authenticate = TRUE,
-    send = TRUE)
-    
-    # this bracket ends the function at the top of the script
 }
 
 # functions to enable age group and sex to be selected with faster AR1 structure in addition to rough run
-inla.function.climate.faster <- function(age.sel,sex.sel,year.start,year.end,type,cluster,cause='Allcause') {
-    
-    dat.inla <- dat.merged
-
-    # filter Hawaii and Alaska if required
-    if(contig == 1){
-        dat.inla = subset(dat.inla,!(DRAWSEQ %in% c('1','51')))
-    }
-
-    # filter all data by sex age and month
-    sex <- sex.sel
-    age <- age.sel
-    fit.years <- year.start:year.end
-    dat.inla <- dat.inla[dat.inla$sex==sex & dat.inla$age==age & dat.inla$year %in% fit.years,]
-
-    # load correct drawseq lookup
-    if(contig == 0){
-        drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')
-    }
-    if(contig == 1){
-        drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')
-    }
-
-    # extract unique table of year and months to generate year.month
-    dat.year.month <- unique(dat.inla[,c('year', 'month')])
-    dat.year.month$month <- as.integer(dat.year.month$month)
-    dat.year.month$year.month <- seq(nrow(dat.year.month))
-
-    # merge year.month table with population table to create year.month id
-    dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
-
-    # make sure that the order of the main data file matches that of the shapefile,
-    # otherwise the model will not be valid
-    dat.inla <- dat.inla[order(dat.inla$DRAWSEQ,dat.inla$sex,dat.inla$age,dat.inla$year.month),]
-
-    # add ID column for INLA
-    dat.inla$ID <- dat.inla$DRAWSEQ
-
-    # fix rownames
-    rownames(dat.inla) <- 1:nrow(dat.inla)
-
-    # variables for INLA model
-
-    dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
-    dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
-    dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
-    dat.inla$e <- 1:nrow(dat.inla)
-
-    # INLA models
-    source('../models/INLA/03_spatiotemporal/inla_models_cod.R')
+inla.function.climate.faster <- function() {
     
     # INLA model rough
     system.time(mod.rough <-
@@ -393,95 +113,78 @@ inla.function.climate.faster <- function(age.sel,sex.sel,year.start,year.end,typ
     control.mode = list(result = mod.rough, restart = TRUE),
     #verbose=TRUE
     ))
-    
-    # create directory for output
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.sel)
-    ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
-    
-    if(cod.arg!='AllCause'){
-        # save all parameters of INLA model
-        parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_parameters_faster') # CURRRENTLY HERE!!!
-        #mod$misc <- NULL
-        #mod$.args$.parent.frame <- NULL
-        if(contig == 1){
-            parameters.name = paste0(parameters.name,'_contig')
-            }
-        if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
-        if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
-
-        # save summary of INLA model
-        summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_summary_faster.txt')
-        inla.summary.mod <- summary(mod)
-        if(contig == 1){
-            summary.name = paste0(parameters.name,'_contig.txt')
-        }
-        if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
-        if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
-
-        # capture output for emailing purposes
-        email.content <- capture.output(inla.summary.mod)
-
-        # save RDS of INLA results
-        plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
-
-        # name of RDS output file then save
-        RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_faster')
-        if(contig == 1){
-            RDS.name = paste0(RDS.name,'_contig')
-        }
-        if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
-        if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
-    }
-
-    if(cod.arg =='AllCause'){
-        # save all parameters of INLA model
-        parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_parameters_faster')
-        #mod$misc <- NULL
-        #mod$.args$.parent.frame <- NULL
-        if(contig == 1){
-            parameters.name = paste0(parameters.name,'_contig')
-            }
-        if(cluster==0){saveRDS(mod,paste0(file.loc,'/',parameters.name))}
-        if(cluster==1){saveRDS(mod,paste0('../output/pred/',parameters.name))}
-
-        # save summary of INLA model
-        summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_summary_faster.txt')
-        inla.summary.mod <- summary(mod)
-        if(contig == 1){
-            summary.name = paste0(parameters.name,'_contig.txt')
-        }
-        if(cluster==0){capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))}
-        if(cluster==1){capture.output(inla.summary.mod,file=paste0('../output/summary/',summary.name))}
-
-        # capture output for emailing purposes
-        email.content <- capture.output(inla.summary.mod)
-
-        # save RDS of INLA results
-        plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
-
-        # name of RDS output file then save
-        RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_faster')
-        if(contig == 1){
-            RDS.name = paste0(RDS.name,'_contig')
-        }
-        if(cluster==0){saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))}
-        if(cluster==1){saveRDS(plot.dat,paste0('../output/pred/',RDS.name))}
-    }
-    
-    sender <- "emailr349@gmail.com"
-    recipients <- c("r.parks15@imperial.ac.uk")
-    send.mail(from = sender,
-    to = recipients,
-    subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,'_',cause,' faster non-pw done'),
-    body = "Well done",
-    smtp = list(host.name = "smtp.gmail.com", port = 465,
-    user.name = "emailr349@gmail.com",
-    passwd = "inlaisthebest", ssl = TRUE),
-    authenticate = TRUE,
-    send = TRUE)
-    
-    # this bracket ends the function at the top of the script
 }
+
+# prep data for output
+if(cod.arg!='AllCause'){
+    # save all parameters of INLA model
+    parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_parameters')
+    #mod$misc <- NULL ; mod$.args$.parent.frame <- NULL
+    if(fast.arg==1){parameters.name = paste0(parameters.name,'_fast')}
+    if(fast.arg==2){parameters.name = paste0(parameters.name,'_faster')}
+    if(contig == 1){parameters.name = paste0(parameters.name,'_contig')}
+    saveRDS(mod,paste0(file.loc,'/',parameters.name))
+
+    # save summary of INLA model
+    summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause,'_summary')
+    inla.summary.mod <- summary(mod)
+    if(fast.arg==1){summary.name = paste0(summary.name,'_fast')}
+    if(fast.arg==2){summary.name = paste0(summary.name,'_faster')}
+    if(contig == 0){summary.name = paste0(summary.name,'.txt')}
+    if(contig == 1){summary.name = paste0(summary.name,'_contig.txt')}
+    capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))
+
+    # save RDS of INLA results
+    plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
+    RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_',cause)
+    if(fast.arg==1){RDS.name = paste0(RDS.name,'_fast')}
+    if(fast.arg==2){RDS.name = paste0(RDS.name,'_faster')}
+    if(contig == 1){RDS.name = paste0(RDS.name,'_contig')}
+    saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
+}
+
+if(cod.arg =='AllCause'){
+    # save all parameters of INLA model
+    parameters.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_parameters')
+    #mod$misc <- NULL ; mod$.args$.parent.frame <- NULL
+    if(contig == 1){parameters.name = paste0(parameters.name,'_contig')}
+    saveRDS(mod,paste0(file.loc,'/',parameters.name))
+
+    # save summary of INLA model
+    summary.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg,'_summary')
+    inla.summary.mod <- summary(mod)
+    if(contig == 0){summary.name = paste0(summary.name,'.txt')}
+    if(contig == 1){summary.name = paste0(summary.name,'_contig.txt')}
+    capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))
+
+    # save RDS of INLA results
+    plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
+    RDS.name <- paste0('USA_rate_pred_type',type.selected,'_',age,'_',sex.lookup[sex],'_',year.start,'_',year.end,'_',dname.arg,'_',metric.arg)
+    if(contig == 1){RDS.name = paste0(RDS.name,'_contig')}
+    saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
+}
+
+# subject for email
+subject = paste0(sex.lookup[sex.sel],' ',age.sel,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cause,' ',year.start.arg,'-',year.end.arg)
+
+if(fast.arg==0){subject = paste0(subject,' non-pw done')}
+if(fast.arg==1){subject = paste0(subject,' fast non-pw done')}
+if(fast.arg==2){subject = paste0(subject,' faster non-pw done')}
+
+# email notification
+sender = "emailr349@gmail.com"
+recipients = c("r.parks15@imperial.ac.uk")
+send.mail(from = sender,
+to = recipients,
+subject = subject,
+body = "Well done",
+smtp = list(host.name = "smtp.gmail.com", port = 465,
+user.name = "emailr349@gmail.com",
+passwd = "inlaisthebest", ssl = TRUE),
+authenticate = TRUE,
+send = TRUE)
+
+# OTHER LEGACY FUNCTIONS
 
 # function to enable age group and sex to be selected
 inla.function.climate.pw <- function(age.sel,sex.sel,year.start,year.end,type,cluster) {
@@ -594,8 +297,8 @@ fml<- deaths.adj ~
 	# space-time interaction
         f(ID3,model="iid", group=year.month4,                                   		# type II space-time interaction
  	 control.group=list(model="rw1")) +
-        #control.group=list(model="rw2")) +                                    
-        #control.group=list(model="exchangeable")) + 
+        #control.group=list(model="rw2")) +
+        #control.group=list(model="exchangeable")) +
         # overdispersion term
         f(e, model = "iid")                                                     		# overdispersion term
 }
@@ -624,8 +327,8 @@ fml<- deaths.adj ~
 	# space-time interaction
         f(ID3,model="iid", group=year.month4,                                           # type II space-time interaction
  	 control.group=list(model="rw1")) +
-        #control.group=list(model="rw2")) +                                    
-        #control.group=list(model="exchangeable")) + 
+        #control.group=list(model="rw2")) +
+        #control.group=list(model="exchangeable")) +
         # overdispersion term
         f(e, model = "iid")                                                             # overdispersion term
 }
@@ -1367,7 +1070,6 @@ inla.function.nat <- function(age.sel,sex.sel,year.start,year.end,type,forecast.
     
     # this bracket ends the function at the top of the script
 }
-
 
 # function to enable age group and sex to be selected
 inla.function.forecast.state <- function(age.sel,sex.sel,year.start,year.end,pwl,type,forecast.length,knot.year) {

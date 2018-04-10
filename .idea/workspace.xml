@@ -21,9 +21,26 @@
       <file leaf-file-name="inla_spatiotemporal_climate_cod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1320">
-              <caret line="88" column="17" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+            <state relative-caret-position="809">
+              <caret line="102" column="1" lean-forward="true" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inla_functions_cod.R" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_functions_cod.R">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="91">
+              <caret line="86" column="1" lean-forward="false" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
+              <folding>
+                <element signature="e#7615#23488#0" expanded="false" />
+                <element signature="e#23685#35022#0" expanded="false" />
+                <element signature="e#35208#47400#0" expanded="false" />
+                <element signature="e#47578#54370#0" expanded="false" />
+                <element signature="e#54539#71412#0" expanded="false" />
+                <element signature="e#71569#85304#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -48,27 +65,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inla_functions_cod.R" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_functions_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="483" column="1" lean-forward="false" selection-start-line="483" selection-start-column="1" selection-end-line="483" selection-end-column="1" />
-              <folding>
-                <element signature="e#21323#37270#0" expanded="false" />
-                <element signature="e#37467#48804#0" expanded="false" />
-                <element signature="e#48990#61182#0" expanded="false" />
-                <element signature="e#61360#68152#0" expanded="false" />
-                <element signature="e#68322#85195#0" expanded="false" />
-                <element signature="e#85352#99087#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="inla_models_cod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6450">
+            <state relative-caret-position="772">
               <caret line="430" column="5" lean-forward="false" selection-start-line="430" selection-start-column="5" selection-end-line="430" selection-end-column="5" />
               <folding />
             </state>
@@ -78,8 +78,8 @@
       <file leaf-file-name="adj_matrix_create_contig_usa.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/adj_matrix_create/adj_matrix_create_contig_usa.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="1" lean-forward="false" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="40" />
+            <state relative-caret-position="270">
+              <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -89,7 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>letter</find>
       <find>heatmap</find>
       <find>month.short</find>
       <find>age.colours</find>
@@ -119,6 +118,7 @@
       <find>geom_vline</find>
       <find>Drugs</find>
       <find>drugs</find>
+      <find>email.content</find>
     </findStrings>
     <replaceStrings>
       <replace>output.loc</replace>
@@ -187,8 +187,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="x" value="-1280" />
+    <option name="y" value="-472" />
+    <option name="width" value="1280" />
+    <option name="height" value="1024" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -578,13 +580,6 @@
       <option name="presentableId" value="Default" />
       <updated>1517410459211</updated>
     </task>
-    <task id="LOCAL-00101" summary="test commit">
-      <created>1521482955048</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1521482955048</updated>
-    </task>
     <task id="LOCAL-00102" summary="test commit">
       <created>1521709565198</created>
       <option name="number" value="00102" />
@@ -921,11 +916,18 @@
       <option name="project" value="LOCAL" />
       <updated>1523292224751</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL-00150" summary="test commit">
+      <created>1523293031202</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1523293031203</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="-1280" y="-472" width="1280" height="1024" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4427754" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -997,7 +999,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1081,6 +1083,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
           <caret line="8" column="30" lean-forward="true" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1149,6 +1152,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="76" column="111" lean-forward="false" selection-start-line="76" selection-start-column="111" selection-end-line="76" selection-end-column="111" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1157,6 +1161,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="43" lean-forward="false" selection-start-line="0" selection-start-column="43" selection-end-line="0" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1330,26 +1335,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/adj_matrix_create/adj_matrix_create_contig_usa.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="1" lean-forward="false" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_2var.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1005">
           <caret line="67" column="63" lean-forward="false" selection-start-line="67" selection-start-column="63" selection-end-line="67" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6450">
-          <caret line="430" column="5" lean-forward="false" selection-start-line="430" selection-start-column="5" selection-end-line="430" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1362,25 +1351,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="772">
+          <caret line="430" column="5" lean-forward="false" selection-start-line="430" selection-start-column="5" selection-end-line="430" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/adj_matrix_create/adj_matrix_create_contig_usa.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="88" column="17" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+        <state relative-caret-position="809">
+          <caret line="102" column="1" lean-forward="true" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_functions_cod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="483" column="1" lean-forward="false" selection-start-line="483" selection-start-column="1" selection-end-line="483" selection-end-column="1" />
+        <state relative-caret-position="91">
+          <caret line="86" column="1" lean-forward="false" selection-start-line="86" selection-start-column="1" selection-end-line="86" selection-end-column="1" />
           <folding>
-            <element signature="e#21323#37270#0" expanded="false" />
-            <element signature="e#37467#48804#0" expanded="false" />
-            <element signature="e#48990#61182#0" expanded="false" />
-            <element signature="e#61360#68152#0" expanded="false" />
-            <element signature="e#68322#85195#0" expanded="false" />
-            <element signature="e#85352#99087#0" expanded="false" />
+            <element signature="e#7615#23488#0" expanded="false" />
+            <element signature="e#23685#35022#0" expanded="false" />
+            <element signature="e#35208#47400#0" expanded="false" />
+            <element signature="e#47578#54370#0" expanded="false" />
+            <element signature="e#54539#71412#0" expanded="false" />
+            <element signature="e#71569#85304#0" expanded="false" />
           </folding>
         </state>
       </provider>
