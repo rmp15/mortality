@@ -41,10 +41,10 @@ ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg
 source('../models/INLA/03_spatiotemporal/inla_load_data_cod.R')
 
 # load climate region data and fix names
-source('../models/INLA/03_spatiotemporal/inla_climate_regions.R')
+# source('../models/INLA/03_spatiotemporal/inla_climate_regions.R')
 
-# merge mortality data with climate region data and get new deaths rates
-dat.inla.load <- merge(dat.inla.load,dat.region,by.x=('fips'),by.y=('STATE_FIPS'),all.x=TRUE)
+# merge mortality data with climate region data
+# dat.inla.load <- merge(dat.inla.load,dat.region,by.x=('fips'),by.y=('STATE_FIPS'),all.x=TRUE)
 
 # load climate data for 1979-2015
 file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
@@ -53,19 +53,16 @@ dat.climate$state.fips <- as.numeric(as.character(dat.climate$state.fips))
 
 # merge mortality and climate data and reorder
 dat.merged <- merge(dat.inla.load,dat.climate,by.x=c('sex','age','year','month','fips'),by.y=c('sex','age','year','month','state.fips'),all.x=TRUE)
-dat.merged <- dat.merged[order(dat.merged$climate_region,dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
-
-# rename rows and remove unnecessary columns
-rownames(dat.merged) <- 1:nrow(dat.merged)
+dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
 
 # generalise climate variable name
 names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
 
 # create lookup table for climate regions
-regions.lookup <- data.frame(climate_region=sort(unique(dat.merged$climate_region)))
-regions.lookup$ID.clim <- seq(nrow(regions.lookup))
+# regions.lookup <- data.frame(climate_region=sort(unique(dat.merged$climate_region)))
+# regions.lookup$ID.clim <- seq(nrow(regions.lookup))
 
-dat.merged <- merge(dat.merged,regions.lookup,by='climate_region')
+# dat.merged <- merge(dat.merged,regions.lookup,by='climate_region')
 
 library(dplyr)
 
@@ -73,30 +70,25 @@ library(dplyr)
 source('../../data/objects/objects.R')
 
 # adjacency matrix with connections
-if(contig.arg == 0){
-    # Hawaii -> California, Alaska -> Washington
-    USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"
-}
-if(contig.arg == 1){
-    # only contiguous USA
-    USA.adj <- "../../output/adj_matrix_create/USA.graph.contig"
-}
+# Hawaii -> California, Alaska -> Washington
+if(contig.arg == 0){USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"}
+# only contiguous USA
+if(contig.arg == 1){USA.adj <- "../../output/adj_matrix_create/USA.graph.contig"}
 
 ##############
 
-library(INLA)
-
 # filter all data by sex age and month
-fit.years <- year.start.arg:year.end.arg
+fit.years <- year.start.analysis.arg:year.end.analysis.arg
 dat.inla <- dat.merged[dat.merged$sex==sex.arg & dat.merged$age==age.arg & dat.merged$year %in% fit.years,]
 
 # filter Hawaii and Alaska if required and load correct drawseq lookup
 if(contig.arg == 0){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')}
-if(contig.arg == 1){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')
-dat.inla = subset(dat.inla,!(DRAWSEQ %in% c('1','51')))}
+if(contig.arg == 1){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')}
+dat.inla = merge(dat.inla,drawseq.lookup,by='fips')
 
 # extract unique table of year and months to generate year.month
 dat.year.month <- unique(dat.inla[,c('year', 'month')])
+dat.year.month <- dat.year.month[order(dat.year.month$year,dat.year.month$month),]
 dat.year.month$month <- as.integer(dat.year.month$month)
 dat.year.month$year.month <- seq(nrow(dat.year.month))
 
@@ -122,6 +114,8 @@ dat.inla$e <- 1:nrow(dat.inla)
 file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.arg)
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
+library(INLA)
+
 # load inla function
 source('../models/INLA/03_spatiotemporal/inla_functions_cod.R')
 
@@ -139,7 +133,7 @@ if(fast.arg==2){
 # prep data for output
 
 # output string for filenames
-output.string = paste0('USA_rate_pred_type',type.selected,'_',age.arg,'_',sex.lookup[sex.arg],'_',year.start.arg,'_',year.end.arg,'_',dname.arg,'_',metric.arg)
+output.string = paste0('USA_rate_pred_type',type.selected,'_',age.arg,'_',sex.lookup[sex.arg],'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
 
 # save all parameters of INLA model
 parameters.name <- paste0(output.string)
@@ -175,7 +169,7 @@ saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
 # send email notification
 
 # subject for email
-subject.arg = paste0(sex.lookup[sex.arg],' ',age.arg,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.arg,'-',year.end.arg)
+subject.arg = paste0(sex.lookup[sex.arg],' ',age.arg,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.analysis.arg,'-',year.end.analysis.arg)
 if(contig.arg == 1){subject.arg = paste0(subject.arg,' contig')}
 if(fast.arg==0){subject.arg = paste0(subject.arg,' non-pw done')}
 if(fast.arg==1){subject.arg = paste0(subject.arg,' fast non-pw done')}
