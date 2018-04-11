@@ -91,7 +91,7 @@ yearsummary_injuries  <- function(x=2000) {
 	}
 
 	if(x>=start_year){
-        # merge cod in ICD 10 coding for broad letter coding
+        # merge cod in ICD 10 coding for broad letter coding NEED TO FIX!!
 		dat$cause[nchar(dat$cause)==3] <- paste0(dat$cause[nchar(dat$cause)==3],'0')
 		dat$letter = substr(dat$cause,1,1)
 		dat.merged = merge(dat,cod.lookup.10,by.x='letter',by.y='letter',all.x=1)
