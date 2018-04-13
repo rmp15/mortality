@@ -18,7 +18,7 @@ declare -i end2=2013
 declare country="USA"
 declare dname="t2m"
 declare metric="meanc3"
-declare cod="Transport accidents"
+#declare cod="Transport accidents"
 declare -i fast=1
 declare -i contig=1
 
@@ -30,6 +30,8 @@ declare -i contig=1
 cd ~/git/mortality/USA/state/prog/00_bash/
 
 (
+
+declare cod="Transport accidents"
 
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
