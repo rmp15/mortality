@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="62b91b4b-6761-4ef0-820a-b55e2d811d0d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" afterPath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +18,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plotting_results_climate_cod_1var.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plotting_results_climate_cod_1var.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
@@ -38,12 +38,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mapping_posterior_climate_cod_1var.R" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mapping_posterior_climate_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="72" lean-forward="false" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
-              <folding />
+            <state relative-caret-position="-43">
+              <caret line="128" column="63" lean-forward="false" selection-start-line="128" selection-start-column="63" selection-end-line="128" selection-end-column="63" />
+              <folding>
+                <element signature="e#1517#5356#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,7 +71,6 @@
       <find>icd9.lookup</find>
       <find>gsub</find>
       <find>heatmap.national.age</find>
-      <find>pdf</find>
       <find>dat.nat.broad</find>
       <find>dat.nat.broad.year</find>
       <find>age.long</find>
@@ -92,6 +93,7 @@
       <find>dat.national.year</find>
       <find>proportion</find>
       <find>colors.</find>
+      <find>pdf</find>
     </findStrings>
     <replaceStrings>
       <replace>output.loc</replace>
@@ -154,8 +156,8 @@
         <option value="$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
+        <option value="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" />
       </list>
     </option>
   </component>
@@ -519,13 +521,6 @@
       <option name="presentableId" value="Default" />
       <updated>1517410459211</updated>
     </task>
-    <task id="LOCAL-00134" summary="test commit">
-      <created>1522925156846</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1522925156846</updated>
-    </task>
     <task id="LOCAL-00135" summary="test commit">
       <created>1522925267558</created>
       <option name="number" value="00135" />
@@ -862,7 +857,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524034694637</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL-00183" summary="test commit">
+      <created>1524034844684</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1524034844684</updated>
+    </task>
+    <option name="localTasksCounter" value="184" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1306,14 +1308,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="72" lean-forward="false" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1327,6 +1321,16 @@
         <state relative-caret-position="150">
           <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-43">
+          <caret line="128" column="63" lean-forward="false" selection-start-line="128" selection-start-column="63" selection-end-line="128" selection-end-column="63" />
+          <folding>
+            <element signature="e#1517#5356#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

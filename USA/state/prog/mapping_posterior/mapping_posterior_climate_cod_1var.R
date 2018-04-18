@@ -124,6 +124,10 @@ if(multiple==1){
 # create directories for output
 file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,
 '/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
+if(contig==1){
+    file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,
+'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/contig/')
+}
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
