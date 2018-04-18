@@ -46,10 +46,10 @@ library(scales)
 # SOMETHING NOT RIGHT ABOUT THE POPULATION IN THIS STEP!!!!
 # POPULATIONS MUCH TOO LARGE!!!
 # REASON: THERE ARE TOO MANY REPEATS OF POPULATION PER SUB-CAUSE,
-# SO
+# SOLUTION: DDPLY BY SUBCAUSE FIRST, ATTACH
 
 # create monthly nationalised data for broad sub-causes
-dat.nat.broad = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
+dat.nat.broad = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj)/6) # is this right?
 dat.nat.broad $rate.adj = with(dat.nat.broad,deaths/pop.adj)
 dat.nat.broad  = dat.nat.broad[order(dat.nat.broad$cause,dat.nat.broad$sex,dat.nat.broad$age,dat.nat.broad$year,dat.nat.broad$month),]
 
