@@ -20,6 +20,8 @@ metric <- as.character(args[6])
 cause <- as.character(args[7]) ; cause <- gsub('_',' ',cause)
 contig.arg <- as.numeric(args[8])
 
+# NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
+
 #year.start = 1980 ; year.end = 2013 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'External'
 
 multiple = 0
