@@ -16,7 +16,9 @@ declare -a metrics=('meanc3')
 declare -a cods=("Transport_accidents")
 #declare -e cods=( "Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion")
 #declare -a cods=("Unintentional" "Intentional")
-declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other" "Unintentional" "Intentional")
+#declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other" "Unintentional" "Intentional")
+declare -e cods=("Accidental_falls")
+
 declare -i contig=1
 
 #################################################
