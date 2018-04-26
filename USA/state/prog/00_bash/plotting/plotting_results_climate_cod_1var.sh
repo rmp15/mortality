@@ -16,7 +16,7 @@ declare -a metrics=('meanc3')
 declare -a cods=("Transport_accidents")
 #declare -e cods=( "Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion")
 #declare -a cods=("Unintentional" "Intentional")
-#declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other")
+declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other" "Unintentional" "Intentional")
 declare -i contig=1
 
 #################################################
@@ -31,7 +31,7 @@ for metric in "${metrics[@]}"; do
 
 for model in "${models[@]}"; do
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig
+#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig
 Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig
 
 done; done; done; done;

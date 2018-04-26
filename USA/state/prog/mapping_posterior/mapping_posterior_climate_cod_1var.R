@@ -32,7 +32,7 @@ model <- models[model]
 unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
 
 # bespoke colourway
-colorway = c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred")
+colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
 # load the data
 if(cause!='AllCause'){
@@ -262,8 +262,8 @@ forest.plot.national.month <- function() {
         scale_fill_gradientn(colours=colorway,
         breaks=c(-0.025, -0.02, -0.015, -0.01, -0.005, 0, 0.005, 0.01, 0.015, 0.02, 0.025),
         na.value = "grey98",limits = c(-0.027, 0.027),
-        labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
-        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk for 1 additional ",unit.name))) +
+        labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name," above long-term average"))) +
+        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk for 1 additional ",unit.name," above long-term average"))) +
         scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
         scale_y_discrete(labels=age.print) +
         ggtitle(cod.print) +
