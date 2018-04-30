@@ -299,7 +299,7 @@
         f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
         # climate specific terms
-        f(month5, variable, model="rw1", cyclic=TRUE) +                                              # month specific climate slope
+        f(month5, variable, model="rw1", cyclic=TRUE) +                                 # month specific climate slope
         # random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # overdispersion term
