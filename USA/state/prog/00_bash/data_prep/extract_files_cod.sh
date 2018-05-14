@@ -51,7 +51,7 @@ Rscript ~/git/mortality/USA/state/prog/format_mort/recode_age.R $year PSPART2
 echo "emulating inherited data format for $year";
 
 # emulate Harvard output data form
-Rscript ~/git/mortality/USA/state/prog/format_mort/reformat_data.R $year
+Rscript ~/git/mortality/USA/state/prog/format_mort_cod/reformat_data.R $year
 
 #################################################
 # 5. CHECK OLD AGAINST NEW DATA EXPORT
