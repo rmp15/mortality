@@ -12,7 +12,7 @@ clear
 cd ~/git/mortality/USA/state/prog/00_bash/
 
 declare -i start=1980
-declare -i end=2013
+declare -i end=2016
 
 #################################################
 # 1. PROCESS DATA FOR BROAD CAUSES
@@ -20,7 +20,7 @@ declare -i end=2013
 
 echo "preparing monthly death rates for years $start - $end";
 
-#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R $start $end
+Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R $start $end
 
 #################################################
 # 2. PROCESS DATA FOR INJURIES CATEGORIES
@@ -36,5 +36,4 @@ Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_da
 
 echo "preparing monthly death rates for years $start - $end";
 
-#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R $start $end
-#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons_no_drugs.R $start $end
+Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R $start $end
