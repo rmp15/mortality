@@ -12,9 +12,9 @@ declare -a sexes=(2)
 declare -a sexstrings=('male' 'female')
 declare -a models=(10)
 declare -i start=1980
-declare -i end=2013
+declare -i end=2016
 declare -i start2=1980
-declare -i end2=2013
+declare -i end2=2016
 declare country="USA"
 declare dname="t2m"
 declare metric="meanc3"
@@ -82,7 +82,6 @@ Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatio
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  5 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  0 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  0 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
-
 
 for model in "${models[@]}"; do
 
