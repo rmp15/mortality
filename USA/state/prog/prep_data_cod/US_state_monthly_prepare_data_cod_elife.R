@@ -27,7 +27,7 @@ yearsummary_cod  <- function(x=2000) {
 		dat$sex = plyr::mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c(2,1))
 	}
 
-	# load lookup for fips CHANGE TO SUBSTR OF FIPS
+	# load lookup for fips
 	dat$fips = substr(dat$fips,1,2)
 	dat$fips <- as.numeric(dat$fips)
 
