@@ -19,7 +19,7 @@ fast.arg <- as.numeric(args[12])
 contig.arg <- as.numeric(args[13])
 
 # for test runs
-# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2013 ; type.arg = 10 ;
+# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 10 ;
 # cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
 # year.end.analysis.arg = 1981 ; cod.arg = 'Cardiopulmonary'; fast.arg = 1 ; contig.arg = 1
 
