@@ -177,15 +177,19 @@ yearsummary_injuries  <- function(x=2000) {
                             ifelse(dat.merged$letter=='N'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=649,'Genitourinary diseases',
                             ifelse(dat.merged$letter=='N'&dat.merged$cause.numeric>=750&dat.merged$cause.numeric<=989,'Genitourinary diseases',
                             # neuropsychiatric disorders
-                            ifelse(dat.merged$letter==''&dat.merged$cause.numeric>=&dat.merged$cause.numeric<=,'Neuropsychiatric disorders',
-
+                            ifelse(dat.merged$letter=='F'&dat.merged$cause.numeric>=10&dat.merged$cause.numeric<=99,'Neuropsychiatric disorders',
+                            ifelse(dat.merged$letter=='F'&dat.merged$cause.numeric>=170&dat.merged$cause.numeric<=179,'Neuropsychiatric disorders',
+                            ifelse(dat.merged$letter=='F'&dat.merged$cause.numeric>=200&dat.merged$cause.numeric<=999,'Neuropsychiatric disorders',
+                            ifelse(dat.merged$letter=='G'&dat.merged$cause.numeric>=60&dat.merged$cause.numeric<=139,'Neuropsychiatric disorders',
+                            ifelse(dat.merged$letter=='G'&dat.merged$cause.numeric>=150&dat.merged$cause.numeric<=989,'Neuropsychiatric disorders',
                             # substance use disorders
-                            ifelse(dat.merged$letter=='N'&dat.merged$cause.numeric>=750&dat.merged$cause.numeric<=989,'Genitourinary diseases',
-
-
+                            ifelse(dat.merged$letter=='F'&dat.merged$cause.numeric>=100&dat.merged$cause.numeric<=169,'Substance use disorders',
+                            ifelse(dat.merged$letter=='F'&dat.merged$cause.numeric>=180&dat.merged$cause.numeric<=199,'Substance use disorders',
+                            ifelse(dat.merged$letter=='X'&dat.merged$cause.numeric>=410&dat.merged$cause.numeric<=420,'Substance use disorders',
+                            ifelse(dat.merged$letter=='X'&dat.merged$cause.numeric>=450&dat.merged$cause.numeric<=459,'Substance use disorders',
 
                             # to close the brackets above
-                            'NA')))))))))))))
+                            'NA')))))))))))))))))))))))))
 
                             # # injury subcauses
                             # ifelse(dat.merged$letter=='V'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=999,'Transport accidents',
@@ -205,12 +209,12 @@ yearsummary_injuries  <- function(x=2000) {
 
         # to fix contraversal poisioning deaths to have their own category if desired
         #dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Other external causes of injury',dat.merged$cause.sub)
-        dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Drugs',dat.merged$cause.sub)
+        # dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Drugs',dat.merged$cause.sub)
 
 		# merge cod in ICD 10 coding
-		dat.merged = merge(dat.merged,icd10.lookup,by='cause',all.x=1)
-        dat.merged$cause.group = as.character(dat.merged$cause.group)
-        dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
+		# dat.merged = merge(dat.merged,icd10.lookup,by='cause',all.x=1)
+        # dat.merged$cause.group = as.character(dat.merged$cause.group)
+        # dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
 
 	}
 
