@@ -158,6 +158,16 @@ yearsummary_injuries  <- function(x=2000) {
 
                             # cardiorespiratory subcauses
                             ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=999,'Cardiovascular',
+                            ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=69,'Respiratory infections',
+                            ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=90&dat.merged$cause.numeric<=189,'Respiratory infections',
+                            ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=200&dat.merged$cause.numeric<=229,'Respiratory infections',
+                            ifelse(dat.merged$letter=='H'&dat.merged$cause.numeric>=650&dat.merged$cause.numeric<=669,'Respiratory infections',
+                            ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=300&dat.merged$cause.numeric<=989,'Chronic respiratory diseases',
+			                # maternal and perinatal subcauses
+                            ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=300&dat.merged$cause.numeric<=989,'Maternal conditions',
+                            ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=300&dat.merged$cause.numeric<=989,'Perinatal conditions',
+
+
 
                             # to close the brackets above
                             'NA')))))))))))))

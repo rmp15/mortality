@@ -150,7 +150,7 @@ icd10.lookup$cause[nchar(icd10.lookup$cause)==3] <- paste0(icd10.lookup$cause[nc
 # COD look-up
 cod.lookup.10 <- data.frame(letter=as.character(toupper(letters)),
                             cause.group=c('Other','Other','Cancer','Cancer','Other', # A-E
-                                        'Other','Other','Other','Cardiopulmonary','Cardiopulmonary', # F-J
+                                        'Other','Other','Other','Cardiorespiratory','Cardiorespiratory', # F-J
                                         'Other','Other','Other','Other','Other', # K-O
                                         'Other','Other','Other','External','External', # P-T
                                         'Other','External','External','External','External', # U-Y
