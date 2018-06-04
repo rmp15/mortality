@@ -53,12 +53,20 @@ yearsummary_injuries  <- function(x=2000) {
         # move deaths due to weather-based heat/cold to 'Other'
         dat$cause.group = ifelse(as.numeric(substr(dat$cause.numeric,1,3))==900|as.numeric(substr(dat$cause.numeric,1,3))==901,'Other',dat$cause.group)
 
-        # # only filter for external
-        # dat.merged = subset(dat,cause.group=='External')
-        # dat.merged$cause.group = NULL
-
         # cause subgroups
         dat.merged$cause.sub =
+
+			                # cardio subcauses
+                            ifelse(dat.merged$cause.numeric>=&dat.merged$cause.numeric<=, 'Cardiovascular',#'',
+                            ifelse(dat.merged$cause.numeric>=&dat.merged$cause.numeric<=, 'Respiratory infections',#'',
+                            ifelse(dat.merged$cause.numeric>=&dat.merged$cause.numeric<=, 'Respiratory infections',#'',
+                            ifelse(dat.merged$cause.numeric>=&dat.merged$cause.numeric<=, 'Respiratory infections',#'',
+                            ifelse(dat.merged$cause.numeric>=&dat.merged$cause.numeric<=, 'Chronic respiratory diseases',#'',
+                            ifelse(dat.merged$cause.numeric>=&dat.merged$cause.numeric<=, 'Chronic respiratory diseases',#'',
+
+
+
+			                # injury subcauses
                             ifelse(dat.merged$cause.numeric>=8000&dat.merged$cause.numeric<=8079, 'Transport accidents',#'Railway Accidents',
 							ifelse(dat.merged$cause.numeric>=8100&dat.merged$cause.numeric<=8199, 'Transport accidents',#'Motor Vehicle Traffic Accidents',
 							ifelse(dat.merged$cause.numeric>=8200&dat.merged$cause.numeric<=8259, 'Transport accidents',#'Motor Vehicle Nontraffic Accidents',
@@ -83,6 +91,8 @@ yearsummary_injuries  <- function(x=2000) {
 							ifelse(dat.merged$cause.numeric>=9700&dat.merged$cause.numeric<=9799, 'Assault',#'Legal Intervention',
 							ifelse(dat.merged$cause.numeric>=9800&dat.merged$cause.numeric<=9899, 'Other external causes of injury',#'Injury Undetemined Whether Accidentlally Or Purposely Inflicted',
 							ifelse(dat.merged$cause.numeric>=9900&dat.merged$cause.numeric<=9999, 'Assault',#'Injury Resulting From Operations Of War',
+
+                            # to close the brackets above
 							'NA'))))))))))))))))))))))))
 
 		# merge cod in ICD 9 coding
