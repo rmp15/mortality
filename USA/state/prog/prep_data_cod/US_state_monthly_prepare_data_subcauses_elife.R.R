@@ -255,7 +255,7 @@ dat.merged$rate.adj <- dat.merged$deaths.adj / dat.merged$pop.adj
 # dat.analyse = unique(dat.appended[,c(1:3)])
 
 # output deaths file as RDS and csv
-saveRDS(dat.merged,paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start.arg,'_',year.end.arg))
+saveRDS(dat.merged,paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_elife_',year.start.arg,'_',year.end.arg))
 
 # append cods and output to single file, merging description names along the way
 start_year = 1999
