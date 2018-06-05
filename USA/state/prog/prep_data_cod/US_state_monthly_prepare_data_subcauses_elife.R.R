@@ -58,17 +58,17 @@ yearsummary_injuries  <- function(x=2000) {
         # cause subgroups
         dat.merged$cause.sub =
 
-			                # cardio subcauses
+			                # cardiorespiratory subcauses
                             ifelse(dat.merged$cause.numeric>=3900&dat.merged$cause.numeric<=4599, 'Cardiovascular',#'',
                             ifelse(dat.merged$cause.numeric>=4600&dat.merged$cause.numeric<=4669, 'Respiratory infections',#'',
                             ifelse(dat.merged$cause.numeric>=4800&dat.merged$cause.numeric<=4879, 'Respiratory infections',#'',
                             ifelse(dat.merged$cause.numeric>=3810&dat.merged$cause.numeric<=3829, 'Respiratory infections',#'',
                             ifelse(dat.merged$cause.numeric>=4700&dat.merged$cause.numeric<=4789, 'Chronic respiratory diseases',#'',
-                            ifelse(dat.merged$cause.numeric>=4900&dat.merged$cause.numeric<=5199, 'Chronic respiratory diseases',#'', 6
+                            ifelse(dat.merged$cause.numeric>=4900&dat.merged$cause.numeric<=5199, 'Chronic respiratory diseases',#'',
 			                # maternal and perinatal subcauses
                             ifelse(dat.merged$cause.numeric>=6300&dat.merged$cause.numeric<=6769, 'Maternal conditions',#'',
                             ifelse(dat.merged$cause.numeric>=7600&dat.merged$cause.numeric<=7712, 'Perinatal conditions',#'',
-                            ifelse(dat.merged$cause.numeric>=7714&dat.merged$cause.numeric<=7799, 'Perinatal conditions',#'', 9
+                            ifelse(dat.merged$cause.numeric>=7714&dat.merged$cause.numeric<=7799, 'Perinatal conditions',#'',
                             # endocrine disorders
                             ifelse(dat.merged$cause.numeric>=2400&dat.merged$cause.numeric<=2429, 'Endocrine disorders',#'',
                             ifelse(dat.merged$cause.numeric>=2440&dat.merged$cause.numeric<=2469, 'Endocrine disorders',#'',
@@ -77,22 +77,22 @@ yearsummary_injuries  <- function(x=2000) {
                             ifelse(dat.merged$cause.numeric>=2750&dat.merged$cause.numeric<=2794, 'Endocrine disorders',#'',
                             ifelse(dat.merged$cause.numeric>=2796&dat.merged$cause.numeric<=2799, 'Endocrine disorders',#'',
                             ifelse(dat.merged$cause.numeric>=2820&dat.merged$cause.numeric<=2858, 'Endocrine disorders',#'',
-                            ifelse(dat.merged$cause.numeric>=2860&dat.merged$cause.numeric<=2899, 'Endocrine disorders',#'', 8
+                            ifelse(dat.merged$cause.numeric>=2860&dat.merged$cause.numeric<=2899, 'Endocrine disorders',#'',
                             # genitourinary diseases
                             ifelse(dat.merged$cause.numeric>=5800&dat.merged$cause.numeric<=6119, 'Genitourinary diseases',#'',
-                            ifelse(dat.merged$cause.numeric>=6170&dat.merged$cause.numeric<=6299, 'Genitourinary diseases',#'', 2
+                            ifelse(dat.merged$cause.numeric>=6170&dat.merged$cause.numeric<=6299, 'Genitourinary diseases',#'',
                             # neuropsychiatric disorders
                             ifelse(dat.merged$cause.numeric>=2900&dat.merged$cause.numeric<=2909, 'Neuropsychiatric disorders',#'',
                             ifelse(dat.merged$cause.numeric>=2920&dat.merged$cause.numeric<=3029, 'Neuropsychiatric disorders',#'',
                             ifelse(dat.merged$cause.numeric>=3051&dat.merged$cause.numeric<=3051, 'Neuropsychiatric disorders',#'',
                             ifelse(dat.merged$cause.numeric>=3060&dat.merged$cause.numeric<=3199, 'Neuropsychiatric disorders',#'',
-                            ifelse(dat.merged$cause.numeric>=3240&dat.merged$cause.numeric<=3599, 'Neuropsychiatric disorders',#'', 5
+                            ifelse(dat.merged$cause.numeric>=3240&dat.merged$cause.numeric<=3599, 'Neuropsychiatric disorders',#'',
                             # substance use disorders
                             ifelse(dat.merged$cause.numeric>=2910&dat.merged$cause.numeric<=2919, 'Substance use disorders',#'',
                             ifelse(dat.merged$cause.numeric>=3030&dat.merged$cause.numeric<=3039, 'Substance use disorders',#'',
                             ifelse(dat.merged$cause.numeric>=3050&dat.merged$cause.numeric<=3050, 'Substance use disorders',#'',
                             ifelse(dat.merged$cause.numeric>=3040&dat.merged$cause.numeric<=3049, 'Substance use disorders',#'',
-                            ifelse(dat.merged$cause.numeric>=3052&dat.merged$cause.numeric<=3059, 'Substance use disorders',#'', 5
+                            ifelse(dat.merged$cause.numeric>=3052&dat.merged$cause.numeric<=3059, 'Substance use disorders',#'',
 
                             # to close the brackets above
 							'NA')))))))))))))))))))))))))))))
@@ -125,12 +125,6 @@ yearsummary_injuries  <- function(x=2000) {
                             # to close the brackets above
                             # 'NA')))))))))))))))))))))))))))))))))))))))))))))))))))))
 
-		# merge cod in ICD 9 coding
-		# icd9.lookup$cause = as.numeric(icd9.lookup$cause)
-		# dat.merged = merge(dat.merged,icd9.lookup,by='cause',all.x=1)
-        # dat.merged$cause.group = as.character(dat.merged$cause.group)
-        # dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
-
         dat.merged$letter = ' '
 
 	}
@@ -146,9 +140,6 @@ yearsummary_injuries  <- function(x=2000) {
         # move deaths due to weather-based heat/cold to 'Other'
         dat.merged$cause.group = ifelse((dat.merged$cause=='X30'|dat.merged$cause=='X31'),'Other',as.character(dat.merged$cause.group))
 
-        # # only filter for external
-        # dat.merged = subset(dat.merged,cause.group=='External')
-        # dat.merged$cause.group = NULL
 
         # numerical cause
         dat.merged$cause.numeric = as.numeric(as.character(substr(dat.merged$cause,2,4)))
@@ -185,7 +176,7 @@ yearsummary_injuries  <- function(x=2000) {
                             # substance use disorders
                             ifelse(dat.merged$letter=='F'&dat.merged$cause.numeric>=100&dat.merged$cause.numeric<=169,'Substance use disorders',
                             ifelse(dat.merged$letter=='F'&dat.merged$cause.numeric>=180&dat.merged$cause.numeric<=199,'Substance use disorders',
-                            ifelse(dat.merged$letter=='X'&dat.merged$cause.numeric>=410&dat.merged$cause.numeric<=420,'Substance use disorders',
+                            ifelse(dat.merged$letter=='X'&dat.merged$cause.numeric>=410&dat.merged$cause.numeric<=429,'Substance use disorders',
                             ifelse(dat.merged$letter=='X'&dat.merged$cause.numeric>=450&dat.merged$cause.numeric<=459,'Substance use disorders',
 
                             # to close the brackets above
