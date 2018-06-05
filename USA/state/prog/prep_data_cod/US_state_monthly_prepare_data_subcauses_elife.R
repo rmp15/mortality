@@ -43,16 +43,13 @@ yearsummary_injuries  <- function(x=2000) {
         # ICD 9 coding for broad cod coding
 		dat$cause[nchar(dat$cause)==3] <- paste0(dat$cause[nchar(dat$cause)==3],'0')
 		dat$cause.numeric = as.numeric(dat$cause)
-		dat$cause.group = 	ifelse(dat$cause.numeric>=1400&dat$cause.numeric<=2399,'Cancer',
-                            ifelse(dat$cause.numeric>=3810&dat$cause.numeric<=3829,'Cardiopulmonary',
+		dat$cause.group = 	ifelse(dat$cause.numeric>=1400&dat$cause.numeric<=2089,'Cancer', # USED TO BE UP TO 2399 BUT CHANGED!
+                            ifelse(dat$cause.numeric>=3810&dat$cause.numeric<=3829,'Cardiopulmonary', # Ottis Media addition
 							ifelse(dat$cause.numeric>=3900&dat$cause.numeric<=5199,'Cardiopulmonary',
-							ifelse(dat$cause.numeric>=8000&dat$cause.numeric<=9999,'Injuries',
+							ifelse(dat$cause.numeric>=8000&dat$cause.numeric<=9999,'External',
 							'Other'))))
 
         dat$cause.group = as.character(dat$cause.group)
-
-        # move deaths due to weather-based heat/cold to 'Other'
-        dat$cause.group = ifelse(as.numeric(substr(dat$cause.numeric,1,3))==900|as.numeric(substr(dat$cause.numeric,1,3))==901,'Other',dat$cause.group)
 
         dat.merged = dat
 
@@ -127,6 +124,10 @@ yearsummary_injuries  <- function(x=2000) {
 							ifelse(dat.merged$cause.numeric>=9900&dat.merged$cause.numeric<=9999, 'Assault',#'Injury Resulting From Operations Of War',
                             # to close the brackets above
                             dat.merged$cause.sub))))))))))))))))))))))))
+
+        # move deaths due to weather-based heat/cold to 'Other'
+        dat.merged$cause.group = ifelse(as.numeric(dat.merged$cause.numeric)==9000|as.numeric(dat.merged$cause.numeric)==9010,'Other',dat.merged$cause.group)
+        dat.merged$cause.sub = ifelse(as.numeric(dat.merged$cause.numeric)==9000|as.numeric(dat.merged$cause.numeric)==9010,'NA',dat.merged$cause.sub)
 
         dat.merged$letter = ' '
 
@@ -255,7 +256,8 @@ yearsummary_injuries  <- function(x=2000) {
 	month 	= 	c(1:12)
 	sex 	= 	c(1:2)
 	age 	= 	c(0,5,15,25,35,45,55,65,75,85)
-	cause.group 	=	c('Cancer','Cardiopulmonary','Injuries','Other')
+	cause.group 	=	c('Cancer','Cardiopulmonary','External','Other')
+    # FINISH THIS!!!!
     cause.sub 	=	c('Cancer','Cardiovascular','Chronic respiratory diseases', 'Respiratory infections',
                         'Injuries','Endocrine disorders','Genitourinary diseases', 'Maternal conditions',
                         'Other','Neuropsychiatric disorders','Perinatal conditions','Substance use disorders')
