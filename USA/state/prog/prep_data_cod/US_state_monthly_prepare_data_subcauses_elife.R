@@ -243,9 +243,6 @@ yearsummary_injuries  <- function(x=2000) {
     dat.summarised$cause.sub = ifelse(dat.summarised$cause.sub=='NA',dat.summarised$cause.group,dat.summarised$cause.sub)
     names(dat.summarised)[1:8] <- c('cause.group','cause.sub','fips','year','month','sex','age','deaths')
 
-    # dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.group,cause.sub,fips,year,monthdth,sex,agegroup),deaths=sum(deaths))
-  	# dat.summarised$cause.sub = ifelse(dat.summarised$cause.sub=='NA',dat.summarised$cause.group,dat.summarised$cause.sub)
-    # names(dat.summarised)[1:8] <- c('cause.group','cause.sub','fips','year','month','sex','age','deaths')
 	dat.summarised <- na.omit(dat.summarised)
 
     #
@@ -257,14 +254,18 @@ yearsummary_injuries  <- function(x=2000) {
 	sex 	= 	c(1:2)
 	age 	= 	c(0,5,15,25,35,45,55,65,75,85)
 	cause.group 	=	c('Cancer','Cardiopulmonary','External','Other')
-    # FINISH THIS!!!!
-    cause.sub 	=	c('Cancer','Cardiovascular','Chronic respiratory diseases', 'Respiratory infections',
-                        'Injuries','Endocrine disorders','Genitourinary diseases', 'Maternal conditions',
-                        'Other','Neuropsychiatric disorders','Perinatal conditions','Substance use disorders')
+    cause.sub 	=	    c('Cancer','Cardiovascular','Chronic respiratory diseases', 'Respiratory infections',
+                        'Accidental drowning and submersion','Accidental falls','Assault', 'Intentional self-harm',
+                        'Other external causes of injury','Transport accidents','Endocrine disorders','Genitourinary diseases',
+                        'Maternal conditions','Other','Neuropsychiatric disorders','Perinatal conditions','Substance use disorders')
 
     # create complete grid
 	complete.grid <- expand.grid(fips=fips,month=month,sex=sex,age=age,cause.group=cause.group,cause.sub=cause.sub)
 	complete.grid$year <- unique(dat.summarised$year)
+
+    # only allow sensible combinations of complete grid
+    dat.unique = as.data.frame(unique(dat.summarised[c('cause.group','cause.sub')]))
+    complete.grid = merge(complete.grid,dat.unique)
 
 	# merge deaths counts with complete grid to ensure there are rows with zero deaths
 	dat.summarised.complete <- merge(complete.grid,dat.summarised,by=c('cause.group','cause.sub','fips','year','month','sex','age'),all.x='TRUE')
