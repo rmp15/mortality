@@ -222,6 +222,7 @@ yearsummary_injuries  <- function(x=2000) {
         # to fix poisioning deaths
         # dat.merged$cause.group = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Other',dat.merged$cause.group)
         dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Substance use disorders',dat.merged$cause.sub)
+        dat.merged$cause.group = ifelse(dat.merged$cause.sub=='Substance use disorders','Other',dat.merged$cause.group)
 
 		# merge cod in ICD 10 coding
 		# dat.merged = merge(dat.merged,icd10.lookup,by='cause',all.x=1)
