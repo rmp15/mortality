@@ -135,6 +135,7 @@ yearsummary_injuries  <- function(x=2000) {
         dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Drugs',dat.merged$cause.sub)
 
 		# merge cod in ICD 10 coding
+		# why is this making the number of deaths go up????
 		dat.merged = merge(dat.merged,icd10.lookup,by='cause',all.x=1)
         dat.merged$cause.group = as.character(dat.merged$cause.group)
         dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)

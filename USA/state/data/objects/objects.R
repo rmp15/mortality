@@ -146,6 +146,8 @@ icd10.lookup$cause = gsub(" ", "", icd10.lookup$cause)
 icd10.lookup$cause = as.character(icd10.lookup$cause)
 icd10.lookup$cause[nchar(icd10.lookup$cause)==3] <- paste0(icd10.lookup$cause[nchar(icd10.lookup$cause)==3],'0')
 
+icd10.lookup = unique(icd10.lookup[,c(1:2)])
+
 
 # COD look-up
 cod.lookup.10 <- data.frame(letter=as.character(toupper(letters)),
