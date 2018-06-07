@@ -135,8 +135,6 @@ yearsummary_injuries  <- function(x=2000) {
 
 	if(x>=start_year){
 
-        # NEED TO FIX TO INCLUDE OTHER NEOPLASMS
-
         # merge cod in ICD 10 coding for broad letter coding
 		dat$cause[nchar(dat$cause)==3] <- paste0(dat$cause[nchar(dat$cause)==3],'0')
 		dat$letter = substr(dat$cause,1,1)
@@ -149,6 +147,9 @@ yearsummary_injuries  <- function(x=2000) {
 
         # numerical cause
         dat.merged$cause.numeric = as.numeric(as.character(substr(dat.merged$cause,2,4)))
+
+        # fix 'other neoplasms' to be cancer ADD TO MAIN PROCESSING FILE
+        dat.merged$cause.group = ifelse(dat.merged$letter=='D'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=489,'Cancer',dat.merged$cause.group)
 
         # cause subgroups
         dat.merged$cause.sub =
