@@ -51,6 +51,7 @@ yearsummary_cod  <- function(x=2000) {
 	}
 	if(x>=start_year){
 		# merge cod in ICD 10 coding
+        dat$cause[nchar(dat$cause)==3] <- paste0(dat$cause[nchar(dat$cause)==3],'0')
 		dat$letter = substr(dat$cause,1,1)
 		dat.merged = merge(dat,cod.lookup.10,by.x='letter',by.y='letter',all.x=1)
         dat.merged$cause.group = as.character(dat.merged$cause.group)
@@ -61,10 +62,16 @@ yearsummary_cod  <- function(x=2000) {
         # numerical cause
         dat.merged$cause.numeric = as.numeric(as.character(substr(dat.merged$cause,2,4)))
 
+        # fix 'other neoplasms' to be cancer
+        dat.merged$cause.group = ifelse(dat.merged$letter=='D'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=489,'Cancer',dat.merged$cause.group)
+
         # move deaths due to Ottis Media to 'Cardiopulmonary'
         dat.merged$cause.group =
                             ifelse((dat.merged$letter=='H'&dat.merged$cause.numeric>=650&dat.merged$cause.numeric<=669),'Cardiopulmonary',
                             as.character(dat.merged$cause.group))
+
+        # to fix poisioning deaths
+        dat.merged$cause.group = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Other',dat.merged$cause.group)
 
         dat.merged$cause.numeric = NULL
 

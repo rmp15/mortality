@@ -4,6 +4,7 @@
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R" afterPath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R" afterPath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,8 +24,8 @@
             <file leaf-file-name="US_state_monthly_prepare_data_cod.R" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1125">
-                    <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="110" selection-end-column="117" />
+                  <state relative-caret-position="675">
+                    <caret line="115" column="56" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
                     <folding>
                       <element signature="e#1055#1816#0" expanded="false" />
                     </folding>
@@ -87,11 +88,10 @@
       <file leaf-file-name="US_state_monthly_prepare_data_subcauses_elife.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="733">
-              <caret line="295" column="0" lean-forward="true" selection-start-line="254" selection-start-column="2" selection-end-line="295" selection-end-column="0" />
+            <state relative-caret-position="692">
+              <caret line="290" column="0" lean-forward="true" selection-start-line="290" selection-start-column="0" selection-end-line="290" selection-end-column="0" />
               <folding>
                 <element signature="e#1371#10494#0" expanded="false" />
-                <element signature="e#10514#19595#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -135,10 +135,10 @@
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R" />
         <option value="$PROJECT_DIR$/USA/state/data/objects/objects.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R" />
       </list>
     </option>
   </component>
@@ -658,7 +658,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528469677788</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Add eLife COD coding">
+      <created>1528471148886</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1528471148886</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -706,7 +713,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#1371#10494#0" expanded="false" />
-            <element signature="e#10514#19595#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -717,7 +723,6 @@
           <caret line="254" column="13" lean-forward="true" selection-start-line="254" selection-start-column="13" selection-end-line="254" selection-end-column="13" />
           <folding>
             <element signature="e#1371#10494#0" expanded="false" />
-            <element signature="e#10514#19595#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -736,7 +741,6 @@
           <caret line="53" column="36" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
             <element signature="e#1371#10494#0" expanded="false" />
-            <element signature="e#10514#19595#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -849,8 +853,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="110" selection-end-column="117" />
+        <state relative-caret-position="675">
+          <caret line="115" column="56" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
           <folding>
             <element signature="e#1055#1816#0" expanded="false" />
           </folding>
@@ -859,11 +863,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="733">
-          <caret line="295" column="0" lean-forward="true" selection-start-line="254" selection-start-column="2" selection-end-line="295" selection-end-column="0" />
+        <state relative-caret-position="692">
+          <caret line="290" column="0" lean-forward="true" selection-start-line="290" selection-start-column="0" selection-end-line="290" selection-end-column="0" />
           <folding>
             <element signature="e#1371#10494#0" expanded="false" />
-            <element signature="e#10514#19595#0" expanded="false" />
           </folding>
         </state>
       </provider>

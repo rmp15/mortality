@@ -150,7 +150,7 @@ yearsummary_elife  <- function(x=2000) {
         # numerical cause
         dat.merged$cause.numeric = as.numeric(as.character(substr(dat.merged$cause,2,4)))
 
-        # fix 'other neoplasms' to be cancer ADD TO MAIN PROCESSING FILE
+        # fix 'other neoplasms' to be cancer
         dat.merged$cause.group = ifelse(dat.merged$letter=='D'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=489,'Cancer',dat.merged$cause.group)
 
         # cause subgroups
@@ -222,7 +222,6 @@ yearsummary_elife  <- function(x=2000) {
         dat.merged$cause.sub = ifelse((dat.merged$cause=='X300'|dat.merged$cause=='X310'),'NA',as.character(dat.merged$cause.sub))
 
         # to fix poisioning deaths
-        # dat.merged$cause.group = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Other',dat.merged$cause.group)
         dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Substance use disorders',dat.merged$cause.sub)
         dat.merged$cause.group = ifelse(dat.merged$cause.sub=='Substance use disorders','Other',dat.merged$cause.group)
 
@@ -257,7 +256,6 @@ yearsummary_elife  <- function(x=2000) {
 
 	dat.summarised <- na.omit(dat.summarised)
 
-    #
 	# create an exhaustive list of location sex age month (in this case it should be 51 * 2 * 10 * 12 * 4 = 12240 rows)
 	fips 	=	c(1,2,4,5,6,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,
 				26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
