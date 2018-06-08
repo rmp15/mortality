@@ -4,7 +4,8 @@
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/prep_data_cod/cods/cods_2000" afterPath="$PROJECT_DIR$/USA/state/output/prep_data_cod/cods/cods_2000" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/data/objects/objects.R" afterPath="$PROJECT_DIR$/USA/state/data/objects/objects.R" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R" afterPath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R" afterPath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R" afterPath="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,6 +19,26 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="DockManager">
+    <window id="3">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="US_state_monthly_prepare_data_injuries_ons.R" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="315">
+                    <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+                    <folding>
+                      <element signature="e#1113#2256#0" expanded="false" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
     <window id="1">
       <content type="file-editors">
         <state>
@@ -25,9 +46,11 @@
             <file leaf-file-name="US_state_monthly_prepare_data_subcauses_injuries_ons.R" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="432">
-                    <caret line="261" column="17" lean-forward="true" selection-start-line="261" selection-start-column="17" selection-end-line="261" selection-end-column="17" />
-                    <folding />
+                  <state relative-caret-position="600">
+                    <caret line="186" column="27" lean-forward="true" selection-start-line="186" selection-start-column="27" selection-end-line="186" selection-end-column="27" />
+                    <folding>
+                      <element signature="e#1399#6270#0" expanded="false" />
+                    </folding>
                   </state>
                 </provider>
               </entry>
@@ -43,44 +66,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="US_state_monthly_prepare_data_subcauses_elife.R" pinned="false" current-in-tab="false">
+      <file leaf-file-name="US_state_monthly_prepare_data_subcauses_elife.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="234" column="21" lean-forward="true" selection-start-line="234" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
+            <state relative-caret-position="510">
+              <caret line="272" column="27" lean-forward="true" selection-start-line="272" selection-start-column="27" selection-end-line="272" selection-end-column="27" />
               <folding>
-                <element signature="e#1374#10430#0" expanded="false" />
+                <element signature="e#1371#10427#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inla_spatiotemporal_climate_cod.R" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-300">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inla_load_data_cod.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_load_data_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="objects.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="132" column="15" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -103,15 +96,18 @@
         <option value="$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_cod_elife.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" />
+        <option value="$PROJECT_DIR$/USA/state/data/objects/objects.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R" />
-        <option value="$PROJECT_DIR$/USA/state/data/objects/objects.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1072" />
-    <option name="height" value="900" />
+    <option name="x" value="1440" />
+    <option name="y" value="-489" />
+    <option name="width" value="787" />
+    <option name="height" value="999" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -203,7 +199,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="prep_data_cod" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -229,63 +225,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="INLA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="03_spatiotemporal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mortality" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mortality" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="USA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="state" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mortality" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mortality" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="USA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="state" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="objects" />
+              <option name="myItemId" value="00_bash" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -293,9 +233,6 @@
       </pane>
       <pane id="Scope" />
     </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -654,14 +591,21 @@
       <option name="project" value="LOCAL" />
       <updated>1528379931324</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Add eLife COD coding">
+      <created>1528386724268</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1528386724268</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1072" height="900" extended-state="0" />
+    <frame x="1440" y="-489" width="787" height="999" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28932038" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44839066" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -699,7 +643,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1374#10430#0" expanded="false" />
+            <element signature="e#1371#10427#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -709,7 +653,7 @@
         <state relative-caret-position="3810">
           <caret line="254" column="13" lean-forward="true" selection-start-line="254" selection-start-column="13" selection-end-line="254" selection-end-column="13" />
           <folding>
-            <element signature="e#1374#10430#0" expanded="false" />
+            <element signature="e#1371#10427#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -727,24 +671,17 @@
         <state relative-caret-position="795">
           <caret line="53" column="36" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
-            <element signature="e#1374#10430#0" expanded="false" />
+            <element signature="e#1371#10427#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod_elife.R" />
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-540">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="67" column="39" lean-forward="false" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -784,21 +721,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_gbd.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="132" column="15" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="234" column="21" lean-forward="true" selection-start-line="234" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
-          <folding>
-            <element signature="e#1374#10430#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="390">
+          <caret line="26" column="97" lean-forward="true" selection-start-line="26" selection-start-column="97" selection-end-line="26" selection-end-column="97" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -810,19 +745,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
+        <state relative-caret-position="442">
+          <caret line="132" column="15" lean-forward="true" selection-start-line="132" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/detrend_analysis/detrend.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-653">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="272" column="27" lean-forward="true" selection-start-line="272" selection-start-column="27" selection-end-line="272" selection-end-column="27" />
+          <folding>
+            <element signature="e#1371#10427#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding>
+            <element signature="e#1113#2256#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="261" column="17" lean-forward="true" selection-start-line="261" selection-start-column="17" selection-end-line="261" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="600">
+          <caret line="186" column="27" lean-forward="true" selection-start-line="186" selection-start-column="27" selection-end-line="186" selection-end-column="27" />
+          <folding>
+            <element signature="e#1399#6270#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

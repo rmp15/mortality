@@ -19,7 +19,7 @@ ifelse(!dir.exists("../../output/prep_data_cod/cods/"), dir.create("../../output
 
 # Function to summarise a year's data. x is the year in 2 number form (e.g. 1989 -> 89).
 # y is the number of rows. default (-1) is all rows.
-yearsummary_injuries  <- function(x=2000) {
+yearsummary_elife  <- function(x=2000) {
 
 	print(paste0('year ',x,' now being processed'))
   
@@ -284,6 +284,7 @@ yearsummary_injuries  <- function(x=2000) {
 	dat.summarised.complete$deaths <- ifelse(is.na(dat.summarised.complete$deaths)==TRUE,0,dat.summarised.complete$deaths)
 
 	print(paste0('total deaths in year ',sum(dat$deaths),', total deaths for processed causes ',sum(dat.merged$deaths),' ',sum(dat.summarised$deaths)))
+	print(paste0('total injury deaths in year ',with(subset(dat.summarised.complete,cause.group=='External'),sum(deaths))))
 
   	return(dat.summarised.complete)
 }

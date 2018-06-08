@@ -131,11 +131,10 @@ yearsummary_injuries  <- function(x=2000) {
                             'NA')))))))))))))
 
         # to fix contraversal poisioning deaths to have their own category if desired
-        #dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Other external causes of injury',dat.merged$cause.sub)
         dat.merged$cause.sub = ifelse(dat.merged$letter=='X'&(dat.merged$cause.numeric==410|dat.merged$cause.numeric==420|dat.merged$cause.numeric==450|dat.merged$cause.numeric==490),'Drugs',dat.merged$cause.sub)
+		dat.merged = subset(dat.merged,cause.sub!='Drugs')
 
 		# merge cod in ICD 10 coding
-		# why is this making the number of deaths go up????
 		dat.merged = merge(dat.merged,icd10.lookup,by='cause',all.x=1)
         dat.merged$cause.group = as.character(dat.merged$cause.group)
         dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
@@ -179,6 +178,13 @@ yearsummary_injuries  <- function(x=2000) {
     # create complete grid
 	complete.grid <- expand.grid(fips=fips,month=month,sex=sex,age=age,cause.group=cause.group,cause.sub=cause.sub)
 	complete.grid$year <- unique(dat.summarised$year)
+
+	# only allow sensible combinations of complete grid
+	dat.unique = as.data.frame(unique(dat.summarised[c('cause.group','cause.sub')]))
+    complete.grid = merge(complete.grid,dat.unique)
+
+	# test to make sure combinations of causes do not give out ones that are impossible
+	print(unique(complete.grid[c('cause','cause.sub')]))
 
 	# merge deaths counts with complete grid to ensure there are rows with zero deaths
 	dat.summarised.complete <- merge(complete.grid,dat.summarised,by=c('cause.group','cause.sub','fips','year','month','sex','age'),all.x='TRUE')
