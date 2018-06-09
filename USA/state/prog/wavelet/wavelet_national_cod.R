@@ -7,7 +7,7 @@ year.end.arg <- as.numeric(args[2])
 num.sim <- as.numeric(args[3])
 sig.arg <- as.numeric(args[4])
 noise.arg <- as.numeric(args[5])
-cod.arg <- as.character(args[6])
+cod.arg <- as.character(args[6]) ; cod.arg <- gsub('_',' ',cod.arg)
 
 #year.start.arg = 1980 ; year.end.arg = 2013 ; num.sim = 10 ; sig.arg =
 
@@ -25,9 +25,18 @@ ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 source('../../data/objects/objects.R')
 
 # load data and filter results
-dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
-if(cod.arg!='AllCause'){
-    dat <- subset(dat,cause==cod.arg)
+if(cod.arg %in% c("AllCause", "Cancer", "Cardiopulmonary", "External")) {
+    dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
+    if(cod.arg!='AllCause'){
+        dat <- subset(dat,cause==cod.arg)
+    }
+}
+if(cod.arg %in% c("Cardiovascular", "Chronic_respiratory_diseases", "Respiratory_infections", "Endocrine_disorders",
+                    "Genitourinary_diseases", "Maternal_conditions", "Neuropsychiatric_disorders","Perinatal_conditions",
+                    "Substance_use_disorders")) {
+    dat <- readRDS(paste0('~/data/mortality/US/state/processed/rates/datus_nat_deaths_subcod_elife_',year.start.arg,'_',year.end.arg))
+    dat <- subset(dat,cause.sub==cod.arg)
+    dat$cause = dat$cause.sub ; dat$cause.group = NULL ; dat$cause.sub = NULL
 }
 
 # fix names of causes
@@ -36,13 +45,13 @@ dat$cause <- gsub('External', 'injuries', dat$cause)
 dat$cause <- gsub('Cardiopulmonary', 'cardiorespiratory', dat$cause)
 
 # number of years for split wavelet analysis
-years <- c(year.start.arg:year.end.arg)
-num.years <- year.end.arg - year.start.arg + 1
+# years <- c(year.start.arg:year.end.arg)
+# num.years <- year.end.arg - year.start.arg + 1
 
-halfway <- floor(num.years/2)
+# halfway <- floor(num.years/2)
 
-year.group.1 <- years[1:halfway]
-year.group.2 <- years[(halfway+1):(num.years)]
+# year.group.1 <- years[1:halfway]
+# year.group.2 <- years[(halfway+1):(num.years)]
 
 # generate nationalised data
 dat$deaths.pred <- with(dat,pop.adj*rate.adj)

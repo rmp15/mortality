@@ -20,7 +20,7 @@ declare -i end=2016
 
 echo "preparing monthly death rates in broad causes of deaths for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R $start $end
 
 #################################################
 # 2. PROCESS DATA FOR INJURIES CATEGORIES
@@ -28,7 +28,7 @@ Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_da
 
 echo "preparing monthly death rates in injury deaths (intentional/unintentional) for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R $start $end
 
 #################################################
 # 3. PROCESS DATA FOR INJURIES SUB-CAUSES
@@ -36,8 +36,7 @@ Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_da
 
 echo "preparing monthly death rates in injury sub-causes of deaths for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R $start $end
-
+#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R $start $end
 
 #################################################
 # 4. PROCESS DATA FOR ELIFE FIRST REVISION
@@ -45,4 +44,4 @@ Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_da
 
 echo "preparing monthly death rates in eLife-requested causes of death for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife $start $end
+Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R $start $end
