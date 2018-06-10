@@ -19,24 +19,33 @@ library(scales)
 source('../../data/objects/objects.R')
 
 # fix cause of death names
-cod.print = ifelse(cod.arg=='AllCause','All cause',
-            ifelse(cod.arg=='Cancer', 'Cancer',
-            ifelse(cod.arg=='Cardiopulmonary', 'Cardiorespiratory',
-            ifelse(cod.arg=='External', 'Injuries',
-            ifelse(cod.arg=='Other', 'Other')))))
+cod.print = ifelse(cod.arg=='AllCause','all cause',
+            ifelse(cod.arg=='Cancer', 'cancer',
+            ifelse(cod.arg=='Cardiopulmonary', 'cardiorespiratory',
+            ifelse(cod.arg=='External', 'injuries',
+            ifelse(cod.arg=='Other', 'other',
+            ifelse(cod.arg=='Cardiovascular','cardiovascular',
+            ifelse(cod.arg=='Chronic respiratory diseases','chronic respiratory diseases',
+            ifelse(cod.arg=='Respiratory infections',"respiratory infections",
+            ifelse(cod.arg=='Endocrine disorders','endocrine disorders',
+            ifelse(cod.arg=='Genitourinary diseases','genitourinary diseases',
+            ifelse(cod.arg=='Maternal conditions','maternal conditions',
+            ifelse(cod.arg=='Neuropsychiatric disorders', 'neuropsychiatric disorders',
+            ifelse(cod.arg=='Perinatal conditions','perinatal conditions',
+            ifelse(cod.arg=='Substance use disorders','substance use disorders'))))))))))))))
 
 # fix short names of months
 month.lookup <- data.frame(month.short=c('None   ',month.short),test=c(0:12))
 month.lookup$month.short <- factor(month.lookup$month.short, levels=c('None   ',month.short))
 
 # number of years for split wavelet analysis
-years <- c(year.start.arg:year.end.arg)
-num.years <- year.end.arg - year.start.arg + 1
-
-halfway <- floor(num.years/2)
-
-year.group.1 <- years[1:halfway]
-year.group.2 <- years[(halfway+1):(num.years)]
+# years <- c(year.start.arg:year.end.arg)
+# num.years <- year.end.arg - year.start.arg + 1
+#
+# halfway <- floor(num.years/2)
+#
+# year.group.1 <- years[1:halfway]
+# year.group.2 <- years[(halfway+1):(num.years)]
 
 # 1. NATIONAL
 
