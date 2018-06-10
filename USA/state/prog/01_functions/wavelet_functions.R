@@ -229,15 +229,15 @@ plot.wavelet.national.all <- function(sex.selected,cod='AllCause') {
                 ifelse(cod=='Cardiopulmonary', 'cardiorespiratory',
                 ifelse(cod=='External', 'injuries',
                 ifelse(cod=='Other', 'other',
-                ifelse(cod=='Cardiovascular','cardiovascular'
-                ifelse(cod=='Chronic respiratory diseases','chronic respiratory diseases'
-                ifelse(cod=='"Respiratory infections"','"respiratory infections"'
-                ifelse(cod=='Endocrine disorders','endocrine disorders'
-                ifelse(cod=='Genitourinary diseases','genitourinary diseases'
-                ifelse(cod=='Maternal conditions','maternal conditions'
-                ifelse(cod=='Neuropsychiatric_disorders', 'neuropsychiatric disorders'))))))
-                ifelse(cod=='Perinatal conditions','perinatal conditions'))))))
-                ifelse(cod=='Substance use disorders','substance use disorders'))))))
+                ifelse(cod=='Cardiovascular','cardiovascular',
+                ifelse(cod=='Chronic respiratory diseases','chronic respiratory diseases',
+                ifelse(cod=='"Respiratory infections"',"respiratory infections",
+                ifelse(cod=='Endocrine disorders','endocrine disorders',
+                ifelse(cod=='Genitourinary diseases','genitourinary diseases',
+                ifelse(cod=='Maternal conditions','maternal conditions',
+                ifelse(cod=='Neuropsychiatric_disorders', 'neuropsychiatric disorders',
+                ifelse(cod=='Perinatal conditions','perinatal conditions',
+                ifelse(cod=='Substance use disorders','substance use disorders'))))))))))))))
 
     dat <- subset(dat.national, sex==sex.selected)
     

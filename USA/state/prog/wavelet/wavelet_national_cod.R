@@ -33,7 +33,7 @@ if(cod.arg %in% c("AllCause", "Cancer", "Cardiopulmonary", "External")) {
 }
 if(cod.arg %in% c("Cardiovascular", "Chronic respiratory diseases", "Respiratory infections", "Endocrine disorders",
                     "Genitourinary diseases", "Maternal conditions", "Neuropsychiatric disorders","Perinatal conditions",
-                    "Substance_use disorders")) {
+                    "Substance use disorders")) {
     dat <- readRDS(paste0('~/data/mortality/US/state/processed/rates/datus_nat_deaths_subcod_elife_',year.start.arg,'_',year.end.arg))
     dat <- subset(dat,cause.sub==cod.arg)
     dat$cause = dat$cause.sub ; dat$cause.group = NULL ; dat$cause.sub = NULL
@@ -94,7 +94,7 @@ plot.wavelet.national.all(1,cod.arg)
 dev.off()
 
 pdf(paste0(file.loc,noise.lookup[noise.arg],'/plots/wavelet_national_all_women_',cod.arg,'_',num.sim,'_sim_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-plot.wavelet.national.all(1,cod.arg)
+plot.wavelet.national.all(2,cod.arg)
 dev.off()
 
 # output national wavelet files sex separately split time period all on one page
