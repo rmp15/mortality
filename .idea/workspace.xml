@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,8 +24,8 @@
       <file leaf-file-name="wavelet_paper_cod.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+            <state relative-caret-position="330">
+              <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -43,7 +44,7 @@
       <file leaf-file-name="wavelet_functions.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/wavelet_functions.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5505">
+            <state relative-caret-position="1440">
               <caret line="367" column="9" lean-forward="false" selection-start-line="367" selection-start-column="9" selection-end-line="367" selection-end-column="9" />
               <folding>
                 <element signature="e#136#2009#0" expanded="false" />
@@ -79,7 +80,7 @@
       <file leaf-file-name="anti_com_analysis_national_cod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/com/anti_com_analysis_national_cod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1185">
+            <state relative-caret-position="1096">
               <caret line="79" column="15" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
               <folding />
             </state>
@@ -282,6 +283,275 @@
       <recent name="$PROJECT_DIR$/USA/state/prog/data_explore" />
       <recent name="$PROJECT_DIR$/USA/state/prog/prep_data_cod" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_15_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_15_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_15_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_15_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_5_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_5_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_15_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_15_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_15_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_15_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_5_External</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_0_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_0_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_0_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_0_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_15_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_15_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_15_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_15_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_25_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_25_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_25_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_25_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_35_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_35_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_35_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_35_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_45_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_45_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_45_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_45_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_55_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_55_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_55_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_55_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_5_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_5_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_5_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_5_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_65_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_65_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_65_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_65_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_75_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_75_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_75_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_75_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_85_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_85_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_85_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Men_85_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_0_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_0_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_0_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_0_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_25_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_25_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_25_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_25_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_35_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_35_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_35_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_35_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_45_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_45_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_45_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_45_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_55_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_55_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_55_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_55_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_5_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_5_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_65_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_65_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_65_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_65_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_75_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_75_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_75_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_75_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_85_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_85_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_85_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/anti_com_rate_cod_Women_85_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_0_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_0_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_0_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_0_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_15_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_15_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_15_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_15_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_25_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_25_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_25_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_25_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_35_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_35_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_35_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_35_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_45_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_45_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_45_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_45_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_55_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_55_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_55_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_55_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_5_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_5_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_5_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_5_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_65_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_65_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_65_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_65_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_75_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_75_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_75_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_75_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_85_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_85_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_85_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Men_85_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_0_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_0_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_0_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_0_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_25_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_25_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_25_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_25_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_35_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_35_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_35_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_35_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_45_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_45_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_45_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_45_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_55_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_55_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_55_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_55_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_5_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_5_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_5_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_65_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_65_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_65_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_65_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_75_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_75_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_75_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_75_External</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_85_AllCause</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_85_Cancer</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_85_Cardiopulmonary</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/national/values/entire_period/method_2/com_rate_cod_Women_85_External</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunManager" selected="Bash.wavelet_paper_cod.sh">
     <configuration default="false" name="data_prep_cod.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
@@ -806,7 +1076,21 @@
       <option name="project" value="LOCAL" />
       <updated>1528652753344</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Add eLife COD coding">
+      <created>1528653738872</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1528653738872</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Add eLife COD coding">
+      <created>1528653749659</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1528653749659</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -818,7 +1102,7 @@
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24951456" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -931,6 +1215,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1054,6 +1339,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1092,56 +1378,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/wavelet/wavelet_national_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/wavelet_functions.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5505">
-          <caret line="367" column="9" lean-forward="false" selection-start-line="367" selection-start-column="9" selection-end-line="367" selection-end-column="9" />
-          <folding>
-            <element signature="e#136#2009#0" expanded="false" />
-            <element signature="e#2166#6777#0" expanded="false" />
-            <element signature="e#6891#10286#0" expanded="false" />
-            <element signature="e#11664#14446#0" expanded="false" />
-            <element signature="e#17716#22513#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1560">
           <caret line="104" column="20" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_analysis_national_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="68" column="20" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/anti_com_analysis_national_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="79" column="15" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1170,6 +1410,52 @@
             <element signature="e#3606#5402#0" expanded="false" />
             <element signature="e#5550#7376#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_analysis_national_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="68" column="20" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/anti_com_analysis_national_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1096">
+          <caret line="79" column="15" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/wavelet/wavelet_national_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/wavelet_functions.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="367" column="9" lean-forward="false" selection-start-line="367" selection-start-column="9" selection-end-line="367" selection-end-column="9" />
+          <folding>
+            <element signature="e#136#2009#0" expanded="false" />
+            <element signature="e#2166#6777#0" expanded="false" />
+            <element signature="e#6891#10286#0" expanded="false" />
+            <element signature="e#11664#14446#0" expanded="false" />
+            <element signature="e#17716#22513#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

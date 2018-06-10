@@ -20,7 +20,7 @@ declare -a numsims=(10)
 declare -i sig=5
 declare -a noises=(1)
 #declare -a noises=(1 2)
-declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External")
+declare -a cods=("Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders")
 #declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
 declare -a logs=(0)
 
@@ -52,10 +52,10 @@ for cod in "${cods[@]}"; do
 echo "starting nationalised COM analysis for ${sexstrings[$sex-1]} $age, years $start - $end";
 
 # runs COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/com_analysis_national_cod.R $start $end $age $sex $cod
+Rscript ~/git/mortality/USA/state/prog/com/com_analysis_national_cod.R $start $end $age $sex $cod &
 
 # runs anti-COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national_cod.R $start $end $age $sex $cod
+Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_national_cod.R $start $end $age $sex $cod &
 
 done; done; done;
 
