@@ -20,7 +20,7 @@ declare -a numsims=(10)
 declare -i sig=5
 declare -a noises=(1)
 #declare -a noises=(1 2)
-declare -a cods=("Endocrine_disorders")
+declare -a cods=("Genitourinary_diseases")
 #declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
 declare -a logs=(0)
 
