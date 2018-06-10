@@ -231,7 +231,7 @@ plot.wavelet.national.all <- function(sex.selected,cod='AllCause') {
                 ifelse(cod=='Other', 'other',
                 ifelse(cod=='Cardiovascular','cardiovascular',
                 ifelse(cod=='Chronic respiratory diseases','chronic respiratory diseases',
-                ifelse(cod=='"Respiratory infections"',"respiratory infections",
+                ifelse(cod=='Respiratory infections',"respiratory infections",
                 ifelse(cod=='Endocrine disorders','endocrine disorders',
                 ifelse(cod=='Genitourinary diseases','genitourinary diseases',
                 ifelse(cod=='Maternal conditions','maternal conditions',
@@ -253,10 +253,11 @@ plot.wavelet.national.all <- function(sex.selected,cod='AllCause') {
         plot.title <- paste0(age.single)
     
         # prepare data frame for anaylsis
-        my.data <- data.frame(date=as.Date(as.character(dat.temp$year),format='%Y'),log.rate=log(dat.temp$rate.adj),log.deaths=log(dat.temp$deaths.pred+1))
+        my.data <- data.frame(date=as.Date(as.character(dat.temp$year),format='%Y'),rate = dat.temp$rate.adj, deaths =dat.temp$deaths.pred, log.rate=log(dat.temp$rate.adj),log.deaths=log(dat.temp$deaths.pred+1))
     
         # perform wavelet analysis
-        my.w <- analyze.wavelet(my.data, "log.rate",
+        my.w <- analyze.wavelet(my.data, "rate",
+        # my.w <- analyze.wavelet(my.data, "log.rate",
         lowerPeriod=2, upperPeriod=32,
         loess.span = 3/26,
         dt= 1, dj = 1/1000,
