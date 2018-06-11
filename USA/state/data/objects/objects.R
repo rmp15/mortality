@@ -161,6 +161,9 @@ cod.lookup.10 <- data.frame(letter=as.character(toupper(letters)),
 
 # cod lookups
 cod.broad = c('Allcause','Cancer','Cardiopulmonary','External','Other')
+cod.cardio = c('Cardiovascular','Respiratory infections','Chronic respiratory diseases')
+cod.injuries = c('Unintentional','Intentional')
+cod.other = c('Endocrine disorders','Genitourinary diseases','Maternal conditions','Perinatal conditions','Substance use disorders','Neuropsychiatric disorders')
 
 # ASDR weightings
 # from http://apps.who.int/healthinfo/statistics/mortality/whodpms/definitions/pop.htm
