@@ -26,7 +26,7 @@ ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 source('../../data/objects/objects.R')
 
 # load data and filter results
-if(cod.arg %in% c("AllCause", "Cancer", "Cardiopulmonary", "External")) {
+if(cod.arg %in% c("AllCause", "Cancer", "Cardiopulmonary", "External", "Other")) {
     dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
     if(cod.arg!='AllCause'){
         dat <- subset(dat,cause==cod.arg)

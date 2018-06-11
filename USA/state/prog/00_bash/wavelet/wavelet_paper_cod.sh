@@ -20,8 +20,8 @@ declare -a numsims=(10)
 declare -i sig=5
 declare -a noises=(1)
 #declare -a noises=(1 2)
-declare -a cods=("Intentional" "Unintentional")
-#declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
+declare -a cods=("Other")
+#declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Intentional" "Unintentional" "Other" Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
 declare -a logs=(0)
 
 for noise in "${noises[@]}"; do
@@ -89,7 +89,7 @@ for cod in "${cods[@]}"; do
 echo "plotting COM analysis for $country for $cod, years $start - $end";
 
 # processes com data
-Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
+#Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 # plots
 Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod

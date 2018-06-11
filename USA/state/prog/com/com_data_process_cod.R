@@ -31,7 +31,7 @@ ifelse(!dir.exists(file.loc.reg.output), dir.create(file.loc.reg.output,recursiv
 dat.entire <- data.frame()
 for(k in c(1,2)){
     for(i in c(0,5,15,25,35,45,55,65,75,85)){
-        dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_2/com_rate_cod_',tolower(sex.lookup[k]),'_',i,'_',cod.arg))
+        dat.temp <- readRDS(paste0(file.loc.nat.entire,'method_2/com_rate_cod_',sex.lookup[k],'_',i,'_',cod.arg))
         dat.entire <- rbind(dat.entire,dat.temp)
         print(dat.entire)
     }}
