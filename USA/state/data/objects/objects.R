@@ -160,7 +160,7 @@ cod.lookup.10 <- data.frame(letter=as.character(toupper(letters)),
                                         'External')) # Z
 
 # cod lookups
-cod.broad = c('Allcause','Cancer','Cardiopulmonary','External','Other')
+cod.broad = c('AllCause','Cancer','Cardiopulmonary','External','Other')
 cod.cardio = c('Cardiovascular','Respiratory infections','Chronic respiratory diseases')
 cod.injuries = c('Unintentional','Intentional')
 cod.other = c('Endocrine disorders','Genitourinary diseases','Maternal conditions','Perinatal conditions','Substance use disorders','Neuropsychiatric disorders')

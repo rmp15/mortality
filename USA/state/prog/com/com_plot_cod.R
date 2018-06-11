@@ -18,6 +18,24 @@ library(scales)
 # source relevant objects
 source('../../data/objects/objects.R')
 
+# fix cause of death names
+cod.print = ifelse(cod.arg=='AllCause','all cause',
+            ifelse(cod.arg=='Cancer', 'cancer',
+            ifelse(cod.arg=='Cardiopulmonary', 'cardiorespiratory',
+            ifelse(cod.arg=='External', 'injuries',
+            ifelse(cod.arg=='Unintentional','unintentional',
+            ifelse(cod.arg=='Intentional','intentional',
+            ifelse(cod.arg=='Other', 'other',
+            ifelse(cod.arg=='Cardiovascular','cardiovascular',
+            ifelse(cod.arg=='Chronic respiratory diseases','chronic respiratory diseases',
+            ifelse(cod.arg=='Respiratory infections',"respiratory infections",
+            ifelse(cod.arg=='Endocrine disorders','endocrine disorders',
+            ifelse(cod.arg=='Genitourinary diseases','genitourinary diseases',
+            ifelse(cod.arg=='Maternal conditions','maternal conditions',
+            ifelse(cod.arg=='Neuropsychiatric disorders', 'neuropsychiatric disorders',
+            ifelse(cod.arg=='Perinatal conditions','perinatal conditions',
+            ifelse(cod.arg=='Substance use disorders','substance use disorders'))))))))))))))))
+
 # fix short names of months
 month.lookup <- data.frame(month.short=c('None   ',month.short),test=c(0:12))
 month.lookup$month.short <- factor(month.lookup$month.short, levels=c('None   ',month.short))
@@ -50,23 +68,54 @@ ifelse(!dir.exists(file.loc.nat.output), dir.create(file.loc.nat.output,recursiv
 # produce dataset for national
 dat.nat <- readRDS(paste0(file.loc.nat.input,'com_inv_com_rates_national_values_method_2_entire_',cod.arg,'_',year.start.arg,'_',year.end.arg))
 
-# # produce complete national data
-# dat.nat.complete = data.frame()
-# for (i in cod.broad){
-#     dat.nat <- readRDS(paste0(file.loc.nat.input,'com_inv_com_rates_national_values_method_2_entire_',i,'_',year.start.arg,'_',year.end.arg))
-#     dat.nat$cause = i
-#     dat.nat.complete = rbind(dat.nat.complete,dat.nat)
-# }
-# dat.nat.complete$size <- 3*(dat.nat.complete$size/max(dat.nat.complete$size))
+# produce complete national data for broad causes
+dat.nat.complete = data.frame()
+for (i in cod.broad){
+    dat.nat <- readRDS(paste0(file.loc.nat.input,'com_inv_com_rates_national_values_method_2_entire_',i,'_',year.start.arg,'_',year.end.arg))
+    dat.nat$cause = i
+    dat.nat.complete = rbind(dat.nat.complete,dat.nat)
+}
+dat.nat.complete$size <- 3*(dat.nat.complete$size/max(dat.nat.complete$size))
+
+# produce data for cardio causes
+dat.nat.cardio = data.frame()
+for (i in cod.cardio){
+    dat.nat <- readRDS(paste0(file.loc.nat.input,'com_inv_com_rates_national_values_method_2_entire_',i,'_',year.start.arg,'_',year.end.arg))
+    dat.nat$cause = i
+    dat.nat.cardio= rbind(dat.nat.cardio,dat.nat)
+}
+dat.nat.cardio$size <- 3*(dat.nat.cardio$size/max(dat.nat.cardio$size))
+
+# produce data for injuries causes
+dat.nat.injuries = data.frame()
+for (i in cod.injuries){
+    dat.nat <- readRDS(paste0(file.loc.nat.input,'com_inv_com_rates_national_values_method_2_entire_',i,'_',year.start.arg,'_',year.end.arg))
+    dat.nat$cause = i
+    dat.nat.injuries= rbind(dat.nat.injuries,dat.nat)
+}
+dat.nat.injuries$size <- 3*(dat.nat.injuries$size/max(dat.nat.injuries$size))
+
+# produce data for other causes
+dat.nat.other = data.frame()
+for (i in cod.other){
+    dat.nat <- readRDS(paste0(file.loc.nat.input,'com_inv_com_rates_national_values_method_2_entire_',i,'_',year.start.arg,'_',year.end.arg))
+    dat.nat$cause = i
+    dat.nat.other= rbind(dat.nat.other,dat.nat)
+}
+
+dat.nat.other$size <- ifelse(is.na(dat.nat.other$size)==TRUE,0,dat.nat.other$size)
+dat.nat.other$size <- 3*(dat.nat.other$size/max(dat.nat.other$size))
 
 # fix names
-# dat.nat.complete$cause <- gsub('Allcause', 'All cause', dat.nat.complete$cause)
-# dat.nat.complete$cause <- gsub('External', 'Injuries', dat.nat.complete$cause)
-# dat.nat.complete$cause <- gsub('Cardiopulmonary', 'Cardiorespiratory', dat.nat.complete$cause)
+dat.nat.complete$cause <- gsub('AllCause', 'All cause', dat.nat.complete$cause)
+dat.nat.complete$cause <- gsub('External', 'Injuries', dat.nat.complete$cause)
+dat.nat.complete$cause <- gsub('Cardiopulmonary', 'Cardiorespiratory', dat.nat.complete$cause)
 
 # fix sex names
-# dat.nat.complete$sex = as.factor(as.character(dat.nat.complete$sex))
-# levels(dat.nat.complete$sex) <- sex.filter2
+dat.nat.complete$sex = as.factor(as.character(dat.nat.complete$sex)) ; levels(dat.nat.complete$sex) <- sex.filter2
+dat.nat.cardio$sex = as.factor(as.character(dat.nat.cardio$sex)) ; levels(dat.nat.cardio$sex) <- sex.filter2
+dat.nat.injuries$sex = as.factor(as.character(dat.nat.injuries$sex)) ; levels(dat.nat.injuries$sex) <- sex.filter2
+dat.nat.other$sex = as.factor(as.character(dat.nat.other$sex)) ; levels(dat.nat.other$sex) <- sex.filter2
 
 # # entire period com plot v1
 # pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v1_',cod.arg,'_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
@@ -106,8 +155,6 @@ scale_size(guide='none') +
 theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
-
-# HASHED FROM HERE TEMPORARILY
 
 # # entire period com plot v3
 # pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v3_',cod.arg,'_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
@@ -200,32 +247,49 @@ dev.off()
 # dat.nat.complete <- subset(dat.nat.complete,!(cause =='Injuries' & age == 45 & sex=='Female'))
 # dat.nat.complete <- subset(dat.nat.complete,!(cause =='Injuries' & age == 55 & sex=='Female'))
 #
-# # entire period com plot v1a (plotting all causes together without nonsig)
-# pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v2_allcauses_nononsig_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-# dat.nat.complete$size = dat.nat.complete$size/2
-# ggplot() +
-#     geom_point(data=subset(dat.nat.complete,type=='max'),aes(x=factor(age),y=COM.mean,size=size),fill='red',shape=24) +
-# geom_point(data=subset(dat.nat.complete,type=='min'),aes(y=COM.mean,x=factor(age),size=size),fill='green',shape=25) +
-# #geom_point(data=subset(dat.nat.complete,type=='max'&cause!='Allcause'),aes(x=factor(age),y=COM.mean,size=size,shape=cause),color='dark red',alpha=0.5) +
-# #geom_point(data=subset(dat.nat.complete,type=='min'&cause!='Allcause'),aes(y=COM.mean,x=factor(age),size=size,shape=cause),color='forest green',alpha=0.5) +
-# #geom_hline(linetype=2, yintercept = 0:12, alpha=0.2) +
-# #geom_vline(linetype=2, xintercept = 1:10,alpha=0.2) +
-# #geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
-# ylab('Month') +
-# xlab('Age group') + ggtitle('') +
-# scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
-# scale_x_discrete(labels=age.print) +
-# #xlim(1,12) +
-# facet_grid(sex~cause) +
-# scale_size(guide='none') +
-# annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
-# annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf) +
-# theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
-# panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
-# legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"),
-# panel.spacing = unit(2, "lines"))
-# dev.off()
-#
+
+dat.nat.complete$size = dat.nat.complete$size/2
+dat.nat.cardio$size = dat.nat.cardio$size/2
+dat.nat.injuries$size = dat.nat.injuries$size/2
+dat.nat.other$size = dat.nat.other$size/2
+
+plot.together = function(data,size){
+    ggplot() +
+    geom_point(data=subset(data,type=='max'),aes(x=factor(age),y=COM.mean,size=size),fill='red',shape=24) +
+    geom_point(data=subset(data,type=='min'),aes(y=COM.mean,x=factor(age),size=size),fill='green',shape=25) +
+    ylab('Month') +
+    xlab('Age group') + ggtitle('') +
+    scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
+    scale_x_discrete(labels=age.print) +
+    #xlim(1,12) +
+    facet_grid(sex~cause) +
+    scale_size(guide='none') +
+    annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
+    annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf) +
+    theme(text = element_text(size = 15),strip.text.x=element_text(size=size),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
+    panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
+    legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"),
+    panel.spacing = unit(2, "lines"))
+}
+
+# entire period com plot v1a (plotting all causes together with nonsig)
+pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v2_allcauses_nononsig_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.together(dat.nat.complete,15)
+dev.off()
+
+pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v2_cardio_nononsig_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.together(dat.nat.cardio,15)
+dev.off()
+
+pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v2_injuries_nononsig_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.together(dat.nat.injuries,15)
+dev.off()
+
+pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v2_other_nononsig_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+plot.together(dat.nat.other,8)
+dev.off()
+
+# #
 # # entire period com plot v1a (plotting all causes together)
 # pdf(paste0(file.loc.nat.output,'USA_COM_rates_total_axis_swapped_v3_allcauses_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 # ggplot() +
