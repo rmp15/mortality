@@ -20,8 +20,7 @@ declare -a numsims=(10)
 declare -i sig=5
 declare -a noises=(1)
 #declare -a noises=(1 2)
-declare -a cods=("Intentional" "Unintentional" "Other" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
-#declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Intentional" "Unintentional" "Other" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
+declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Intentional" "Unintentional" "Other" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
 declare -a logs=(0)
 
 for noise in "${noises[@]}"; do
@@ -68,15 +67,15 @@ for cod in "${cods[@]}"; do
 echo "starting regional COM analysis for $cod for years $start - $end";
 
 # runs regional COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region_cod.R $start $end $cod &
+#Rscript ~/git/mortality/USA/state/prog/com/com_analysis_region_cod.R $start $end $cod &
 
 # runs regional anti-COM analysis
-Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_region_cod.R $start $end $cod &
+#Rscript ~/git/mortality/USA/state/prog/com/anti_com_analysis_region_cod.R $start $end $cod &
 
 echo "processing data for $country for $cod, years $start - $end";
 
 # process COM data
-#Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
+Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 done;
 
@@ -92,9 +91,11 @@ echo "plotting COM analysis for $country for $cod, years $start - $end";
 #Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 # plots
-#Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
+Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
 
 done;
+
+# TO DOOOOOOOO STILL BELOW
 
 #################################################
 # 5. NATIONAL CLIMATE SEASONALITY INDEX
@@ -104,7 +105,7 @@ declare dname="t2m"
 declare metric="mean"
 
 # create seasonality index climate values
-#Rscript ~/git/climate/countries/USA/prog/10_seasonality_index/seasonality_index_climate_regions.R $start $end $start $end $dname $metric
+Rscript ~/git/climate/countries/USA/prog/10_seasonality_index/seasonality_index_climate_regions_cod.R $start $end $start $end $dname $metric $cod
 
 #################################################
 # 6. NATIONAL SEASONALITY INDEX ANALYSIS
@@ -115,7 +116,7 @@ for cod in "${cods[@]}"; do
 echo "starting seasonality index analysis for $country, years $start - $end";
 
 # runs seasonality index analysis
-#Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod.R $start $end $start $end $dname $metric $cod
+Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod.R $start $end $start 2016 $dname $metric $cod
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R $start $end $start $end $dname $metric $cod
 
 done;
