@@ -4,7 +4,7 @@ rm(list=ls())
 args <- commandArgs(trailingOnly=TRUE)
 year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
-cod.arg <- as.character(args[3])
+cod.arg <- as.character(args[3]);cod.arg <- gsub('_',' ',cod.arg)
 
 # year.start.arg = 1980 ; year.end.arg = 2016 ; cod.arg = 'Cardiovascular'
 
