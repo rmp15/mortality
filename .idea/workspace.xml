@@ -2,18 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_AllCause_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_AllCause_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Cancer_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Cancer_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Cardiopulmonary_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Cardiopulmonary_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_External_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_External_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_allcauses_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_allcauses_nononsig_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_cardio_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_cardio_nononsig_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_injuries_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_injuries_nononsig_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_other_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_other_nononsig_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/anti_com_rates_region_map_men_rounded_External_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/anti_com_rates_region_map_men_rounded_External_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/anti_com_rates_region_map_women_rounded_External_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/anti_com_rates_region_map_women_rounded_External_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/com_rates_region_map_men_rounded_External_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/com_rates_region_map_men_rounded_External_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/com_rates_region_map_women_rounded_External_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/com_rates_region_map_women_rounded_External_1980_2016.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
     </list>
@@ -36,8 +24,8 @@
       <file leaf-file-name="wavelet_paper_cod.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+            <state relative-caret-position="315">
+              <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="274" />
               <folding />
             </state>
           </provider>
@@ -4136,13 +4124,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00025" summary="Add eLife COD coding">
-      <created>1528378393675</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1528378393675</updated>
-    </task>
     <task id="LOCAL-00026" summary="Add eLife COD coding">
       <created>1528379931324</created>
       <option name="number" value="00026" />
@@ -4479,7 +4460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528802818629</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Add eLife COD coding">
+      <created>1528803255345</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1528803255345</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -4911,8 +4899,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        <state relative-caret-position="315">
+          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="274" />
           <folding />
         </state>
       </provider>
