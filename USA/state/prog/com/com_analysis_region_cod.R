@@ -6,10 +6,10 @@ year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 cod.arg <- as.character(args[3])
 
-# year.start.arg = 1980 ; year.end.arg = 2013 ; cod.arg = 'Cardiopulmonary'
+# year.start.arg = 1980 ; year.end.arg = 2016 ; cod.arg = 'Cardiovascular'
 
-library(plyr)
 require(CircStats)
+library(plyr)
 
 # create output directories
 file.loc <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/region/")
@@ -22,7 +22,6 @@ ifelse(!dir.exists(file.loc.split), dir.create(file.loc.split,recursive=TRUE), F
 # coding for graph-friendly information
 source('../../data/objects/objects.R')
 
-# load data and filter results
 # load data and filter results
 if(cod.arg %in% c("AllCause", "Cancer", "Cardiopulmonary", "External", "Other")) {
     dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))

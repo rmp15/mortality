@@ -6,7 +6,7 @@ year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 cod.arg <- as.character(args[3])
 
-# year.start.arg = 1980 ; year.end.arg = 2013 ; cod.arg = 'Cardiopulmonary'
+# year.start.arg = 1980 ; year.end.arg = 2016 ; cod.arg = 'Cardiovascular'
 
 require(CircStats)
 library(plyr)
@@ -14,9 +14,9 @@ library(plyr)
 # create output directories
 file.loc <- paste0("../../output/com/",year.start.arg,'_',year.end.arg,"/region/")
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
-file.loc.entire <- paste0(file.loc,'/values/entire_period/')
+file.loc.entire <- paste0(file.loc,'values/entire_period/')
 ifelse(!dir.exists(file.loc.entire), dir.create(file.loc.entire,recursive=TRUE), FALSE)
-file.loc.split <- paste0(file.loc,'/values/split_period/')
+file.loc.split <- paste0(file.loc,'values/split_period/')
 ifelse(!dir.exists(file.loc.split), dir.create(file.loc.split,recursive=TRUE), FALSE)
 
 # coding for graph-friendly information
@@ -69,13 +69,13 @@ dat.national <- merge(dat.national,test)
 dat.national$rate.inv <- dat.national$rate.scaled.max - dat.national$rate.scaled
 
 # number of years for split wavelet analysis
-years <- c(year.start.arg:year.end.arg)
-num.years <- year.end.arg - year.start.arg + 1
-
-halfway <- floor(num.years/2)
-
-year.group.1 <- years[1:halfway]
-year.group.2 <- years[(halfway+1):(num.years)]
+# years <- c(year.start.arg:year.end.arg)
+# num.years <- year.end.arg - year.start.arg + 1
+#
+# halfway <- floor(num.years/2)
+#
+# year.group.1 <- years[1:halfway]
+# year.group.2 <- years[(halfway+1):(num.years)]
 
 # climate region lookup
 region.lookup <- unique(dat.national$climate_region)
