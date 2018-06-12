@@ -6,6 +6,8 @@ year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 cod.arg <- as.character(args[3])
 
+# year.start.arg = 1980 ; year.end.arg = 2013 ; cod.arg = 'Cardiopulmonary'
+
 library(plyr)
 require(CircStats)
 
@@ -21,14 +23,31 @@ ifelse(!dir.exists(file.loc.split), dir.create(file.loc.split,recursive=TRUE), F
 source('../../data/objects/objects.R')
 
 # load data and filter results
-dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
-if(cod.arg!='AllCause'){
+# load data and filter results
+if(cod.arg %in% c("AllCause", "Cancer", "Cardiopulmonary", "External", "Other")) {
+    dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
+    if(cod.arg!='AllCause'){
+        dat <- subset(dat,cause==cod.arg)
+    }
+}
+if(cod.arg %in% c("Cardiovascular", "Chronic respiratory diseases", "Respiratory infections", "Endocrine disorders",
+                    "Genitourinary diseases", "Maternal conditions", "Neuropsychiatric disorders","Perinatal conditions",
+                    "Substance use disorders")) {
+    dat <- readRDS(paste0('~/data/mortality/US/state/processed/rates/datus_nat_deaths_subcod_elife_',year.start.arg,'_',year.end.arg))
+    dat <- subset(dat,cause.sub==cod.arg)
+    dat$cause = dat$cause.sub ; dat$cause.group = NULL ; dat$cause.sub = NULL
+}
+if(cod.arg %in% c("Intentional", "Unintentional")) {
+    dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_injuries_ons_',year.start.arg,'_',year.end.arg))
     dat <- subset(dat,cause==cod.arg)
 }
 
-# load region data
+# load region data and fix climate region names if necessary
+# (East North Central ->Central, Upper Midwest -> East North Central)
 dat.region <- readRDS(paste0('../../output/mapping_posterior/INLA/type1a/1982_2013/maps/USA_state_data'))
 dat.region$fips <- as.numeric(as.character(dat.region$STATE_FIPS))
+dat.region$climate_region <- gsub('East North Central', 'Central', dat.region$climate_region)
+dat.region$climate_region <- gsub('Upper Midwest', 'East North Central', dat.region$climate_region)
 
 # merge region data with death data
 dat <- merge(dat,dat.region,by='fips')
@@ -43,13 +62,13 @@ dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
 dat.national$rate.scaled <- round(1000000*(dat.national$rate.adj))
 
 # number of years for split wavelet analysis
-years <- c(year.start.arg:year.end.arg)
-num.years <- year.end.arg - year.start.arg + 1
-
-halfway <- floor(num.years/2)
-
-year.group.1 <- years[1:halfway]
-year.group.2 <- years[(halfway+1):(num.years)]
+# years <- c(year.start.arg:year.end.arg)
+# num.years <- year.end.arg - year.start.arg + 1
+#
+# halfway <- floor(num.years/2)
+#
+# year.group.1 <- years[1:halfway]
+# year.group.2 <- years[(halfway+1):(num.years)]
 
 # climate region lookup
 region.lookup <- unique(dat.national$climate_region)

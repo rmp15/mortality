@@ -2,7 +2,7 @@
 dat.region <- readRDS(paste0('~/git/mortality/USA/state/output/mapping_posterior/INLA/type1a/1982_2013/maps/USA_state_data'))
 
 # fix climate region names
-dat.region$climate_region <- 	c('Northwest','West North Central','Northeast','West North Central','West North Central',
+dat.region$climate_region2 <- 	c('Northwest','West North Central','Northeast','West North Central','West North Central',
 'West North Central','East North Central','Northwest','Northeast','East North Central',
 'Northwest','Northeast','East North Central','Northeast','West North Central',
 'Northeast','Northeast','Northeast','Northeast','Northeast',
