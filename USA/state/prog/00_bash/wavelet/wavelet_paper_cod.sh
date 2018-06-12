@@ -16,9 +16,15 @@ declare country="USA"
 # 0. NATIONAL DEATH STATISTICS BY CAUSE OF DEATH
 #################################################
 
-echo "calculating death statistics for $country by cause of death, years $start - $end";
+echo "calculating death statistics for $country by $cod, years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national_cod.R $start $end $numsim $sig $noise $cod $log
+declare -a classes=("broad" "narrow" "injuries" )
+
+for class in "${classes[@]}"; do
+
+Rscript ~/git/mortality/USA/state/prog/data_explore/data_summary_cod.R $start $end $class
+
+done;
 
 #################################################
 # 1. NATIONAL WAVELET ANALYSIS
@@ -115,7 +121,7 @@ declare dname="t2m"
 declare metric="mean"
 
 # create seasonality index climate values
-Rscript ~/git/climate/countries/USA/prog/10_seasonality_index/seasonality_index_climate_regions_cod.R $start $end $start $end $dname $metric $cod
+#Rscript ~/git/climate/countries/USA/prog/10_seasonality_index/seasonality_index_climate_regions_cod.R $start $end $start $end $dname $metric $cod
 
 done;
 
@@ -128,7 +134,7 @@ for cod in "${cods[@]}"; do
 echo "starting seasonality index analysis for $country, years $start - $end";
 
 # runs seasonality index analysis
-Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod.R $start $end $start 2016 $dname $metric $cod
+#Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod.R $start $end $start 2016 $dname $metric $cod
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R $start $end $start $end $dname $metric $cod
 
 done;
