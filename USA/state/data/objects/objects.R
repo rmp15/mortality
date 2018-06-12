@@ -110,7 +110,7 @@ models <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef',
 
 # climate regions
 region.lookup=c("Northwest","West_North_Central", "Northeast",
-                "Upper_Midwest","East_North_Central", "West",
+                "East_North_Central","Central", "West",
                 "Southwest", "South", "Southeast")
 
 # load intentional and unintentional lookup (with poisoning and unclear variables added to unintentional)
