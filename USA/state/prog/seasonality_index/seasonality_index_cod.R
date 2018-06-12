@@ -20,7 +20,7 @@ year.start.2 <- as.numeric(args[3])
 year.end.2 <- as.numeric(args[4])
 dname <- as.character(args[5])
 metric <- as.character(args[6])
-cod <- as.character(args[7]) ; #cod <- gsub('_',' ',cod)
+cod <- as.character(args[7]) ; cod <- gsub('_',' ',cod)
 
 print(cod)
 

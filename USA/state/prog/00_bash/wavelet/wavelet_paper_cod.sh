@@ -75,7 +75,7 @@ echo "starting regional COM analysis for $cod for years $start - $end";
 echo "processing data for $country for $cod, years $start - $end";
 
 # process COM data
-Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
+#Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 done;
 
@@ -91,7 +91,7 @@ echo "plotting COM analysis for $country for $cod, years $start - $end";
 #Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 # plots
-Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
+#Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
 
 done;
 
@@ -101,11 +101,17 @@ done;
 # 5. NATIONAL CLIMATE SEASONALITY INDEX
 #################################################
 
+for cod in "${cods[@]}"; do
+
+echo "starting climate seasonality index analysis for $country, years $start - $end";
+
 declare dname="t2m"
 declare metric="mean"
 
 # create seasonality index climate values
 Rscript ~/git/climate/countries/USA/prog/10_seasonality_index/seasonality_index_climate_regions_cod.R $start $end $start $end $dname $metric $cod
+
+done;
 
 #################################################
 # 6. NATIONAL SEASONALITY INDEX ANALYSIS
