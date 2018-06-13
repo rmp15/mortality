@@ -249,6 +249,11 @@ yearsummary_elife  <- function(x=2000) {
                 ifelse (dat.merged$age<85,  75,
                    	85)))))))))
 
+    print(with(subset(dat.merged,age>=5&cause.sub=='Perinatal conditions'),sum(deaths)))
+
+    # fix perinatal conditions for those not in 0-4 (i.e. move to 'Other'/'Other')
+    dat.merged$cause.sub = ifelse(dat.merged$cause.sub=='Perinatal conditions'&dat.merged$age>=5,'Other',dat.merged$cause.sub)
+
 	# summarise by state,year,month,sex,agegroup
     dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.group,cause.sub,fips,year,monthdth,sex,agegroup),deaths=sum(deaths))
     dat.summarised$cause.sub = ifelse(dat.summarised$cause.sub=='NA',dat.summarised$cause.group,dat.summarised$cause.sub)
