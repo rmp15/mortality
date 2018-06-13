@@ -378,6 +378,24 @@ dat.mort.climate.fixed$climate_region <- gsub('_',' ', dat.mort.climate.fixed$cl
 # set colour scheme for climate colour map
 map.climate.colour <- colorRampPalette(c("red","hotpink","brown","navy","cyan","green","orange"))(20)[c(10,12,13,15,18,19,20,1,5)]
 
+    # fix cause of death names
+    cod.print = ifelse(cod=='AllCause','All cause',
+                ifelse(cod=='Cancer', 'Cancer',
+                ifelse(cod=='Cardiopulmonary', 'Cardiorespiratory',
+                ifelse(cod=='External', 'Injuries',
+                ifelse(cod=='Unintentional','Unintentional',
+                ifelse(cod=='Intentional','Intentional',
+                ifelse(cod=='Other', 'Other',
+                ifelse(cod=='Cardiovascular','Cardiovascular',
+                ifelse(cod=='Chronic respiratory diseases','Chronic respiratory diseases',
+                ifelse(cod=='Respiratory infections',"Respiratory infections",
+                ifelse(cod=='Endocrine disorders','Endocrine disorders',
+                ifelse(cod=='Genitourinary diseases','Genitourinary diseases',
+                ifelse(cod=='Maternal conditions','Maternal conditions',
+                ifelse(cod=='Neuropsychiatric disorders', 'Neuropsychiatric disorders',
+                ifelse(cod=='Perinatal conditions','Perinatal conditions',
+                ifelse(cod=='Substance use disorders','Substance use disorders'))))))))))))))))
+
 pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_fixed_com_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
 ggplot(data=subset(dat.mort.climate.fixed, sex==1|2),aes(shape=as.factor(sex),x=abs(end.value.climate),
 y=end.value.mort/100)) +
@@ -386,6 +404,7 @@ geom_point(aes(color=as.factor(climate_region)),size=2) +
 scale_shape_manual(values=c(16,17),labels=c('Male','Female'),guide = guide_legend(title = '')) +
 scale_x_continuous(name=expression(paste("Absolute temperature difference (",degree,"C)"))) +
 scale_y_continuous(name=paste0('Percent difference in death rates'),labels=percent) +
+ggtitle(cod.print) +
 # scale_y_continuous(name=paste0('Percent difference in death rates'),labels=percent,limits=c(-0.05,0.5)) +
 #ylim(c(-0.05,1)) +
 #geom_hline(linetype=2, yintercept = seq(-1,1,0.1), alpha=0.2) +
@@ -395,11 +414,7 @@ geom_hline(yintercept=0,linetype=2,alpha=0.4) +
 #ggtitle(cod) +
 facet_wrap(~age.print,scales='free') +
 scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Region')) +
-# theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),
-# panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
-# axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),rect = element_blank(),
-# legend.background = element_rect(fill = "grey95"))
-theme(legend.box.just = "centre",legend.box = "horizontal",legend.position=c(.8, .1),text = element_text(size = 10),
+theme(plot.title = element_text(hjust=0.5), legend.box.just = "centre",legend.box = "horizontal",legend.position=c(.8, .1),text = element_text(size = 10),
 panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
 axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),
 rect = element_blank(),legend.background = element_rect(fill = "grey95"))
