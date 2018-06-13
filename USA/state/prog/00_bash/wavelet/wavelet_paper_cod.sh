@@ -46,7 +46,7 @@ clear
 
 echo "starting nationalised wavelet analysis for $country, $cod, years $start - $end";
 
-# runs wavelet analysis (figure 2 and appendix figure 1)
+# runs wavelet analysis (figure 2, appendix figure 1)
 #Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national_cod.R $start $end $numsim $sig $noise $cod $log
 
 done; done; done; done;
@@ -104,7 +104,7 @@ echo "plotting COM analysis for $country for $cod, years $start - $end";
 # processes com data
 #Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
-# plots
+# plots (figure 3, figure 5, appendix figure 2, )
 #Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
 
 done;
@@ -133,7 +133,7 @@ for cod in "${cods[@]}"; do
 
 echo "starting seasonality index analysis for $country, years $start - $end";
 
-# runs seasonality index analysis
+# runs seasonality index analysis (figure 4, figure 6, appendix figure 3, appendix figure 4)
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod.R $start $end $start 2016 $dname $metric $cod
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R $start $end $start $end $dname $metric $cod
 
