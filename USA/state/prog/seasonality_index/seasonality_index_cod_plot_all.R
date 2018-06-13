@@ -46,7 +46,7 @@ for(i in cod.broad){
     dat.temp$cause = i
     lin.reg.grad.weight = rbind(lin.reg.grad.weight,dat.temp)
 }
-lin.reg.grad.weight$cause <- gsub('Allcause', 'All cause', lin.reg.grad.weight$cause)
+lin.reg.grad.weight$cause <- gsub('AllCause', 'All cause', lin.reg.grad.weight$cause)
 lin.reg.grad.weight$cause <- gsub('Cardiopulmonary', 'Cardiorespiratory', lin.reg.grad.weight$cause)
 lin.reg.grad.weight$cause <- gsub('External', 'Injuries', lin.reg.grad.weight$cause)
 lin.reg.grad.weight$age = as.numeric(lin.reg.grad.weight$age)

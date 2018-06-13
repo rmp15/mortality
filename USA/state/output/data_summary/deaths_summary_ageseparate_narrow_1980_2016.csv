@@ -1,0 +1,171 @@
+"Cause","Age","Male","Female"
+"Cancer","0-4",13175,11121
+"Cancer","15-24",42179,28346
+"Cancer","25-34",84039,86584
+"Cancer","35-44",242039,304711
+"Cancer","45-54",837003,828229
+"Cancer","5-14",23629,18691
+"Cancer","55-64",2038262,1654590
+"Cancer","65-74",3120513,2466104
+"Cancer","75-84",2880418,2581229
+"Cancer","85+",1200325,1496925
+"Cardiovascular","0-4",22234,18219
+"Cardiovascular","15-24",31744,19280
+"Cardiovascular","25-34",104496,58667
+"Cardiovascular","35-44",390929,178856
+"Cardiovascular","45-54",1119944,477830
+"Cardiovascular","5-14",7558,6487
+"Cardiovascular","55-64",2306886,1120724
+"Cardiovascular","65-74",3785541,2521199
+"Cardiovascular","75-84",4865873,5219687
+"Cardiovascular","85+",3603139,7589607
+"Chronic respiratory diseases","0-4",11530,8138
+"Chronic respiratory diseases","15-24",7607,5460
+"Chronic respiratory diseases","25-34",12253,10207
+"Chronic respiratory diseases","35-44",25689,24034
+"Chronic respiratory diseases","45-54",88455,81494
+"Chronic respiratory diseases","5-14",4402,3181
+"Chronic respiratory diseases","55-64",309227,249697
+"Chronic respiratory diseases","65-74",748425,591114
+"Chronic respiratory diseases","75-84",1005810,888027
+"Chronic respiratory diseases","85+",578254,734598
+"Respiratory infections","0-4",15674,11697
+"Respiratory infections","15-24",4993,3889
+"Respiratory infections","25-34",12261,8345
+"Respiratory infections","35-44",24852,16209
+"Respiratory infections","45-54",43803,28847
+"Respiratory infections","5-14",2545,2394
+"Respiratory infections","55-64",84677,56209
+"Respiratory infections","65-74",182988,130488
+"Respiratory infections","75-84",369693,356669
+"Respiratory infections","85+",396567,688272
+"Accidental drowning and submersion","0-4",13921,7393
+"Accidental drowning and submersion","15-24",26298,2739
+"Accidental drowning and submersion","25-34",18438,2700
+"Accidental drowning and submersion","35-44",13685,2715
+"Accidental drowning and submersion","45-54",10893,2673
+"Accidental drowning and submersion","5-14",11103,3492
+"Accidental drowning and submersion","55-64",8259,2341
+"Accidental drowning and submersion","65-74",5873,2150
+"Accidental drowning and submersion","75-84",4045,2216
+"Accidental drowning and submersion","85+",1554,1150
+"Accidental falls","0-4",1832,1038
+"Accidental falls","15-24",8741,1367
+"Accidental falls","25-34",12454,2067
+"Accidental falls","35-44",17177,3891
+"Accidental falls","45-54",26016,8020
+"Accidental falls","5-14",1318,484
+"Accidental falls","55-64",34666,14584
+"Accidental falls","65-74",49049,32748
+"Accidental falls","75-84",91107,92966
+"Accidental falls","85+",97819,166874
+"Assault","0-4",13894,11183
+"Assault","15-24",179385,33162
+"Assault","25-34",168686,39283
+"Assault","35-44",99755,29382
+"Assault","45-54",56853,17566
+"Assault","5-14",8869,5807
+"Assault","55-64",29555,9996
+"Assault","65-74",14275,7392
+"Assault","75-84",6515,5995
+"Assault","85+",1833,2575
+"Intentional self-harm","0-4",0,0
+"Intentional self-harm","15-24",144074,28490
+"Intentional self-harm","25-34",178481,41913
+"Intentional self-harm","35-44",171039,52412
+"Intentional self-harm","45-54",157744,54306
+"Intentional self-harm","5-14",7469,2830
+"Intentional self-harm","55-64",120751,38320
+"Intentional self-harm","65-74",88588,21401
+"Intentional self-harm","75-84",68641,12446
+"Intentional self-harm","85+",24614,4458
+"Other external causes of injury","0-4",36141,25134
+"Other external causes of injury","15-24",80815,21739
+"Other external causes of injury","25-34",133433,43880
+"Other external causes of injury","35-44",144159,60521
+"Other external causes of injury","45-54",125252,66634
+"Other external causes of injury","5-14",21096,10162
+"Other external causes of injury","55-64",92207,50401
+"Other external causes of injury","65-74",75750,49625
+"Other external causes of injury","75-84",78843,73964
+"Other external causes of injury","85+",56915,92263
+"Transport accidents","0-4",19117,15221
+"Transport accidents","15-24",313841,113418
+"Transport accidents","25-34",239549,74289
+"Transport accidents","35-44",173001,63048
+"Transport accidents","45-54",141118,53754
+"Transport accidents","5-14",42400,25703
+"Transport accidents","55-64",106112,45943
+"Transport accidents","65-74",76209,46423
+"Transport accidents","75-84",60684,45790
+"Transport accidents","85+",22965,17733
+"Endocrine disorders","0-4",11842,9623
+"Endocrine disorders","15-24",9950,8541
+"Endocrine disorders","25-34",21084,13441
+"Endocrine disorders","35-44",32012,21976
+"Endocrine disorders","45-54",47287,35950
+"Endocrine disorders","5-14",5308,4728
+"Endocrine disorders","55-64",67644,54859
+"Endocrine disorders","65-74",88082,82269
+"Endocrine disorders","75-84",102270,129113
+"Endocrine disorders","85+",74127,166185
+"Genitourinary diseases","0-4",4487,3441
+"Genitourinary diseases","15-24",2003,1980
+"Genitourinary diseases","25-34",6655,5717
+"Genitourinary diseases","35-44",16728,12859
+"Genitourinary diseases","45-54",38213,30401
+"Genitourinary diseases","5-14",574,590
+"Genitourinary diseases","55-64",82452,70794
+"Genitourinary diseases","65-74",163832,155631
+"Genitourinary diseases","75-84",279597,310556
+"Genitourinary diseases","85+",252512,415328
+"Maternal conditions","0-4",0,0
+"Maternal conditions","15-24",0,4554
+"Maternal conditions","25-34",0,8581
+"Maternal conditions","35-44",0,5060
+"Maternal conditions","45-54",0,1698
+"Maternal conditions","5-14",0,39
+"Maternal conditions","55-64",0,39
+"Maternal conditions","65-74",0,12
+"Maternal conditions","75-84",0,5
+"Maternal conditions","85+",0,3
+"Other","0-4",283532,224635
+"Other","15-24",52962,36142
+"Other","25-34",211415,96713
+"Other","35-44",424695,191041
+"Other","45-54",615134,328165
+"Other","5-14",19845,17337
+"Other","55-64",790617,527175
+"Other","65-74",908545,820622
+"Other","75-84",961315,1225091
+"Other","85+",628510,1389472
+"Neuropsychiatric disorders","0-4",14405,11538
+"Neuropsychiatric disorders","15-24",21410,10779
+"Neuropsychiatric disorders","25-34",21941,14931
+"Neuropsychiatric disorders","35-44",33637,26414
+"Neuropsychiatric disorders","45-54",62010,53237
+"Neuropsychiatric disorders","5-14",10784,8211
+"Neuropsychiatric disorders","55-64",115181,103085
+"Neuropsychiatric disorders","65-74",261762,243415
+"Neuropsychiatric disorders","75-84",651979,835035
+"Neuropsychiatric disorders","85+",718135,1825971
+"Perinatal conditions","0-4",320057,245939
+"Perinatal conditions","15-24",263,175
+"Perinatal conditions","25-34",119,105
+"Perinatal conditions","35-44",87,73
+"Perinatal conditions","45-54",71,46
+"Perinatal conditions","5-14",520,431
+"Perinatal conditions","55-64",39,34
+"Perinatal conditions","65-74",37,27
+"Perinatal conditions","75-84",24,11
+"Perinatal conditions","85+",17,14
+"Substance use disorders","0-4",219,158
+"Substance use disorders","15-24",26372,7874
+"Substance use disorders","25-34",66487,21689
+"Substance use disorders","35-44",97116,35705
+"Substance use disorders","45-54",118352,44670
+"Substance use disorders","5-14",257,149
+"Substance use disorders","55-64",81405,25616
+"Substance use disorders","65-74",34029,10255
+"Substance use disorders","75-84",11328,4056
+"Substance use disorders","85+",2424,1739
