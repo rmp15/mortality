@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,83 +21,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="wavelet_paper_cod.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="wavelet_paper_cod.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="20" column="46" lean-forward="false" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="46" />
+              <caret line="48" column="39" lean-forward="false" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data_summary_cod.R" pinned="false" current-in-tab="true">
+      <file leaf-file-name="data_summary_cod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/data_explore/data_summary_cod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="68" lean-forward="true" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="seasonality_index_cod.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="com_analysis_region_cod.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_analysis_region_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
-              <folding>
-                <element signature="e#11093#12945#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="anti_com_analysis_region_cod.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/com/anti_com_analysis_region_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="com_data_process_cod.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_data_process_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="755">
-              <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="com_plot_cod.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-9435">
-              <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="67" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="objects.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="111" column="12" lean-forward="false" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
+            <state relative-caret-position="420">
+              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -110,7 +49,6 @@
       <find>print</find>
       <find>noise</find>
       <find>men</find>
-      <find>sex</find>
       <find>sex.lookup</find>
       <find>climate</find>
       <find>gsub</find>
@@ -124,6 +62,9 @@
       <find>dat.mort.climate.fixed</find>
       <find>file.loc.region</find>
       <find>year.start</find>
+      <find>age.long</find>
+      <find>age.</find>
+      <find>sex</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,15 +94,14 @@
         <option value="$PROJECT_DIR$/USA/state/prog/com/com_analysis_region_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/com/anti_com_analysis_region_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/data_explore/data_summary_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="980" />
-    <option name="y" value="-1412" />
-    <option name="width" value="1525" />
-    <option name="height" value="1375" />
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -181,8 +121,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -253,11 +191,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="prog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="seasonality_index" />
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -279,946 +213,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="prog" />
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data_explore" />
+              <option name="myItemId" value="objects" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/USA/state/prog/data_explore" />
       <recent name="$PROJECT_DIR$/USA/state/prog/prep_data_cod" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_35_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_45_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_55_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_65_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_East_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_South_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_South_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_75_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_East_North_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_East_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_East_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_East_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northeast_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northeast_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northwest_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northwest_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_South_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_South_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_South_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_South_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southeast_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southeast_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Men_85_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_25_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_25_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_25_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_25_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_25_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_35_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_45_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_55_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_65_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_East_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_East_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_East_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northeast_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northwest_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_South_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_South_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_South_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southeast_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southwest_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_75_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/anti_com_rate_Women_85_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_35_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_45_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_55_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_65_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_South_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_75_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_East_North_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_East_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_East_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northeast_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northwest_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_South_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_South_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_South_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southeast_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southwest_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_North_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Men_85_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_25_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_25_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_25_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_25_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_35_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_45_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_55_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_65_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_East_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_East_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_South_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_South_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_75_West_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_East_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Northwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_South_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southeast_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_Southwest_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Cardiovascular</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Chronic respiratory diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Endocrine disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Genitourinary diseases</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Intentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Neuropsychiatric disorders</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_North_Central_Unintentional</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Other</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Respiratory infections</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/com/1980_2016/region/values/entire_period/method_2/com_rate_Women_85_West_Unintentional</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunManager" selected="Bash.wavelet_paper_cod.sh">
     <configuration default="false" name="data_prep_cod.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
@@ -1430,13 +446,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Add eLife COD coding">
-      <created>1528469677788</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1528469677788</updated>
     </task>
     <task id="LOCAL-00031" summary="Add eLife COD coding">
       <created>1528471148886</created>
@@ -1774,32 +783,39 @@
       <option name="project" value="LOCAL" />
       <updated>1528816032505</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Add eLife COD coding">
+      <created>1528818722536</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1528818722536</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="980" y="-1412" width="1525" height="1375" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24342549" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24678111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2983051" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24951456" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29773968" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -1811,33 +827,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/wavelet_functions.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3375">
-          <caret line="225" column="0" lean-forward="false" selection-start-line="225" selection-start-column="0" selection-end-line="239" selection-end-column="93" />
-          <folding>
-            <element signature="e#136#2009#0" expanded="false" />
-            <element signature="e#2166#6777#0" expanded="false" />
-            <element signature="e#6891#10286#0" expanded="false" />
-            <element signature="e#11784#14566#0" expanded="false" />
-            <element signature="e#17836#22633#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/wavelet/wavelet_national_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/data_prep/data_prep_cod.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1857,7 +851,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1865,13 +858,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3465">
           <caret line="231" column="64" lean-forward="false" selection-start-line="231" selection-start-column="64" selection-end-line="231" selection-end-column="64" />
-          <folding>
-            <element signature="e#136#2009#0" expanded="false" />
-            <element signature="e#2166#6777#0" expanded="false" />
-            <element signature="e#6891#10286#0" expanded="false" />
-            <element signature="e#11784#14566#0" expanded="false" />
-            <element signature="e#17836#22633#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1907,7 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1725">
           <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1929,7 +914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1725">
           <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1951,7 +935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2250">
           <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="156" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2072,21 +1055,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5526">
           <caret line="307" column="17" lean-forward="false" selection-start-line="307" selection-start-column="12" selection-end-line="307" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/wavelet_functions.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="59" lean-forward="true" selection-start-line="0" selection-start-column="59" selection-end-line="0" selection-end-column="59" />
-          <folding>
-            <element signature="e#136#2009#0" expanded="false" />
-            <element signature="e#2166#6777#0" expanded="false" />
-            <element signature="e#6891#10286#0" expanded="false" />
-            <element signature="e#11784#14566#0" expanded="false" />
-            <element signature="e#17836#22633#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2094,7 +1062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="73" lean-forward="false" selection-start-line="25" selection-start-column="73" selection-end-line="25" selection-end-column="73" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2102,7 +1069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="70" lean-forward="false" selection-start-line="25" selection-start-column="70" selection-end-line="25" selection-end-column="70" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2110,7 +1076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2118,15 +1083,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="701">
           <caret line="145" column="0" lean-forward="false" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/wavelet/wavelet_national_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="44" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2134,7 +1090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
           <caret line="42" column="14" lean-forward="false" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2142,15 +1097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="111" column="12" lean-forward="false" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2158,7 +1104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="755">
           <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2166,9 +1111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
-          <folding>
-            <element signature="e#11093#12945#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2176,15 +1118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9435">
-          <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="67" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2192,6 +1125,55 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/wavelet/wavelet_national.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/wavelet/wavelet_national_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="1478" column="92" lean-forward="false" selection-start-line="1478" selection-start-column="88" selection-end-line="1478" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2217">
+          <caret line="0" column="3" lean-forward="false" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/wavelet_functions.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1725">
+          <caret line="386" column="58" lean-forward="false" selection-start-line="386" selection-start-column="58" selection-end-line="386" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/data_explore/data_summary_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2199,15 +1181,7 @@
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="46" lean-forward="false" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/data_explore/data_summary_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="68" lean-forward="true" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
+          <caret line="48" column="39" lean-forward="false" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
           <folding />
         </state>
       </provider>
