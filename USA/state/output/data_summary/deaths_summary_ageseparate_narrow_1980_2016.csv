@@ -130,15 +130,15 @@
 "Maternal conditions","75-84",0,5
 "Maternal conditions","85+",0,3
 "Other","0-4",283532,224635
-"Other","15-24",52962,36142
-"Other","25-34",211415,96713
-"Other","35-44",424695,191041
-"Other","45-54",615134,328165
-"Other","5-14",19845,17337
-"Other","55-64",790617,527175
-"Other","65-74",908545,820622
-"Other","75-84",961315,1225091
-"Other","85+",628510,1389472
+"Other","15-24",53225,36317
+"Other","25-34",211534,96818
+"Other","35-44",424782,191114
+"Other","45-54",615205,328211
+"Other","5-14",20365,17768
+"Other","55-64",790656,527209
+"Other","65-74",908582,820649
+"Other","75-84",961339,1225102
+"Other","85+",628527,1389486
 "Neuropsychiatric disorders","0-4",14405,11538
 "Neuropsychiatric disorders","15-24",21410,10779
 "Neuropsychiatric disorders","25-34",21941,14931
@@ -150,15 +150,15 @@
 "Neuropsychiatric disorders","75-84",651979,835035
 "Neuropsychiatric disorders","85+",718135,1825971
 "Perinatal conditions","0-4",320057,245939
-"Perinatal conditions","15-24",263,175
-"Perinatal conditions","25-34",119,105
-"Perinatal conditions","35-44",87,73
-"Perinatal conditions","45-54",71,46
-"Perinatal conditions","5-14",520,431
-"Perinatal conditions","55-64",39,34
-"Perinatal conditions","65-74",37,27
-"Perinatal conditions","75-84",24,11
-"Perinatal conditions","85+",17,14
+"Perinatal conditions","15-24",0,0
+"Perinatal conditions","25-34",0,0
+"Perinatal conditions","35-44",0,0
+"Perinatal conditions","45-54",0,0
+"Perinatal conditions","5-14",0,0
+"Perinatal conditions","55-64",0,0
+"Perinatal conditions","65-74",0,0
+"Perinatal conditions","75-84",0,0
+"Perinatal conditions","85+",0,0
 "Substance use disorders","0-4",219,158
 "Substance use disorders","15-24",26372,7874
 "Substance use disorders","25-34",66487,21689

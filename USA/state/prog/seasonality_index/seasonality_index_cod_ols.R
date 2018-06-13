@@ -1,10 +1,5 @@
 rm(list=ls())
 
-library(maptools)
-library(mapproj)
-library(rgeos)
-library(rgdal)
-library(RColorBrewer)
 library(ggplot2)
 library(plyr)
 library(scales)
@@ -29,8 +24,23 @@ cod <- as.character(args[7])
 num.years <- year.end - year.start + 1
 
 # load data and filter results
-dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start,'_',year.end))
-if(cod!='AllCause'){
+if(cod %in% c("Test","AllCause", "Cancer", "Cardiopulmonary", "External", "Other")) {
+    dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start,'_',year.end))
+    print(cod)
+    if(cod!='AllCause'){
+        dat <- subset(dat,cause==cod)
+
+    }
+}
+if(cod %in% c("Cardiovascular", "Chronic respiratory diseases", "Respiratory infections", "Endocrine disorders",
+                    "Genitourinary diseases", "Maternal conditions", "Neuropsychiatric disorders","Perinatal conditions",
+                    "Substance use disorders")) {
+    dat <- readRDS(paste0('~/data/mortality/US/state/processed/rates/datus_nat_deaths_subcod_elife_',year.start,'_',year.end))
+    dat <- subset(dat,cause.sub==cod)
+    dat$cause = dat$cause.sub ; dat$cause.group = NULL ; dat$cause.sub = NULL
+}
+if(cod %in% c("Intentional", "Unintentional")) {
+    dat <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_injuries_ons_',year.start,'_',year.end))
     dat <- subset(dat,cause==cod)
 }
 
@@ -73,15 +83,17 @@ dat.year.month$year.month <- seq(nrow(dat.year.month))
 dat.national <- merge(dat.national,dat.year.month, by=c('year','month'))
 dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-# add sinusoidal terms
-dat.national$cos.12 = with(dat.national,cos(2*pi*month/12))
-dat.national$sin.12 = with(dat.national,sin(2*pi*month/12))
-dat.national$cos.6  = with(dat.national,cos(2*pi*month/6))
-dat.national$sin.6  = with(dat.national,sin(2*pi*month/6))
+# # add sinusoidal terms
+# dat.national$cos.12 = with(dat.national,cos(2*pi*month/12))
+# dat.national$sin.12 = with(dat.national,sin(2*pi*month/12))
+# dat.national$cos.6  = with(dat.national,cos(2*pi*month/6))
+# dat.national$sin.6  = with(dat.national,sin(2*pi*month/6))
 
 # apply Poisson glm with population offsetting
 dat.pois.summary <- ddply(dat.national,.(sex,age), function(z)coef(summary(glm(deaths.pred ~ 1 + year.month + (1 + year)*(cos(2*pi*year.month/12)+sin(2*pi*year.month/12)+cos(2*pi*year.month/6)+sin(2*pi*year.month/6)), offset=log(pop.adj),family=poisson(link="log"),data=z))))
 
 # testing below
-# dat.national.test = subset(dat.national,age==0&sex==1)
-#dat.pois.summary = glm(deaths.pred ~ 1 + year.month + (1 + year)*(cos(2*pi*month/12)+sin(2*pi*month/12)+cos(2*pi*month/6)+sin(2*pi*month/6)), offset=log(pop.adj),family=poisson(link="log"),data=dat.national.test)
+dat.national.test = subset(dat.national,age==0&sex==1)
+dat.pois.summary = glm(deaths.pred ~ 1 + year.month + (1 + year)*(cos(2*pi*month/12)+sin(2*pi*month/12)+cos(2*pi*month/6)+sin(2*pi*month/6)), offset=log(pop.adj),family=poisson(link="log"),data=dat.national.test)
+pred <- predict(dat.pois.summary, newdata = dat.national.test, se.fit = TRUE)
+plot(dat.national.test$deaths.pred) ; lines(fitted.values(dat.pois.summary)) ; lines(exp(pred$fit),col='blue') ;

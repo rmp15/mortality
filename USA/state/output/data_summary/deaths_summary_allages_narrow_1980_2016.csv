@@ -1,18 +1,18 @@
-"Cause","Male","Female"
-"Cancer",10481582,9476530
-"Cardiovascular",16238344,17210556
-"Chronic respiratory diseases",2791652,2595950
-"Respiratory infections",1138053,1303019
-"Accidental drowning and submersion",114069,29569
-"Accidental falls",340179,324039
-"Assault",579620,162341
-"Intentional self-harm",961401,256576
-"Other external causes of injury",844611,494323
-"Transport accidents",1194996,501322
-"Endocrine disorders",459606,526685
-"Genitourinary diseases",847053,1007297
-"Maternal conditions",0,19991
-"Other",4896570,4856393
-"Neuropsychiatric disorders",1911244,3132616
-"Perinatal conditions",321234,246855
-"Substance use disorders",437989,151911
+Cause,Male,Female
+Cancer,10481582,9476530
+Cardiovascular,16238344,17210556
+Chronic respiratory diseases,2791652,2595950
+Respiratory infections,1138053,1303019
+Accidental drowning and submersion,114069,29569
+Accidental falls,340179,324039
+Assault,579620,162341
+Intentional self-harm,961401,256576
+Other external causes of injury,844611,494323
+Transport accidents,1194996,501322
+Endocrine disorders,459606,526685
+Genitourinary diseases,847053,1007297
+Maternal conditions,0,19991
+Other,4897747,4857309
+Neuropsychiatric disorders,1911244,3132616
+Perinatal conditions,320057,245939
+Substance use disorders,437989,151911

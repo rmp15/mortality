@@ -147,6 +147,19 @@ lin.reg.grad.weight <- with(lin.reg.grad.weight,lin.reg.grad.weight[order(sex,ag
 lin.reg.grad.weight$start.value.2 <- with(lin.reg.grad.weight,round(100*(start.value),1)-100)
 lin.reg.grad.weight$end.value.2 <- with(lin.reg.grad.weight,round(100*(end.value),1)-100)
 
+# create a human-friendly version for reading
+lin.reg.grad.weight.csv = lin.reg.grad.weight[,c(7,2,4,9,11,15,14)]
+lin.reg.grad.weight.csv = merge(lin.reg.grad.weight.csv,age.code,by='age')
+lin.reg.grad.weight.csv = lin.reg.grad.weight.csv[,c(8,2,3,6,7,5)]
+names(lin.reg.grad.weight.csv) = c('Age','Sex','Change per year','Per year 95% CI lower','Per year 95% CI higher','p-value')
+lin.reg.grad.weight.csv[,c(3:5)] = round(lin.reg.grad.weight.csv[,c(3:5)]*100,4)
+lin.reg.grad.weight.csv$`p-value` = round(lin.reg.grad.weight.csv$`p-value`,4)
+lin.reg.grad.weight.csv$`Change per decade` = 10*lin.reg.grad.weight.csv$`Change per year`
+lin.reg.grad.weight.csv$`Per decade 95% CI lower` = 10*lin.reg.grad.weight.csv$`Per year 95% CI lower`
+lin.reg.grad.weight.csv$`Per decade 95% CI higher` = 10*lin.reg.grad.weight.csv$`Per year 95% CI higher`
+lin.reg.grad.weight.csv$`p-value` = round(lin.reg.grad.weight.csv$`p-value`,4)
+lin.reg.grad.weight.csv = lin.reg.grad.weight.csv[,c(1:5,7:9,6)]
+
 # establish confidence intervals for linear regression start and end values
 dat.ci <- data.frame()
 for (j in c(1:2)) {
@@ -278,7 +291,6 @@ dat.mort.climate.fixed <- merge(dat.mort.climate.fixed,age.code,by='age')
 dat.mort.climate.fixed$age.print <- reorder(dat.mort.climate.fixed$age.print,dat.mort.climate.fixed$age)
 
 # linear regression for each age-sex and obtain significance of slopes
-# NEED TO DO THIS TAKING INTO ACCOUNT POPULATION (AS ABOVE IN NATIONAL STUDY)
 lin.reg.mort.climate.fixed <- ddply(dat.mort.climate.fixed,.(age,sex),
                             function(z)coef(summary(lm(end.value.mort ~ end.value.climate , data=z))))
 lin.reg.mort.climate.fixed <- lin.reg.mort.climate.fixed[!c(TRUE,FALSE),]
@@ -300,6 +312,7 @@ ifelse(!dir.exists(file.loc.regional), dir.create(file.loc.regional, recursive=T
 
 # export national seasonality index changes file
 saveRDS(lin.reg.grad.weight,paste0(file.loc,'seasonality_index_nat_changes_',cod,'_',year.start,'_',year.end))
+write.csv(lin.reg.grad.weight.csv,paste0(file.loc,'seasonality_index_nat_changes_',cod,'_',year.start,'_',year.end,'.csv'))
 
 # export
 # saveRDS(lin.reg.mort.climate.fixed,paste0(file.loc.regional,'seasonality_index_climate_region_against_temp_grads_',cod,'_',year.start,'_',year.end))
