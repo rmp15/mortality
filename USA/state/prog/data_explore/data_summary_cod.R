@@ -44,6 +44,9 @@ names(dat.summary.age) =c('Age','Cause','Male','Female')
 dat.summary.age = dat.summary.age[order(dat.summary.age$Cause,dat.summary.age$Age),]
 dat.summary.age = dat.summary.age[,c(2,1,3,4)]
 
+# summary of deaths by cause, sex, and age for entire period
+dat.summary.age.year = ddply(dat,.(cause,sex,age,year),summarise,deaths=sum(deaths))
+
 # fix broad cod names
 dat.summary.entire$Cause <- gsub('Cardiopulmonary', 'Cardiorespiratory', dat.summary.entire$Cause)
 dat.summary.entire$Cause <- gsub('External', 'Injuries', dat.summary.entire$Cause)
@@ -53,3 +56,4 @@ dat.summary.age$Cause <- gsub('External', 'Injuries', dat.summary.age$Cause)
 # write to csv
 write.csv(dat.summary.entire,paste0(file.loc,'deaths_summary_allages_',class.arg,'_',year.start.arg,'_',year.end.arg,'.csv'),row.names=FALSE)
 write.csv(dat.summary.age,paste0(file.loc,'deaths_summary_ageseparate_',class.arg,'_',year.start.arg,'_',year.end.arg,'.csv'),row.names=FALSE)
+write.csv(dat.summary.age.year,paste0(file.loc,'deaths_summary_ageseparate_yearly_',class.arg,'_',year.start.arg,'_',year.end.arg,'.csv'),row.names=FALSE)
