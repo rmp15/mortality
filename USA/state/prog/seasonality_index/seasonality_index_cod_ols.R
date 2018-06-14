@@ -94,20 +94,19 @@ pred <- predict(dat.pois.summary.gamma, newdata = dat.national.test, se.fit = TR
 pred.exp = data.frame(year.month =dat.national.test$year.month , pred=exp(pred$fit),ll=exp(pred$fit-1.96*pred$se),ul=exp(pred$fit+1.96*pred$se),se=exp(pred$se))
 
 # isolate the first/last 12 months and find the maximum/minimum (with the errors added appropriately)
-
 start.max = subset(subset(pred.exp,year.month<=12),pred==max(pred)) ; names(start.max) = c('start.year.month.max','start.pred.max','start.pred.max.ll','start.pred.max.ul','start.se.max')
 start.min = subset(subset(pred.exp,year.month<=12),pred==min(pred)) ; names(start.min) = c('start.year.month.min','start.pred.min','start.pred.min.ll','start.pred.min.ul','start.se.min')
 start = cbind(start.max,start.min) ; start$start.seas.index = with(start,start.pred.max/start.pred.min)
 end.max = subset(subset(pred.exp,year.month>=(max(pred.exp$year.month)-12+1)),pred==max(pred)) ; names(end.max) = c('end.year.month.max','end.pred.max','end.pred.max.ll','end.pred.max.ul','end.se.max')
 end.min = subset(subset(pred.exp,year.month>=(max(pred.exp$year.month)-12+1)),pred==min(pred)) ; names(end.min) = c('end.year.month.min','end.pred.min','end.pred.min.ll','end.pred.min.ul','end.se.min')
 end = cbind(end.max,end.min) ; end$end.seas.index = with(end,end.pred.max/end.pred.min)
+# find the difference between them (again adding errors appropriately)
 start.end = cbind(start,end) ; start.end$diff = with(start.end,end.seas.index-start.seas.index)
+# report this value.
 start.end$per.year = start.end$diff/num.years ; start.end$per.decade = 10*start.end$diff/num.years
 
 }
 
-# find the difference between them (again adding errors appropriately)
-# report this value.
 
 # # plot to test if wanted
 # ggplot() +

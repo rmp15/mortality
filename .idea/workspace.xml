@@ -34,8 +34,8 @@
       <file leaf-file-name="seasonality_index_cod_ols.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_ols.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="711">
-              <caret line="95" column="39" lean-forward="false" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
+            <state relative-caret-position="846">
+              <caret line="104" column="20" lean-forward="false" selection-start-line="104" selection-start-column="20" selection-end-line="104" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -467,13 +467,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00036" summary="Add eLife COD coding">
-      <created>1528473782332</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1528473782332</updated>
-    </task>
     <task id="LOCAL-00037" summary="Add eLife COD coding">
       <created>1528557004306</created>
       <option name="number" value="00037" />
@@ -810,7 +803,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528930426309</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Edited bash file to describe what's going on a bit more for eLife revisions">
+      <created>1528972749183</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1528972749183</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1218,8 +1218,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_ols.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="711">
-          <caret line="95" column="39" lean-forward="false" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
+        <state relative-caret-position="846">
+          <caret line="104" column="20" lean-forward="false" selection-start-line="104" selection-start-column="20" selection-end-line="104" selection-end-column="20" />
           <folding />
         </state>
       </provider>
