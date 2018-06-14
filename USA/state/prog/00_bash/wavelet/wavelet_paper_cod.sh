@@ -144,6 +144,6 @@ Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_o
 done;
 
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R $start $end $start $end $dname $metric $cod
-Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all_cod.R $start $end $start $end $dname $metric $cod
+Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all_ols.R $start $end $start $end $dname $metric $cod
 
 
