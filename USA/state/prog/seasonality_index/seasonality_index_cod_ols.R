@@ -83,6 +83,40 @@ dat.year.month$year.month <- seq(nrow(dat.year.month))
 dat.national <- merge(dat.national,dat.year.month, by=c('year','month'))
 dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
+# testing below
+
+seas.index.func = function(age,sex) {
+dat.national.test = subset(dat.national,age==0&sex==1)
+dat.pois.summary.gamma = glm(deaths.pred ~ 1 + year.month + (1 + year)*(cos(2*pi*month/12)+sin(2*pi*month/12)+cos(2*pi*month/6)+sin(2*pi*month/6)), offset=log(pop.adj),family=poisson(link="log"),data=dat.national.test)
+dat.pois.summary.nogamma = glm(deaths.pred ~ 1 + year.month + (cos(2*pi*month/12)+sin(2*pi*month/12)+cos(2*pi*month/6)+sin(2*pi*month/6)), offset=log(pop.adj),family=poisson(link="log"),data=dat.national.test)
+
+pred <- predict(dat.pois.summary.gamma, newdata = dat.national.test, se.fit = TRUE)
+pred.exp = data.frame(year.month =dat.national.test$year.month , pred=exp(pred$fit),ll=exp(pred$fit-1.96*pred$se),ul=exp(pred$fit+1.96*pred$se),se=exp(pred$se))
+
+# isolate the first/last 12 months and find the maximum/minimum (with the errors added appropriately)
+
+start.max = subset(subset(pred.exp,year.month<=12),pred==max(pred)) ; names(start.max) = c('start.year.month.max','start.pred.max','start.pred.max.ll','start.pred.max.ul','start.se.max')
+start.min = subset(subset(pred.exp,year.month<=12),pred==min(pred)) ; names(start.min) = c('start.year.month.min','start.pred.min','start.pred.min.ll','start.pred.min.ul','start.se.min')
+start = cbind(start.max,start.min) ; start$start.seas.index = with(start,start.pred.max/start.pred.min)
+end.max = subset(subset(pred.exp,year.month>=(max(pred.exp$year.month)-12+1)),pred==max(pred)) ; names(end.max) = c('end.year.month.max','end.pred.max','end.pred.max.ll','end.pred.max.ul','end.se.max')
+end.min = subset(subset(pred.exp,year.month>=(max(pred.exp$year.month)-12+1)),pred==min(pred)) ; names(end.min) = c('end.year.month.min','end.pred.min','end.pred.min.ll','end.pred.min.ul','end.se.min')
+end = cbind(end.max,end.min) ; end$end.seas.index = with(end,end.pred.max/end.pred.min)
+start.end = cbind(start,end) ; start.end$diff = with(start.end,end.seas.index-start.seas.index)
+start.end$per.year = start.end$diff/num.years ; start.end$per.decade = 10*start.end$diff/num.years
+
+}
+
+# find the difference between them (again adding errors appropriately)
+# report this value.
+
+# # plot to test if wanted
+# ggplot() +
+#     geom_point(data=dat.national.test,aes(x=year.month,y=deaths.pred)) +
+#     geom_line(data=pred.exp,aes(x=year.month, y=pred),color='blue') +
+#     geom_ribbon(data=pred.exp,aes(x=year.month, ymin=ll,ymax=ul),fill='red')
+
+# LEGACY
+
 # # add sinusoidal terms
 # dat.national$cos.12 = with(dat.national,cos(2*pi*month/12))
 # dat.national$sin.12 = with(dat.national,sin(2*pi*month/12))
@@ -90,10 +124,6 @@ dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.nationa
 # dat.national$sin.6  = with(dat.national,sin(2*pi*month/6))
 
 # apply Poisson glm with population offsetting
-dat.pois.summary <- ddply(dat.national,.(sex,age), function(z)coef(summary(glm(deaths.pred ~ 1 + year.month + (1 + year)*(cos(2*pi*year.month/12)+sin(2*pi*year.month/12)+cos(2*pi*year.month/6)+sin(2*pi*year.month/6)), offset=log(pop.adj),family=poisson(link="log"),data=z))))
+# dat.pois.summary <- ddply(dat.national,.(sex,age), function(z)coef(summary(glm(deaths.pred ~ 1 + year.month + (1 + year)*(cos(2*pi*year.month/12)+sin(2*pi*year.month/12)+cos(2*pi*year.month/6)+sin(2*pi*year.month/6)), offset=log(pop.adj),family=poisson(link="log"),data=z))))
 
-# testing below
-dat.national.test = subset(dat.national,age==0&sex==1)
-dat.pois.summary = glm(deaths.pred ~ 1 + year.month + (1 + year)*(cos(2*pi*month/12)+sin(2*pi*month/12)+cos(2*pi*month/6)+sin(2*pi*month/6)), offset=log(pop.adj),family=poisson(link="log"),data=dat.national.test)
-pred <- predict(dat.pois.summary, newdata = dat.national.test, se.fit = TRUE)
-plot(dat.national.test$deaths.pred) ; lines(fitted.values(dat.pois.summary)) ; lines(exp(pred$fit),col='blue') ;
+
