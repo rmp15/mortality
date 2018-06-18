@@ -255,8 +255,8 @@ dat.nat.other$size = dat.nat.other$size/2
 
 plot.together = function(data,size){
     ggplot() +
-    geom_point(data=subset(data,type=='max'),aes(x=factor(age),y=COM.mean,size=size),fill='red',shape=24) +
-    geom_point(data=subset(data,type=='min'),aes(y=COM.mean,x=factor(age),size=size),fill='green',shape=25) +
+    geom_point(data=subset(data,type=='max'),aes(x=factor(age),y=COM.mean,size=(size^2)/2),fill='red',shape=24) +
+    geom_point(data=subset(data,type=='min'),aes(y=COM.mean,x=factor(age),size=(size^2)/2),fill='green',shape=25) +
     ylab('Month') +
     xlab('Age group') + ggtitle('') +
     scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
@@ -269,7 +269,7 @@ plot.together = function(data,size){
     theme(text = element_text(size = 15),strip.text.x=element_text(size=size),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
     panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
     legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"),
-    panel.spacing = unit(2, "lines"))
+    panel.spacing = unit(1, "lines"))
 }
 
 # entire period com plot v1a (plotting all causes together with nonsig)
