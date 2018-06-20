@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/tables/Table 2 2018 06 19.xlsx" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/tables/Table 2 2018 06 19.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/US dynamic mortality seasonality analysis 2018 06 19.docx" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/US dynamic mortality seasonality analysis 2018 06 19.docx" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -107,9 +106,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="877" />
+    <option name="x" value="-927" />
+    <option name="y" value="-1417" />
+    <option name="width" value="1702" />
+    <option name="height" value="1417" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -781,10 +781,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
+    <frame x="-927" y="-1417" width="1702" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44706723" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37650603" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
