@@ -34,8 +34,8 @@ declare -a numsims=(10)
 declare -i sig=5
 declare -a noises=(1)
 #declare -a noises=(1 2)
-#declare -a cods=("Perinatal_conditions")
-declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Intentional" "Unintentional" "Other" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
+declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External")
+#declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Intentional" "Unintentional" "Other" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
 declare -a logs=(0)
 
 for noise in "${noises[@]}"; do
@@ -95,7 +95,7 @@ echo "starting regional COM analysis for $cod for years $start - $end";
 done;
 
 #################################################
-# 4. PLOTS
+# 4. COM PLOTS
 #################################################
 
 for cod in "${cods[@]}"; do
@@ -106,7 +106,7 @@ echo "plotting COM analysis for $country for $cod, years $start - $end";
 #Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 # plots (figure 3, figure 5, appendix figure 2)
-Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
+#Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
 
 done;
 
@@ -146,4 +146,4 @@ done;
 # (figure 4, appendix figure 3, alternative figure 4, alternative appendix figure 3, figure comparing original and ols)
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R $start $end $start $end $dname $metric
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all_ols.R $start $end $start $end $dname $metric
-Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_compare_plot.R $start $end $start $end $dname $metric
+#Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_compare_plot.R $start $end $start $end $dname $metric
