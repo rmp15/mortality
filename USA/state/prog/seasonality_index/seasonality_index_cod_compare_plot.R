@@ -1,13 +1,6 @@
 rm(list=ls())
 
-library(maptools)
-library(mapproj)
-library(rgeos)
-library(rgdal)
-library(RColorBrewer)
 library(ggplot2)
-library(plyr)
-library(scales)
 
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
@@ -38,6 +31,9 @@ file.loc.regional <- paste0('../../output/seasonality_index/regional/')
 ifelse(!dir.exists(file.loc.regional), dir.create(file.loc.regional, recursive=TRUE), FALSE)
 
 # 1. ORIGINAL METHOD
+
+# input directory
+file.loc <- paste0('../../output/seasonality_index/')
 
 # load files for all cause and main sub-causes
 lin.reg.grad.weight = data.frame()
@@ -82,6 +78,9 @@ dat.old = rbind(lin.reg.grad.weight, lin.reg.grad.weight.cardio, lin.reg.grad.we
 
 # 2. NEW METHOD (RECOMMENDED BY ELIFE REVISIONS)
 
+# input directory
+file.loc <- paste0('../../output/seasonality_index_ols/')
+
 # load files for all cause and main sub-causes
 lin.reg.grad.weight = data.frame()
 for(i in cod.broad){
@@ -124,3 +123,32 @@ lin.reg.grad.weight.other$age = as.numeric(lin.reg.grad.weight.other$age)
 lin.reg.grad.weight.other$pvalue = lin.reg.grad.weight.other$`p-value`
 
 dat.new = rbind(lin.reg.grad.weight, lin.reg.grad.weight.cardio, lin.reg.grad.weight.injury, lin.reg.grad.weight.other)
+
+###############################################################
+# MERGING AND PLOTTING PARAMETERS
+###############################################################
+
+dat.old = dat.old
+dat.merged = merge(dat.old[,c(1,2,8,11,21)],dat.new[,c(24,26,27,28,29)],by=c('sex','age','cause'))
+
+# remove wacky results that are meaningless by definition
+# only allow maternal conditions between 15-54
+dat.merged = subset(dat.merged,!(age%in%c(0,5,55,65,75,85)&cause=='Maternal conditions'))
+dat.merged = subset(dat.merged,!(sex==1&cause=='Maternal conditions'))
+dat.merged = subset(dat.merged,!(age%in%c(5,15,25,35,45,55,65,75,85)&cause=='Perinatal conditions'))
+names(dat.merged) = c('sex','age','cause','grad.old','p.old','grad.new','p.new')
+
+# plot
+pdf(paste0(file.loc,'seasonality_original_method_against_elife_revisions_proposal_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+    ggplot() +
+    geom_point(data=subset(dat.merged,p.old<=0.05),colour='hot pink',aes(shape=as.factor(sex),x=(grad.old*100),y=grad.new),size=3) +
+    geom_point(data=dat.merged,aes(shape=as.factor(sex),x=(grad.old*100),y=grad.new)) +
+    geom_abline(slope=1,intercept=0, linetype=1,alpha=0.5) +
+    geom_abline(slope=0,intercept=0, linetype=2,alpha=0.5) +
+    geom_vline(xintercept=0,linetype=2,alpha=0.5) +
+    xlab(c('Original method')) + ylab(c('eLife review method')) +
+    scale_shape_manual(values=c(16,17),labels=c('Male','Female'),guide = guide_legend(title = '')) +
+    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
+    values=age.colours,guide = guide_legend(title = 'Age group (years)')) +
+    facet_wrap(~cause,scale='free')
+dev.off()
