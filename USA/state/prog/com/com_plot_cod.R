@@ -102,6 +102,10 @@ for (i in cod.other){
     dat.nat$cause = i
     dat.nat.other= rbind(dat.nat.other,dat.nat)
 }
+# remove impossible age-sex values from 'maternal conditions' and 'perinatal conditions'
+dat.nat.other = subset(dat.nat.other,!(cause=='Maternal conditions'&sex=='Men'))
+dat.nat.other = subset(dat.nat.other,!(cause=='Maternal conditions'&sex=='Women'&age%in%c(0,5,55,65,75,85)))
+dat.nat.other = subset(dat.nat.other,!(cause=='Perinatal conditions'&age%in%c(5,15,25,35,45,55,65,75,85)))
 
 dat.nat.other$size <- ifelse(is.na(dat.nat.other$size)==TRUE,0,dat.nat.other$size)
 dat.nat.other$size <- 3*(dat.nat.other$size/max(dat.nat.other$size))

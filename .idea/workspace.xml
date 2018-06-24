@@ -2,17 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_AllCause_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_AllCause_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_Cancer_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_Cancer_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_Cardiopulmonary_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_Cardiopulmonary_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_External_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_External_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_AllCause_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_AllCause_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_Cancer_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_Cancer_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_Cardiopulmonary_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_Cardiopulmonary_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_External_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_against_climate_fixed_com_External_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Other_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Other_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_allcauses_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_allcauses_nononsig_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_cardio_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_cardio_nononsig_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_injuries_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_injuries_nononsig_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_other_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_other_nononsig_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/anti_com_rates_region_map_men_rounded_Other_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/anti_com_rates_region_map_men_rounded_Other_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/anti_com_rates_region_map_women_rounded_Other_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/anti_com_rates_region_map_women_rounded_Other_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/com_rates_region_map_men_rounded_Other_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/com_rates_region_map_men_rounded_Other_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/com_rates_region_map_women_rounded_Other_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/region/plots/com_rates_region_map_women_rounded_Other_1980_2016.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/supplementary/US dynamic mortality seasonality analysis supplementary 2018 06 21.docx" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/supplementary/US dynamic mortality seasonality analysis supplementary 2018 06 21.docx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_nat_changes_AllCause_1980_2016.csv" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_nat_changes_AllCause_1980_2016.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" afterPath="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,64 +32,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="wavelet_paper_cod.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="wavelet_paper_cod.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="36" column="24" lean-forward="false" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+            <state relative-caret-position="1016">
+              <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="seasonality_index_cod_compare_plot.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_compare_plot.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2115">
-              <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="153" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="seasonality_index_cod.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="451" column="0" lean-forward="false" selection-start-line="451" selection-start-column="0" selection-end-line="461" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="seasonality_index_cod_plot_all.R" pinned="false" current-in-tab="false">
+      <file leaf-file-name="seasonality_index_cod_plot_all.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="716">
-              <caret line="128" column="21" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+            <state relative-caret-position="-49">
+              <caret line="77" column="1" lean-forward="true" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
               <folding>
                 <element signature="e#7010#8593#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="seasonality_index_cod_plot_all_ols.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all_ols.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="30" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="seasonality_index_cod_ols.R" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_ols.R">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1004">
-              <caret line="145" column="14" lean-forward="false" selection-start-line="145" selection-start-column="14" selection-end-line="145" selection-end-column="14" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -153,7 +115,6 @@
         <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_stmarys.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all_ols.R" />
@@ -161,6 +122,7 @@
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_compare_plot.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
       </list>
     </option>
@@ -260,7 +222,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
+              <option name="myItemId" value="seasonality_index" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -851,7 +813,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273196" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48367697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48367697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24951456" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1140,14 +1102,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3810">
-          <caret line="254" column="0" lean-forward="false" selection-start-line="254" selection-start-column="0" selection-end-line="290" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1974">
@@ -1210,16 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="128" column="21" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding>
-            <element signature="e#7010#8593#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_compare_plot.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2115">
@@ -1238,9 +1182,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="36" column="24" lean-forward="false" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+        <state relative-caret-position="1016">
+          <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-135">
+          <caret line="107" column="61" lean-forward="true" selection-start-line="107" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-49">
+          <caret line="77" column="1" lean-forward="true" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
+          <folding>
+            <element signature="e#7010#8593#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
