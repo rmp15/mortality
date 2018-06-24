@@ -34,8 +34,8 @@ declare -a numsims=(10)
 declare -i sig=5
 declare -a noises=(1)
 #declare -a noises=(1 2)
-declare -a cods=("Other")
-#declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Intentional" "Unintentional" "Other" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
+#declare -a cods=("Other")
+declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Intentional" "Unintentional" "Other" "Cardiovascular" "Chronic_respiratory_diseases" "Respiratory_infections" "Endocrine_disorders" "Genitourinary_diseases" "Maternal_conditions" "Neuropsychiatric_disorders" "Perinatal_conditions" "Substance_use_disorders")
 declare -a logs=(0)
 
 for noise in "${noises[@]}"; do
@@ -139,12 +139,12 @@ echo "starting seasonality index analysis for $country, years $start - $end";
 
 # runs ols model as per revisions
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_ols.R $start $end $start $end $dname $metric $cod
-Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_cosinor.R $start $end $start $end $dname $metric $cod
+#Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_cosinor.R $start $end $start $end $dname $metric $cod
 
 
 done;
 
-# (figure 4, appendix figure 3, alternative figure 4, alternative appendix figure 3, figure comparing original and ols)
+# (figure 4, appendix figure 3, alternative figure 4, alternative appendix figure 3, figure comparing original and ols, cosinor methods)
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R $start $end $start $end $dname $metric
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all_ols.R $start $end $start $end $dname $metric
-#Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_compare_plot.R $start $end $start $end $dname $metric
+Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_compare_plot.R $start $end $start $end $dname $metric
