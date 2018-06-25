@@ -4,6 +4,7 @@ library(ggplot2)
 library(plyr)
 library(scales)
 library(season)
+library(cosinor)
 
 # correct location to start at
 setwd('~/git/mortality/USA/state/prog/00_bash')
@@ -76,7 +77,6 @@ dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.nationa
 # Mit= ρi + γit
 # --------------------- -------------------------------------
 
-
 # extract unique table of year and months to generate year.month
 dat.year.month <- unique(dat.national[,c('year', 'month')])
 dat.year.month <- dat.year.month[order(dat.year.month$year,dat.year.month$month),]
@@ -87,16 +87,11 @@ dat.year.month$year.month <- seq(nrow(dat.year.month))
 dat.national <- merge(dat.national,dat.year.month, by=c('year','month'))
 dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-# SECOND ATTEMPT (USING COSINOR FUNCTIONS)
+# SECOND ATTEMPT (USING COSINOR FUNCTIONS FROM SEASON PACKAGE)
 seas.index.func = function(age.selected,sex.selected) {
     dat.national.test = subset(dat.national,age==age.selected&sex==sex.selected)
-    # dat.pois.summary.gamma = glm(deaths.pred ~ 1 + year.month + (1 + year)*(cos(2*pi*month/12)+sin(2*pi*month/12)+cos(2*pi*month/6)+sin(2*pi*month/6)), offset=log(pop.adj),family=poisson(link="log"),data=dat.national.test)
-    # dat.pois.summary.nogamma = glm(deaths.pred ~ 1 + year.month + (cos(2*pi*month/12)+sin(2*pi*month/12)+cos(2*pi*month/6)+sin(2*pi*month/6))
 
     dat.pois.summary = cosinor(deaths.pred ~ 1 + year.month , date='month', data=dat.national.test, type='monthly', family=poisson(link="log"), offsetmonth=FALSE, offsetpop=dat.national.test$pop.adj)
-
-    # pred <- predict(dat.pois.summary.gamma, newdata = dat.national.test, se.fit = TRUE)
-    # pred.exp = data.frame(year.month =dat.national.test$year.month , pred=exp(pred$fit),ll=exp(pred$fit-1.96*pred$se),ul=exp(pred$fit+1.96*pred$se),se=exp(pred$se))
 
     # create dataset with fitted values
     dat.predicted = data.frame(year.month = dat.national.test$year.month,rate.fit = dat.pois.summary$fitted.values, deaths.fit = dat.pois.summary$fitted.plus)
@@ -118,10 +113,63 @@ seas.index.func = function(age.selected,sex.selected) {
     start.end$age = age.selected ; start.end$sex= sex.selected ; start.end$cause = cod
 
     # plot to test if wanted
-    # print(ggplot() +
-    #     geom_point(data=dat.national.test,aes(x=year.month,y=deaths.pred)) +
-    #     geom_line(data=dat.predicted,aes(x=year.month, y=deaths.fit),color='blue') +
-    #     geom_ribbon(data=dat.predicted,aes(x=year.month, ymin=ll,ymax=ul),fill='red'))
+    print(ggplot() +
+        geom_point(data=dat.national.test,aes(x=year.month,y=deaths.pred)) +
+        geom_line(data=dat.predicted,aes(x=year.month, y=deaths.fit),color='blue') +
+        geom_ribbon(data=dat.predicted,aes(x=year.month, ymin=ll,ymax=ul),fill='red'))
+
+    return(start.end)
+}
+
+dat.complete = data.frame()
+# Function to append all the age and sexes desired to be summarised into one file
+for(j in c(0,5,15,25,35,45,55,65,75,85)){
+    for(i in c(1,2)) {
+
+        dat.temp = seas.index.func(j,i)
+        dat.complete = rbind(dat.complete,dat.temp)
+    }
+}
+
+# save as as rds and csv
+saveRDS(dat.complete,paste0(file.loc,'seasonality_index_nat_changes_',cod,'_',year.start,'_',year.end))
+write.csv(dat.complete,paste0(file.loc,'seasonality_index_nat_changes_',cod,'_',year.start,'_',year.end,'.csv'))
+
+# output directory
+file.loc <- paste0('../../output/seasonality_index_cosinor/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
+
+# THIRD ATTEMPT (USING COSINOR FUNCTIONS FROM COSINOR PACKAGE)
+seas.index.func = function(age.selected,sex.selected) {
+    dat.national.test = subset(dat.national,age==age.selected&sex==sex.selected)
+
+    dat.pois.summary = cosinor.lm(deaths.pred ~ 1 + year.month + time(year.month) + amp.acro(year.month), data=dat.national.test, period=12)
+
+    # create dataset with fitted values
+    dat.predicted = data.frame(year.month = dat.national.test$year.month,rate.fit = dat.pois.summary$fitted.values, deaths.fit = dat.pois.summary$fitted.plus)
+    # dat.predicted = data.frame(year.month = dat.national.test$year.month, deaths.fit = dat.pois.summary$fit$fitted.values)
+
+    # isolate the first/last 12 months and find the maximum/minimum (with the errors added appropriately)
+    start.max = subset(subset(dat.predicted[,c(1,3)],year.month<=12),deaths.fit==max(deaths.fit)) ; names(start.max) = c('start.year.month.max','start.pred.max')
+    start.min = subset(subset(dat.predicted[,c(1,3)],year.month<=12),deaths.fit==min(deaths.fit)) ; names(start.min) = c('start.year.month.min','start.pred.min')
+    start = cbind(start.max,start.min) ; start$start.seas.index = with(start,start.pred.max/start.pred.min)
+    end.max = subset(subset(dat.predicted[,c(1,3)],year.month>=(max(dat.predicted$year.month)-12+1)),deaths.fit==max(deaths.fit)) ; names(end.max) = c('end.year.month.max','end.pred.max')
+    end.min = subset(subset(dat.predicted[,c(1,3)],year.month>=(max(dat.predicted$year.month)-12+1)),deaths.fit==min(deaths.fit)) ; names(end.min) = c('end.year.month.min','end.pred.min')
+    end = cbind(end.max,end.min) ; end$end.seas.index = with(end,end.pred.max/end.pred.min)
+
+    # find the difference between them (again adding errors appropriately)
+    start.end = cbind(start,end) ; start.end$diff = with(start.end,end.seas.index-start.seas.index)
+    # report this value.
+    start.end$per.year.perc = 100*(start.end$diff/num.years) ; start.end$per.decade.perc = 10*start.end$per.year.perc
+
+    # add age, sex, cod
+    start.end$age = age.selected ; start.end$sex= sex.selected ; start.end$cause = cod
+
+    # plot to test if wanted
+    print(ggplot() +
+        geom_point(data=dat.national.test,aes(x=year.month,y=deaths.pred)) +
+        geom_line(data=dat.predicted,aes(x=year.month, y=deaths.fit),color='blue') +
+        geom_ribbon(data=dat.predicted,aes(x=year.month, ymin=ll,ymax=ul),fill='red'))
 
     return(start.end)
 }

@@ -177,20 +177,20 @@ dat.new.cosinor = rbind(lin.reg.grad.weight, lin.reg.grad.weight.cardio, lin.reg
 ###############################################################
 
 dat.merged = merge(dat.old[,c(1,2,8,11,21)],dat.new[,c(24,26,27,28,29)],by=c('sex','age','cause'))
-dat.merged$per.year.perc.ols = dat.merged$per.year.perc
-dat.merged = merge(dat.merged,dat.new.cosinor[,c(13:16)],by=c('sex','age','cause'))
+dat.merged$per.year.perc.ols = dat.merged$per.year.perc ; dat.merged$per.year.perc = NULL
+dat.merged = merge(dat.merged,dat.new.cosinor[,c(12,14:16)],by=c('sex','age','cause'))
 
 # remove wacky results that are meaningless by definition
 dat.merged = subset(dat.merged,!(age%in%c(0,5,55,65,75,85)&cause=='Maternal conditions'))
 dat.merged = subset(dat.merged,!(sex==1&cause=='Maternal conditions'))
 dat.merged = subset(dat.merged,!(age%in%c(5,15,25,35,45,55,65,75,85)&cause=='Perinatal conditions'))
-names(dat.merged) = c('sex','age','cause','grad.ols','p.old','grad.ols','p.new',)
+names(dat.merged) = c('sex','age','cause','grad.old','p.old','p.new','grad.ols','grad.cosinor')
 
-# plot old against old
+# plot old against ols
 pdf(paste0(file.loc,'seasonality_original_method_against_elife_revisions_proposal_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
     ggplot() +
-    geom_point(data=subset(dat.merged,p.old<=0.05),colour='hot pink',aes(shape=as.factor(sex),x=(grad.old*100),y=grad.new),size=3) +
-    geom_point(data=dat.merged,aes(shape=as.factor(sex),x=(grad.old*100),y=grad.new)) +
+    geom_point(data=subset(dat.merged,p.old<=0.05),colour='hot pink',aes(shape=as.factor(sex),x=(grad.old*100),y=grad.ols),size=3) +
+    geom_point(data=dat.merged,aes(shape=as.factor(sex),x=(grad.old*100),y=grad.ols)) +
     geom_abline(slope=1,intercept=0, linetype=1,alpha=0.5) +
     geom_abline(slope=0,intercept=0, linetype=2,alpha=0.5) +
     geom_vline(xintercept=0,linetype=2,alpha=0.5) +
@@ -202,10 +202,10 @@ pdf(paste0(file.loc,'seasonality_original_method_against_elife_revisions_proposa
 dev.off()
 
 # plot old against cosinor
-pdf(paste0(file.loc,'seasonality_original_method_against_elife_revisions_proposal_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+pdf(paste0(file.loc,'seasonality_original_method_against_elife_revisions_proposal_cosinor_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
     ggplot() +
-    geom_point(data=subset(dat.merged,p.old<=0.05),colour='hot pink',aes(shape=as.factor(sex),x=(grad.old*100),y=grad.new),size=3) +
-    geom_point(data=dat.merged,aes(shape=as.factor(sex),x=(grad.old*100),y=grad.new)) +
+    geom_point(data=subset(dat.merged,p.old<=0.05),colour='hot pink',aes(shape=as.factor(sex),x=(grad.old*100),y=grad.cosinor),size=3) +
+    geom_point(data=dat.merged,aes(shape=as.factor(sex),x=(grad.old*100),y=grad.cosinor)) +
     geom_abline(slope=1,intercept=0, linetype=1,alpha=0.5) +
     geom_abline(slope=0,intercept=0, linetype=2,alpha=0.5) +
     geom_vline(xintercept=0,linetype=2,alpha=0.5) +
