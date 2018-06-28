@@ -39,7 +39,16 @@ echo "preparing monthly death rates in injury sub-causes of deaths for years $st
 #Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_injuries_ons.R $start $end
 
 #################################################
-# 4. PROCESS DATA FOR ELIFE FIRST REVISION
+# 4. PROCESS DATA FOR INJURIES WO DROWNING
+#################################################
+
+echo "preparing monthly death rates in injury sub-causes of deaths for years $start - $end";
+
+Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_wo_drowning.R $start $end
+
+
+#################################################
+# 5. PROCESS DATA FOR ELIFE FIRST REVISION
 #################################################
 
 echo "preparing monthly death rates in eLife-requested causes of death for years $start - $end";
