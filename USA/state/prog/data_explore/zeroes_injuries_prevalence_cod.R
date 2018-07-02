@@ -28,8 +28,8 @@ library(plyr)
 library(ggplot2)
 
 # calculate percentage of zeroes
-dat.broad.summary = ddply(dat.broad,.(cause,age,sex,month),summarise,zeroes=sum(deaths %in% 0 ),count=length(deaths),percentage.zeroes=round(100*sum(deaths %in% 0)/length(deaths),1))
-dat.sub.summary = ddply(dat.sub,.(cause.sub,age,sex,month),summarise,zeroes=sum(deaths %in% 0 ),count=length(deaths),percentage.zeroes=round(100*sum(deaths %in% 0)/length(deaths),1))
+dat.broad.summary = ddply(dat.broad,.(cause,fips,age,sex,month),summarise,zeroes=sum(deaths %in% 0 ),count=length(deaths),percentage.zeroes=round(100*sum(deaths %in% 0)/length(deaths),1))
+dat.sub.summary = ddply(dat.sub,.(cause.sub,fips,age,sex,month),summarise,zeroes=sum(deaths %in% 0 ),count=length(deaths),percentage.zeroes=round(100*sum(deaths %in% 0)/length(deaths),1))
 names(dat.sub.summary)[1] = 'cause'
 
 # colorway for plotting
