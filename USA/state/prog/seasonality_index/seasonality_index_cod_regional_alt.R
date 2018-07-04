@@ -60,7 +60,9 @@ source('../../data/objects/objects.R')
 # DATA PROCESSING
 ###############################################################
 
+###############################################################
 # 1. NATIONAL
+###############################################################
 
 # generate nationalised data
 dat$deaths.pred <- with(dat,pop.adj*rate.adj)
@@ -170,7 +172,9 @@ for (j in c(1:2)) {
         dat.ci <- rbind(dat.ci,cbind(i,j,temp.start,temp.end))
     }}
 
+###############################################################
 # 2. REGIONAL
+###############################################################
 
 # METHOD TAKING ACCOUNT OF POPULATION
 
@@ -246,7 +250,7 @@ month.min=month[type=='min'])
 
 dat.max.min.fixed.region$percent.change <- with(dat.max.min.fixed.region,round(100*(rate.max/rate.min),1)-100)
 
-#establish correct sex names for plotting
+# establish correct sex names for plotting
 dat.max.min.fixed.region$sex.long <- as.factor(as.character(dat.max.min.fixed.region$sex))
 levels(dat.max.min.fixed.region$sex.long) <- sex.lookup
 
@@ -273,43 +277,39 @@ lin.reg.grad.region <- merge(lin.reg.grad.region,lin.reg.sig.region,by=c('sex','
 
 # MORTALITY SEASONALITY INDEX AGAINST CLIMATE VARIABLE SEASONALITY INDEX
 
-# STATIC MAX/MIN DEFINED BY COM
-
-# load climate data
-file.loc.climate.fixed <- paste0('~/git/climate/countries/USA/output/seasonality_index_climate_region/',dname,'/',metric,'/')
-dat.climate.fixed <- readRDS(paste0(file.loc.climate.fixed,'seasonality_index_com_fixed_',dname,'_',metric,'_',cod,'_',year.start.2,'_',year.end.2))
-dat.climate.fixed$start.value.climate <- dat.climate.fixed$start.value
-dat.climate.fixed$end.value.climate <- dat.climate.fixed$end.value
-dat.climate.fixed <- dat.climate.fixed[,c('sex','age','climate_region','start.value.climate','end.value.climate')]
+# load climate data and generate annual means for each climate region
+file.loc.input <- paste0('~/git/climate/countries/USA/output/metrics_climate_regions/',dname,'/',metric,'/')
+dat.climate.fixed <- readRDS(paste0(file.loc.input,'climate_region_values_',dname,'_',metric,'_',year.start.2,'_',year.end.2))
+dat.climate.fixed = ddply(dat.climate.fixed,.(sex,age,climate_region,year),summarise,mean=mean(t2m.mean))
 
 lin.reg.grad.climate.fixed <- lin.reg.grad.region[,c('sex','age','climate_region','start.value','end.value')]
 lin.reg.grad.climate.fixed$start.value.mort <- lin.reg.grad.climate.fixed$start.value
 lin.reg.grad.climate.fixed$end.value.mort <- lin.reg.grad.climate.fixed$end.value
 lin.reg.grad.climate.fixed <- lin.reg.grad.climate.fixed[,c('sex','age','climate_region','start.value.mort','end.value.mort')]
 
-# fix names of climate regions to match each other
+# # fix names of climate regions to match each other
 dat.climate.fixed$climate_region <- gsub(' ','_',dat.climate.fixed$climate_region)
 
 # merge mortality data and climate data
-dat.mort.climate.fixed <- merge(dat.climate.fixed,lin.reg.grad.climate.fixed,by=c('sex','age','climate_region'))
+dat.mort.climate.fixed <- merge(subset(dat.climate.fixed,year==year.end),lin.reg.grad.climate.fixed,by=c('sex','age','climate_region'))
 
 # attach the last population and calculate slope with significance
-dat.mort.climate.fixed = merge(dat.mort.climate.fixed,subset(dat.region,year==year.end.2&month==12),by=c('age','sex','climate_region'))
-dat.mort.climate.fixed = dat.mort.climate.fixed[]
+# dat.mort.climate.fixed = merge(dat.mort.climate.fixed,subset(dat.region,year==year.end.2&month==12),by=c('age','sex','climate_region'))
+# dat.mort.climate.fixed = dat.mort.climate.fixed[]
 
-# calculate differnce in mort
-dat.mort.climate.fixed$diff.mort <- with(dat.mort.climate.fixed,end.value.mort-start.value.mort)
-dat.mort.climate.fixed$diff.climate <- with(dat.mort.climate.fixed,end.value.climate-start.value.climate)
+# # calculate differnce in mort
+# dat.mort.climate.fixed$diff.mort <- with(dat.mort.climate.fixed,end.value.mort-start.value.mort)
+# dat.mort.climate.fixed$diff.climate <- with(dat.mort.climate.fixed,end.value.climate-start.value.climate)
 
 # add print-friendly ages
 dat.mort.climate.fixed <- merge(dat.mort.climate.fixed,age.code,by='age')
 dat.mort.climate.fixed$age.print <- reorder(dat.mort.climate.fixed$age.print,dat.mort.climate.fixed$age)
-
-# linear regression for each age-sex and obtain significance of slopes
-lin.reg.mort.climate.fixed <- ddply(dat.mort.climate.fixed,.(age,sex),
-                            function(z)coef(summary(lm(end.value.mort ~ end.value.climate , data=z))))
-lin.reg.mort.climate.fixed <- lin.reg.mort.climate.fixed[!c(TRUE,FALSE),]
-lin.reg.mort.climate.fixed$sig.test.5 <- ifelse(lin.reg.mort.climate.fixed[,6]<0.05,1,0)
+#
+# # linear regression for each age-sex and obtain significance of slopes
+# lin.reg.mort.climate.fixed <- ddply(dat.mort.climate.fixed,.(age,sex),
+#                             function(z)coef(summary(lm(end.value.mort ~ end.value.climate , data=z))))
+# lin.reg.mort.climate.fixed <- lin.reg.mort.climate.fixed[!c(TRUE,FALSE),]
+# lin.reg.mort.climate.fixed$sig.test.5 <- ifelse(lin.reg.mort.climate.fixed[,6]<0.05,1,0)
 
 #dat.mort.climate.fixed.test = ddply(dat.mort.climate.fixed,.(sex,age), function(z)coef(summary(glm(deaths.pred ~ maxmonth + offset(log(pop.adj)),family=poisson,data=z))))
 
@@ -326,8 +326,8 @@ ifelse(!dir.exists(file.loc.regional), dir.create(file.loc.regional, recursive=T
 ## DATA ##
 
 # export national seasonality index changes file
-saveRDS(lin.reg.grad.weight,paste0(file.loc,'seasonality_index_nat_changes_',cod,'_',year.start,'_',year.end))
-write.csv(lin.reg.grad.weight.csv,paste0(file.loc,'seasonality_index_nat_changes_',cod,'_',year.start,'_',year.end,'.csv'))
+# saveRDS(lin.reg.grad.weight,paste0(file.loc,'seasonality_index_nat_changes_',cod,'_',year.start,'_',year.end))
+# write.csv(lin.reg.grad.weight.csv,paste0(file.loc,'seasonality_index_nat_changes_',cod,'_',year.start,'_',year.end,'.csv'))
 
 # export
 # saveRDS(lin.reg.mort.climate.fixed,paste0(file.loc.regional,'seasonality_index_climate_region_against_temp_grads_',cod,'_',year.start,'_',year.end))
@@ -341,38 +341,38 @@ write.csv(lin.reg.grad.weight.csv,paste0(file.loc,'seasonality_index_nat_changes
 # 0. comparison of start and end values
 
 # METHOD NOT TAKING ACCCOUNT OF POPULATION
-
-age.colours <- c('#FF1493','#B8860B','#808080','#00BFFF','#00CED1')
-age.colours <- c(age.colours,'#66CDAA','#9ACD32','#ADFF2F','#9932CC','#FF8C00')
-age.colours=c("blue",brewer.pal(9,"BrBG")[c(9:6,4:1)],"grey")
-
-# plot coefficient of seasonality for each age nationally at start and end of period with significance
-plot.function.diff.seas.sig.5 <- function(shape.selected) {
-
-    #lin.reg.grad$shape.code <- ifelse(lin.reg.grad$sex==1,16,1)
-    #lin.reg.grad$shape.code <- as.factor(lin.reg.grad$shape.code)
-
-    print(ggplot() +
-    geom_point(data=subset(lin.reg.grad.weight,sig.test.5==1),colour='black',aes(shape=as.factor(sex),x=(start.value.2/100),y=(end.value.2/100)),size=8) +
-    geom_point(data=subset(lin.reg.grad.weight,sex==1|2),aes(shape=as.factor(sex), color=as.factor(age),x=(start.value.2/100),y=(end.value.2/100)),size=6) +
-    geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
-    scale_x_continuous(name=paste0('Percent difference in death rates in ',year.start),labels=percent,limits=c(0,(200/100))) +
-    scale_y_continuous(name=paste0('Percent difference in death rates in ',year.end),labels=percent,limits=c(0,(200/100))) +
-    # geom_hline(linetype=2, yintercept = seq(0,1,0.1), alpha=0.2) +
-    # geom_vline(linetype=2, xintercept = seq(0,1,0.1), alpha=0.2) +
-    scale_shape_manual(values=c(16,shape.selected),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
-    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),values=age.colours,guide = guide_legend(title = 'Age group:')) +
-    ggtitle(cod) +
-    theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),
-    panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
-    axis.line.x = element_line(colour = "black"),
-    axis.line.y = element_line(colour = "black"),rect = element_blank())#,legend.background = element_rect(fill = "grey95"))
-    )
-}
-
-pdf(paste0(file.loc,'seasonality_index_change_sig5_weighted_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-plot.function.diff.seas.sig.5(17)
-dev.off()
+#
+# age.colours <- c('#FF1493','#B8860B','#808080','#00BFFF','#00CED1')
+# age.colours <- c(age.colours,'#66CDAA','#9ACD32','#ADFF2F','#9932CC','#FF8C00')
+# age.colours=c("blue",brewer.pal(9,"BrBG")[c(9:6,4:1)],"grey")
+#
+# # plot coefficient of seasonality for each age nationally at start and end of period with significance
+# plot.function.diff.seas.sig.5 <- function(shape.selected) {
+#
+#     #lin.reg.grad$shape.code <- ifelse(lin.reg.grad$sex==1,16,1)
+#     #lin.reg.grad$shape.code <- as.factor(lin.reg.grad$shape.code)
+#
+#     print(ggplot() +
+#     geom_point(data=subset(lin.reg.grad.weight,sig.test.5==1),colour='black',aes(shape=as.factor(sex),x=(start.value.2/100),y=(end.value.2/100)),size=8) +
+#     geom_point(data=subset(lin.reg.grad.weight,sex==1|2),aes(shape=as.factor(sex), color=as.factor(age),x=(start.value.2/100),y=(end.value.2/100)),size=6) +
+#     geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
+#     scale_x_continuous(name=paste0('Percent difference in death rates in ',year.start),labels=percent,limits=c(0,(200/100))) +
+#     scale_y_continuous(name=paste0('Percent difference in death rates in ',year.end),labels=percent,limits=c(0,(200/100))) +
+#     # geom_hline(linetype=2, yintercept = seq(0,1,0.1), alpha=0.2) +
+#     # geom_vline(linetype=2, xintercept = seq(0,1,0.1), alpha=0.2) +
+#     scale_shape_manual(values=c(16,shape.selected),labels=c('Men','Women'),guide = guide_legend(title = 'Sex:')) +
+#     scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),values=age.colours,guide = guide_legend(title = 'Age group:')) +
+#     ggtitle(cod) +
+#     theme(legend.box.just = "centre",legend.box = "horizontal",legend.position='bottom',text = element_text(size = 15),
+#     panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
+#     axis.line.x = element_line(colour = "black"),
+#     axis.line.y = element_line(colour = "black"),rect = element_blank())#,legend.background = element_rect(fill = "grey95"))
+#     )
+# }
+#
+# pdf(paste0(file.loc,'seasonality_index_change_sig5_weighted_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+# plot.function.diff.seas.sig.5(17)
+# dev.off()
 
 ######################################################################
 # REGIONAL PLOTS
@@ -381,25 +381,6 @@ dev.off()
 # add cause of death for filtering
 dat.mort.climate.fixed$cause = cod
 
-# # remove com data that doesn't meet wavelet criteria (currently manual)
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='AllCause' & age == 35 & sex==1))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='AllCause' & age == 5 & sex==2))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='AllCause' & age == 25 & sex==2))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 0 & sex==1))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 5 & sex==1))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 15 & sex==1))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 25 & sex==1))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 35 & sex==1))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 45 & sex==1))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 0 & sex==2))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 5 & sex==2))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 15 & sex==2))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 25 & sex==2))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='Cancer' & age == 35 & sex==2))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='External' & age == 65 & sex==1))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='External' & age == 45 & sex==2))
-# dat.mort.climate.fixed <- subset(dat.mort.climate.fixed,!(cause =='External' & age == 55 & sex==2))
-#
 # fix region names
 dat.mort.climate.fixed$climate_region <- gsub('_',' ', dat.mort.climate.fixed$climate_region)
 
@@ -424,13 +405,13 @@ map.climate.colour <- colorRampPalette(c("red","hotpink","brown","navy","cyan","
                 ifelse(cod=='Perinatal conditions','Perinatal conditions',
                 ifelse(cod=='Substance use disorders','Substance use disorders'))))))))))))))))
 
-pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_fixed_com_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-ggplot(data=subset(dat.mort.climate.fixed, sex==1|2),aes(shape=as.factor(sex),x=abs(end.value.climate),
+pdf(paste0(file.loc.regional,'seasonality_index_regional_against_climate_annual_mean_fixed_com_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+print(ggplot(data=subset(dat.mort.climate.fixed, (sex==1|2)),aes(shape=as.factor(sex),x=abs(mean),
 y=abs(end.value.mort/100))) +
 geom_point(aes(color=as.factor(climate_region)),size=2) +
 #geom_smooth(method="lm") +
 scale_shape_manual(values=c(16,17),labels=c('Male','Female'),guide = guide_legend(title = '')) +
-scale_x_continuous(name=expression(paste("Absolute temperature difference (",degree,"C)"))) +
+scale_x_continuous(name=expression(paste("Mean annual temperature (",degree,"C)"))) +
 scale_y_continuous(name=paste0('Percent difference in death rates'),labels=percent) +
 ggtitle(cod.print) +
 scale_y_continuous(name=paste0('Percent difference in death rates'),labels=percent,limits=c(0,1)) +
@@ -445,35 +426,35 @@ scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Regi
 theme(plot.title = element_text(hjust=0.5), legend.box.just = "centre",legend.box = "horizontal",legend.position=c(.8, .1),text = element_text(size = 10),
 panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
 axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),
-rect = element_blank(),legend.background = element_rect(fill = "grey95"))
+rect = element_blank(),legend.background = element_rect(fill = "grey95")))
 dev.off()
 
-# fix region names
-lin.reg.grad.region$climate_region <- gsub('_',' ', lin.reg.grad.region$climate_region)
-
-# fix sex names
-lin.reg.grad.region$sex.long <- mapvalues(lin.reg.grad.region$sex,from=sort(unique(lin.reg.grad.region$sex)),to=c('Male','Female'))
-lin.reg.grad.region$sex.long <- reorder(lin.reg.grad.region$sex.long,lin.reg.grad.region$sex)
-lin.reg.grad.weight$sex.long <- mapvalues(lin.reg.grad.weight$sex,from=sort(unique(lin.reg.grad.weight$sex)),to=c('Male','Female'))
-lin.reg.grad.weight$sex.long <- reorder(lin.reg.grad.weight$sex.long,lin.reg.grad.weight$sex)
-
-# plot to compare national and regional values
-pdf(paste0(file.loc.regional,'seasonality_index_regional_against_national_index_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
-ggplot() +
-    ggtitle(cod.print) +
-    ylab('Percentage point change per year') + xlab('Age') +
-    geom_point(data=lin.reg.grad.region,aes(x=as.factor(age),y=Estimate,col=climate_region),size=1) +
-    # geom_line(data=lin.reg.grad.region,aes(x=age,y=Estimate,col=climate_region),alpha=0.2) +
-    geom_point(data=subset(lin.reg.grad.weight,sig.test.5==1),aes(x=as.factor(age),y=100*Estimate),size=4,color='hot pink') +
-    geom_point(data=lin.reg.grad.weight,aes(x=as.factor(age),y=100*Estimate),size=2) +
-    scale_x_discrete(labels=age.print) +
-    scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Region')) +
-    geom_hline(yintercept=0,lty=2) +
-    facet_wrap(~sex.long) +
-    theme_bw() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-dev.off()
+# # fix region names
+# lin.reg.grad.region$climate_region <- gsub('_',' ', lin.reg.grad.region$climate_region)
+#
+# # fix sex names
+# lin.reg.grad.region$sex.long <- mapvalues(lin.reg.grad.region$sex,from=sort(unique(lin.reg.grad.region$sex)),to=c('Male','Female'))
+# lin.reg.grad.region$sex.long <- reorder(lin.reg.grad.region$sex.long,lin.reg.grad.region$sex)
+# lin.reg.grad.weight$sex.long <- mapvalues(lin.reg.grad.weight$sex,from=sort(unique(lin.reg.grad.weight$sex)),to=c('Male','Female'))
+# lin.reg.grad.weight$sex.long <- reorder(lin.reg.grad.weight$sex.long,lin.reg.grad.weight$sex)
+#
+# # plot to compare national and regional values
+# pdf(paste0(file.loc.regional,'seasonality_index_regional_against_national_index_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+# ggplot() +
+#     ggtitle(cod.print) +
+#     ylab('Percentage point change per year') + xlab('Age') +
+#     geom_point(data=lin.reg.grad.region,aes(x=as.factor(age),y=Estimate,col=climate_region),size=1) +
+#     # geom_line(data=lin.reg.grad.region,aes(x=age,y=Estimate,col=climate_region),alpha=0.2) +
+#     geom_point(data=subset(lin.reg.grad.weight,sig.test.5==1),aes(x=as.factor(age),y=100*Estimate),size=4,color='hot pink') +
+#     geom_point(data=lin.reg.grad.weight,aes(x=as.factor(age),y=100*Estimate),size=2) +
+#     scale_x_discrete(labels=age.print) +
+#     scale_colour_manual(values=map.climate.colour,guide = guide_legend(title = 'Region')) +
+#     geom_hline(yintercept=0,lty=2) +
+#     facet_wrap(~sex.long) +
+#     theme_bw() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+# dev.off()
