@@ -142,7 +142,7 @@ echo "starting seasonality index analysis for $country, years $start - $end";
 #Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_cosinor.R $start $end $start $end $dname $metric $cod
 
 # run alternative figure 6 based on mean annual temperature instead
-Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_regional_alt.R $start $end $start $end $dname $metric $cod
+#Rscript ~/git/mortality/USA/state/prog/seasonality_index/seasonality_index_cod_regional_alt.R $start $end $start $end $dname $metric $cod
 
 done;
 
