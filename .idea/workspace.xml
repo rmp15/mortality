@@ -24,8 +24,8 @@
       <file leaf-file-name="injury_paper.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/injury_paper.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+            <state relative-caret-position="105">
+              <caret line="7" column="5" lean-forward="false" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -34,25 +34,25 @@
       <file leaf-file-name="mapping_posterior_climate_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="280" column="171" lean-forward="false" selection-start-line="280" selection-start-column="171" selection-end-line="280" selection-end-column="171" />
+            <state relative-caret-position="322">
+              <caret line="278" column="90" lean-forward="true" selection-start-line="278" selection-start-column="90" selection-end-line="278" selection-end-column="90" />
               <folding>
                 <element signature="e#1622#5365#0" expanded="false" />
-                <element signature="e#16541#16772#0" expanded="false" />
-                <element signature="e#16798#17019#0" expanded="false" />
-                <element signature="e#24568#26367#0" expanded="false" />
-                <element signature="e#26616#28425#0" expanded="false" />
-                <element signature="e#28734#30466#0" expanded="false" />
-                <element signature="e#30729#32505#0" expanded="false" />
-                <element signature="e#32806#34966#0" expanded="false" />
-                <element signature="e#35232#37040#0" expanded="false" />
-                <element signature="e#37340#39495#0" expanded="false" />
-                <element signature="e#39994#42261#0" expanded="false" />
-                <element signature="e#44590#45721#0" expanded="false" />
-                <element signature="e#48534#49848#0" expanded="false" />
-                <element signature="e#50462#64970#0" expanded="false" />
-                <element signature="e#65092#86508#0" expanded="false" />
-                <element signature="e#89481#93801#0" expanded="false" />
+                <element signature="e#16584#16815#0" expanded="false" />
+                <element signature="e#16841#17062#0" expanded="false" />
+                <element signature="e#24611#26410#0" expanded="false" />
+                <element signature="e#26659#28468#0" expanded="false" />
+                <element signature="e#28777#30509#0" expanded="false" />
+                <element signature="e#30772#32548#0" expanded="false" />
+                <element signature="e#32849#35009#0" expanded="false" />
+                <element signature="e#35275#37083#0" expanded="false" />
+                <element signature="e#37383#39538#0" expanded="false" />
+                <element signature="e#40037#42304#0" expanded="false" />
+                <element signature="e#44633#45764#0" expanded="false" />
+                <element signature="e#48577#49891#0" expanded="false" />
+                <element signature="e#50505#65013#0" expanded="false" />
+                <element signature="e#65135#86551#0" expanded="false" />
+                <element signature="e#89524#93844#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -61,8 +61,8 @@
       <file leaf-file-name="US_state_monthly_prepare_data_cod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="44" />
+            <state relative-caret-position="825">
+              <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -154,8 +154,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="width" value="960" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -172,8 +172,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -254,6 +252,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -858,28 +858,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="0" y="0" width="960" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19743863" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27210885" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291639" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273196" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3375262" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24951456" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3375262" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -1134,7 +1134,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1163,7 +1162,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8262">
           <caret line="459" column="46" lean-forward="false" selection-start-line="459" selection-start-column="46" selection-end-line="459" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1172,7 +1170,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2872">
           <caret line="181" column="85" lean-forward="false" selection-start-line="181" selection-start-column="85" selection-end-line="181" selection-end-column="85" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1180,7 +1177,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1188,7 +1184,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1196,7 +1191,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1204,7 +1198,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="792">
           <caret line="131" column="85" lean-forward="false" selection-start-line="131" selection-start-column="85" selection-end-line="131" selection-end-column="85" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1212,63 +1205,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="888">
           <caret line="61" column="107" lean-forward="false" selection-start-line="61" selection-start-column="107" selection-end-line="61" selection-end-column="107" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/icd10_coding_rodrigo.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="44" column="46" lean-forward="true" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/icd10_coding_rodrigo.R" />
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_elife.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
           <caret line="192" column="58" lean-forward="true" selection-start-line="192" selection-start-column="58" selection-end-line="192" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/injury_paper.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="44" />
+        <state relative-caret-position="105">
+          <caret line="7" column="5" lean-forward="false" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="280" column="171" lean-forward="false" selection-start-line="280" selection-start-column="171" selection-end-line="280" selection-end-column="171" />
+        <state relative-caret-position="322">
+          <caret line="278" column="90" lean-forward="true" selection-start-line="278" selection-start-column="90" selection-end-line="278" selection-end-column="90" />
           <folding>
             <element signature="e#1622#5365#0" expanded="false" />
-            <element signature="e#16541#16772#0" expanded="false" />
-            <element signature="e#16798#17019#0" expanded="false" />
-            <element signature="e#24568#26367#0" expanded="false" />
-            <element signature="e#26616#28425#0" expanded="false" />
-            <element signature="e#28734#30466#0" expanded="false" />
-            <element signature="e#30729#32505#0" expanded="false" />
-            <element signature="e#32806#34966#0" expanded="false" />
-            <element signature="e#35232#37040#0" expanded="false" />
-            <element signature="e#37340#39495#0" expanded="false" />
-            <element signature="e#39994#42261#0" expanded="false" />
-            <element signature="e#44590#45721#0" expanded="false" />
-            <element signature="e#48534#49848#0" expanded="false" />
-            <element signature="e#50462#64970#0" expanded="false" />
-            <element signature="e#65092#86508#0" expanded="false" />
-            <element signature="e#89481#93801#0" expanded="false" />
+            <element signature="e#16584#16815#0" expanded="false" />
+            <element signature="e#16841#17062#0" expanded="false" />
+            <element signature="e#24611#26410#0" expanded="false" />
+            <element signature="e#26659#28468#0" expanded="false" />
+            <element signature="e#28777#30509#0" expanded="false" />
+            <element signature="e#30772#32548#0" expanded="false" />
+            <element signature="e#32849#35009#0" expanded="false" />
+            <element signature="e#35275#37083#0" expanded="false" />
+            <element signature="e#37383#39538#0" expanded="false" />
+            <element signature="e#40037#42304#0" expanded="false" />
+            <element signature="e#44633#45764#0" expanded="false" />
+            <element signature="e#48577#49891#0" expanded="false" />
+            <element signature="e#50505#65013#0" expanded="false" />
+            <element signature="e#65135#86551#0" expanded="false" />
+            <element signature="e#89524#93844#0" expanded="false" />
           </folding>
         </state>
       </provider>
