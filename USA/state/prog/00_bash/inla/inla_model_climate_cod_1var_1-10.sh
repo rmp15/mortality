@@ -18,7 +18,7 @@ declare -i end2=2016
 declare country="USA"
 declare dname="t2m"
 declare metric="meanc3"
-declare cod="Accidental_drowning_and_submersion"
+declare cod="Accidental_falls"
 declare -i fast=1
 declare -i contig=1
 
