@@ -24,7 +24,10 @@ model <- models[model]
 if(model=='1d'){
     
     # create dataframe with each of the national terms for entire group of age and sexes
-    dat <- data.frame()
+    dat.weather <- data.frame()
+    dat.intercept <- data.frame()
+    dat.slope <- data.frame()
+
     
     # find the posterior exponential mean
     for (i in seq(length(sex.filter))) {
@@ -62,9 +65,88 @@ if(model=='1d'){
             model.current <- readRDS(file.name)
 
             ######################################
-            # weather parameter (month5)
+            # global intercept (1)
             ######################################
 
+            ######################################
+            # global slope (year.month)
+            ######################################
+
+            ######################################
+            # month-specific intercept (month)
+            ######################################
+            current.file <- model.current$summary.random$month
+            current.file$age <- age.filter[j] ; current.file$sex <- i
+
+            # find mean and CIs of transformed distributions and probability of increased odds from posterior marginal
+            dat.mean.exp <- data.frame(ID=numeric(0),odds.mean=numeric(0),odds.ll=numeric(0),odds.ul=numeric(0),odds.prob=numeric(0))
+            for(k in c(1:12)) {
+                # find the exponentiated means and CIs
+                marginal.exp <- inla.tmarginal(function(x) exp(x), model.current$marginals.random$month[[k]])
+                odds.mean <- inla.emarginal(function(x) x,marginal.exp) - 1
+                odds.ll <- inla.qmarginal(0.025,marginal.exp) - 1
+                odds.ul <- inla.qmarginal(0.975,marginal.exp) - 1
+
+                # find the probability of increased odds from posterior marginal
+                odds.prob <- 1 - inla.pmarginal(1,marginal.exp)
+                dat.temp <- data.frame(ID=k,odds.mean=odds.mean,odds.ll=odds.ll,odds.ul=odds.ul,odds.prob=odds.prob)
+                dat.mean.exp <- rbind(dat.mean.exp,dat.temp)
+            }
+            # merge exponentiated means
+            current.file <- merge(current.file,dat.mean.exp,by=('ID'))
+
+            # attached new age sex profile to master file
+            dat.intercept <- rbind(dat.intercept,current.file)
+
+            ######################################
+            # month-specific slope (month2)
+            ######################################
+            current.file <- model.current$summary.random$month2
+            current.file$age <- age.filter[j] ; current.file$sex <- i
+
+            # find mean and CIs of transformed distributions and probability of increased odds from posterior marginal
+            dat.mean.exp <- data.frame(ID=numeric(0),odds.mean=numeric(0),odds.ll=numeric(0),odds.ul=numeric(0),odds.prob=numeric(0))
+            for(k in c(1:12)) {
+                # find the exponentiated means and CIs
+                marginal.exp <- inla.tmarginal(function(x) exp(x), model.current$marginals.random$month2[[k]])
+                odds.mean <- inla.emarginal(function(x) x,marginal.exp) - 1
+                odds.ll <- inla.qmarginal(0.025,marginal.exp) - 1
+                odds.ul <- inla.qmarginal(0.975,marginal.exp) - 1
+
+                # find the probability of increased odds from posterior marginal
+                odds.prob <- 1 - inla.pmarginal(1,marginal.exp)
+                dat.temp <- data.frame(ID=k,odds.mean=odds.mean,odds.ll=odds.ll,odds.ul=odds.ul,odds.prob=odds.prob)
+                dat.mean.exp <- rbind(dat.mean.exp,dat.temp)
+            }
+            # merge exponentiated means
+            current.file <- merge(current.file,dat.mean.exp,by=('ID'))
+
+            # attached new age sex profile to master file
+            dat.slope <- rbind(dat.slope,current.file)
+
+            ######################################
+            # state-month specific intercept (month3)
+            ######################################
+
+            ######################################
+            # state-month specific slope (month4)
+            ######################################
+
+            ######################################
+            # state specific intercept (ID)
+            ######################################
+
+            ######################################
+            # state specific slope (ID2)
+            ######################################
+
+            ######################################
+            # state-month specific slope (month4)
+            ######################################
+
+            ######################################
+            # weather parameter (month5)
+            ######################################
             current.file <- model.current$summary.random$month5
             current.file$age <- age.filter[j] ; current.file$sex <- i
 
@@ -86,26 +168,63 @@ if(model=='1d'){
             current.file <- merge(current.file,dat.mean.exp,by=('ID'))
 
             # attached new age sex profile to master file
-            dat <- rbind(dat,current.file)
+            dat.weather <- rbind(dat.weather,current.file)
+
+            ######################################
+            # random walk across time (year.month3)
+            ######################################
+
+            ######################################
+            # overdispersion term (e)
+            ######################################
+
         }
     }
 
 # create directories for output
-file.loc.local <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
+file.loc.local <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters_all/')
 ifelse(!dir.exists(file.loc.local), dir.create(file.loc.local, recursive=TRUE), FALSE)
-file.loc.git <- paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
+file.loc.git <- paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters_all/')
 ifelse(!dir.exists(file.loc.git), dir.create(file.loc.git, recursive=TRUE), FALSE)
 
+
+######################################
+# month-specific intercept (month)
+######################################
 # save bound posterior
 if(cause!='AllCause'){
-    save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig')
+    save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_month_fast_contig')
 }
 if(cause=='AllCause'){
-    save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig')
+    save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_month_fast_contig')
 }
+saveRDS(dat.intercept,paste0(file.loc.local,save.name))
+saveRDS(dat.intercept,paste0(file.loc.git,save.name))
 
-#save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast')
-saveRDS(dat,paste0(file.loc.local,save.name))
-saveRDS(dat,paste0(file.loc.git,save.name))
+######################################
+# month-specific slope (month2)
+######################################
+# save bound posterior
+if(cause!='AllCause'){
+    save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_month2_fast_contig')
+}
+if(cause=='AllCause'){
+    save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_month2_fast_contig')
+}
+saveRDS(dat.slope,paste0(file.loc.local,save.name))
+saveRDS(dat.slope,paste0(file.loc.git,save.name))
+
+######################################
+# weather parameter (month5)
+######################################
+# save bound posterior
+if(cause!='AllCause'){
+    save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_month5_fast_contig')
+}
+if(cause=='AllCause'){
+    save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_month5_fast_contig')
+}
+saveRDS(dat.weather,paste0(file.loc.local,save.name))
+saveRDS(dat.weather,paste0(file.loc.git,save.name))
 
 }

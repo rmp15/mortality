@@ -24,8 +24,8 @@
       <file leaf-file-name="inla_models_cod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="290" column="19" lean-forward="false" selection-start-line="290" selection-start-column="19" selection-end-line="290" selection-end-column="19" />
+            <state relative-caret-position="315">
+              <caret line="304" column="8" lean-forward="false" selection-start-line="304" selection-start-column="8" selection-end-line="304" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -34,8 +34,8 @@
       <file leaf-file-name="bind_posterior_climate_cod_all_param_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_cod_all_param_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="63" column="50" lean-forward="true" selection-start-line="63" selection-start-column="50" selection-end-line="63" selection-end-column="50" />
+            <state relative-caret-position="690">
+              <caret line="175" column="12" lean-forward="true" selection-start-line="175" selection-start-column="12" selection-end-line="175" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -123,6 +123,7 @@
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
+        <option value="$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_cod_all_param_1var.R" />
       </list>
     </option>
@@ -486,13 +487,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00096" summary="Edited bash file to describe what's going on a bit more for eLife revisions">
-      <created>1529313772521</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1529313772521</updated>
-    </task>
     <task id="LOCAL-00097" summary="Edited bash file to describe what's going on a bit more for eLife revisions">
       <created>1529412486748</created>
       <option name="number" value="00097" />
@@ -829,7 +823,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531152386665</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="Fixed injury paper bash script">
+      <created>1531162073772</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1531162073772</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1221,16 +1222,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="290" column="19" lean-forward="false" selection-start-line="290" selection-start-column="19" selection-end-line="290" selection-end-column="19" />
+        <state relative-caret-position="315">
+          <caret line="304" column="8" lean-forward="false" selection-start-line="304" selection-start-column="8" selection-end-line="304" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_cod_all_param_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="63" column="50" lean-forward="true" selection-start-line="63" selection-start-column="50" selection-end-line="63" selection-end-column="50" />
+        <state relative-caret-position="690">
+          <caret line="175" column="12" lean-forward="true" selection-start-line="175" selection-start-column="12" selection-end-line="175" selection-end-column="12" />
           <folding />
         </state>
       </provider>
