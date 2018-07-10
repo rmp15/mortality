@@ -106,7 +106,7 @@ echo "plotting COM analysis for $country for $cod, years $start - $end";
 #Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 # plots (figure 3, figure 5, appendix figure 2)
-#Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
+Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
 
 done;
 
