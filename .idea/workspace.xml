@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/figures/04_eLife/02_first_revisions/elife figures 2018 07 10.key" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Cardiovascular_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Cardiovascular_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Intentional_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Intentional_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Unintentional_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_Unintentional_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_allcauses_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_allcauses_nononsig_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_cardio_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_cardio_nononsig_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_injuries_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_injuries_nononsig_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_other_nononsig_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/com/1980_2016/national/plots/USA_COM_rates_total_axis_swapped_v2_other_nononsig_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_allcauses_with_allcause_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_allcauses_with_allcause_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_allcauses_with_cardio_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_allcauses_with_cardio_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_allcauses_with_injuries_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_allcauses_with_injuries_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_allcauses_with_other_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/national/seasonality_index_change_sig5_weighted_allcauses_with_other_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_men_Cardiovascular_10_sim_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_men_Cardiovascular_10_sim_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_men_Intentional_10_sim_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_men_Intentional_10_sim_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_men_Unintentional_10_sim_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_men_Unintentional_10_sim_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_women_Cardiovascular_10_sim_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_women_Cardiovascular_10_sim_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_women_Intentional_10_sim_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_women_Intentional_10_sim_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_women_Unintentional_10_sim_1980_2016.pdf" afterPath="$PROJECT_DIR$/USA/state/output/wavelet/1980_2016/national/10_sim/white_noise/plots/no_log/wavelet_national_all_women_Unintentional_10_sim_1980_2016.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/figures/04_eLife/02_first_revisions/elife additional plots 2018 07 10.key" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/figures/04_eLife/02_first_revisions/elife additional plots 2018 07 10.key" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/main_paper/US dynamic mortality seasonality analysis 2018 07 10.docx" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/main_paper/US dynamic mortality seasonality analysis 2018 07 10.docx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" afterPath="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -542,13 +520,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00102" summary="Edited bash file to describe what's going on a bit more for eLife revisions">
-      <created>1529871132724</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1529871132724</updated>
-    </task>
     <task id="LOCAL-00103" summary="Edited bash file to describe what's going on a bit more for eLife revisions">
       <created>1529871929969</created>
       <option name="number" value="00103" />
@@ -885,7 +856,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531250694017</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="Fixed injury paper bash script">
+      <created>1531252983760</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1531252983760</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TodoView">
@@ -908,7 +886,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32650602" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32650602" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28433734" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28433734" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24951456" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
