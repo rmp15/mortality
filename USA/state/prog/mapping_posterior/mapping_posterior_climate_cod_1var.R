@@ -327,17 +327,17 @@ if(model=='1d'){
         # ADD SIGNIFICANCE HIGHLIGHTS
         print(ggplot() +
         geom_tile(data=subset(dat),aes(x=ID,y=as.factor(age)),color='black',fill='white') +
-        geom_point(data=subset(dat,mean>0),aes(x=ID,y=as.factor(age),fill=odds.mean,size=odds.prob),shape=21, color="black")+
-        geom_point(data=subset(dat,mean<0),aes(x=ID,y=as.factor(age),fill=odds.mean,size=(1-odds.prob)),shape=21, color="black")+
-        geom_point(data=subset(dat),aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1)),shape='* ') +
-        scale_size_continuous(limits=c(0.5,1),trans='sqrt') +
+        geom_point(data=subset(dat),aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1.2)),shape=21,color='black',fill='black') +
+        geom_point(data=subset(dat,mean>0),aes(x=ID,y=as.factor(age),fill=odds.mean,size=odds.prob*1),shape=21, color="black")+
+        geom_point(data=subset(dat,mean<0),aes(x=ID,y=as.factor(age),fill=odds.mean,size=(1-odds.prob*1)),shape=21, color="black")+
+        scale_size_continuous(range=c(1,12),limits=c(0.5,1.2),trans='sqrt') +
         scale_fill_gradientn(colours=colorway,
         breaks=c(-0.025, -0.02, -0.015, -0.01, -0.005, 0, 0.005, 0.01, 0.015, 0.02, 0.025),
         na.value = "grey98",limits = c(-0.027, 0.027),
         # breaks=c(-0.08, -0.06, -0.04, -0.02, 0, 0.02, 0.04, 0.06, 0.08),
         # na.value = "grey98",limits = c(-0.1, 0.1),
         labels=percent,guide = guide_legend(nrow = 1,title = paste0("Excess risk for 1 additional ",unit.name," above long-term average"))) +
-        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk for 1 additional ",unit.name," above long-term average"))) +
+        guides(size=FALSE, fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("Excess risk for 1 additional ",unit.name," above long-term average"))) +
         scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
         scale_y_discrete(labels=age.print) +
         ggtitle(cod.print) +
