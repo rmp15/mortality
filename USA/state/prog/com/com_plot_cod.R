@@ -34,7 +34,7 @@ cod.print = ifelse(cod.arg=='AllCause','all cause',
             ifelse(cod.arg=='Maternal conditions','maternal conditions',
             ifelse(cod.arg=='Neuropsychiatric disorders', 'neuropsychiatric disorders',
             ifelse(cod.arg=='Perinatal conditions','perinatal conditions',
-            ifelse(cod.arg=='Substance use disorders','substance use disorders'))))))))))))))))
+            ifelse(cod.arg=='Substance use disorders','substance use disorders','NA'))))))))))))))))
 
 # fix short names of months
 month.lookup <- data.frame(month.short=c('None   ',month.short),test=c(0:12))
@@ -74,7 +74,7 @@ for (i in cod.broad){
     dat.nat$cause = i
     dat.nat.complete = rbind(dat.nat.complete,dat.nat)
 }
-dat.nat.complete$size <- 3*(dat.nat.complete$size/max(dat.nat.complete$size))
+# dat.nat.complete$size <- 3*(dat.nat.complete$size/max(dat.nat.complete$size))
 
 # produce data for cardio causes
 dat.nat.cardio = data.frame()
@@ -83,7 +83,7 @@ for (i in cod.cardio){
     dat.nat$cause = i
     dat.nat.cardio= rbind(dat.nat.cardio,dat.nat)
 }
-dat.nat.cardio$size <- 3*(dat.nat.cardio$size/max(dat.nat.cardio$size))
+# dat.nat.cardio$size <- 3*(dat.nat.cardio$size/max(dat.nat.cardio$size))
 
 # produce data for injuries causes
 dat.nat.injuries = data.frame()
@@ -92,7 +92,7 @@ for (i in cod.injuries){
     dat.nat$cause = i
     dat.nat.injuries= rbind(dat.nat.injuries,dat.nat)
 }
-dat.nat.injuries$size <- 3*(dat.nat.injuries$size/max(dat.nat.injuries$size))
+# dat.nat.injuries$size <- 3*(dat.nat.injuries$size/max(dat.nat.injuries$size))
 
 # produce data for other causes
 dat.nat.other = data.frame()
@@ -101,13 +101,30 @@ for (i in cod.other){
     dat.nat$cause = i
     dat.nat.other= rbind(dat.nat.other,dat.nat)
 }
+
+# get size of arrows on plot consistent over different plots
+dat.nat.complete$size <- with(dat.nat.complete,1/(COM.95-COM.5))
+dat.nat.cardio$size <- with(dat.nat.cardio,1/(COM.95-COM.5))
+dat.nat.injuries$size <- with(dat.nat.injuries,1/(COM.95-COM.5))
+dat.nat.other$size <- with(dat.nat.other,1/(COM.95-COM.5))
+
+# fix sizes which are infinity beecause of zero denominator
+dat.nat.other$size = ifelse(dat.nat.other$size==Inf, 0.00001, dat.nat.other$size)
+
+max.size = max(max(dat.nat.complete$size), max(dat.nat.cardio$size), max(dat.nat.injuries$size), max(dat.nat.other$size))
+
+dat.nat.complete$size <- 3*(dat.nat.complete$size/max.size)
+dat.nat.cardio$size <- 3*(dat.nat.cardio$size/max.size)
+dat.nat.injuries$size <- 3*(dat.nat.injuries$size/max.size)
+dat.nat.other$size <- 3*(dat.nat.other$size/max.size)
+
 # remove impossible age-sex values from 'maternal conditions' and 'perinatal conditions'
 dat.nat.other = subset(dat.nat.other,!(cause=='Maternal conditions'&sex=='Men'))
 dat.nat.other = subset(dat.nat.other,!(cause=='Maternal conditions'&sex=='Women'&age%in%c(0,5,55,65,75,85)))
 dat.nat.other = subset(dat.nat.other,!(cause=='Perinatal conditions'&age%in%c(5,15,25,35,45,55,65,75,85)))
 
 dat.nat.other$size <- ifelse(is.na(dat.nat.other$size)==TRUE,0,dat.nat.other$size)
-dat.nat.other$size <- 3*(dat.nat.other$size/max(dat.nat.other$size))
+# dat.nat.other$size <- 3*(dat.nat.other$size/max(dat.nat.other$size))
 
 # fix names
 dat.nat.complete$cause <- gsub('AllCause', 'All cause', dat.nat.complete$cause)
@@ -160,7 +177,7 @@ scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),exp
 scale_x_discrete(labels=age.print) +
 #xlim(1,12) +
 facet_wrap(~sex, ncol=1) +
-scale_size(guide='none') +
+scale_size(guide='none',limits=c(0,3)) +
 theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"))
 dev.off()
@@ -257,10 +274,10 @@ dev.off()
 # dat.nat.complete <- subset(dat.nat.complete,!(cause =='Injuries' & age == 55 & sex=='Female'))
 #
 
-dat.nat.complete$size = dat.nat.complete$size/2
-dat.nat.cardio$size = dat.nat.cardio$size/2
-dat.nat.injuries$size = dat.nat.injuries$size/2
-dat.nat.other$size = dat.nat.other$size/2
+# dat.nat.complete$size = dat.nat.complete$size/2
+# dat.nat.cardio$size = dat.nat.cardio$size/2
+# dat.nat.injuries$size = dat.nat.injuries$size/2
+# dat.nat.other$size = dat.nat.other$size/2
 
 plot.together = function(data,size){
     ggplot() +
@@ -272,7 +289,7 @@ plot.together = function(data,size){
     scale_x_discrete(labels=age.print) +
     #xlim(1,12) +
     facet_grid(sex~cause) +
-    scale_size(guide='none') +
+    scale_size(guide='none',limits=c(0,3)) +
     annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
     annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf) +
     theme(text = element_text(size = 15),strip.text.x=element_text(size=size),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
