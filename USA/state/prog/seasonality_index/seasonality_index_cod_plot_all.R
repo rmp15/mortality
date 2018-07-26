@@ -102,7 +102,7 @@ age.colours=c("blue",brewer.pal(9,"BrBG")[c(9:6,4:1)],"grey")
 plot.function.diff.seas.sig.5 <- function(data,shape.selected,x,y,n,xmin,xmax,ymin,ymax,legend){
 
     p = ggplot() +
-    geom_point(data=subset(data,sig.test.5==1),colour='hot pink',aes(shape=as.factor(sex),x=(start.value.2/100),y=abs((end.value.2/100))),size=5) +
+    # geom_point(data=subset(data,sig.test.5==1),colour='hot pink',aes(shape=as.factor(sex),x=(start.value.2/100),y=abs((end.value.2/100))),size=5) +
     geom_point(data=subset(data,sex==1|2),aes(shape=as.factor(sex), color=as.factor(age),x=(start.value.2/100),y=abs((end.value.2/100))),size=3) +
     geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
     scale_x_continuous(name=paste0('Percent difference in death rates in ',year.start),labels=percent,limits=c(xmin/100,(xmax/100))) +
