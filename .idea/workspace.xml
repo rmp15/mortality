@@ -24,14 +24,14 @@
       <file leaf-file-name="additional_deaths_climate_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_climate_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1116">
-              <caret line="999" column="0" lean-forward="false" selection-start-line="999" selection-start-column="2" selection-end-line="1129" selection-end-column="3" />
+            <state relative-caret-position="378">
+              <caret line="210" column="34" lean-forward="false" selection-start-line="210" selection-start-column="34" selection-end-line="210" selection-end-column="34" />
               <folding>
                 <element signature="e#2151#5894#0" expanded="false" />
-                <element signature="e#12006#14161#0" expanded="false" />
-                <element signature="e#14660#16927#0" expanded="false" />
-                <element signature="e#17286#31794#0" expanded="false" />
-                <element signature="e#31916#53332#0" expanded="false" />
+                <element signature="e#11906#14061#0" expanded="false" />
+                <element signature="e#14560#16827#0" expanded="false" />
+                <element signature="e#17186#31694#0" expanded="false" />
+                <element signature="e#31816#53232#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -493,13 +493,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00126" summary="Edited bash file to describe what's going on a bit more for eLife revisions">
-      <created>1530522946386</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1530522946386</updated>
-    </task>
     <task id="LOCAL-00127" summary="Edited bash file to describe what's going on a bit more for eLife revisions">
       <created>1530531595456</created>
       <option name="number" value="00127" />
@@ -836,7 +829,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533549744530</updated>
     </task>
-    <option name="localTasksCounter" value="175" />
+    <task id="LOCAL-00175" summary="updates to wavelet coding">
+      <created>1533552735476</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1533552735476</updated>
+    </task>
+    <option name="localTasksCounter" value="176" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1231,14 +1231,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1116">
-          <caret line="999" column="0" lean-forward="false" selection-start-line="999" selection-start-column="2" selection-end-line="1129" selection-end-column="3" />
+        <state relative-caret-position="378">
+          <caret line="210" column="34" lean-forward="false" selection-start-line="210" selection-start-column="34" selection-end-line="210" selection-end-column="34" />
           <folding>
             <element signature="e#2151#5894#0" expanded="false" />
-            <element signature="e#12006#14161#0" expanded="false" />
-            <element signature="e#14660#16927#0" expanded="false" />
-            <element signature="e#17286#31794#0" expanded="false" />
-            <element signature="e#31916#53332#0" expanded="false" />
+            <element signature="e#11906#14061#0" expanded="false" />
+            <element signature="e#14560#16827#0" expanded="false" />
+            <element signature="e#17186#31694#0" expanded="false" />
+            <element signature="e#31816#53232#0" expanded="false" />
           </folding>
         </state>
       </provider>

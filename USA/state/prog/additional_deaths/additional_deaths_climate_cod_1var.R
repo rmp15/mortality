@@ -208,8 +208,7 @@ if(model=='1d'){
 
     # calculate additional deaths
     dat.merged$deaths.added <- with(dat.merged,odds.mean*deaths.pred)
-    # dat.merged$deaths.ll <- with(dat.merged,odds.ll*deaths.pred)
-    # dat.merged$deaths.ul <- with(dat.merged,odds.ul*deaths.pred)
+    # use draws to work out limits
 
     # take one year
     dat.merged.sub <- subset(dat.merged,year==year.end)
@@ -221,7 +220,6 @@ if(model=='1d'){
                                 (ref.male-(dat.merged.sub$age+5))*dat.merged.sub$deaths.added,
                                 0)
     # use draws to work out limits
-
     dat.merged.sub$yll.mean.f = ifelse((ref.female-(dat.merged.sub$age+5))>=0,
                                 (ref.female-(dat.merged.sub$age+5))*dat.merged.sub$deaths.added,
                                 0)
