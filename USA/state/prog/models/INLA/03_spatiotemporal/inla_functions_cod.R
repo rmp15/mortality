@@ -11,7 +11,7 @@ inla.function.climate <- function(){
     family = "poisson",
     data = dat.inla,
     E = pop.adj,
-    control.compute = list(dic=TRUE),
+    control.compute = list(config=TRUE, dic=TRUE),
     control.predictor = list(link = 1),
     ))
 
@@ -38,7 +38,7 @@ inla.function.climate.fast <- function() {
     family = "poisson",
     data = dat.inla,
     E = pop.adj,
-    control.compute = list(dic=TRUE),
+    control.compute = list(config=TRUE, dic=TRUE),
     control.predictor = list(link = 1),
     control.inla=list(diagonal=0),
     control.mode = list(result = mod.rough, restart = TRUE),
@@ -68,7 +68,7 @@ inla.function.climate.faster <- function() {
     family = "poisson",
     data = dat.inla,
     E = pop.adj,
-    control.compute = list(dic=TRUE),
+    control.compute = list(config=TRUE, dic=TRUE),
     control.predictor = list(link = 1),
     control.inla=list(diagonal=0),
     control.mode = list(result = mod.rough, restart = TRUE),

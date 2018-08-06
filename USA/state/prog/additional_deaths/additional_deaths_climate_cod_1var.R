@@ -36,7 +36,7 @@ unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes,
 # bespoke colourway
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
-# load the data
+# load the data for quoting parameters
 if(contig==1){
     if(cause!='AllCause'){
         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
@@ -57,6 +57,24 @@ if(contig==0){
         ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
     }
 }
+
+# load the data for making draws
+library(INLA)
+if(cause!='AllCause'){
+    file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+    dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[1],
+    '/',country,'_rate_pred_type',model,'_',age.filter[1],'_',sex.lookup[1],'_',
+    year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
+}
+if(cause=='AllCause'){
+    file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+    dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[1],
+    '/',country,'_rate_pred_type',model,'_',age.filter[1],'_',sex.lookup[1],
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
+}
+model.current <- readRDS(file.name)
+
+
 if(multiple==1){
 
     # NEED TO GENERALISE!!!!
