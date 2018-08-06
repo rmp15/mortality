@@ -191,9 +191,8 @@ if(model=='1d'){
         print(head(dat.mort))
     }
 
-    # 1. ADDITIONAL DEATHS NATIONALLY FROM UNIFORM 2 DEGREE INCREASE
-    # establish change in number of deaths over time period and for a slice in time
-
+    # 1. ADDITIONAL DEATHS FROM UNIFORM 2 DEGREE INCREASE NATIONALLY
+    # establish potential attributable deaths for last year of dataset
 
     # make for national data
     dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
@@ -205,12 +204,21 @@ if(model=='1d'){
     dat.merged <- merge(dat.national,dat,by.x=c('sex','age','month'),by.y=c('sex','age','ID'),all.x=TRUE)
     dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
 
-    # calculate additional deaths for unit change in climate parameter
+    # calculate additional deaths for 2 unit change in climate parameter
     dat.merged$deaths.added <- with(dat.merged,odds.mean*deaths.pred)
-    # use draws to work out limits
+    dat.merged$deaths.added.two.deg <- with(dat.merged,((odds.mean+1)^2-1)*deaths.pred)
+    dat.merged$deaths.added.two.deg.ll <- with(dat.merged,((odds.ll+1)^2-1)*deaths.pred) #TEMP
+    dat.merged$deaths.added.two.deg.ul <- with(dat.merged,((odds.ul+1)^2-1)*deaths.pred) #TEMP
+
+    # use draws to work out limits IN PROGRESS
 
     # take one year
     dat.merged.sub <- subset(dat.merged,year==year.end)
+
+    # integrate across year
+    dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added))
+
+    # ggplot(data=dat.merged.sub.year) + geom_point(aes(x=age,y=deaths.added)) + geom_hline(yintercept=0) + facet_wrap(~sex) + ggtitle(cause)
 
     # add YLL from a reference point (2016)
     ref.male  = 76.40

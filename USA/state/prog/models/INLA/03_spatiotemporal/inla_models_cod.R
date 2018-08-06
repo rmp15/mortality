@@ -305,6 +305,30 @@
         # overdispersion term
         f(e, model = "iid")                                                    		 	# overdispersion term
     }
+
+    if(type.arg==18){
+
+        # 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(month5, variable, model="iid") +                                              # month specific climate slope
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
     
     if(type.arg==11){
         
