@@ -143,7 +143,7 @@ if(contig==1){
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
-# fix name fo plotting
+# fix name for plotting
 cod.print = ifelse(cause=='AllCause', 'All cause',
         ifelse(cause=='Cancer', 'Cancers',
         ifelse(cause=='Cardiopulmonary', 'Cardiorespiratory diseases',
@@ -170,9 +170,8 @@ if(model=='1d'){
     dat$sig = ifelse(dat$odds.ll*dat$odds.ul>0,1,NA)
 
     # ADDITIONAL DEATHS NATIONALLY
-    # establish change in number of deaths for a slice in time
+    # establish change in number of deaths over time period and for a slice in time
     # load death rate data and create national death rates
-    # load the data
     if(cause=='AllCause'){
         dat.mort <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_',year.end))
     }
@@ -197,6 +196,7 @@ if(model=='1d'){
         print(head(dat.mort))
     }
 
+    # make for national data
     dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
     dat.national <- ddply(dat.mort,.(year,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
     dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
