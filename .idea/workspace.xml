@@ -4,9 +4,8 @@
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_stmarys.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_stmarys.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,28 +26,8 @@
       <file leaf-file-name="inla_model_climate_cod_1var_1-10.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inla_model_climate_cod_1var_5-10.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="913">
-              <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inla_model_climate_cod_1var_6-10.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1242">
-              <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+            <state relative-caret-position="846">
+              <caret line="47" column="104" lean-forward="false" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
               <folding />
             </state>
           </provider>
@@ -57,8 +36,28 @@
       <file leaf-file-name="inla_model_climate_cod_1var_7-10.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="22" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="69" selection-end-column="5" />
+            <state relative-caret-position="846">
+              <caret line="47" column="104" lean-forward="false" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inla_model_climate_cod_1var_6-10.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="846">
+              <caret line="47" column="104" lean-forward="false" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inla_model_climate_cod_1var_5-10.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1242">
+              <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -175,14 +174,14 @@
         <option value="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_climate_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_2var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_3var.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_stmarys.sh" />
-        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh" />
+        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh" />
+        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" />
+        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" />
       </list>
     </option>
   </component>
@@ -712,13 +711,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00132" summary="Added bash file for injury paper">
-      <created>1530787323192</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1530787323193</updated>
-    </task>
     <task id="LOCAL-00133" summary="Added bash file for injury paper">
       <created>1530787769470</created>
       <option name="number" value="00133" />
@@ -1055,7 +1047,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533564000999</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="updates to wavelet coding">
+      <created>1533564212306</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1533564212306</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1430,30 +1429,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="22" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="69" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="913">
-          <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_stmarys.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1242">
@@ -1462,10 +1437,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1242">
+          <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="846">
+          <caret line="47" column="104" lean-forward="false" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="846">
+          <caret line="47" column="104" lean-forward="false" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+        <state relative-caret-position="846">
+          <caret line="47" column="104" lean-forward="false" selection-start-line="47" selection-start-column="104" selection-end-line="47" selection-end-column="104" />
           <folding />
         </state>
       </provider>
