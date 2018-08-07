@@ -62,32 +62,30 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
         ifelse(cause=='Assault','Assault','NA'
         )))))))))))))
 
-
-# load the data for quoting parameters
-if(contig==1){
-    if(cause!='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-        country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
-    }
-    if(cause=='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-        ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
-    }
-}
-if(contig==0){
-    if(cause!='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-        country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
-    }
-    if(cause=='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-        ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
-    }
-}
+# # load the data for quoting parameters
+# if(contig==1){
+#     if(cause!='AllCause'){
+#         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+#         country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+#     }
+#     if(cause=='AllCause'){
+#         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+#         ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+#     }
+# }
+# if(contig==0){
+#     if(cause!='AllCause'){
+#         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+#         country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+#     }
+#     if(cause=='AllCause'){
+#         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+#         ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+#     }
+# }
 
 # load the data for each age and sex to make draws
 library(INLA)
-num.draws = 1000 # NEED TO WORK INTO BASH FILE
 for (i in seq(length(sex.filter))) {
     for (j in seq(length(age.filter))) {
 
