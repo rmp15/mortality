@@ -36,6 +36,32 @@ unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes,
 # bespoke colourway
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
+# create directories for output
+file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
+'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
+if(contig==1){
+    file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
+'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/contig/',cause,'/')
+}
+ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+
+# fix name for plotting
+cod.print = ifelse(cause=='AllCause', 'All cause',
+        ifelse(cause=='Cancer', 'Cancers',
+        ifelse(cause=='Cardiopulmonary', 'Cardiorespiratory diseases',
+        ifelse(cause=='External', 'Injuries',
+        ifelse(cause=='Other', 'Other',
+        ifelse(cause=='Intentional','Intentional injuries',
+        ifelse(cause=='Unintentional','Unintentional injuries',
+        ifelse(cause=='Unintentional wo drowning','Unintentional injuries except drowinings',
+        ifelse(cause=='Transport accidents','Transport',
+        ifelse(cause=='Intentional self-harm','Intentional self-harm', # TO ASK MAJID. 'Suicides' ???
+        ifelse(cause=='Accidental falls','Falls',
+        ifelse(cause=='Accidental drowning and submersion','Drownings',
+        ifelse(cause=='Assault','Assault','NA'
+        )))))))))))))
+
+
 # load the data for quoting parameters
 if(contig==1){
     if(cause!='AllCause'){
@@ -60,9 +86,11 @@ if(contig==0){
 
 # load the data for making draws
 library(INLA)
-num.draws = 5000
+num.draws = 100
 for (i in seq(length(sex.filter))) {
     for (j in seq(length(age.filter))) {
+
+    # load the full model
     if(cause!='AllCause'){
         file.name <- paste0('~/data/mortality/US/state/climate_effects/',
         dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
@@ -74,21 +102,19 @@ for (i in seq(length(sex.filter))) {
         dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
         '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
         '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
-
     }
     model.current <- readRDS(file.name)
+
+    # make draws from the model for the parameters
     draws.current = inla.posterior.sample(num.draws,model.current)
     do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current))
 }}
 
 for(k in seq(num.draws)){
     # MAKE PARAMETER SUMMARIES PER DRAW (WILL END UP WITH NUMBER OF ESTIMATES FROM NUMBER OF DRAWS)
-}
+    # subset(get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent)
+    climate.values = get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent))] # do I need to exponentiate? check bind_posterior
 
-# use draws to combine parameters, i.e. first draws all go together, second draws all go together etc....
-# FINISH but something like
-for (k in c(1:num.draws)){
-    # draws.current[[k]]$latent
 }
 
 if(multiple==1){
@@ -168,30 +194,6 @@ if(multiple==1){
 
 }
 
-# create directories for output
-file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
-if(contig==1){
-    file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/contig/',cause,'/')
-}
-ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
-
-# fix name for plotting
-cod.print = ifelse(cause=='AllCause', 'All cause',
-        ifelse(cause=='Cancer', 'Cancers',
-        ifelse(cause=='Cardiopulmonary', 'Cardiorespiratory diseases',
-        ifelse(cause=='External', 'Injuries',
-        ifelse(cause=='Other', 'Other',
-        ifelse(cause=='Intentional','Intentional injuries',
-        ifelse(cause=='Unintentional','Unintentional injuries',
-        ifelse(cause=='Unintentional wo drowning','Unintentional injuries except drowinings',
-        ifelse(cause=='Transport accidents','Transport',
-        ifelse(cause=='Intentional self-harm','Intentional self-harm', # TO ASK MAJID. 'Suicides' ???
-        ifelse(cause=='Accidental falls','Falls',
-        ifelse(cause=='Accidental drowning and submersion','Drownings',
-        ifelse(cause=='Assault','Assault','NA'
-        )))))))))))))
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
 if(model=='1d'){

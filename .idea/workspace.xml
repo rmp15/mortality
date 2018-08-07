@@ -24,15 +24,14 @@
       <file leaf-file-name="additional_deaths_climate_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_climate_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="49" column="14" lean-forward="true" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
+            <state relative-caret-position="720">
+              <caret line="115" column="228" lean-forward="false" selection-start-line="115" selection-start-column="228" selection-end-line="115" selection-end-column="228" />
               <folding>
-                <element signature="e#1121#1642#0" expanded="false" />
-                <element signature="e#3556#7299#0" expanded="false" />
-                <element signature="e#13882#16037#0" expanded="false" />
-                <element signature="e#16536#18803#0" expanded="false" />
-                <element signature="e#19162#33670#0" expanded="false" />
-                <element signature="e#33792#55208#0" expanded="false" />
+                <element signature="e#5027#8770#0" expanded="false" />
+                <element signature="e#14075#16230#0" expanded="false" />
+                <element signature="e#16729#18996#0" expanded="false" />
+                <element signature="e#19355#33863#0" expanded="false" />
+                <element signature="e#33985#55401#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -611,13 +610,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00137" summary="Fixed injury paper bash script">
-      <created>1530880758925</created>
-      <option name="number" value="00137" />
-      <option name="presentableId" value="LOCAL-00137" />
-      <option name="project" value="LOCAL" />
-      <updated>1530880758927</updated>
-    </task>
     <task id="LOCAL-00138" summary="Fixed injury paper bash script">
       <created>1530881371992</created>
       <option name="number" value="00138" />
@@ -954,7 +946,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533637494046</updated>
     </task>
-    <option name="localTasksCounter" value="186" />
+    <task id="LOCAL-00186" summary="updates to wavelet coding">
+      <created>1533640257219</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1533640257219</updated>
+    </task>
+    <option name="localTasksCounter" value="187" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1352,15 +1351,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="49" column="14" lean-forward="true" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
+        <state relative-caret-position="720">
+          <caret line="115" column="228" lean-forward="false" selection-start-line="115" selection-start-column="228" selection-end-line="115" selection-end-column="228" />
           <folding>
-            <element signature="e#1121#1642#0" expanded="false" />
-            <element signature="e#3556#7299#0" expanded="false" />
-            <element signature="e#13882#16037#0" expanded="false" />
-            <element signature="e#16536#18803#0" expanded="false" />
-            <element signature="e#19162#33670#0" expanded="false" />
-            <element signature="e#33792#55208#0" expanded="false" />
+            <element signature="e#5027#8770#0" expanded="false" />
+            <element signature="e#14075#16230#0" expanded="false" />
+            <element signature="e#16729#18996#0" expanded="false" />
+            <element signature="e#19355#33863#0" expanded="false" />
+            <element signature="e#33985#55401#0" expanded="false" />
           </folding>
         </state>
       </provider>
