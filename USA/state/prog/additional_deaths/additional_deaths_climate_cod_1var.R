@@ -84,13 +84,13 @@ if(contig==0){
     }
 }
 
-# load the data for making draws
+# load the data for each age and sex to make draws
 library(INLA)
-num.draws = 100
+num.draws = 1000 # NEED TO WORK INTO BASH FILE
 for (i in seq(length(sex.filter))) {
     for (j in seq(length(age.filter))) {
 
-    # load the full model
+    # load the full model for a particular age and sex
     if(cause!='AllCause'){
         file.name <- paste0('~/data/mortality/US/state/climate_effects/',
         dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
@@ -106,16 +106,30 @@ for (i in seq(length(sex.filter))) {
     model.current <- readRDS(file.name)
 
     # make draws from the model for the parameters
-    draws.current = inla.posterior.sample(num.draws,model.current)
-    do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current))
+    draws.current = try(inla.posterior.sample(num.draws,model.current))
+    try(do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current)))
 }}
 
-for(k in seq(num.draws)){
-    # MAKE PARAMETER SUMMARIES PER DRAW (WILL END UP WITH NUMBER OF ESTIMATES FROM NUMBER OF DRAWS)
-    # subset(get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent)
-    climate.values = get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent))] # do I need to exponentiate? check bind_posterior
+# # with all the draws made for each age and sex, will now make an estimate for additional deaths
+# for(k in seq(num.draws)){
+#     parameter.table = data.frame()
+#     for (i in seq(length(sex.filter))) {
+#         for (j in seq(length(age.filter))) {
+#     # for each draw make a parameter summary to then calculate additional deaths
+#     climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i]))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[1]))[[k]]$latent))]
+#     climate.values = exp(climate.values)
+#     table = data.frame(age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
+#     parameter.table = rbind(parameter.table,table)
+#     }}
+#     # attach long age names
+#     parameter.table$age.long <- mapvalues(parameter.table$age,from=sort(unique(parameter.table$age)),to=as.character(age.code[,2]))
+#     dat$age.long <- reorder(parameter.table$age.long, parameter.table$age)
+# }
 
-}
+# to check if required
+# ggplot() + geom_point(data=subset(dat,age==25&sex==1),aes(x=as.factor(ID),y=odds.mean,color='red',size=5)) +
+#     geom_boxplot(data=complete.table,aes(x=as.factor(ID),y=climate.values)) +
+#     geom_point(data=subset(dat,age==25&sex==1),aes(x=as.factor(ID),y=odds.mean,color='red',size=5))
 
 if(multiple==1){
 
@@ -198,10 +212,6 @@ if(multiple==1){
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
 if(model=='1d'){
 
-    # attach long age names
-    dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
-    dat$age.long <- reorder(dat$age.long,dat$age)
-
     # load death rate data and create national death rates
     if(cause=='AllCause'){
         dat.mort <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_',year.end))
@@ -227,26 +237,78 @@ if(model=='1d'){
         print(head(dat.mort))
     }
 
-    # 1. ADDITIONAL DEATHS FROM UNIFORM 2 DEGREE INCREASE NATIONALLY
-    # establish potential attributable deaths for last year of dataset
-
     # make for national data
     dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
     dat.national <- ddply(dat.mort,.(year,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
     dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
     dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
+    # with all the draws made for each age and sex, will now make an estimate for additional deaths
+    for(k in seq(num.draws)){
+        parameter.table = data.frame()
+        for (i in seq(length(sex.filter))) {
+            for (j in seq(length(age.filter))) {
+        # for each draw make a parameter summary to then calculate additional deaths
+        climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i]))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[1]))[[k]]$latent))]
+        climate.values = exp(climate.values)
+        table = data.frame(age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
+        parameter.table = rbind(parameter.table,table)
+        }}
+        # attach long age names
+        parameter.table$age.long <- mapvalues(parameter.table$age,from=sort(unique(parameter.table$age)),to=as.character(age.code[,2]))
+        dat$age.long <- reorder(parameter.table$age.long, parameter.table$age)
+
+        # 1. ADDITIONAL DEATHS FROM UNIFORM 2 DEGREE INCREASE NATIONALLY
+        # establish potential attributable deaths for last year of dataset
+
+        # merge odds and deaths files and reorder
+        dat.merged <- merge(dat.national,parameter.table,by.x=c('sex','age','month'),by.y=c('sex','age','ID'),all.x=TRUE)
+        dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+        dat.merged <- na.omit(dat.merged)
+
+        # calculate additional deaths for 2 unit change in climate parameter
+        dat.merged$deaths.added <- with(dat.merged,(odds.mean-1)*deaths.pred)
+        dat.merged$deaths.added.two.deg <- with(dat.merged,((odds.mean)^2-1)*deaths.pred)
+
+        # take one year
+        dat.merged.sub <- subset(dat.merged,year==year.end)
+
+        # integrate across year
+        dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added))
+
+    }
+
+    # # attach long age names
+    # dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
+    # dat$age.long <- reorder(dat$age.long,dat$age)
+
     # merge odds and deaths files and reorder
-    dat.merged <- merge(dat.national,dat,by.x=c('sex','age','month'),by.y=c('sex','age','ID'),all.x=TRUE)
-    dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+    dat.merged.old <- merge(dat.national,dat, by.x=c('sex','age','month'),by.y=c('sex','age','ID'),all.x=TRUE)
+    dat.merged.old <- dat.merged.old[order(dat.merged.old$sex,dat.merged.old$age,dat.merged.old$year,dat.merged.old$month),]
+    dat.merged.old <- na.omit(dat.merged.old)
+
+    # calculate additional deaths for 2 unit change in climate parameter
+    dat.merged.old$deaths.added <- with(dat.merged.old,(odds.mean)*deaths.pred)
+    dat.merged.old$deaths.added.two.deg <- with(dat.merged.old,((odds.mean+1)^2-1)*deaths.pred)
+
+    # take one year
+    dat.merged.sub.old <- subset(dat.merged.old,year==year.end)
+
+    # integrate across year
+    dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added))
+
+
+
+
+    # # merge odds and deaths files and reorder
+    # dat.merged <- merge(dat.national,dat,by.x=c('sex','age','month'),by.y=c('sex','age','ID'),all.x=TRUE)
+    # dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
 
     # calculate additional deaths for 2 unit change in climate parameter
     dat.merged$deaths.added <- with(dat.merged,odds.mean*deaths.pred)
     dat.merged$deaths.added.two.deg <- with(dat.merged,((odds.mean+1)^2-1)*deaths.pred)
-    dat.merged$deaths.added.two.deg.ll <- with(dat.merged,((odds.ll+1)^2-1)*deaths.pred) #TEMP
-    dat.merged$deaths.added.two.deg.ul <- with(dat.merged,((odds.ul+1)^2-1)*deaths.pred) #TEMP
-
-    # use draws to work out limits IN PROGRESS
+    # dat.merged$deaths.added.two.deg.ll <- with(dat.merged,((odds.ll+1)^2-1)*deaths.pred) #TEMP
+    # dat.merged$deaths.added.two.deg.ul <- with(dat.merged,((odds.ul+1)^2-1)*deaths.pred) #TEMP
 
     # take one year
     dat.merged.sub <- subset(dat.merged,year==year.end)
