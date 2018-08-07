@@ -24,12 +24,12 @@
       <file leaf-file-name="additional_deaths_climate_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_climate_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3078">
-              <caret line="284" column="4" lean-forward="false" selection-start-line="284" selection-start-column="4" selection-end-line="284" selection-end-column="4" />
+            <state relative-caret-position="378">
+              <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
               <folding>
-                <element signature="e#5949#9692#0" expanded="false" />
-                <element signature="e#14045#28553#0" expanded="false" />
-                <element signature="e#28675#50091#0" expanded="false" />
+                <element signature="e#5072#8815#0" expanded="false" />
+                <element signature="e#13170#27678#0" expanded="false" />
+                <element signature="e#27800#49216#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -610,13 +610,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00141" summary="Fixed injury paper bash script">
-      <created>1531092719267</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1531092719267</updated>
-    </task>
     <task id="LOCAL-00142" summary="Fixed injury paper bash script">
       <created>1531152325599</created>
       <option name="number" value="00142" />
@@ -953,7 +946,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533660358541</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary="updates to wavelet coding">
+      <created>1533660951971</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1533660951971</updated>
+    </task>
+    <option name="localTasksCounter" value="191" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1351,12 +1351,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3078">
-          <caret line="284" column="4" lean-forward="false" selection-start-line="284" selection-start-column="4" selection-end-line="284" selection-end-column="4" />
+        <state relative-caret-position="378">
+          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
-            <element signature="e#5949#9692#0" expanded="false" />
-            <element signature="e#14045#28553#0" expanded="false" />
-            <element signature="e#28675#50091#0" expanded="false" />
+            <element signature="e#5072#8815#0" expanded="false" />
+            <element signature="e#13170#27678#0" expanded="false" />
+            <element signature="e#27800#49216#0" expanded="false" />
           </folding>
         </state>
       </provider>

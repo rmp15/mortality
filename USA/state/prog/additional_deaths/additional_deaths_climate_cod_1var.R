@@ -19,10 +19,11 @@ dname <- as.character(args[5])
 metric <- as.character(args[6])
 cause <- as.character(args[7]) ; cause <- gsub('_',' ',cause)
 contig <- as.numeric(args[8])
+num.draws <- as.numeric(args[9])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Intentional self-harm'; contig=1
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Intentional self-harm'; contig=1 ; num.draws = 1000
 
 multiple = 0
 
@@ -110,23 +111,7 @@ for (i in seq(length(sex.filter))) {
     try(do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current)))
 }}
 
-# # with all the draws made for each age and sex, will now make an estimate for additional deaths
-# for(k in seq(num.draws)){
-#     parameter.table = data.frame()
-#     for (i in seq(length(sex.filter))) {
-#         for (j in seq(length(age.filter))) {
-#     # for each draw make a parameter summary to then calculate additional deaths
-#     climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i]))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[1]))[[k]]$latent))]
-#     climate.values = exp(climate.values)
-#     table = data.frame(age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
-#     parameter.table = rbind(parameter.table,table)
-#     }}
-#     # attach long age names
-#     parameter.table$age.long <- mapvalues(parameter.table$age,from=sort(unique(parameter.table$age)),to=as.character(age.code[,2]))
-#     dat$age.long <- reorder(parameter.table$age.long, parameter.table$age)
-# }
-
-# to check if required
+# to check distribution of parameters if required
 # ggplot() + geom_point(data=subset(dat,age==25&sex==1),aes(x=as.factor(ID),y=odds.mean,color='red',size=5)) +
 #     geom_boxplot(data=complete.table,aes(x=as.factor(ID),y=climate.values)) +
 #     geom_point(data=subset(dat,age==25&sex==1),aes(x=as.factor(ID),y=odds.mean,color='red',size=5))
@@ -247,15 +232,15 @@ if(model=='1d'){
     additional.deaths = data.frame()
     for(k in seq(num.draws)){
         parameter.table = data.frame()
-        # for (i in seq(length(sex.filter))) { PUT BACK
-        #     for (j in seq(length(age.filter))) { PUT BACK
-        i=1 ; j=4 ;
+        for (i in seq(length(sex.filter))) { # PUT BACK
+            for (j in seq(length(age.filter))) { # PUT BACK
+        # i=1 ; j=4 ;
         # for each draw make a parameter summary to then calculate additional deaths
         climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i]))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[1]))[[k]]$latent))]
         climate.values = exp(climate.values)
         table = data.frame(age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
         parameter.table = rbind(parameter.table,table)
-        # }} PUT BACK
+        }} # PUT BACK
 
         # attach long age names
         # parameter.table$age.long <- mapvalues(parameter.table$age,from=sort(unique(parameter.table$age)),to=as.character(age.code[,2]))
