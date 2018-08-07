@@ -78,8 +78,12 @@ for (i in seq(length(sex.filter))) {
     }
     model.current <- readRDS(file.name)
     draws.current = inla.posterior.sample(num.draws,model.current)
-
+    do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current))
 }}
+
+for(k in seq(num.draws)){
+    # MAKE PARAMETER SUMMARIES PER DRAW (WILL END UP WITH NUMBER OF ESTIMATES FROM NUMBER OF DRAWS)
+}
 
 # use draws to combine parameters, i.e. first draws all go together, second draws all go together etc....
 # FINISH but something like
