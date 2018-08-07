@@ -22,7 +22,7 @@ contig <- as.numeric(args[8])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Accidental falls'; contig=1
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Intentional self-harm'; contig=1
 
 multiple = 0
 
@@ -60,20 +60,32 @@ if(contig==0){
 
 # load the data for making draws
 library(INLA)
-if(cause!='AllCause'){
-    file.name <- paste0('~/data/mortality/US/state/climate_effects/',
-    dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[1],
-    '/',country,'_rate_pred_type',model,'_',age.filter[1],'_',sex.lookup[1],'_',
-    year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
-}
-if(cause=='AllCause'){
-    file.name <- paste0('~/data/mortality/US/state/climate_effects/',
-    dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[1],
-    '/',country,'_rate_pred_type',model,'_',age.filter[1],'_',sex.lookup[1],
-    '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
-}
-model.current <- readRDS(file.name)
+num.draws = 5000
+for (i in seq(length(sex.filter))) {
+    for (j in seq(length(age.filter))) {
+    if(cause!='AllCause'){
+        file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+        dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
+        '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],'_',
+        year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
+    }
+    if(cause=='AllCause'){
+        file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+        dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
+        '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
+        '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
 
+    }
+    model.current <- readRDS(file.name)
+    draws.current = inla.posterior.sample(num.draws,model.current)
+
+}}
+
+# use draws to combine parameters, i.e. first draws all go together, second draws all go together etc....
+# FINISH but something like
+for (k in c(1:num.draws)){
+    # draws.current[[k]]$latent
+}
 
 if(multiple==1){
 
