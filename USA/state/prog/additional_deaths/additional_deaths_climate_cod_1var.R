@@ -19,10 +19,11 @@ dname <- as.character(args[5])
 metric <- as.character(args[6])
 cause <- as.character(args[7]) ; cause <- gsub('_',' ',cause)
 contig <- as.numeric(args[8])
+num.draws <- as.numeric(args[9])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Intentional self-harm'; contig=1
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Intentional self-harm'; contig=1 ; num.draws = 1000
 
 multiple = 0
 
@@ -61,36 +62,34 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
         ifelse(cause=='Assault','Assault','NA'
         )))))))))))))
 
+# # load the data for quoting parameters
+# if(contig==1){
+#     if(cause!='AllCause'){
+#         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+#         country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+#     }
+#     if(cause=='AllCause'){
+#         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+#         ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+#     }
+# }
+# if(contig==0){
+#     if(cause!='AllCause'){
+#         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+#         country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+#     }
+#     if(cause=='AllCause'){
+#         dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+#         ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+#     }
+# }
 
-# load the data for quoting parameters
-if(contig==1){
-    if(cause!='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-        country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
-    }
-    if(cause=='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-        ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
-    }
-}
-if(contig==0){
-    if(cause!='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-        country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
-    }
-    if(cause=='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-        ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
-    }
-}
-
-# load the data for making draws
+# load the data for each age and sex to make draws
 library(INLA)
-num.draws = 100
 for (i in seq(length(sex.filter))) {
     for (j in seq(length(age.filter))) {
 
-    # load the full model
+    # load the full model for a particular age and sex
     if(cause!='AllCause'){
         file.name <- paste0('~/data/mortality/US/state/climate_effects/',
         dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
@@ -106,16 +105,14 @@ for (i in seq(length(sex.filter))) {
     model.current <- readRDS(file.name)
 
     # make draws from the model for the parameters
-    draws.current = inla.posterior.sample(num.draws,model.current)
-    do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current))
+    draws.current = try(inla.posterior.sample(num.draws,model.current))
+    try(do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current)))
 }}
 
-for(k in seq(num.draws)){
-    # MAKE PARAMETER SUMMARIES PER DRAW (WILL END UP WITH NUMBER OF ESTIMATES FROM NUMBER OF DRAWS)
-    # subset(get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent)
-    climate.values = get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[4],'.',sex.lookup[1]))[[1]]$latent))] # do I need to exponentiate? check bind_posterior
-
-}
+# to check distribution of parameters if required
+# ggplot() + geom_point(data=subset(dat,age==25&sex==1),aes(x=as.factor(ID),y=odds.mean,color='red',size=5)) +
+#     geom_boxplot(data=complete.table,aes(x=as.factor(ID),y=climate.values)) +
+#     geom_point(data=subset(dat,age==25&sex==1),aes(x=as.factor(ID),y=odds.mean,color='red',size=5))
 
 if(multiple==1){
 
@@ -198,10 +195,6 @@ if(multiple==1){
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
 if(model=='1d'){
 
-    # attach long age names
-    dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
-    dat$age.long <- reorder(dat$age.long,dat$age)
-
     # load death rate data and create national death rates
     if(cause=='AllCause'){
         dat.mort <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_',year.end))
@@ -227,153 +220,52 @@ if(model=='1d'){
         print(head(dat.mort))
     }
 
-    # 1. ADDITIONAL DEATHS FROM UNIFORM 2 DEGREE INCREASE NATIONALLY
-    # establish potential attributable deaths for last year of dataset
-
     # make for national data
     dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
     dat.national <- ddply(dat.mort,.(year,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
     dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
     dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-    # merge odds and deaths files and reorder
-    dat.merged <- merge(dat.national,dat,by.x=c('sex','age','month'),by.y=c('sex','age','ID'),all.x=TRUE)
-    dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+    # with all the draws made for each age and sex, will now make an estimate for additional deaths
+    additional.deaths = data.frame()
+    for(k in seq(num.draws)){
+        parameter.table = data.frame()
+        for (i in seq(length(sex.filter))) { # PUT BACK
+            for (j in seq(length(age.filter))) { # PUT BACK
+        # i=1 ; j=4 ;
+        # for each draw make a parameter summary to then calculate additional deaths
+        climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i]))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[1]))[[k]]$latent))]
+        climate.values = exp(climate.values)
+        table = data.frame(age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
+        parameter.table = rbind(parameter.table,table)
+        }} # PUT BACK
 
-    # calculate additional deaths for 2 unit change in climate parameter
-    dat.merged$deaths.added <- with(dat.merged,odds.mean*deaths.pred)
-    dat.merged$deaths.added.two.deg <- with(dat.merged,((odds.mean+1)^2-1)*deaths.pred)
-    dat.merged$deaths.added.two.deg.ll <- with(dat.merged,((odds.ll+1)^2-1)*deaths.pred) #TEMP
-    dat.merged$deaths.added.two.deg.ul <- with(dat.merged,((odds.ul+1)^2-1)*deaths.pred) #TEMP
+        # attach long age names
+        # parameter.table$age.long <- mapvalues(parameter.table$age,from=sort(unique(parameter.table$age)),to=as.character(age.code[,2]))
+        # dat$age.long <- reorder(parameter.table$age.long, parameter.table$age)
 
-    # use draws to work out limits IN PROGRESS
+        # 1. ADDITIONAL DEATHS FROM UNIFORM 2 DEGREE INCREASE NATIONALLY FROM LAST YEAR'S POPULATION
 
-    # take one year
-    dat.merged.sub <- subset(dat.merged,year==year.end)
+        # merge odds and deaths files and reorder
+        dat.merged <- merge(dat.national,parameter.table,by.x=c('sex','age','month'),by.y=c('sex','age','ID'),all.x=TRUE)
+        dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+        dat.merged <- na.omit(dat.merged)
 
-    # integrate across year
-    dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added))
+        # calculate additional deaths for 2 unit change in climate parameter
+        dat.merged$deaths.added <- with(dat.merged,(odds.mean-1)*deaths.pred)
+        dat.merged$deaths.added.two.deg <- with(dat.merged,((odds.mean)^2-1)*deaths.pred)
 
-    # ggplot(data=dat.merged.sub.year) + geom_point(aes(x=age,y=deaths.added)) + geom_hline(yintercept=0) + facet_wrap(~sex) + ggtitle(cause)
+        # take one year
+        dat.merged.sub <- subset(dat.merged,year==year.end)
 
-    # add YLL from a reference point (2016)
-    ref.male  = 76.40
-    ref.female= 81.2
-    dat.merged.sub$yll.mean.m = ifelse((ref.male-(dat.merged.sub$age+5))>=0,
-                                (ref.male-(dat.merged.sub$age+5))*dat.merged.sub$deaths.added,
-                                0)
-    # use draws to work out limits
-    dat.merged.sub$yll.mean.f = ifelse((ref.female-(dat.merged.sub$age+5))>=0,
-                                (ref.female-(dat.merged.sub$age+5))*dat.merged.sub$deaths.added,
-                                0)
-    # use draws to work out limits
+        # integrate across year by age and sex, also for entire population
+        dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added))
+        dat.merged.sub.year$draw = k
 
-    # combined male and female ylls
-    dat.merged.sub$yll.mean = ifelse(dat.merged.sub$sex==1,dat.merged.sub$yll.mean.m,dat.merged.sub$yll.mean.f)
-
-    # # export table in form that is digestible to human eyes
-    dat.merged.sub.csv <- dat.merged.sub[,c('sex','age','month','deaths.added','deaths.ll','deaths.ul','yll.mean','yll.ll','yll.ul')]
-    # dat.merged.sub.csv$month = mapvalues(dat.merged.sub.csv$month, from=sort(unique(dat.merged.sub.csv$month)),to=month.short)
-    # dat.merged.sub.csv$sex = mapvalues(dat.merged.sub.csv$sex, from=sort(unique(dat.merged.sub.csv$sex)),to=c('Men','Women'))
-    # dat.merged.sub.csv$age.long <- mapvalues(dat.merged.sub.csv$age,from=sort(unique(dat.merged.sub.csv$age)),to=as.character(age.code[,2]))
-    # dat.merged.sub.csv$age.long <- reorder(dat.merged.sub.csv$age.long,dat.merged.sub.csv$age)
-    # dat.merged.sub.csv <- dat.merged.sub.csv[,c('sex','age.long','month','deaths.added','deaths.ll','deaths.ul','yll.mean','yll.ll','yll.ul')]
-    # names(dat.merged.sub.csv) = c('sex','age','month','deaths added','ll','ul','yll','ll','ul')
-    #
-    # write.csv(dat.merged.sub.csv,paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_deaths_added.csv'))
-
-    # under different climate scenarios
-    heatmap.national.yll.scenarios <- function(sex.sel) {
-        
-        dat = ddply(dat.merged.sub,.(sex,age,month),summarize,yll.mean=sum(yll.mean),yll.ll=sum(yll.ll),yll.ul=sum(yll.ul))
-        
-        dat$sig = ifelse(dat$yll.ll*dat$yll.ul>0,1,NA)
-
-        # create a set of results for different temperature changes
-        dat.1 = dat ; dat.1$scenario = paste0('+1',unit.name) ;
-        dat.2 = dat ; dat.2$scenario = paste0('+2',unit.name) ; dat.2$yll.mean = exp(2)*dat.2$yll.mean
-        dat.3 = dat ; dat.3$scenario = paste0('+3',unit.name) ; dat.3$yll.mean = exp(3)*dat.3$yll.mean
-        dat.4 = dat ; dat.4$scenario = paste0('+4',unit.name) ; dat.4$yll.mean = exp(4)*dat.4$yll.mean
-
-        dat.1$scenario = 'RCP2.6'
-        dat.2$scenario = 'RCP4.5'
-        dat.3$scenario = 'RCP6.0'
-        dat.4$scenario = 'RCP8.5'
-
-        dat.test = rbind(dat.2,dat.3,dat.4)
-        
-        lims <- range(abs(dat.test$yll.mean))
-        
-        # only choose selected sex
-        dat.test = subset(dat.test,sex==sex.sel)
-        
-        print(ggplot(data=subset(dat.test)) +
-        geom_tile(aes(x=month,y=as.factor(age),fill=yll.mean)) +
-        geom_point(aes(x=month,y=as.factor(age),size = sig),shape='*') +
-        scale_fill_gradientn(colours=c(bl, "white", sm), na.value = "grey98",labels = scales::comma,limits = c(-lims[2], lims[2]), guide = guide_legend(title = paste0("YLL"))) +
-        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("YLL"))) +
-        scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-        scale_y_discrete(labels=age.print) +
-        scale_size(guide = 'none') +
-        #ggtitle('+1°C') +
-        facet_wrap(~scenario) +
-        xlab("Month") + ylab('Age') +
-        theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
-        panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
-        
+        additional.deaths = rbind(additional.deaths,dat.merged.sub.year)
     }
-
-    #pdf(paste0(file.loc,'yll_nat_heatmap_scenarios_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    #heatmap.national.yll.scenarios(1)
-    #dev.off()
-    #pdf(paste0(file.loc,'yll_nat_heatmap_scenarios_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    #heatmap.national.yll.scenarios(2)
-    #dev.off()
-    
-    heatmap.national.yll.both.sex.scenarios <- function() {
-        
-        dat = ddply(dat.merged.sub,.(sex,age,month),summarize,yll.mean=sum(yll.mean),yll.ll=sum(yll.ll),yll.ul=sum(yll.ul))
-        
-        dat$sig = ifelse(dat$yll.ll*dat$yll.ul>0,1,NA)
-        
-        dat$sex.long <- mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c('Men','Women'))
-        
-        # create a set of results for different temperature changes
-        dat.1 = dat ; dat.1$scenario = paste0('+1',unit.name) ;
-        dat.2 = dat ; dat.2$scenario = paste0('+2',unit.name) ; dat.2$yll.mean = exp(2)*dat.2$yll.mean
-        dat.3 = dat ; dat.3$scenario = paste0('+3',unit.name) ; dat.3$yll.mean = exp(3)*dat.3$yll.mean
-        dat.4 = dat ; dat.4$scenario = paste0('+4',unit.name) ; dat.4$yll.mean = exp(4)*dat.4$yll.mean
-        
-        dat.1$scenario = 'RCP2.6'
-        dat.2$scenario = 'RCP4.5'
-        dat.3$scenario = 'RCP6.0'
-        dat.4$scenario = 'RCP8.5'
-        
-        dat.test = rbind(dat.2,dat.3,dat.4)
-
-        lims <- range(abs(dat.test$yll.mean))
-        
-        # only choose selected sex
-        dat.test = subset(dat.test)
-        
-        print(ggplot(data=subset(dat.test)) +
-        geom_tile(aes(x=month,y=as.factor(age),fill=yll.mean)) +
-        geom_point(aes(x=month,y=as.factor(age),size = sig),shape='*') +
-        scale_fill_gradientn(colours=c(bl, "white", sm), na.value = "grey98",labels = scales::comma,limits = c(-lims[2], lims[2]), guide = guide_legend(title = paste0("YLL"))) +
-        guides(fill = guide_colorbar(barwidth = 30, barheight = 1,title = paste0("YLL"))) +
-        scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-        scale_y_discrete(labels=age.print) +
-        scale_size(guide = 'none') +
-        #ggtitle('+1°C') +
-        facet_grid(sex.long ~ scenario) +
-        xlab("Month") + ylab('Age') +
-        theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5),
-        panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")))
-        
-    }
-    #pdf(paste0(file.loc,'yll_nat_heatmap_scenarios_bothsexes_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    #heatmap.national.yll.both.sex.scenarios()
-    #dev.off()
+    # to check if desired
+    ggplot(data=additional.deaths) + geom_boxplot(aes(x=as.factor(age),y=deaths.added)) + geom_hline(yintercept=0) + facet_wrap(~sex) + ggtitle(cause)
 
 }
 
