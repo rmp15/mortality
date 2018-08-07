@@ -72,7 +72,7 @@ fips.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 state.lookup <- read.csv('../../data/fips_lookup/name_fips_lookup.csv')
 
 # INLA model versions
-# models <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','S','1d2')
+models <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','S','1d2')
 
 # lookups for temperature units
 temp = c("10percc3", "90percc3", "meanc3")
