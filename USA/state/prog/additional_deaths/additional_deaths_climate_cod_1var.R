@@ -63,6 +63,8 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
 for (i in seq(length(sex.filter))) {
     for (j in seq(length(age.filter))) {
 
+        print(paste0('Loading draws for ',sex.filter[i],' ,',age.filter[j],'...'))
+
         # get location of file
         file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
                 '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
@@ -101,8 +103,8 @@ if(model%in%c('1d','1d2')){
     if(cause%in%c('Transport accidents','Accidental falls','Other external causes of injury',
                     'Accidental drowning and submersion','Intentional self-harm','Assault')){
         dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
-        dat.mort$cause.group = NULL ; names(dat.mort)[6] = 'cause'
-        dat.mort <- subset(dat.mort,cause==cause)
+        dat.mort$cause.group = NULL ; names(dat.mort)[6] = 'cause.'
+        dat.mort <- subset(dat.mort,cause.==as.character(cause)) ; names(dat.mort)[6] = 'cause'
 
         print(head(dat.mort))
     }
@@ -143,27 +145,28 @@ if(model%in%c('1d','1d2')){
         # take one year
         dat.merged.sub <- subset(dat.merged,year==year.end)
 
+        # take out unsuitable age-sex age_groups
+        if(cause=="Intentional self-harm"){
+            dat.merged.sub$deaths.added =           ifelse(dat.merged.sub$age==0,0,dat.merged.sub$deaths.added)
+            dat.merged.sub$deaths.added.two.deg =   ifelse(dat.merged.sub$age==0,0,dat.merged.sub$deaths.added.two.deg)
+
+        }
+
         # integrate across year by age and sex, also for entire population
-        dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added))
+        dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added.two.deg))
+        dat.total = ddply(dat.merged.sub.year,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total$age = 'All ages'
+        dat.merged.sub.year = rbind(dat.merged.sub.year,dat.total)
         dat.merged.sub.year$draw = k
 
         additional.deaths = rbind(additional.deaths,dat.merged.sub.year)
-
-        # integrate across year by age and sex, also for entire population
-        dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added))
-        dat.merged.sub.year$draw = k
-
-        additional.deaths = rbind(additional.deaths,dat.merged.sub.year)
-        # additional.deaths$sex.long <- mapvalues(additional.deaths$sex,from=sort(unique(additional.deaths$sex)),to=c('Male','Female'))
-        # additional.deaths$sex.long <- reorder(additional.deaths$sex.long,additional.deaths$sex)
 
         # integrate across year by month and sex, also for entire population
-        dat.merged.sub.year.monthly = ddply(dat.merged.sub,.(sex,month),summarise,deaths.added=sum(deaths.added))
+        dat.merged.sub.year.monthly = ddply(dat.merged.sub,.(sex,month),summarise,deaths.added=sum(deaths.added.two.deg))
+        dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total.monthly$month = 'All months'
+        dat.merged.sub.year.monthly = rbind(dat.merged.sub.year.monthly,dat.total.monthly)
         dat.merged.sub.year.monthly$draw = k
-        #
+
         additional.deaths.monthly = rbind(additional.deaths.monthly,dat.merged.sub.year.monthly)
-        # additional.deaths.monthly$sex.long <- mapvalues(additional.deaths.monthly$sex,from=sort(unique(additional.deaths.monthly$sex)),to=c('Male','Female'))
-        # additional.deaths.monthly$sex.long <- reorder(additional.deaths.monthly$sex.long,additional.deaths.monthly$sex)
 
     }
 
