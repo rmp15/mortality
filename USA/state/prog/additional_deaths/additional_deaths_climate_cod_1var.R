@@ -31,11 +31,8 @@ multiple = 0
 source('../../data/objects/objects.R')
 model <- models[model]
 
-# unit data for plotting
-unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
-
 # bespoke colourway
-colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
+# colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
 # create directories for output DELETE OLD DIRECTORIES
 file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
@@ -63,15 +60,27 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
         )))))))))))))
 
 # load the draws data for each age and sex for the cause chosen
-file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
-        '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
-if(contig==1){
-    file.loc <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
-    '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
-}
+for (i in seq(length(sex.filter))) {
+    for (j in seq(length(age.filter))) {
+
+        # get location of file
+        file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+                '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
+        if(contig==1){
+            file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+            '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
+        }
+
+        # load file
+        save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
+            '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
+        draws.current = readRDS(paste0(file.loc.input,save.name))
+        do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current))
+}}
+
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
-if(model=='1d'){
+if(model%in%c('1d','1d2')){
 
     # load death rate data and create national death rates
     if(cause=='AllCause'){
@@ -107,15 +116,17 @@ if(model=='1d'){
     # with all the draws made for each age and sex, will now make an estimate for additional deaths
     additional.deaths = data.frame()
     for(k in seq(num.draws)){
+        print(paste0('draw ',k))
         parameter.table = data.frame()
         for (i in seq(length(sex.filter))) {
             for (j in seq(length(age.filter))) {
+
         # for each draw make a parameter summary to then calculate additional deaths
         climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i]))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[1]))[[k]]$latent))]
         climate.values = exp(climate.values)
         table = data.frame(age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
         parameter.table = rbind(parameter.table,table)
-        }}
+        }#}
 
         # attach long age names
         # parameter.table$age.long <- mapvalues(parameter.table$age,from=sort(unique(parameter.table$age)),to=as.character(age.code[,2]))
