@@ -154,7 +154,7 @@ if(model%in%c('1d','1d2')){
 
         # integrate across year by age and sex, also for entire population
         dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added.two.deg))
-        dat.total = ddply(dat.merged.sub.year,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total$age = 'All ages'
+        dat.total = ddply(dat.merged.sub.year,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total$age = 99
         dat.merged.sub.year = rbind(dat.merged.sub.year,dat.total)
         dat.merged.sub.year$draw = k
 
@@ -162,7 +162,7 @@ if(model%in%c('1d','1d2')){
 
         # integrate across year by month and sex, also for entire population
         dat.merged.sub.year.monthly = ddply(dat.merged.sub,.(sex,month),summarise,deaths.added=sum(deaths.added.two.deg))
-        dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total.monthly$month = 'All months'
+        dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total.monthly$month = 99
         dat.merged.sub.year.monthly = rbind(dat.merged.sub.year.monthly,dat.total.monthly)
         dat.merged.sub.year.monthly$draw = k
 
@@ -179,16 +179,17 @@ if(model%in%c('1d','1d2')){
     additional.deaths.summary.monthly$sex.long <- mapvalues(additional.deaths.summary.monthly$sex,from=sort(unique(additional.deaths.summary.monthly$sex)),to=c('Male','Female'))
     additional.deaths.summary.monthly$sex.long <- reorder(additional.deaths.summary.monthly$sex.long,additional.deaths.summary.monthly$sex)
 
-    if(cause=="Intentional self-harm"){
-    additional.deaths.summary$deaths.added.median = ifelse(additional.deaths.summary$age==0,0,additional.deaths.summary$deaths.added.median)
-    additional.deaths.summary$deaths.added.ll = ifelse(additional.deaths.summary$age==0,0,additional.deaths.summary$deaths.added.ll)
-    additional.deaths.summary$deaths.added.ul = ifelse(additional.deaths.summary$age==0,0,additional.deaths.summary$deaths.added.ul)
+    additional.deaths.summary$age.long <- mapvalues(additional.deaths.summary$age,from=sort(unique(additional.deaths.summary$age)),to=c(as.character(age.code[,2]),'All ages'))
+    additional.deaths.summary$age.long <- reorder(additional.deaths.summary$age.long,additional.deaths.summary$age)
 
-    additional.deaths.summary.monthly$deaths.added.median = ifelse(additional.deaths.summary.monthly$age==0,0,additional.deaths.summary.monthly$deaths.added.median)
-    additional.deaths.summary.monthly$deaths.added.ll = ifelse(additional.deaths.summary.monthly$age==0,0,additional.deaths.summary.monthly$deaths.added.ll)
-    additional.deaths.summary.monthly$deaths.added.ul = ifelse(additional.deaths.summary.monthly$age==0,0,additional.deaths.summary.monthly$deaths.added.ul)
+    additional.deaths.summary.monthly$month.short <- mapvalues(additional.deaths.summary.monthly$month,from=sort(unique(additional.deaths.summary.monthly$month)),to=c(as.character(month.short),'All months'))
+    additional.deaths.summary.monthly$month.short <- reorder(additional.deaths.summary.monthly$month.short,additional.deaths.summary.monthly$month)
 
-    }
+    # save output as csvs
+    write.csv(additional.deaths.summary,paste0(file.loc,country,'_rate_pred_type',model,
+            '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig_by_age.csv'))
+    write.csv(additional.deaths.monthly,paste0(file.loc,country,'_rate_pred_type',model,
+            '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig_by_month.csv'))
 
     # plot boxplot and 95 CI per age-sex for additional deaths
     pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -208,11 +209,11 @@ if(model%in%c('1d','1d2')){
     #     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
     ggplot() +
-        geom_point(data=additional.deaths.summary,aes(x=as.factor(age),y=deaths.added.median)) +
-        geom_errorbar(data=additional.deaths.summary,aes(x=as.factor(age),ymax=deaths.added.ul,ymin=deaths.added.ll)) +
+        geom_point(data=additional.deaths.summary,aes(x=as.factor(age.long),y=deaths.added.median)) +
+        geom_errorbar(data=additional.deaths.summary,aes(x=as.factor(age.long),ymax=deaths.added.ul,ymin=deaths.added.ll)) +
         geom_hline(yintercept=0) +
         xlab('Age (years)') + ylab('Additional deaths with 2 degrees additional warming (based on 2016 population)') +
-        scale_x_discrete(labels=age.code[,2])   +
+        # scale_x_continuous(labels=c(age.code[,2],'All ages'))   +
         facet_wrap(~sex.long) +
         ggtitle(cause) +
         theme_bw() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
@@ -223,11 +224,11 @@ if(model%in%c('1d','1d2')){
         legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
     ggplot() +
-        geom_point(data=additional.deaths.summary.monthly,aes(x=as.factor(month),y=deaths.added.median)) +
-        geom_errorbar(data=additional.deaths.summary.monthly,aes(x=as.factor(month),ymax=deaths.added.ul,ymin=deaths.added.ll)) +
+        geom_point(data=additional.deaths.summary.monthly,aes(x=as.factor(month.short),y=deaths.added.median)) +
+        geom_errorbar(data=additional.deaths.summary.monthly,aes(x=as.factor(month.short),ymax=deaths.added.ul,ymin=deaths.added.ll)) +
         geom_hline(yintercept=0) +
         xlab('Age (years)') + ylab('Additional deaths with 2 degrees additional warming (based on 2016 population)') +
-        scale_x_discrete(labels=month.short)   +
+        # scale_x_discrete(labels=c(month.short,'All'))   +
         facet_wrap(~sex.long) +
         ggtitle(cause) +
         theme_bw() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
@@ -236,6 +237,7 @@ if(model%in%c('1d','1d2')){
         panel.border = element_rect(colour = "black"),strip.background = element_blank(),
         legend.position = 'bottom',legend.justification='center',
         legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
     dev.off()
 
 }
