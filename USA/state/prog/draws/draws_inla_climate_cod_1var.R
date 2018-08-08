@@ -23,22 +23,17 @@ num.draws <- as.numeric(args[9])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Intentional self-harm'; contig=1 ; num.draws = 1000
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Transport_accidents'; contig=1 ; num.draws = 1000
 
 # source variables
 source('../../data/objects/objects.R')
 model <- models[model]
 
-# unit data for plotting
-unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
-
-# bespoke colourway
-colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
-
 # load the data for each age and sex to make draws
 library(INLA)
 for (i in seq(length(sex.filter))) {
-    for (j in seq(length(age.filter))) {
+    # for (j in seq(length(age.filter))) {
+    for (j in c(2,3,4,5,7,9,10)) {
 
         # create directories for output
         file.loc <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
@@ -64,7 +59,7 @@ for (i in seq(length(sex.filter))) {
         }
 
         print(paste0('Reading ',file.name))
-        try(model.current <- readRDS(file.name))
+        model.current <- readRDS(file.name)
 
         # make draws from the model for the parameters
         print(paste0('Making ',num.draws, ' draws...'))
@@ -74,8 +69,8 @@ for (i in seq(length(sex.filter))) {
         # save draws as an rds file
         print('Saving file...')
         save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
-            '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig'))
-        try(saveRDS(draws.current,paste0(file.loc,save.name))
+            '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
+        try(saveRDS(draws.current,paste0(file.loc,save.name)))
 }}
 
 ### LEGACY ONLY FOR COMPARISON OF CENTRAL ESTIMATES
