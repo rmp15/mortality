@@ -230,15 +230,14 @@ if(model=='1d'){
     additional.deaths = data.frame()
     for(k in seq(num.draws)){
         parameter.table = data.frame()
-        for (i in seq(length(sex.filter))) { # PUT BACK
-            for (j in seq(length(age.filter))) { # PUT BACK
-        # i=1 ; j=4 ;
+        for (i in seq(length(sex.filter))) {
+            for (j in seq(length(age.filter))) {
         # for each draw make a parameter summary to then calculate additional deaths
         climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i]))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[1]))[[k]]$latent))]
         climate.values = exp(climate.values)
         table = data.frame(age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
         parameter.table = rbind(parameter.table,table)
-        }} # PUT BACK
+        }}
 
         # attach long age names
         # parameter.table$age.long <- mapvalues(parameter.table$age,from=sort(unique(parameter.table$age)),to=as.character(age.code[,2]))
