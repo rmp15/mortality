@@ -37,12 +37,12 @@ unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes,
 # bespoke colourway
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
-# create directories for output
+# create directories for output DELETE OLD DIRECTORIES
 file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
+'/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',cause,'/',num.draws,'_draws/')
 if(contig==1){
     file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/contig/',cause,'/')
+'/',dname,'/',metric,'/non_pw/type_',model,'/contig/',cause,'/',num.draws,'_draws/')
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
@@ -62,8 +62,13 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
         ifelse(cause=='Assault','Assault','NA'
         )))))))))))))
 
-# load the draws data for each age and sex cause chosen
-
+# load the draws data for each age and sex for the cause chosen
+file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+        '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
+if(contig==1){
+    file.loc <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+    '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
+}
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
 if(model=='1d'){
