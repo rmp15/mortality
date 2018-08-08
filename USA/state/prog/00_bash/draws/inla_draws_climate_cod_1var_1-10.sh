@@ -26,7 +26,7 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 
 (
 
-declare cod="Intentional_self-harm"
+declare cod="Transport_accidents"
 
 for model in "${models[@]}"; do
 for draw in "${draws[@]}"; do

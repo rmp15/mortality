@@ -64,7 +64,7 @@ for (i in seq(length(sex.filter))) {
         }
 
         print(paste0('Reading ',file.name))
-        model.current <- readRDS(file.name)
+        try(model.current <- readRDS(file.name))
 
         # make draws from the model for the parameters
         print(paste0('Making ',num.draws, ' draws...'))
@@ -74,8 +74,8 @@ for (i in seq(length(sex.filter))) {
         # save draws as an rds file
         print('Saving file...')
         save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
-            '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
-        saveRDS(draws.current,paste0(file.loc,save.name))
+            '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig'))
+        try(saveRDS(draws.current,paste0(file.loc,save.name))
 }}
 
 ### LEGACY ONLY FOR COMPARISON OF CENTRAL ESTIMATES
