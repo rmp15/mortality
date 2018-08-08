@@ -35,14 +35,50 @@ unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes,
 # bespoke colourway
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
-# create directories for output
-file.loc <- paste0('../../output/draws/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.arg)
-if(contig==1){
-    file.loc <- paste0('../../output/draws/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/parameters/contig/',cause,'/')
-}
-ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+# load the data for each age and sex to make draws
+library(INLA)
+for (i in seq(length(sex.filter))) {
+    for (j in seq(length(age.filter))) {
+
+        # create directories for output
+        file.loc <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+        '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
+        if(contig==1){
+            file.loc <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+            '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
+            }
+        ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+
+        # load the full model for a particular age and sex
+        if(cause!='AllCause'){
+            file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+            dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
+            '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],'_',
+            year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
+        }
+        if(cause=='AllCause'){
+            file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+            dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
+            '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
+            '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
+        }
+
+        print(paste0('Reading ',file.name))
+        model.current <- readRDS(file.name)
+
+        # make draws from the model for the parameters
+        print(paste0('Making ',num.draws, ' draws...'))
+        draws.current = try(inla.posterior.sample(num.draws,model.current))
+        # try(do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current)))
+
+        # save draws as an rds file
+        print('Saving file...')
+        save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
+            '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
+        saveRDS(draws.current,paste0(file.loc,save.name))
+}}
+
+### LEGACY ONLY FOR COMPARISON OF CENTRAL ESTIMATES
 
 # # load the data for quoting parameters
 # if(contig==1){
@@ -66,33 +102,7 @@ ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 #     }
 # }
 
-# load the data for each age and sex to make draws
-library(INLA)
-for (i in seq(length(sex.filter))) {
-    for (j in seq(length(age.filter))) {
-
-    # load the full model for a particular age and sex
-    if(cause!='AllCause'){
-        file.name <- paste0('~/data/mortality/US/state/climate_effects/',
-        dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
-        '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],'_',
-        year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
-    }
-    if(cause=='AllCause'){
-        file.name <- paste0('~/data/mortality/US/state/climate_effects/',
-        dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
-        '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
-        '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
-    }
-    model.current <- readRDS(file.name)
-
-    # make draws from the model for the parameters
-    draws.current = try(inla.posterior.sample(num.draws,model.current))
-    try(do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i]), draws.current)))
-}}
-
 # to check distribution of parameters if required
 # ggplot() + geom_point(data=subset(dat,age==25&sex==1),aes(x=as.factor(ID),y=odds.mean,color='red',size=5)) +
 #     geom_boxplot(data=complete.table,aes(x=as.factor(ID),y=climate.values)) +
 #     geom_point(data=subset(dat,age==25&sex==1),aes(x=as.factor(ID),y=odds.mean,color='red',size=5))
-
