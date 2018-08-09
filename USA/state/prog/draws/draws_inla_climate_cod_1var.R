@@ -33,8 +33,6 @@ model <- models[model]
 library(INLA)
 # for (i in seq(length(sex.filter))) {
     # for (j in seq(length(age.filter))) {
-for(i in c(2)){
-    for (j in c(8,9,10)) {
 
         # create directories for output
         file.loc <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,

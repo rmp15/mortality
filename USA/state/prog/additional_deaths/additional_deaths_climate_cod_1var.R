@@ -23,7 +23,7 @@ num.draws <- as.numeric(args[9])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Intentional self-harm'; contig=1 ; num.draws = 1000
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Transport accidents'; contig=1 ; num.draws = 1000
 
 multiple = 0
 
@@ -63,7 +63,7 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
 for (i in seq(length(sex.filter))) {
     for (j in seq(length(age.filter))) {
 
-        print(paste0('Loading draws for ',sex.filter[i],' ,',age.filter[j],'...'))
+        print(paste0('Loading draws for ',sex.filter[i],', ',age.filter[j],'...'))
 
         # get location of file
         file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
