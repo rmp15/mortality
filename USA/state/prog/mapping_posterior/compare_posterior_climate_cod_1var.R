@@ -135,10 +135,9 @@ heatmap.national.age.alt.2 <- function() {
     dat.merged$sex.long <- with(dat.merged,reorder(dat.merged$sex.long,sex))
     dat.merged$diff = with(dat.merged,odds.mean-odds.mean.2)
 
-
     # ADD SIGNIFICANCE HIGHLIGHTS
     print(ggplot() +
-    geom_tile(data=subset(dat.merged),aes(x=ID,y=age,fill=diff),color='black') +
+    geom_tile(data=subset(dat.merged),aes(x=ID,y=as.factor(age),fill=diff),color='black') +
     # geom_point(data=subset(dat),aes(x=ID,y=as.factor(age),size = ifelse(dat$sig == 0,NA,1.2)),shape=21,color='black',fill='black') +
     # geom_point(data=subset(dat.merged),aes(x=ID,y=age,fill=diff), color="black") +
     # geom_point(data=subset(dat.merged),aes(x=ID,y=as.factor(age),fill=diff),shape=21, color="black")+

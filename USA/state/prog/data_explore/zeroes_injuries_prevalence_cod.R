@@ -28,7 +28,9 @@ library(plyr)
 library(ggplot2)
 
 # calculate total number of deaths for analysis of whether to include in analysis
-
+dat.sub.total = ddply(dat.sub,.(cause.sub,age,sex),summarise,deaths=sum(deaths))
+dat.sub.wide = dcast(dat.sub.total,formula =age  ~sex+cause.sub,value.var='deaths')
+write.csv(dat.sub.wide,paste0(file.loc,'deaths_injury_subcauses_',year.start.arg,'_',year.end.arg,'.csv'))
 
 # calculate percentage of zeroes
 dat.broad.summary = ddply(dat.broad,.(cause,fips,age,sex,month),summarise,zeroes=sum(deaths %in% 0 ),count=length(deaths),percentage.zeroes=round(100*sum(deaths %in% 0)/length(deaths),1))

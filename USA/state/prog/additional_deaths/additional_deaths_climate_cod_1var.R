@@ -81,7 +81,7 @@ for (i in seq(length(sex.filter))) {
 }}
 
 
-# for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
+# for national model, plot additional deaths (with CIs) all on one page, one for men and one for women
 if(model%in%c('1d','1d2')){
 
     # load death rate data and create national death rates
@@ -240,5 +240,4 @@ if(model%in%c('1d','1d2')){
 
     dev.off()
 
-}
 }

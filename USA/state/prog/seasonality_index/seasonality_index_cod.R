@@ -477,3 +477,48 @@ ggplot() +
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 dev.off()
+
+
+# plot to compare regional start and end values
+
+plot.function.diff.seas.sig.5 <- function(data,shape.selected,x,y,n,xmin,xmax,ymin,ymax,legend){
+
+        data$sex.long <- mapvalues(data$sex,from=sort(unique(data$sex)),to=c('Male','Female'))
+        data$sex.long <- with(data,reorder(data$sex.long,sex))
+
+    p = ggplot() +
+    geom_point(data=subset(data,sex==1|2),aes(shape=as.factor(climate_region), color=as.factor(age),x=(start.value/100),y=abs((end.value/100))),size=3) +
+    geom_abline(slope=1,intercept=0, linetype=2,alpha=0.5) +
+    scale_x_continuous(name=paste0('Percent difference in death rates in ',year.start),labels=percent,limits=c(xmin/100,(xmax/100))) +
+    scale_y_continuous(name=paste0('Percent difference in death rates in ',year.end),labels=percent,limits=c(ymin/100,(ymax/100))) +
+    #geom_hline(linetype=2, yintercept = seq(0,1,0.1), alpha=0.2) +
+    #geom_vline(linetype=2, xintercept = seq(0,1,0.1), alpha=0.2) +
+    annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
+    annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf) +
+    scale_shape_manual(values=c(shape.selected+c(0,1,2,3,4,5,6,7,8)),guide = guide_legend(title = '')) +
+    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
+    values=age.colours,guide = guide_legend(title = 'Age group (years)')) +
+    facet_wrap(~sex.long,ncol=n)
+
+    if(legend==0){
+        p = p +
+        theme(legend.box.just = "centre",legend.box = "horizontal",legend.position=c(x, y),text = element_text(size = 10),
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
+        axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),
+        rect = element_blank(),legend.background = element_rect(fill = "grey95"))
+    }
+    if(legend==1){
+        p = p +
+        theme(legend.position = 'bottom', legend.box.just = "centre",legend.box = "horizontal",text = element_text(size = 10),
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(),
+        axis.line.x = element_line(colour = "black"), axis.line.y = element_line(colour = "black"),
+        rect = element_blank(),legend.background = element_rect(fill = "grey95"))
+    }
+
+    print(p)
+}
+
+
+pdf(paste0(file.loc.regional,'seasonality_index_regional_start_end_compare_index_',cod,'_',year.start,'_',year.end,'.pdf'),height=0,width=0,paper='a4r')
+    plot.function.diff.seas.sig.5(lin.reg.grad.region,15,.65,.8,3,-5,120,-5,120,0)
+dev.off()
