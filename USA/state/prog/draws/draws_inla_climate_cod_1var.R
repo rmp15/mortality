@@ -23,7 +23,7 @@ num.draws <- as.numeric(args[9])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Transport_accidents'; contig=1 ; num.draws = 1000
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Transport accidents'; contig=1 ; num.draws = 1000
 
 # source variables
 source('../../data/objects/objects.R')
@@ -33,7 +33,7 @@ model <- models[model]
 library(INLA)
 for (i in seq(length(sex.filter))) {
     # for (j in seq(length(age.filter))) {
-    for (j in c(2,3,4,5,7,9,10)) {
+    for (j in c(1,2,3,4,5,7,8,9,10)) {
 
         # create directories for output
         file.loc <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
