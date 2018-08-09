@@ -21,7 +21,7 @@ cause <- as.character(args[8]) ; cause <- gsub('_',' ',cause)
 contig <- as.numeric(args[9])
 
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ; model.2 = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Intentional self-harm'; contig=1
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ; model.2 = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Transport accidents'; contig=1
 
 # source variables
 source('../../data/objects/objects.R')
