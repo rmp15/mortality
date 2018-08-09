@@ -31,9 +31,10 @@ model <- models[model]
 
 # load the data for each age and sex to make draws
 library(INLA)
-for (i in seq(length(sex.filter))) {
+# for (i in seq(length(sex.filter))) {
     # for (j in seq(length(age.filter))) {
-    for (j in c(1,2,3,4,5,7,8,9,10)) {
+for(i in c(2)){
+    for (j in c(8,9,10)) {
 
         # create directories for output
         file.loc <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
