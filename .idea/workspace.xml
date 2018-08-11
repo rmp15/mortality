@@ -2,11 +2,128 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/compare_posterior_climate/1980_2016/t2m/meanc3/non_pw/type_1d/parameters/contig/Intentional self-harm/USA_rate_pred_type1d_1980_2016_t2m_meanc3_fast_contig.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/compare_posterior_climate/1980_2016/t2m/meanc3/non_pw/type_1d/parameters/contig/Transport accidents/USA_rate_pred_type1d_1980_2016_t2m_meanc3_fast_contig.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/mapping_posterior_climate/1980_2016/t2m/meanc3/non_pw/type_1d2/parameters/contig/Intentional self-harm/climate_month_params_forest_age_1d2_1980_2016_t2m_meanc3_Intentional self-harm.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/mapping_posterior_climate/1980_2016/t2m/meanc3/non_pw/type_1d2/parameters/contig/Intentional self-harm/climate_month_params_forest_month_1d2_1980_2016_t2m_meanc3_Intentional self-harm.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/mapping_posterior_climate/1980_2016/t2m/meanc3/non_pw/type_1d2/parameters/contig/Intentional self-harm/climate_month_params_heatmap_1d2_1980_2016_t2m_meanc3_Intentional self-harm.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/mapping_posterior_climate/1980_2016/t2m/meanc3/non_pw/type_1d2/parameters/contig/Intentional self-harm/climate_month_params_heatmap_alt2_1d2_1980_2016_t2m_meanc3_Intentional self-harm.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/mapping_posterior_climate/1980_2016/t2m/meanc3/non_pw/type_1d2/parameters/contig/Intentional self-harm/climate_month_params_heatmap_alt_1d2_1980_2016_t2m_meanc3_Intentional self-harm.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/seasonality_index/regional/seasonality_index_regional_start_end_compare_index_AllCause_1980_2016.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 06 19 JB.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 06 19.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 06 21.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 06 23.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 06 24.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 06 25.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 06 26 ME.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 06 28.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 02.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 03.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 04.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 06.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 09 ME 2.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 09 ME.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 10.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 16 ME.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 18.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 19.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 20 ME.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 23.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 24.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 26.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 27 ME.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 07 31.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 08 06.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 08 08 ME.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 08 09.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 08 10 (co-authors).docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/main_paper/US dynamic mortality seasonality analysis 2018 08 10.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 06 10 ME.....docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 06 19.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 06 20.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 06 23.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 06 24.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 06 25.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 06 26 ME.....docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 06 28.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 02.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 03.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 04.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 06.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 08 ME.....docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 08 ME.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 23.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 24.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 26.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 07 27 ME.....docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 02.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 03.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 06.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 08 ME 2.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 08 ME.....docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 08 ME.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 09.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 10 ME.....docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 10.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/reviewers_responses/29-01-2018-RA-eLife-35500 - response to reviewer comments 2018 08 10b.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 06 19.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 06 21.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 06 24.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 06 25.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 06 26 ME.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 07 26.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 08 06.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 08 08 ME.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 08 09.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/01_in_progress/supplementary/US dynamic mortality seasonality analysis supplementary 2018 08 10.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/02_coauthors/main figures and supplementary figures.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/02_coauthors/main paper new submission clean.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/02_coauthors/main paper new submission with tracked changes.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/02_coauthors/main paper original submission.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/02_coauthors/response to reviewers.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/01_wavelet_paper/words/04_eLife/10_entire/02_first_revisions/02_coauthors/supplementary note.DOCX" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/00_examples/Balancing-sources-and-sinks-of-greenhouse-gases-Grantham-BN3_web.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/00_examples/Climate-change-impacts-on-the-water-resources-of-the-Ganges-basin-BN-4.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/01_ideas/Imperial college March 2018.pptx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/02_proposal/final/Grantham Briefing Paper outline 2018 03 28.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/02_proposal/in progress/Grantham Briefing Note - Year Zero in Cape Town.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/02_proposal/in progress/Grantham Briefing Paper outline 2018 03 27.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/02_proposal/in progress/Grantham Briefing Paper outline template.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/03_outline/Experiences and lessons managing water in Cape Town with the advent of ‘Day Zero’ notes 2018 07 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/03_outline/cape town skeleton 2018 04 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/03_outline/cape town skeleton 2018 05 04.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/03_outline/cape town skeleton 2018 05 16.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/03_outline/cape town skeleton 2018 05 31.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/04_notes/notes 2018 05 31.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/04_notes/notes 2018 06 15.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/04_notes/notes 2018 07 01.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/10_drafts/01_introduction/Ch 1 Introduction 2018 07 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/10_drafts/01_introduction/Ch 1 Introduction 2018 08 11.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/10_drafts/02_background_to_drought/Ch 2 Climatology 2018 07 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/10_drafts/03_supply_side/Ch 3 Supply side 2018 07 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/10_drafts/04_demand_side/Ch 4 Demand Side Interventions 2018 07 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/10_drafts/05_impacts/Ch 5 Impacts 2018 07 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/10_drafts/06_policy_recommendations/Ch 6 Policy Recommendations 2018 07 30.docx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/99_pay_claims/05_pay8b_may_2018_rparks.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/99_pay_claims/06_pay8b_june_2018_rparks.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/99_pay_claims/07_pay8b_july_2018_rparks.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/99_pay_claims/pay8b.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/a. The challenge of water management and drought globally/16429 COCT State of Cape Town Report 2016 FINAL.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/a. The challenge of water management and drought globally/Cosgrove_et_al-2015-Water_Resources_Research.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/a. The challenge of water management and drought globally/Spinoni_et_al-2014-International_Journal_of_Climatology.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/a. The challenge of water management and drought globally/hess-18-213-2014 (1).pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/a. The challenge of water management and drought globally/hess-18-213-2014.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/a. The challenge of water management and drought globally/ngeo1617.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/a. The challenge of water management and drought globally/sustainability-07-08461.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/b. Overview of Cape Town and South Africa/5057-23678-1-PB.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/d. Water guarantee in the South African consitution/Constitution of the Republic of South Africa 1.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/1. Introduction/d. Water guarantee in the South African consitution/Where-does-my-water-come-from-1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/write_ups/04_cape_town_paper/Grantham Briefing Note/reference pdfs/3./CFS-Update_SouthAfrica_March2016.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/USA/state/output/zeroes_prevalence/deaths_injury_subcauses_1980_2016.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,21 +141,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="inla_model_climate_cod_1var_1-10.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="inla_model_climate_cod_1var_1-10.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="720">
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inla_model_climate_cod_1var_5-10.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="inla_model_climate_cod_1var_5-10.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+            <state relative-caret-position="570">
+              <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -47,7 +164,7 @@
       <file leaf-file-name="inla_model_climate_cod_1var_6-10.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
+            <state relative-caret-position="690">
               <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding />
             </state>
@@ -57,8 +174,8 @@
       <file leaf-file-name="inla_model_climate_cod_1var_7-10.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="26" column="49" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="26" selection-end-column="49" />
+            <state relative-caret-position="390">
+              <caret line="26" column="49" lean-forward="false" selection-start-line="25" selection-start-column="28" selection-end-line="26" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -159,15 +276,16 @@
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" />
-        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh" />
+        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="y" value="12" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -551,13 +669,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00178" summary="updates to wavelet coding">
-      <created>1533555844028</created>
-      <option name="number" value="00178" />
-      <option name="presentableId" value="LOCAL-00178" />
-      <option name="project" value="LOCAL" />
-      <updated>1533555844028</updated>
-    </task>
     <task id="LOCAL-00179" summary="updates to wavelet coding">
       <created>1533563658882</created>
       <option name="number" value="00179" />
@@ -894,7 +1005,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533936489769</updated>
     </task>
-    <option name="localTasksCounter" value="227" />
+    <task id="LOCAL-00227" summary="updates to wavelet coding">
+      <created>1533977540508</created>
+      <option name="number" value="00227" />
+      <option name="presentableId" value="LOCAL-00227" />
+      <option name="project" value="LOCAL" />
+      <updated>1533977540510</updated>
+    </task>
+    <option name="localTasksCounter" value="228" />
     <servers />
   </component>
   <component name="TodoView">
@@ -907,7 +1025,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="12" width="1440" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31402004" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1269,31 +1387,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_7-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="26" column="49" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="26" selection-end-column="49" />
+        <state relative-caret-position="390">
+          <caret line="26" column="49" lean-forward="false" selection-start-line="25" selection-start-column="28" selection-end-line="26" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
+        <state relative-caret-position="690">
           <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
+        <state relative-caret-position="720">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_5-10.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
           <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
         </state>
