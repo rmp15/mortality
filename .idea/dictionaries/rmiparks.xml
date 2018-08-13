@@ -3185,6 +3185,7 @@
       <w>`.__T__whiches.max:raster`</w>
       <w>`.__T__whiches.min:raster`</w>
       <w>`.__T__workdir:git2r`</w>
+      <w>`.__T__write.mat:rmatio`</w>
       <w>`.__T__writeMM:Matrix`</w>
       <w>`.__T__writeRaster:raster`</w>
       <w>`.__T__writeStart:raster`</w>
@@ -11661,6 +11662,7 @@
       <w>read.gwt2nb</w>
       <w>read.irts</w>
       <w>read.jags</w>
+      <w>read.mat</w>
       <w>read.matrix</w>
       <w>read.matrix.hb</w>
       <w>read.mtp</w>
@@ -12077,6 +12079,7 @@
       <w>rm</w>
       <w>rm.boot</w>
       <w>rm_file</w>
+      <w>rmatio</w>
       <w>rmixedvm</w>
       <w>rmnorm</w>
       <w>rms</w>
@@ -14969,6 +14972,7 @@
       <w>write.ftable</w>
       <w>write.fwf</w>
       <w>write.irts</w>
+      <w>write.mat</w>
       <w>write.matrix</w>
       <w>write.model</w>
       <w>write.nb.gal</w>

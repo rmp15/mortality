@@ -33,35 +33,78 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 
 declare cod="Intentional_self-harm"
 
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 
 declare cod="Transport_accidents"
 
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 
-declare cod="Intentional_self-harm"
+# RUN AGAIN FOR BELOW
+
+declare cod="External"
+
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+
+declare cod="Unintentional"
+
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+
+declare cod="Intentional"
 
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 
-declare cod="Transport_accidents"
+declare cod="Accidental_falls"
 
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+
+declare cod="Accidental_drowning_and_submersion"
+
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+
+declare cod="Assault"
+
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+
+declare cod="Other_external_causes_of_injury"
+
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+
 
 for model in "${models[@]}"; do
 

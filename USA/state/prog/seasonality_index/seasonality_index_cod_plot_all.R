@@ -50,6 +50,7 @@ lin.reg.grad.weight$cause <- gsub('AllCause', 'All cause', lin.reg.grad.weight$c
 lin.reg.grad.weight$cause <- gsub('Cancer', 'Cancers', lin.reg.grad.weight$cause)
 lin.reg.grad.weight$cause <- gsub('Cardiopulmonary', 'Cardiorespiratory diseases', lin.reg.grad.weight$cause)
 lin.reg.grad.weight$cause <- gsub('External', 'Injuries', lin.reg.grad.weight$cause)
+lin.reg.grad.weight$cause <- gsub('Other', 'Other causes', lin.reg.grad.weight$cause)
 lin.reg.grad.weight$age = as.numeric(lin.reg.grad.weight$age)
 
 # load files for cardio sub-causes
@@ -60,7 +61,6 @@ for(i in cod.cardio){
     lin.reg.grad.weight.cardio = rbind(lin.reg.grad.weight.cardio,dat.temp)
 }
 lin.reg.grad.weight.cardio$cause <- gsub('Cardiovascular', 'Cardiovascular diseases', lin.reg.grad.weight.cardio$cause)
-lin.reg.grad.weight.cardio$cause <- gsub('Other', 'Other causes', lin.reg.grad.weight.cardio$cause)
 lin.reg.grad.weight.cardio$age = as.numeric(lin.reg.grad.weight.cardio$age)
 
 # load files for injury sub-causes
