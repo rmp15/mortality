@@ -316,7 +316,7 @@ if(model%in%c('1d','1d2')){
     #                 max(dat.oops.summary$deaths.added),max(dat.oops.month.summary$deaths.added))
 
     min.plot = -150
-    max.plot = 500
+    max.plot = 450
 
     # fix names for categories of sub-categories
     dat.all.summary$cause.cat = ifelse(dat.all.summary$cause%in%c('5. Assault', '6. Intentional self-harm'),'Intentional','Unintentional')
@@ -339,6 +339,7 @@ if(model%in%c('1d','1d2')){
         xlab('Age group (years)') + ylab('Additional deaths with 2 degrees \n additional warming (based on 2016 population)') +
         ylim(c(min.plot,max.plot)) +
         scale_fill_manual(values=colors.injuries[c(2,1)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Category of injury")) +
         facet_wrap(~sex.long) +
         # ggtitle('Additional deaths by intentional and unintentional injuries') +
@@ -360,6 +361,7 @@ if(model%in%c('1d','1d2')){
         xlab('Age group (years)') + ylab('Additional deaths with 2 degrees \n additional warming (based on 2016 population)') +
         ylim(c(min.plot,max.plot)) +
         scale_fill_manual(values=colors.subinjuries[c(1:6)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of injury")) +
         facet_wrap(~sex.long) +
         # ggtitle('Additional deaths by intentional and unintentional injuries') +
@@ -381,6 +383,7 @@ if(model%in%c('1d','1d2')){
         xlab('Month') + ylab('Additional deaths with 2 degrees \n additional warming (based on 2016 population)') +
         ylim(c(min.plot,max.plot)) +
         scale_fill_manual(values=colors.injuries[c(2,1)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Category of injury")) +
         facet_wrap(~sex.long) +
         # ggtitle('Additional deaths by intentional and unintentional injuries') +
@@ -402,6 +405,7 @@ if(model%in%c('1d','1d2')){
         xlab('Age group (years)') + ylab('Additional deaths with 2 degrees \n additional warming (based on 2016 population)') +
         ylim(c(min.plot,max.plot)) +
         scale_fill_manual(values=colors.subinjuries[c(1:6)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of injury")) +
         facet_wrap(~sex.long) +
         # ggtitle('Additional deaths by intentional and unintentional injuries') +
@@ -425,6 +429,7 @@ if(model%in%c('1d','1d2')){
         xlab('Age group (years)') + ylab('Additional deaths with 2 degrees \n additional warming (based on 2016 population)') +
         ylim(c(min.plot,max.plot)) +
         scale_fill_manual(values=colors.injuries[c(2,1)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Category of injury")) +
         facet_wrap(~sex.long) +
         # ggtitle('Additional deaths by intentional and unintentional injuries') +
@@ -447,6 +452,7 @@ if(model%in%c('1d','1d2')){
         xlab('Age group (years)') + ylab('Additional deaths with 2 degrees \n additional warming (based on 2016 population)') +
         ylim(c(min.plot,max.plot)) +
         scale_fill_manual(values=colors.injuries[c(2,1)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Category of injury")) +
         facet_wrap(~sex.long) +
         # ggtitle('Additional deaths by intentional and unintentional injuries') +
@@ -469,6 +475,7 @@ if(model%in%c('1d','1d2')){
         xlab('Month') + ylab('Additional deaths with 2 degrees \n additional warming (based on 2016 population)') +
         ylim(c(min.plot,max.plot)) +
         scale_fill_manual(values=colors.injuries[c(2,1)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Category of injury")) +
         facet_wrap(~sex.long) +
         # ggtitle('Additional deaths by intentional and unintentional injuries') +
@@ -491,6 +498,7 @@ if(model%in%c('1d','1d2')){
         xlab('Month') + ylab('Additional deaths with 2 degrees \n additional warming (based on 2016 population)') +
         ylim(c(min.plot,max.plot)) +
         scale_fill_manual(values=colors.injuries[c(2,1)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Category of injury")) +
         facet_wrap(~sex.long) +
         # ggtitle('Additional deaths by intentional and unintentional injuries') +
@@ -515,6 +523,7 @@ if(model%in%c('1d','1d2')){
         ylim(c(min.plot,max.plot)) +
         facet_wrap(~sex.long) +
         scale_fill_manual(values=colors.subinjuries[c(5,6)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of intentional injury")) +
         # ggtitle('Additional deaths by types of intentional injuries') +
         theme_bw() + theme(text = element_text(size = 15),
@@ -537,6 +546,7 @@ if(model%in%c('1d','1d2')){
         ylim(c(min.plot,max.plot)) +
         facet_wrap(~sex.long) +
         scale_fill_manual(values=colors.subinjuries[c(5,6)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of intentional injury")) +
         # ggtitle('Additional deaths by types of intentional injuries') +
         theme_bw() + theme(text = element_text(size = 15),
@@ -558,6 +568,7 @@ if(model%in%c('1d','1d2')){
         ylim(c(min.plot,max.plot)) +
         facet_wrap(~sex.long) +
         scale_fill_manual(values=colors.subinjuries[c(5,6)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of intentional injury")) +
         # ggtitle('Additional deaths by types of intentional injuries') +
         theme_bw() + theme(text = element_text(size = 15),
@@ -579,6 +590,7 @@ if(model%in%c('1d','1d2')){
         ylim(c(min.plot,max.plot)) +
         facet_wrap(~sex.long) +
         scale_fill_manual(values=colors.subinjuries[c(5,6)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of intentional injury")) +
         # ggtitle('Additional deaths by types of intentional injuries') +
         theme_bw() + theme(text = element_text(size = 15),
@@ -603,6 +615,7 @@ if(model%in%c('1d','1d2')){
         ylim(c(min.plot,max.plot)) +
         facet_wrap(~sex.long) +
         scale_fill_manual(values=colors.subinjuries[c(1,2,3,4)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of unintentional injury")) +
         # ggtitle('Additional deaths by types of intentional injuries') +
         theme_bw() + theme(text = element_text(size = 15),
@@ -625,6 +638,7 @@ if(model%in%c('1d','1d2')){
         ylim(c(min.plot,max.plot)) +
         facet_wrap(~sex.long) +
         scale_fill_manual(values=colors.subinjuries[c(1,2,3,4)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of unintentional injury")) +
         # ggtitle('Additional deaths by types of intentional injuries') +
         theme_bw() + theme(text = element_text(size = 15),
@@ -647,6 +661,7 @@ if(model%in%c('1d','1d2')){
         ylim(c(min.plot,max.plot)) +
         facet_wrap(~sex.long) +
         scale_fill_manual(values=colors.subinjuries[c(1,2,3,4)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of unintentional injury")) +
         # ggtitle('Additional deaths by types of intentional injuries') +
         theme_bw() + theme(text = element_text(size = 15),
@@ -669,6 +684,7 @@ if(model%in%c('1d','1d2')){
         ylim(c(min.plot,max.plot)) +
         facet_wrap(~sex.long) +
         scale_fill_manual(values=colors.subinjuries[c(1,2,3,4)]) +
+        scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
         guides(fill=guide_legend(title="Subcategory of unintentional injury")) +
         # ggtitle('Additional deaths by types of intentional injuries') +
         theme_bw() + theme(text = element_text(size = 15),
