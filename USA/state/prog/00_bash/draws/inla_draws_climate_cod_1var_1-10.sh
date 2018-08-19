@@ -6,7 +6,7 @@
 clear
 
 declare -a sexstrings=('male' 'female')
-declare -a models=(18) #10) not sure if model 18 or model 10 is the authoritative model yet
+declare -a models=(10)
 declare -i start=1980
 declare -i end=2016
 declare country="USA"

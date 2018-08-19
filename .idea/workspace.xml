@@ -24,8 +24,8 @@
       <file leaf-file-name="inla_draws_climate_cod_1var_1-10.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/draws/inla_draws_climate_cod_1var_1-10.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="39" lean-forward="false" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
+            <state relative-caret-position="120">
+              <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -491,13 +491,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00205" summary="updates to wavelet coding">
-      <created>1533753429089</created>
-      <option name="number" value="00205" />
-      <option name="presentableId" value="LOCAL-00205" />
-      <option name="project" value="LOCAL" />
-      <updated>1533753429089</updated>
-    </task>
     <task id="LOCAL-00206" summary="updates to wavelet coding">
       <created>1533756574829</created>
       <option name="number" value="00206" />
@@ -834,7 +827,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534680436360</updated>
     </task>
-    <option name="localTasksCounter" value="254" />
+    <task id="LOCAL-00254" summary="updates to wavelet coding">
+      <created>1534680503834</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1534680503834</updated>
+    </task>
+    <option name="localTasksCounter" value="255" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1228,8 +1228,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/draws/inla_draws_climate_cod_1var_1-10.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="39" lean-forward="false" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
+        <state relative-caret-position="120">
+          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
           <folding />
         </state>
       </provider>
