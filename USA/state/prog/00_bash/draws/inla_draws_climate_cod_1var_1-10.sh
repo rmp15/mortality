@@ -34,7 +34,7 @@ for draw in "${draws[@]}"; do
 
 echo "combining results into one file from INLA model $model years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/draws_inla_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $draw;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/draws/draws_inla_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $draw;
 
 done; done; done;
 
