@@ -87,7 +87,7 @@ declare cod="Accidental_drowning_and_submersion"
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 75 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 65 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 5  2 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 0  1 $start $end  10 0 $dname $metric $start2 $end2 $cod $fast $contig;
