@@ -170,7 +170,7 @@ if(model%in%c('1d','1d2')){
 
     }
 
-    # processing for plotting
+    # processing for plotting NEED TO ADD MEAN INSTEAD (to match the original method of bind_posterior...)
     additional.deaths.summary = ddply(additional.deaths,.(sex,age),summarise,deaths.added.median=median(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
     additional.deaths.summary$sex.long <- mapvalues(additional.deaths.summary$sex,from=sort(unique(additional.deaths.summary$sex)),to=c('Male','Female'))
     additional.deaths.summary$sex.long <- reorder(additional.deaths.summary$sex.long,additional.deaths.summary$sex)
