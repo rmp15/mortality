@@ -17,9 +17,8 @@ country <- as.character(args[3])
 model <- as.numeric(args[4])
 dname <- as.character(args[5])
 metric <- as.character(args[6])
-# cause <- as.character(args[7]) ; cause <- gsub('_',' ',cause)
-contig <- as.numeric(args[8])
-num.draws <- as.numeric(args[9])
+contig <- as.numeric(args[7])
+num.draws <- as.numeric(args[8])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
@@ -90,24 +89,6 @@ for(k in causes.all){
 # for national model, plot additional deaths (with CIs) all on one page, one for men and one for women
 if(model%in%c('1d','1d2')){
 
-    # load death rate data and create national death rates
-    if(cause=='AllCause'){
-        dat.mort <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_',year.end))
-    }
-    if(cause%in%c('Cancer','Cardiopulmonary','External','Other')){
-        dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start,'_',year.end))
-        dat.mort <- subset(dat.mort,cause==cause)
-    }
-    if(cause%in%c('Intentional','Unintentional')){
-        dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_injuries_ons_',year.start,'_',year.end))
-        dat.mort <- subset(dat.mort,cause==cause)
-    }
-    if(cause%in%c('Unintentional wo drowning')){
-        dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_injuries_wo_drowning_ons_',year.start,'_',year.end))
-        dat.mort <- subset(dat.mort,cause=='Unintentional')
-    }
-    if(cause%in%c('Transport accidents','Accidental falls','Other external causes of injury',
-                    'Accidental drowning and submersion','Intentional self-harm','Assault')){
         dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
         dat.mort$cause.group = NULL ; names(dat.mort)[6] = 'cause.'
         dat.mort <- subset(dat.mort,cause.==as.character(cause)) ; names(dat.mort)[6] = 'cause'
