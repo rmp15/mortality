@@ -33,7 +33,7 @@ dat$cause.sub <- gsub('Transport accidents', '1. Transport', dat$cause.sub)
 dat$cause.sub <- gsub('Accidental falls', '2. Falls', dat$cause.sub)
 dat$cause.sub <- gsub('Other external causes of injury', '4. Other injuries', dat$cause.sub)
 dat$cause.sub <- gsub('Accidental drowning and submersion', '3. Drownings', dat$cause.sub)
-dat$cause.sub <- gsub('Intentional self-harm', '6. Intentional self-harm', dat$cause.sub)
+dat$cause.sub <- gsub('Intentional self-harm', '6. Intentional\nself-harm', dat$cause.sub)
 dat$cause.sub <- gsub('Assault', '5. Assault', dat$cause.sub)
 
 library(plyr)
@@ -292,7 +292,7 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,colour=as.factor(year
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 2,title = paste0("Year"))) +
+    scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 3,title = paste0("Year"))) +
     facet_grid(~cause.sub) +
     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
