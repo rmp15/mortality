@@ -63,114 +63,146 @@ causes.unintentional = c('Accidental falls', 'Accidental drowning and submersion
 causes.all = c(causes.intentional,causes.unintentional)
 
 # load the draws data for each age and sex for the cause chosen
-for(k in causes.all){
+for(h in causes.all){
     for (i in seq(length(sex.filter))) {
         for (j in seq(length(age.filter))) {
 
-            print(paste0('Loading draws for ',sex.filter[i],', ',age.filter[j],', ',k,'...'))
+            print(paste0('Loading draws for ',sex.filter[i],', ',age.filter[j],', ',h,'...'))
 
             # get location of file
             file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
-                    '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',k,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
+                    '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',h,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
             if(contig==1){
                 file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
-                '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',k,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
+                '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',h,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
             }
+
+
 
             # load file
             save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
                 '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
             draws.current = readRDS(paste0(file.loc.input,save.name))
-            do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',k), draws.current))
+            do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h), draws.current))
 }}}
-
-# FIX FROM HERE
 
 # for national model, plot additional deaths (with CIs) all on one page, one for men and one for women
 if(model%in%c('1d','1d2')){
 
         dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
-        dat.mort$cause.group = NULL ; names(dat.mort)[6] = 'cause.'
-        dat.mort <- subset(dat.mort,cause.==as.character(cause)) ; names(dat.mort)[6] = 'cause'
-
         print(head(dat.mort))
-    }
 
     # make for national data
     dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
-    dat.national <- ddply(dat.mort,.(year,month,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
+    dat.national <- ddply(dat.mort,.(year,month,cause.sub,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
     dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
-    dat.national <- dat.national[order(dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
+    dat.national <- dat.national[order(dat.national$cause.sub,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
     # with all the draws made for each age and sex, will now make an estimate for additional deaths
     additional.deaths = data.frame()
-    additional.deaths.monthly = data.frame()
+    additional.deaths.total = data.frame()
+    # additional.deaths.monthly = data.frame()
     for(k in seq(num.draws)){
-        print(paste0('draw ',k))
-        parameter.table = data.frame()
-        for (i in seq(length(sex.filter))) {
-            for (j in seq(length(age.filter))) {
+            print(paste0('draw ',k))
+            dat.merged.sub.all = data.frame()
+            # for each cause of death in cause.all
+            for(h in causes.all){
 
-        # for each draw make a parameter summary to then calculate additional deaths
-        climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i]))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[1]))[[k]]$latent))]
-        climate.values = exp(climate.values)
-        table = data.frame(age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
-        parameter.table = rbind(parameter.table,table)
-        }}
+                # isolate the cause
+                dat.national$cause.group = NULL ; names(dat.national)[3] = 'cause.'
+                dat.national.current <- subset(dat.national,cause.==as.character(h)) ; names(dat.national.current)[3] = 'cause'
 
-        # 1. ADDITIONAL DEATHS FROM UNIFORM 2 DEGREE INCREASE NATIONALLY FROM LAST YEAR'S POPULATION
+                # empty data frame for parameters
+                parameter.table = data.frame()
 
-        # merge odds and deaths files and reorder
-        dat.merged <- merge(dat.national,parameter.table,by.x=c('sex','age','month'),by.y=c('sex','age','ID'),all.x=TRUE)
-        dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
-        dat.merged <- na.omit(dat.merged)
+                # cycle through every age-sex group
+                for (i in seq(length(sex.filter))) {
+                    for (j in seq(length(age.filter))) {
 
-        # calculate additional deaths for 2 unit change in climate parameter
-        dat.merged$deaths.added <- with(dat.merged,(odds.mean-1)*deaths.pred)
-        dat.merged$deaths.added.two.deg <- with(dat.merged,((odds.mean)^2-1)*deaths.pred)
+                # for each draw make a parameter summary to then calculate additional deaths
+                climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h))[[k]]$latent))]
+                climate.values = exp(climate.values)
+                table = data.frame(cause=h,age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
+                parameter.table = rbind(parameter.table,table)
+                }}
 
-        # take one year
-        dat.merged.sub <- subset(dat.merged,year==year.end)
+                # 1. ADDITIONAL DEATHS FROM UNIFORM 2 DEGREE INCREASE NATIONALLY FROM LAST YEAR'S POPULATION
 
-        # take out unsuitable age-sex age_groups
-        if(cause=="Intentional self-harm"){
-            dat.merged.sub$deaths.added =           ifelse(dat.merged.sub$age==0,0,dat.merged.sub$deaths.added)
-            dat.merged.sub$deaths.added.two.deg =   ifelse(dat.merged.sub$age==0,0,dat.merged.sub$deaths.added.two.deg)
+                # merge odds and deaths files and reorder
+                dat.merged <- merge(dat.national.current,parameter.table,by.x=c('cause','sex','age','month'),by.y=c('cause','sex','age','ID'),all.x=TRUE)
+                dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+                dat.merged <- na.omit(dat.merged)
 
-        }
+                # calculate additional deaths for 2 unit change in climate parameter
+                dat.merged$deaths.added <- with(dat.merged,(odds.mean-1)*deaths.pred)
+                dat.merged$deaths.added.two.deg <- with(dat.merged,((odds.mean)^2-1)*deaths.pred)
 
-        # integrate across year by age and sex, also for entire population
-        dat.merged.sub.year = ddply(dat.merged.sub,.(sex,age),summarise,deaths.added=sum(deaths.added.two.deg))
-        dat.total = ddply(dat.merged.sub.year,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total$age = 99
-        dat.merged.sub.year = rbind(dat.merged.sub.year,dat.total)
-        dat.merged.sub.year$draw = k
+                # take one year
+                dat.merged.sub <- subset(dat.merged,year==year.end)
 
-        additional.deaths = rbind(additional.deaths,dat.merged.sub.year)
+                # take out unsuitable age-sex age_groups
+                if(h=="Intentional self-harm"){
+                    dat.merged.sub$deaths.added =           ifelse(dat.merged.sub$age==0,0,dat.merged.sub$deaths.added)
+                    dat.merged.sub$deaths.added.two.deg =   ifelse(dat.merged.sub$age==0,0,dat.merged.sub$deaths.added.two.deg)
 
-        # integrate across year by month and sex, also for entire population
-        dat.merged.sub.year.monthly = ddply(dat.merged.sub,.(sex,month),summarise,deaths.added=sum(deaths.added.two.deg))
-        dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total.monthly$month = 99
-        dat.merged.sub.year.monthly = rbind(dat.merged.sub.year.monthly,dat.total.monthly)
-        dat.merged.sub.year.monthly$draw = k
+                }
 
-        additional.deaths.monthly = rbind(additional.deaths.monthly,dat.merged.sub.year.monthly)
+                dat.merged.sub.all=rbind(dat.merged.sub.all,dat.merged.sub)
+
+            }
+
+            # integrate across year by cause, age and sex, also for entire population
+            dat.merged.sub.year = ddply(dat.merged.sub.all,.(cause,sex,age),summarise,deaths.added=sum(deaths.added.two.deg))
+            dat.total.sex = ddply(dat.merged.sub.year,.(cause,sex),summarise,deaths.added=sum(deaths.added)) ; dat.total.sex$age = 99
+            dat.total= ddply(dat.merged.sub.year,.(cause),summarise,deaths.added=sum(deaths.added)) ; dat.total$age = 99 ; dat.total$sex = 0
+
+            dat.merged.sub.year = rbind(dat.merged.sub.year,dat.total.sex,dat.total)
+            dat.merged.sub.year$draw = k
+
+            additional.deaths = rbind(additional.deaths,dat.merged.sub.year)
+            additional.deaths.total= rbind(additional.deaths.total,subset(dat.merged.sub.year,sex==0&age==99))
+
+            # # integrate across year by month and sex, also for entire population
+            # dat.merged.sub.year.monthly = ddply(dat.merged.sub,.(sex,month),summarise,deaths.added=sum(deaths.added.two.deg))
+            # dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total.monthly$month = 99
+            # dat.merged.sub.year.monthly = rbind(dat.merged.sub.year.monthly,dat.total.monthly)
+            # dat.merged.sub.year.monthly$draw = k
+            #
+            # additional.deaths.monthly = rbind(additional.deaths.monthly,dat.merged.sub.year.monthly)
 
     }
 
-    # processing for plotting NEED TO ADD MEAN INSTEAD (to match the original method of bind_posterior...)
-    additional.deaths.summary = ddply(additional.deaths,.(sex,age),summarise,deaths.added.median=median(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
-    additional.deaths.summary$sex.long <- mapvalues(additional.deaths.summary$sex,from=sort(unique(additional.deaths.summary$sex)),to=c('Male','Female'))
-    additional.deaths.summary$sex.long <- reorder(additional.deaths.summary$sex.long,additional.deaths.summary$sex)
+    # summarise each cause of deaths as well as intent
+    additional.deaths.total.intent = additional.deaths.total
+    additional.deaths.total.intent$intent = ifelse(additional.deaths.total.intent$cause%in%c('Assault','Intentional self-harm'),'Intentional','Unintentional')
+    additional.deaths.total.intent = ddply(additional.deaths.total.intent,.(draw,intent),summarize,deaths.added=sum(deaths.added))
 
-    additional.deaths.summary.monthly = ddply(additional.deaths.monthly,.(sex,month),summarise,deaths.added.median=median(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
-    additional.deaths.summary.monthly$sex.long <- mapvalues(additional.deaths.summary.monthly$sex,from=sort(unique(additional.deaths.summary.monthly$sex)),to=c('Male','Female'))
-    additional.deaths.summary.monthly$sex.long <- reorder(additional.deaths.summary.monthly$sex.long,additional.deaths.summary.monthly$sex)
+    # total deaths overall also
+    additional.deaths.total.total = additional.deaths.total
+    additional.deaths.total.total = ddply(additional.deaths.total.total,.(draw),summarize,deaths.added=sum(deaths.added))
+
+    # processing for plotting (mean to match the original method of bind_posterior...)
+    additional.deaths.summary = ddply(additional.deaths.total,.(cause),summarise,deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
+    additional.deaths.intent.summary = ddply(additional.deaths.total.intent,.(intent),summarise,deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
+    additional.deaths.total.summary = ddply(additional.deaths.total.total,.(),summarise,deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
+
+
+
+
+
+
+    # additional.deaths.summary$sex.long <- mapvalues(additional.deaths.summary$sex,from=sort(unique(additional.deaths.summary$sex)),to=c('Male','Female'))
+    # additional.deaths.summary$sex.long <- reorder(additional.deaths.summary$sex.long,additional.deaths.summary$sex)
+    #
+    # additional.deaths.summary.monthly = ddply(additional.deaths.monthly,.(sex,month),summarise,deaths.added.median=median(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
+    # additional.deaths.summary.monthly$sex.long <- mapvalues(additional.deaths.summary.monthly$sex,from=sort(unique(additional.deaths.summary.monthly$sex)),to=c('Male','Female'))
+    # additional.deaths.summary.monthly$sex.long <- reorder(additional.deaths.summary.monthly$sex.long,additional.deaths.summary.monthly$sex)
 
     additional.deaths.summary$age.long <- mapvalues(additional.deaths.summary$age,from=sort(unique(additional.deaths.summary$age)),to=c(as.character(age.code[,2]),'All ages'))
     additional.deaths.summary$age.long <- reorder(additional.deaths.summary$age.long,additional.deaths.summary$age)
 
-    additional.deaths.summary.monthly$month.short <- mapvalues(additional.deaths.summary.monthly$month,from=sort(unique(additional.deaths.summary.monthly$month)),to=c(as.character(month.short),'All months'))
-    additional.deaths.summary.monthly$month.short <- reorder(additional.deaths.summary.monthly$month.short,additional.deaths.summary.monthly$month)
+    # additional.deaths.summary.monthly$month.short <- mapvalues(additional.deaths.summary.monthly$month,from=sort(unique(additional.deaths.summary.monthly$month)),to=c(as.character(month.short),'All months'))
+    # additional.deaths.summary.monthly$month.short <- reorder(additional.deaths.summary.monthly$month.short,additional.deaths.summary.monthly$month)
 
     # save output as csvs
     write.csv(additional.deaths.summary,paste0(file.loc,country,'_rate_pred_type',model,
