@@ -157,7 +157,7 @@ for(i in c(0,5,15,25,35,45,55,65,75,85)){
         ggplot(data=subset(dat.all,sex==1&year.month<=600&age==i)) +
         geom_point(aes(x=year.month,y=rate.adj),color='red') +
         geom_line(aes(x=year.month,y=rate.pred))+ facet_wrap(~fips, scales='free') +
-        ggtitle(k)
+        ggtitle(i)
     )
 }
 dev.off()
@@ -168,7 +168,7 @@ for(i in c(0,5,15,25,35,45,55,65,75,85)){
         ggplot(data=subset(dat.all,sex==1&year.month<=600&age==i)) +
         geom_point(aes(x=year.month,y=rate.adj),color='red') +
         geom_line(aes(x=year.month,y=rate.pred))+ facet_wrap(~fips, scales='free') +
-        ggtitle(k)
+        ggtitle(i)
     )
 }
 dev.off()
