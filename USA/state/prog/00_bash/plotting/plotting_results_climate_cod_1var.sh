@@ -34,7 +34,7 @@ for model in "${models[@]}"; do
 #Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig
 
 #################################################
-# 2. PLOT RAW AGAINST FITTED DEATH RATES
+# 2. PLOT RAW AGAINST FITTED DEATH RATES AND RESIDUALS
 #################################################
 
 #Rscript ~/git/mortality/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R $start $end $country $model $dname $metric $cod $contig
