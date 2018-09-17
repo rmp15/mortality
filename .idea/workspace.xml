@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R" afterPath="$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +24,8 @@
       <file leaf-file-name="fitted_against_raw_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="85" column="22" lean-forward="false" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
+            <state relative-caret-position="337">
+              <caret line="116" column="9" lean-forward="true" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -107,9 +107,9 @@
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_1-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/residuals/residuals_trend_cod_1var.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/residuals/residuals_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
+        <option value="$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R" />
       </list>
     </option>
   </component>
@@ -294,6 +294,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/External/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_External.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/External/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_External.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/External/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_External.pdf</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -301,11 +304,43 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/External/raw_against_adjusted_1d_1980_2016_t2m_meanc3_External.pdf</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/External/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_External.pdf</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/External/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_External.pdf</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/External/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_External.pdf</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/.nfs0000001f0001f39c00000209</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Accidental drowning and submersion/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Accidental drowning and submersion.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Accidental drowning and submersion/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Accidental drowning and submersion.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Accidental drowning and submersion/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Accidental drowning and submersion.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Accidental falls/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Accidental falls.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Accidental falls/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Accidental falls.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Accidental falls/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Accidental falls.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Assault/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Assault.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Assault/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Assault.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Assault/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Assault.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Intentional self-harm/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Intentional self-harm.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Intentional self-harm/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Intentional self-harm.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Intentional self-harm/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Intentional self-harm.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Intentional/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Intentional.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Intentional/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Intentional.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Intentional/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Intentional.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Other external causes of injury/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Other external causes of injury.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Other external causes of injury/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Other external causes of injury.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Other external causes of injury/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Other external causes of injury.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Transport accidents/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Transport accidents.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Transport accidents/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Transport accidents.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Transport accidents/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Transport accidents.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Unintentional wo drowning/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Unintentional wo drowning.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Unintentional wo drowning/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Unintentional wo drowning.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Unintentional wo drowning/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Unintentional wo drowning.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Unintentional/raw_against_adjusted_by_age_1d_1980_2016_t2m_meanc3_Unintentional.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Unintentional/raw_against_adjusted_by_state_1d_1980_2016_t2m_meanc3_Unintentional.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/fitted_against_raw/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Unintentional/raw_against_adjusted_over_time_1d_1980_2016_t2m_meanc3_Unintentional.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Accidental drowning and submersion/residuals_over_time_1d_1980_2016_t2m_meanc3_Accidental drowning and submersion.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Accidental falls/residuals_over_time_1d_1980_2016_t2m_meanc3_Accidental falls.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Assault/residuals_over_time_1d_1980_2016_t2m_meanc3_Assault.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/External/residuals_over_time_1d_1980_2016_t2m_meanc3_External.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Intentional self-harm/residuals_over_time_1d_1980_2016_t2m_meanc3_Intentional self-harm.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Intentional/residuals_over_time_1d_1980_2016_t2m_meanc3_Intentional.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Other external causes of injury/residuals_over_time_1d_1980_2016_t2m_meanc3_Other external causes of injury.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Transport accidents/residuals_over_time_1d_1980_2016_t2m_meanc3_Transport accidents.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Unintentional wo drowning/residuals_over_time_1d_1980_2016_t2m_meanc3_Unintentional wo drowning.pdf</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/USA/state/output/residuals/1980_2016/t2m/meanc3/non_pw/type_1d/contig/Unintentional/residuals_over_time_1d_1980_2016_t2m_meanc3_Unintentional.pdf</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -607,13 +642,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
-    </task>
-    <task id="LOCAL-00243" summary="updates to wavelet coding">
-      <created>1534283580821</created>
-      <option name="number" value="00243" />
-      <option name="presentableId" value="LOCAL-00243" />
-      <option name="project" value="LOCAL" />
-      <updated>1534283580822</updated>
     </task>
     <task id="LOCAL-00244" summary="updates to wavelet coding">
       <created>1534318521836</created>
@@ -951,7 +979,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537185408147</updated>
     </task>
-    <option name="localTasksCounter" value="292" />
+    <task id="LOCAL-00292" summary="updates to wavelet coding">
+      <created>1537190479580</created>
+      <option name="number" value="00292" />
+      <option name="presentableId" value="LOCAL-00292" />
+      <option name="project" value="LOCAL" />
+      <updated>1537190479581</updated>
+    </task>
+    <option name="localTasksCounter" value="293" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -963,7 +998,7 @@
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32880434" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32650602" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3237998" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3237998" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24951456" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1365,8 +1400,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="85" column="22" lean-forward="false" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
+        <state relative-caret-position="337">
+          <caret line="116" column="9" lean-forward="true" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
           <folding />
         </state>
       </provider>
