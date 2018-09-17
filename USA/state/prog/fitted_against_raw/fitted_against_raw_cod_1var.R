@@ -126,13 +126,49 @@ ggplot(data=dat.all) +
 dev.off()
 
 # plotting by state over time
-pdf(paste0(file.loc,'raw_against_adjusted_over_time_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+pdf(paste0(file.loc,'raw_against_adjusted_over_time_males_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
 for(k in sort(unique(dat$fips))){
     print(
-        ggplot(data=subset(dat.all,year.month<=600&fips==k)) +
+        ggplot(data=subset(dat.all,sex==1&year.month<=600&fips==k)) +
         geom_point(aes(x=year.month,y=rate.adj),color='red') +
         geom_line(aes(x=year.month,y=rate.pred))+ facet_wrap(~age, scales='free') +
         ggtitle(k)
     )
 }
 dev.off()
+
+# plotting by state over time
+pdf(paste0(file.loc,'raw_against_adjusted_over_time_females_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+for(k in sort(unique(dat$fips))){
+    print(
+        ggplot(data=subset(dat.all,sex==2&year.month<=600&fips==k)) +
+        geom_point(aes(x=year.month,y=rate.adj),color='red') +
+        geom_line(aes(x=year.month,y=rate.pred))+ facet_wrap(~age, scales='free') +
+        ggtitle(k)
+    )
+}
+dev.off()
+
+# plotting by age over time per state
+pdf(paste0(file.loc,'raw_against_adjusted_over_time_males_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+for(i in c(0,5,15,25,35,45,55,65,75,85)){
+    print(
+        ggplot(data=subset(dat.all,sex==1&year.month<=600&age==i)) +
+        geom_point(aes(x=year.month,y=rate.adj),color='red') +
+        geom_line(aes(x=year.month,y=rate.pred))+ facet_wrap(~fips, scales='free') +
+        ggtitle(k)
+    )
+}
+dev.off()
+
+pdf(paste0(file.loc,'raw_against_adjusted_over_time_females_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+for(i in c(0,5,15,25,35,45,55,65,75,85)){
+    print(
+        ggplot(data=subset(dat.all,sex==1&year.month<=600&age==i)) +
+        geom_point(aes(x=year.month,y=rate.adj),color='red') +
+        geom_line(aes(x=year.month,y=rate.pred))+ facet_wrap(~fips, scales='free') +
+        ggtitle(k)
+    )
+}
+dev.off()
+

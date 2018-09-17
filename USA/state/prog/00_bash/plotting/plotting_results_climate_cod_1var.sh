@@ -37,7 +37,7 @@ for model in "${models[@]}"; do
 # 2. PLOT RAW AGAINST FITTED DEATH RATES AND RESIDUALS
 #################################################
 
-#Rscript ~/git/mortality/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R $start $end $country $model $dname $metric $cod $contig
-Rscript ~/git/mortality/USA/state/prog/residuals/residuals_cod_1var.R $start $end $country $model $dname $metric $cod $contig
+Rscript ~/git/mortality/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R $start $end $country $model $dname $metric $cod $contig
+#Rscript ~/git/mortality/USA/state/prog/residuals/residuals_cod_1var.R $start $end $country $model $dname $metric $cod $contig
 
 done; done; done; done;
