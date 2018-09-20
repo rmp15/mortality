@@ -305,7 +305,7 @@
         # overdispersion term
         f(e, model = "iid")                                                    		 	# overdispersion term
 
-        # ADD AN OPTION IF PW THEN PUT SECOND VARIABLE IN
+        # if piece-wise (need to extend to entire model selections)
     if(pw.arg==1){
         fml  <- deaths.adj ~
         # global terms
