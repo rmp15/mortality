@@ -4,6 +4,7 @@
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/compare_posterior_climate_cod_1var.R" afterPath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/compare_posterior_climate_cod_1var.R" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" afterPath="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,28 +22,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plotting_results_climate_cod_1var.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="plotting_results_climate_cod_1var.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="510">
+              <caret line="34" column="153" lean-forward="true" selection-start-line="34" selection-start-column="153" selection-end-line="34" selection-end-column="153" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="compare_posterior_climate_cod_1var.R" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mapping_posterior_climate_cod_1var.R" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+              <folding>
+                <element signature="e#1146#2183#0" expanded="false" />
+                <element signature="e#2201#3210#0" expanded="false" />
+                <element signature="e#3245#4266#0" expanded="false" />
+                <element signature="e#3276#3763#0" expanded="false" />
+                <element signature="e#3793#4260#0" expanded="false" />
+                <element signature="e#4284#5277#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compare_posterior_climate_cod_1var.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/compare_posterior_climate_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="94" selection-end-column="1" />
+            <state relative-caret-position="286">
+              <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
-                <element signature="e#996#2033#0" expanded="false" />
-                <element signature="e#2051#3060#0" expanded="false" />
-                <element signature="e#3095#4116#0" expanded="false" />
-                <element signature="e#3126#3613#0" expanded="false" />
-                <element signature="e#3643#4110#0" expanded="false" />
-                <element signature="e#4134#5127#0" expanded="false" />
+                <element signature="e#1025#2062#0" expanded="false" />
+                <element signature="e#2080#3089#0" expanded="false" />
+                <element signature="e#3124#4145#0" expanded="false" />
+                <element signature="e#3155#3642#0" expanded="false" />
+                <element signature="e#3672#4139#0" expanded="false" />
+                <element signature="e#4163#5156#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -86,7 +104,6 @@
         <option value="$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/cape_town/step_tariff_plot.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_climate_draws_cod_1var.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw.R" />
@@ -111,6 +128,7 @@
         <option value="$PROJECT_DIR$/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/mapping_posterior/compare_posterior_climate_cod_1var.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R" />
       </list>
     </option>
   </component>
@@ -443,13 +461,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
-    </task>
-    <task id="LOCAL-00279" summary="updates to wavelet coding">
-      <created>1534926618309</created>
-      <option name="number" value="00279" />
-      <option name="presentableId" value="LOCAL-00279" />
-      <option name="project" value="LOCAL" />
-      <updated>1534926618309</updated>
     </task>
     <task id="LOCAL-00280" summary="updates to wavelet coding">
       <created>1534926681030</created>
@@ -787,7 +798,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538131676297</updated>
     </task>
-    <option name="localTasksCounter" value="328" />
+    <task id="LOCAL-00328" summary="updates to wavelet coding">
+      <created>1538131785778</created>
+      <option name="number" value="00328" />
+      <option name="presentableId" value="LOCAL-00328" />
+      <option name="project" value="LOCAL" />
+      <updated>1538131785778</updated>
+    </task>
+    <option name="localTasksCounter" value="329" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1003,13 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="314" column="158" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="315" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_load_data_cod.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -1172,26 +1183,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/compare_posterior_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="286">
+          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#1025#2062#0" expanded="false" />
+            <element signature="e#2080#3089#0" expanded="false" />
+            <element signature="e#3124#4145#0" expanded="false" />
+            <element signature="e#3155#3642#0" expanded="false" />
+            <element signature="e#3672#4139#0" expanded="false" />
+            <element signature="e#4163#5156#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/compare_posterior_climate_cod_1var.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="94" selection-end-column="1" />
+        <state relative-caret-position="315">
+          <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
           <folding>
-            <element signature="e#996#2033#0" expanded="false" />
-            <element signature="e#2051#3060#0" expanded="false" />
-            <element signature="e#3095#4116#0" expanded="false" />
-            <element signature="e#3126#3613#0" expanded="false" />
-            <element signature="e#3643#4110#0" expanded="false" />
-            <element signature="e#4134#5127#0" expanded="false" />
+            <element signature="e#1146#2183#0" expanded="false" />
+            <element signature="e#2201#3210#0" expanded="false" />
+            <element signature="e#3245#4266#0" expanded="false" />
+            <element signature="e#3276#3763#0" expanded="false" />
+            <element signature="e#3793#4260#0" expanded="false" />
+            <element signature="e#4284#5277#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="34" column="153" lean-forward="true" selection-start-line="34" selection-start-column="153" selection-end-line="34" selection-end-column="153" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -19,6 +19,7 @@ dname <- as.character(args[5])
 metric <- as.character(args[6])
 cause <- as.character(args[7]) ; cause <- gsub('_',' ',cause)
 contig <- as.numeric(args[8])
+pw.arg = as.numeric(args[9])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
@@ -37,24 +38,64 @@ unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes,
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
 # load the data
-if(contig==1){
-    if(cause!='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-        country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+if(pw.arg==0){
+    if(contig==1){
+        if(cause!='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+            country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
+            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+        }
+        if(cause=='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+            ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
+            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+        }
     }
-    if(cause=='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-        ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+    if(contig==0){
+        if(cause!='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+            country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
+            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+        }
+        if(cause=='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+            ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
+            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+        }
     }
 }
-if(contig==0){
-    if(cause!='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-        country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+if(pw.arg==1){
+    if(contig==1){
+        if(cause!='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/',
+            country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model.2,'/parameters/',
+            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+        }
+        if(cause=='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/'
+            ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model.2,'/parameters/'
+            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+        }
     }
-    if(cause=='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-        ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+    if(contig==0){
+        if(cause!='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/',
+            country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model.2,'/parameters/',
+            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+        }
+        if(cause=='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/'
+            ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model.2,'/parameters/'
+            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+        }
     }
 }
 if(multiple==1){

@@ -19,7 +19,7 @@ dname <- as.character(args[6])
 metric <- as.character(args[7])
 cause <- as.character(args[8]) ; cause <- gsub('_',' ',cause)
 contig <- as.numeric(args[9])
-
+pw.arg = as.numeric(args[10])
 
 #year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ; model.2 = 18 ; dname = 't2m' ; metric = 'meanc3' ; cause = 'Transport accidents'; contig=1
 
