@@ -33,35 +33,66 @@ model.2 <- models[model.2]
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
 # load the data
-if(contig==1){
-    if(cause!='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-        country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
-        dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
-        country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+if(pw.arg==0){
+    if(contig==1){
+        if(cause!='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+            country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
+            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+        }
+        if(cause=='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+            ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
+            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+        }
     }
-    if(cause=='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-        ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
-        dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
-        ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+    if(contig==0){
+        if(cause!='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+            country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
+            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+        }
+        if(cause=='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+            ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
+            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+        }
     }
 }
-if(contig==0){
-    if(cause!='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-        country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
-        dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
-        country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+if(pw.arg==1){
+    if(contig==1){
+        if(cause!='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/',
+            country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model.2,'/parameters/',
+            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+        }
+        if(cause=='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/'
+            ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model.2,'/parameters/'
+            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+        }
     }
-    if(cause=='AllCause'){
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-        ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
-        dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
-        ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+    if(contig==0){
+        if(cause!='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/',
+            country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model.2,'/parameters/',
+            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+        }
+        if(cause=='AllCause'){
+            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/'
+            ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model.2,'/parameters/'
+            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+        }
     }
 }
-
 # create directories for output
 file.loc <- paste0('../../output/compare_posterior_climate/',year.start,'_',year.end,
 '/',dname,'/',metric,'/non_pw/type_',model,'/parameters/')
