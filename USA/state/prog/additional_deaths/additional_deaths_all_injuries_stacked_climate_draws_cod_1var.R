@@ -4,10 +4,6 @@ library(RColorBrewer)
 library(ggplot2)
 library(plyr)
 library(scales)
-#library(maptools)
-#library(mapproj)
-#library(rgeos)
-#library(rgdal)
 
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
