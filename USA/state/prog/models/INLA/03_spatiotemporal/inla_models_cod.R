@@ -494,7 +494,7 @@
     }
     }
 
-    if(type.arg==23){
+    if(type.arg==24){
 
         # Same as with 10 but with hyperparameters edited (but different to above as it doesn't have besag hyperparameters when there is a rw1-besag hybrid
 
