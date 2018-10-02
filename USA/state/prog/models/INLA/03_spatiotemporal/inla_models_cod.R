@@ -316,6 +316,8 @@
     
     if(type.arg==10){
 
+        # EDIT TO RUN WITH HYPERPARAMETERS
+
         # 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
         fml  <- deaths.adj ~
         # global terms

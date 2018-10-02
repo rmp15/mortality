@@ -22,7 +22,7 @@ num.draws <- as.numeric(args[8])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; contig=1 ; num.draws = 1000
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; contig=1 ; num.draws = 5000
 
 multiple = 0
 
@@ -41,22 +41,6 @@ if(contig==1){
 '/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_injuries/',num.draws,'_draws/')
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
-
-# # fix name for plotting
-# cod.print = ifelse(cause=='AllCause', 'All cause',
-#         ifelse(cause=='Cancer', 'Cancers',
-#         ifelse(cause=='Cardiopulmonary', 'Cardiorespiratory diseases',
-#         ifelse(cause=='External', 'Injuries',
-#         ifelse(cause=='Other', 'Other',
-#         ifelse(cause=='Intentional','Intentional injuries',
-#         ifelse(cause=='Unintentional','Unintentional injuries',
-#         ifelse(cause=='Unintentional wo drowning','Unintentional injuries except drowinings',
-#         ifelse(cause=='Transport accidents','Transport',
-#         ifelse(cause=='Intentional self-harm','Intentional self-harm', # TO ASK MAJID. 'Suicides' ???
-#         ifelse(cause=='Accidental falls','Falls',
-#         ifelse(cause=='Accidental drowning and submersion','Drownings',
-#         ifelse(cause=='Assault','Assault','NA'
-#         )))))))))))))
 
 causes.intentional = c('Assault','Intentional self-harm')
 causes.unintentional = c('Accidental falls', 'Accidental drowning and submersion', 'Transport accidents', 'Other external causes of injury')
