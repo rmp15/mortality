@@ -106,7 +106,7 @@ if(model%in%c('1d','1d2')){
                 parameter.table = rbind(parameter.table,table)
                 }}
 
-                # 1. ADDITIONAL DEATHS FROM UNIFORM 2 DEGREE INCREASE NATIONALLY FROM LAST YEAR'S POPULATION
+                # 1. ADDITIONAL DEATHS FROM UNIFORM 1/2 DEGREE INCREASE NATIONALLY FROM LAST YEAR'S POPULATION
 
                 # merge odds and deaths files and reorder
                 dat.merged <- merge(dat.national.current,parameter.table,by.x=c('cause','sex','age','month'),by.y=c('cause','sex','age','ID'),all.x=TRUE)
@@ -142,13 +142,13 @@ if(model%in%c('1d','1d2')){
             additional.deaths = rbind(additional.deaths,dat.merged.sub.year)
             additional.deaths.total= rbind(additional.deaths.total,subset(dat.merged.sub.year,sex==0&age==99))
 
-            # # integrate across year by month and sex, also for entire population
-            # dat.merged.sub.year.monthly = ddply(dat.merged.sub,.(sex,month),summarise,deaths.added=sum(deaths.added.two.deg))
-            # dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total.monthly$month = 99
-            # dat.merged.sub.year.monthly = rbind(dat.merged.sub.year.monthly,dat.total.monthly)
-            # dat.merged.sub.year.monthly$draw = k
-            #
-            # additional.deaths.monthly = rbind(additional.deaths.monthly,dat.merged.sub.year.monthly)
+            # integrate across year by month and sex, also for entire population
+            dat.merged.sub.year.monthly = ddply(dat.merged.sub,.(sex,month),summarise,deaths.added=sum(deaths.added.two.deg))
+            dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(sex),summarise,deaths.added=sum(deaths.added)) ; dat.total.monthly$month = 99
+            dat.merged.sub.year.monthly = rbind(dat.merged.sub.year.monthly,dat.total.monthly)
+            dat.merged.sub.year.monthly$draw = k
+
+            additional.deaths.monthly = rbind(additional.deaths.monthly,dat.merged.sub.year.monthly)
 
     }
 
@@ -165,11 +165,6 @@ if(model%in%c('1d','1d2')){
     additional.deaths.summary = ddply(additional.deaths.total,.(cause),summarise,deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
     additional.deaths.intent.summary = ddply(additional.deaths.total.intent,.(intent),summarise,deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
     additional.deaths.total.summary = ddply(additional.deaths.total.total,.(),summarise,deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
-
-
-
-
-
 
     # additional.deaths.summary$sex.long <- mapvalues(additional.deaths.summary$sex,from=sort(unique(additional.deaths.summary$sex)),to=c('Male','Female'))
     # additional.deaths.summary$sex.long <- reorder(additional.deaths.summary$sex.long,additional.deaths.summary$sex)
