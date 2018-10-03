@@ -69,8 +69,8 @@ for(h in causes.all){
 # for national model, plot additional deaths (with CIs) all on one page, one for men and one for women
 if(model%in%c('1d','1d2')){
 
-        dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
-        print(head(dat.mort))
+    dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
+    print(head(dat.mort))
 
     # make for national data
     dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
@@ -465,3 +465,4 @@ if(model%in%c('1d','1d2')){
     dev.off()
 
 
+}

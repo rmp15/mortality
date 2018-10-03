@@ -32,10 +32,10 @@ model <- models[model]
 
 # create directories for output
 file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/all_injuries/',num.draws,'_draws/')
+'/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/all_injuries/',num.draws,'_draws/test/')
 if(contig==1){
     file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_injuries/',num.draws,'_draws/')
+'/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_injuries/',num.draws,'_draws/test/')
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
