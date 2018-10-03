@@ -82,8 +82,8 @@ if(model%in%c('1d','1d2')){
     additional.deaths = data.frame()
     additional.deaths.total = data.frame()
     additional.deaths.monthly = data.frame()
-    # for(k in seq(num.draws)){
-    for(k in c(1:100)){
+    for(k in seq(num.draws)){
+    # for(k in c(1:1000)){
 
             print(paste0('draw ',k))
             dat.merged.sub.all = data.frame()
@@ -208,11 +208,12 @@ if(model%in%c('1d','1d2')){
     additional.deaths.intent.summary$sex.long <- mapvalues(additional.deaths.intent.summary$sex,from=sort(unique(additional.deaths.intent.summary$sex)),to=c('Male','Female'))
     additional.deaths.intent.summary$sex.long <- reorder(additional.deaths.intent.summary$sex.long,additional.deaths.intent.summary$sex)
 
-    # fix names of deaths
 
     # SAVE FILES
 
     # FOR PLOT BY AGE AND SEX
+
+    # FIX NAMES OF CAUSES
 
     pdf(paste0(file.loc,country,'_rate_pred_type',model,
         '_',year.start,'_',year.end,'_',dname,'_',metric,'_unintentional_to_transport_falls_drownings_other_fast_contig.pdf'),paper='a4r',height=0,width=0)

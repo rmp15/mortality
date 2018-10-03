@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_cod_1var.R" afterPath="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_cod_1var.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +23,8 @@
       <file leaf-file-name="additional_deaths_all_injuries_stacked_climate_draws_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="818">
-              <caret line="274" column="31" lean-forward="false" selection-start-line="274" selection-start-column="31" selection-end-line="274" selection-end-column="31" />
+            <state relative-caret-position="705">
+              <caret line="215" column="25" lean-forward="false" selection-start-line="215" selection-start-column="25" selection-end-line="215" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -111,10 +110,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1125" />
-    <option name="y" value="-1391" />
-    <option name="width" value="1383" />
-    <option name="height" value="1283" />
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -191,6 +188,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -414,27 +412,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
-    </task>
-    <task id="LOCAL-00293" summary="updates to wavelet coding">
-      <created>1537193390835</created>
-      <option name="number" value="00293" />
-      <option name="presentableId" value="LOCAL-00293" />
-      <option name="project" value="LOCAL" />
-      <updated>1537193390835</updated>
-    </task>
-    <task id="LOCAL-00294" summary="updates to wavelet coding">
-      <created>1537194018730</created>
-      <option name="number" value="00294" />
-      <option name="presentableId" value="LOCAL-00294" />
-      <option name="project" value="LOCAL" />
-      <updated>1537194018730</updated>
-    </task>
-    <task id="LOCAL-00295" summary="updates to wavelet coding">
-      <created>1537197039921</created>
-      <option name="number" value="00295" />
-      <option name="presentableId" value="LOCAL-00295" />
-      <option name="project" value="LOCAL" />
-      <updated>1537197039923</updated>
     </task>
     <task id="LOCAL-00296" summary="updates to wavelet coding">
       <created>1537198306453</created>
@@ -758,11 +735,32 @@
       <option name="project" value="LOCAL" />
       <updated>1538494406819</updated>
     </task>
-    <option name="localTasksCounter" value="342" />
+    <task id="LOCAL-00342" summary="updates to wavelet coding">
+      <created>1538523387228</created>
+      <option name="number" value="00342" />
+      <option name="presentableId" value="LOCAL-00342" />
+      <option name="project" value="LOCAL" />
+      <updated>1538523387228</updated>
+    </task>
+    <task id="LOCAL-00343" summary="updates to wavelet coding">
+      <created>1538523876477</created>
+      <option name="number" value="00343" />
+      <option name="presentableId" value="LOCAL-00343" />
+      <option name="project" value="LOCAL" />
+      <updated>1538523876477</updated>
+    </task>
+    <task id="LOCAL-00344" summary="updates to wavelet coding">
+      <created>1538557303758</created>
+      <option name="number" value="00344" />
+      <option name="presentableId" value="LOCAL-00344" />
+      <option name="project" value="LOCAL" />
+      <updated>1538557303758</updated>
+    </task>
+    <option name="localTasksCounter" value="345" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1125" y="-1391" width="1383" height="1283" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3131991" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1154,8 +1152,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="818">
-          <caret line="274" column="31" lean-forward="false" selection-start-line="274" selection-start-column="31" selection-end-line="274" selection-end-column="31" />
+        <state relative-caret-position="705">
+          <caret line="215" column="25" lean-forward="false" selection-start-line="215" selection-start-column="25" selection-end-line="215" selection-end-column="25" />
           <folding />
         </state>
       </provider>
