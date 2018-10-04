@@ -58,6 +58,7 @@ additional.deaths.intent.monthly.summary = readRDS(paste0(file.loc,'additional_d
 additional.deaths.summary = readRDS(paste0(file.loc,'additional_deaths_summary_age_draws.rds'))
 additional.deaths.summary.monthly =    readRDS(paste0(file.loc,'additional_deaths_summary_monthly_draws.rds'))
 
+# PLOTS FOR ABSOLUTE CHANGE IN DEATHS
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_unintentional_to_transport_falls_drownings_other_fast_contig.pdf'),paper='a4r',height=0,width=0)
@@ -251,4 +252,83 @@ pdf(paste0(file.loc,country,'_rate_pred_type',model,
 grid.arrange(p3,p4,nrow=2,left='Additional deaths associated with 1 degree additional warming (based on 2016 population)')
 dev.off()
 
+# PLOTS IN RELATIVE CHANGE IN DEATHS
 
+fix_cause_names = function(dat){
+    dat$cause <- gsub('Transport accidents', '1. Transport', dat$cause)
+    dat$cause <- gsub('Accidental falls', '2. Falls', dat$cause)
+    dat$cause <- gsub('Other external causes of injury', '4. Other injuries', dat$cause)
+    dat$cause <- gsub('Accidental drowning and submersion', '3. Drownings', dat$cause)
+    dat$cause <- gsub('Intentional self-harm', '6. Intentional self-harm', dat$cause)
+    dat$cause <- gsub('6. Intentional self-harm', '6. Intentional\nself-harm', dat$cause)
+    dat$cause <- gsub('Assault', '5. Assault', dat$cause)
+
+    return(dat)
+    }
+
+# load mortality data
+dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
+print(head(dat.mort))
+
+# make for national data
+dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
+dat.national <- ddply(dat.mort,.(year,month,cause.sub,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
+dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
+dat.national <- dat.national[order(dat.national$cause.sub,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
+dat.national$cause = dat.national$cause.sub ; dat.national$cause.sub = NULL
+
+# take one year
+dat.merged.sub <- subset(dat.national,year==year.end)
+
+# summarise by age-sex and cause across the year
+dat.year.summary = ddply(dat.merged.sub,.(sex,age,cause),summarize,deaths=sum(deaths.pred))
+dat.year.summary = fix_cause_names(dat.year.summary)
+
+# merge with summary of additional deaths by sex,age,cause
+additional.deaths.summary.perc = merge(dat.year.summary,additional.deaths.summary,by=c('sex','age','cause'))
+additional.deaths.summary.perc$perc.mean = with(additional.deaths.summary.perc,deaths.added.mean/deaths)
+additional.deaths.summary.perc$perc.ul = with(additional.deaths.summary.perc,deaths.added.ul/deaths)
+additional.deaths.summary.perc$perc.ll = with(additional.deaths.summary.perc,deaths.added.ll/deaths)
+
+perc_calculator = function(dat){
+    dat$perc.mean = with(dat,deaths.added.mean/deaths)
+    dat$perc.ul = with(dat,deaths.added.ul/deaths)
+    dat$perc.ll = with(dat,deaths.added.ll/deaths)
+
+    return(dat)
+}
+
+# summarise by age-sex and intent across the year
+additional.deaths.intent.summary.perc = dat.year.summary
+additional.deaths.intent.summary.perc$intent = ifelse(additional.deaths.intent.summary.perc$cause%in%c('5. Assault','6. Intentional self-harm'),'2. Intentional','1. Unintentional')
+additional.deaths.intent.summary.perc = ddply(additional.deaths.intent.summary.perc,.(sex,age,intent),summarize,deaths=sum(deaths))
+additional.deaths.intent.summary.perc = merge(additional.deaths.intent.summary.perc,additional.deaths.intent.summary,by=c('sex','age','intent'))
+additional.deaths.intent.summary.perc =  perc_calculator(additional.deaths.intent.summary.perc)
+
+
+pdf(paste0(file.loc,country,'_rate_pred_type',model,
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_unintentional_to_transport_falls_drownings_other_fast_excess_risk_contig.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+    # geom_bar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,fill=cause), stat='identity') +
+    geom_errorbar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=2,shape=16) +
+    # geom_point(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),y=perc.mean),shape=16) +
+    # geom_errorbar(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.3,size=0.5) +
+    geom_hline(yintercept=0,linetype='dotted') +
+    xlab('Age group (years)') + ylab('Excess risk associated with 1 degree \n additional warming (based on 2016 population)') +
+    # ylim(c(min.plot,max.plot)) +
+    facet_grid(cause~sex.long) +
+    scale_y_continuous(labels=scales::percent) +
+    scale_color_manual(values=colors.subinjuries[c(1,2,3,4)]) +
+    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
+    guides(fill=guide_legend(title="Subcategory of unintentional injury",nrow=1)) +
+    # ggtitle('Additional deaths by types of intentional injuries') +
+    theme_bw() + theme(text = element_text(size = 15),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+dev.off()
