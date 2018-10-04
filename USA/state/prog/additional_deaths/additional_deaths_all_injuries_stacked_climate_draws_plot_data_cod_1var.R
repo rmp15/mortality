@@ -305,71 +305,94 @@ additional.deaths.intent.summary.perc = ddply(additional.deaths.intent.summary.p
 additional.deaths.intent.summary.perc = merge(additional.deaths.intent.summary.perc,additional.deaths.intent.summary,by=c('sex','age','intent'))
 additional.deaths.intent.summary.perc =  perc_calculator(additional.deaths.intent.summary.perc)
 
-# pdf(paste0(file.loc,country,'_rate_pred_type',model,
-#     '_',year.start,'_',year.end,'_',dname,'_',metric,'_unintentional_to_transport_falls_drownings_other_fast_excess_risk_contig.pdf'),paper='a4r',height=0,width=0)
-# ggplot() +
-#     # geom_bar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,fill=cause), stat='identity') +
-#     geom_errorbar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
-#     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16) +
-#     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=2,shape=16) +
-#     # geom_point(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),y=perc.mean),shape=16) +
-#     # geom_errorbar(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.3,size=0.5) +
-#     geom_hline(yintercept=0,linetype='dotted') +
-#     xlab('Age group (years)') + ylab('Excess risk associated with 1 degree additional warming') +
-#     # ylim(c(min.plot,max.plot)) +
-#     facet_grid(cause~sex.long) +
-#     scale_y_continuous(labels=scales::percent) +
-#     scale_color_manual(values=colors.subinjuries[c(1,2,3,4)]) +
-#     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-#     guides(color=guide_legend(title="Subcategory of unintentional injury",nrow=1)) +
-#     # ggtitle('Additional deaths by types of intentional injuries') +
-#     theme_bw() + theme(text = element_text(size = 15),
-#     panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-#     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-# dev.off()
-#
-# pdf(paste0(file.loc,country,'_rate_pred_type',model,
-#     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_to_assault_intentional_self-harm_monthly_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
-# ggplot() +
-#     # geom_bar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,fill=cause), stat='identity') +
-#     geom_errorbar(data=subset(additional.deaths.summary.perc,sex>0&age<99&(cause%in%c('5. Assault','6. Intentional\nself-harm'))),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
-#     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16) +
-#     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=2,shape=16) +
-#     # geom_point(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),y=perc.mean),shape=16) +
-#     # geom_errorbar(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.3,size=0.5) +
-#     geom_hline(yintercept=0,linetype='dotted') +
-#     xlab('Age group (years)') + ylab('Excess risk associated with 1 degree additional warming') +
-#     # ylim(c(min.plot,max.plot)) +
-#     facet_grid(cause~sex.long) +
-#     scale_y_continuous(labels=scales::percent) +
-#     scale_color_manual(values=colors.subinjuries[c(5,6)]) +
-#     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-#     guides(color=guide_legend(title="Subcategory of intentional injury",nrow=1)) +
-#     # ggtitle('Additional deaths by types of intentional injuries') +
-#     theme_bw() + theme(text = element_text(size = 15),
-#     panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-#     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-# dev.off()
+pdf(paste0(file.loc,country,'_rate_pred_type',model,
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_unintentional_to_transport_falls_drownings_other_fast_excess_risk_contig.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+    geom_errorbar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=2,shape=16) +
+    # geom_point(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),y=perc.mean),shape=16) +
+    # geom_errorbar(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.3,size=0.5) +
+    geom_hline(yintercept=0,linetype='dotted') +
+    xlab('Age group (years)') + ylab('Excess risk associated with 1 degree additional warming') +
+    # ylim(c(min.plot,max.plot)) +
+    facet_grid(cause~sex.long) +
+    scale_y_continuous(labels=scales::percent) +
+    scale_color_manual(values=colors.subinjuries[c(1,2,3,4)]) +
+    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
+    guides(color=guide_legend(title="Subcategory of unintentional injury",nrow=1)) +
+    # ggtitle('Additional deaths by types of intentional injuries') +
+    theme_bw() + theme(text = element_text(size = 15),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+dev.off()
+
+pdf(paste0(file.loc,country,'_rate_pred_type',model,
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_to_assault_intentional_self-harm_monthly_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+    geom_errorbar(data=subset(additional.deaths.summary.perc,sex>0&age<99&(cause%in%c('5. Assault','6. Intentional\nself-harm'))),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=2,shape=16) +
+    # geom_point(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),y=perc.mean),shape=16) +
+    # geom_errorbar(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.3,size=0.5) +
+    geom_hline(yintercept=0,linetype='dotted') +
+    xlab('Age group (years)') + ylab('Excess risk associated with 1 degree additional warming') +
+    # ylim(c(min.plot,max.plot)) +
+    facet_grid(cause~sex.long) +
+    scale_y_continuous(labels=scales::percent) +
+    scale_color_manual(values=colors.subinjuries[c(5,6)]) +
+    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
+    guides(color=guide_legend(title="Subcategory of intentional injury",nrow=1)) +
+    # ggtitle('Additional deaths by types of intentional injuries') +
+    theme_bw() + theme(text = element_text(size = 15),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
-    # geom_bar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,fill=cause), stat='identity') +
     geom_errorbar(data=subset(additional.deaths.summary.perc,sex>0&age<99),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16) +
     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=2,shape=16) +
     geom_hline(yintercept=0,linetype='dotted') +
     xlab('Age group (years)') + ylab('Excess risk associated with 1 degree additional warming') +
-    # ylim(c(min.plot,max.plot)) +
     facet_grid(cause~sex.long) +
+    scale_y_continuous(labels=scales::percent) +
+    scale_color_manual(values=colors.subinjuries[c(1,2,3,4,5,6)]) +
+    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
+    guides(color=guide_legend(title="Subcategory of injury",nrow=1)) +
+    # ggtitle('Additional deaths by types of intentional injuries') +
+    theme_bw() + theme(text = element_text(size = 15),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+dev.off()
+
+pdf(paste0(file.loc,country,'_rate_pred_type',model,
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_one_panel_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+    # geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99), aes(x=age.long,y=perc.mean),size=3,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5), aes(x=age.long,y=perc.mean,color=cause),size=2,shape=16) +
+    geom_errorbar(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5),aes(x=age.long,ymax=perc.ul,ymin=perc.ll,color=cause),width=.2,size=0.5) +
+    # geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5), aes(x=age.long,y=perc.mean,color=cause),size=2,shape=16) +
+    # geom_point(data=subset(additional.deaths.intent.summary.perc,intent=='1. Unintentional'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16) +
+    # geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16,position=position_dodge(width=0.5)) +
+    geom_hline(yintercept=0,linetype='dotted') +
+    xlab('Age group (years)') + ylab('Excess risk associated with 1 degree additional warming') +
+    # ylim(c(min.plot,max.plot)) +
+    facet_grid(~sex.long) +
     scale_y_continuous(labels=scales::percent) +
     scale_color_manual(values=colors.subinjuries[c(1,2,3,4,5,6)]) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
@@ -410,26 +433,66 @@ ggplot() +
 dev.off()
 
 # summarise by sex, cause and month across the year
-dat.year.summary = ddply(dat.merged.sub,.(sex,age,cause),summarize,deaths=sum(deaths.pred))
-dat.year.summary = fix_cause_names(dat.year.summary)
+dat.year.summary.monthly = ddply(dat.merged.sub,.(sex,month,cause),summarize,deaths=sum(deaths.pred))
+dat.year.summary.monthly = fix_cause_names(dat.year.summary.monthly)
 
 # merge with summary of additional deaths by sex,age,cause
-additional.deaths.summary.perc = merge(dat.year.summary,additional.deaths.summary,by=c('sex','age','cause'))
-additional.deaths.summary.perc$perc.mean = with(additional.deaths.summary.perc,deaths.added.mean/deaths)
-additional.deaths.summary.perc$perc.ul = with(additional.deaths.summary.perc,deaths.added.ul/deaths)
-additional.deaths.summary.perc$perc.ll = with(additional.deaths.summary.perc,deaths.added.ll/deaths)
+additional.deaths.summary.monthly.perc = merge(dat.year.summary.monthly,additional.deaths.summary.monthly,by=c('sex','month','cause'))
+additional.deaths.summary.monthly.perc =  perc_calculator(additional.deaths.summary.monthly.perc)
 
-perc_calculator = function(dat){
-    dat$perc.mean = with(dat,deaths.added.mean/deaths)
-    dat$perc.ul = with(dat,deaths.added.ul/deaths)
-    dat$perc.ll = with(dat,deaths.added.ll/deaths)
+# summarise by sex, month and intent across the year
+additional.deaths.intent.summary.monthly.perc = dat.year.summary.monthly
+additional.deaths.intent.summary.monthly.perc$intent = ifelse(additional.deaths.intent.summary.monthly.perc$cause%in%c('5. Assault','6. Intentional self-harm'),'2. Intentional','1. Unintentional')
+additional.deaths.intent.summary.monthly.perc = ddply(additional.deaths.intent.summary.monthly.perc,.(sex,month,intent),summarize,deaths=sum(deaths))
+additional.deaths.intent.summary.monthly.perc = merge(additional.deaths.intent.summary.monthly.perc,additional.deaths.intent.monthly.summary,by=c('sex','month','intent'))
+additional.deaths.intent.summary.monthly.perc =  perc_calculator(additional.deaths.intent.summary.monthly.perc)
 
-    return(dat)
-}
+pdf(paste0(file.loc,country,'_rate_pred_type',model,
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_monthly_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+    # geom_bar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,fill=cause), stat='identity') +
+    geom_errorbar(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99),aes(x=as.factor(month.short),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
+    geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99), aes(x=as.factor(month.short),y=perc.mean),size=3,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99), aes(x=as.factor(month.short),y=perc.mean,color=cause),size=2,shape=16) +
+    geom_hline(yintercept=0,linetype='dotted') +
+    xlab('Month') + ylab('Excess risk associated with 1 degree additional warming') +
+    # ylim(c(min.plot,max.plot)) +
+    facet_grid(cause~sex.long) +
+    scale_y_continuous(labels=scales::percent) +
+    scale_color_manual(values=colors.subinjuries[c(1,2,3,4,5,6)]) +
+    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
+    guides(color=guide_legend(title="Subcategory of injury",nrow=1)) +
+    # ggtitle('Additional deaths by types of intentional injuries') +
+    theme_bw() + theme(text = element_text(size = 15),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+dev.off()
 
-# summarise by age-sex and intent across the year
-additional.deaths.intent.summary.perc = dat.year.summary
-additional.deaths.intent.summary.perc$intent = ifelse(additional.deaths.intent.summary.perc$cause%in%c('5. Assault','6. Intentional self-harm'),'2. Intentional','1. Unintentional')
-additional.deaths.intent.summary.perc = ddply(additional.deaths.intent.summary.perc,.(sex,age,intent),summarize,deaths=sum(deaths))
-additional.deaths.intent.summary.perc = merge(additional.deaths.intent.summary.perc,additional.deaths.intent.summary,by=c('sex','age','intent'))
-additional.deaths.intent.summary.perc =  perc_calculator(additional.deaths.intent.summary.perc)
+pdf(paste0(file.loc,country,'_rate_pred_type',model,
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_monthlyexcess_risk_freescale_fast_contig.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+    # geom_bar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,fill=cause), stat='identity') +
+    geom_errorbar(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99),aes(x=as.factor(month.short),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
+    geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99), aes(x=as.factor(month.short),y=perc.mean),size=3,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99), aes(x=as.factor(month.short),y=perc.mean,color=cause),size=2,shape=16) +
+    geom_hline(yintercept=0,linetype='dotted') +
+    xlab('Month') + ylab('Excess risk associated with 1 degree additional warming') +
+    # ylim(c(min.plot,max.plot)) +
+    facet_grid(cause~sex.long,scales='free') +
+    scale_y_continuous(labels=scales::percent) +
+    scale_color_manual(values=colors.subinjuries[c(1,2,3,4,5,6)]) +
+    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
+    guides(color=guide_legend(title="Subcategory of injury",nrow=1)) +
+    # ggtitle('Additional deaths by types of intentional injuries') +
+    theme_bw() + theme(text = element_text(size = 15),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+dev.off()
