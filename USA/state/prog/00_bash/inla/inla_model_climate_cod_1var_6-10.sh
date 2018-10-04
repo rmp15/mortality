@@ -33,11 +33,11 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 
 declare cod="External"
 
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 2 $start $end 25 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 25 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 24 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 2 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 18 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 2 $start $end 25 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 25 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 25 2 $start $end 25 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 25 1 $start $end 25 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;

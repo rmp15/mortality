@@ -599,6 +599,7 @@
         # overdispersion term
         f(e, model = "iid", hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001))))
     }
+   }
 
     if(type.arg==11){
         
