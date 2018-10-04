@@ -383,12 +383,9 @@ dev.off()
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_one_panel_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
-    # geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99), aes(x=age.long,y=perc.mean),size=3,shape=16) +
-    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5), aes(x=age.long,y=perc.mean,color=cause),size=2,shape=16) +
     geom_errorbar(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5),aes(x=age.long,ymax=perc.ul,ymin=perc.ll,color=cause),width=.2,size=0.5) +
-    # geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5), aes(x=age.long,y=perc.mean,color=cause),size=2,shape=16) +
-    # geom_point(data=subset(additional.deaths.intent.summary.perc),aes(x=as.factor(age.long),y=perc.mean),shape=16) +
-    # geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16,position=position_dodge(width=0.5)) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5), aes(x=age.long,y=perc.mean,group=cause),size=3,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5), aes(x=age.long,y=perc.mean,color=cause),size=2,shape=16) +
     geom_hline(yintercept=0,linetype='dotted') +
     xlab('Age group (years)') + ylab('Excess risk associated with 1 degree additional warming') +
     # ylim(c(min.plot,max.plot)) +
@@ -473,7 +470,7 @@ ggplot() +
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
-    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_monthlyexcess_risk_freescale_fast_contig.pdf'),paper='a4r',height=0,width=0)
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_monthly_excess_risk_freescale_fast_contig.pdf'),paper='a4r',height=0,width=0)
 ggplot() +
     # geom_bar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,fill=cause), stat='identity') +
     geom_errorbar(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99),aes(x=as.factor(month.short),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
@@ -483,6 +480,30 @@ ggplot() +
     xlab('Month') + ylab('Excess risk associated with 1 degree additional warming') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(cause~sex.long,scales='free') +
+    scale_y_continuous(labels=scales::percent) +
+    scale_color_manual(values=colors.subinjuries[c(1,2,3,4,5,6)]) +
+    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
+    guides(color=guide_legend(title="Subcategory of injury",nrow=1)) +
+    # ggtitle('Additional deaths by types of intentional injuries') +
+    theme_bw() + theme(text = element_text(size = 15),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+dev.off()
+
+pdf(paste0(file.loc,country,'_rate_pred_type',model,
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_monthly_one_panel_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
+ggplot() +
+    geom_errorbar(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99),position=position_dodge(width=0.5),aes(x=month.short,ymax=perc.ul,ymin=perc.ll,color=cause),width=.2,size=0.5) +
+    geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99),position=position_dodge(width=0.5), aes(x=month.short,y=perc.mean,group=cause),size=3,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99),position=position_dodge(width=0.5), aes(x=month.short,y=perc.mean,color=cause),size=2,shape=16) +
+    geom_hline(yintercept=0,linetype='dotted') +
+    xlab('Month') + ylab('Excess risk associated with 1 degree additional warming') +
+    # ylim(c(min.plot,max.plot)) +
+    facet_grid(~sex.long) +
     scale_y_continuous(labels=scales::percent) +
     scale_color_manual(values=colors.subinjuries[c(1,2,3,4,5,6)]) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +

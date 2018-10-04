@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_one_panel_excess_risk_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_one_panel_excess_risk_fast_contig.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R" afterPath="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +34,8 @@
       <file leaf-file-name="additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="381" column="0" lean-forward="true" selection-start-line="381" selection-start-column="0" selection-end-line="407" selection-end-column="9" />
+            <state relative-caret-position="463">
+              <caret line="496" column="0" lean-forward="false" selection-start-line="496" selection-start-column="0" selection-end-line="518" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -1195,8 +1195,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="381" column="0" lean-forward="true" selection-start-line="381" selection-start-column="0" selection-end-line="407" selection-end-column="9" />
+        <state relative-caret-position="463">
+          <caret line="496" column="0" lean-forward="false" selection-start-line="496" selection-start-column="0" selection-end-line="518" selection-end-column="9" />
           <folding />
         </state>
       </provider>
