@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/data/objects/objects.R" afterPath="$PROJECT_DIR$/USA/state/data/objects/objects.R" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" afterPath="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,7 +24,7 @@
       <file leaf-file-name="inla_models_cod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="772">
+            <state relative-caret-position="8280">
               <caret line="601" column="3" lean-forward="false" selection-start-line="601" selection-start-column="3" selection-end-line="601" selection-end-column="3" />
               <folding />
             </state>
@@ -41,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="objects.R" pinned="false" current-in-tab="true">
+      <file leaf-file-name="objects.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="288">
@@ -63,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plotting_results_climate_cod_1var.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="plotting_results_climate_cod_1var.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="19" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="12" selection-end-column="19" />
+            <state relative-caret-position="165">
+              <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -97,7 +97,6 @@
       <find>type</find>
       <find>pw</find>
       <find>age.arg</find>
-      <find>model</find>
       <find>dat.merged.sub.year</find>
       <find>Additional deaths with 1 degree</find>
       <find>additional.deaths.summary</find>
@@ -105,6 +104,7 @@
       <find>output.local</find>
       <find>additional.deaths.intent.monthly.summary</find>
       <find>saveRDS</find>
+      <find>model</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,9 +144,9 @@
         <option value="$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/inla/inla_model_climate_cod_1var_6-10.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/residuals/residuals_cod_1var.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/data/objects/objects.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh" />
       </list>
     </option>
   </component>
@@ -528,13 +528,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00312" summary="updates to wavelet coding">
-      <created>1537740300659</created>
-      <option name="number" value="00312" />
-      <option name="presentableId" value="LOCAL-00312" />
-      <option name="project" value="LOCAL" />
-      <updated>1537740300659</updated>
-    </task>
     <task id="LOCAL-00313" summary="updates to wavelet coding">
       <created>1537740319044</created>
       <option name="number" value="00313" />
@@ -871,7 +864,14 @@
       <option name="project" value="LOCAL" />
       <updated>1538977887455</updated>
     </task>
-    <option name="localTasksCounter" value="361" />
+    <task id="LOCAL-00361" summary="updates to wavelet coding">
+      <created>1538978109703</created>
+      <option name="number" value="00361" />
+      <option name="presentableId" value="LOCAL-00361" />
+      <option name="project" value="LOCAL" />
+      <updated>1538978109703</updated>
+    </task>
+    <option name="localTasksCounter" value="362" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1202,14 +1202,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="601" column="3" lean-forward="false" selection-start-line="601" selection-start-column="3" selection-end-line="601" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/residuals/residuals_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-188">
@@ -1242,14 +1234,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="19" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="12" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/compare_posterior_climate_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1005">
@@ -1257,6 +1241,14 @@
           <folding>
             <element signature="e#7883#9762#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="74" column="143" lean-forward="false" selection-start-line="74" selection-start-column="143" selection-end-line="74" selection-end-column="143" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1268,10 +1260,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/data/objects/objects.R">
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/models/INLA/03_spatiotemporal/inla_models_cod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="74" column="143" lean-forward="false" selection-start-line="74" selection-start-column="143" selection-end-line="74" selection-end-column="143" />
+        <state relative-caret-position="8280">
+          <caret line="601" column="3" lean-forward="false" selection-start-line="601" selection-start-column="3" selection-end-line="601" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/plotting/plotting_results_climate_cod_1var.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding />
         </state>
       </provider>

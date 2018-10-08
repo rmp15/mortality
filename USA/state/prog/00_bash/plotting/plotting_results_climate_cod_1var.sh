@@ -9,7 +9,7 @@ clear
 
 declare -i start=1980
 declare -i end=2016
-declare -a models=(10 18 19 20 21 22 23 24 25)
+declare -a models=(25)
 declare country="USA"
 declare -a dnames=("t2m")
 declare -a metrics=('meanc3')
