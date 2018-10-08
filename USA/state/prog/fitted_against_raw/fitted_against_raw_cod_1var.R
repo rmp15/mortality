@@ -41,8 +41,8 @@ colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","o
 dat.all = data.frame()
 if(contig==1){
     if(cause!='AllCause'){
-        # for(i in c(0,5,15,25,35,45,55,65,75,85)){
-        for(i in c(85)){
+        for(i in c(0,5,15,25,35,45,55,65,75,85)){
+        # for(i in c(85)){
             for(j in c('Men','Women')){
         dat <- readRDS(paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/non_pw/type_',model,
         '/age_groups/',i,'/',
@@ -156,8 +156,8 @@ levels(dat.all$fips) <- state.lookup$full_name
 
 # plotting by age over time per state
 pdf(paste0(file.loc,'raw_against_adjusted_over_time_males_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-# for(i in c(0,5,15,25,35,45,55,65,75,85)){
-for(i in c(85)){
+for(i in c(0,5,15,25,35,45,55,65,75,85)){
+# for(i in c(85)){
     print(
         ggplot(data=subset(dat.all,sex==1&year.month<=600&age==i)) +
         geom_point(aes(x=year.month,y=rate.adj),color='red') +
@@ -168,8 +168,8 @@ for(i in c(85)){
 dev.off()
 
 pdf(paste0(file.loc,'raw_against_adjusted_over_time_females_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-# for(i in c(0,5,15,25,35,45,55,65,75,85)){
-for(i in c(85)){
+for(i in c(0,5,15,25,35,45,55,65,75,85)){
+# for(i in c(85)){
     print(
         ggplot(data=subset(dat.all,sex==1&year.month<=600&age==i)) +
         geom_point(aes(x=year.month,y=rate.adj),color='red') +
