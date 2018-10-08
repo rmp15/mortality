@@ -36,6 +36,8 @@ dat$cause.sub <- gsub('Accidental drowning and submersion', '3. Drownings', dat$
 dat$cause.sub <- gsub('Intentional self-harm', '6. Intentional\nself-harm', dat$cause.sub)
 dat$cause.sub <- gsub('Assault', '5. Assault', dat$cause.sub)
 
+# take off the numbers in the descriptions above and reorder
+
 library(plyr)
 library(scales)
 
