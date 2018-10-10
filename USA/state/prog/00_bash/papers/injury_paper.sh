@@ -40,10 +40,10 @@ Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons_su
 echo "plotting figure 3 injury paper $start - $end";
 
 
-Rscript ~/git/climate/countries/USA/prog/06_plots/plots_against_time.R $start $end $dname $metric
+#Rscript ~/git/climate/countries/USA/prog/06_plots/plots_against_time.R $start $end $dname $metric
 
 #################################################
 # Figure 4 and supplementary figure 1
 #################################################
 
-Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws
+#Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws

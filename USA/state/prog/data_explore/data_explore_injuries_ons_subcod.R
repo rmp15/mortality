@@ -24,19 +24,21 @@ yearpalette = colorfunc(year.end.arg-year.start.arg +1)
 
 # fix cod names
 dat$cause = dat$cause.group ; dat$cause.group=NULL
-dat$cause <- gsub('Intentional', '2. Intentional injuries', dat$cause)
-dat$cause <- gsub('Unintentional', '1. Unintentional injuries', dat$cause)
-dat$cause <- gsub('Other', '3. Undetermined whether accidentally or purposely inflicted', dat$cause)
+dat$cause <- gsub('Unintentional', 'Unintentional injuries', dat$cause) # first in order
+dat$cause <- gsub('Intentional', 'Intentional injuries', dat$cause) # second in order
+# dat$cause <- gsub('Other', 'Undetermined whether accidentally or purposely inflicted', dat$cause)
 
 # fix sub-cod names
-dat$cause.sub <- gsub('Transport accidents', '1. Transport', dat$cause.sub)
-dat$cause.sub <- gsub('Accidental falls', '2. Falls', dat$cause.sub)
-dat$cause.sub <- gsub('Other external causes of injury', '4. Other injuries', dat$cause.sub)
-dat$cause.sub <- gsub('Accidental drowning and submersion', '3. Drownings', dat$cause.sub)
-dat$cause.sub <- gsub('Intentional self-harm', '6. Intentional\nself-harm', dat$cause.sub)
-dat$cause.sub <- gsub('Assault', '5. Assault', dat$cause.sub)
+dat$cause.sub <- gsub('Transport accidents', 'Transport', dat$cause.sub)                                        # 1
+dat$cause.sub <- gsub('Accidental falls', 'Falls', dat$cause.sub)                                               # 2
+dat$cause.sub <- gsub('Accidental drowning and submersion', 'Drownings', dat$cause.sub)                         # 3
+dat$cause.sub <- gsub('Other external causes of injury', 'Other unintentional\ninjuries', dat$cause.sub)        # 4
+dat$cause.sub <- gsub('Assault', 'Assault', dat$cause.sub)                                                      # 5
+dat$cause.sub <- gsub('Intentional self-harm', 'Intentional self-harm', dat$cause.sub)                          # 6
 
-# take off the numbers in the descriptions above and reorder
+# reorder
+dat$cause = factor(dat$cause, levels=c('Unintentional injuries','Intentional injuries'))
+dat$cause.sub = factor(dat$cause.sub, levels=c('Transport','Falls','Drownings','Other unintentional\ninjuries','Assault','Intentional self-harm'))
 
 library(plyr)
 library(scales)
@@ -174,12 +176,13 @@ dev.off()
 
 pdf(paste0(file.loc,'injury_ons_subcod_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 # 1. monthly plot facetted by subcause
-ggplot(dat=dat.nat.broad.asdr, aes(x=month,y=100000*ASDR,colour=as.factor(year))) +
+ggplot(dat=dat.nat.broad.asdr, aes(x=month,y=100000*ASDR,group=year,color=year)) +
     geom_line() +
     xlab('Time') +
     ylab('Age standardised death rate (per 100,000)') +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 2,title = paste0("Year"))) +
+    guides(color=guide_colorbar(barwidth=20, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
     facet_grid(~cause) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
@@ -289,12 +292,28 @@ dev.off()
 
 pdf(paste0(file.loc,'injury_ons_subsubcod_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 # 1. monthly plot facetted by subsubcause
-ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,colour=as.factor(year))) +
+ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 3,title = paste0("Year"))) +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
+ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
     facet_grid(~cause.sub) +
     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
@@ -476,12 +495,15 @@ dat.last.years$ID = with(dat.last.years,reorder(dat.last.years$ID,month))
 pdf(paste0(file.loc,'injury_ons_subsubcod_last_years_plots',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 
 # full bar chart per age-sex group with breakdown of types of injuries
+dat.last.years$cause.sub = gsub('\n',' ',dat.last.years$cause.sub)
+dat.last.years$cause.sub = factor(dat.last.years$cause.sub, levels=c('Transport','Falls','Drownings','Other unintentional injuries','Assault','Intentional self-harm'))
+
 ggplot(data=dat.last.years, aes(x="",y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
     geom_bar(width = 1, position='fill', stat = "identity") +
     #coord_polar("y", start=0) +
     xlab('Age group (years)') + ylab('Proportion of deaths') +
-    scale_fill_manual(values=colors.subinjuries, guide = guide_legend(nrow = 1,title = paste0("Subcategory of injury"))) +
-    scale_color_manual(values=colors.subinjuries, guide = guide_legend(nrow = 1,title = paste0("Subcategory of injury"))) +
+    scale_fill_manual(values=colors.subinjuries, guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=colors.subinjuries, guide = guide_legend(nrow = 1,title = paste0(""))) +
     # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
     scale_y_continuous(labels = scales::percent) +
     facet_grid(sex.long~age.long) +
