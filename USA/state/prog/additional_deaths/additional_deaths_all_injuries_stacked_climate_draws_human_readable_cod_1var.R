@@ -112,11 +112,17 @@ names(additional.deaths.summary.all.print) = c('Age_group','Sex','Cause','Deaths
 # combine deaths added columns into one column
 additional.deaths.summary.all.print$deaths_added = with(additional.deaths.summary.all.print,paste0(format(round(as.numeric(Deaths_added)),nsmall=1),', (',format(round(as.numeric(Deaths_added_ll)),nsmall=1),',',format(round(as.numeric(Deaths_added_ul)),nsmall=1),')'))
 additional.deaths.summary.all.print = additional.deaths.summary.all.print[,c('Age_group','Sex','Cause','deaths_added')]
+names(additional.deaths.summary.all.print) = c('Age group','Sex','Cause','Deaths added')
 
-# add
+additional.deaths.summary.all.print.wide = spread(additional.deaths.summary.all.print,'Age group','Deaths added')
+
+library(tidyr)
+
 
 ########################################
 
 # save human-readable table
 write.csv(additional.deaths.summary.all.print,paste0(file.loc,'table_deaths_human_readable.csv'))
 write.csv(additional.deaths.summary.all.print.wo.other,paste0(file.loc,'table_deaths_human_readable_no_other.csv'))
+
+write.csv(additional.deaths.summary.all.print.wide,paste0(file.loc,'table_deaths_human_readable_wide.csv'))
