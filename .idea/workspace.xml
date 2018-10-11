@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21b4bedd-3c09-4223-a30e-537ba1f7f93e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_to_assault_intentional_self-harm_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_to_assault_intentional_self-harm_fast_contig.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_to_assault_intentional_self-harm_monthly_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_to_assault_intentional_self-harm_monthly_fast_contig.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_contig.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_monthly_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_monthly_contig.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_unintentional_to_transport_falls_drownings_other_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_unintentional_to_transport_falls_drownings_other_fast_contig.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_unintentional_to_transport_falls_drownings_other_monthly_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_unintentional_to_transport_falls_drownings_other_monthly_fast_contig.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_to_assault_intentional_self-harm_monthly_excess_risk_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_to_assault_intentional_self-harm_monthly_excess_risk_fast_contig.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_excess_risk_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_excess_risk_fast_contig.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_excess_risk_freescale_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_excess_risk_freescale_fast_contig.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_monthly_excess_risk_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_monthly_excess_risk_fast_contig.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_one_panel_excess_risk_fast_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_intentional_unintentional_one_panel_excess_risk_fast_contig.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_unintentional_to_transport_falls_drownings_other_fast_excess_risk_contig.pdf" afterPath="$PROJECT_DIR$/USA/state/output/additional_deaths_climate/1980_2016/t2m/meanc3/non_pw/type_1d/contig/all_injuries/5000_draws/USA_rate_pred_type1d_1980_2016_t2m_meanc3_unintentional_to_transport_falls_drownings_other_fast_excess_risk_contig.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/write_ups/02_monthly_injury_temperature_paper/figures/01_journal/injury_paper 2018 10 08.key" afterPath="$PROJECT_DIR$/USA/state/write_ups/02_monthly_injury_temperature_paper/figures/01_journal/injury_paper 2018 10 08.key" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R" afterPath="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R" />
     </list>
@@ -30,8 +31,8 @@
       <file leaf-file-name="injury_paper.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/papers/injury_paper.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="42" column="43" lean-forward="false" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+            <state relative-caret-position="690">
+              <caret line="46" column="43" lean-forward="false" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -40,8 +41,8 @@
       <file leaf-file-name="data_explore_injuries_ons_subcod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="36" selection-end-column="115" />
+            <state relative-caret-position="600">
+              <caret line="40" column="16" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -50,8 +51,8 @@
       <file leaf-file-name="additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="283" column="0" lean-forward="false" selection-start-line="283" selection-start-column="0" selection-end-line="286" selection-end-column="9" />
+            <state relative-caret-position="172">
+              <caret line="494" column="0" lean-forward="false" selection-start-line="494" selection-start-column="0" selection-end-line="519" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -138,8 +139,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="x" value="268" />
+    <option name="y" value="-1400" />
+    <option name="width" value="1440" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -276,7 +279,6 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -864,7 +866,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="268" y="-1400" width="1440" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27854857" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1233,24 +1235,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/papers/injury_paper.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="42" column="43" lean-forward="false" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+        <state relative-caret-position="690">
+          <caret line="46" column="43" lean-forward="false" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="36" selection-end-column="115" />
+        <state relative-caret-position="600">
+          <caret line="40" column="16" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="283" column="0" lean-forward="false" selection-start-line="283" selection-start-column="0" selection-end-line="286" selection-end-column="9" />
+        <state relative-caret-position="172">
+          <caret line="494" column="0" lean-forward="false" selection-start-line="494" selection-start-column="0" selection-end-line="519" selection-end-column="0" />
           <folding />
         </state>
       </provider>
