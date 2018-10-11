@@ -102,11 +102,18 @@ additional.deaths.wo.other.total.summary$age.long = mapvalues(additional.deaths.
 additional.deaths.wo.other.total.summary$sex.long = mapvalues(additional.deaths.wo.other.total.summary$sex,from=sort(unique(additional.deaths.wo.other.total.summary$sex)),to=c('Both',as.character(sex.filter2)))
 additional.deaths.wo.other.total.summary$cause = 'All injuries'
 additional.deaths.wo.other.total.summary = additional.deaths.wo.other.total.summary[,c('age.long','sex.long','cause','deaths.added.mean','deaths.added.ll','deaths.added.ul')]
-names(additional.deaths.wo.other.total.summary) = c('Age group','Sex','Cause','Deaths added',' Deaths added ll', 'Deaths added ul')
+names(additional.deaths.wo.other.total.summary) = c('Age group','Sex','Cause','Deaths added','Deaths added ll', 'Deaths added ul')
 
 # combine every level of injury into one table
 additional.deaths.summary.all.print = rbind(additional.deaths.summary.print,additional.deaths.wo.other.intent.summary,additional.deaths.wo.other.total.summary)
-additional.deaths.summary.all.print.wo.other = subset(additional.deaths.summary.all.print,Cause!='Other unintentional injuries')
+names(additional.deaths.summary.all.print) = c('Age_group','Sex','Cause','Deaths_added','Deaths_added_ll', 'Deaths_added_ul')
+# additional.deaths.summary.all.print.wo.other = subset(additional.deaths.summary.all.print,Cause!='Other unintentional injuries')
+
+# combine deaths added columns into one column
+additional.deaths.summary.all.print$deaths_added = with(additional.deaths.summary.all.print,paste0(format(round(as.numeric(Deaths_added)),nsmall=1),', (',format(round(as.numeric(Deaths_added_ll)),nsmall=1),',',format(round(as.numeric(Deaths_added_ul)),nsmall=1),')'))
+additional.deaths.summary.all.print = additional.deaths.summary.all.print[,c('Age_group','Sex','Cause','deaths_added')]
+
+# add
 
 ########################################
 
