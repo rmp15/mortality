@@ -174,48 +174,48 @@ dev.off()
 # for nationalised ASDR data
 ############################
 
-pdf(paste0(file.loc,'injury_ons_subcod_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-# 1. monthly plot facetted by subcause
-ggplot(dat=dat.nat.broad.asdr, aes(x=month,y=100000*ASDR,group=year,color=year)) +
-    geom_line() +
-    xlab('Time') +
-    ylab('Age standardised death rate (per 100,000)') +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    guides(color=guide_colorbar(barwidth=20, title='Year')) +
-    scale_color_gradientn(colors=yearpalette) +
-    facet_grid(~cause) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center', strip.text = element_text(size=10),
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# 2. stacked yearly plot
-ggplot(dat=dat.nat.broad.asdr.year, aes(x=year,y=12*ASDR*100000,fill=cause)) +
-    geom_area(position='stack') +
-    xlab('Year') +
-    ylab('Age standardised death rate (per 100,000)') +
-    scale_fill_manual(values=colors.injuries, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0("Cause"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# 3. stacked yearly plot facetted by subcause
-ggplot(dat=dat.nat.broad.asdr.year, aes(x=year,y=12*ASDR*100000,fill=cause)) +
-    geom_area(position='stack') +
-    geom_vline(xintercept=1999, linetype="dotted") +
-    xlab('Year') +
-    ylab('Age standardised death rate (per 100,000)') +
-    scale_fill_manual(values=colors.injuries, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0("Cause"))) +
-    facet_grid(~cause, scales='free') +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-dev.off()
+# pdf(paste0(file.loc,'injury_ons_subcod_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+# # 1. monthly plot facetted by subcause
+# ggplot(dat=dat.nat.broad.asdr, aes(x=month,y=100000*ASDR,group=year,color=year)) +
+#     geom_line() +
+#     xlab('Time') +
+#     ylab('Age standardised death rate (per 100,000)') +
+#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+#     guides(color=guide_colorbar(barwidth=20, title='Year')) +
+#     scale_color_gradientn(colors=yearpalette) +
+#     facet_grid(~cause) +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center', strip.text = element_text(size=10),
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # 2. stacked yearly plot
+# ggplot(dat=dat.nat.broad.asdr.year, aes(x=year,y=12*ASDR*100000,fill=cause)) +
+#     geom_area(position='stack') +
+#     xlab('Year') +
+#     ylab('Age standardised death rate (per 100,000)') +
+#     scale_fill_manual(values=colors.injuries, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0("Cause"))) +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # 3. stacked yearly plot facetted by subcause
+# ggplot(dat=dat.nat.broad.asdr.year, aes(x=year,y=12*ASDR*100000,fill=cause)) +
+#     geom_area(position='stack') +
+#     geom_vline(xintercept=1999, linetype="dotted") +
+#     xlab('Year') +
+#     ylab('Age standardised death rate (per 100,000)') +
+#     scale_fill_manual(values=colors.injuries, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0("Cause"))) +
+#     facet_grid(~cause, scales='free') +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+# dev.off()
 
 ########################################### SUB SUB CAUSES ###########################################
 
