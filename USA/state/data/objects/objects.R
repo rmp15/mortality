@@ -64,6 +64,7 @@ colors.months = mycols[c(       1,   # Jan
 # month lookups
 month.lookup <- c('January','February','March','April','May','June','July','August','September','October','November','December')
 month.short <- c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')
+month.short.2 <- c('Jan','','Mar','','May','','Jul','','Sep','','Nov','')
 month.names <- c('January','February','March','April','May','June',
 'July','August','September','October','November','December')
 

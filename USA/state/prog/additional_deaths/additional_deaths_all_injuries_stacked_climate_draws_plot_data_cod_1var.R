@@ -234,7 +234,7 @@ dev.off()
 
 p3 = ggplot() +
     geom_bar(data=subset(additional.deaths.summary,sex>0&age<99&cause!='Other unintentional injuries'), aes(x=as.factor(age.long),y=deaths.added.mean,fill=cause), stat='identity') +
-    geom_point(data=subset(additional.deaths.intent.summary,sex.long!='Both'&age.long!='All ages'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16) +
+    geom_point(data=subset(additional.deaths.intent.summary,sex.long!='Both'&age.long!='All ages'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16,color='light blue') +
     # geom_errorbar(data=subset(additional.deaths.intent.summary),aes(x=as.factor(age.long),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
     geom_hline(yintercept=0,linetype='dotted') +
     xlab('Age group (years)') +  ylab('') +
@@ -254,7 +254,7 @@ p3 = ggplot() +
 
 p4 =ggplot() +
     geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause), stat='identity') +
-    geom_point(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16) +
+    geom_point(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16,color='light blue') +
     # geom_errorbar(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
     geom_hline(yintercept=0,linetype='dotted') +
     xlab('Month') + ylab('') +
@@ -292,17 +292,13 @@ dev.off()
 fix_cause_names = function(dat){
     dat$cause <- gsub('Transport accidents', 'Transport', dat$cause)
     dat$cause <- gsub('Accidental falls', 'Falls', dat$cause)
-<<<<<<< HEAD
     dat$cause <- gsub('Other external causes of injury', 'Other unintentional injuries', dat$cause)
     dat$cause <- gsub('Accidental drowning and submersion', 'Drownings', dat$cause)
     dat$cause <- gsub('Intentional self-harm', 'Intentional self-harm', dat$cause)
     dat$cause <- gsub('6. Intentional self-harm', '6. Intentional\nself-harm', dat$cause)
-=======
     dat$cause <- gsub('Other external causes of injury', 'Other injuries', dat$cause)
     dat$cause <- gsub('Accidental drowning and submersion', 'Drownings', dat$cause)
     dat$cause <- gsub('Intentional self-harm', 'Intentional self-harm', dat$cause)
-    # dat$cause <- gsub('6. Intentional self-harm', '6. Intentional\nself-harm', dat$cause)
->>>>>>> dedc84d424f592ff9fd64abaa013ac18e4720e2d
     dat$cause <- gsub('Assault', 'Assault', dat$cause)
 
     return(dat)
