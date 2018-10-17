@@ -547,6 +547,23 @@ ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), ae
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
+ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+    geom_bar(width = 0.9, position='fill', stat = "identity") +
+    #coord_polar("y", start=0) +
+    xlab('Age group (years)') + ylab('Proportion of deaths') +
+    scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    scale_y_continuous(labels = scales::percent) +
+    facet_grid(sex.long~.)   +
+     theme_bw() +
+    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
 # x axis age-group, y-axis death rate for last year
 ggplot(data=dat.last.years) +
     geom_point(aes(x=as.factor(age),y=100000*rate.adj,color=as.factor(ID))) +
