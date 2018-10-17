@@ -533,7 +533,6 @@ ggplot(data=dat.last.years, aes(x="",y=deaths,color=as.factor(cause.sub),fill=as
 
 ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x="",y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
     geom_bar(width = 1, position='fill', stat = "identity") +
-    #coord_polar("y", start=0) +
     xlab('Age group (years)') + ylab('Proportion of deaths') +
     scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
     scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
