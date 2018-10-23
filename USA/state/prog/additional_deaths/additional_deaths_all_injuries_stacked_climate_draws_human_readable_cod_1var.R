@@ -86,6 +86,8 @@ fix_names2 = function(dat){
     return(dat)
 }
 additional.deaths.summary = fix_names(additional.deaths.summary)
+additional.deaths.summary.monthly = fix_names(additional.deaths.summary.monthly)
+# EXCESS RISK IN DEATHS
 
 # create human-readable table for paper
 ########################################
@@ -162,7 +164,101 @@ additional.deaths.summary.all.print.wide = spread(additional.deaths.summary.all.
 ########################################
 
 # save human-readable table
-write.csv(additional.deaths.summary.all.print,paste0(file.loc,'table_deaths_human_readable.csv'))
-write.csv(additional.deaths.summary.all.print.wo.other,paste0(file.loc,'table_deaths_human_readable_no_other.csv'))
+write.csv(additional.deaths.summary.all.print,paste0(file.loc,'table_deaths_age_human_readable.csv'))
+write.csv(additional.deaths.summary.all.print.wo.other,paste0(file.loc,'table_deaths_age_human_readable_no_other.csv'))
+write.csv(additional.deaths.summary.all.print.wide,paste0(file.loc,'table_deaths_human_age_readable_wide.csv'),row.names=FALSE)
 
-write.csv(additional.deaths.summary.all.print.wide,paste0(file.loc,'table_deaths_human_readable_wide.csv'),row.names=FALSE)
+
+# RELATIVE RISK IN DEATHS
+
+# create human-readable table for paper
+########################################
+
+fix_cause_names = function(dat){
+    dat$cause <- gsub('Transport accidents', 'Transport', dat$cause)
+    dat$cause <- gsub('Accidental falls', 'Falls', dat$cause)
+    dat$cause <- gsub('Other external causes of injury', 'Other unintentional injuries', dat$cause)
+    dat$cause <- gsub('Accidental drowning and submersion', 'Drownings', dat$cause)
+    dat$cause <- gsub('Intentional self-harm', 'Intentional self-harm', dat$cause)
+    dat$cause <- gsub('6. Intentional self-harm', '6. Intentional\nself-harm', dat$cause)
+    dat$cause <- gsub('Other external causes of injury', 'Other injuries', dat$cause)
+    dat$cause <- gsub('Accidental drowning and submersion', 'Drownings', dat$cause)
+    dat$cause <- gsub('Intentional self-harm', 'Intentional self-harm', dat$cause)
+    dat$cause <- gsub('Assault', 'Assault', dat$cause)
+
+    return(dat)
+    }
+
+# load mortality data
+dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
+print(head(dat.mort))
+
+# make for national data
+dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
+dat.national <- ddply(dat.mort,.(year,month,cause.sub,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
+dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
+dat.national <- dat.national[order(dat.national$cause.sub,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
+dat.national$cause = dat.national$cause.sub ; dat.national$cause.sub = NULL
+
+# take one year
+dat.merged.sub <- subset(dat.national,year==year.end)
+
+# 1. by age group
+
+# summarise by age-sex and cause across the year
+dat.year.summary = ddply(dat.merged.sub,.(sex,age,cause),summarize,deaths=sum(deaths.pred))
+dat.year.summary = fix_cause_names(dat.year.summary)
+
+# merge with summary of additional deaths by sex,age,cause
+dat.year.summary$age.long = mapvalues(dat.year.summary$age,from=sort(unique(dat.year.summary$age)),to=as.character(age.code[,2]))
+dat.year.summary$sex.long = mapvalues(dat.year.summary$sex,from=sort(unique(dat.year.summary$sex)),to=as.character(sex.filter2))
+
+additional.deaths.summary.perc = merge(dat.year.summary,additional.deaths.summary,by=c('sex.long','sex','age.long','age','cause'))
+additional.deaths.summary.perc$perc.mean = with(additional.deaths.summary.perc,deaths.added.mean/deaths)
+additional.deaths.summary.perc$perc.ul = with(additional.deaths.summary.perc,deaths.added.ul/deaths)
+additional.deaths.summary.perc$perc.ll = with(additional.deaths.summary.perc,deaths.added.ll/deaths)
+additional.deaths.summary.perc$cause = factor(additional.deaths.summary.perc$cause, levels=c('Transport','Falls','Drownings','Other unintentional injuries','Assault','Intentional self-harm'))
+
+perc_calculator = function(dat){
+    dat$perc.mean = with(dat,deaths.added.mean/deaths)
+    dat$perc.ul = with(dat,deaths.added.ul/deaths)
+    dat$perc.ll = with(dat,deaths.added.ll/deaths)
+
+    return(dat)
+}
+
+additional.deaths.summary.perc.print.wide = additional.deaths.summary.perc
+additional.deaths.summary.perc.print.wide = additional.deaths.summary.perc.print.wide[,c('age.long','sex.long','cause','perc.mean','perc.ll', 'perc.ul')]
+additional.deaths.summary.perc.print.wide$excess.risk = with(additional.deaths.summary.perc.print.wide,paste0(format(round(as.numeric(100*perc.mean),2),nsmall=1),' (',format(round(as.numeric(100*perc.ll),2),nsmall=1),',',format(round(as.numeric(100*perc.ul),2),nsmall=1),')'))
+names(additional.deaths.summary.perc.print.wide) = c('Age group','Sex','Cause','Perc','Perc ll', 'Perc ul', 'Excess risk')
+additional.deaths.summary.perc.print.wide = additional.deaths.summary.perc.print.wide[,c('Age group','Sex','Cause','Excess risk')]
+additional.deaths.summary.perc.print.wide = spread(additional.deaths.summary.perc.print.wide,'Age group','Excess risk')
+additional.deaths.summary.perc.print.wide = additional.deaths.summary.perc.print.wide[,c('Sex','Cause','0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','85+')]
+
+# save human-readable table
+write.csv(additional.deaths.summary.perc.print.wide,paste0(file.loc,'table_excess_risk_age_human_readable_wide.csv'),row.names=FALSE)
+
+# 2. by month
+
+# summarise by sex, cause and month across the year
+dat.year.summary.monthly = ddply(dat.merged.sub,.(sex,month,cause),summarize,deaths=sum(deaths.pred))
+dat.year.summary.monthly = fix_cause_names(dat.year.summary.monthly)
+
+# merge with summary of additional deaths by sex,age,cause
+additional.deaths.summary.monthly.perc = merge(dat.year.summary.monthly,additional.deaths.summary.monthly,by=c('sex','month','cause'))
+additional.deaths.summary.monthly.perc =  perc_calculator(additional.deaths.summary.monthly.perc)
+
+additional.deaths.summary.monthly.perc$cause = gsub('Intentional self-harm', 'Intentional\nself-harm',additional.deaths.summary.monthly.perc$cause)
+additional.deaths.summary.monthly.perc$cause = factor(additional.deaths.summary.monthly.perc$cause, levels=c('Transport','Falls','Drownings','Other unintentional injuries','Assault','Intentional\nself-harm'))
+additional.deaths.summary.monthly.perc$month.short = factor(additional.deaths.summary.monthly.perc$month.short, levels=month.short)
+
+additional.deaths.summary.monthly.perc.print.wide = additional.deaths.summary.monthly.perc
+additional.deaths.summary.monthly.perc.print.wide = additional.deaths.summary.monthly.perc.print.wide[,c('month.short','sex.long','cause','perc.mean','perc.ll', 'perc.ul')]
+additional.deaths.summary.monthly.perc.print.wide$excess.risk = with(additional.deaths.summary.monthly.perc.print.wide,paste0(format(round(as.numeric(100*perc.mean),2),nsmall=1),' (',format(round(as.numeric(100*perc.ll),2),nsmall=1),',',format(round(as.numeric(100*perc.ul),2),nsmall=1),')'))
+names(additional.deaths.summary.monthly.perc.print.wide) = c('Month','Sex','Cause','Perc','Perc ll', 'Perc ul', 'Excess risk')
+additional.deaths.summary.monthly.perc.print.wide = additional.deaths.summary.monthly.perc.print.wide[,c('Month','Sex','Cause','Excess risk')]
+additional.deaths.summary.monthly.perc.print.wide = spread(additional.deaths.summary.monthly.perc.print.wide,'Month','Excess risk')
+
+# save human-readable table
+write.csv(additional.deaths.summary.monthly.perc.print.wide,paste0(file.loc,'table_excess_risk_month_human_readable_wide.csv'),row.names=FALSE)
+
