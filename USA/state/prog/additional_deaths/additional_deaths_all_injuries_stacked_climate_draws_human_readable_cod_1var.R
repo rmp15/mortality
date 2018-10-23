@@ -91,6 +91,9 @@ additional.deaths.summary.monthly = fix_names(additional.deaths.summary.monthly)
 
 # create human-readable table for paper
 ########################################
+
+# A. by age group
+
 # 1. sub-categories of deaths
 additional.deaths.summary.print = additional.deaths.summary[,c('age.long','sex.long','cause','deaths.added.mean','deaths.added.ll','deaths.added.ul')]
 names(additional.deaths.summary.print) = c('Age group','Sex','Cause','Deaths added','Deaths added ll', 'Deaths added ul')
@@ -136,7 +139,7 @@ additional.deaths.wo.other.total.summary$cause = 'All injuries'
 additional.deaths.wo.other.total.summary = additional.deaths.wo.other.total.summary[,c('age.long','sex.long','cause','deaths.added.mean','deaths.added.ll','deaths.added.ul')]
 names(additional.deaths.wo.other.total.summary) = c('Age group','Sex','Cause','Deaths added','Deaths added ll', 'Deaths added ul')
 
-# 6. total deaths but  sex together (have to remove all ages too)
+# 6. total deaths but sex together (have to remove all ages too)
 additional.deaths.wo.other.total.sex.together = ddply(additional.deaths.wo.other,.(age,draw),summarize,deaths.added=sum(deaths.added))
 additional.deaths.wo.other.total.sex.together.summary = ddply(additional.deaths.wo.other.total.sex.together,.(age),summarize, deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975))
 additional.deaths.wo.other.total.sex.together.summary$age.long = mapvalues(additional.deaths.wo.other.total.sex.together.summary$age,from=sort(unique(additional.deaths.wo.other.total.sex.together.summary$age)),to=as.character(c(as.character(age.code[,2]),'All ages')))
@@ -161,12 +164,32 @@ library(tidyr)
 # wide WITHOUT other deaths included in summation of intent etc.
 additional.deaths.summary.all.print.wide = spread(additional.deaths.summary.all.print,'Age group','Deaths added')
 
+# B. by month
+
+# 1. sub-categories of deaths
+additional.deaths.summary.monthly.print = additional.deaths.summary.monthly[,c('month.short','sex.long','cause','deaths.added.mean','deaths.added.ll','deaths.added.ul')]
+names(additional.deaths.summary.monthly.print) = c('Month','Sex','Cause','Deaths_added','Deaths_added_ll', 'Deaths_added_ul')
+
+# combine deaths added columns into one column
+additional.deaths.summary.monthly.print$deaths_added = with(additional.deaths.summary.monthly.print,paste0(format(round(as.numeric(Deaths_added)),nsmall=1),' (',format(round(as.numeric(Deaths_added_ll)),nsmall=1),',',format(round(as.numeric(Deaths_added_ul)),nsmall=1),')'))
+additional.deaths.summary.monthly.print = additional.deaths.summary.monthly.print[,c('Month','Sex','Cause','deaths_added')]
+names(additional.deaths.summary.monthly.print) = c('Month','Sex','Cause','Deaths added')
+
+# additional.deaths.wo.other.monthly = subset(additional.deaths.monthly,!(cause%in%c('Other external causes of injury')))
+
+# wide WITHOUT other deaths included in summation of intent etc.
+additional.deaths.summary.monthly.all.print.wide = spread(additional.deaths.summary.monthly.print,'Month','Deaths added')
+
 ########################################
 
-# save human-readable table
-write.csv(additional.deaths.summary.all.print,paste0(file.loc,'table_deaths_age_human_readable.csv'))
-write.csv(additional.deaths.summary.all.print.wo.other,paste0(file.loc,'table_deaths_age_human_readable_no_other.csv'))
-write.csv(additional.deaths.summary.all.print.wide,paste0(file.loc,'table_deaths_human_age_readable_wide.csv'),row.names=FALSE)
+# save human-readable tables
+# by age
+# write.csv(additional.deaths.summary.all.print,paste0(file.loc,'table_deaths_age_human_readable.csv'))
+# write.csv(additional.deaths.summary.all.print.wo.other,paste0(file.loc,'table_deaths_age_human_readable_no_other.csv'))
+write.csv(additional.deaths.summary.all.print.wide,paste0(file.loc,'table_deaths_age_human_readable_wide.csv'),row.names=FALSE)
+
+# by month
+write.csv(additional.deaths.summary.monthly.all.print.wide,paste0(file.loc,'table_deaths_month_human_readable_wide.csv'),row.names=FALSE)
 
 
 # RELATIVE RISK IN DEATHS
@@ -203,7 +226,7 @@ dat.national$cause = dat.national$cause.sub ; dat.national$cause.sub = NULL
 # take one year
 dat.merged.sub <- subset(dat.national,year==year.end)
 
-# 1. by age group
+# A. by age group
 
 # summarise by age-sex and cause across the year
 dat.year.summary = ddply(dat.merged.sub,.(sex,age,cause),summarize,deaths=sum(deaths.pred))
@@ -238,7 +261,7 @@ additional.deaths.summary.perc.print.wide = additional.deaths.summary.perc.print
 # save human-readable table
 write.csv(additional.deaths.summary.perc.print.wide,paste0(file.loc,'table_excess_risk_age_human_readable_wide.csv'),row.names=FALSE)
 
-# 2. by month
+# B. by month
 
 # summarise by sex, cause and month across the year
 dat.year.summary.monthly = ddply(dat.merged.sub,.(sex,month,cause),summarize,deaths=sum(deaths.pred))
