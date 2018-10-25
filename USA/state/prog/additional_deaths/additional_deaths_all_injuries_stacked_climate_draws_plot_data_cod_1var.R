@@ -234,7 +234,7 @@ dev.off()
 
 p3 = ggplot() +
     geom_bar(data=subset(additional.deaths.summary,sex>0&age<99&cause!='Other unintentional injuries'), aes(x=as.factor(age.long),y=deaths.added.mean,fill=cause), stat='identity') +
-    geom_point(data=subset(additional.deaths.intent.summary,sex.long!='Both'&age.long!='All ages'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16,color='light blue') +
+    geom_point(data=subset(additional.deaths.intent.summary,sex.long!='Both'&age.long!='All ages'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16,color='black') +
     # geom_errorbar(data=subset(additional.deaths.intent.summary),aes(x=as.factor(age.long),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
     geom_hline(yintercept=0,linetype='dotted') +
     xlab('Age group (years)') +  ylab('') +
@@ -254,7 +254,7 @@ p3 = ggplot() +
 
 p4 =ggplot() +
     geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause), stat='identity') +
-    geom_point(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16,color='light blue') +
+    geom_point(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16,color='black') +
     # geom_errorbar(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
     geom_hline(yintercept=0,linetype='dotted') +
     xlab('Month') + ylab('') +
@@ -273,18 +273,53 @@ p4 =ggplot() +
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
+# alternative p4 but with month skipping
+
+# additional.deaths.summary.monthly$month.short.2 <- mapvalues(additional.deaths.summary.monthly$month,from=sort(unique(additional.deaths.summary.monthly$month)),to=c(as.character(month.short.2)))
+# additional.deaths.summary.monthly$month.short.2 <- reorder(additional.deaths.summary.monthly$month.short.2,additional.deaths.summary.monthly$month)
+# additional.deaths.intent.monthly.summary$month.short.2 <- mapvalues(additional.deaths.intent.monthly.summary$month,from=sort(unique(additional.deaths.intent.monthly.summary$month)),to=c(as.character(month.short.2)))
+# additional.deaths.intent.monthly.summary$month.short.2 <- reorder(additional.deaths.intent.monthly.summary$month.short.2,additional.deaths.intent.monthly.summary$month)
+
+p5 =ggplot() +
+    geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause), stat='identity') +
+    geom_point(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16,color='black') +
+    geom_hline(yintercept=0,linetype='dotted') +
+    xlab('Month') + ylab('') +
+    scale_x_discrete(labels=month.short.2) +
+    # ylim(c(min.plot,max.plot)) +
+    facet_grid(. ~intent + sex.long) +
+    scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)]) +
+    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
+    guides(fill=guide_legend(title="", nrow=1)) +
+    # ggtitle('Additional deaths by types of intentional injuries') +
+    theme_bw() + theme(text = element_text(size = 15), strip.text.x=element_blank(),
+    axis.title.y = element_text(margin=margin(b=1000)),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
 # make sure that everything aligns (from http://www.exegetic.biz/blog/2015/05/r-recipe-aligning-axes-in-ggplot2/)
 p3 = ggplot_gtable(ggplot_build(p3))
 p4 = ggplot_gtable(ggplot_build(p4))
+p5 = ggplot_gtable(ggplot_build(p5))
 
-maxWidth = unit.pmax(p3$widths[2:3],p4$widths[2:3])
+maxWidth = unit.pmax(p3$widths[2:3],p4$widths[2:3],p5$widths[2:3])
 
-p3$widths[2:3] = maxWidth ; p4$widths[2:3] = maxWidth
+p3$widths[2:3] = maxWidth ; p4$widths[2:3] = maxWidth ; p5$widths[2:3] = maxWidth
 
 # everything all on one page
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_all_contig.pdf'),paper='a4r',height=0,width=0)
 grid.arrange(p3,p4,nrow=2,left='Additional deaths associated with 1 degree additional warming (based on 2016 population)')
+dev.off()
+
+# same plot as above but with skipping month names
+pdf(paste0(file.loc,country,'_rate_pred_type',model,
+    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_all_contig_month_skip.pdf'),paper='a4r',height=0,width=0)
+grid.arrange(p3,p5,nrow=2,left='Additional deaths associated with 1 degree additional warming (based on 2016 population)')
 dev.off()
 
 # PLOTS IN RELATIVE RISK IN DEATHS
