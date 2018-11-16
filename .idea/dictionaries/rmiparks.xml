@@ -286,6 +286,7 @@
       <w>.__C__dump.frames</w>
       <w>.__C__envRefClass</w>
       <w>.__C__environment</w>
+      <w>.__C__erodebin</w>
       <w>.__C__expression</w>
       <w>.__C__externalRefMethod</w>
       <w>.__C__externalptr</w>
@@ -326,6 +327,9 @@
       <w>.__C__gpc.poly.nohole</w>
       <w>.__C__groupGenericFunction</w>
       <w>.__C__groupGenericFunctionWithTrace</w>
+      <w>.__C__hexVP</w>
+      <w>.__C__hexbin</w>
+      <w>.__C__hexbinList</w>
       <w>.__C__hsearch</w>
       <w>.__C__iMatrix</w>
       <w>.__C__if</w>
@@ -455,6 +459,7 @@
       <w>.__C__selm</w>
       <w>.__C__signature</w>
       <w>.__C__slm</w>
+      <w>.__C__smoothbin</w>
       <w>.__C__socket</w>
       <w>.__C__sourceEnvironment</w>
       <w>.__C__sparseLU</w>
@@ -843,6 +848,8 @@
       <w>BJsales</w>
       <w>BOD</w>
       <w>BROWSE</w>
+      <w>BTC</w>
+      <w>BTY</w>
       <w>Baghdad</w>
       <w>Bahia</w>
       <w>Bahrain</w>
@@ -1467,6 +1474,8 @@
       <w>Libreville</w>
       <w>LifeCycleSavings</w>
       <w>Lima</w>
+      <w>LinGray</w>
+      <w>LinOCS</w>
       <w>Lindeman</w>
       <w>Line</w>
       <w>LineLength</w>
@@ -1599,6 +1608,7 @@
       <w>NAToUnknown</w>
       <w>NAvalue</w>
       <w>NCOL</w>
+      <w>NHANES</w>
       <w>NLSstAsymptotic</w>
       <w>NLSstClosestX</w>
       <w>NLSstLfAsymptote</w>
@@ -2117,6 +2127,7 @@
       <w>Rcpp.plugin.maker</w>
       <w>RcppArmadillo</w>
       <w>RcppArmadillo.package.skeleton</w>
+      <w>RcppCNPy</w>
       <w>RcppEigen</w>
       <w>RcppEigen.package.skeleton</w>
       <w>RcppLdFlags</w>
@@ -2646,6 +2657,7 @@
       <w>`.__C__C++Function`</w>
       <w>`.__C__C++Object`</w>
       <w>`.__C__C++OverloadedMethods`</w>
+      <w>`.__C__integer or NULL`</w>
       <w>`.__C__{`</w>
       <w>`.__T__!:base`</w>
       <w>`.__T__!=:base`</w>
@@ -2869,6 +2881,7 @@
       <w>`.__T__duplicated:base`</w>
       <w>`.__T__elide:maptools`</w>
       <w>`.__T__erase:raster`</w>
+      <w>`.__T__erode:hexbin`</w>
       <w>`.__T__exclude:usdm`</w>
       <w>`.__T__expand:Matrix`</w>
       <w>`.__T__expm:Matrix`</w>
@@ -2904,6 +2917,7 @@
       <w>`.__T__get.pts:rgeos`</w>
       <w>`.__T__getDataPart:methods`</w>
       <w>`.__T__getDynLib:inline`</w>
+      <w>`.__T__getHMedian:hexbin`</w>
       <w>`.__T__getValues:raster`</w>
       <w>`.__T__getValuesBlock:raster`</w>
       <w>`.__T__getValuesFocal:raster`</w>
@@ -2927,9 +2941,11 @@
       <w>`.__T__gridded&lt;-:sp`</w>
       <w>`.__T__hash:git2r`</w>
       <w>`.__T__hashfile:git2r`</w>
+      <w>`.__T__hcell2xy:hexbin`</w>
       <w>`.__T__head:utils`</w>
       <w>`.__T__hist:graphics`</w>
       <w>`.__T__hour&lt;-:lubridate`</w>
+      <w>`.__T__hsmooth:hexbin`</w>
       <w>`.__T__image:graphics`</w>
       <w>`.__T__in_repository:git2r`</w>
       <w>`.__T__init:git2r`</w>
@@ -4056,6 +4072,7 @@
       <w>as_env</w>
       <w>as_environment</w>
       <w>as_f_list</w>
+      <w>as_factor</w>
       <w>as_function</w>
       <w>as_glue</w>
       <w>as_integer</w>
@@ -6161,6 +6178,8 @@
       <w>erase</w>
       <w>erase.screen</w>
       <w>ergoStool</w>
+      <w>erode</w>
+      <w>erode.hexbin</w>
       <w>errbar</w>
       <w>errorStats</w>
       <w>error_cnd</w>
@@ -6344,6 +6363,27 @@
       <w>fastbw</w>
       <w>fattyacid</w>
       <w>fbeta</w>
+      <w>fct_anon</w>
+      <w>fct_c</w>
+      <w>fct_collapse</w>
+      <w>fct_count</w>
+      <w>fct_drop</w>
+      <w>fct_expand</w>
+      <w>fct_explicit_na</w>
+      <w>fct_infreq</w>
+      <w>fct_inorder</w>
+      <w>fct_lump</w>
+      <w>fct_other</w>
+      <w>fct_recode</w>
+      <w>fct_relabel</w>
+      <w>fct_relevel</w>
+      <w>fct_reorder</w>
+      <w>fct_reorder2</w>
+      <w>fct_rev</w>
+      <w>fct_shift</w>
+      <w>fct_shuffle</w>
+      <w>fct_unify</w>
+      <w>fct_unique</w>
       <w>fdGPH</w>
       <w>fdHess</w>
       <w>fdSperio</w>
@@ -6542,6 +6582,7 @@
       <w>forName</w>
       <w>forName.Class</w>
       <w>forbes</w>
+      <w>forcats</w>
       <w>force</w>
       <w>forceAndCall</w>
       <w>forceGrob</w>
@@ -6614,6 +6655,7 @@
       <w>format_csv</w>
       <w>format_delim</w>
       <w>format_format</w>
+      <w>format_tagged_na</w>
       <w>format_tsv</w>
       <w>formatdescribeSingle</w>
       <w>formula</w>
@@ -7055,6 +7097,7 @@
       <w>getGroupMembers</w>
       <w>getGroups</w>
       <w>getGroupsFormula</w>
+      <w>getHMedian</w>
       <w>getHdata</w>
       <w>getHistory</w>
       <w>getHistory.Package</w>
@@ -7444,6 +7487,7 @@
       <w>gpclibPermit</w>
       <w>gpclibPermitStatus</w>
       <w>gpdfit</w>
+      <w>gplot.hexbin</w>
       <w>gqtest</w>
       <w>grDevices</w>
       <w>grSoftVersion</w>
@@ -7510,6 +7554,8 @@
       <w>grid.grep</w>
       <w>grid.grill</w>
       <w>grid.grob</w>
+      <w>grid.hexagons</w>
+      <w>grid.hexlegend</w>
       <w>grid.info</w>
       <w>grid.layout</w>
       <w>grid.legend</w>
@@ -7593,6 +7639,7 @@
       <w>grpreg</w>
       <w>grpregPredict</w>
       <w>grpsurv</w>
+      <w>gss_cat</w>
       <w>gstring</w>
       <w>gstring.GString</w>
       <w>gstring.default</w>
@@ -7695,10 +7742,15 @@
       <w>hat</w>
       <w>hatvalues</w>
       <w>have_name</w>
+      <w>haven</w>
       <w>hazard.ratio.plot</w>
+      <w>hboxplot</w>
       <w>hccm</w>
+      <w>hcell2xy</w>
+      <w>hcell2xyInt</w>
       <w>hcl</w>
       <w>hclust</w>
+      <w>hdiffplot</w>
       <w>hdquantile</w>
       <w>hdr</w>
       <w>head</w>
@@ -7712,6 +7764,7 @@
       <w>heart</w>
       <w>hearttransplants</w>
       <w>heat.colors</w>
+      <w>heat.ob</w>
       <w>heat_hcl</w>
       <w>heatmap</w>
       <w>heckbert</w>
@@ -7727,7 +7780,21 @@
       <w>hessian</w>
       <w>hex</w>
       <w>hex2RGB</w>
+      <w>hexGraphPaper</w>
+      <w>hexList</w>
+      <w>hexMA.loess</w>
+      <w>hexTapply</w>
+      <w>hexVP.abline</w>
+      <w>hexVP.loess</w>
+      <w>hexViewport</w>
       <w>hexagons</w>
+      <w>hexbin</w>
+      <w>hexbinplot</w>
+      <w>hexcoords</w>
+      <w>hexlegendGrob</w>
+      <w>hexplom</w>
+      <w>hexpolygon</w>
+      <w>hgridcent</w>
       <w>hhare</w>
       <w>hheft</w>
       <w>hi_andre</w>
@@ -7810,6 +7877,7 @@
       <w>hsize</w>
       <w>hsize.numeric</w>
       <w>hsize.object_size</w>
+      <w>hsmooth</w>
       <w>hsv</w>
       <w>html</w>
       <w>html.contents.data.frame</w>
@@ -8196,6 +8264,7 @@
       <w>inmChoice</w>
       <w>inner_join</w>
       <w>inout</w>
+      <w>inout.hex</w>
       <w>inpip</w>
       <w>inplace</w>
       <w>inputPanel</w>
@@ -8383,6 +8452,7 @@
       <w>is.interval</w>
       <w>is.irts</w>
       <w>is.jnull</w>
+      <w>is.labelled</w>
       <w>is.language</w>
       <w>is.leaf</w>
       <w>is.levelsMap</w>
@@ -8700,6 +8770,7 @@
       <w>is_symbol</w>
       <w>is_symbolic</w>
       <w>is_syntactic_literal</w>
+      <w>is_tagged_na</w>
       <w>is_tibble</w>
       <w>is_true</w>
       <w>is_unary_lang</w>
@@ -8873,6 +8944,8 @@
       <w>label_value</w>
       <w>label_wrap_gen</w>
       <w>labeling</w>
+      <w>labelled</w>
+      <w>labelled_spss</w>
       <w>labeller</w>
       <w>labels</w>
       <w>labels.default</w>
@@ -8906,6 +8979,7 @@
       <w>largest.empty</w>
       <w>larrows</w>
       <w>last</w>
+      <w>last2</w>
       <w>lastAdd</w>
       <w>lastModified</w>
       <w>lastModified.default</w>
@@ -9076,6 +9150,7 @@
       <w>list.tree</w>
       <w>list2</w>
       <w>list2env</w>
+      <w>list2hexList</w>
       <w>listBundleFiles</w>
       <w>listCurlOptions</w>
       <w>listDirectory</w>
@@ -9319,6 +9394,10 @@
       <w>lubridate</w>
       <w>lung</w>
       <w>luv_colours</w>
+      <w>lvls_expand</w>
+      <w>lvls_reorder</w>
+      <w>lvls_revalue</w>
+      <w>lvls_union</w>
       <w>lvq1</w>
       <w>lvq2</w>
       <w>lvq3</w>
@@ -9331,6 +9410,7 @@
       <w>ma</w>
       <w>mad</w>
       <w>madDiff</w>
+      <w>magent</w>
       <w>magenta</w>
       <w>magic</w>
       <w>magic.post.proc</w>
@@ -9886,6 +9966,7 @@
       <w>na_if</w>
       <w>na_int</w>
       <w>na_lgl</w>
+      <w>na_tag</w>
       <w>naclus</w>
       <w>nafitted.delete</w>
       <w>naive</w>
@@ -10153,6 +10234,9 @@
       <w>npr1</w>
       <w>npsurv</w>
       <w>npts</w>
+      <w>npyHasIntegerSupport</w>
+      <w>npyLoad</w>
+      <w>npySave</w>
       <w>nrow</w>
       <w>ns</w>
       <w>ns.sep</w>
@@ -10279,6 +10363,7 @@
       <w>openmp</w>
       <w>openssl</w>
       <w>openssl_config</w>
+      <w>optShape</w>
       <w>optim</w>
       <w>optim.thresh</w>
       <w>optimHess</w>
@@ -10408,6 +10493,11 @@
       <w>panel.ggmap</w>
       <w>panel.grid</w>
       <w>panel.gridplot</w>
+      <w>panel.hexbinplot</w>
+      <w>panel.hexboxplot</w>
+      <w>panel.hexgrid</w>
+      <w>panel.hexloess</w>
+      <w>panel.hexplom</w>
       <w>panel.histogram</w>
       <w>panel.horizonplot</w>
       <w>panel.identify</w>
@@ -10686,6 +10776,7 @@
       <w>plantTraits</w>
       <w>plasma</w>
       <w>plclust</w>
+      <w>plinrain</w>
       <w>plnorm</w>
       <w>plogis</w>
       <w>plogr</w>
@@ -10790,6 +10881,7 @@
       <w>plotCorrPrecision</w>
       <w>plotHelper</w>
       <w>plotLines</w>
+      <w>plotMAhex</w>
       <w>plotMap</w>
       <w>plotMonth</w>
       <w>plotMultSim</w>
@@ -11266,6 +11358,8 @@
       <w>printStackTrace.Exception</w>
       <w>printTextProtocol</w>
       <w>print_dims</w>
+      <w>print_labels</w>
+      <w>print_tagged_na</w>
       <w>printcp</w>
       <w>printf</w>
       <w>printf.NullVerbose</w>
@@ -11362,6 +11456,7 @@
       <w>pushBackLength</w>
       <w>pushBackupFile</w>
       <w>pushBackupFile.default</w>
+      <w>pushHexport</w>
       <w>pushState</w>
       <w>pushState.Verbose</w>
       <w>pushTemporaryFile</w>
@@ -11737,6 +11832,7 @@
       <w>read_delim</w>
       <w>read_delim_chunked</w>
       <w>read_demo</w>
+      <w>read_dta</w>
       <w>read_excel</w>
       <w>read_file</w>
       <w>read_file_raw</w>
@@ -11749,17 +11845,23 @@
       <w>read_log</w>
       <w>read_pem</w>
       <w>read_pkcs12</w>
+      <w>read_por</w>
       <w>read_pubkey</w>
       <w>read_rds</w>
       <w>read_rdump</w>
       <w>read_rforge</w>
+      <w>read_sas</w>
+      <w>read_sav</w>
+      <w>read_spss</w>
       <w>read_stan_csv</w>
+      <w>read_stata</w>
       <w>read_table</w>
       <w>read_table2</w>
       <w>read_tsv</w>
       <w>read_tsv_chunked</w>
       <w>read_xls</w>
       <w>read_xlsx</w>
+      <w>read_xpt</w>
       <w>readhex</w>
       <w>readline</w>
       <w>readr</w>
@@ -12939,6 +13041,7 @@
       <w>smooth.construct.ts.smooth.spec</w>
       <w>smooth.construct2</w>
       <w>smooth.f</w>
+      <w>smooth.hexbin</w>
       <w>smooth.map</w>
       <w>smooth.spline</w>
       <w>smooth2random</w>
@@ -13856,6 +13959,7 @@
       <w>tagHasAttribute</w>
       <w>tagList</w>
       <w>tagSetChildren</w>
+      <w>tagged_na</w>
       <w>tags</w>
       <w>tail</w>
       <w>tail.matrix</w>
@@ -15021,6 +15125,7 @@
       <w>write_delim</w>
       <w>write_der</w>
       <w>write_disk</w>
+      <w>write_dta</w>
       <w>write_excel_csv</w>
       <w>write_file</w>
       <w>write_function</w>
@@ -15029,9 +15134,12 @@
       <w>write_pem</w>
       <w>write_pkcs12</w>
       <w>write_rds</w>
+      <w>write_sas</w>
+      <w>write_sav</w>
       <w>write_ssh</w>
       <w>write_stream</w>
       <w>write_tsv</w>
+      <w>write_xpt</w>
       <w>writehex</w>
       <w>wrld_simpl</w>
       <w>wrpcauchy.ml</w>
@@ -15188,6 +15296,11 @@
       <w>yscale.components.subticks</w>
       <w>yvars</w>
       <w>zApply</w>
+      <w>zap_empty</w>
+      <w>zap_formats</w>
+      <w>zap_labels</w>
+      <w>zap_missing</w>
+      <w>zap_widths</w>
       <w>zapsmall</w>
       <w>zeroGrob</w>
       <w>zero_range</w>
