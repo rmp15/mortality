@@ -23,18 +23,48 @@
       <file leaf-file-name="injury_paper.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/papers/injury_paper.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="41" column="30" lean-forward="false" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+            <state relative-caret-position="585">
+              <caret line="39" column="30" lean-forward="false" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data_explore_injuries_ons_subcod.R" pinned="false" current-in-tab="true">
+      <file leaf-file-name="data_explore_injuries_ons_subcod.R" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="658" column="55" lean-forward="false" selection-start-line="658" selection-start-column="55" selection-end-line="658" selection-end-column="55" />
+            <state relative-caret-position="12120">
+              <caret line="808" column="9" lean-forward="false" selection-start-line="808" selection-start-column="9" selection-end-line="808" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="map_generate.R" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/map_generate.R">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="682">
+              <caret line="103" column="6" lean-forward="false" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="com_plot_cod.R" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="667" column="10" lean-forward="false" selection-start-line="667" selection-start-column="10" selection-end-line="668" selection-end-column="82" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wavelet_paper_cod.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/papers/wavelet_paper_cod.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-878">
+              <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -44,8 +74,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Other_external_causes_of_injury</find>
-      <find>age group</find>
       <find>15</find>
       <find>yearpalette</find>
       <find>median</find>
@@ -74,6 +102,8 @@
       <find>month.short</find>
       <find>Cause</find>
       <find>fix_cause_names</find>
+      <find>region</find>
+      <find>geom_poly</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -83,7 +113,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/USA/state/prog/01_functions/wavelet_functions.R" />
-        <option value="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_paper_cod.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/cape_town/step_tariff_plot.R" />
@@ -120,12 +149,13 @@
         <option value="$PROJECT_DIR$/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R" />
         <option value="$PROJECT_DIR$/USA/state/prog/00_bash/papers/injury_paper.sh" />
         <option value="$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R" />
+        <option value="$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -142,8 +172,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -218,12 +246,44 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data_explore" />
+              <option name="myItemId" value="00_bash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mortality" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mortality" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="USA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="state" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="00_bash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="papers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -816,28 +876,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23692636" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24391988" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.49713877" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="R Packages" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32880434" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="R Graphics" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32650602" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3217569" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3282365" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4228805" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24892704" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4228805" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -859,41 +919,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_2var.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/map_generate.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/map_usa/map_usa.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="127" column="51" lean-forward="false" selection-start-line="127" selection-start-column="51" selection-end-line="127" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="441" column="0" lean-forward="false" selection-start-line="441" selection-start-column="0" selection-end-line="441" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod_plot_all.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="98" column="12" lean-forward="false" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/data_explore/plot_county_against_time.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -942,13 +967,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1845">
           <caret line="172" column="106" lean-forward="false" selection-start-line="172" selection-start-column="106" selection-end-line="172" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="292" column="62" lean-forward="false" selection-start-line="292" selection-start-column="62" selection-end-line="292" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -1106,13 +1124,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/papers/wavelet_paper_cod.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1043">
-          <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_injuries_ons.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="961">
@@ -1148,13 +1159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_analysis.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/additional_deaths/additional_deaths_no_draws_cod_1var.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1173,7 +1177,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1181,7 +1184,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5958">
           <caret line="331" column="0" lean-forward="false" selection-start-line="331" selection-start-column="0" selection-end-line="332" selection-end-column="168" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1189,22 +1191,84 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/papers/injury_paper.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="41" column="30" lean-forward="false" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+        <state relative-caret-position="585">
+          <caret line="39" column="30" lean-forward="false" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="292" column="62" lean-forward="false" selection-start-line="292" selection-start-column="62" selection-end-line="292" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="658" column="55" lean-forward="false" selection-start-line="658" selection-start-column="55" selection-end-line="658" selection-end-column="55" />
+        <state relative-caret-position="12120">
+          <caret line="808" column="9" lean-forward="false" selection-start-line="808" selection-start-column="9" selection-end-line="808" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/01_functions/map_generate.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="103" column="6" lean-forward="false" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5517">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/seasonality_index/seasonality_index_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3500">
+          <caret line="180" column="26" lean-forward="true" selection-start-line="180" selection-start-column="26" selection-end-line="180" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_analysis_region_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4272">
+          <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/wavelet/wavelet_analysis.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-308">
+          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/00_bash/papers/wavelet_paper_cod.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-878">
+          <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/USA/state/prog/com/com_plot_cod.R">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="667" column="10" lean-forward="false" selection-start-line="667" selection-start-column="10" selection-end-line="668" selection-end-column="82" />
           <folding />
         </state>
       </provider>
