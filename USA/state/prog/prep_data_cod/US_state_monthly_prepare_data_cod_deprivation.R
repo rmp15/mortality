@@ -143,6 +143,8 @@ appendyears  <- function(x=1980, y=1981) {
   	return(dat)
 }
 
+# BELOW TO FINISH
+
 # append summarised dataset
 dat.appended <- appendyears(year.start.arg,year.end.arg)
 
@@ -157,7 +159,7 @@ dat.appended   <- na.omit(dat.appended)
 dat.appended$iso3 <- "USA"
 
 # add inferred population data by day
-pop.state <- readRDS('../../output/pop_us_infer/statePopulations_infer_by_days_new_years')
+pop.state <- readRDS('../../output/pop_us_infer/deprivationPopulations_infer_by_days_new_years')
 pop.state$fips <- as.integer(pop.state$fips)
 
 # merge deaths and population files

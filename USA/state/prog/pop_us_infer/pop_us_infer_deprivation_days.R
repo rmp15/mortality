@@ -206,4 +206,4 @@ axis.text.x = element_text(angle=0))
 )
 dev.off()
 
-saveRDS(pop.state.long, '../../output/pop_us_infer/statePopulations_infer_by_days_new_years')
+saveRDS(pop.state.long, '../../output/pop_us_infer/deprivationPopulations_infer_by_days_new_years')
