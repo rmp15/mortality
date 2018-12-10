@@ -7,7 +7,7 @@ library(ggplot2)
 #
 
 # load income data
-file_income <- "P:/data/income/CA1/CA1_1969_2015__ALL_AREAS.csv"
+file_income = '~/git/mortality/USA/state/data/income/CA1_1969_2016__ALL_AREAS.csv'
 income <- read.csv(file_income,header=TRUE,stringsAsFactors = FALSE)
 
 income_tot <- subset(income,LineCode==1)[,c(-2,-3,-4,-5,-6,-7)]
@@ -33,7 +33,6 @@ income_us <- data.frame(left_join(income_us,income_pc_melt,by=c('fips','year')))
 income_us[,c(3,4,5)] <- as.numeric(as.character(unlist(income_us[,c(3,4,5)])))
 income_us[,2] <- as.numeric(unlist(income_us[,2]))
 income_us$total <- income_us$total*1000
-
 
 # load population data to check 
 # pop <- read.dta("C:/Users/hmt207/data/us_county_data/countyPopulationsnewyears.dta")    #pop_with_sc.dta")
