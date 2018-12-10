@@ -7,7 +7,7 @@ library(ggplot2)
 # arguments from bash file
 year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
-strata <- as.numeric(args[3])
+quantile.arg <- as.numeric(args[3])
 
 # create output directory
 dir.output = '~/git/mortality/USA/state/output/income_process/'
@@ -44,7 +44,16 @@ income_us$total <- income_us$total*1000
 # save file
 saveRDS(income_us,paste0(dir.output,'income_1969_2016.rds'))
 
-# process into
+# process into number of chosen quantile by year
+# TO DO REMOVE STATEWIDE SUMMARIES AND OTHER IRRELEVANT VALUES BEFORE BELOW
+dat.2016 = subset(income_us,year==2016)
+dat.2016$quantile = as.vector(t(ddply(dat.2016,.(year), function(x) ntile(x$pc,quantile.arg))))[-1]
+dat.1980 = subset(income_us,year==1980)
+dat.1980$quantile = as.vector(t(ddply(dat.1980,.(year), function(x) ntile(x$pc,quantile.arg))))[-1]
+
+# compare quantiles for counties at beginning and end of period of study
+
+# plot comparison of quantiles
 
 # below is the rest of Helen's original code which I may not need
 
