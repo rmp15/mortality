@@ -28,7 +28,8 @@ yearsummary_cod  <- function(x=2000) {
 		dat$sex = plyr::mapvalues(dat$sex,from=sort(unique(dat$sex)),to=c(2,1))
 	}
 
-	# load lookup for fips CHANGE TO SUBSTR OF FIPS
+	# state fips
+	dat$county.fips = dat$fips
 	dat$fips = substr(dat$fips,1,2)
 	dat$fips <- as.numeric(dat$fips)
 
@@ -91,26 +92,32 @@ yearsummary_cod  <- function(x=2000) {
                 ifelse (dat.merged$age<85,  75,
                    	85)))))))))
 
-	# summarise by state,year,month,sex,agegroup
-    dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.group,fips,year,monthdth,sex,agegroup),deaths=sum(deaths))
+    # load and merge deprivation definitions
+    # TO FINISH POSSIBLY BOTH MEASURES BY POVERTY AND INCOME
+    # dat.dep = read.csv(...)
+    # dat.merged = merge(dat.merged,dat.dep)
+
+	# summarise by deprivation group,year,month,sex,agegroup
+    dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.group,dep,year,monthdth,sex,agegroup),deaths=sum(deaths))
     
-  	names(dat.summarised)[1:7] <- c('cause','fips','year','month','sex','age','deaths')
+  	names(dat.summarised)[1:7] <- c('cause','deprivation','year','month','sex','age','deaths')
 	dat.summarised <- na.omit(dat.summarised)
 
 	# create an exhaustive list of location sex age month (in this case it should be 51 * 2 * 10 * 12 * 4 = 48,960 rows)
 	fips 	=	c(1,2,4,5,6,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,
 				26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
 				41,42,44,45,46,47,48,49,50,51,53,54,55,56)
+    deprivation = c(1:5) # TO CONFIRM
 	month 	= 	c(1:12)
 	sex 	= 	c(1:2)
 	age 	= 	c(0,5,15,25,35,45,55,65,75,85)
 	cause 	=	c('Cancer','Cardiopulmonary','External','Other')
 
-	complete.grid <- expand.grid(fips=fips,month=month,sex=sex,age=age,cause=cause)
+	complete.grid <- expand.grid(deprivation=deprivation,month=month,sex=sex,age=age,cause=cause)
 	complete.grid$year <- unique(dat.summarised$year)
 
 	# merge deaths counts with complete grid to ensure there are rows with zero deaths
-	dat.summarised.complete <- merge(complete.grid,dat.summarised,by=c('cause','fips','year','month','sex','age'),all.x='TRUE')
+	dat.summarised.complete <- merge(complete.grid,dat.summarised,by=c('cause','deprivation','year','month','sex','age'),all.x='TRUE')
 
 	# assign missing deaths to have value 0
 	dat.summarised.complete$deaths <- ifelse(is.na(dat.summarised.complete$deaths)==TRUE,0,dat.summarised.complete$deaths)

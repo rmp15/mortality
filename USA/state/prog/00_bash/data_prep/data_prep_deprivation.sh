@@ -15,9 +15,18 @@ declare -i start=1980
 declare -i end=2016
 
 #################################################
-# 1. PROCESS DATA FOR BROAD CAUSES
+# 2. PROCESS POPULATION
 #################################################
 
-echo "preparing monthly death rates in broad causes of deaths for years $start - $end";
+echo "preparing population by deprivation for years $start - $end";
+
+Rscript ~/git/mortality/USA/state/prog/pop_format/pop_us_infer_deprivation_days.R $start $end
+Rscript ~/git/mortality/USA/state/prog/pop_us_infer/pop_us_infer_deprivation_days.R $start $end
+
+#################################################
+# 2. PROCESS DEATH RATES FOR BROAD CAUSES
+#################################################
+
+echo "preparing monthly death rates by deprivation in broad causes of deaths for years $start - $end";
 
 Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod_deprivation.R $start $end
