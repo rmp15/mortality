@@ -54,37 +54,35 @@ yearsummary_injuries  <- function(x=2000) {
         # move deaths due to weather-based heat/cold to 'Other'
         dat$cause.group = ifelse(as.numeric(substr(dat$cause.numeric,1,3))==900|as.numeric(substr(dat$cause.numeric,1,3))==901,'Other',dat$cause.group)
 
-        # only filter for external
-        dat.merged = subset(dat,cause.group=='External')
+        # only filter for cardiorespiratory
+        dat.merged = subset(dat,cause.group=='Cardipulmonary')
         dat.merged$cause.group = NULL
 
         # cause subgroups
         dat.merged$cause.sub =
-                            ifelse(dat.merged$cause.numeric>=8000&dat.merged$cause.numeric<=8079, 'Transport accidents',#'Railway Accidents',
-							ifelse(dat.merged$cause.numeric>=8100&dat.merged$cause.numeric<=8199, 'Transport accidents',#'Motor Vehicle Traffic Accidents',
-							ifelse(dat.merged$cause.numeric>=8200&dat.merged$cause.numeric<=8259, 'Transport accidents',#'Motor Vehicle Nontraffic Accidents',
-							ifelse(dat.merged$cause.numeric>=8260&dat.merged$cause.numeric<=8299, 'Transport accidents',#'Other Road Vehicle Accidents',
-							ifelse(dat.merged$cause.numeric>=8300&dat.merged$cause.numeric<=8389, 'Transport accidents',#'Water Transport Accidents',
-							ifelse(dat.merged$cause.numeric>=8400&dat.merged$cause.numeric<=8459, 'Transport accidents',#'Air and Space Transport Accidents',
-							ifelse(dat.merged$cause.numeric>=8460&dat.merged$cause.numeric<=8499, 'Transport accidents',#'Vehicle Accidents, Not Elsewhere Classifiable',
-							ifelse(dat.merged$cause.numeric>=8500&dat.merged$cause.numeric<=8589, 'Other external causes of injury',#'Accidental Poisoning By Drugs, Medicinal Substances, And Biologicals',
-							ifelse(dat.merged$cause.numeric>=8600&dat.merged$cause.numeric<=8699, 'Other external causes of injury',#'Accidental Poisoning By Other Solid And Liquid Substances, And Biologicals',
-							ifelse(dat.merged$cause.numeric>=8700&dat.merged$cause.numeric<=8769, 'Other external causes of injury',#'Misadventures To Patients During Surgical And Medical Care',
-							ifelse(dat.merged$cause.numeric>=8780&dat.merged$cause.numeric<=8799, 'Other external causes of injury',#'Non-Misadventures To Patients During Surigcal And Medical Care',
-							ifelse(dat.merged$cause.numeric>=8800&dat.merged$cause.numeric<=8889, 'Accidental falls', #'Accidental Falls',
-							ifelse(dat.merged$cause.numeric>=8900&dat.merged$cause.numeric<=8999, 'Other external causes of injury',#'Accidents Caused By Fire and Flames',
-							ifelse(dat.merged$cause.numeric>=9000&dat.merged$cause.numeric<=9099, 'Other external causes of injury',#'Accidents Due To Natural And Environmental Factors',
-							ifelse(dat.merged$cause.numeric>=9100&dat.merged$cause.numeric<=9109, 'Accidental drowning and submersion',#'Accidents Caused By Submersion',
-							ifelse(dat.merged$cause.numeric>=9110&dat.merged$cause.numeric<=9159, 'Other external causes of injury',#'Accidents Caused By Suffocation And Foreign Bodies',
-							ifelse(dat.merged$cause.numeric>=9160&dat.merged$cause.numeric<=9289, 'Other external causes of injury',#'Other Accidents',
-							ifelse(dat.merged$cause.numeric>=9290&dat.merged$cause.numeric<=9299, 'Other external causes of injury',#'Late Effects Of Accidental Injury',
-							ifelse(dat.merged$cause.numeric>=9300&dat.merged$cause.numeric<=9499, 'Other external causes of injury',#'Complications of medical and surgical care',
-							ifelse(dat.merged$cause.numeric>=9500&dat.merged$cause.numeric<=9599, 'Intentional self-harm',#'Suicide And Self-Inflicted Injury',
-							ifelse(dat.merged$cause.numeric>=9600&dat.merged$cause.numeric<=9699, 'Assault',#'Homicide And Injury Purposely Inflicted By Other Persons',
-							ifelse(dat.merged$cause.numeric>=9700&dat.merged$cause.numeric<=9799, 'Assault',#'Legal Intervention',
-							ifelse(dat.merged$cause.numeric>=9800&dat.merged$cause.numeric<=9899, 'Other external causes of injury',#'Injury Undetemined Whether Accidentlally Or Purposely Inflicted',
-							ifelse(dat.merged$cause.numeric>=9900&dat.merged$cause.numeric<=9999, 'Assault',#'Injury Resulting From Operations Of War',
-							'NA'))))))))))))))))))))))))
+							# Cardiovascular diseases (3900-4699)
+                            ifelse(dat.merged$cause.numeric>=3810&dat.merged$cause.numeric<=3829, 'Ottis media', #'Ottis media',
+							ifelse(dat.merged$cause.numeric>=3900&dat.merged$cause.numeric<=3989, 'Rheumatic heart diseases', #'Rheumatic heart diseases',
+							ifelse(dat.merged$cause.numeric>=3990&dat.merged$cause.numeric<=4009, 'Other cardiovascular diseases', #'?',
+							ifelse(dat.merged$cause.numeric>=4010&dat.merged$cause.numeric<=4059, 'Hypertensive heart disease', #'Hypertensive heart disease',
+							ifelse(dat.merged$cause.numeric>=4060&dat.merged$cause.numeric<=4099, 'Other cardiovascular diseases', #'?',
+							ifelse(dat.merged$cause.numeric>=4100&dat.merged$cause.numeric<=4149, 'Ischaemic heart disease', #'Ischaemic heart disease',
+							ifelse(dat.merged$cause.numeric>=4150&dat.merged$cause.numeric<=4199, 'Other cardiovascular diseases', #'?',
+							ifelse(dat.merged$cause.numeric>=4200&dat.merged$cause.numeric<=4229, 'Inflammatory heart diseases', #'Inflammatory heart diseases',
+							ifelse(dat.merged$cause.numeric>=4230&dat.merged$cause.numeric<=4249, 'Other cardiovascular diseases', #'?',
+							ifelse(dat.merged$cause.numeric>=4250&dat.merged$cause.numeric<=4259, 'Inflammatory heart diseases', #'Inflammatory heart diseases',
+							ifelse(dat.merged$cause.numeric>=4300&dat.merged$cause.numeric<=4699, 'Cerebrovascular disease', #'Cerebrovascular disease',
+							# Respiratory diseases (4700-4789, 4900-5199)
+							ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
+							ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
+							ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
+							ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
+							ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
+							ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
+
+							ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
+							ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
+							'NA')))))))))))
 
 		# merge cod in ICD 9 coding
 		icd9.lookup$cause = as.numeric(icd9.lookup$cause)
