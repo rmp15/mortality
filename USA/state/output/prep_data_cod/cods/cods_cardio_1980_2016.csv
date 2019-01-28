@@ -1,0 +1,889 @@
+"cause","cause.sub","icd"
+"4930","Asthma",9
+"4931","Asthma",9
+"4939","Asthma",9
+"J450","Asthma",10
+"J451","Asthma",10
+"J458","Asthma",10
+"J459","Asthma",10
+"J460","Asthma",10
+"4300","Cerebrovascular disease",9
+"4310","Cerebrovascular disease",9
+"4320","Cerebrovascular disease",9
+"4321","Cerebrovascular disease",9
+"4329","Cerebrovascular disease",9
+"4330","Cerebrovascular disease",9
+"4331","Cerebrovascular disease",9
+"4332","Cerebrovascular disease",9
+"4333","Cerebrovascular disease",9
+"4338","Cerebrovascular disease",9
+"4339","Cerebrovascular disease",9
+"4340","Cerebrovascular disease",9
+"4341","Cerebrovascular disease",9
+"4349","Cerebrovascular disease",9
+"4350","Cerebrovascular disease",9
+"4360","Cerebrovascular disease",9
+"4370","Cerebrovascular disease",9
+"4371","Cerebrovascular disease",9
+"4372","Cerebrovascular disease",9
+"4373","Cerebrovascular disease",9
+"4374","Cerebrovascular disease",9
+"4375","Cerebrovascular disease",9
+"4376","Cerebrovascular disease",9
+"4378","Cerebrovascular disease",9
+"4379","Cerebrovascular disease",9
+"4380","Cerebrovascular disease",9
+"I600","Cerebrovascular disease",10
+"I601","Cerebrovascular disease",10
+"I602","Cerebrovascular disease",10
+"I603","Cerebrovascular disease",10
+"I604","Cerebrovascular disease",10
+"I605","Cerebrovascular disease",10
+"I606","Cerebrovascular disease",10
+"I607","Cerebrovascular disease",10
+"I608","Cerebrovascular disease",10
+"I609","Cerebrovascular disease",10
+"I610","Cerebrovascular disease",10
+"I611","Cerebrovascular disease",10
+"I612","Cerebrovascular disease",10
+"I613","Cerebrovascular disease",10
+"I614","Cerebrovascular disease",10
+"I615","Cerebrovascular disease",10
+"I616","Cerebrovascular disease",10
+"I618","Cerebrovascular disease",10
+"I619","Cerebrovascular disease",10
+"I620","Cerebrovascular disease",10
+"I621","Cerebrovascular disease",10
+"I629","Cerebrovascular disease",10
+"I630","Cerebrovascular disease",10
+"I631","Cerebrovascular disease",10
+"I632","Cerebrovascular disease",10
+"I633","Cerebrovascular disease",10
+"I634","Cerebrovascular disease",10
+"I635","Cerebrovascular disease",10
+"I636","Cerebrovascular disease",10
+"I638","Cerebrovascular disease",10
+"I639","Cerebrovascular disease",10
+"I640","Cerebrovascular disease",10
+"I670","Cerebrovascular disease",10
+"I671","Cerebrovascular disease",10
+"I672","Cerebrovascular disease",10
+"I673","Cerebrovascular disease",10
+"I674","Cerebrovascular disease",10
+"I675","Cerebrovascular disease",10
+"I676","Cerebrovascular disease",10
+"I677","Cerebrovascular disease",10
+"I678","Cerebrovascular disease",10
+"I679","Cerebrovascular disease",10
+"I690","Cerebrovascular disease",10
+"I691","Cerebrovascular disease",10
+"I692","Cerebrovascular disease",10
+"I693","Cerebrovascular disease",10
+"I694","Cerebrovascular disease",10
+"I698","Cerebrovascular disease",10
+"4900","Chronic obstructive pulmonary disease",9
+"4910","Chronic obstructive pulmonary disease",9
+"4911","Chronic obstructive pulmonary disease",9
+"4912","Chronic obstructive pulmonary disease",9
+"4918","Chronic obstructive pulmonary disease",9
+"4919","Chronic obstructive pulmonary disease",9
+"4920","Chronic obstructive pulmonary disease",9
+"4950","Chronic obstructive pulmonary disease",9
+"4951","Chronic obstructive pulmonary disease",9
+"4952","Chronic obstructive pulmonary disease",9
+"4956","Chronic obstructive pulmonary disease",9
+"4957","Chronic obstructive pulmonary disease",9
+"4958","Chronic obstructive pulmonary disease",9
+"4959","Chronic obstructive pulmonary disease",9
+"4960","Chronic obstructive pulmonary disease",9
+"J400","Chronic obstructive pulmonary disease",10
+"J410","Chronic obstructive pulmonary disease",10
+"J411","Chronic obstructive pulmonary disease",10
+"J420","Chronic obstructive pulmonary disease",10
+"J430","Chronic obstructive pulmonary disease",10
+"J431","Chronic obstructive pulmonary disease",10
+"J432","Chronic obstructive pulmonary disease",10
+"J438","Chronic obstructive pulmonary disease",10
+"J439","Chronic obstructive pulmonary disease",10
+"J440","Chronic obstructive pulmonary disease",10
+"J441","Chronic obstructive pulmonary disease",10
+"J448","Chronic obstructive pulmonary disease",10
+"J449","Chronic obstructive pulmonary disease",10
+"4010","Hypertensive heart disease",9
+"4011","Hypertensive heart disease",9
+"4019","Hypertensive heart disease",9
+"4020","Hypertensive heart disease",9
+"4021","Hypertensive heart disease",9
+"4029","Hypertensive heart disease",9
+"4030","Hypertensive heart disease",9
+"4031","Hypertensive heart disease",9
+"4039","Hypertensive heart disease",9
+"4040","Hypertensive heart disease",9
+"4041","Hypertensive heart disease",9
+"4049","Hypertensive heart disease",9
+"I100","Hypertensive heart disease",10
+"I110","Hypertensive heart disease",10
+"I119","Hypertensive heart disease",10
+"I120","Hypertensive heart disease",10
+"I129","Hypertensive heart disease",10
+"I130","Hypertensive heart disease",10
+"I131","Hypertensive heart disease",10
+"I132","Hypertensive heart disease",10
+"I139","Hypertensive heart disease",10
+"4209","Inflammatory heart diseases",9
+"4210","Inflammatory heart diseases",9
+"4219","Inflammatory heart diseases",9
+"4229","Inflammatory heart diseases",9
+"4250","Inflammatory heart diseases",9
+"4251","Inflammatory heart diseases",9
+"4252","Inflammatory heart diseases",9
+"4253","Inflammatory heart diseases",9
+"4254","Inflammatory heart diseases",9
+"4255","Inflammatory heart diseases",9
+"4259","Inflammatory heart diseases",9
+"I300","Inflammatory heart diseases",10
+"I301","Inflammatory heart diseases",10
+"I308","Inflammatory heart diseases",10
+"I309","Inflammatory heart diseases",10
+"I310","Inflammatory heart diseases",10
+"I311","Inflammatory heart diseases",10
+"I312","Inflammatory heart diseases",10
+"I313","Inflammatory heart diseases",10
+"I318","Inflammatory heart diseases",10
+"I319","Inflammatory heart diseases",10
+"I330","Inflammatory heart diseases",10
+"I339","Inflammatory heart diseases",10
+"I380","Inflammatory heart diseases",10
+"I400","Inflammatory heart diseases",10
+"I401","Inflammatory heart diseases",10
+"I408","Inflammatory heart diseases",10
+"I409","Inflammatory heart diseases",10
+"I420","Inflammatory heart diseases",10
+"I421","Inflammatory heart diseases",10
+"I422","Inflammatory heart diseases",10
+"I423","Inflammatory heart diseases",10
+"I424","Inflammatory heart diseases",10
+"I425","Inflammatory heart diseases",10
+"I426","Inflammatory heart diseases",10
+"I427","Inflammatory heart diseases",10
+"I428","Inflammatory heart diseases",10
+"I429","Inflammatory heart diseases",10
+"4100","Ischaemic heart disease",9
+"4110","Ischaemic heart disease",9
+"4120","Ischaemic heart disease",9
+"4130","Ischaemic heart disease",9
+"4140","Ischaemic heart disease",9
+"4141","Ischaemic heart disease",9
+"4148","Ischaemic heart disease",9
+"4149","Ischaemic heart disease",9
+"I200","Ischaemic heart disease",10
+"I201","Ischaemic heart disease",10
+"I208","Ischaemic heart disease",10
+"I209","Ischaemic heart disease",10
+"I210","Ischaemic heart disease",10
+"I211","Ischaemic heart disease",10
+"I212","Ischaemic heart disease",10
+"I213","Ischaemic heart disease",10
+"I214","Ischaemic heart disease",10
+"I219","Ischaemic heart disease",10
+"I220","Ischaemic heart disease",10
+"I221","Ischaemic heart disease",10
+"I228","Ischaemic heart disease",10
+"I229","Ischaemic heart disease",10
+"I241","Ischaemic heart disease",10
+"I248","Ischaemic heart disease",10
+"I249","Ischaemic heart disease",10
+"I250","Ischaemic heart disease",10
+"I251","Ischaemic heart disease",10
+"I252","Ischaemic heart disease",10
+"I253","Ischaemic heart disease",10
+"I254","Ischaemic heart disease",10
+"I255","Ischaemic heart disease",10
+"I256","Ischaemic heart disease",10
+"I258","Ischaemic heart disease",10
+"I259","Ischaemic heart disease",10
+"4150","Other cardiovascular diseases",9
+"4151","Other cardiovascular diseases",9
+"4160","Other cardiovascular diseases",9
+"4161","Other cardiovascular diseases",9
+"4168","Other cardiovascular diseases",9
+"4169","Other cardiovascular diseases",9
+"4170","Other cardiovascular diseases",9
+"4171","Other cardiovascular diseases",9
+"4178","Other cardiovascular diseases",9
+"4179","Other cardiovascular diseases",9
+"4230","Other cardiovascular diseases",9
+"4231","Other cardiovascular diseases",9
+"4232","Other cardiovascular diseases",9
+"4238","Other cardiovascular diseases",9
+"4239","Other cardiovascular diseases",9
+"4240","Other cardiovascular diseases",9
+"4241","Other cardiovascular diseases",9
+"4242","Other cardiovascular diseases",9
+"4243","Other cardiovascular diseases",9
+"4249","Other cardiovascular diseases",9
+"4260","Other cardiovascular diseases",9
+"4261","Other cardiovascular diseases",9
+"4262","Other cardiovascular diseases",9
+"4263","Other cardiovascular diseases",9
+"4264","Other cardiovascular diseases",9
+"4265","Other cardiovascular diseases",9
+"4266","Other cardiovascular diseases",9
+"4267","Other cardiovascular diseases",9
+"4268","Other cardiovascular diseases",9
+"4269","Other cardiovascular diseases",9
+"4270","Other cardiovascular diseases",9
+"4271","Other cardiovascular diseases",9
+"4272","Other cardiovascular diseases",9
+"4273","Other cardiovascular diseases",9
+"4274","Other cardiovascular diseases",9
+"4275","Other cardiovascular diseases",9
+"4276","Other cardiovascular diseases",9
+"4278","Other cardiovascular diseases",9
+"4279","Other cardiovascular diseases",9
+"4280","Other cardiovascular diseases",9
+"4281","Other cardiovascular diseases",9
+"4289","Other cardiovascular diseases",9
+"4290","Other cardiovascular diseases",9
+"4291","Other cardiovascular diseases",9
+"4292","Other cardiovascular diseases",9
+"4293","Other cardiovascular diseases",9
+"4295","Other cardiovascular diseases",9
+"4296","Other cardiovascular diseases",9
+"4298","Other cardiovascular diseases",9
+"4299","Other cardiovascular diseases",9
+"4400","Other cardiovascular diseases",9
+"4401","Other cardiovascular diseases",9
+"4402","Other cardiovascular diseases",9
+"4408","Other cardiovascular diseases",9
+"4409","Other cardiovascular diseases",9
+"4410","Other cardiovascular diseases",9
+"4411","Other cardiovascular diseases",9
+"4412","Other cardiovascular diseases",9
+"4413","Other cardiovascular diseases",9
+"4414","Other cardiovascular diseases",9
+"4415","Other cardiovascular diseases",9
+"4416","Other cardiovascular diseases",9
+"4420","Other cardiovascular diseases",9
+"4421","Other cardiovascular diseases",9
+"4422","Other cardiovascular diseases",9
+"4423","Other cardiovascular diseases",9
+"4428","Other cardiovascular diseases",9
+"4429","Other cardiovascular diseases",9
+"4430","Other cardiovascular diseases",9
+"4431","Other cardiovascular diseases",9
+"4438","Other cardiovascular diseases",9
+"4439","Other cardiovascular diseases",9
+"4440","Other cardiovascular diseases",9
+"4441","Other cardiovascular diseases",9
+"4442","Other cardiovascular diseases",9
+"4448","Other cardiovascular diseases",9
+"4449","Other cardiovascular diseases",9
+"4460","Other cardiovascular diseases",9
+"4461","Other cardiovascular diseases",9
+"4462","Other cardiovascular diseases",9
+"4463","Other cardiovascular diseases",9
+"4464","Other cardiovascular diseases",9
+"4465","Other cardiovascular diseases",9
+"4466","Other cardiovascular diseases",9
+"4467","Other cardiovascular diseases",9
+"4470","Other cardiovascular diseases",9
+"4471","Other cardiovascular diseases",9
+"4472","Other cardiovascular diseases",9
+"4473","Other cardiovascular diseases",9
+"4474","Other cardiovascular diseases",9
+"4475","Other cardiovascular diseases",9
+"4476","Other cardiovascular diseases",9
+"4478","Other cardiovascular diseases",9
+"4479","Other cardiovascular diseases",9
+"4480","Other cardiovascular diseases",9
+"4481","Other cardiovascular diseases",9
+"4489","Other cardiovascular diseases",9
+"4510","Other cardiovascular diseases",9
+"4511","Other cardiovascular diseases",9
+"4512","Other cardiovascular diseases",9
+"4518","Other cardiovascular diseases",9
+"4519","Other cardiovascular diseases",9
+"4520","Other cardiovascular diseases",9
+"4530","Other cardiovascular diseases",9
+"4531","Other cardiovascular diseases",9
+"4532","Other cardiovascular diseases",9
+"4533","Other cardiovascular diseases",9
+"4538","Other cardiovascular diseases",9
+"4539","Other cardiovascular diseases",9
+"4540","Other cardiovascular diseases",9
+"4541","Other cardiovascular diseases",9
+"4542","Other cardiovascular diseases",9
+"4549","Other cardiovascular diseases",9
+"4550","Other cardiovascular diseases",9
+"4551","Other cardiovascular diseases",9
+"4552","Other cardiovascular diseases",9
+"4553","Other cardiovascular diseases",9
+"4554","Other cardiovascular diseases",9
+"4555","Other cardiovascular diseases",9
+"4556","Other cardiovascular diseases",9
+"4557","Other cardiovascular diseases",9
+"4558","Other cardiovascular diseases",9
+"4559","Other cardiovascular diseases",9
+"4560","Other cardiovascular diseases",9
+"4561","Other cardiovascular diseases",9
+"4563","Other cardiovascular diseases",9
+"4564","Other cardiovascular diseases",9
+"4565","Other cardiovascular diseases",9
+"4568","Other cardiovascular diseases",9
+"4571","Other cardiovascular diseases",9
+"4572","Other cardiovascular diseases",9
+"4578","Other cardiovascular diseases",9
+"4579","Other cardiovascular diseases",9
+"4580","Other cardiovascular diseases",9
+"4581","Other cardiovascular diseases",9
+"4589","Other cardiovascular diseases",9
+"4590","Other cardiovascular diseases",9
+"4591","Other cardiovascular diseases",9
+"4592","Other cardiovascular diseases",9
+"4598","Other cardiovascular diseases",9
+"4599","Other cardiovascular diseases",9
+"4600","Other cardiovascular diseases",9
+"4610","Other cardiovascular diseases",9
+"4611","Other cardiovascular diseases",9
+"4612","Other cardiovascular diseases",9
+"4613","Other cardiovascular diseases",9
+"4618","Other cardiovascular diseases",9
+"4619","Other cardiovascular diseases",9
+"4620","Other cardiovascular diseases",9
+"4630","Other cardiovascular diseases",9
+"4640","Other cardiovascular diseases",9
+"4641","Other cardiovascular diseases",9
+"4642","Other cardiovascular diseases",9
+"4643","Other cardiovascular diseases",9
+"4644","Other cardiovascular diseases",9
+"4650","Other cardiovascular diseases",9
+"4658","Other cardiovascular diseases",9
+"4659","Other cardiovascular diseases",9
+"4660","Other cardiovascular diseases",9
+"4661","Other cardiovascular diseases",9
+"I000","Other cardiovascular diseases",10
+"I150","Other cardiovascular diseases",10
+"I159","Other cardiovascular diseases",10
+"I260","Other cardiovascular diseases",10
+"I269","Other cardiovascular diseases",10
+"I270","Other cardiovascular diseases",10
+"I271","Other cardiovascular diseases",10
+"I272","Other cardiovascular diseases",10
+"I278","Other cardiovascular diseases",10
+"I279","Other cardiovascular diseases",10
+"I280","Other cardiovascular diseases",10
+"I281","Other cardiovascular diseases",10
+"I288","Other cardiovascular diseases",10
+"I289","Other cardiovascular diseases",10
+"I340","Other cardiovascular diseases",10
+"I341","Other cardiovascular diseases",10
+"I342","Other cardiovascular diseases",10
+"I348","Other cardiovascular diseases",10
+"I349","Other cardiovascular diseases",10
+"I350","Other cardiovascular diseases",10
+"I351","Other cardiovascular diseases",10
+"I352","Other cardiovascular diseases",10
+"I358","Other cardiovascular diseases",10
+"I359","Other cardiovascular diseases",10
+"I360","Other cardiovascular diseases",10
+"I361","Other cardiovascular diseases",10
+"I362","Other cardiovascular diseases",10
+"I368","Other cardiovascular diseases",10
+"I369","Other cardiovascular diseases",10
+"I370","Other cardiovascular diseases",10
+"I371","Other cardiovascular diseases",10
+"I372","Other cardiovascular diseases",10
+"I378","Other cardiovascular diseases",10
+"I379","Other cardiovascular diseases",10
+"I440","Other cardiovascular diseases",10
+"I441","Other cardiovascular diseases",10
+"I442","Other cardiovascular diseases",10
+"I443","Other cardiovascular diseases",10
+"I444","Other cardiovascular diseases",10
+"I447","Other cardiovascular diseases",10
+"I451","Other cardiovascular diseases",10
+"I452","Other cardiovascular diseases",10
+"I453","Other cardiovascular diseases",10
+"I454","Other cardiovascular diseases",10
+"I455","Other cardiovascular diseases",10
+"I456","Other cardiovascular diseases",10
+"I458","Other cardiovascular diseases",10
+"I459","Other cardiovascular diseases",10
+"I460","Other cardiovascular diseases",10
+"I461","Other cardiovascular diseases",10
+"I469","Other cardiovascular diseases",10
+"I470","Other cardiovascular diseases",10
+"I471","Other cardiovascular diseases",10
+"I472","Other cardiovascular diseases",10
+"I479","Other cardiovascular diseases",10
+"I480","Other cardiovascular diseases",10
+"I490","Other cardiovascular diseases",10
+"I491","Other cardiovascular diseases",10
+"I492","Other cardiovascular diseases",10
+"I493","Other cardiovascular diseases",10
+"I494","Other cardiovascular diseases",10
+"I495","Other cardiovascular diseases",10
+"I498","Other cardiovascular diseases",10
+"I499","Other cardiovascular diseases",10
+"I500","Other cardiovascular diseases",10
+"I501","Other cardiovascular diseases",10
+"I509","Other cardiovascular diseases",10
+"I510","Other cardiovascular diseases",10
+"I511","Other cardiovascular diseases",10
+"I512","Other cardiovascular diseases",10
+"I513","Other cardiovascular diseases",10
+"I514","Other cardiovascular diseases",10
+"I515","Other cardiovascular diseases",10
+"I516","Other cardiovascular diseases",10
+"I517","Other cardiovascular diseases",10
+"I518","Other cardiovascular diseases",10
+"I519","Other cardiovascular diseases",10
+"I700","Other cardiovascular diseases",10
+"I701","Other cardiovascular diseases",10
+"I702","Other cardiovascular diseases",10
+"I708","Other cardiovascular diseases",10
+"I709","Other cardiovascular diseases",10
+"I710","Other cardiovascular diseases",10
+"I711","Other cardiovascular diseases",10
+"I712","Other cardiovascular diseases",10
+"I713","Other cardiovascular diseases",10
+"I714","Other cardiovascular diseases",10
+"I715","Other cardiovascular diseases",10
+"I716","Other cardiovascular diseases",10
+"I718","Other cardiovascular diseases",10
+"I719","Other cardiovascular diseases",10
+"I720","Other cardiovascular diseases",10
+"I721","Other cardiovascular diseases",10
+"I722","Other cardiovascular diseases",10
+"I723","Other cardiovascular diseases",10
+"I724","Other cardiovascular diseases",10
+"I725","Other cardiovascular diseases",10
+"I728","Other cardiovascular diseases",10
+"I729","Other cardiovascular diseases",10
+"I730","Other cardiovascular diseases",10
+"I731","Other cardiovascular diseases",10
+"I738","Other cardiovascular diseases",10
+"I739","Other cardiovascular diseases",10
+"I740","Other cardiovascular diseases",10
+"I741","Other cardiovascular diseases",10
+"I742","Other cardiovascular diseases",10
+"I743","Other cardiovascular diseases",10
+"I744","Other cardiovascular diseases",10
+"I745","Other cardiovascular diseases",10
+"I748","Other cardiovascular diseases",10
+"I749","Other cardiovascular diseases",10
+"I770","Other cardiovascular diseases",10
+"I771","Other cardiovascular diseases",10
+"I772","Other cardiovascular diseases",10
+"I773","Other cardiovascular diseases",10
+"I774","Other cardiovascular diseases",10
+"I775","Other cardiovascular diseases",10
+"I776","Other cardiovascular diseases",10
+"I778","Other cardiovascular diseases",10
+"I779","Other cardiovascular diseases",10
+"I780","Other cardiovascular diseases",10
+"I781","Other cardiovascular diseases",10
+"I788","Other cardiovascular diseases",10
+"I789","Other cardiovascular diseases",10
+"I800","Other cardiovascular diseases",10
+"I801","Other cardiovascular diseases",10
+"I802","Other cardiovascular diseases",10
+"I803","Other cardiovascular diseases",10
+"I808","Other cardiovascular diseases",10
+"I809","Other cardiovascular diseases",10
+"I810","Other cardiovascular diseases",10
+"I820","Other cardiovascular diseases",10
+"I821","Other cardiovascular diseases",10
+"I822","Other cardiovascular diseases",10
+"I823","Other cardiovascular diseases",10
+"I828","Other cardiovascular diseases",10
+"I829","Other cardiovascular diseases",10
+"I830","Other cardiovascular diseases",10
+"I831","Other cardiovascular diseases",10
+"I832","Other cardiovascular diseases",10
+"I839","Other cardiovascular diseases",10
+"I840","Other cardiovascular diseases",10
+"I841","Other cardiovascular diseases",10
+"I842","Other cardiovascular diseases",10
+"I844","Other cardiovascular diseases",10
+"I845","Other cardiovascular diseases",10
+"I848","Other cardiovascular diseases",10
+"I849","Other cardiovascular diseases",10
+"I850","Other cardiovascular diseases",10
+"I859","Other cardiovascular diseases",10
+"I860","Other cardiovascular diseases",10
+"I861","Other cardiovascular diseases",10
+"I862","Other cardiovascular diseases",10
+"I864","Other cardiovascular diseases",10
+"I868","Other cardiovascular diseases",10
+"I870","Other cardiovascular diseases",10
+"I871","Other cardiovascular diseases",10
+"I872","Other cardiovascular diseases",10
+"I878","Other cardiovascular diseases",10
+"I879","Other cardiovascular diseases",10
+"I880","Other cardiovascular diseases",10
+"I881","Other cardiovascular diseases",10
+"I888","Other cardiovascular diseases",10
+"I889","Other cardiovascular diseases",10
+"I890","Other cardiovascular diseases",10
+"I891","Other cardiovascular diseases",10
+"I898","Other cardiovascular diseases",10
+"I899","Other cardiovascular diseases",10
+"I950","Other cardiovascular diseases",10
+"I951","Other cardiovascular diseases",10
+"I952","Other cardiovascular diseases",10
+"I958","Other cardiovascular diseases",10
+"I959","Other cardiovascular diseases",10
+"I990","Other cardiovascular diseases",10
+"4700","Other respiratory diseases",9
+"4710","Other respiratory diseases",9
+"4718","Other respiratory diseases",9
+"4719","Other respiratory diseases",9
+"4720","Other respiratory diseases",9
+"4721","Other respiratory diseases",9
+"4722","Other respiratory diseases",9
+"4730","Other respiratory diseases",9
+"4731","Other respiratory diseases",9
+"4732","Other respiratory diseases",9
+"4733","Other respiratory diseases",9
+"4738","Other respiratory diseases",9
+"4739","Other respiratory diseases",9
+"4740","Other respiratory diseases",9
+"4741","Other respiratory diseases",9
+"4748","Other respiratory diseases",9
+"4749","Other respiratory diseases",9
+"4750","Other respiratory diseases",9
+"4760","Other respiratory diseases",9
+"4761","Other respiratory diseases",9
+"4770","Other respiratory diseases",9
+"4778","Other respiratory diseases",9
+"4779","Other respiratory diseases",9
+"4780","Other respiratory diseases",9
+"4781","Other respiratory diseases",9
+"4782","Other respiratory diseases",9
+"4783","Other respiratory diseases",9
+"4784","Other respiratory diseases",9
+"4785","Other respiratory diseases",9
+"4786","Other respiratory diseases",9
+"4787","Other respiratory diseases",9
+"4788","Other respiratory diseases",9
+"4789","Other respiratory diseases",9
+"4800","Other respiratory diseases",9
+"4801","Other respiratory diseases",9
+"4802","Other respiratory diseases",9
+"4808","Other respiratory diseases",9
+"4809","Other respiratory diseases",9
+"4810","Other respiratory diseases",9
+"4820","Other respiratory diseases",9
+"4821","Other respiratory diseases",9
+"4822","Other respiratory diseases",9
+"4823","Other respiratory diseases",9
+"4824","Other respiratory diseases",9
+"4828","Other respiratory diseases",9
+"4829","Other respiratory diseases",9
+"4830","Other respiratory diseases",9
+"4850","Other respiratory diseases",9
+"4860","Other respiratory diseases",9
+"4870","Other respiratory diseases",9
+"4871","Other respiratory diseases",9
+"4878","Other respiratory diseases",9
+"4940","Other respiratory diseases",9
+"5000","Other respiratory diseases",9
+"5010","Other respiratory diseases",9
+"5020","Other respiratory diseases",9
+"5030","Other respiratory diseases",9
+"5040","Other respiratory diseases",9
+"5050","Other respiratory diseases",9
+"5060","Other respiratory diseases",9
+"5061","Other respiratory diseases",9
+"5062","Other respiratory diseases",9
+"5063","Other respiratory diseases",9
+"5064","Other respiratory diseases",9
+"5069","Other respiratory diseases",9
+"5070","Other respiratory diseases",9
+"5071","Other respiratory diseases",9
+"5078","Other respiratory diseases",9
+"5080","Other respiratory diseases",9
+"5081","Other respiratory diseases",9
+"5088","Other respiratory diseases",9
+"5089","Other respiratory diseases",9
+"5100","Other respiratory diseases",9
+"5109","Other respiratory diseases",9
+"5110","Other respiratory diseases",9
+"5111","Other respiratory diseases",9
+"5118","Other respiratory diseases",9
+"5119","Other respiratory diseases",9
+"5120","Other respiratory diseases",9
+"5130","Other respiratory diseases",9
+"5131","Other respiratory diseases",9
+"5140","Other respiratory diseases",9
+"5150","Other respiratory diseases",9
+"5160","Other respiratory diseases",9
+"5162","Other respiratory diseases",9
+"5163","Other respiratory diseases",9
+"5168","Other respiratory diseases",9
+"5169","Other respiratory diseases",9
+"5180","Other respiratory diseases",9
+"5181","Other respiratory diseases",9
+"5182","Other respiratory diseases",9
+"5183","Other respiratory diseases",9
+"5184","Other respiratory diseases",9
+"5185","Other respiratory diseases",9
+"5188","Other respiratory diseases",9
+"5190","Other respiratory diseases",9
+"5191","Other respiratory diseases",9
+"5192","Other respiratory diseases",9
+"5193","Other respiratory diseases",9
+"5194","Other respiratory diseases",9
+"5198","Other respiratory diseases",9
+"5199","Other respiratory diseases",9
+"J000","Other respiratory diseases",10
+"J010","Other respiratory diseases",10
+"J011","Other respiratory diseases",10
+"J013","Other respiratory diseases",10
+"J014","Other respiratory diseases",10
+"J018","Other respiratory diseases",10
+"J019","Other respiratory diseases",10
+"J020","Other respiratory diseases",10
+"J028","Other respiratory diseases",10
+"J029","Other respiratory diseases",10
+"J030","Other respiratory diseases",10
+"J038","Other respiratory diseases",10
+"J039","Other respiratory diseases",10
+"J040","Other respiratory diseases",10
+"J041","Other respiratory diseases",10
+"J042","Other respiratory diseases",10
+"J050","Other respiratory diseases",10
+"J051","Other respiratory diseases",10
+"J060","Other respiratory diseases",10
+"J068","Other respiratory diseases",10
+"J069","Other respiratory diseases",10
+"J090","Other respiratory diseases",10
+"J100","Other respiratory diseases",10
+"J101","Other respiratory diseases",10
+"J108","Other respiratory diseases",10
+"J110","Other respiratory diseases",10
+"J111","Other respiratory diseases",10
+"J118","Other respiratory diseases",10
+"J120","Other respiratory diseases",10
+"J121","Other respiratory diseases",10
+"J122","Other respiratory diseases",10
+"J123","Other respiratory diseases",10
+"J128","Other respiratory diseases",10
+"J129","Other respiratory diseases",10
+"J130","Other respiratory diseases",10
+"J140","Other respiratory diseases",10
+"J150","Other respiratory diseases",10
+"J151","Other respiratory diseases",10
+"J152","Other respiratory diseases",10
+"J153","Other respiratory diseases",10
+"J154","Other respiratory diseases",10
+"J155","Other respiratory diseases",10
+"J156","Other respiratory diseases",10
+"J157","Other respiratory diseases",10
+"J158","Other respiratory diseases",10
+"J159","Other respiratory diseases",10
+"J160","Other respiratory diseases",10
+"J168","Other respiratory diseases",10
+"J180","Other respiratory diseases",10
+"J181","Other respiratory diseases",10
+"J182","Other respiratory diseases",10
+"J188","Other respiratory diseases",10
+"J189","Other respiratory diseases",10
+"J200","Other respiratory diseases",10
+"J201","Other respiratory diseases",10
+"J202","Other respiratory diseases",10
+"J204","Other respiratory diseases",10
+"J205","Other respiratory diseases",10
+"J206","Other respiratory diseases",10
+"J208","Other respiratory diseases",10
+"J209","Other respiratory diseases",10
+"J210","Other respiratory diseases",10
+"J218","Other respiratory diseases",10
+"J219","Other respiratory diseases",10
+"J220","Other respiratory diseases",10
+"J301","Other respiratory diseases",10
+"J302","Other respiratory diseases",10
+"J303","Other respiratory diseases",10
+"J304","Other respiratory diseases",10
+"J310","Other respiratory diseases",10
+"J312","Other respiratory diseases",10
+"J320","Other respiratory diseases",10
+"J321","Other respiratory diseases",10
+"J322","Other respiratory diseases",10
+"J323","Other respiratory diseases",10
+"J324","Other respiratory diseases",10
+"J328","Other respiratory diseases",10
+"J329","Other respiratory diseases",10
+"J330","Other respiratory diseases",10
+"J338","Other respiratory diseases",10
+"J339","Other respiratory diseases",10
+"J340","Other respiratory diseases",10
+"J341","Other respiratory diseases",10
+"J342","Other respiratory diseases",10
+"J343","Other respiratory diseases",10
+"J348","Other respiratory diseases",10
+"J350","Other respiratory diseases",10
+"J351","Other respiratory diseases",10
+"J352","Other respiratory diseases",10
+"J353","Other respiratory diseases",10
+"J358","Other respiratory diseases",10
+"J359","Other respiratory diseases",10
+"J360","Other respiratory diseases",10
+"J370","Other respiratory diseases",10
+"J371","Other respiratory diseases",10
+"J380","Other respiratory diseases",10
+"J381","Other respiratory diseases",10
+"J382","Other respiratory diseases",10
+"J383","Other respiratory diseases",10
+"J384","Other respiratory diseases",10
+"J385","Other respiratory diseases",10
+"J386","Other respiratory diseases",10
+"J387","Other respiratory diseases",10
+"J390","Other respiratory diseases",10
+"J391","Other respiratory diseases",10
+"J392","Other respiratory diseases",10
+"J393","Other respiratory diseases",10
+"J398","Other respiratory diseases",10
+"J399","Other respiratory diseases",10
+"J470","Other respiratory diseases",10
+"J600","Other respiratory diseases",10
+"J610","Other respiratory diseases",10
+"J620","Other respiratory diseases",10
+"J628","Other respiratory diseases",10
+"J630","Other respiratory diseases",10
+"J631","Other respiratory diseases",10
+"J632","Other respiratory diseases",10
+"J633","Other respiratory diseases",10
+"J634","Other respiratory diseases",10
+"J638","Other respiratory diseases",10
+"J640","Other respiratory diseases",10
+"J650","Other respiratory diseases",10
+"J660","Other respiratory diseases",10
+"J661","Other respiratory diseases",10
+"J668","Other respiratory diseases",10
+"J670","Other respiratory diseases",10
+"J671","Other respiratory diseases",10
+"J672","Other respiratory diseases",10
+"J677","Other respiratory diseases",10
+"J678","Other respiratory diseases",10
+"J679","Other respiratory diseases",10
+"J680","Other respiratory diseases",10
+"J681","Other respiratory diseases",10
+"J682","Other respiratory diseases",10
+"J683","Other respiratory diseases",10
+"J684","Other respiratory diseases",10
+"J688","Other respiratory diseases",10
+"J689","Other respiratory diseases",10
+"J690","Other respiratory diseases",10
+"J691","Other respiratory diseases",10
+"J698","Other respiratory diseases",10
+"J700","Other respiratory diseases",10
+"J701","Other respiratory diseases",10
+"J703","Other respiratory diseases",10
+"J704","Other respiratory diseases",10
+"J708","Other respiratory diseases",10
+"J709","Other respiratory diseases",10
+"J800","Other respiratory diseases",10
+"J810","Other respiratory diseases",10
+"J820","Other respiratory diseases",10
+"J840","Other respiratory diseases",10
+"J841","Other respiratory diseases",10
+"J848","Other respiratory diseases",10
+"J849","Other respiratory diseases",10
+"J850","Other respiratory diseases",10
+"J851","Other respiratory diseases",10
+"J852","Other respiratory diseases",10
+"J853","Other respiratory diseases",10
+"J860","Other respiratory diseases",10
+"J869","Other respiratory diseases",10
+"J900","Other respiratory diseases",10
+"J920","Other respiratory diseases",10
+"J929","Other respiratory diseases",10
+"J930","Other respiratory diseases",10
+"J931","Other respiratory diseases",10
+"J938","Other respiratory diseases",10
+"J939","Other respiratory diseases",10
+"J940","Other respiratory diseases",10
+"J941","Other respiratory diseases",10
+"J942","Other respiratory diseases",10
+"J948","Other respiratory diseases",10
+"J949","Other respiratory diseases",10
+"J960","Other respiratory diseases",10
+"J961","Other respiratory diseases",10
+"J969","Other respiratory diseases",10
+"J980","Other respiratory diseases",10
+"J981","Other respiratory diseases",10
+"J982","Other respiratory diseases",10
+"J983","Other respiratory diseases",10
+"J984","Other respiratory diseases",10
+"J985","Other respiratory diseases",10
+"J986","Other respiratory diseases",10
+"J988","Other respiratory diseases",10
+"J989","Other respiratory diseases",10
+"3810","Ottis media",9
+"3814","Ottis media",9
+"3818","Ottis media",9
+"3819","Ottis media",9
+"3820","Ottis media",9
+"3821","Ottis media",9
+"3823","Ottis media",9
+"3824","Ottis media",9
+"3829","Ottis media",9
+"3900","Rheumatic heart disease",9
+"3910","Rheumatic heart disease",9
+"3911","Rheumatic heart disease",9
+"3912","Rheumatic heart disease",9
+"3918","Rheumatic heart disease",9
+"3919","Rheumatic heart disease",9
+"3920","Rheumatic heart disease",9
+"3929","Rheumatic heart disease",9
+"3930","Rheumatic heart disease",9
+"3940","Rheumatic heart disease",9
+"3941","Rheumatic heart disease",9
+"3942","Rheumatic heart disease",9
+"3949","Rheumatic heart disease",9
+"3950","Rheumatic heart disease",9
+"3951","Rheumatic heart disease",9
+"3952","Rheumatic heart disease",9
+"3959","Rheumatic heart disease",9
+"3960","Rheumatic heart disease",9
+"3970","Rheumatic heart disease",9
+"3971","Rheumatic heart disease",9
+"3979","Rheumatic heart disease",9
+"3980","Rheumatic heart disease",9
+"3989","Rheumatic heart disease",9
+"I010","Rheumatic heart disease",10
+"I011","Rheumatic heart disease",10
+"I012","Rheumatic heart disease",10
+"I018","Rheumatic heart disease",10
+"I019","Rheumatic heart disease",10
+"I020","Rheumatic heart disease",10
+"I029","Rheumatic heart disease",10
+"I050","Rheumatic heart disease",10
+"I051","Rheumatic heart disease",10
+"I052","Rheumatic heart disease",10
+"I058","Rheumatic heart disease",10
+"I059","Rheumatic heart disease",10
+"I060","Rheumatic heart disease",10
+"I061","Rheumatic heart disease",10
+"I062","Rheumatic heart disease",10
+"I068","Rheumatic heart disease",10
+"I069","Rheumatic heart disease",10
+"I070","Rheumatic heart disease",10
+"I071","Rheumatic heart disease",10
+"I072","Rheumatic heart disease",10
+"I078","Rheumatic heart disease",10
+"I079","Rheumatic heart disease",10
+"I080","Rheumatic heart disease",10
+"I081","Rheumatic heart disease",10
+"I082","Rheumatic heart disease",10
+"I083","Rheumatic heart disease",10
+"I088","Rheumatic heart disease",10
+"I089","Rheumatic heart disease",10
+"I090","Rheumatic heart disease",10
+"I091","Rheumatic heart disease",10
+"I092","Rheumatic heart disease",10
+"I098","Rheumatic heart disease",10
+"I099","Rheumatic heart disease",10

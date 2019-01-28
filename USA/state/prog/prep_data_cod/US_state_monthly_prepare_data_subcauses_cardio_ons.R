@@ -129,6 +129,7 @@ yearsummary_injuries  <- function(x=2000) {
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=400&dat.merged$cause.numeric<=409,	'Inflammatory heart diseases', #'Inflammatory heart diseases',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=410&dat.merged$cause.numeric<=419,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=420&dat.merged$cause.numeric<=429,	'Inflammatory heart diseases', #'Inflammatory heart diseases',
+  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=430&dat.merged$cause.numeric<=599,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=600&dat.merged$cause.numeric<=699,	'Cerebrovascular disease', #'Cerebrovascular disease',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=700&dat.merged$cause.numeric<=999,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
 							# Respiratory diseases (J00-J99)
@@ -136,13 +137,13 @@ yearsummary_injuries  <- function(x=2000) {
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=400&dat.merged$cause.numeric<=449,	'Chronic obstructive pulmonary disease', #'Chronic obstructive pulmonary disease',
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=450&dat.merged$cause.numeric<=469,	'Asthma', #'Asthma',
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=470&dat.merged$cause.numeric<=999,	'Other respiratory diseases', #'Other respiratory diseases',
-                            'NA'))))))))))))))))))
+                            'NA'))))))))))))))))))))
 
 
-		# merge cod in ICD 10 coding EDIT
-		dat.merged = merge(dat.merged,icd10.lookup,by='cause',all.x=1)
-        dat.merged$cause.group = as.character(dat.merged$cause.group)
-        dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
+		# merge cod in ICD 10 coding
+        dat.merged$cause.group = 	ifelse(dat.merged$letter=='I','Cardiovascular diseases',
+									ifelse(dat.merged$letter=='J','Respiratory diseases','NA'))
+        # dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
 
 	}
 
@@ -281,7 +282,7 @@ start_year = 1999
 dat.cods = data.frame()
 dat.lookup = read.csv('../../data/cod/icd10cmtoicd9gem.csv')
 for(x in c(year.start.arg:year.end.arg)){
-    dat.cod = readRDS(paste0('../../output/prep_data_cod/cods/cods_',x))
+    dat.cod = readRDS(paste0('../../output/prep_data_cod/cods/cods_cardio_',x))
     if(x<start_year) {
         dat.cod$icd = 9
         # merge code with cod lookup
