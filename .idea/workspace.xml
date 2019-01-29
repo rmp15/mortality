@@ -24,8 +24,8 @@
       <file leaf-file-name="US_state_monthly_prepare_data_subcauses_cardio_ons.R" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_cardio_ons.R">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="148" column="166" lean-forward="true" selection-start-line="148" selection-start-column="166" selection-end-line="148" selection-end-column="166" />
+            <state relative-caret-position="108">
+              <caret line="114" column="111" lean-forward="false" selection-start-line="114" selection-start-column="111" selection-end-line="114" selection-end-column="111" />
               <folding />
             </state>
           </provider>
@@ -541,13 +541,6 @@
       <option name="presentableId" value="Default" />
       <updated>1528108809576</updated>
     </task>
-    <task id="LOCAL-00375" summary="updates to wavelet coding">
-      <created>1539601708709</created>
-      <option name="number" value="00375" />
-      <option name="presentableId" value="LOCAL-00375" />
-      <option name="project" value="LOCAL" />
-      <updated>1539601708709</updated>
-    </task>
     <task id="LOCAL-00376" summary="updates to wavelet coding">
       <created>1539602910647</created>
       <option name="number" value="00376" />
@@ -884,7 +877,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548777260124</updated>
     </task>
-    <option name="localTasksCounter" value="424" />
+    <task id="LOCAL-00424" summary="updates to wavelet coding">
+      <created>1548777533976</created>
+      <option name="number" value="00424" />
+      <option name="presentableId" value="LOCAL-00424" />
+      <option name="project" value="LOCAL" />
+      <updated>1548777533976</updated>
+    </task>
+    <option name="localTasksCounter" value="425" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1209,8 +1209,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subcauses_cardio_ons.R">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="148" column="166" lean-forward="true" selection-start-line="148" selection-start-column="166" selection-end-line="148" selection-end-column="166" />
+        <state relative-caret-position="108">
+          <caret line="114" column="111" lean-forward="false" selection-start-line="114" selection-start-column="111" selection-end-line="114" selection-end-column="111" />
           <folding />
         </state>
       </provider>

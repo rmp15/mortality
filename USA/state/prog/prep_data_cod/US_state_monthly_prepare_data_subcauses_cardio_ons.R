@@ -112,6 +112,8 @@ yearsummary_injuries  <- function(x=2000) {
 
         # only filter for cardiorespiratory AND include otitis media
         dat.merged = subset(dat.merged,cause.group=='Cardiopulmonary')
+        dat.merged.append = subset(dat.merged,letter=='H'&cause.numeric>=650&cause.numeric<=669) # otitis media
+		dat.merged = rbind(dat.merged,dat.merged.append)
         dat.merged$cause.group = NULL
 
         # numerical cause
