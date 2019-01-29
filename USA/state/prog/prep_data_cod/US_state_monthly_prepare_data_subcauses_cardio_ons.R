@@ -137,7 +137,12 @@ yearsummary_injuries  <- function(x=2000) {
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=600&dat.merged$cause.numeric<=699,	'Cerebrovascular disease', #'Cerebrovascular disease',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=700&dat.merged$cause.numeric<=999,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
 							# Respiratory diseases (J00-J99)
-  						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=399,	'Other respiratory diseases', #'Other respiratory diseases',
+  						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=69,		'Respiratory infections', #'Upper respiratory infections',
+  						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=70&dat.merged$cause.numeric<=89,	'Other respiratory diseases', #'Other respiratory diseases',
+  						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=90&dat.merged$cause.numeric<=189,	'Respiratory infections', #'Lower respiratory infections',
+  						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=190&dat.merged$cause.numeric<=199,	'Other respiratory diseases', #'Other respiratory diseases',
+  						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=200&dat.merged$cause.numeric<=229,	'Respiratory infections', #'Lower respiratory infections',
+  						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=230&dat.merged$cause.numeric<=399,	'Other respiratory diseases', #'Other respiratory diseases',
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=400&dat.merged$cause.numeric<=449,	'Chronic obstructive pulmonary disease', #'Chronic obstructive pulmonary disease',
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=450&dat.merged$cause.numeric<=469,	'Asthma', #'Asthma',
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=470&dat.merged$cause.numeric<=999,	'Other respiratory diseases', #'Other respiratory diseases',
