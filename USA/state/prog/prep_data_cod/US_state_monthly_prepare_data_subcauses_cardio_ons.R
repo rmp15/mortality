@@ -60,35 +60,39 @@ yearsummary_injuries  <- function(x=2000) {
 
         # cause subgroups
         dat.merged$cause.sub =
-							# Ottis media
-                            ifelse(dat.merged$cause.numeric>=3810&dat.merged$cause.numeric<=3829, 'Ottis media', #'Ottis media',
-							# Cardiovascular diseases (3900-4699)
-							ifelse(dat.merged$cause.numeric>=3900&dat.merged$cause.numeric<=3989, 'Rheumatic heart disease', #'Rheumatic heart disease',
+							# Ottis media (other respiratory diseases)
+                            ifelse(dat.merged$cause.numeric>=3810&dat.merged$cause.numeric<=3829, 'Respiratory infections', #'Otitis media',
+							# Cardiovascular diseases (3900-4599)
+							ifelse(dat.merged$cause.numeric>=3900&dat.merged$cause.numeric<=3989, 'Other cardiovascular diseases', #'Rheumatic heart disease',
 							ifelse(dat.merged$cause.numeric>=3990&dat.merged$cause.numeric<=4009, 'Other cardiovascular diseases', #'?',
-							ifelse(dat.merged$cause.numeric>=4010&dat.merged$cause.numeric<=4059, 'Hypertensive heart disease', #'Hypertensive heart disease',
+							ifelse(dat.merged$cause.numeric>=4010&dat.merged$cause.numeric<=4059, 'Other cardiovascular diseases', #'Hypertensive heart disease',
 							ifelse(dat.merged$cause.numeric>=4060&dat.merged$cause.numeric<=4099, 'Other cardiovascular diseases', #'?',
 							ifelse(dat.merged$cause.numeric>=4100&dat.merged$cause.numeric<=4149, 'Ischaemic heart disease', #'Ischaemic heart disease',
 							ifelse(dat.merged$cause.numeric>=4150&dat.merged$cause.numeric<=4199, 'Other cardiovascular diseases', #'?',
-							ifelse(dat.merged$cause.numeric>=4200&dat.merged$cause.numeric<=4229, 'Inflammatory heart diseases', #'Inflammatory heart diseases',
+							ifelse(dat.merged$cause.numeric>=4200&dat.merged$cause.numeric<=4229, 'Other cardiovascular diseases', #'Inflammatory heart diseases',
 							ifelse(dat.merged$cause.numeric>=4230&dat.merged$cause.numeric<=4249, 'Other cardiovascular diseases', #'?',
-							ifelse(dat.merged$cause.numeric>=4250&dat.merged$cause.numeric<=4259, 'Inflammatory heart diseases', #'Inflammatory heart diseases',
+							ifelse(dat.merged$cause.numeric>=4250&dat.merged$cause.numeric<=4259, 'Other cardiovascular diseases', #'Inflammatory heart diseases',
 							ifelse(dat.merged$cause.numeric>=4260&dat.merged$cause.numeric<=4299, 'Other cardiovascular diseases', #'?',
 							ifelse(dat.merged$cause.numeric>=4300&dat.merged$cause.numeric<=4389, 'Cerebrovascular disease', #'Cerebrovascular disease',
-							ifelse(dat.merged$cause.numeric>=4390&dat.merged$cause.numeric<=4699, 'Other cardiovascular diseases', #'?',
-							# Respiratory diseases (4700-4789, 4900-5199)
-							ifelse(dat.merged$cause.numeric>=4700&dat.merged$cause.numeric<=4899, 'Other respiratory diseases', #'Other respiratory diseases',
+							ifelse(dat.merged$cause.numeric>=4390&dat.merged$cause.numeric<=4599, 'Other cardiovascular diseases', #'?',
+							# Respiratory diseases and infections (4600-5199)
+							ifelse(dat.merged$cause.numeric>=4600&dat.merged$cause.numeric<=4659, 'Respiratory infections', #'Upper respiratory infections',
+							ifelse(dat.merged$cause.numeric>=4660&dat.merged$cause.numeric<=4669, 'Respiratory infections', #'Lower respiratory infections',
+							ifelse(dat.merged$cause.numeric>=4670&dat.merged$cause.numeric<=4799, 'Other respiratory diseases', #'Other respiratory diseases',
+							ifelse(dat.merged$cause.numeric>=4800&dat.merged$cause.numeric<=4879, 'Respiratory infections', #'Lower respiratory infections',
+							ifelse(dat.merged$cause.numeric>=4880&dat.merged$cause.numeric<=4899, 'Other respiratory diseases', #'Other respiratory diseases',
 							ifelse(dat.merged$cause.numeric>=4900&dat.merged$cause.numeric<=4929, 'Chronic obstructive pulmonary disease', #'Chronic obstructive pulmonary disease',
-							ifelse(dat.merged$cause.numeric>=4930&dat.merged$cause.numeric<=4939, 'Asthma', #'Asthma',
+							ifelse(dat.merged$cause.numeric>=4930&dat.merged$cause.numeric<=4939, 'Other respiratory diseases', #'Asthma',
 							ifelse(dat.merged$cause.numeric>=4940&dat.merged$cause.numeric<=4949, 'Other respiratory diseases', #'Other respiratory diseases',
 							ifelse(dat.merged$cause.numeric>=4950&dat.merged$cause.numeric<=4969, 'Chronic obstructive pulmonary disease', #'Chronic obstructive pulmonary disease',
 							ifelse(dat.merged$cause.numeric>=4970&dat.merged$cause.numeric<=5199, 'Other respiratory diseases', #'Other respiratory diseases',
 							# ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
-							'NA')))))))))))))))))))
+							'NA'))))))))))))))))))))))
 
 		# also add cardiovascular or respiratory diseases
-		dat.merged$cause.group = 	ifelse(dat.merged$cause.numeric>=3810&dat.merged$cause.numeric<=3829,'Cardiovascular diseases', #'Ottis media'
-							ifelse(dat.merged$cause.numeric>=3900&dat.merged$cause.numeric<=4699,'Cardiovascular diseases', #'Cardiovascular' proper
-							ifelse(dat.merged$cause.numeric>=4700&dat.merged$cause.numeric<=5199,'Respiratory diseases', #'Respiratory diseases'
+		dat.merged$cause.group = 	ifelse(dat.merged$cause.numeric>=3810&dat.merged$cause.numeric<=3829,'Respiratory diseases and infections', #'Ottis media'
+							ifelse(dat.merged$cause.numeric>=3900&dat.merged$cause.numeric<=4599,'Cardiovascular diseases', #'Cardiovascular' proper
+							ifelse(dat.merged$cause.numeric>=4600&dat.merged$cause.numeric<=5199,'Respiratory diseases and infections ', #'Respiratory diseases'
 							'Other')))
 
         dat.merged$letter = ' '
@@ -106,7 +110,7 @@ yearsummary_injuries  <- function(x=2000) {
         # move deaths due to weather-based heat/cold to 'Other'
         dat.merged$cause.group = ifelse((dat.merged$cause=='X300'|dat.merged$cause=='X310'),'Other',as.character(dat.merged$cause.group))
 
-        # only filter for cardiorespiratory
+        # only filter for cardiorespiratory AND include otitis media
         dat.merged = subset(dat.merged,cause.group=='Cardiopulmonary')
         dat.merged$cause.group = NULL
 
@@ -117,18 +121,18 @@ yearsummary_injuries  <- function(x=2000) {
         dat.merged$cause.sub =
 							# Cardiovascular diseases (I00-I99)
                             ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=9,		'Other cardiovascular diseases', # 'Other cardiovascular diseases'
-  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=10&dat.merged$cause.numeric<=99,	'Rheumatic heart disease', #'Rheumatic heart disease',
-  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=100&dat.merged$cause.numeric<=139,	'Hypertensive heart disease', #'Hypertensive heart disease'
+  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=10&dat.merged$cause.numeric<=99,	'Other cardiovascular diseases', #'Rheumatic heart disease',
+  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=100&dat.merged$cause.numeric<=139,	'Other cardiovascular diseases', #'Hypertensive heart disease'
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=140&dat.merged$cause.numeric<=199,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=200&dat.merged$cause.numeric<=259,	'Ischaemic heart disease', #'Ischaemic heart disease',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=260&dat.merged$cause.numeric<=299,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
-  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=300&dat.merged$cause.numeric<=339,	'Inflammatory heart diseases', #'Inflammatory heart diseases',
+  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=300&dat.merged$cause.numeric<=339,	'Other cardiovascular diseases', #'Inflammatory heart diseases',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=340&dat.merged$cause.numeric<=379,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
-  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=380&dat.merged$cause.numeric<=389,	'Inflammatory heart diseases', #'Inflammatory heart diseases',
+  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=380&dat.merged$cause.numeric<=389,	'Other cardiovascular diseases', #'Inflammatory heart diseases',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=390&dat.merged$cause.numeric<=399,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
-  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=400&dat.merged$cause.numeric<=409,	'Inflammatory heart diseases', #'Inflammatory heart diseases',
+  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=400&dat.merged$cause.numeric<=409,	'Other cardiovascular diseases', #'Inflammatory heart diseases',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=410&dat.merged$cause.numeric<=419,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
-  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=420&dat.merged$cause.numeric<=429,	'Inflammatory heart diseases', #'Inflammatory heart diseases',
+  						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=420&dat.merged$cause.numeric<=429,	'Other cardiovascular diseases', #'Inflammatory heart diseases',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=430&dat.merged$cause.numeric<=599,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=600&dat.merged$cause.numeric<=699,	'Cerebrovascular disease', #'Cerebrovascular disease',
   						    ifelse(dat.merged$letter=='I'&dat.merged$cause.numeric>=700&dat.merged$cause.numeric<=999,	'Other cardiovascular diseases', # 'Other cardiovascular diseases'
@@ -137,12 +141,15 @@ yearsummary_injuries  <- function(x=2000) {
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=400&dat.merged$cause.numeric<=449,	'Chronic obstructive pulmonary disease', #'Chronic obstructive pulmonary disease',
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=450&dat.merged$cause.numeric<=469,	'Asthma', #'Asthma',
   						    ifelse(dat.merged$letter=='J'&dat.merged$cause.numeric>=470&dat.merged$cause.numeric<=999,	'Other respiratory diseases', #'Other respiratory diseases',
+  						    ifelse(dat.merged$letter=='H'&dat.merged$cause.numeric>=650&dat.merged$cause.numeric<=669,	'Other respiratory diseases', #'Otitis media',
                             'NA'))))))))))))))))))))
 
 
 		# merge cod in ICD 10 coding
         dat.merged$cause.group = 	ifelse(dat.merged$letter=='I','Cardiovascular diseases',
-									ifelse(dat.merged$letter=='J','Respiratory diseases','NA'))
+									ifelse(dat.merged$letter=='J','Respiratory diseases and infections',
+									ifelse(dat.merged$letter=='H','Respiratory diseases and infections',
+									'NA')))
         # dat.merged$cause.group = ifelse(is.na(dat.merged$cause.group)==TRUE,'Other',dat.merged$cause.group)
 
 	}
