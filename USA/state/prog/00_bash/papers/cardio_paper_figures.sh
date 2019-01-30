@@ -29,9 +29,7 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 
 echo "plotting figures 1 and 2 for cardio paper $start - $end";
 
-# runs code
 Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cardio_ons_subcod.R $start $end
-#Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cardio_ons.R $start $end
 
 #################################################
 # Figure 3 (same as injury paper)
@@ -65,6 +63,6 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 echo "populating table XX cardio paper $start - $end";
 
 # to correct directory
-#cd ~/git/mortality/USA/state/prog/00_bash/
+cd ~/git/mortality/USA/state/prog/00_bash/
 
 #Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_cardio_stacked_climate_draws_human_readable_cod_1var.R $start $end $country $model $dname $metric $contig $draws

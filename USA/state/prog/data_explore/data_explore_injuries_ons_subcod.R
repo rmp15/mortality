@@ -264,7 +264,7 @@ ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause.sub)) +
     ylab('Death rate (per 100,000)') +
     geom_vline(xintercept=1999, linetype="dotted") +
     facet_grid(sex.long~age.long) +
-    scale_color_manual(values=colors.subinjuries, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=colors.subinjuries[c(4,1,2,3,5,6)], guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -278,7 +278,7 @@ ggplot(dat=dat.national.year, aes(x=year,y=log(rate.adj*100000),color=cause.sub)
     ylab('log(Death rate (per 100,000))') +
     geom_vline(xintercept=1999, linetype="dotted") +
     facet_grid(sex.long~age.long) +
-    scale_color_manual(values=colors.subinjuries, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=colors.subinjuries[c(4,1,2,3,5,6)], guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -361,7 +361,7 @@ ggplot(dat=dat.national.com.sex.year, aes(x=year,y=12*ASDR*100000,fill=cause.sub
     geom_area(position='stack') +
     xlab('Year') +
     ylab('Age standardised death rate (per 100,000)') +
-    scale_fill_manual(values=colors.subinjuries, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
+    scale_fill_manual(values=colors.subinjuries[c(4,1,2,3,5,6)], guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -374,7 +374,7 @@ ggplot(dat=dat.national.com.sex.year, aes(x=year,y=12*ASDR*100000,fill=cause.sub
     geom_vline(xintercept=1999, linetype="dotted") +
     xlab('Year') +
     ylab('Age standardised death rate (per 100,000)') +
-    scale_fill_manual(values=colors.subinjuries, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
+    scale_fill_manual(values=colors.subinjuries[c(4,1,2,3,5,6)], guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
     facet_grid(~cause.sub, scales='free') +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
@@ -508,147 +508,147 @@ dat.last.years$age.long <- reorder(dat.last.years$age.long,dat.last.years$age)
 dat.last.years$ID = mapvalues(dat.last.years$month, from=sort(unique(dat.last.years$month)),to=month.short)
 dat.last.years$ID = with(dat.last.years,reorder(dat.last.years$ID,month))
 
-pdf(paste0(file.loc,'injury_ons_subsubcod_last_years_plots',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-
-# full bar chart per age-sex group with breakdown of types of injuries
-dat.last.years$cause.sub = gsub('\n',' ',dat.last.years$cause.sub)
-dat.last.years$cause.sub = factor(dat.last.years$cause.sub, levels=c('Transport','Falls','Drownings','Other unintentional injuries','Assault','Intentional self-harm'))
-
-ggplot(data=dat.last.years, aes(x="",y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 1, position='fill', stat = "identity") +
-    #coord_polar("y", start=0) +
-    xlab('Age group (years)') + ylab('Proportion of deaths') +
-    scale_fill_manual(values=colors.subinjuries, guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.subinjuries, guide = guide_legend(nrow = 1,title = paste0(""))) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    scale_y_continuous(labels = scales::percent) +
-    facet_grid(sex.long~age.long) +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x="",y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 1, position='fill', stat = "identity") +
-    xlab('Age group (years)') + ylab('Proportion of deaths') +
-    scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    scale_y_continuous(labels = scales::percent) +
-    facet_grid(sex.long~age.long, switch='x') +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 0.9, position='fill', stat = "identity") +
-    #coord_polar("y", start=0) +
-    xlab('Age group (years)') + ylab('Proportion of deaths') +
-    scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    scale_y_continuous(labels = scales::percent) +
-    facet_grid(sex.long~.)   +
-     theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 0.9, stat='identity') +
-    #coord_polar("y", start=0) +
-    xlab('Age group (years)') + ylab('Number of deaths') +
-    scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_y_continuous(label = comma) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~.)   +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# x axis age-group, y-axis death rate for last year
-ggplot(data=dat.last.years) +
-    geom_point(aes(x=as.factor(age),y=100000*rate.adj,color=as.factor(ID))) +
-    xlab('Age group (years)') +
-    ylab('Death rate (per 100,000)') +
-    scale_x_discrete(breaks=age.filter,labels=age.print) +
-    scale_colour_manual(values=colors.months,guide = guide_legend(nrow = 1,title = paste0("Month"))) +
-    geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
-    ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~cause.sub) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# x axis age-group, y-axis log(death rate) for last year
-ggplot(data=dat.last.years) +
-    geom_point(aes(x=as.factor(age),y=log(100000*rate.adj),color=as.factor(ID))) +
-    xlab('Age group (years)') +
-    ylab('log(death rate (per 100,000))') +
-    scale_x_discrete(breaks=age.filter,labels=age.print) +
-    scale_colour_manual(values=colors.months,guide = guide_legend(nrow = 1,title = paste0("Month"))) +
-    geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
-    ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~cause.sub) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# x axis month, y-axis death rate for last years
-ggplot(data=dat.last.years) +
-    geom_line(aes(x=month,y=100000*rate.adj,color=as.factor(age))) +
-    #geom_point(aes(x=month,y=1000000*rate.adj,color=as.factor(age))) +
-    xlab('Month') +
-    ylab('Death rate (per 100,000)') +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
-    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
-    values=age.colours,guide = guide_legend(title = 'Age group (years)',nrow = 1)) +
-    ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~cause.sub,scales="free") +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# x axis month, y-axis log(death rate) for last year
-ggplot(data=dat.last.years) +
-    geom_line(aes(x=month,y=log(100000*rate.adj),color=as.factor(age))) +
-    xlab('Month') +
-    ylab('log(death rate (per 100,000)') +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
-    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
-    values=age.colours,guide = guide_legend(title = 'Age group (years)',nrow = 1)) + # , guide = guide_legend(nrow = 1,title = paste0(""))
-    ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~cause.sub,scales="free") +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-dev.off()
+# pdf(paste0(file.loc,'injury_ons_subsubcod_last_years_plots',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+#
+# # full bar chart per age-sex group with breakdown of types of injuries
+# dat.last.years$cause.sub = gsub('\n',' ',dat.last.years$cause.sub)
+# dat.last.years$cause.sub = factor(dat.last.years$cause.sub, levels=c('Transport','Falls','Drownings','Other unintentional injuries','Assault','Intentional self-harm'))
+#
+# ggplot(data=dat.last.years, aes(x="",y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+#     geom_bar(width = 1, position='fill', stat = "identity") +
+#     #coord_polar("y", start=0) +
+#     xlab('Age group (years)') + ylab('Proportion of deaths') +
+#     scale_fill_manual(values=colors.subinjuries, guide = guide_legend(nrow = 1,title = paste0(""))) +
+#     scale_color_manual(values=colors.subinjuries, guide = guide_legend(nrow = 1,title = paste0(""))) +
+#     # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+#     scale_y_continuous(labels = scales::percent) +
+#     facet_grid(sex.long~age.long) +
+#     theme_bw() +
+#     theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+#     axis.ticks.x=element_blank(),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x="",y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+#     geom_bar(width = 1, position='fill', stat = "identity") +
+#     xlab('Age group (years)') + ylab('Proportion of deaths') +
+#     scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+#     scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+#     # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+#     scale_y_continuous(labels = scales::percent) +
+#     facet_grid(sex.long~age.long, switch='x') +
+#     theme_bw() +
+#     theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+#     axis.ticks.x=element_blank(),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+#     geom_bar(width = 0.9, position='fill', stat = "identity") +
+#     #coord_polar("y", start=0) +
+#     xlab('Age group (years)') + ylab('Proportion of deaths') +
+#     scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+#     scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+#     # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+#     scale_y_continuous(labels = scales::percent) +
+#     facet_grid(sex.long~.)   +
+#      theme_bw() +
+#     theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+#     axis.ticks.x=element_blank(),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+#     geom_bar(width = 0.9, stat='identity') +
+#     #coord_polar("y", start=0) +
+#     xlab('Age group (years)') + ylab('Number of deaths') +
+#     scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+#     scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+#     scale_y_continuous(label = comma) +
+#     # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+#     facet_grid(sex.long~.)   +
+#     theme_bw() +
+#     theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+#     axis.ticks.x=element_blank(),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # x axis age-group, y-axis death rate for last year
+# ggplot(data=dat.last.years) +
+#     geom_point(aes(x=as.factor(age),y=100000*rate.adj,color=as.factor(ID))) +
+#     xlab('Age group (years)') +
+#     ylab('Death rate (per 100,000)') +
+#     scale_x_discrete(breaks=age.filter,labels=age.print) +
+#     scale_colour_manual(values=colors.months,guide = guide_legend(nrow = 1,title = paste0("Month"))) +
+#     geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
+#     ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+#     facet_grid(sex.long~cause.sub) +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # x axis age-group, y-axis log(death rate) for last year
+# ggplot(data=dat.last.years) +
+#     geom_point(aes(x=as.factor(age),y=log(100000*rate.adj),color=as.factor(ID))) +
+#     xlab('Age group (years)') +
+#     ylab('log(death rate (per 100,000))') +
+#     scale_x_discrete(breaks=age.filter,labels=age.print) +
+#     scale_colour_manual(values=colors.months,guide = guide_legend(nrow = 1,title = paste0("Month"))) +
+#     geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
+#     ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+#     facet_grid(sex.long~cause.sub) +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # x axis month, y-axis death rate for last years
+# ggplot(data=dat.last.years) +
+#     geom_line(aes(x=month,y=100000*rate.adj,color=as.factor(age))) +
+#     #geom_point(aes(x=month,y=1000000*rate.adj,color=as.factor(age))) +
+#     xlab('Month') +
+#     ylab('Death rate (per 100,000)') +
+#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+#     geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
+#     scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
+#     values=age.colours,guide = guide_legend(title = 'Age group (years)',nrow = 1)) +
+#     ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+#     facet_grid(sex.long~cause.sub,scales="free") +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # x axis month, y-axis log(death rate) for last year
+# ggplot(data=dat.last.years) +
+#     geom_line(aes(x=month,y=log(100000*rate.adj),color=as.factor(age))) +
+#     xlab('Month') +
+#     ylab('log(death rate (per 100,000)') +
+#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+#     geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
+#     scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
+#     values=age.colours,guide = guide_legend(title = 'Age group (years)',nrow = 1)) + # , guide = guide_legend(nrow = 1,title = paste0(""))
+#     ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+#     facet_grid(sex.long~cause.sub,scales="free") +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# dev.off()
 
 # subset of all data
 last.years = c((year.start.arg):(year.end.arg))
@@ -673,7 +673,16 @@ pdf(paste0(file.loc,'injury_ons_subsubcod_all_years_plots',year.start.arg,'_',ye
 dat.last.years$cause.sub = gsub('\n',' ',dat.last.years$cause.sub)
 dat.last.years$cause.sub = factor(dat.last.years$cause.sub, levels=c('Other unintentional injuries','Transport','Falls','Drownings','Assault','Intentional self-harm'))
 
-ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+# function to extract legend of figure
+extract_legend<-function(a.gplot){
+    tmp <- ggplot_gtable(ggplot_build(a.gplot))
+    leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+    legend <- tmp$grobs[[leg]]
+
+    return(legend)
+}
+
+p1= ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
     geom_bar(width = 0.9, stat='identity') +
     #coord_polar("y", start=0) +
     xlab('Age group (years)') + ylab('Number of deaths') +
@@ -689,6 +698,86 @@ ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(caus
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
+# print for pdf
+print(p1)
+
+# extract legend from plot p1
+p1L = extract_legend(p1)
+
+# p1 but without other unintentional injuries to strip out legend
+p2= ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+    geom_bar(width = 0.9, stat='identity') +
+    #coord_polar("y", start=0) +
+    xlab('Age group (years)') + ylab('Number of deaths') +
+    scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_y_continuous(label = comma) +
+    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    facet_grid(sex.long~.)   +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
+# extract legend from plot p2
+p2L = extract_legend(p2)
+
+# p3 but only other unintentional injuries to strip out legend
+p3= ggplot(data=subset(dat.last.years,cause.sub=='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+    geom_bar(width = 0.9, stat='identity') +
+    #coord_polar("y", start=0) +
+    xlab('Age group (years)') + ylab('Number of deaths') +
+    scale_fill_manual(values=colors.subinjuries[c(4)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=colors.subinjuries[c(4)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_y_continuous(label = comma) +
+    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    facet_grid(sex.long~.)   +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
+# extract legend from plot p2
+p3L = extract_legend(p3)
+
+# p1 but without legend
+p4= ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+    geom_bar(width = 0.9, stat='identity') +
+    #coord_polar("y", start=0) +
+    xlab('Age group (years)') + ylab('Number of deaths') +
+    scale_fill_manual(values=colors.subinjuries[c(4,1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=colors.subinjuries[c(4,1,2,3,5,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    guides(fill=FALSE,color=FALSE) +
+    scale_y_continuous(label = comma) +
+    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    facet_grid(sex.long~.)   +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
+library(grid)
+library(gridExtra)
+
+# plot p1 but with custom legend (no unintentional legend)
+print(grid.arrange(p4,p2L,heights=c(11,1)))
+
+# layout for two seperated legends
+lay <- rbind(c(1,1,1,1,1,1,1),
+             c(2,2,2,2,2,3,3))
+
+# plot p1 but with custom legend (unintentional legend seperate)
+print(grid.arrange(p4,p2L,p3L,layout_matrix=lay,heights=c(11,1)))
 
 ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
     geom_bar(width = 0.9, stat='identity') +
