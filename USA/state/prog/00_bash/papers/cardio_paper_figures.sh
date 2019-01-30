@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # this script
-# runs necessary scripts for deprivation paper
+# runs necessary scripts for injury paper
 
 clear
 
