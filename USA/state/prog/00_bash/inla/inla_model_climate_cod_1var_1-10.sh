@@ -59,8 +59,8 @@ declare cod="Ischaemic_heart_disease"
 
 declare cod="Cerebrovascular_disease"
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 75 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 75 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 65 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;

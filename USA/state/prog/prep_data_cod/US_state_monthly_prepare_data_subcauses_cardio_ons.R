@@ -78,14 +78,14 @@ yearsummary_cardio  <- function(x=2000) {
 							# Respiratory diseases and infections (4600-5199)
 							ifelse(dat.merged$cause.numeric>=4600&dat.merged$cause.numeric<=4659, 'Respiratory infections', #'Upper respiratory infections',
 							ifelse(dat.merged$cause.numeric>=4660&dat.merged$cause.numeric<=4669, 'Respiratory infections', #'Lower respiratory infections',
-							ifelse(dat.merged$cause.numeric>=4670&dat.merged$cause.numeric<=4799, 'Other respiratory diseases', #'Other respiratory diseases',
+							ifelse(dat.merged$cause.numeric>=4670&dat.merged$cause.numeric<=4799, 'Other respiratory diseases', #'?',
 							ifelse(dat.merged$cause.numeric>=4800&dat.merged$cause.numeric<=4879, 'Respiratory infections', #'Lower respiratory infections',
-							ifelse(dat.merged$cause.numeric>=4880&dat.merged$cause.numeric<=4899, 'Other respiratory diseases', #'Other respiratory diseases',
+							ifelse(dat.merged$cause.numeric>=4880&dat.merged$cause.numeric<=4899, 'Other respiratory diseases', #'?',
 							ifelse(dat.merged$cause.numeric>=4900&dat.merged$cause.numeric<=4929, 'Chronic obstructive pulmonary disease', #'Chronic obstructive pulmonary disease',
 							ifelse(dat.merged$cause.numeric>=4930&dat.merged$cause.numeric<=4939, 'Other respiratory diseases', #'Asthma',
-							ifelse(dat.merged$cause.numeric>=4940&dat.merged$cause.numeric<=4949, 'Other respiratory diseases', #'Other respiratory diseases',
+							ifelse(dat.merged$cause.numeric>=4940&dat.merged$cause.numeric<=4949, 'Other respiratory diseases', #'?',
 							ifelse(dat.merged$cause.numeric>=4950&dat.merged$cause.numeric<=4969, 'Chronic obstructive pulmonary disease', #'Chronic obstructive pulmonary disease',
-							ifelse(dat.merged$cause.numeric>=4970&dat.merged$cause.numeric<=5199, 'Other respiratory diseases', #'Other respiratory diseases',
+							ifelse(dat.merged$cause.numeric>=4970&dat.merged$cause.numeric<=5199, 'Other respiratory diseases', #'?',
 							# ifelse(dat.merged$cause.numeric>=XX&dat.merged$cause.numeric<=XX, 'XX', #'XX',
 							'NA')))))))))))))))))))))))
 
