@@ -9,8 +9,10 @@ tmp <- installed.packages()
 installedpkgs <- as.vector(tmp[is.na(tmp[,"Priority"]), 1])
 save(installedpkgs, file="../../output/save_r_package_list/installed_old.rda")
 
+# load list of installed packages after update
 tmp <- installed.packages()
+installedpkgs <- load("../../output/save_r_package_list/installed_old.rda")
 installedpkgs.new <- as.vector(tmp[is.na(tmp[,"Priority"]), 1])
 missing <- setdiff(installedpkgs, installedpkgs.new)
 install.packages(missing)
-update.packages()
+update.packages(ask=FALSE)
