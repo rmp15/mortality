@@ -354,7 +354,7 @@ print(grid.arrange(p4,p2L,heights=c(11,1)))
 
 # layout for two seperated legends
 lay <- rbind(c(1,1,1,1,1,1,1,1,1),
-             c(2,2,2,2,2,2,2,3,3))
+             c(2,2,2,2,2,2,3,3,3))
 
 # plot p1 but with custom legend (unintentional legend seperate)
 print(grid.arrange(p4,p2L,p3L,layout_matrix=lay,heights=c(11,1)))
