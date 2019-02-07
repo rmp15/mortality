@@ -8,7 +8,7 @@ year.end.arg <- as.numeric(args[2])
 library(RColorBrewer)
 
 # create directories for output
-file.loc <- paste0('../../output/data_explore_cod/')
+file.loc <- paste0('../../output/data_explore_cod/injuries/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
 # load data

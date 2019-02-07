@@ -6,7 +6,7 @@ year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 
 # create directories for output
-file.loc <- paste0('../../output/data_explore_cod/')
+file.loc <- paste0('../../output/data_explore_cod/broad/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
 # load data
@@ -80,7 +80,6 @@ library(scales)
 
 # 1.
 ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-    #ggtitle('ASDRs in the USA over time') +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -96,73 +95,69 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=yea
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
-# 2.
-ggplot(dat=dat.national.com.sex,color='black', aes(x=year,y=100000*ASDR,fill=cause)) +
-    #ggtitle('ASDRs in the USA over time') +
-    geom_area(position='stack') +
-    facet_grid(~ID) +
-    xlab('Year') +
-    ylab('Age standardised death rate (per 100,000)') +
-    scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
-    theme_bw() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# 3.
-ggplot(dat=dat.national.com.sex, aes(x=year,y=100000*ASDR,fill=cause)) +
-    #ggtitle('ASDRs in the USA over time') +
-    geom_area(position='stack') +
-    facet_grid(cause~ID) +
-    xlab('Year') +
-    ylab('Age standardised death rate (per 100,000)') +
-    scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# 4.
-ggplot(dat=dat.national.com.sex, aes(x=date,y=100000*ASDR,fill=cause)) +
-    #ggtitle('ASDRs in the USA over time') +
-    geom_area(position='stack') +
-    xlab('Year') +
-    ylab('Age standardised death rate (per 100,000)') +
-    scale_x_date(labels = date_format("%Y"),date_breaks = "1 year") +
-    scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# 5.
-ggplot(dat=dat.national.com.sex, aes(x=date,y=100000*ASDR,color=cause)) +
-    #ggtitle('ASDRs in the USA over time') +
-    geom_line() +
-    xlab('Year') +
-    ylab('Age standardised death rate (per 100,000)') +
-    scale_x_date(labels = date_format("%Y"),date_breaks = "1 year") +
-    scale_color_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# 6.
-ggplot(dat=dat.national.com.sex.year, aes(x=year,y=12*ASDR*100000,fill=cause)) +
-    geom_area(position='stack') +
-    xlab('Year') +
-    ylab('Age standardised death rate (per 100,000)') +
-    scale_fill_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0("Cause of death"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+# # 2.
+# ggplot(dat=dat.national.com.sex,color='black', aes(x=year,y=100000*ASDR,fill=cause)) +
+#     geom_area(position='stack') +
+#     facet_grid(~ID) +
+#     xlab('Year') +
+#     ylab('Age standardised death rate (per 100,000)') +
+#     scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
+#     theme_bw() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # 3.
+# ggplot(dat=dat.national.com.sex, aes(x=year,y=100000*ASDR,fill=cause)) +
+#     geom_area(position='stack') +
+#     facet_grid(cause~ID) +
+#     xlab('Year') +
+#     ylab('Age standardised death rate (per 100,000)') +
+#     scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # 4.
+# ggplot(dat=dat.national.com.sex, aes(x=date,y=100000*ASDR,fill=cause)) +
+#     geom_area(position='stack') +
+#     xlab('Year') +
+#     ylab('Age standardised death rate (per 100,000)') +
+#     scale_x_date(labels = date_format("%Y"),date_breaks = "1 year") +
+#     scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # 5.
+# ggplot(dat=dat.national.com.sex, aes(x=date,y=100000*ASDR,color=cause)) +
+#     geom_line() +
+#     xlab('Year') +
+#     ylab('Age standardised death rate (per 100,000)') +
+#     scale_x_date(labels = date_format("%Y"),date_breaks = "1 year") +
+#     scale_color_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Cause of death"))) +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+#
+# # 6.
+# ggplot(dat=dat.national.com.sex.year, aes(x=year,y=12*ASDR*100000,fill=cause)) +
+#     geom_area(position='stack') +
+#     xlab('Year') +
+#     ylab('Age standardised death rate (per 100,000)') +
+#     scale_fill_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0("Cause of death"))) +
+#     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+#     legend.position = 'bottom',legend.justification='center',
+#     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
 dev.off()
 
@@ -176,37 +171,6 @@ dat.national.year$age.long = reorder(dat.national.year$age.long,dat.national.yea
 dat.national.year$sex.long = mapvalues(dat.national.year$sex,from=sort(unique(dat.national.year$sex)),to=as.character(sex.filter2))
 dat.national.year$sex.long = reorder(dat.national.year$sex.long,rev(dat.national.year$sex))
 dat.national.year$sex.long = as.character(dat.national.year$sex.long)
-
-pdf(paste0(file.loc,'broad_cod_age_sex_yearly_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-# 1. yearly plot
-ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause)) +
-    geom_line() +
-    xlab('Age group (years)') +
-    ylab('Death rate (per 100,000)') +
-    geom_vline(xintercept=1999, linetype="dotted") +
-    facet_grid(sex.long~age.long) +
-    scale_color_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0("Cause"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-# 2. yearly plot log-scale
-ggplot(dat=dat.national.year, aes(x=year,y=log(rate.adj*100000),color=cause)) +
-    geom_line() +
-    xlab('Age group (years)') +
-    ylab('log(Death rate (per 100,000))') +
-    geom_vline(xintercept=1999, linetype="dotted") +
-    facet_grid(sex.long~age.long) +
-    scale_color_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0("Cause"))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
-
-dev.off()
 
 # subset of all data
 last.years = c((year.start.arg):(year.end.arg))
@@ -225,6 +189,25 @@ dat.last.years$age.long <- reorder(dat.last.years$age.long,dat.last.years$age)
 dat.last.years$ID = mapvalues(dat.last.years$month, from=sort(unique(dat.last.years$month)),to=month.short)
 dat.last.years$ID = with(dat.last.years,reorder(dat.last.years$ID,month))
 
+p0 = ggplot(data=dat.last.years, aes(x=age.long,y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
+    geom_bar(width = 0.9, stat = "identity") +
+    xlab('Age group (years)') + ylab('Number of deaths') +
+    scale_fill_manual(values=colors.broad.cod[c(3,4,2,1)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=colors.broad.cod[c(3,4,2,1)], guide = guide_legend(nrow = 1,title = paste0(""))) +
+    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    scale_y_continuous(label = comma) +
+    facet_grid(sex.long~.)   +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
+# fix order of causes
+dat.last.years$cause = factor(dat.last.years$cause, levels= c('Other','Injuries', 'Cancer', 'Cardiorespiratory'))
+
 # function to extract legend of figure
 extract_legend<-function(a.gplot){
     tmp <- ggplot_gtable(ggplot_build(a.gplot))
@@ -234,9 +217,12 @@ extract_legend<-function(a.gplot){
     return(legend)
 }
 
+# extract legend from plot p1
+p1L = extract_legend(p0)
+
 pdf(paste0(file.loc,'broad_cod_all_years_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 
-ggplot(data=dat.last.years, aes(x=age.long,y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
+p1 = ggplot(data=dat.last.years, aes(x=age.long,y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
     geom_bar(width = 0.9, stat = "identity") +
     xlab('Age group (years)') + ylab('Number of deaths') +
     scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0(""))) +
@@ -252,8 +238,17 @@ ggplot(data=dat.last.years, aes(x=age.long,y=deaths,color=as.factor(cause),fill=
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
+# p1 but without legend
+p2 = p1 + guides(fill=FALSE,color=FALSE)
+
+library(grid)
+library(gridExtra)
+
+# plot p1 but with custom legend
+print(grid.arrange(p2,p1L,heights=c(11,1)))
+
 # full bar chart per age-sex group with breakdown of causes
-ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
+p3 = ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
     geom_bar(width = 0.9, position='fill', stat = "identity") +
     xlab('Age group (years)') + ylab('Proportion of deaths') +
     scale_fill_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0(""))) +
@@ -268,70 +263,87 @@ ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(caus
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
-# x axis age-group, y-axis death rate for last year
-ggplot(data=dat.last.years) +
-    geom_point(aes(x=as.factor(age),y=100000*rate.adj,color=as.factor(ID))) +
-    xlab('Age group') +
+# p3 but without legend
+p4 = p3 + guides(fill=FALSE,color=FALSE)
+
+# plot p3 but with custom legend
+print(grid.arrange(p4,p1L,heights=c(11,1)))
+
+dev.off()
+
+# fix names of sexes
+dat.national.year$sex.long <- with(dat.national.year,reorder(dat.national.year$sex.long,sex))
+
+dat.national.year$cause = factor(dat.national.year$cause, levels= c('Other','Injuries', 'Cancer', 'Cardiorespiratory'))
+
+# plots over time
+
+pdf(paste0(file.loc,'broad_cod_age_sex_over_time_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+
+# 1. yearly plot fixed axis
+q1 = ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause)) +
+    geom_point(size=1.3) +
+    xlab('Year') +
     ylab('Death rate (per 100,000)') +
-    scale_x_discrete(breaks=age.filter,labels=age.print) +
-    scale_colour_manual(values=colors.months,guide = guide_legend(nrow = 1,title = paste0("Month"))) +
-    geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
-    facet_grid(sex.long~cause) +
+    geom_vline(xintercept=1999, linetype="dotted") +
+    facet_grid(sex.long~age.long) +
+    scale_color_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
-# x axis age-group, y-axis log(death rate) for last year
-ggplot(data=dat.last.years) +
-    geom_point(aes(x=as.factor(age),y=log(100000*rate.adj),color=as.factor(ID))) +
-    xlab('Age group') +
-    ylab('log(death rate (per 100,000))') +
-    scale_x_discrete(breaks=age.filter,labels=age.print) +
-    scale_colour_manual(values=colors.months,guide = guide_legend(nrow = 1,title = paste0("Month"))) +
-    geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~cause) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+# q1 but without legend
+q2 = q1 + guides(fill=FALSE,color=FALSE)
 
-# x axis month, y-axis death rate for last year
-ggplot(data=dat.last.years) +
-    geom_line(aes(x=month,y=100000*rate.adj,color=as.factor(age))) +
-    #geom_point(aes(x=month,y=1000000*rate.adj,color=as.factor(age))) +
-    xlab('Age group') +
+# 2. yearly plot free axis
+q3 = ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause)) +
+    # geom_point(size=1) +
+    geom_line(linetype=1,alpha=1) +
+    xlab('Year') +
     ylab('Death rate (per 100,000)') +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
-    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
-    values=age.colours,guide = guide_legend(title = 'Age group (years)')) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~cause,scales="free") +
+    geom_vline(xintercept=1999, linetype="dotted") +
+    facet_wrap(sex.long~age.long,ncol=10, scales='free') +
+    scale_color_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
-# x axis month, y-axis log(death rate) for last year
-ggplot(data=dat.last.years) +
-    geom_line(aes(x=month,y=log(100000*rate.adj),color=as.factor(age))) +
-    xlab('Age group') +
-    ylab('log(death rate (per 100,000)') +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    geom_hline(linetype=1, yintercept = 0, alpha=0.5) +
-    scale_colour_manual(labels=c('0-4','5-14','15-24','25-34','35-44','45-54','55-64','65-74','75-84','85+'),
-    values=age.colours,guide = guide_legend(title = 'Age group (years)')) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~cause,scales="free") +
+# q3 but without legend
+q4 = q3 + guides(fill=FALSE,color=FALSE)
+
+# plot q3 but with custom legend (blocks of colour instead of lines)
+print(grid.arrange(q4,p1L,heights=c(11,1)))
+
+# plot q1 but with custom legend (blocks of colour instead of lines)
+print(grid.arrange(q2,p1L,heights=c(11,1)))
+
+dev.off()
+
+pdf(paste0(file.loc,'broad_cod_age_sex_over_time_plots_stacked_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+
+# 1. stacked plot over time facetted by subsubcause
+r1 = ggplot(dat=dat.national.year, aes(x=year,y=(deaths/100000),fill=cause)) +
+    geom_area(position='stack') +
+    geom_vline(xintercept=1999, linetype="dotted") +
+    xlab('Year') +
+    ylab('Number of deaths (hundreds of thousands)') +
+    scale_y_continuous(labels = comma) +
+    scale_fill_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
+    facet_wrap(sex.long~age.long,ncol=10, scales='free') +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+
+# r1 but without legend
+r2 = r1 + guides(fill=FALSE,color=FALSE)
+
+# plot r1 but with custom legend (blocks of colour instead of lines)
+print(grid.arrange(r2,p1L,heights=c(11,1)))
 
 dev.off()

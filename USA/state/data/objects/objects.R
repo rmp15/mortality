@@ -24,10 +24,10 @@ mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724
 
 
 # colors for broad causes of death
-colors.broad.cod = mycols[c(    14,  # Cancer
-                                9,   # Cardio
-                                24,  # Injuries
-                                11)] # Other
+colors.broad.cod = mycols[c(    24,  # Other
+                                40,  # Injuries
+                                15,  # Cancer
+                                62)]   # Cardio
 
 # colors for sub-causes of death
 colors.injuries = mycols[c(     25,  # Unintentional
