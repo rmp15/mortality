@@ -226,7 +226,6 @@ dat.national.year$cause = factor(dat.national.year$cause, levels= c('Other','Inj
 dat.national.year.all$cause = factor(dat.national.year.all$cause, levels= c('Other','Injuries', 'Cancer', 'Cardiorespiratory'))
 
 # plots over time
-
 pdf(paste0(file.loc,'broad_cod_age_sex_over_time_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 
 # 1. yearly plot fixed axis
@@ -267,9 +266,6 @@ q4 = q3 + guides(fill=FALSE,color=FALSE)
 
 # plot q3 but with custom legend (blocks of colour instead of lines)
 print(grid.arrange(q4,p1L,heights=c(11,1)))
-
-# plot q1 but with custom legend (blocks of colour instead of lines)
-# print(grid.arrange(q2,p1L,heights=c(11,1)))
 
 dev.off()
 
