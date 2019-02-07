@@ -190,6 +190,10 @@ library(gridExtra)
 # plot p1 but with custom legend
 print(grid.arrange(p2,p1L,heights=c(11,1)))
 
+dev.off()
+
+pdf(paste0(file.loc,'broad_cod_all_years_plots_full_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+
 # full bar chart per age-sex group with breakdown of causes
 p3 = ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
     geom_bar(width = 0.9, position='fill', stat = "identity") +
@@ -235,7 +239,7 @@ q1 = ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause)) +
     scale_color_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
@@ -248,12 +252,13 @@ q3 = ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause)) +
     geom_line(linetype=1,alpha=1) +
     xlab('Year') +
     ylab('Death rate (per 100,000)') +
+    scale_y_continuous(labels = comma) +
     geom_vline(xintercept=1999, linetype="dotted") +
-    facet_wrap(sex.long~age.long,ncol=10, scales='free') +
+    facet_wrap(sex.long~age.long,ncol=10, scales='free', labeller=label_wrap_gen(multi_line=FALSE)) +
     scale_color_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
@@ -276,12 +281,12 @@ r1 = ggplot(dat=dat.national.year, aes(x=year,y=(deaths/100000),fill=cause)) +
     geom_vline(xintercept=1999, linetype="dotted") +
     xlab('Year') +
     ylab('Number of deaths (hundreds of thousands)') +
-    scale_y_continuous(labels = comma) +
+    scale_y_continuous() +
     scale_fill_manual(values=colors.broad.cod, guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
-    facet_wrap(sex.long~age.long,ncol=10, scales='free') +
+    facet_wrap(sex.long~age.long,ncol=10, scales='free', labeller=label_wrap_gen(multi_line=FALSE)) +
     theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
 
