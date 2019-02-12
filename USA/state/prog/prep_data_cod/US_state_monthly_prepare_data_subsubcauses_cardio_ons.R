@@ -223,8 +223,8 @@ yearsummary_cardio  <- function(x=2000) {
 	}
 
     # find unique values of causes of death and sub-groupings and save
-    dat.unique = unique(dat.merged[c('cause','cause.sub')])
-    saveRDS(dat.unique,paste0('../../output/prep_data_cod/cods/cods_cardio_',x))
+    dat.unique = unique(dat.merged[c('cause','cause.sub','cause.sub.sub')])
+    saveRDS(dat.unique,paste0('../../output/prep_data_cod/cods/cods_cardio_sub_',x))
 
 
     # add agegroup groupings
