@@ -88,7 +88,7 @@ yearsummary_cardio  <- function(x=2000) {
 							ifelse(dat.merged$cause.numeric>=4970&dat.merged$cause.numeric<=5199, 'Other respiratory diseases', #'?',
 							'NA')))))))))))))))))))))))
 
-        # cause sub sub groups
+        # cause subsubgroups
         dat.merged$cause.sub.sub =
 							# Ottis media (other respiratory diseases)
                             ifelse(dat.merged$cause.numeric>=3810&dat.merged$cause.numeric<=3829, 'Otitis media',

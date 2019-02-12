@@ -44,7 +44,7 @@ echo "preparing monthly death rates in injury sub-causes of deaths for years $st
 
 echo "preparing monthly death rates in injury sub-sub-causes of deaths for years $start - $end";
 
-#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subsubcauses_injuries_ons.R $start $end
+Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subsubcauses_injuries_ons.R $start $end
 
 #################################################
 # 5. PROCESS DATA FOR INJURIES WO DROWNING
@@ -68,7 +68,7 @@ echo "preparing monthly death rates in cardio sub-causes of deaths for years $st
 
 echo "preparing monthly death rates in cardio sub-sub-causes of deaths for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subsubcauses_cardio_ons.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subsubcauses_cardio_ons.R $start $end
 
 #################################################
 # 8. PROCESS DATA FOR ELIFE FIRST REVISION
