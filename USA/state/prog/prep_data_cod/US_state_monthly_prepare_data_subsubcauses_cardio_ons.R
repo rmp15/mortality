@@ -241,7 +241,7 @@ yearsummary_cardio  <- function(x=2000) {
                    	85)))))))))
 
 	# # summarise by state,year,month,sex,agegroup
-    dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.group,cause.sub,fips,year,monthdth,sex,agegroup),deaths=sum(deaths))
+    dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.group,cause.sub,cause.sub.sub,fips,year,monthdth,sex,agegroup),deaths=sum(deaths))
   	names(dat.summarised)[1:8] <- c('cause.group','cause.sub','fips','year','month','sex','age','deaths')
 	dat.summarised <- na.omit(dat.summarised)
     #
