@@ -9,7 +9,7 @@ clear
 
 declare -i start=1980
 declare -i end=2016
-declare -a models=(25)
+declare -a models=(10)
 declare country="USA"
 declare -a dnames=("t2m")
 declare -a metrics=('meanc3')
@@ -31,14 +31,14 @@ for metric in "${metrics[@]}"; do
 
 for model in "${models[@]}"; do
 
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $pw
-#Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $pw
+Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $pw
+Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $pw
 
 #################################################
 # 2. PLOT RAW AGAINST FITTED DEATH RATES AND RESIDUALS
 #################################################
 
-Rscript ~/git/mortality/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R $start $end $country $model $dname $metric $cod $contig
+#Rscript ~/git/mortality/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R $start $end $country $model $dname $metric $cod $contig
 #Rscript ~/git/mortality/USA/state/prog/residuals/residuals_cod_1var.R $start $end $country $model $dname $metric $cod $contig
 
 done; done; done; done;
