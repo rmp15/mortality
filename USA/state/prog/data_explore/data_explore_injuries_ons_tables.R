@@ -34,10 +34,11 @@ dat$cause = factor(dat$cause, levels=c('Unintentional injuries','Intentional inj
 library(plyr)
 library(scales)
 
+# eliminate Hawaii and Alaska
+dat = subset(dat,!(fips%in%c(2,15)))
+
 # create nationalised data
-dat.national = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
-dat.national$rate.adj = with(dat.national,deaths/pop.adj)
-dat.national = dat.national[order(dat.national$cause,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
+dat.national.all = ddply(dat,.(sex,age),summarize,deaths=sum(deaths))
 
 # create a date column
 library(zoo)
