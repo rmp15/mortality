@@ -43,28 +43,28 @@ if(pw.arg==0){
         if(cause!='AllCause'){
             dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
             country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
-            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
-            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+            # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
+            # country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
         }
         if(cause=='AllCause'){
             dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
             ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
-            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
-            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+            # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
+            # ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
         }
     }
     if(contig==0){
         if(cause!='AllCause'){
             dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
             country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
-            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
-            country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+            # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
+            # country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
         }
         if(cause=='AllCause'){
             dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
             ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
-            dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
-            ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+            # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
+            # ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
         }
     }
 }
@@ -200,7 +200,7 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
         ifelse(cause=='Intentional self-harm','Intentional self-harm', # TO ASK MAJID. 'Suicides' ???
         ifelse(cause=='Accidental falls','Falls',
         ifelse(cause=='Accidental drowning and submersion','Drownings',
-        ifelse(cause=='Assault','Assault','NA'
+        ifelse(cause=='Assault','Assault',cause
         )))))))))))))
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
@@ -315,9 +315,9 @@ if(model%in%c('1d','1d2')){
     }
 
     # plot heatmap
-    pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    heatmap.national.age()
-    dev.off()
+    # pdf(paste0(file.loc,'climate_month_params_heatmap_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+    # heatmap.national.age()
+    # dev.off()
 
     # HEATMAPS OF PARAMETERS ALTERNATIVE
     heatmap.national.age.alt <- function() {
@@ -356,9 +356,9 @@ if(model%in%c('1d','1d2')){
     }
 
     # national month intercept
-    pdf(paste0(file.loc,'climate_month_params_heatmap_alt_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    heatmap.national.age.alt()
-    dev.off()
+    # pdf(paste0(file.loc,'climate_month_params_heatmap_alt_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+    # heatmap.national.age.alt()
+    # dev.off()
 
     # HEATMAPS OF PARAMETERS ALTERNATIVE
     heatmap.national.age.alt.2 <- function() {

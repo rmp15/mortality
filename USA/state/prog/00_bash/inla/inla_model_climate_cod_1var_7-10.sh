@@ -77,16 +77,16 @@ declare cod="Other_cardiovascular_diseases"
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 25 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  5 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  5 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  0 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  0 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 15 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  5 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  5 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  0 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R  0 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 
 declare cod="Other_respiratory_diseases"
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 85 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 75 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 75 1 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod.R 65 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
