@@ -47,6 +47,17 @@ echo "plotting figure 3 injury paper $start - $end";
 #Rscript ~/git/climate/countries/USA/prog/06_plots/plots_against_time.R $start2 $end $dname $metric
 
 #################################################
+# Figure XX (ANOMALY SUMMARY)
+#################################################
+
+# to correct directory
+cd ~/git/climate/countries/USA/prog/00_bash/
+
+echo "plotting figure XX injury paper $start - $end";
+
+Rscript ~/git/climate/countries/USA/prog/15_anomaly_summaries/anomaly_summaries.R $start2 $end $dname $metric
+
+#################################################
 # Figure 4 and Supplementary Figure 1 and 2
 #################################################
 
@@ -69,7 +80,7 @@ cd ~/git/climate/countries/USA/prog/00_bash/
 
 echo "plotting supplementary table 1 injury paper $start - $end";
 
-Rscript ~/git/climate/countries/USA/prog/14_comparing_max_min/comparing_max_min.R $start2 $end 'mean' $dname
+#Rscript ~/git/climate/countries/USA/prog/14_comparing_max_min/comparing_max_min.R $start2 $end 'mean' $dname
 
 #################################################
 # Tables XX-XX (not currently in paper)
