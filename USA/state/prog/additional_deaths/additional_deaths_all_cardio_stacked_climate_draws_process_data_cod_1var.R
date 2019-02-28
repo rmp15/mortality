@@ -62,6 +62,9 @@ for(h in causes.all){
                 '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
             draws.current = readRDS(paste0(file.loc.input,save.name))
             do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h), draws.current))
+
+            print(paste0(' draws done for ',sex.filter[i],', ',age.filter[j],', ',h,'...'))
+
 }}}
 
 # for national model, plot additional deaths (with CIs) all on one page, one for men and one for women
@@ -155,7 +158,7 @@ if(model%in%c('1d','1d2')){
 
     # save additional.deaths, additional.deaths.monthly and additional.deaths.total NEED TO ADD FOR NON_CONTIG ALSO
     output.local = paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
-                    '/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_injuries/',num.draws,'_draws/')
+                    '/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_cardio/',num.draws,'_draws/')
     ifelse(!dir.exists(output.local), dir.create(output.local,recursive=TRUE), FALSE)
 
     # saveRDS(additional.deaths,paste0(file.loc,'additional_deaths_age_draws.rds'))
@@ -164,16 +167,16 @@ if(model%in%c('1d','1d2')){
 
     # summarise each cause of deaths as well as intent
     additional.deaths.total.intent = additional.deaths.total
-    additional.deaths.total.intent$intent = ifelse(additional.deaths.total.intent$cause%in%c('Assault','Intentional self-harm'),'Intentional','Unintentional')
+    additional.deaths.total.intent$intent = ifelse(additional.deaths.total.intent$cause%in%causes.cardio,'Cardiovascular','Respiratory')
     additional.deaths.total.intent = ddply(additional.deaths.total.intent,.(draw,intent),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
 
     # total deaths overall also
     additional.deaths.total.total = additional.deaths.total
     additional.deaths.total.total = ddply(additional.deaths.total.total,.(draw),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
 
-    # summarise intent by age and for each sex
+    # summarise cardiovascular or respiratory by age and for each sex
     additional.deaths.intent = additional.deaths
-    additional.deaths.intent$intent = ifelse(additional.deaths.intent$cause%in%c('Assault','Intentional self-harm'),'Intentional','Unintentional')
+    additional.deaths.intent$intent = ifelse(additional.deaths.intent$cause%in%causes.cardio,'Cardiovascular','Respiratory')
     additional.deaths.intent = subset(additional.deaths.intent,age<90&sex!=0)
     additional.deaths.intent = ddply(additional.deaths.intent,.(draw,intent,sex,age),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
 
@@ -188,7 +191,7 @@ if(model%in%c('1d','1d2')){
 
     # summarise intent by month and for each sex
     additional.deaths.intent.monthly = additional.deaths.monthly
-    additional.deaths.intent.monthly$intent = ifelse(additional.deaths.intent.monthly$cause%in%c('Assault','Intentional self-harm'),'Intentional','Unintentional')
+    additional.deaths.intent.monthly$intent = ifelse(additional.deaths.intent.monthly$cause%in%causes.cardio,'Cardiovascular','Respiratory')
     additional.deaths.intent.monthly = subset(additional.deaths.intent.monthly,month<90&sex!=0)
     additional.deaths.intent.monthly = ddply(additional.deaths.intent.monthly,.(draw,intent,sex,month),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
 
@@ -229,20 +232,17 @@ if(model%in%c('1d','1d2')){
     # FIX NAMES OF CAUSES
 
     fix_cause_names = function(dat){
-    dat$cause <- gsub('Transport accidents', '1. Transport', dat$cause)
-    dat$cause <- gsub('Accidental falls', '2. Falls', dat$cause)
-    dat$cause <- gsub('Other external causes of injury', '4. Other injuries', dat$cause)
-    dat$cause <- gsub('Accidental drowning and submersion', '3. Drownings', dat$cause)
-    dat$cause <- gsub('Intentional self-harm', '6. Intentional self-harm', dat$cause)
-    dat$cause <- gsub('6. Intentional self-harm', '6. Intentional\nself-harm', dat$cause)
-    dat$cause <- gsub('Assault', '5. Assault', dat$cause)
+    dat$cause <- gsub('Ischaemic heart disease', 'Ischaemic heart disease', dat$cause)
+    dat$cause <- gsub('Cerebrovascular disease', 'Cerebrovascular disease', dat$cause)
+    dat$cause <- gsub('Chronic obstructive pulmonary disease', 'COPD', dat$cause)
+    dat$cause <- gsub('Respiratory infections', 'Respiratory infections', dat$cause)
 
     return(dat)
     }
 
     fix_intent_names = function(dat){
-    dat$intent <- gsub('Intentional', '2. Intentional', dat$intent)
-    dat$intent <- gsub('Unintentional', '1. Unintentional', dat$intent)
+    dat$intent <- gsub('Cardiovascular', 'Cardiovascular', dat$intent)
+    dat$intent <- gsub('Respiratory', 'Respiratory', dat$intent)
 
     return(dat)
     }
@@ -295,7 +295,7 @@ if(model%in%c('1d','1d2')){
     #     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
     # dev.off()
 
-    additional.deaths.summary$intent = ifelse(additional.deaths.summary$cause%in%c('5. Assault','6. Intentional\nself-harm'),'2. Intentional','1. Unintentional')
+    additional.deaths.summary$intent = ifelse(additional.deaths.summary$cause%in%causes.cardio,'Cardiovascular','Respiratory')
     additional.deaths.intent.summary = fix_intent_names(additional.deaths.intent.summary)
     #3
     # pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -386,7 +386,7 @@ if(model%in%c('1d','1d2')){
     #     legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
     # dev.off()
 
-    additional.deaths.summary.monthly$intent = ifelse(additional.deaths.summary.monthly$cause%in%c('5. Assault','6. Intentional\nself-harm'),'2. Intentional','1. Unintentional')
+    additional.deaths.summary.monthly$intent = ifelse(additional.deaths.summary.monthly$cause%in%causes.cardio,'Cardiovascular','Respiratory')
     additional.deaths.intent.monthly.summary = fix_intent_names(additional.deaths.intent.monthly.summary)
     # #6
     # pdf(paste0(file.loc,country,'_rate_pred_type',model,
