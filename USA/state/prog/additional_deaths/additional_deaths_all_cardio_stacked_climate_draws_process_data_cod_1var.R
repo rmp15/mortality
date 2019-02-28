@@ -31,10 +31,10 @@ model <- models[model]
 
 # create directories for output
 file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/all_injuries/',num.draws,'_draws/')
+'/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/all_cardio/',num.draws,'_draws/')
 if(contig==1){
     file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_injuries/',num.draws,'_draws/')
+'/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_cardio/',num.draws,'_draws/')
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
@@ -57,8 +57,6 @@ for(h in causes.all){
                 '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',h,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
             }
 
-
-
             # load file
             save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
                 '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
@@ -69,7 +67,7 @@ for(h in causes.all){
 # for national model, plot additional deaths (with CIs) all on one page, one for men and one for women
 if(model%in%c('1d','1d2')){
 
-    dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
+    dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_cardio_ons_',year.start,'_',year.end))
     print(head(dat.mort))
 
     # make for national data
