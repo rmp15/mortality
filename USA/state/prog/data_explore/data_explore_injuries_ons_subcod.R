@@ -157,7 +157,7 @@ ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
@@ -172,7 +172,7 @@ ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
@@ -187,7 +187,7 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=yea
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 dev.off()
 
@@ -242,7 +242,7 @@ p1= ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # print for pdf
 print(p1)
@@ -266,7 +266,7 @@ p2= ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries')
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # extract legend from plot p2
 p2L = extract_legend(p2)
@@ -287,7 +287,7 @@ p3= ggplot(data=subset(dat.last.years,cause.sub=='Other unintentional injuries')
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # extract legend from plot p2
 p3L = extract_legend(p3)
@@ -328,7 +328,7 @@ p5 = ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # print p5 for pdf
 print(p5)
@@ -354,7 +354,7 @@ ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), ae
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 dev.off()
 
@@ -378,7 +378,7 @@ q3 = ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause.sub)
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # q3 but without legend
 q4 = q3 + guides(fill=FALSE,color=FALSE)
@@ -407,7 +407,7 @@ r1 = ggplot(dat=dat.national.year, aes(x=year,y=(deaths/100000),fill=cause.sub))
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # r1 but without legend
 r2 = r1 +  guides(fill=FALSE,color=FALSE)
@@ -435,7 +435,7 @@ r1 = ggplot(dat=dat.national.year.all, aes(x=year,y=(deaths),fill=cause.sub)) +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # r1 but without legend
 r2 = r1 + guides(fill=FALSE,color=FALSE)

@@ -107,7 +107,7 @@ ggplot() +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -130,7 +130,7 @@ ggplot() +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -153,7 +153,7 @@ p1 = ggplot() +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 print(p1)
 
@@ -181,7 +181,7 @@ ggplot() +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -204,7 +204,7 @@ ggplot() +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -227,7 +227,7 @@ p2 =ggplot() +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 print(p2)
 dev.off()
@@ -245,12 +245,12 @@ p3 = ggplot() +
     # guides(fill=guide_legend(title="Subcategory of intentional injury")) +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90, vjust=0.5),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 p4 =ggplot() +
     geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause), stat='identity') +
@@ -266,12 +266,12 @@ p4 =ggplot() +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15), strip.text.x=element_blank(),
     axis.title.y = element_text(margin=margin(b=1000)),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90, vjust=0.5),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # alternative p4 but with month skipping
 
@@ -294,12 +294,12 @@ p5 =ggplot() +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15), strip.text.x=element_blank(),
     axis.title.y = element_text(margin=margin(b=1000)),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90, vjust=0.5),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # make sure that everything aligns (from http://www.exegetic.biz/blog/2015/05/r-recipe-aligning-axes-in-ggplot2/)
 p3 = ggplot_gtable(ggplot_build(p3))
@@ -315,6 +315,8 @@ pdf(paste0(file.loc,country,'_rate_pred_type',model,
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_all_contig.pdf'),paper='a4r',height=0,width=0)
 grid.arrange(p3,p4,nrow=2,left='Additional deaths associated with 1 degree additional warming (based on 2016 population)')
 dev.off()
+
+#name=expression(paste("Temperature (",degree,"C)"))
 
 # same plot as above but with skipping month names
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -414,7 +416,7 @@ ggplot() +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -435,12 +437,12 @@ ggplot() +
     guides(color=guide_legend(title="",nrow=1)) +
     coord_flip() +
     theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=0),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 additional.deaths.summary.perc$cause = gsub('Intentional self-harm', 'Intentional\nself-harm',additional.deaths.summary.perc$cause)
@@ -463,12 +465,12 @@ ggplot() +
     coord_flip() +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90), axis.text.y = element_text(size=10),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=0), axis.text.y = element_text(size=10),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -488,12 +490,12 @@ ggplot() +
     coord_flip() +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=0),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -514,12 +516,12 @@ ggplot() +
     coord_flip() +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=0),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 # summarise by sex, cause and month across the year
@@ -560,12 +562,12 @@ ggplot() +
     guides(color=FALSE) +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),axis.text.y = element_text(size=8),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=0),axis.text.y = element_text(size=8),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 
@@ -586,12 +588,12 @@ ggplot() +
     guides(color=guide_legend(title="Subcategory of injury",nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=0),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -610,10 +612,10 @@ ggplot() +
     guides(color=guide_legend(title="Subcategory of injury",nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +
     theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=0),
     plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
