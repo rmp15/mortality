@@ -21,7 +21,7 @@ declare -i contig=1
 declare -a draws=(5000)
 
 #################################################
-# Figures 1 and 2
+# Figures 1 and 2 (mortality data summary)
 #################################################
 
 # to correct directory
@@ -43,18 +43,29 @@ echo "plotting figure 3 cardio paper $start - $end";
 #Rscript ~/git/climate/countries/USA/prog/06_plots/plots_against_time.R $start2 $end $dname $metric
 
 #################################################
-# Figure 4 and Supplementary Figure 1 and 2
+# Figure 4 (anomaly summary)
+#################################################
+
+# to correct directory
+cd ~/git/climate/countries/USA/prog/00_bash/
+
+echo "plotting figure 4 cardio paper $start - $end";
+
+Rscript ~/git/climate/countries/USA/prog/15_anomaly_summaries/anomaly_summaries.R $start2 $end $dname $metric
+
+#################################################
+# Figure 5 (additional deaths) and Supplementary Figure 1 and 2
 #################################################
 
 # to correct directory
 cd ~/git/mortality/USA/state/prog/00_bash/
 
-echo "plotting figure 4 and supplementary figure cardio paper $start - $end";
+echo "plotting figure 5 and supplementary figure cardio paper $start - $end";
 
 # to correct directory
 cd ~/git/mortality/USA/state/prog/00_bash/
 
-#Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_cardio_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws
+Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_cardio_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws
 
 #################################################
 # Tables XX-XX (not currently in paper)

@@ -33,16 +33,16 @@ model <- models[model]
 
 # create directories for output
 file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/all_injuries/',num.draws,'_draws/')
+'/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/all_cardio/',num.draws,'_draws/')
 if(contig==1){
     file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
-'/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_injuries/',num.draws,'_draws/')
+'/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_cardio/',num.draws,'_draws/')
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
-causes.intentional = c('Assault','Intentional self-harm')
-causes.unintentional = c('Accidental falls', 'Accidental drowning and submersion', 'Transport accidents', 'Other external causes of injury')
-causes.all = c(causes.intentional,causes.unintentional)
+causes.cardio = c('Ischaemic heart disease','Cerebrovascular disease')
+causes.resp = c('Chronic obstructive pulmonary disease', 'Respiratory infections')
+causes.all = c(causes.cardio,causes.resp)
 
 # # save additional.deaths, additional.deaths.monthly and additional.deaths.total NEED TO ADD FOR NON_CONTIG ALSO
 # output.local = paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
@@ -79,59 +79,12 @@ fix_names = function(dat){
 
     return(dat)
 }
-additional.deaths.summary = fix_names(additional.deaths.summary)
+# additional.deaths.summary = fix_names(additional.deaths.summary)
 
 # additional edit for plotting intentional and unintentional totals on graphs without other unintentional injuries (see human readable for permanent fix)
 additional.deaths.intent.summary = ddply(subset(additional.deaths.summary,cause!='Other unintentional injuries'),.(intent,age.long,sex.long),summarize,deaths.added.mean=sum(deaths.added.mean))
 additional.deaths.summary.monthly = fix_names(additional.deaths.summary.monthly)
 additional.deaths.intent.monthly.summary = ddply(subset(additional.deaths.summary.monthly,cause!='Other unintentional injuries'),.(intent,month.short,sex.long),summarize,deaths.added.mean=sum(deaths.added.mean))
-
-pdf(paste0(file.loc,country,'_rate_pred_type',model,
-    '_',year.start,'_',year.end,'_',dname,'_',metric,'_unintentional_to_transport_falls_drownings_other_fast_contig.pdf'),paper='a4r',height=0,width=0)
-ggplot() +
-    geom_bar(data=subset(additional.deaths.summary,sex>0&age<99&!(cause%in%c('Other unintentional injuries', 'Assault','Intentional self-harm'))), aes(x=as.factor(age.long),y=deaths.added.mean,fill=cause), stat='identity') +
-    geom_point(data=subset(additional.deaths.intent.summary,intent=='Unintentional'&sex.long!='Both'&age.long!='All ages'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16) +
-    # geom_bar(data=subset(additional.deaths.intent.summary,intent=='Unintentional'&sex.long%in%c('Male','Female')&age.long%in%age.print),aes(x=as.factor(age.long),y=deaths.added.mean),fill=NA,color='black',stat='identity') +
-    # geom_errorbar(data=subset(additional.deaths.intent.summary,intent=='Unintentional'),aes(x=as.factor(age.long),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
-    geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Age group (years)') + ylab('Additional deaths associated with 1 degree \n additional warming (based on 2016 population)') +
-    # ylim(c(min.plot,max.plot)) +
-    facet_wrap(~sex.long) +
-    scale_fill_manual(values=colors.subinjuries[c(1,2,3,4)]) +
-    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-    guides(fill=guide_legend(title="",nrow=1)) +
-    # ggtitle('Additional deaths by types of intentional injuries') +
-    theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-dev.off()
-
-pdf(paste0(file.loc,country,'_rate_pred_type',model,
-    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_to_assault_intentional_self-harm_fast_contig.pdf'),paper='a4r',height=0,width=0)
-ggplot() +
-    geom_bar(data=subset(additional.deaths.summary,sex>0&age<99&(cause%in%c('Assault','Intentional self-harm'))), aes(x=as.factor(age.long),y=deaths.added.mean,fill=cause), stat='identity') +
-    geom_point(data=subset(additional.deaths.intent.summary,intent=='Intentional'&sex.long!='Both'&age.long!='All ages'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16) +
-    # geom_errorbar(data=subset(additional.deaths.intent.summary,intent=='Intentional'),aes(x=as.factor(age.long),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
-    geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Age group (years)') + ylab('Additional deaths associated with 1 degree \n additional warming (based on 2016 population)') +
-    # ylim(c(min.plot,max.plot)) +
-    facet_wrap(~sex.long) +
-    scale_fill_manual(values=colors.subinjuries[c(5,6)]) +
-    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-    guides(fill=guide_legend(title="",nrow=1)) +
-    # ggtitle('Additional deaths by types of intentional injuries') +
-    theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_contig.pdf'),paper='a4r',height=0,width=0)
@@ -143,7 +96,7 @@ p1 = ggplot() +
     xlab('Age group (years)') + ylab('Additional deaths associated with 1 degree \n additional warming (based on 2016 population)') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(.~intent +sex.long) +
-    scale_fill_manual(values=colors.subinjuries[c(1,2,3,5,6)]) +
+    scale_fill_manual(values=colors.cardio[c(1,2,4,5)]) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(fill=guide_legend(title="",nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +
@@ -160,52 +113,6 @@ print(p1)
 dev.off()
 
 # FOR PLOT BY MONTH AND SEX
-
-pdf(paste0(file.loc,country,'_rate_pred_type',model,
-    '_',year.start,'_',year.end,'_',dname,'_',metric,'_unintentional_to_transport_falls_drownings_other_monthly_fast_contig.pdf'),paper='a4r',height=0,width=0)
-ggplot() +
-    geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&!(cause%in%c('Other unintentional injuries', 'Assault','Intentional self-harm'))), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause), stat='identity') +
-    geom_point(data=subset(additional.deaths.intent.monthly.summary,intent=='Unintentional'),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16) +
-    # geom_errorbar(data=subset(additional.deaths.intent.monthly.summary,intent=='Unintentional'),aes(x=as.factor(month.short),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
-    geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Month') + ylab('Additional deaths associated with 1 degree \n additional warming (based on 2016 population)') +
-    # ylim(c(min.plot,max.plot)) +
-    facet_wrap(~sex.long) +
-    scale_fill_manual(values=colors.subinjuries[c(1,2,3,4)]) +
-    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-    guides(fill=guide_legend(title="",nrow=1)) +
-    # ggtitle('Additional deaths by types of intentional injuries') +
-    theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-dev.off()
-
-pdf(paste0(file.loc,country,'_rate_pred_type',model,
-    '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_to_assault_intentional_self-harm_monthly_fast_contig.pdf'),paper='a4r',height=0,width=0)
-ggplot() +
-    geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&(cause%in%c('Assault','Intentional self-harm'))), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause), stat='identity') +
-    geom_point(data=subset(additional.deaths.intent.monthly.summary,intent=='Intentional'),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16) +
-    # geom_errorbar(data=subset(additional.deaths.intent.monthly.summary,intent=='Intentional'),aes(x=as.factor(month.short),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
-    geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Month') + ylab('Additional deaths associated with 1 degree \n additional warming (based on 2016 population)') +
-    # ylim(c(min.plot,max.plot)) +
-    facet_wrap(~sex.long) +
-    scale_fill_manual(values=colors.subinjuries[c(5,6)]) +
-    # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-    guides(fill=guide_legend(title="", nrow=1)) +
-    # ggtitle('Additional deaths by types of intentional injuries') +
-    theme_bw() + theme(text = element_text(size = 15),
-    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-dev.off()
 
 pdf(paste0(file.loc,country,'_rate_pred_type',model,
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_monthly_contig.pdf'),paper='a4r',height=0,width=0)
