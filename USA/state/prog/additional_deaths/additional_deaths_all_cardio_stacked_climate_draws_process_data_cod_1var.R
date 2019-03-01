@@ -234,7 +234,7 @@ if(model%in%c('1d','1d2')){
     fix_cause_names = function(dat){
     dat$cause <- gsub('Ischaemic heart disease', 'Ischaemic heart disease', dat$cause)
     dat$cause <- gsub('Cerebrovascular disease', 'Cerebrovascular disease', dat$cause)
-    dat$cause <- gsub('Chronic obstructive pulmonary disease', 'COPD', dat$cause)
+    dat$cause <- gsub('Chronic obstructive pulmonary disease', 'Chronic obstructive pulmonary disease', dat$cause)
     dat$cause <- gsub('Respiratory infections', 'Respiratory infections', dat$cause)
 
     return(dat)
