@@ -58,7 +58,7 @@ for model in "${models[@]}"; do
 
 echo "Plotting change in deaths resutls for injury and cardio $start - $end";
 :
-#Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws;
-#Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_cardio_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws;
+Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws;
+Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_cardio_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws;
 
 done;
