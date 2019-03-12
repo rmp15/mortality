@@ -92,7 +92,16 @@ dat = data.frame(single.variable.parameter=dat.1var$mean,two.variable.parameter=
 # plot
 print(
     ggplot(dat) +
-        geom_point()
+    geom_point(aes(x=single.variable.parameter,y=two.variable.parameter)) +
+    ggtitle(paste0('Only ',as.character(dat.dict[which(dat.dict$metric==metric1),][,2]),' vs. ',
+    as.character(dat.dict[which(dat.dict$metric==metric1),][,2]), ' and ',as.character(dat.dict[which(dat.dict$metric==metric2),][,2]) )) +
+    theme_bw() + theme(text = element_text(size = 15),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 )
 
 # # reorder dataframe variables for plotting
