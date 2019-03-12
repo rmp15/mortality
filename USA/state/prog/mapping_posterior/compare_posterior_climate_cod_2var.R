@@ -93,6 +93,8 @@ dat = data.frame(single.variable.parameter=dat.1var$mean,two.variable.parameter=
 print(
     ggplot(dat) +
     geom_point(aes(x=single.variable.parameter,y=two.variable.parameter)) +
+    xlab('Single-variable parameter') +
+    ylab('Two-variable parameter') +
     ggtitle(paste0('Only ',as.character(dat.dict[which(dat.dict$metric==metric1),][,2]),' vs. ',
     as.character(dat.dict[which(dat.dict$metric==metric1),][,2]), ' and ',as.character(dat.dict[which(dat.dict$metric==metric2),][,2]) )) +
     theme_bw() + theme(text = element_text(size = 15),
