@@ -89,11 +89,24 @@ dat.2var.isolated = subset(dat.2var,var==as.character(dat.dict[which(dat.dict$me
 # new dataframe with only the mean excess risk
 dat = data.frame(single.variable.parameter=dat.1var$mean,two.variable.parameter=dat.2var.isolated)
 
+# calculate r^2 values
+lm_eqn <- function(df){
+    m <- lm(two.variable.parameter ~ single.variable.parameter, df);
+    eq <- substitute(italic(r)~"="~corr,
+         list(a = format(coef(m)[1], digits = 2),
+              b = format(coef(m)[2], digits = 2),
+             r2 = format(summary(m)$r.squared, digits = 3),
+             corr = format(cor(df$two.variable.parameter, df$single.variable.parameter),method='pearson')))
+    as.character(as.expression(eq));
+}
+
 # plot
 pdf(paste0(file.loc,'parameter_comparison_',model,'_',year.start,'_',year.end,'_',dname,'_',metric.combined,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
 print(
     ggplot(dat) +
     geom_point(aes(x=single.variable.parameter,y=two.variable.parameter)) +
+    geom_abline() +
+    geom_text(x = 0, y = 0.015, label = lm_eqn(dat), parse = TRUE) +
     xlab(paste0('Excess risk values of ',metric1, ' from single-variable model')) +
     ylab(paste0('Excess risk values of ',metric1, ' from two-variable model')) +
     ggtitle(paste0('Only ',as.character(dat.dict[which(dat.dict$metric==metric1),][,2]),' vs. ',
