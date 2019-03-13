@@ -37,7 +37,7 @@ model <- models[model]
 metric.combined = paste(sort(c(metric1,metric2)),collapse='_')
 
 # until things are completely run we need to use different year range (but shouldn't change too much)
-year.end.2 = 2016
+year.end.2 = 2013
 
 # bespoke colourway
 colorway = c("navy","deepskyblue2","deepskyblue3","darkgreen","yellow3","gold","orange","red","darkred")
@@ -49,11 +49,11 @@ var2.short = as.character(dat.dict[which(dat.dict$metric==metric2),][,2])
 # load the data for 1 variables
 if(cause!='AllCause'){
     dat.1var <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric1,'/non_pw/type_',model,'/parameters/',
-    country,'_rate_pred_type',model,'_',year.start,'_',year.end.2,'_',dname,'_',metric1,'_',cause,'_fast_contig'))
+    country,'_rate_pred_type',model,'_',year.start,'_',year.end.2,'_',dname,'_',metric1,'_',cause,'_fast'))
 }
 if(cause=='AllCause'){
     dat.1var <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric1,'/non_pw/type_',model,'/parameters/'
-    ,country,'_rate_pred_type',model,'_',year.start,'_',year.end.2,'_',dname,'_',metric1,'_fast_contig'))
+    ,country,'_rate_pred_type',model,'_',year.start,'_',year.end.2,'_',dname,'_',metric1,'_fast'))
 }
 
 # load the data for 2 variables
@@ -76,7 +76,7 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
 
 # create directories for output
 file.loc <- paste0('../../output/compare_posterior_climate/',year.start,'_',year.end,
-'/',dname,'/2var/',metric,'/non_pw/type_',model,'/parameters/')
+'/',dname,'/2var/',metric.combined,'/non_pw/type_',model,'/parameters/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # add names of variables to dataframe
@@ -107,8 +107,9 @@ print(
     geom_point(aes(x=single.variable.parameter,y=two.variable.parameter)) +
     geom_abline() +
     geom_text(x = 0, y = 0.015, label = lm_eqn(dat), parse = TRUE) +
-    xlab(paste0('Excess risk values of ',metric1, ' from single-variable model')) +
-    ylab(paste0('Excess risk values of ',metric1, ' from two-variable model')) +
+    coord_fixed() +
+    xlab(paste0('log(Excess risk values of anomaly parameters from single-variable model)')) +
+    ylab(paste0('log(Excess risk values of anomaly parameters from two-variable model)')) +
     ggtitle(paste0('Only ',as.character(dat.dict[which(dat.dict$metric==metric1),][,2]),' vs. ',
     as.character(dat.dict[which(dat.dict$metric==metric1),][,2]), ' and ',as.character(dat.dict[which(dat.dict$metric==metric2),][,2]) )) +
     theme_bw() + theme(text = element_text(size = 15),
