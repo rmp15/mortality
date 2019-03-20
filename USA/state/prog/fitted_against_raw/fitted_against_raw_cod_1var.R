@@ -77,6 +77,10 @@ if(contig==1){
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
+# DATA SUMMARY
+
+
+# PLOTS
 
 # fix name for plotting
 cod.print = ifelse(cause=='AllCause', 'All cause',
