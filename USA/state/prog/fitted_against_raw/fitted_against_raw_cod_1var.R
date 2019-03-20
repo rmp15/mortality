@@ -79,6 +79,12 @@ ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # DATA SUMMARY
 
+# calculate error
+dat.all$error = with(dat.all,rate.pred-rate.adj)
+dat.all$abs.error = abs(dat.all$error)
+
+# table of median errors by age and sex
+dat.all.summary = ddply(dat.all,.(age,sex),summarize,median.error=100000*median(error),median.abs.error=100000*median(abs.error),rmse=100000*sqrt(mean((abs.error)^2)))
 
 # PLOTS
 
