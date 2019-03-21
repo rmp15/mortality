@@ -19,7 +19,7 @@ declare metric="meanc3"
 declare -i fast=1
 declare -i contig=1
 declare -i pw=0
-declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other")
+declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other" "Other_cardiovascular_diseases" "Other_respiratory_diseases" "Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease" "Unintentional" "Unintentional_wo_drowning" "Intentional" "Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault" "Other_external_causes_of_injury")
 
 
 #################################################
