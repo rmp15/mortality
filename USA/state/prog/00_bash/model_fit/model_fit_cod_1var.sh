@@ -35,7 +35,7 @@ for model in "${models[@]}"; do
 for cod in "${cods[@]}"; do
 echo "establishing error statistics $model years $start - $end for $cod";
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/fitted_against_raw_cod_1var.R $start $end $country $model $dname $metric $cod $contig;
+Rscript ~/git/mortality/USA/state/prog/fitted_against_raw/fitted_against_raw_cod_1var.R $start $end $country $model $dname $metric $cod $contig;
 
 done; done;
 
