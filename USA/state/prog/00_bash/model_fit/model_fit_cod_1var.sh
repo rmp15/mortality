@@ -19,7 +19,7 @@ declare metric="meanc3"
 declare -i fast=1
 declare -i contig=1
 declare -i pw=0
-declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other" "Unintentional" "Intentional")
+declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other")
 
 
 #################################################
