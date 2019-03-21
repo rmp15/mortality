@@ -18,12 +18,13 @@ cod.arg <- as.character(args[11]) ; cod.arg <- gsub('_',' ',cod.arg)
 fast.arg <- as.numeric(args[12])
 contig.arg <- as.numeric(args[13])
 pw.arg <- as.numeric(args[14])
+age.break.arg <- as.numeric(args[15])
 
 # for test runs
-# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 10 ;
+# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 11 ;
 # cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
-# year.end.analysis.arg = 2016 ; cod.arg = 'Ischaemic heart disease'; fast.arg = 1 ; contig.arg = 1
-# pw.arg=0
+# year.end.analysis.arg = 2016 ; cod.arg = 'Cardiopulmonary'; fast.arg = 1 ; contig.arg = 1
+# pw.arg=0 ; age.break.arg = 65
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','minus1','1d2','1d3','1d4','0a','0b','1d5','1d6','1d7')
@@ -38,13 +39,15 @@ require(mailR)
 
 # create file location for output
 if(pw.arg==0){
-    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
+    output.dir = paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')
+    ifelse(!dir.exists(output.dir), dir.create(output.dir,recursive=TRUE), FALSE)
 }
 if(pw.arg==1){
-    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
+    output.dir = paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups')
+    ifelse(!dir.exists(output.dir), dir.create(output.dir,recursive=TRUE), FALSE)
 }
 # load data and filter results
-source('../models/INLA/03_spatiotemporal/inla_load_data_cod.R')
+source('../models/INLA/03_spatiotemporal/inla_load_data_cod_split.R')
 
 # load climate region data and fix names
 # source('../models/INLA/03_spatiotemporal/inla_climate_regions.R')
