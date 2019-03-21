@@ -154,7 +154,7 @@ if(fast.arg==2){
 # prep data for output
 
 # output string for filenames
-output.string = paste0('USA_rate_pred_type',type.selected,'_',age.arg,'_',sex.lookup[sex.arg],'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
+output.string = paste0('USA_rate_pred_type',type.selected,'_',age.arg,'_age_split',age.break.arg,'_',sex.lookup[sex.arg],'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
 
 # save all parameters of INLA model
 parameters.name <- paste0(output.string)
@@ -190,7 +190,7 @@ saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
 # send email notification
 
 # subject for email
-subject.arg = paste0(sex.lookup[sex.arg],' ',age.arg,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.analysis.arg,'-',year.end.analysis.arg)
+subject.arg = paste0(sex.lookup[sex.arg],' ',age.arg,' (split age at ',age.break.arg,') model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.analysis.arg,'-',year.end.analysis.arg)
 if(contig.arg == 1){subject.arg = paste0(subject.arg,' contig')}
 if(fast.arg==0){subject.arg = paste0(subject.arg,' non-pw done')}
 if(fast.arg==1){subject.arg = paste0(subject.arg,' fast non-pw done')}
