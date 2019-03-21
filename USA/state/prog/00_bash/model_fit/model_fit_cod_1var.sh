@@ -23,7 +23,7 @@ declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other" "Other
 
 
 #################################################
-# 1. RUN AGE-SEPARATED MODEL
+# 1. ERROR STATISTICS
 #################################################
 
 # to correct directory
@@ -33,22 +33,10 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 
 for model in "${models[@]}"; do
 for cod in "${cods[@]}"; do
-echo "combining results into one file from INLA model $model years $start - $end";
+echo "establishing error statistics $model years $start - $end for $cod";
 
-Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig;
+Rscript ~/git/mortality/USA/state/prog/bind_posterior/fitted_against_raw_cod_1var.R $start $end $country $model $dname $metric $cod $contig;
 
 done; done;
 
 ) &
-
-#################################################
-# 2. COMBINE RESULTS
-#################################################
-
-for model in "${models[@]}"; do
-
-echo "combining results into one file from INLA model $model years $start - $end";
-
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod.R $start2 $end2 $country $model $dname $metric $cod
-
-done;
