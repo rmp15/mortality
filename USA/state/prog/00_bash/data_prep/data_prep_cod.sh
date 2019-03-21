@@ -26,9 +26,11 @@ echo "preparing monthly death rates in broad causes of deaths for years $start -
 # 1. PROCESS DATA FOR BROAD CAUSES SPLIT INTO TWO AT CHOSEN AGE
 ##################################################################################################
 
-echo "preparing monthly death rates in broad causes of deaths for years $start - $end";
+declare -i split=65
 
-#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod.R $start $end
+echo "preparing monthly death rates in broad causes of deaths for years $start - $end with split at $split years";
+
+#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_cod_age_split.R $start $end $split
 
 ##################################################################################################
 # 2. PROCESS DATA FOR INJURIES CATEGORIES (OBSOLETE)
@@ -52,7 +54,7 @@ echo "preparing monthly death rates in injury sub-causes of deaths for years $st
 
 echo "preparing monthly death rates in injury sub-sub-causes of deaths for years $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subsubcauses_injuries_ons.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_state_monthly_prepare_data_subsubcauses_injuries_ons.R $start $end
 
 ##################################################################################################
 # 5. PROCESS DATA FOR INJURIES WO DROWNING
