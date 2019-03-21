@@ -4,10 +4,6 @@ library(RColorBrewer)
 library(ggplot2)
 library(plyr)
 library(scales)
-#library(maptools)
-#library(mapproj)
-#library(rgeos)
-#library(rgdal)
 
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
@@ -22,8 +18,8 @@ contig <- as.numeric(args[8])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ;
-# dname = 't2m' ; metric = 'meanc3' ; cause = 'External'; contig=1
+# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ;
+# dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'; contig=1
 
 print(args)
 
@@ -83,8 +79,9 @@ ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 dat.all$error = with(dat.all,rate.pred-rate.adj)
 dat.all$abs.error = abs(dat.all$error)
 
-# table of median errors by age and sex
+# table of median errors by age and sex and save
 dat.all.summary = ddply(dat.all,.(age,sex),summarize,median.error=100000*median(error),median.abs.error=100000*median(abs.error),rmse=100000*sqrt(mean((abs.error)^2)))
+write.csv(dat.all.summary,paste0(file.loc,'raw_against_fitted_error_summary_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.csv'))
 
 # PLOTS
 
