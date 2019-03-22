@@ -109,7 +109,7 @@ saveRDS(dat,paste0(file.loc.git,save.name))
 
 }
 }
-
+# TO FINISH PW
 if(pw.arg==1){
     if(model%in% c('1d','1d2')){
 
@@ -198,7 +198,7 @@ saveRDS(dat,paste0(file.loc.git,save.name))
 # MODEL 1E
 
 if(pw.arg==0){
-    if(model%in% c('1d','1d2')){
+    if(model%in% c('1e')){
 
     # create dataframe with each of the national terms for entire group of age and sexes
     dat <- data.frame()
