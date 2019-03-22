@@ -21,7 +21,7 @@ pw.arg <- as.numeric(args[14])
 age.break.arg <- as.numeric(args[15])
 
 # for test runs
-# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 11 ;
+# age.arg = 65 ; sex.arg = 2 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 11 ;
 # cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
 # year.end.analysis.arg = 2016 ; cod.arg = 'Cardiopulmonary'; fast.arg = 1 ; contig.arg = 1
 # pw.arg=0 ; age.break.arg = 65
