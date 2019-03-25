@@ -37,7 +37,7 @@ declare cod="Cardiopulmonary"
 
 # state specific temperature terms
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 65 2 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 0  2 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 0  2 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 65 1 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 0  1 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
 
