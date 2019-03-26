@@ -22,8 +22,7 @@ library(INLA)
 source('../../data/objects/objects.R')
 model <- models[model]
 
-# MODEL 1D and MODEL 1E (I CAN JUST USE THIS CODE FOR 1E RIGHT???)
-
+# MODEL 1D and MODEL 1E
 if(pw.arg==0){
     if(model%in% c('1d','1d2','1e')){
     
@@ -111,7 +110,7 @@ saveRDS(dat,paste0(file.loc.git,save.name))
 }
 }
 
-# TO FIX FOR PIECEWISE (ADAPT ABOVE)
+# TO FIX FOR PIECEWISE (ADAPT ABOVE AS CURRENTLY NOT FUNCTIONAL)
 if(pw.arg==1){
     if(model%in% c('1d','1d2')){
 

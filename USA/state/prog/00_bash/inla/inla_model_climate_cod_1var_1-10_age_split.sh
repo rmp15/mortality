@@ -39,7 +39,7 @@ declare cod="Cardiopulmonary"
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 65 2 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 0  2 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 65 1 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 0  1 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 0  1 $start $end 11 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
 
 # national temperature terms
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_age_split.R 65 2 $start $end 10 0 $dname $metric $start2 $end2 $cod $fast $contig $pw $break;
@@ -51,7 +51,7 @@ for model in "${models[@]}"; do
 
 echo "combining results into one file from INLA model $model years $start - $end";
 
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start2 $end2 $country 10 $dname $metric $cod $contig;
+Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var_age_split.R $start2 $end2 $country 10 $dname $metric $cod $contig $pw $break;
 
 done;
 
