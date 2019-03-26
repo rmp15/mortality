@@ -1055,7 +1055,7 @@ if(model%in%c('1d','1d2')){
 
 }
 
-# for state model, plot climate parameters on map all on on e page, one for men and one for women
+# for state model, plot climate parameters on map all on one page, one for men and one for women
 if(model %in% c('1e','1f')){
 
     # add months to data file

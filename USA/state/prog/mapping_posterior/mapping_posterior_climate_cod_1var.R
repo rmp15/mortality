@@ -1044,265 +1044,212 @@ if(model%in%c('1d','1d2')){
 
 }
 
-# for state model, plot climate parameters on map all on on e page, one for men and one for women
+# for state model, plot climate parameters on map all on one page, one for men and one for women
 if(model %in% c('1e','1f')){
-    
+
+    # add months to data file
+    dat$month = c(1:12)
+
+    # remove id column as duplicate name
+    dat$ID = NULL
+
+    # add state details (but first removing alaska and hawaii)
+    dat$DRAWSEQ = rep(2:50,each=12)
+    drawseq.lookup = read.csv("../../data/shapefiles/drawseq_lookup.csv") ; drawseq.lookup = drawseq.lookup[,c(2,3)]
+    dat = merge(dat,drawseq.lookup)
+
     # source map
     source('../../prog/01_functions/map_generate.R')
-    
+
     # merge selected data to map dataframe for colouring of ggplot
+    dat = dat[,c(1:16)]
     plot <- merge(USA.df,dat,by.x=c('STATE_FIPS','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
     plot <- with(plot, plot[order(sex,age,DRAWSEQ,order),])
-                
+
     # function to plot age for all months subnationally
     plot.function.age <- function(sex.sel,age.sel) {
-                    
+
         # find limits for plot
-        min.plot <- min(plot$mean)
-        max.plot <- max(plot$mean)
-                    
-        # attach long month names
-        plot$month.short <- mapvalues(plot$ID,from=sort(unique(plot$ID)),to=month.short)
-        plot$month.short <- reorder(plot$month.short,plot$ID)
+        min.plot <- min(plot$odds.mean)
+        max.plot <- max(plot$odds.mean)
 
-        # long age name for title
-        age.long <- as.character(age.code[age.code$age==age.sel,2])
-                    
-        # plotting
-        print(ggplot(data=subset(plot,sex==sex.sel & age==age.sel),aes(x=long.x,y=lat.x,group=group)) +
-        geom_polygon(aes(fill=odds.mean),color='black',size=0.01) +
-        scale_fill_gradient2(limits=c(min.plot,max.plot),low="green", mid="white",high="red",midpoint=0,guide = guide_legend(title = ''),labels=percent) +
-        facet_wrap(~month.short) +
-        ggtitle(sex.sel) +
-        ggtitle(paste0(age.long,' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' percentage excess risk by month ',year.start,'-',year.end)) +
-        theme_map() +
-        theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
-        }
-                
-        # male output to pdf
-        pdf(paste0(file.loc,'climate_month_params_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in sort(unique(dat$age))){plot.function.age(1,i)}
-        dev.off()
-                
-        # female output to pdf
-        pdf(paste0(file.loc,'climate_month_params_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in sort(unique(dat$age))){plot.function.age(2,i)}
-        dev.off()
-        
-        # function to plot posterior probability of increased risk for all months subnationally
-        plot.function.age.odds <- function(sex.sel,age.sel) {
-            
-            # find limits for plot
-            min.plot <- min(plot$mean)
-            max.plot <- max(plot$mean)
-            
-            # attach long month names
-            plot$month.short <- mapvalues(plot$ID,from=sort(unique(plot$ID)),to=month.short)
-            plot$month.short <- reorder(plot$month.short,plot$ID)
-            
-            # long age name for title
-            age.long <- as.character(age.code[age.code$age==age.sel,2])
-            
-            print(ggplot(data=subset(plot,sex==sex.sel & age==age.sel),aes(x=long.x,y=lat.x,group=group)) +
-            geom_polygon(aes(fill=odds.prob),color='black',size=0.01) +
-            #geom_polygon(aes(fill=cut(odds.prob, c(-Inf,seq(0.1,0.9,0.1),Inf))),color='black',size=0.01) +
-            #scale_fill_brewer(palette = "Greens") +
-            scale_fill_gradient(limits=c(0,1),low="green",high="purple",guide = guide_legend(title = ''),labels=percent) +
-            facet_wrap(~month.short) +
-            ggtitle(sex.sel) +
-            ggtitle(paste0(age.long,' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' posterior probabilites of increased risk by month for ',' ',year.start,'-',year.end)) +
-            theme_map() +
-            theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
-            
-        }
-        
-        # male output to pdf
-        #pdf(paste0(file.loc,'climate_month_posterior_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        #for(i in sort(unique(dat$age))){plot.function.age.odds(1,i)}
-        #dev.off()
-        
-        # female output to pdf
-        #pdf(paste0(file.loc,'climate_month_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        #for(i in sort(unique(dat$age))){plot.function.age.odds(2,i)}
-        #dev.off()
-        
-    # function to plot age for all months subnationally
-    plot.function.month <- function(sex.sel,month.sel) {
-                    
-        # find limits for plot
-        min.plot <- min(plot$mean)
-        max.plot <- max(plot$mean)
-                    
-        # attach long month names
-        plot$age.long <- mapvalues(plot$age,from=sort(unique(plot$age)),to=as.character(age.code[,2]))
-        plot$age.long <- reorder(plot$age.long,plot$age)
-                    
-        print(ggplot(data=subset(plot,sex==sex.sel & ID==month.sel),aes(x=long.x,y=lat.x,group=group)) +
-        geom_polygon(aes(fill=odds.mean),color='black',size=0.01) +
-        scale_fill_gradient2(limits=c(min.plot,max.plot),low="green", mid="white",high="red",midpoint=0,guide = guide_legend(title = ''),labels=percent) +
-        facet_wrap(~age.long) +
-        ggtitle(sex.sel) +
-        ggtitle(paste0(month.short[month.sel],' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' percentage excess risk by age for ',' ',year.start,'-',year.end)) +
-        theme_map() +
-        theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
-                    
-        }
-                
-        # male output to pdf
-        pdf(paste0(file.loc,'climate_age_params_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in c(1:12)){plot.function.month(1,i)}
-        dev.off()
-                
-        # female output to pdf
-        pdf(paste0(file.loc,'climate_age_params_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in c(1:12)){plot.function.month(2,i)}
-        dev.off()
-        
-        # function to plot posterior probability of increased risk for all months subnationally
-        plot.function.month.odds <- function(sex.sel,month.sel) {
-            
-            # attach long month names
-            plot$age.long <- mapvalues(plot$age,from=sort(unique(plot$age)),to=as.character(age.code[,2]))
-            plot$age.long <- reorder(plot$age.long,plot$age)
-            
-            print(ggplot(data=subset(plot,sex==sex.sel & ID==month.sel),aes(x=long.x,y=lat.x,group=group)) +
-            geom_polygon(aes(fill=odds.prob),color='black',size=0.01) +
-            scale_fill_gradient(limits=c(0,1),low="green",high="purple",guide = guide_legend(title = ''),labels=percent) +
-            facet_wrap(~age.long) +
-            ggtitle(sex.sel) +
-            ggtitle(paste0(month.short[month.sel],' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' posterior probabilites of increased risk by age for ',' ',year.start,'-',year.end)) +
-            theme_map() +
-            theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
-            
-        }
-        
-        # male output to pdf
-        #pdf(paste0(file.loc,'climate_age_posterior_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        #for(i in c(1:12)){plot.function.month.odds(1,i)}
-        #dev.off()
-        
-        # female output to pdf
-        #pdf(paste0(file.loc,'climate_age_posterior_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        #for(i in c(1:12)){plot.function.month.odds(2,i)}
-        #dev.off()
-        
-        # function to plot posterior probability of decreased risk for all months subnationally
-        plot.function.month.odds.decreased <- function(sex.sel,month.sel) {
-            
-            # attach long month names
-            plot$age.long <- mapvalues(plot$age,from=sort(unique(plot$age)),to=as.character(age.code[,2]))
-            plot$age.long <- reorder(plot$age.long,plot$age)
-            
-            print(ggplot(data=subset(plot,sex==sex.sel & ID==month.sel),aes(x=long.x,y=lat.x,group=group)) +
-            geom_polygon(aes(fill=1-odds.prob),color='black',size=0.01) +
-            scale_fill_gradient(limits=c(0,1),low="green",high="purple",guide = guide_legend(title = ''),labels=percent) +
-            facet_wrap(~age.long) +
-            ggtitle(sex.sel) +
-            ggtitle(paste0(month.short[month.sel],' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' posterior probabilites of decreased risk by age for ',' ',year.start,'-',year.end)) +
-            theme_map() +
-            theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
-            
-        }
-        
-        # male output to pdf
-        pdf(paste0(file.loc,'climate_age_posterior_map_male_decreased_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in c(1:12)){plot.function.month.odds.decreased(1,i)}
-        dev.off()
-        
-        # female output to pdf
-        pdf(paste0(file.loc,'climate_age_posterior_map_female_decreased',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        for(i in c(1:12)){plot.function.month.odds.decreased(2,i)}
-        dev.off()
-
-        # establish change in number of deaths for a slice in time (at the moment it's 2013)
-        # load death rate data
-        dat.mort <- readRDS(paste0('../../output/prep_data/datus_state_rates_',year.start,'_2013'))
-
-        # load the data again
-        dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric))
-
-        # merge odds and deaths files and reorder
-        dat.merged <- merge(dat.mort,dat,by.x=c('sex','age','month','fips'),by.y=c('sex','age','ID','fips'),all.x=TRUE)
-        dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
-
-        # calculate additional deaths
-        dat.merged$deaths.added <- with(dat.merged,odds.mean*rate.adj*pop.adj)
-
-        # take one year
-        dat.merged.sub <- subset(dat.merged,year==2013)
-
-        # merge selected data to map dataframe for colouring of ggplot
-        plot <- merge(USA.df,dat.merged.sub,by.x=c('STATE_FIPS'),by.y=c('fips'))
-        plot <- with(plot, plot[order(sex,age,DRAWSEQ,order),])
-
-        # function to plot posterior probability of increased odds for all months subnationally
-        plot.function.age.deaths <- function(sex.sel,age.sel) {
-    
-        # find limits for plot
-        min.plot <- floor(min(plot$deaths.added))
-        max.plot <- ceiling(max(plot$deaths.added))
-    
         # attach long month names
         plot$month.short <- mapvalues(plot$month,from=sort(unique(plot$month)),to=month.short)
         plot$month.short <- reorder(plot$month.short,plot$month)
-    
+
         # long age name for title
         age.long <- as.character(age.code[age.code$age==age.sel,2])
-    
+
+        # plotting
         print(ggplot(data=subset(plot,sex==sex.sel & age==age.sel),aes(x=long,y=lat,group=group)) +
-        geom_polygon(aes(fill=cut(deaths.added,c(-Inf,1,10,20,Inf))),color='black',size=0.01) +
-        #scale_fill_gradient2(limits=c(min.plot,50),low="green",mid="white",high="red",midpoint=0,guide = guide_legend(title = '')) +
-        scale_fill_manual(labels=c('<1','1-10','10-20','>20'),name="Number of additional deaths",values=c('light green','dark green','red','dark red')) +
+        geom_polygon(aes(fill=odds.mean),color='black',size=0.01) +
+        scale_fill_gradient2(limits=c(min.plot,max.plot),low="green", mid="white",high="red",midpoint=0,guide = guide_legend(title = ''),labels=percent) +
         facet_wrap(~month.short) +
-        ggtitle(sex.sel) +
-        ggtitle(paste0(age.long,' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' changes in deaths expected with one degree of warming ',' ',year.start,'-',year.end)) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess risk associated with\n1 degree additional warming')) +
+        ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
         theme_map() +
-        theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
-    
-}
+        theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(0.5,0),strip.background = element_blank()))
+        }
 
-    # male output to pdf
-    pdf(paste0(file.loc,'climate_month_deaths_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    for(i in sort(unique(dat$age))){plot.function.age.deaths(1,i)}
-    dev.off()
+        # male output to pdf
+        pdf(paste0(file.loc,'climate_month_params_map_men_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.age(1,i)}
+        dev.off()
 
-    # female output to pdf
-    pdf(paste0(file.loc,'climate_month_deaths_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    for(i in sort(unique(dat$age))){plot.function.age.deaths(2,i)}
-    dev.off()
+        # female output to pdf
+        pdf(paste0(file.loc,'climate_month_params_map_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.age(2,i)}
+        dev.off()
 
-# function to plot posterior probability of increased odds for all months subnationally
-plot.function.month.deaths <- function(sex.sel,month.sel) {
-    
-    # find limits for plot
-    min.plot <- min(plot$deaths.added)
-    max.plot <- max(plot$deaths.added)
-    
-    # attach long month names
-    plot$age.long <- mapvalues(plot$age,from=sort(unique(plot$age)),to=as.character(age.code[,2]))
-    plot$age.long <- reorder(plot$age.long,plot$age)
-    
-    print(ggplot(data=subset(plot,sex==sex.sel & month==month.sel),aes(x=long,y=lat,group=group)) +
-    geom_polygon(aes(fill=cut(deaths.added,c(-Inf,1,10,20,Inf))),color='black',size=0.01) +
-    #scale_fill_gradient(low="green",high="red",guide = guide_legend(title = '')) +
-    scale_fill_manual(labels=c('<1','1-10','10-20','>20'),name="Number of additional deaths",values=c('light green','dark green','red','dark red')) +
-    facet_wrap(~age.long) +
-    ggtitle(sex.sel) +
-    ggtitle(paste0(month.short[month.sel],' ',sex.lookup2[sex.sel],' : ',metric,' ',dname,' changes in deaths expected with one degree of warming ',' ',year.start,'-',year.end)) +
-    theme_map() +
-    theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(1,0),strip.background = element_blank()))
-    
-}
+    # function to plot all excess risk on plot with error and reference from national model as comparison
+        plot.function.excess.risk.w.national <- function(sex.sel,age.sel,model.comp) {
 
-# male output to pdf
-pdf(paste0(file.loc,'climate_age_deaths_map_male_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-for(i in c(1:12)){plot.function.month.deaths(1,i)}
-dev.off()
+        # load alternative model to compare (must be a national model)
+        dat.comp = load.function(model.comp)
 
-# female output to pdf
-pdf(paste0(file.loc,'climate_age_deaths_map_female_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-for(i in c(1:12)){plot.function.month.deaths(2,i)}
-dev.off()
+        # find limits for plot
+        min.plot <- min(dat$odds.ll)
+        max.plot <- max(dat$odds.ul)
+
+        # attach long month names
+        dat$month.short <- mapvalues(dat$month,from=sort(unique(dat$month)),to=month.short)
+        dat$month.short <- reorder(dat$month.short,(dat$month))
+        dat.comp$month.short <- mapvalues(dat.comp$ID,from=sort(unique(dat.comp$ID)),to=month.short)
+        dat.comp$month.short <- reorder(dat.comp$month.short,(dat.comp$ID))
+
+        # long age name for title
+        age.long <- as.character(age.code[age.code$age==age.sel,2])
+
+        shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
+        dat = merge(dat,shapefile.data,by.x=c('fips','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+
+        # plotting
+        print(ggplot() +
+        geom_point(data=subset(dat,sex==sex.sel & age==age.sel), aes(x=as.factor(STATE_ABBR),y=odds.mean)) +
+        geom_errorbar(data=subset(dat,sex==sex.sel & age==age.sel), aes(x=as.factor(STATE_ABBR),ymin=odds.ll,ymax=odds.ul), width=0) +
+        geom_hline(data=subset(dat.comp,sex==sex.sel & age==age.sel), aes(yintercept=odds.mean), color='red') +
+        geom_hline(data=subset(dat.comp,sex==sex.sel & age==age.sel), aes(yintercept=odds.ll), color='red',alpha=0.5) +
+        geom_hline(data=subset(dat.comp,sex==sex.sel & age==age.sel), aes(yintercept=odds.ul), color='red',alpha=0.5) +
+        geom_hline(yintercept=0,linetype='dotted') +
+        xlab('State') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
+        coord_flip() +
+        facet_wrap(~month.short) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess risk associated with\n1 degree additional warming')) +
+        ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
+        theme_bw() + theme(text = element_text(size = 6),
+        panel.grid.major = element_blank(),axis.text.y = element_text(size=6, angle=0),
+        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+        legend.position = 'bottom',legend.justification='center',
+        legend.background = element_rect(fill="white", size=.5, linetype="dotted")))
+        }
+
+        # male output to pdf
+        pdf(paste0(file.loc,'climate_month_params_excess_risk_w_national_men_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.excess.risk.w.national(1,i,10)}
+        dev.off()
+
+        # female output to pdf
+        pdf(paste0(file.loc,'climate_month_params_excess_risk_w_national_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.excess.risk.w.national(2,i,10)}
+        dev.off()
+
+    # function to plot all excess risk on plot with error
+        plot.function.excess.risk <- function(sex.sel,age.sel) {
+
+        # find limits for plot
+        min.plot <- min(dat$odds.ll)
+        max.plot <- max(dat$odds.ul)
+
+        # attach long month names
+        dat$month.short <- mapvalues(dat$month,from=sort(unique(dat$month)),to=month.short)
+        dat$month.short <- reorder(dat$month.short,(dat$month))
+
+        # long age name for title
+        age.long <- as.character(age.code[age.code$age==age.sel,2])
+
+        shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
+        dat = merge(dat,shapefile.data,by.x=c('fips','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+
+        # plotting
+        print(ggplot(data=subset(dat,sex==sex.sel & age==age.sel)) +
+        geom_point(aes(x=as.factor(STATE_ABBR),y=odds.mean)) +
+        geom_errorbar(aes(x=as.factor(STATE_ABBR),ymin=odds.ll,ymax=odds.ul), width=0) +
+        geom_hline(yintercept=0,linetype='dotted') +
+        xlab('State') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
+        coord_flip() +
+        facet_wrap(~month.short) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess risk associated with\n1 degree additional warming')) +
+        ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
+        theme_bw() + theme(text = element_text(size = 6),
+        panel.grid.major = element_blank(),axis.text.y = element_text(size=6, angle=0),
+        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+        legend.position = 'bottom',legend.justification='center',
+        legend.background = element_rect(fill="white", size=.5, linetype="dotted")))
+        }
+
+        # male output to pdf
+        pdf(paste0(file.loc,'climate_month_params_excess_risk_men_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.excess.risk(1,i)}
+        dev.off()
+
+        # female output to pdf
+        pdf(paste0(file.loc,'climate_month_params_excess_risk_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.excess.risk(2,i)}
+        dev.off()
+
+    # function to plot all excess risk on plot with error by state instead
+        plot.function.excess.risk.state <- function(sex.sel,age.sel) {
+
+        # find limits for plot
+        min.plot <- min(dat$odds.ll)
+        max.plot <- max(dat$odds.ul)
+
+        # attach long month names
+        dat$month.short <- mapvalues(dat$month,from=sort(unique(dat$month)),to=month.short)
+        dat$month.short <- reorder(dat$month.short,(dat$month))
+
+        # long age name for title
+        age.long <- as.character(age.code[age.code$age==age.sel,2])
+
+        shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
+        dat = merge(dat,shapefile.data,by.x=c('fips','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+
+        # plotting
+        print(ggplot(data=subset(dat,sex==sex.sel & age==age.sel)) +
+        geom_point(aes(x=as.factor(month.short),y=odds.mean)) +
+        geom_errorbar(aes(x=as.factor(month.short),ymin=odds.ll,ymax=odds.ul), width=0) +
+        geom_hline(yintercept=0,linetype='dotted') +
+        xlab('State') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
+        coord_flip() +
+        facet_wrap(~STATE_ABBR) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess risk associated with\n1 degree additional warming')) +
+        ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
+        theme_bw() + theme(text = element_text(size = 6),
+        panel.grid.major = element_blank(),axis.text.y = element_text(size=6, angle=0),
+        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+        legend.position = 'bottom',legend.justification='center',
+        legend.background = element_rect(fill="white", size=.5, linetype="dotted")))
+        }
+
+        # male output to pdf
+        pdf(paste0(file.loc,'climate_month_params_by_state_excess_risk_men_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.excess.risk.state(1,i)}
+        dev.off()
+
+        # female output to pdf
+        pdf(paste0(file.loc,'climate_month_params_by_state_excess_risk_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.excess.risk.state(2,i)}
+        dev.off()
+
 
 }
 
