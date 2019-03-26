@@ -601,6 +601,58 @@
     }
    }
 
+    if(type.arg==26){
+
+        # Same as with 10 but with Vasilis's suggestion of long-term temperature as term added in
+
+        # 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(month5, variable, model="rw1", cyclic=TRUE) +                                 # month specific climate slope
+        f(variable.abs, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                # state-month specific climate intercept using absolute value IS THIS RIGHT?
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+
+        # if piece-wise (need to extend to entire model selections)
+    if(pw.arg==1){
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # state-month specific terms
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        # state specific terms
+        f(ID, model="besag",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
+        # climate specific terms
+        f(month5, variable2, model="rw1", cyclic=TRUE) +                                 # month specific climate slope (above 0)
+        f(month6, variable3, model="rw1", cyclic=TRUE) +                                 # month specific climate slope (below 0)
+        f(variable.abs, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                # state-month specific climate intercept using absolute value IS THIS RIGHT?
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1
+        # overdispersion term
+        f(e, model = "iid")
+    }
+    }
+
     if(type.arg==11){
         
         # 1. Type Ie space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
