@@ -21,74 +21,87 @@ age.break <- as.numeric(args[10])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'; contig=1 ; age.break=65
+# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'; contig=1 ; age.break=65
 # pw.arg = 0
 
 multiple = 0
 
 # source variables
 source('../../data/objects/objects.R')
-model <- models[model]
 
 # unit data for plotting
-unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
+# unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
 
 # bespoke colourway
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
 # load the data
-if(pw.arg==0){
-    if(contig==1){
-        if(cause!='AllCause'){
-            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-            country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
-            # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
-            # country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+load.function = function(model.sel){
+
+    model = models[model.sel]
+
+    if(pw.arg==0){
+        if(contig==1){
+            if(cause!='AllCause'){
+                dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+                country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+                # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
+                # country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+            }
+            if(cause=='AllCause'){
+                dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+                ,country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+                # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
+                # ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+            }
         }
-        if(cause=='AllCause'){
-            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-            ,country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
-            # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
-            # ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+        if(contig==0){
+            if(cause!='AllCause'){
+                dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
+                country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+                # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
+                # country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+            }
+            if(cause=='AllCause'){
+                dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
+                ,country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+                # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
+                # ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+            }
         }
     }
-    if(contig==0){
-        if(cause!='AllCause'){
-            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/',
-            country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
-            # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/',
-            # country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+    if(pw.arg==1){
+        if(contig==1){
+            if(cause!='AllCause'){
+                dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/',
+                country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
+            }
+            if(cause=='AllCause'){
+                dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/'
+                ,country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
+            }
         }
-        if(cause=='AllCause'){
-            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model,'/parameters/'
-            ,country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
-            # dat.2 <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_',model.2,'/parameters/'
-            # ,country,'_rate_pred_type',model.2,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+        if(contig==0){
+            if(cause!='AllCause'){
+                dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/',
+                country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
+            }
+            if(cause=='AllCause'){
+                dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/'
+                ,country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
+            }
         }
     }
+
+    return(dat)
+
 }
-if(pw.arg==1){
-    if(contig==1){
-        if(cause!='AllCause'){
-            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/',
-            country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast_contig'))
-        }
-        if(cause=='AllCause'){
-            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/'
-            ,country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig'))
-        }
-    }
-    if(contig==0){
-        if(cause!='AllCause'){
-            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/',
-            country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_fast'))
-        }
-        if(cause=='AllCause'){
-            dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/'
-            ,country,'_rate_pred_type',model,'_age_split',age.break,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
-        }
-    }
-}
+
+dat = load.function(model)
+
+# correct model description for outputting
+model <- models[model]
+
 if(multiple==1){
 
     # NEED TO GENERALISE!!!!
@@ -1100,6 +1113,61 @@ if(model %in% c('1e','1f')){
         for(i in sort(unique(dat$age))){plot.function.age(2,i)}
         dev.off()
 
+    # function to plot all excess risk on plot with error and reference from national model as comparison
+        plot.function.excess.risk.w.national <- function(sex.sel,age.sel,model.comp) {
+
+        # load alternative model to compare (must be a national model)
+        dat.comp = load.function(model.comp)
+
+        # find limits for plot
+        min.plot <- min(dat$odds.ll)
+        max.plot <- max(dat$odds.ul)
+
+        # attach long month names
+        dat$month.short <- mapvalues(dat$month,from=sort(unique(dat$month)),to=month.short)
+        dat$month.short <- reorder(dat$month.short,(dat$month))
+        dat.comp$month.short <- mapvalues(dat.comp$ID,from=sort(unique(dat.comp$ID)),to=month.short)
+        dat.comp$month.short <- reorder(dat.comp$month.short,(dat.comp$ID))
+
+        # long age name for title
+        age.long <- as.character(age.code[age.code$age==age.sel,2])
+
+        shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
+        dat = merge(dat,shapefile.data,by.x=c('fips','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+
+        # plotting
+        print(ggplot() +
+        geom_point(data=subset(dat,sex==sex.sel & age==age.sel), aes(x=as.factor(STATE_ABBR),y=odds.mean)) +
+        geom_errorbar(data=subset(dat,sex==sex.sel & age==age.sel), aes(x=as.factor(STATE_ABBR),ymin=odds.ll,ymax=odds.ul), width=0) +
+        geom_hline(data=subset(dat.comp,sex==sex.sel & age==age.sel), aes(yintercept=odds.mean), color='red') +
+        geom_hline(data=subset(dat.comp,sex==sex.sel & age==age.sel), aes(yintercept=odds.ll), color='red',alpha=0.5) +
+        geom_hline(data=subset(dat.comp,sex==sex.sel & age==age.sel), aes(yintercept=odds.ul), color='red',alpha=0.5) +
+        geom_hline(yintercept=0,linetype='dotted') +
+        xlab('State') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
+        coord_flip() +
+        facet_wrap(~month.short) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess risk associated with\n1 degree additional warming')) +
+        ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
+        theme_bw() + theme(text = element_text(size = 6),
+        panel.grid.major = element_blank(),axis.text.y = element_text(size=6, angle=0),
+        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+        legend.position = 'bottom',legend.justification='center',
+        legend.background = element_rect(fill="white", size=.5, linetype="dotted")))
+        }
+
+        # male output to pdf
+        pdf(paste0(file.loc,'climate_month_params_excess_risk_w_national_men_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.excess.risk.w.national(1,i,10)}
+        dev.off()
+
+        # female output to pdf
+        pdf(paste0(file.loc,'climate_month_params_excess_risk_w_national_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        for(i in sort(unique(dat$age))){plot.function.excess.risk.w.national(2,i,10)}
+        dev.off()
+
     # function to plot all excess risk on plot with error
         plot.function.excess.risk <- function(sex.sel,age.sel) {
 
@@ -1147,7 +1215,7 @@ if(model %in% c('1e','1f')){
         for(i in sort(unique(dat$age))){plot.function.excess.risk(2,i)}
         dev.off()
 
-    # function to plot all excess risk on plot with error
+    # function to plot all excess risk on plot with error by state instead
         plot.function.excess.risk.state <- function(sex.sel,age.sel) {
 
         # find limits for plot
@@ -1593,137 +1661,5 @@ if(model %in% c('1g')){
     for(i in c(1:12)){plot.function.month.deaths(2,i)}
     dev.off()
 
-
-}
-
-# combined plot of national and climate region model
-# create directories for output
-file.loc <- paste0('../../output/mapping_posterior_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_1dg/parameters/')
-ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
-
-# load the data
-dat1d <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_1d/parameters/',country,'_rate_pred_type1d_',year.start,'_',year.end,'_',dname,'_',metric,'_fast'))
-dat <- readRDS(paste0('../../data/climate_effects/',dname,'/',metric,'/non_pw/type_1g/parameters/',country,'_rate_pred_type1g_',year.start,'_',year.end,'_',dname,'_',metric))
-
-# FOREST PLOTS OF PARAMETERS
-forest.plot.climate.age.sex <- function(sex.sel) {
-    
-    # attach long age names
-    dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
-    dat$age.long <- reorder(dat$age.long,dat$age)
-    
-    f <- function(pal) brewer.pal(brewer.pal.info[pal, "maxcolors"], pal)
-    mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724", "#74D944", "#CE50CA", "#3F4921", "#C0717C", "#CBD588", "#5F7FC7", "#673770", "#D3D93E", "#38333E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD", "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D", "#8A7C64", "#599861" )
-    
-    # attach long month names
-    dat$month.short <- mapvalues(dat$ID,from=sort(unique(dat$ID)),to=month.short)
-    dat$month.short <- reorder(dat$month.short,dat$ID)
-    dat1d$month.short <- mapvalues(dat1d$ID,from=sort(unique(dat1d$ID)),to=month.short)
-    dat1d$month.short <- reorder(dat1d$month.short,dat1d$ID)
-    
-    # attach long age names
-    dat1d$age.long <- mapvalues(dat1d$age,from=sort(unique(dat1d$age)),to=as.character(age.code[,2]))
-    dat1d$age.long <- reorder(dat1d$age.long,dat1d$age)
-    
-    print(ggplot(data=subset(dat,sex==sex.sel)) +
-    geom_point(data=subset(dat1d,sex==sex.sel),aes(x=month.short,y=odds.mean),size=3,shape=4) +
-    geom_point(aes(x=ID,y=odds.mean,color=as.factor(climate_region))) +
-    geom_hline(yintercept=0, lty=2) +
-    scale_y_continuous(labels=percent) +
-    ggtitle(paste0('Subnational ',sex.lookup[sex.sel],' percentage excess risk by month ',dname,' ',metric,' ',year.start,'-',year.end)) +
-    #coord_flip() +
-    coord_flip(ylim = c(-0.03,0.03)) +
-    facet_wrap(~age.long) +
-    xlab("Age") + ylab("Excess risk (95% CI)") +
-    labs(color = "Sex\n") +
-    scale_color_manual(values = mycols[c(1:9)]) +
-    theme_bw()
-    )
-}
-
-pdf(paste0(file.loc,'climate_age_params_forest_month_male_1dg_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-forest.plot.climate.age.sex(1)
-dev.off()
-
-pdf(paste0(file.loc,'climate_age_params_forest_month_female_1dg_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-forest.plot.climate.age.sex(2)
-dev.off()
-
-if(multiple==1){
-    forest.plot.climate.month.sex <- function(sex.sel) {
-
-        f <- function(pal) brewer.pal(brewer.pal.info[pal, "maxcolors"], pal)
-        mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724", "#74D944", "#CE50CA", "#3F4921", "#C0717C", "#CBD588", "#5F7FC7", "#673770", "#D3D93E", "#38333E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD", "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D", "#8A7C64", "#599861" )
-
-        # attach long month names
-        dat$month.short <- mapvalues(dat$ID,from=sort(unique(dat$ID)),to=month.short)
-        dat$month.short <- reorder(dat$month.short,dat$ID)
-        dat1d$month.short <- mapvalues(dat1d$ID,from=sort(unique(dat1d$ID)),to=month.short)
-        dat1d$month.short <- reorder(dat1d$month.short,dat1d$ID)
-
-        # attach long age names
-        dat1d$age.long <- mapvalues(dat1d$age,from=sort(unique(dat1d$age)),to=as.character(age.code[,2]))
-        dat1d$age.long <- reorder(dat1d$age.long,dat1d$age)
-
-        print(ggplot(data=subset(dat,sex==sex.sel)) +
-        geom_point(data=subset(dat1d,sex==sex.sel),aes(x=age,y=odds.mean),size=3,shape=4) +
-        geom_point(aes(x=age,y=odds.mean,color=as.factor(climate_region))) +
-        geom_hline(yintercept=0, lty=2) +
-        scale_y_continuous(labels=percent) +
-        ggtitle(paste0('Subnational ',sex.lookup[sex.sel],' percentage excess risk by month ',dname,' ',metric,' ',year.start,'-',year.end)) +
-        coord_flip() +
-        facet_wrap(~month.short) +
-        xlab("Age") + ylab("Excess risk (95% CI)") +
-        labs(color = "Sex\n") +
-        scale_color_manual(values = mycols[c(1:9)]) +
-        theme_bw()
-        )
-    }
-
-    pdf(paste0(file.loc,'climate_month_params_forest_month_male_1dg_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    forest.plot.climate.month.sex(1)
-    dev.off()
-
-    pdf(paste0(file.loc,'climate_month_params_forest_month_female_1dg_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    forest.plot.climate.month.sex(2)
-    dev.off()
-
-    forest.plot.climate.region.sex <- function(sex.sel) {
-
-        f <- function(pal) brewer.pal(brewer.pal.info[pal, "maxcolors"], pal)
-        mycols <- c(f("Dark2"), f("Set1")[1:8], f("Set2"), f("Set3"),"#89C5DA", "#DA5724", "#74D944", "#CE50CA", "#3F4921", "#C0717C", "#CBD588", "#5F7FC7", "#673770", "#D3D93E", "#38333E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD", "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D", "#8A7C64", "#599861" )
-
-        # attach long month names
-        dat$month.short <- mapvalues(dat$ID,from=sort(unique(dat$ID)),to=month.short)
-        dat$month.short <- reorder(dat$month.short,dat$ID)
-        dat1d$month.short <- mapvalues(dat1d$ID,from=sort(unique(dat1d$ID)),to=month.short)
-        dat1d$month.short <- reorder(dat1d$month.short,dat1d$ID)
-
-        # attach long age names
-        dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
-        dat$age.long <- reorder(dat$age.long,dat$age)
-
-        print(ggplot(data=subset(dat,sex==sex.sel)) +
-        #geom_point(data=subset(dat1d,sex==sex.sel),aes(x=climate_region,y=odds.mean),size=3,shape=4) +
-        geom_point(aes(x=climate_region,y=odds.mean,color=as.factor(month.short))) +
-        geom_hline(yintercept=0, lty=2) +
-        scale_y_continuous(labels=percent) +
-        ggtitle(paste0('Subnational ',sex.lookup[sex.sel],' percentage excess risk by climate region ',dname,' ',metric,' ',year.start,'-',year.end)) +
-        coord_flip() +
-        facet_wrap(~age.long) +
-        xlab("Age") + ylab("Excess risk (95% CI)") +
-        labs(color = "Month\n") +
-        scale_color_manual(values = mycols[c(10:24)]) +
-        theme_bw()
-        )
-    }
-
-    pdf(paste0(file.loc,'climate_month_params_forest_region_male_1dg_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    forest.plot.climate.region.sex(1)
-    dev.off()
-
-    pdf(paste0(file.loc,'climate_month_params_forest_region_female_1dg_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-    forest.plot.climate.region.sex(2)
-    dev.off()
 
 }
