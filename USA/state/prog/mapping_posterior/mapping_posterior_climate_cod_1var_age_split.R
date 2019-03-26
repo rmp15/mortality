@@ -28,9 +28,6 @@ multiple = 0
 # source variables
 source('../../data/objects/objects.R')
 
-# unit data for plotting
-# unit.name = ifelse(metric %in% temp, paste0('°C'), ifelse(metric %in% episodes, ' episode(s)','error'))
-
 # bespoke colourway
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
@@ -95,7 +92,6 @@ load.function = function(model.sel){
     return(dat)
 
 }
-
 dat = load.function(model)
 
 # correct model description for outputting
