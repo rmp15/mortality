@@ -18,7 +18,6 @@ contig <- as.numeric(args[8])
 pw.arg = as.numeric(args[9])
 age.break <- as.numeric(args[10])
 
-
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
 # year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'; contig=1 ; age.break=65

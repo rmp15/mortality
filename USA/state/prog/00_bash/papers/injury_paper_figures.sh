@@ -55,7 +55,7 @@ cd ~/git/climate/countries/USA/prog/00_bash/
 
 echo "plotting figure 4 injury paper $start - $end";
 
-Rscript ~/git/climate/countries/USA/prog/15_anomaly_summaries/anomaly_summaries.R $start2 $end $dname $metric
+#Rscript ~/git/climate/countries/USA/prog/15_anomaly_summaries/anomaly_summaries.R $start2 $end $dname $metric
 
 #################################################
 # Figure 5 (additional deaths) and Supplementary Figure 1 and 2
@@ -69,7 +69,7 @@ echo "plotting figure 5 and supplementary figure injury paper $start - $end";
 # to correct directory
 cd ~/git/mortality/USA/state/prog/00_bash/
 
-Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws
+#Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_injuries_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws
 
 #################################################
 # Supplementary table 1
