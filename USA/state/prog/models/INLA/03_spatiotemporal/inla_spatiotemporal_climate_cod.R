@@ -206,9 +206,12 @@ saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
 # subject for email
 subject.arg = paste0(sex.lookup[sex.arg],' ',age.arg,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.analysis.arg,'-',year.end.analysis.arg)
 if(contig.arg == 1){subject.arg = paste0(subject.arg,' contig')}
-if(fast.arg==0){subject.arg = paste0(subject.arg,' non-pw done')}
-if(fast.arg==1){subject.arg = paste0(subject.arg,' fast non-pw done')}
-if(fast.arg==2){subject.arg = paste0(subject.arg,' faster non-pw done')}
+if(fast.arg==0){subject.arg = paste0(subject.arg,' ')}
+if(fast.arg==1){subject.arg = paste0(subject.arg,' fast')}
+if(fast.arg==2){subject.arg = paste0(subject.arg,' faster')}
+if(pw.arg==0){subject.arg = paste0(subject.arg,' non-pw done')}
+if(pw.arg==1){subject.arg = paste0(subject.arg,' pw done')}
+
 
 print(subject.arg)
 
