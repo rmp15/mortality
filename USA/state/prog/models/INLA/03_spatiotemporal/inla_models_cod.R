@@ -621,13 +621,13 @@
         f(ID2, year.month2, model="besag",graph=USA.adj) +                        		# state specific slope (BYM)
         # climate specific terms
         f(month5, variable, model="rw1", cyclic=TRUE) +                                 # month specific climate slope
-        f(variable.abs, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                # state-month specific climate intercept using absolute value IS THIS RIGHT?
+        f(month7, variable.abs, model="rw1", cyclic=TRUE) +                             # state-month specific climate intercept using absolute value IS THIS RIGHT?
         # random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # overdispersion term
         f(e, model = "iid")                                                    		 	# overdispersion term
 
-        # if piece-wise (need to extend to entire model selections)
+        # if piece-wise
     if(pw.arg==1){
         fml  <- deaths.adj ~
         # global terms
@@ -645,7 +645,7 @@
         # climate specific terms
         f(month5, variable2, model="rw1", cyclic=TRUE) +                                 # month specific climate slope (above 0)
         f(month6, variable3, model="rw1", cyclic=TRUE) +                                 # month specific climate slope (below 0)
-        f(variable.abs, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                # state-month specific climate intercept using absolute value IS THIS RIGHT?
+        f(month7, variable.abs, model="rw1", cyclic=TRUE) +                             # state-month specific climate intercept using absolute value IS THIS RIGHT?
         # random walk across time
         f(year.month3, model="rw1") +                                           		# rw1
         # overdispersion term

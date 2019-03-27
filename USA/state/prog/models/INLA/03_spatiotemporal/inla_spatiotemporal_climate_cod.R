@@ -20,9 +20,9 @@ contig.arg <- as.numeric(args[13])
 pw.arg <- as.numeric(args[14])
 
 # for test runs
-# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 10 ;
+# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 26 ;
 # cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
-# year.end.analysis.arg = 2016 ; cod.arg = 'Ischaemic heart disease'; fast.arg = 1 ; contig.arg = 1
+# year.end.analysis.arg = 2016 ; cod.arg = 'Transport accidents'; fast.arg = 1 ; contig.arg = 1
 # pw.arg=0
 
 # types character for file strings
@@ -60,6 +60,24 @@ dat.climate$state.fips <- as.numeric(as.character(dat.climate$state.fips))
 # merge mortality and climate data and reorder
 dat.merged <- merge(dat.inla.load,dat.climate,by.x=c('sex','age','year','month','fips'),by.y=c('sex','age','year','month','state.fips'),all.x=TRUE)
 dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+
+# optional addition of long-term normals into model (currently testing may be removed)
+if(type.arg %in% c(26)){
+
+    # load long-term average (for sensitivity of model to inclusion). This may be a temporary inclusion depending on the outcome
+    file.loc.abs <- paste0('~/git/climate/countries/USA/output/multiyear_normals/',dname.arg,'/mean/')
+    dat.climate.abs = readRDS(paste0(file.loc.abs,'state_longterm_95_nonnormals_mean_',dname.arg,'_1980_2009.rds'))
+    dat.climate.abs$state.fips = as.numeric(dat.climate.abs$state.fips)
+    names(dat.climate.abs)[grep('mean',names(dat.climate.abs))] <- 'variable.abs'
+    dat.climate.abs = subset(dat.climate.abs,select=c(month,state.fips,sex,age,variable.abs))
+
+    # merge existing mortality and climate data with long-run absolute values
+    dat.merged <- merge(dat.merged,dat.climate.abs,by.x=c('sex','age','month','fips'),by.y=c('sex','age','month','state.fips'),all.x=TRUE)
+
+    # reorder one more time as had to add another column
+    dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+
+}
 
 # generalise climate variable name
 names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
@@ -112,7 +130,7 @@ rownames(dat.inla) <- 1:nrow(dat.inla)
 
 # variables for INLA model
 dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
-dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
+dat.inla$month7 <- dat.inla$month6 <- dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
 dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
 dat.inla$e <- 1:nrow(dat.inla)
 
@@ -120,7 +138,6 @@ dat.inla$e <- 1:nrow(dat.inla)
 if(pw.arg==1){
     dat.inla$variable2 = ifelse(dat.inla$variable<0,0,dat.inla$variable)
     dat.inla$variable3 = ifelse(dat.inla$variable>0,0,dat.inla$variable)
-    dat.inla$month6 <- dat.inla$month5
 }
 
 # create directory for output
