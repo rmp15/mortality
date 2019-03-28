@@ -28,7 +28,6 @@ source('../../data/objects/objects.R')
 model <- models[model]
 model.2 <- models[model.2]
 
-
 # bespoke colourway
 colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
