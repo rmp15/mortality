@@ -31,7 +31,7 @@ if(class.arg=='injuries') {
 head(dat)
 
 # get rid of alaska and hawaii
-
+dat = subset(dat,!(fips%in%c(2,15)))
 
 # summary of deaths by cause and sex for entire period
 dat.summary.entire = ddply(dat,.(cause,sex),summarise,deaths=sum(deaths))
