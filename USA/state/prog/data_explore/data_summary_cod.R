@@ -34,9 +34,24 @@ head(dat)
 dat = subset(dat,!(fips%in%c(2,15)))
 
 # summary of deaths by cause and sex for entire period
+dat.summary.sex = ddply(dat,.(sex),summarise,deaths=sum(deaths))
+dat.summary.sex = spread(dat.summary.entire, key = 'sex', value='deaths')
+names(dat.summary.sex) = c('Male','Female')
+
+# summary of deaths by cause and sex for entire period
 dat.summary.entire = ddply(dat,.(cause,sex),summarise,deaths=sum(deaths))
 dat.summary.entire = spread(dat.summary.entire, key = 'sex', value='deaths')
 names(dat.summary.entire) = c('Cause','Male','Female')
+
+# summary of deaths by cause and sex over time
+dat.summary.sex.time = ddply(dat,.(year,sex),summarise,deaths=sum(deaths))
+dat.summary.sex.time = spread(dat.summary.entire.time, key = 'sex', value='deaths')
+# names(dat.summary.sex) = c('Male','Female')
+
+# summary of deaths by cause and sex over time
+dat.summary.entire.time = ddply(dat,.(year,cause,sex),summarise,deaths=sum(deaths))
+# dat.summary.entire.time = spread(dat.summary.entire.time, key = 'sex', value='deaths')
+# names(dat.summary.entire.time) = c('Cause','Male','Female')
 
 # summary of deaths by cause, sex, and age for entire period
 dat.summary.age = ddply(dat,.(cause,sex,age),summarise,deaths=sum(deaths))
