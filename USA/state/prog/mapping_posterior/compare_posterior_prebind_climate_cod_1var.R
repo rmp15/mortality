@@ -21,6 +21,8 @@ source('../../data/objects/objects.R')
 model <- models[model]
 model.2 <- models[model.2]
 
+library(INLA)
+
 if(pw.arg==0){
     # create dataframe with each of the national terms for entire group of age and sexes
     dat <- data.frame()
@@ -29,6 +31,8 @@ if(pw.arg==0){
     for (i in seq(length(sex.filter))) {
         for (j in seq(length(age.filter))) {
             # load data
+            print(paste0(i,' ',j))
+
             if(cause!='AllCause'){
                 file.name <- paste0('~/data/mortality/US/state/climate_effects/',
                 dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
@@ -78,7 +82,7 @@ if(pw.arg==0){
     }
 
 # create directories for output
-file.loc.git <- paste0('../../output/compare_posterior_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_',model,'_and '_,model.2,'/parameters/')
+file.loc.git <- paste0('../../output/compare_posterior_climate/',year.start,'_',year.end,'/',dname,'/',metric,'/non_pw/type_',model,'_and_',model.2,'/parameters/')
 ifelse(!dir.exists(file.loc.git), dir.create(file.loc.git, recursive=TRUE), FALSE)
 
 # save bound posterior
