@@ -12,6 +12,9 @@ cause <- as.character(args[7]) ; cause <- gsub('_',' ',cause)
 contig.arg <- as.numeric(args[8])
 pw.arg <- as.numeric(args[9])
 
+# year.start = 1980 ; year.end = 2016 ; country='USA' ; model = 11 ;
+# dname= 't2m' ; metric = 'meanc3'; cause = 'Cardiopulmonary'; contig.arg=1 ; pw.arg=0 ; age.break.arg = 65
+
 library(INLA)
 
 # lookups
