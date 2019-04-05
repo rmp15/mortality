@@ -1104,7 +1104,7 @@ if(model %in% c('1e','1f')){
         dev.off()
                 
         # female output to pdf
-        pdf(paste0(file.loc,'climate_month_params_map_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        pdf(paste0(file.loc,'climate_month_params_map_women_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
         for(i in sort(unique(dat$age))){plot.function.age(2,i)}
         dev.off()
 
@@ -1159,7 +1159,7 @@ if(model %in% c('1e','1f')){
         dev.off()
 
         # female output to pdf
-        pdf(paste0(file.loc,'climate_month_params_excess_risk_w_national_women_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        pdf(paste0(file.loc,'climate_month_params_excess_risk_w_national_women_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
         for(i in sort(unique(dat$age))){plot.function.excess.risk.w.national(2,i,10)}
         dev.off()
 
@@ -1206,7 +1206,7 @@ if(model %in% c('1e','1f')){
         dev.off()
 
         # female output to pdf
-        pdf(paste0(file.loc,'climate_month_params_excess_risk_women_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        pdf(paste0(file.loc,'climate_month_params_excess_risk_women_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
         for(i in sort(unique(dat$age))){plot.function.excess.risk(2,i)}
         dev.off()
 
@@ -1253,7 +1253,7 @@ if(model %in% c('1e','1f')){
         dev.off()
 
         # female output to pdf
-        pdf(paste0(file.loc,'climate_month_params_by_state_excess_risk_women_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
+        pdf(paste0(file.loc,'climate_month_params_by_state_excess_risk_women_age_split',age.break,'_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
         for(i in sort(unique(dat$age))){plot.function.excess.risk.state(2,i)}
         dev.off()
 
