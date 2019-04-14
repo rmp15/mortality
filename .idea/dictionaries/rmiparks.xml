@@ -805,6 +805,7 @@
       <w>.day.of.week</w>
       <w>.debugMethod</w>
       <w>.decode_numeric_version</w>
+      <w>.degAxis</w>
       <w>.dense2sy</w>
       <w>.deparseOpts</w>
       <w>.detach</w>
@@ -847,10 +848,13 @@
       <w>.getRequiredPackages</w>
       <w>.getRequiredPackages2</w>
       <w>.getXlevels</w>
+      <w>.get_layout</w>
       <w>.gt</w>
       <w>.gtn</w>
       <w>.handleSimpleError</w>
       <w>.hasSlot</w>
+      <w>.image_scale</w>
+      <w>.image_scale_factor</w>
       <w>.import</w>
       <w>.initPlotRegion</w>
       <w>.insertNAs</w>
@@ -998,6 +1002,7 @@
       <w>.solve.geoR</w>
       <w>.sparseDiagonal</w>
       <w>.standard_regexps</w>
+      <w>.stop_geos</w>
       <w>.stroke</w>
       <w>.subset</w>
       <w>.subset2</w>
@@ -1672,6 +1677,7 @@
       <w>HLS</w>
       <w>HMFA</w>
       <w>HPDinterval</w>
+      <w>HPDinterval.lagImpact</w>
       <w>HSV</w>
       <w>HTML</w>
       <w>HTMLheader</w>
@@ -1878,6 +1884,9 @@
       <w>LLint</w>
       <w>LMM_Sigma_G</w>
       <w>LOOCV</w>
+      <w>LOSH</w>
+      <w>LOSH.cs</w>
+      <w>LOSH.mc</w>
       <w>LR.sarlm</w>
       <w>LR1.sarlm</w>
       <w>LR1.spautolm</w>
@@ -2080,6 +2089,9 @@
       <w>Mwgt</w>
       <w>NAToUnknown</w>
       <w>NA_LLint_</w>
+      <w>NA_agr_</w>
+      <w>NA_bbox_</w>
+      <w>NA_crs_</w>
       <w>NAvalue</w>
       <w>NCBICHIP_DB_SeedGenerator</w>
       <w>NCList</w>
@@ -3163,6 +3175,7 @@
       <w>`%&gt;%`</w>
       <w>`%@%`</w>
       <w>`%T&gt;%`</w>
+      <w>`%^%`</w>
       <w>`%between%`</w>
       <w>`%chin%`</w>
       <w>`%do%`</w>
@@ -4569,6 +4582,7 @@
       <w>`labels_cex&lt;-`</w>
       <w>`labels_colors&lt;-`</w>
       <w>`languageEl&lt;-`</w>
+      <w>`last&lt;-`</w>
       <w>`length&lt;-.Date`</w>
       <w>`length&lt;-.POSIXct`</w>
       <w>`length&lt;-.POSIXlt`</w>
@@ -4646,6 +4660,10 @@
       <w>`split&lt;-.data.frame`</w>
       <w>`split&lt;-.default`</w>
       <w>`split&lt;-`</w>
+      <w>`st_agr&lt;-`</w>
+      <w>`st_crs&lt;-`</w>
+      <w>`st_geometry&lt;-`</w>
+      <w>`st_precision&lt;-`</w>
       <w>`start&lt;-`</w>
       <w>`storage.mode&lt;-`</w>
       <w>`storageMode&lt;-`</w>
@@ -4856,6 +4874,7 @@
       <w>aggregate.data.frame</w>
       <w>aggregate.nb</w>
       <w>aggregate.ts</w>
+      <w>aggregating_zones</w>
       <w>agnes</w>
       <w>agreg.fit</w>
       <w>agrep</w>
@@ -4873,6 +4892,7 @@
       <w>ais</w>
       <w>akj</w>
       <w>alarm</w>
+      <w>alaska</w>
       <w>alcohol</w>
       <w>alert</w>
       <w>alias</w>
@@ -4907,6 +4927,7 @@
       <w>allCoef</w>
       <w>allGenerics</w>
       <w>allNames</w>
+      <w>allShortestPaths</w>
       <w>allValue</w>
       <w>all_couple_rotations_at_k</w>
       <w>all_dots</w>
@@ -5400,6 +5421,7 @@
       <w>as.trans</w>
       <w>as.treedata</w>
       <w>as.ts</w>
+      <w>as.units</w>
       <w>as.vector</w>
       <w>as.vector.Rle</w>
       <w>as.vector.factor</w>
@@ -5441,10 +5463,12 @@
       <w>asTable</w>
       <w>asTheEconomist</w>
       <w>asVector</w>
+      <w>as_Spatial</w>
       <w>as_box</w>
       <w>as_box_if</w>
       <w>as_bytes</w>
       <w>as_call</w>
+      <w>as_cf</w>
       <w>as_character</w>
       <w>as_closure</w>
       <w>as_complex</w>
@@ -5455,6 +5479,7 @@
       <w>as_datetime</w>
       <w>as_dgRMatrix_listw</w>
       <w>as_dictionary</w>
+      <w>as_difftime</w>
       <w>as_double</w>
       <w>as_dsCMatrix_I</w>
       <w>as_dsCMatrix_IrW</w>
@@ -5484,6 +5509,7 @@
       <w>as_quosureish</w>
       <w>as_string</w>
       <w>as_tibble</w>
+      <w>as_units</w>
       <w>as_utf8</w>
       <w>as_utf8_character</w>
       <w>as_utf8_string</w>
@@ -5637,6 +5663,7 @@
       <w>backtick</w>
       <w>backtransform.moments</w>
       <w>bacteria</w>
+      <w>badDend</w>
       <w>baggedETS</w>
       <w>balance</w>
       <w>balanceMethodsList</w>
@@ -5677,6 +5704,7 @@
       <w>base64decode</w>
       <w>base64enc</w>
       <w>base64encode</w>
+      <w>baseOf</w>
       <w>base_env</w>
       <w>baseball</w>
       <w>baseball.1964</w>
@@ -5710,6 +5738,7 @@
       <w>bcBathymetry</w>
       <w>bcPower</w>
       <w>bcPowerAxis</w>
+      <w>bclust</w>
       <w>bcnPower</w>
       <w>bcnPowerAxis</w>
       <w>bcnPowerInverse</w>
@@ -5732,6 +5761,11 @@
       <w>besselK</w>
       <w>besselY</w>
       <w>besseldot</w>
+      <w>best.nnet</w>
+      <w>best.randomForest</w>
+      <w>best.rpart</w>
+      <w>best.svm</w>
+      <w>best.tune</w>
       <w>bestVars</w>
       <w>bestglm</w>
       <w>beta</w>
@@ -5773,6 +5807,7 @@
       <w>binCounts</w>
       <w>binMeans</w>
       <w>binaryBuffer</w>
+      <w>bincombinations</w>
       <w>binconf</w>
       <w>bind</w>
       <w>bindData</w>
@@ -5788,6 +5823,7 @@
       <w>binomial.beta.mix</w>
       <w>binsearch</w>
       <w>binsrt</w>
+      <w>binsrtR</w>
       <w>bioChemists</w>
       <w>biocAccess</w>
       <w>biocLite</w>
@@ -5871,6 +5907,7 @@
       <w>bootcov</w>
       <w>bootkm</w>
       <w>bootplot</w>
+      <w>bootstrap.lca</w>
       <w>bootstrapLib</w>
       <w>bootstrapPage</w>
       <w>border</w>
@@ -6108,6 +6145,7 @@
       <w>capture.output</w>
       <w>captureOutput</w>
       <w>captureStackTraces</w>
+      <w>capwords</w>
       <w>car</w>
       <w>car.test.frame</w>
       <w>car90</w>
@@ -6244,6 +6282,7 @@
       <w>censor</w>
       <w>centerText</w>
       <w>centers</w>
+      <w>centers.bclust</w>
       <w>ceres.plot</w>
       <w>ceres.plots</w>
       <w>ceresPlot</w>
@@ -6421,7 +6460,11 @@
       <w>claridge</w>
       <w>class</w>
       <w>class.ind</w>
+      <w>classAgreement</w>
       <w>classError</w>
+      <w>classInt</w>
+      <w>classIntervals</w>
+      <w>classIntervals2shingle</w>
       <w>classLabel</w>
       <w>classMetaName</w>
       <w>className</w>
@@ -6507,6 +6550,7 @@
       <w>clusterSplit</w>
       <w>clusterboot</w>
       <w>clusters</w>
+      <w>clusters.bclust</w>
       <w>clusym</w>
       <w>cm</w>
       <w>cm.colors</w>
@@ -6515,6 +6559,7 @@
       <w>cmdArgs</w>
       <w>cmdArgsCall</w>
       <w>cmdscale</w>
+      <w>cmeans</w>
       <w>cml</w>
       <w>cmlmomco</w>
       <w>cmpfile</w>
@@ -6572,6 +6617,7 @@
       <w>coerce_class</w>
       <w>coerce_lang</w>
       <w>coerce_type</w>
+      <w>coffee_data</w>
       <w>col</w>
       <w>col.whitebg</w>
       <w>col2hcl</w>
@@ -6722,6 +6768,7 @@
       <w>compareCRS</w>
       <w>compareCoefs</w>
       <w>compareFits</w>
+      <w>compareMatchedClasses</w>
       <w>comparePred</w>
       <w>compareRaster</w>
       <w>compareVersion</w>
@@ -6795,6 +6842,7 @@
       <w>confplot</w>
       <w>confusion</w>
       <w>confusion.matrix</w>
+      <w>congruent</w>
       <w>conn_create_fd</w>
       <w>conn_create_file</w>
       <w>conn_create_pipepair</w>
@@ -6971,6 +7019,7 @@
       <w>count_</w>
       <w>count_fields</w>
       <w>count_terminal_nodes</w>
+      <w>countpattern</w>
       <w>counts</w>
       <w>county.fips</w>
       <w>countyMapEnv</w>
@@ -7100,6 +7149,7 @@
       <w>crs</w>
       <w>crs2lm</w>
       <w>cscale</w>
+      <w>cshell</w>
       <w>cshow</w>
       <w>csi</w>
       <w>csr</w>
@@ -7206,7 +7256,10 @@
       <w>cxxfunction</w>
       <w>cyan</w>
       <w>cycle</w>
+      <w>cycle_hire</w>
+      <w>cycle_hire_osm</w>
       <w>cyclical_scale</w>
+      <w>d2sigmoid</w>
       <w>dDeta</w>
       <w>dQuote</w>
       <w>d_ply</w>
@@ -7369,6 +7422,7 @@
       <w>ddays</w>
       <w>ddf_Lb</w>
       <w>ddirichlet</w>
+      <w>ddiscrete</w>
       <w>ddmmmyy</w>
       <w>ddply</w>
       <w>de</w>
@@ -7459,6 +7513,7 @@
       <w>depan</w>
       <w>deparse</w>
       <w>deparseLatex</w>
+      <w>deparse_unit</w>
       <w>dependsOnPkgs</w>
       <w>deployAPI</w>
       <w>deployApp</w>
@@ -7601,6 +7656,7 @@
       <w>dfbetasPlots</w>
       <w>dffits</w>
       <w>dgamma</w>
+      <w>dgebal</w>
       <w>dgeom</w>
       <w>dget</w>
       <w>dgrid</w>
@@ -7876,6 +7932,7 @@
       <w>drop_na</w>
       <w>drop_na_</w>
       <w>drop_style</w>
+      <w>drop_units</w>
       <w>droplevels</w>
       <w>droplevels.List</w>
       <w>droplevels.Rle</w>
@@ -7888,6 +7945,7 @@
       <w>dscale</w>
       <w>dseconds</w>
       <w>dshw</w>
+      <w>dsigmoid</w>
       <w>dsignrank</w>
       <w>dsn</w>
       <w>dsquare</w>
@@ -7981,6 +8039,7 @@
       <w>dynGet</w>
       <w>dynlib</w>
       <w>dynrq</w>
+      <w>e1071</w>
       <w>each</w>
       <w>eagles</w>
       <w>eapply</w>
@@ -8029,6 +8088,7 @@
       <w>election</w>
       <w>election.2008</w>
       <w>elem</w>
+      <w>element</w>
       <w>elementMetadata</w>
       <w>elementNROWS</w>
       <w>elementType</w>
@@ -8037,6 +8097,7 @@
       <w>element_line</w>
       <w>element_rect</w>
       <w>element_text</w>
+      <w>elev</w>
       <w>elevation</w>
       <w>elide</w>
       <w>ellipse</w>
@@ -8268,6 +8329,7 @@
       <w>exiting</w>
       <w>exp</w>
       <w>exp.tilt</w>
+      <w>expAtv</w>
       <w>exp_trans</w>
       <w>expand</w>
       <w>expand.grid</w>
@@ -8285,7 +8347,10 @@
       <w>explain</w>
       <w>explode</w>
       <w>expm</w>
+      <w>expm.Higham08</w>
       <w>expm1</w>
+      <w>expmCond</w>
+      <w>expmFrechet</w>
       <w>export</w>
       <w>exportTestValues</w>
       <w>exposeClass</w>
@@ -8339,6 +8404,7 @@
       <w>extractAIC.slm</w>
       <w>extractList</w>
       <w>extractListFragments</w>
+      <w>extractPath</w>
       <w>extractPolyData</w>
       <w>extractPreserveChunks</w>
       <w>extractROWS</w>
@@ -8406,6 +8472,7 @@
       <w>fastbw</w>
       <w>fattyacid</w>
       <w>fbeta</w>
+      <w>fclustIndex</w>
       <w>fct_anon</w>
       <w>fct_c</w>
       <w>fct_collapse</w>
@@ -8519,6 +8586,8 @@
       <w>find.package</w>
       <w>findCells</w>
       <w>findClass</w>
+      <w>findColours</w>
+      <w>findCols</w>
       <w>findDependencies</w>
       <w>findDispatchMethodsS3</w>
       <w>findFiles</w>
@@ -8761,6 +8830,7 @@
       <w>format_tagged_na</w>
       <w>format_tsv</w>
       <w>format_type_sum</w>
+      <w>format_type_sum.type_sum_units</w>
       <w>formatdescribeSingle</w>
       <w>formula</w>
       <w>formula.gam</w>
@@ -9015,6 +9085,15 @@
       <w>gctorture</w>
       <w>gctorture2</w>
       <w>gdalDrivers</w>
+      <w>gdal_crs</w>
+      <w>gdal_inv_geotransform</w>
+      <w>gdal_metadata</w>
+      <w>gdal_polygonize</w>
+      <w>gdal_rasterize</w>
+      <w>gdal_read</w>
+      <w>gdal_subdatasets</w>
+      <w>gdal_utils</w>
+      <w>gdal_write</w>
       <w>gdata</w>
       <w>gdbsource</w>
       <w>gdocs_pal</w>
@@ -9143,6 +9222,7 @@
       <w>getBarString</w>
       <w>getBarString.ProgressBar</w>
       <w>getBaseFont</w>
+      <w>getBclustClassIntervals</w>
       <w>getBibstyle</w>
       <w>getBimapFilters</w>
       <w>getBinaryURL</w>
@@ -9306,6 +9386,7 @@
       <w>getGroups</w>
       <w>getGroupsFormula</w>
       <w>getHMedian</w>
+      <w>getHclustClassIntervals</w>
       <w>getHdata</w>
       <w>getHistory</w>
       <w>getHistory.Package</w>
@@ -9620,6 +9701,7 @@
       <w>get_hmfa_quanti_var</w>
       <w>get_hmfa_var</w>
       <w>get_inits</w>
+      <w>get_key_pos</w>
       <w>get_leaves_attr</w>
       <w>get_leaves_branches_attr</w>
       <w>get_leaves_branches_col</w>
@@ -9827,6 +9909,7 @@
       <w>gradient_color</w>
       <w>gradient_fill</w>
       <w>gradient_n_pal</w>
+      <w>grain</w>
       <w>grangertest</w>
       <w>grangertest.default</w>
       <w>graph.var</w>
@@ -9929,6 +10012,7 @@
       <w>grid.xaxis</w>
       <w>grid.xspline</w>
       <w>grid.yaxis</w>
+      <w>grid2nb</w>
       <w>gridDistance</w>
       <w>gridExtra</w>
       <w>gridIndex2nb</w>
@@ -10042,6 +10126,8 @@
       <w>h4</w>
       <w>h5</w>
       <w>h6</w>
+      <w>hamming.distance</w>
+      <w>hamming.window</w>
       <w>hampelPsi</w>
       <w>handle</w>
       <w>handle_cookies</w>
@@ -10052,6 +10138,7 @@
       <w>handle_setheaders</w>
       <w>handle_setopt</w>
       <w>hang.dendrogram</w>
+      <w>hanning.window</w>
       <w>hard.rejection</w>
       <w>hare</w>
       <w>hargreaves</w>
@@ -10115,6 +10202,7 @@
       <w>hatvalues</w>
       <w>have_name</w>
       <w>haven</w>
+      <w>hawaii</w>
       <w>hazard.ratio.plot</w>
       <w>hbk</w>
       <w>hboxplot</w>
@@ -10137,6 +10225,7 @@
       <w>hclcolorpicker</w>
       <w>hclplot</w>
       <w>hclust</w>
+      <w>hclust.bclust</w>
       <w>hclustCBI</w>
       <w>hclusttreeCBI</w>
       <w>hclwizard</w>
@@ -10292,6 +10381,7 @@
       <w>hsize.object_size</w>
       <w>hsmooth</w>
       <w>hsv</w>
+      <w>hsv_palette</w>
       <w>html</w>
       <w>html.contents.data.frame</w>
       <w>html.data.frame</w>
@@ -10346,6 +10436,7 @@
       <w>hybridizations</w>
       <w>hypvol</w>
       <w>iapply</w>
+      <w>ica</w>
       <w>ice.river</w>
       <w>icl</w>
       <w>icon</w>
@@ -10438,6 +10529,7 @@
       <w>include_url</w>
       <w>incmatrix</w>
       <w>income</w>
+      <w>incongruent</w>
       <w>increase</w>
       <w>increase.ProgressBar</w>
       <w>indepmetrop</w>
@@ -10735,6 +10827,8 @@
       <w>installXLSXsupport</w>
       <w>install_bioc</w>
       <w>install_bitbucket</w>
+      <w>install_conversion_constant</w>
+      <w>install_conversion_offset</w>
       <w>install_cran</w>
       <w>install_deps</w>
       <w>install_dev</w>
@@ -10745,6 +10839,7 @@
       <w>install_gitlab</w>
       <w>install_local</w>
       <w>install_svn</w>
+      <w>install_symbolic_unit</w>
       <w>install_url</w>
       <w>install_version</w>
       <w>installed.packages</w>
@@ -11351,6 +11446,8 @@
       <w>james.stein</w>
       <w>jarque.bera.test</w>
       <w>javaImport</w>
+      <w>jenks.tests</w>
+      <w>jenks71</w>
       <w>jerr</w>
       <w>jerr.coxnet</w>
       <w>jerr.elnet</w>
@@ -11640,6 +11737,7 @@
       <w>lcPrefix</w>
       <w>lcPrefixC</w>
       <w>lcSuffix</w>
+      <w>lca</w>
       <w>lchoose</w>
       <w>lcm</w>
       <w>lcmixed</w>
@@ -11888,6 +11986,7 @@
       <w>lmsreg</w>
       <w>lmtest</w>
       <w>lmwork</w>
+      <w>lnd</w>
       <w>load</w>
       <w>load.Object</w>
       <w>load.Package</w>
@@ -12020,6 +12119,7 @@
       <w>loglin</w>
       <w>loglm</w>
       <w>loglm1</w>
+      <w>logm</w>
       <w>lognet</w>
       <w>logpoissgamma</w>
       <w>logpoissnormal</w>
@@ -12180,6 +12280,9 @@
       <w>make_style</w>
       <w>make_tbl</w>
       <w>make_translations_pkg</w>
+      <w>make_unit</w>
+      <w>make_unit_label</w>
+      <w>make_units</w>
       <w>makeconf_path</w>
       <w>makegrid</w>
       <w>makepredictcall</w>
@@ -12264,6 +12367,7 @@
       <w>maskedwidth</w>
       <w>mat.or.vec</w>
       <w>mat2listw</w>
+      <w>matStig</w>
       <w>match</w>
       <w>match.arg</w>
       <w>match.call</w>
@@ -12272,8 +12376,10 @@
       <w>match.map</w>
       <w>match.ratetable</w>
       <w>matchCases</w>
+      <w>matchClasses</w>
       <w>matchCluster</w>
       <w>matchCoefs</w>
+      <w>matchControls</w>
       <w>matchIntegerPairs</w>
       <w>matchIntegerQuads</w>
       <w>matchSignature</w>
@@ -12564,6 +12670,7 @@
       <w>missing_s3</w>
       <w>mixcolor</w>
       <w>mixdens</w>
+      <w>mixed_units</w>
       <w>mixedorder</w>
       <w>mixedsort</w>
       <w>mixpredictive</w>
@@ -12585,6 +12692,7 @@
       <w>mmps</w>
       <w>mn6.9</w>
       <w>mnnd</w>
+      <w>mnndR</w>
       <w>mnormt</w>
       <w>mnormt.onesided</w>
       <w>mnormt.twosided</w>
@@ -12632,6 +12740,7 @@
       <w>modulus_trans</w>
       <w>mom_calc</w>
       <w>mom_calc_int2</w>
+      <w>moment</w>
       <w>moments</w>
       <w>moments_setup</w>
       <w>mona</w>
@@ -12754,6 +12863,7 @@
       <w>mutate_each_</w>
       <w>mutate_if</w>
       <w>muted</w>
+      <w>mv</w>
       <w>mvdcoord</w>
       <w>mvfft</w>
       <w>mvn</w>
@@ -12779,6 +12889,7 @@
       <w>nLnode</w>
       <w>nMclustParams</w>
       <w>nPairs</w>
+      <w>nPartitions</w>
       <w>nRnode</w>
       <w>nSV</w>
       <w>nVarParams</w>
@@ -12829,6 +12940,7 @@
       <w>naclus</w>
       <w>nafitted.delete</w>
       <w>naive</w>
+      <w>naiveBayes</w>
       <w>name_rows</w>
       <w>names</w>
       <w>names.Object</w>
@@ -13008,6 +13120,7 @@
       <w>ngonGrob</w>
       <w>nhit</w>
       <w>nhtemp</w>
+      <w>niProperties</w>
       <w>nino</w>
       <w>nir_list</w>
       <w>niter</w>
@@ -13174,7 +13287,10 @@
       <w>nvalid</w>
       <w>nvar</w>
       <w>nwtco</w>
+      <w>nydata</w>
+      <w>nz</w>
       <w>nzMapEnv</w>
+      <w>nz_height</w>
       <w>nzchar</w>
       <w>nzchar_ctl</w>
       <w>nzchar_sgr</w>
@@ -13659,6 +13775,7 @@
       <w>parse_quosures</w>
       <w>parse_repo_spec</w>
       <w>parse_time</w>
+      <w>parse_unit</w>
       <w>parse_url</w>
       <w>parse_vector</w>
       <w>parsed_content</w>
@@ -13798,6 +13915,7 @@
       <w>pdfwei</w>
       <w>pdisc</w>
       <w>pdiscp</w>
+      <w>pdiscrete</w>
       <w>peek_option</w>
       <w>peek_options</w>
       <w>peek_vars</w>
@@ -13855,6 +13973,8 @@
       <w>piecewiselin</w>
       <w>pillar</w>
       <w>pillar_shaft</w>
+      <w>pillar_shaft.mixed_units</w>
+      <w>pillar_shaft.units</w>
       <w>pilot</w>
       <w>pintersect</w>
       <w>pip</w>
@@ -14049,6 +14169,7 @@
       <w>plot_hex</w>
       <w>plot_horiz.dendrogram</w>
       <w>plot_mnsl</w>
+      <w>plot_sf</w>
       <w>plot_to_gtable</w>
       <w>plotcluster</w>
       <w>plotcorr</w>
@@ -14329,6 +14450,7 @@
       <w>predictive_interval</w>
       <w>predplot</w>
       <w>prefpls</w>
+      <w>prelimtlist</w>
       <w>prepanel.Dotplot</w>
       <w>prepanel.Ecdf</w>
       <w>prepanel.default.bwplot</w>
@@ -14600,6 +14722,7 @@
       <w>print.summaryPB</w>
       <w>print.t.test.cluster</w>
       <w>print.table</w>
+      <w>print.tileInfo</w>
       <w>print.timePOSIXt</w>
       <w>print.tkm</w>
       <w>print.transcan</w>
@@ -14648,6 +14771,7 @@
       <w>probit_trans</w>
       <w>problems</w>
       <w>probmap</w>
+      <w>probplot</w>
       <w>proc.time</w>
       <w>process</w>
       <w>process.events</w>
@@ -14845,6 +14969,7 @@
       <w>qda</w>
       <w>qday</w>
       <w>qdensity</w>
+      <w>qdiscrete</w>
       <w>qexp</w>
       <w>qf</w>
       <w>qgamma</w>
@@ -15096,6 +15221,7 @@
       <w>rawToBase64</w>
       <w>rawToBits</w>
       <w>rawToChar</w>
+      <w>rawToHex</w>
       <w>rawTransform</w>
       <w>raw_along</w>
       <w>raw_data</w>
@@ -15130,6 +15256,7 @@
       <w>rbindlist</w>
       <w>rbinom</w>
       <w>rboxcox</w>
+      <w>rbridge</w>
       <w>rc.getOption</w>
       <w>rc.options</w>
       <w>rc.settings</w>
@@ -15161,6 +15288,7 @@
       <w>rcspline.restate</w>
       <w>rcsplineFunction</w>
       <w>rdirichlet</w>
+      <w>rdiscrete</w>
       <w>rdply</w>
       <w>rdunif</w>
       <w>reLabelled</w>
@@ -15233,6 +15361,7 @@
       <w>read.liftMask</w>
       <w>read.mat</w>
       <w>read.matrix</w>
+      <w>read.matrix.csr</w>
       <w>read.matrix.hb</w>
       <w>read.mrbayes</w>
       <w>read.mtp</w>
@@ -15350,6 +15479,7 @@
       <w>read_rforge</w>
       <w>read_sas</w>
       <w>read_sav</w>
+      <w>read_sf</w>
       <w>read_spss</w>
       <w>read_stan_csv</w>
       <w>read_stata</w>
@@ -15393,6 +15523,7 @@
       <w>rect.dendrogram</w>
       <w>rect.hclust</w>
       <w>rectGrob</w>
+      <w>rectangle.window</w>
       <w>rectify</w>
       <w>recycleArg</w>
       <w>recycleCharacterArg</w>
@@ -15502,6 +15633,7 @@
       <w>remove_missing</w>
       <w>remove_nodes_nodePar</w>
       <w>remove_rownames</w>
+      <w>remove_symbolic_unit</w>
       <w>rename</w>
       <w>rename.vars</w>
       <w>renameFile</w>
@@ -15984,6 +16116,7 @@
       <w>rvm</w>
       <w>rweibull</w>
       <w>rwf</w>
+      <w>rwiener</w>
       <w>rwilcox</w>
       <w>rwmetrop</w>
       <w>rwrpcauchy</w>
@@ -16395,6 +16528,7 @@
       <w>seasonaldummyf</w>
       <w>seasonplot</w>
       <w>seasrescheck</w>
+      <w>seaweed</w>
       <w>sec_axis</w>
       <w>secal</w>
       <w>second</w>
@@ -16409,6 +16543,7 @@
       <w>segments</w>
       <w>segmentsGrob</w>
       <w>segplot</w>
+      <w>seine</w>
       <w>seizure</w>
       <w>select</w>
       <w>select.list</w>
@@ -16637,6 +16772,7 @@
       <w>set_rownames</w>
       <w>set_str_encoding</w>
       <w>set_tidy_names</w>
+      <w>set_units</w>
       <w>setattr</w>
       <w>setattributes</w>
       <w>setcolorder</w>
@@ -16655,6 +16791,10 @@
       <w>setup</w>
       <w>setup_rtools</w>
       <w>setwd</w>
+      <w>sf</w>
+      <w>sf.colors</w>
+      <w>sf_extSoftVersion</w>
+      <w>sf_project</w>
       <w>sflist2stanfit</w>
       <w>sfn.control</w>
       <w>sfnMessage</w>
@@ -16777,6 +16917,7 @@
       <w>sigma</w>
       <w>sigma2decomp</w>
       <w>sigmaHat</w>
+      <w>sigmoid</w>
       <w>sign</w>
       <w>signTabulate</w>
       <w>sign_oauth1.0</w>
@@ -17007,9 +17148,12 @@
       <w>sp2RF</w>
       <w>sp2WB</w>
       <w>sp2tmap</w>
+      <w>spBreg_err</w>
       <w>spBreg_lag</w>
+      <w>spBreg_sac</w>
       <w>spCbind</w>
       <w>spChFIDs</w>
+      <w>spData</w>
       <w>spDists</w>
       <w>spDistsN1</w>
       <w>spLines</w>
@@ -17102,6 +17246,7 @@
       <w>splitRanges</w>
       <w>split_indices</w>
       <w>split_labels</w>
+      <w>split_path</w>
       <w>splom</w>
       <w>spm</w>
       <w>spmap.to.lev</w>
@@ -17146,6 +17291,7 @@
       <w>sqliteQuickColumn</w>
       <w>sqrt</w>
       <w>sqrt_trans</w>
+      <w>sqrtm</w>
       <w>squash</w>
       <w>squash_chr</w>
       <w>squash_cpl</w>
@@ -17179,6 +17325,98 @@
       <w>st.infoMv</w>
       <w>st.infoUv</w>
       <w>st.mple</w>
+      <w>st_agr</w>
+      <w>st_area</w>
+      <w>st_as_binary</w>
+      <w>st_as_grob</w>
+      <w>st_as_sf</w>
+      <w>st_as_sfc</w>
+      <w>st_as_text</w>
+      <w>st_bbox</w>
+      <w>st_bind_cols</w>
+      <w>st_boundary</w>
+      <w>st_buffer</w>
+      <w>st_cast</w>
+      <w>st_centroid</w>
+      <w>st_collection_extract</w>
+      <w>st_combine</w>
+      <w>st_contains</w>
+      <w>st_contains_properly</w>
+      <w>st_convex_hull</w>
+      <w>st_coordinates</w>
+      <w>st_covered_by</w>
+      <w>st_covers</w>
+      <w>st_crop</w>
+      <w>st_crosses</w>
+      <w>st_crs</w>
+      <w>st_difference</w>
+      <w>st_dimension</w>
+      <w>st_disjoint</w>
+      <w>st_distance</w>
+      <w>st_drivers</w>
+      <w>st_drop_geometry</w>
+      <w>st_equals</w>
+      <w>st_equals_exact</w>
+      <w>st_geometry</w>
+      <w>st_geometry_type</w>
+      <w>st_geometrycollection</w>
+      <w>st_graticule</w>
+      <w>st_interpolate_aw</w>
+      <w>st_intersection</w>
+      <w>st_intersects</w>
+      <w>st_is</w>
+      <w>st_is_empty</w>
+      <w>st_is_longlat</w>
+      <w>st_is_simple</w>
+      <w>st_is_valid</w>
+      <w>st_is_within_distance</w>
+      <w>st_jitter</w>
+      <w>st_join</w>
+      <w>st_layers</w>
+      <w>st_length</w>
+      <w>st_line_merge</w>
+      <w>st_line_sample</w>
+      <w>st_linestring</w>
+      <w>st_make_grid</w>
+      <w>st_multilinestring</w>
+      <w>st_multipoint</w>
+      <w>st_multipolygon</w>
+      <w>st_nearest_feature</w>
+      <w>st_nearest_points</w>
+      <w>st_node</w>
+      <w>st_normalize</w>
+      <w>st_overlaps</w>
+      <w>st_point</w>
+      <w>st_point_on_surface</w>
+      <w>st_polygon</w>
+      <w>st_polygonize</w>
+      <w>st_precision</w>
+      <w>st_proj_info</w>
+      <w>st_read</w>
+      <w>st_read_db</w>
+      <w>st_relate</w>
+      <w>st_sample</w>
+      <w>st_segmentize</w>
+      <w>st_set_agr</w>
+      <w>st_set_crs</w>
+      <w>st_set_geometry</w>
+      <w>st_set_precision</w>
+      <w>st_sf</w>
+      <w>st_sfc</w>
+      <w>st_simplify</w>
+      <w>st_snap</w>
+      <w>st_sym_difference</w>
+      <w>st_touches</w>
+      <w>st_transform</w>
+      <w>st_triangulate</w>
+      <w>st_union</w>
+      <w>st_viewport</w>
+      <w>st_voronoi</w>
+      <w>st_within</w>
+      <w>st_wrap_dateline</w>
+      <w>st_write</w>
+      <w>st_write_db</w>
+      <w>st_zm</w>
       <w>stack</w>
       <w>stackApply</w>
       <w>stackOpen</w>
@@ -17315,6 +17553,7 @@
       <w>sterling</w>
       <w>stext</w>
       <w>stext.default</w>
+      <w>stft</w>
       <w>still.identical</w>
       <w>stillbirth</w>
       <w>stitch</w>
@@ -17891,6 +18130,7 @@
       <w>svd</w>
       <w>svd.triplet</w>
       <w>svg</w>
+      <w>svm</w>
       <w>svn.time</w>
       <w>swapXY</w>
       <w>swapXY.density</w>
@@ -18215,6 +18455,7 @@
       <w>tile</w>
       <w>tile.centroids</w>
       <w>tile.list</w>
+      <w>tileInfo</w>
       <w>tilePerim</w>
       <w>tilePerim0</w>
       <w>tileplot</w>
@@ -18699,6 +18940,13 @@
       <w>tulia6Eprecip</w>
       <w>tuliaprecip</w>
       <w>tuna</w>
+      <w>tune</w>
+      <w>tune.control</w>
+      <w>tune.knn</w>
+      <w>tune.nnet</w>
+      <w>tune.randomForest</w>
+      <w>tune.rpart</w>
+      <w>tune.svm</w>
       <w>tw</w>
       <w>txhousing</w>
       <w>txtInt</w>
@@ -18713,9 +18961,12 @@
       <w>type_convert</w>
       <w>type_of</w>
       <w>type_sum</w>
+      <w>type_sum.mixed_units</w>
+      <w>type_sum.units</w>
       <w>typeof</w>
       <w>tz</w>
       <w>ucv</w>
+      <w>ud_units</w>
       <w>udca</w>
       <w>uganda</w>
       <w>uiOutput</w>
@@ -18776,10 +19027,12 @@
       <w>unit_format</w>
       <w>unite</w>
       <w>unite_</w>
+      <w>unitless</w>
       <w>units</w>
       <w>units.Surv</w>
       <w>units.default</w>
       <w>units.difftime</w>
+      <w>units_options</w>
       <w>univarLR</w>
       <w>univariate</w>
       <w>univariate_calpha</w>
@@ -18840,6 +19093,7 @@
       <w>update.default</w>
       <w>update.dev.pkg</w>
       <w>update.formula</w>
+      <w>update.list</w>
       <w>update.packageStatus</w>
       <w>update.packages</w>
       <w>updateActionButton</w>
@@ -18888,6 +19142,7 @@
       <w>uq</w>
       <w>uqf</w>
       <w>uqs</w>
+      <w>urban_agglomerations</w>
       <w>urine</w>
       <w>url</w>
       <w>url.exists</w>
@@ -18897,6 +19152,8 @@
       <w>url_ok</w>
       <w>url_success</w>
       <w>us.cities</w>
+      <w>us_states</w>
+      <w>us_states_df</w>
       <w>usaMapEnv</w>
       <w>usdm</w>
       <w>use</w>
@@ -19012,6 +19269,8 @@
       <w>validRow</w>
       <w>validSlotNames</w>
       <w>validUTF8</w>
+      <w>valid_udunits</w>
+      <w>valid_udunits_prefixes</w>
       <w>validate</w>
       <w>validate.SmartComments</w>
       <w>validate.VComments</w>
@@ -19219,6 +19478,7 @@
       <w>which.min</w>
       <w>which.names</w>
       <w>which.packet</w>
+      <w>which.tile</w>
       <w>whichAsIRanges</w>
       <w>whichClosePW</w>
       <w>whichClosek</w>
@@ -19343,12 +19603,14 @@
       <w>words</w>
       <w>workdir</w>
       <w>worksheetOrder</w>
+      <w>world</w>
       <w>world.cities</w>
       <w>world.legacy</w>
       <w>world2MapEnv</w>
       <w>worldLL</w>
       <w>worldLLhigh</w>
       <w>worldMapEnv</w>
+      <w>worldbank_df</w>
       <w>wpbc</w>
       <w>wrap</w>
       <w>wrap.array</w>
@@ -19385,12 +19647,14 @@
       <w>write.jtree</w>
       <w>write.mat</w>
       <w>write.matrix</w>
+      <w>write.matrix.csr</w>
       <w>write.model</w>
       <w>write.nb.gal</w>
       <w>write.polyfile</w>
       <w>write.sn2dat</w>
       <w>write.sn2gwt</w>
       <w>write.socket</w>
+      <w>write.svm</w>
       <w>write.table</w>
       <w>write.tree</w>
       <w>write.xlsx</w>
@@ -19458,6 +19722,7 @@
       <w>write_rds</w>
       <w>write_sas</w>
       <w>write_sav</w>
+      <w>write_sf</w>
       <w>write_ssh</w>
       <w>write_stream</w>
       <w>write_tsv</w>
