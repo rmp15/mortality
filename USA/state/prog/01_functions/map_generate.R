@@ -96,7 +96,7 @@ USA.coords <- merge(USA.coords, shapefile.data, by='DRAWSEQ')
 USA.coords$STATE_FIPS <- as.numeric(as.character(USA.coords$STATE_FIPS))
 
 # attach coordinate information for colouring
-dat <- merge(dat, USA.coords, by.x=c('fips','DRAWSEQ'),by.y=c('STATE_FIPS','DRAWSEQ'))
+# dat <- merge(dat, USA.coords, by.x=c('fips','DRAWSEQ'),by.y=c('STATE_FIPS','DRAWSEQ'))
 
 # set colour scheme for geographical colour map
 map.region.colour <- colorRampPalette(rev(brewer.pal(12,"Accent")[c(1:3,5,6)]))(length(unique(USA.df$SUB_REGION)))

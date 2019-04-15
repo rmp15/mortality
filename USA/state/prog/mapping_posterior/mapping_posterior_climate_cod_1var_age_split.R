@@ -20,7 +20,7 @@ age.break <- as.numeric(args[10])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11;  cause = 'Cardiopulmonary'; contig=1 ; age.break=65
+# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11;  cause = 'Ischaemic heart disease'; contig=1 ; age.break=65
 # dname = 't2m' ; metric = 'meanc3' ; pw.arg = 0
 
 multiple = 0
@@ -194,7 +194,7 @@ if(pw.arg==1){
     ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 }
 
-# fix name fo plotting
+# fix name for plotting
 cod.print = ifelse(cause=='AllCause', 'All cause',
         ifelse(cause=='Cancer', 'Cancers',
         ifelse(cause=='Cardiopulmonary', 'Cardiorespiratory diseases',
@@ -1054,23 +1054,23 @@ if(model%in%c('1d','1d2')){
 # for state model, plot climate parameters on map all on one page, one for men and one for women
 if(model %in% c('1e','1f')){
 
-    # add months to data file
+    # add months to data file and remove id column as duplicate name
     dat$month = c(1:12)
-
-    # remove id column as duplicate name
     dat$ID = NULL
 
-    # add state details (but first removing alaska and hawaii)
-    dat$DRAWSEQ = rep(2:50,each=12)
-    drawseq.lookup = read.csv("../../data/shapefiles/drawseq_lookup.csv") ; drawseq.lookup = drawseq.lookup[,c(2,3)]
-    dat = merge(dat,drawseq.lookup)
+    # add state details (but first removing alaska and hawaii) I THINK THIS IS WRONG FIX VIA BELOW ID IS DRAWSEQ SO MAKE OPTION FOR CONTIG
+    dat$DRAWSEQ = rep(1:49,each=12)
+    # drawseq.lookup = read.csv("../../data/shapefiles/drawseq_lookup.csv") ; drawseq.lookup = drawseq.lookup[,c(2,3)]
+    if(contig == 0){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')}
+    if(contig == 1){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')}
 
     # source map
     source('../../prog/01_functions/map_generate.R')
 
     # merge selected data to map dataframe for colouring of ggplot
-    dat = dat[,c(1:16)]
-    plot <- merge(USA.df,dat,by.x=c('STATE_FIPS','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+    dat= merge(dat,drawseq.lookup)
+    dat$DRAWSEQ = NULL
+    plot <- merge(USA.df,dat,by.x=c('STATE_FIPS'),by.y=c('fips'))
     plot <- with(plot, plot[order(sex,age,DRAWSEQ,order),])
                 
     # function to plot age for all months subnationally
@@ -1128,7 +1128,7 @@ if(model %in% c('1e','1f')){
         age.long <- as.character(age.code[age.code$age==age.sel,2])
 
         shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
-        dat = merge(dat,shapefile.data,by.x=c('fips','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+        dat = merge(dat,shapefile.data,by.x=c('fips'),by.y=c('fips'))
 
         # plotting
         print(ggplot() +
@@ -1178,7 +1178,7 @@ if(model %in% c('1e','1f')){
         age.long <- as.character(age.code[age.code$age==age.sel,2])
 
         shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
-        dat = merge(dat,shapefile.data,by.x=c('fips','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+        dat = merge(dat,shapefile.data,by.x=c('fips'),by.y=c('fips'))
 
         # plotting
         print(ggplot(data=subset(dat,sex==sex.sel & age==age.sel)) +
@@ -1225,7 +1225,7 @@ if(model %in% c('1e','1f')){
         age.long <- as.character(age.code[age.code$age==age.sel,2])
 
         shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
-        dat = merge(dat,shapefile.data,by.x=c('fips','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+        dat = merge(dat,shapefile.data,by.x=c('fips'),by.y=c('fips'))
 
         # plotting
         print(ggplot(data=subset(dat,sex==sex.sel & age==age.sel)) +
