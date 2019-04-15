@@ -978,7 +978,7 @@ if(model%in%c('1d','1d2')){
 if(model %in% c('1e','1f')){
 
     # add months to data file and remove id column as duplicate name
-    dat$DRAWSEQ = c(1:49)
+    dat$DRAWSEQ = rep(c(1:49),each=12)
     dat$month = dat$ID
     dat$ID = NULL
 
@@ -1138,8 +1138,8 @@ if(model %in% c('1e','1f')){
         plot.function.excess.risk.state <- function(sex.sel,age.sel) {
 
         # find limits for plot
-        min.plot <- min(dat$odds.ll)
-        max.plot <- max(dat$odds.ul)
+        min.plot <- min(subset(dat,sex==sex.sel & age==age.sel)$odds.ll)
+        max.plot <- max(subset(dat,sex==sex.sel & age==age.sel)$odds.ul)
 
         # attach long month names
         dat$month.short <- mapvalues(dat$month,from=sort(unique(dat$month)),to=month.short)
@@ -1149,7 +1149,7 @@ if(model %in% c('1e','1f')){
         age.long <- as.character(age.code[age.code$age==age.sel,2])
 
         shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
-        dat = merge(dat,shapefile.data,by.x=c('fips','DRAWSEQ'),by.y=c('fips','DRAWSEQ'))
+        dat = merge(dat,shapefile.data,by.x=c('fips'),by.y=c('fips'))
 
         # plotting
         print(ggplot(data=subset(dat,sex==sex.sel & age==age.sel)) +
