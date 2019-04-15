@@ -65,7 +65,7 @@ if(pw.arg==0){
             model.current <- readRDS(file.name)
             current.file <- model.current$summary.random$month5
             current.file$age <- j ; current.file$sex <- i
-            current.file$ID = c(1:length(model.current$marginals.random$month5))
+            # current.file$ID = c(1:length(model.current$marginals.random$month5))
 
             # find mean and CIs of transformed distributions and probability of increased odds from posterior marginal
             dat.mean.exp <- data.frame(ID=numeric(0),odds.mean=numeric(0),odds.ll=numeric(0),odds.ul=numeric(0),odds.prob=numeric(0))
