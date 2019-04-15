@@ -20,7 +20,7 @@ contig.arg <- as.numeric(args[13])
 pw.arg <- as.numeric(args[14])
 
 # for test runs
-# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 26 ;
+# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 11 ;
 # cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
 # year.end.analysis.arg = 2016 ; cod.arg = 'Transport accidents'; fast.arg = 1 ; contig.arg = 1
 # pw.arg=0
@@ -105,7 +105,7 @@ if(contig.arg == 1){USA.adj <- "../../output/adj_matrix_create/USA.graph.contig"
 fit.years <- year.start.analysis.arg:year.end.analysis.arg
 dat.inla <- dat.merged[dat.merged$sex==sex.arg & dat.merged$age==age.arg & dat.merged$year %in% fit.years,]
 
-# filter Hawaii and Alaska if required and load correct drawseq lookup
+# filter Hawaii and Alaska if required and load correct drawseq lookup NEED TO FIX HERE AND WITH AGE SPLIT!!
 if(contig.arg == 0){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')}
 if(contig.arg == 1){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')}
 dat.inla = merge(dat.inla,drawseq.lookup,by='fips')

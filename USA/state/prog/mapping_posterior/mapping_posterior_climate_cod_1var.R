@@ -981,11 +981,14 @@ if(model %in% c('1e','1f')){
     dat$month = c(1:12)
 
     # remove id column as duplicate name
-    dat$ID = NULL
+    dat$DRAWSEQ = dat$ID ; dat$ID = NULL
 
-    # add state details (but first removing alaska and hawaii)
-    dat$DRAWSEQ = rep(2:50,each=12)
-    drawseq.lookup = read.csv("../../data/shapefiles/drawseq_lookup.csv") ; drawseq.lookup = drawseq.lookup[,c(2,3)]
+    # add state details (but first removing alaska and hawaii) I THINK THIS IS WRONG FIX VIA BELOW ID IS DRAWSEQ SO MAKE OPTION FOR CONTIG
+    # dat$DRAWSEQ = rep(2:50,each=12)
+    # drawseq.lookup = read.csv("../../data/shapefiles/drawseq_lookup.csv") ; drawseq.lookup = drawseq.lookup[,c(2,3)]
+    if(contig == 0){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')}
+    if(contig == 1){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')}
+
     dat = merge(dat,drawseq.lookup)
 
     # source map
