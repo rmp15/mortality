@@ -164,32 +164,32 @@ if(model%in%c('1d','1d2')){
     additional.deaths.total.total = ddply(additional.deaths.total.total,.(draw),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
 
     # summarise cardiovascular or respiratory by age and for each sex
-    additional.deaths.intent = additional.deaths
-    additional.deaths.intent$intent = ifelse(additional.deaths.intent$cause%in%causes.cardio,'Cardiovascular','Respiratory')
-    additional.deaths.intent = subset(additional.deaths.intent,age<90&sex!=0)
-    additional.deaths.intent = ddply(additional.deaths.intent,.(draw,intent,sex,age),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
+    # additional.deaths.intent = additional.deaths
+    # additional.deaths.intent$intent = ifelse(additional.deaths.intent$cause%in%causes.cardio,'Cardiovascular','Respiratory')
+    # additional.deaths.intent = subset(additional.deaths.intent,age<90&sex!=0)
+    # additional.deaths.intent = ddply(additional.deaths.intent,.(draw,intent,sex,age),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
 
     # saveRDS(additional.deaths.intent,paste0(file.loc,'additional_deaths_intent_age_draws.rds'))
 
-    additional.deaths.intent.summary = ddply(additional.deaths.intent,.(sex,age,intent),summarise,
-        deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975),
-        deaths.added.two.deg.median=median(deaths.added.two.deg),deaths.added.two.deg.mean=mean(deaths.added.two.deg),deaths.added.two.deg.ll=quantile(deaths.added.two.deg,0.025),deaths.added.two.deg.ul=quantile(deaths.added.two.deg,0.975)
-    )
+    # additional.deaths.intent.summary = ddply(additional.deaths.intent,.(sex,age,intent),summarise,
+    #     deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975),
+    #     deaths.added.two.deg.median=median(deaths.added.two.deg),deaths.added.two.deg.mean=mean(deaths.added.two.deg),deaths.added.two.deg.ll=quantile(deaths.added.two.deg,0.025),deaths.added.two.deg.ul=quantile(deaths.added.two.deg,0.975)
+    # )
 
     # saveRDS(additional.deaths.intent.summary,paste0(file.loc,'additional_deaths_intent_summary_age_draws.rds'))
 
     # summarise intent by month and for each sex
-    additional.deaths.intent.monthly = additional.deaths.monthly
-    additional.deaths.intent.monthly$intent = ifelse(additional.deaths.intent.monthly$cause%in%causes.cardio,'Cardiovascular','Respiratory')
-    additional.deaths.intent.monthly = subset(additional.deaths.intent.monthly,month<90&sex!=0)
-    additional.deaths.intent.monthly = ddply(additional.deaths.intent.monthly,.(draw,intent,sex,month),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
+    # additional.deaths.intent.monthly = additional.deaths.monthly
+    # additional.deaths.intent.monthly$intent = ifelse(additional.deaths.intent.monthly$cause%in%causes.cardio,'Cardiovascular','Respiratory')
+    # additional.deaths.intent.monthly = subset(additional.deaths.intent.monthly,month<90&sex!=0)
+    # additional.deaths.intent.monthly = ddply(additional.deaths.intent.monthly,.(draw,intent,sex,month),summarize,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
 
     # saveRDS(additional.deaths.intent.monthly,paste0(file.loc,'additional_deaths_intent_monthly_draws.rds'))
 
-    additional.deaths.intent.monthly.summary = ddply(additional.deaths.intent.monthly,.(sex,month,intent),summarise,
-        deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975),
-        deaths.added.two.deg.median=median(deaths.added.two.deg),deaths.added.two.deg.mean=mean(deaths.added.two.deg),deaths.added.two.deg.ll=quantile(deaths.added.two.deg,0.025),deaths.added.two.deg.ul=quantile(deaths.added.two.deg,0.975)
-    )
+    # additional.deaths.intent.monthly.summary = ddply(additional.deaths.intent.monthly,.(sex,month,intent),summarise,
+    #     deaths.added.median=median(deaths.added),deaths.added.mean=mean(deaths.added),deaths.added.ll=quantile(deaths.added,0.025),deaths.added.ul=quantile(deaths.added,0.975),
+    #     deaths.added.two.deg.median=median(deaths.added.two.deg),deaths.added.two.deg.mean=mean(deaths.added.two.deg),deaths.added.two.deg.ll=quantile(deaths.added.two.deg,0.025),deaths.added.two.deg.ul=quantile(deaths.added.two.deg,0.975)
+    # )
 
     # saveRDS(additional.deaths.intent.monthly.summary,paste0(file.loc,'additional_deaths_intent_summary_monthly_draws.rds'))
 
@@ -210,55 +210,55 @@ if(model%in%c('1d','1d2')){
     additional.deaths.summary$sex.long <- mapvalues(additional.deaths.summary$sex,from=sort(unique(additional.deaths.summary$sex)),to=c('Both','Male','Female'))
     additional.deaths.summary$sex.long <- reorder(additional.deaths.summary$sex.long,additional.deaths.summary$sex)
 
-    additional.deaths.intent.summary$age.long <- mapvalues(additional.deaths.intent.summary$age,from=sort(unique(additional.deaths.intent.summary$age)),to=c(as.character(age.code[,2])))
-    additional.deaths.intent.summary$age.long <- reorder(additional.deaths.intent.summary$age.long,additional.deaths.intent.summary$age)
-
-    additional.deaths.intent.summary$sex.long <- mapvalues(additional.deaths.intent.summary$sex,from=sort(unique(additional.deaths.intent.summary$sex)),to=c('Male','Female'))
-    additional.deaths.intent.summary$sex.long <- reorder(additional.deaths.intent.summary$sex.long,additional.deaths.intent.summary$sex)
+    # additional.deaths.intent.summary$age.long <- mapvalues(additional.deaths.intent.summary$age,from=sort(unique(additional.deaths.intent.summary$age)),to=c(as.character(age.code[,2])))
+    # additional.deaths.intent.summary$age.long <- reorder(additional.deaths.intent.summary$age.long,additional.deaths.intent.summary$age)
+    #
+    # additional.deaths.intent.summary$sex.long <- mapvalues(additional.deaths.intent.summary$sex,from=sort(unique(additional.deaths.intent.summary$sex)),to=c('Male','Female'))
+    # additional.deaths.intent.summary$sex.long <- reorder(additional.deaths.intent.summary$sex.long,additional.deaths.intent.summary$sex)
 
     # FOR PLOT BY AGE AND SEX
 
     # FIX NAMES OF CAUSES
 
-    fix_cause_names = function(dat){
-    dat$cause <- gsub('Ischaemic heart disease', 'Ischaemic heart disease', dat$cause)
-    dat$cause <- gsub('Cerebrovascular disease', 'Cerebrovascular disease', dat$cause)
-    dat$cause <- gsub('Chronic obstructive pulmonary disease', 'Chronic obstructive pulmonary disease', dat$cause)
-    dat$cause <- gsub('Respiratory infections', 'Respiratory infections', dat$cause)
-
-    return(dat)
-    }
-
-    fix_intent_names = function(dat){
-    dat$intent <- gsub('Cardiovascular', 'Cardiovascular', dat$intent)
-    dat$intent <- gsub('Respiratory', 'Respiratory', dat$intent)
-
-    return(dat)
-    }
+    # fix_cause_names = function(dat){
+    # dat$cause <- gsub('Ischaemic heart disease', 'Ischaemic heart disease', dat$cause)
+    # dat$cause <- gsub('Cerebrovascular disease', 'Cerebrovascular disease', dat$cause)
+    # dat$cause <- gsub('Chronic obstructive pulmonary disease', 'Chronic obstructive pulmonary disease', dat$cause)
+    # dat$cause <- gsub('Respiratory infections', 'Respiratory infections', dat$cause)
+    #
+    # return(dat)
+    # }
+    #
+    # fix_intent_names = function(dat){
+    # dat$intent <- gsub('Cardiovascular', 'Cardiovascular', dat$intent)
+    # dat$intent <- gsub('Respiratory', 'Respiratory', dat$intent)
+    #
+    # return(dat)
+    # }
 
     additional.deaths.summary = fix_cause_names(additional.deaths.summary)
 
-    additional.deaths.summary$intent = ifelse(additional.deaths.summary$cause%in%causes.cardio,'Cardiovascular','Respiratory')
-    additional.deaths.intent.summary = fix_intent_names(additional.deaths.intent.summary)
+    # additional.deaths.summary$intent = ifelse(additional.deaths.summary$cause%in%causes.cardio,'Cardiovascular','Respiratory')
+    # additional.deaths.intent.summary = fix_intent_names(additional.deaths.intent.summary)
 
     additional.deaths.summary.monthly$month.short <- mapvalues(additional.deaths.summary.monthly$month,from=sort(unique(additional.deaths.summary.monthly$month)),to=c(as.character(month.short)))
     additional.deaths.summary.monthly$month.short <- reorder(additional.deaths.summary.monthly$month.short,additional.deaths.summary.monthly$month)
-
-    additional.deaths.intent.monthly.summary$month.short <- mapvalues(additional.deaths.intent.monthly.summary$month,from=sort(unique(additional.deaths.intent.monthly.summary$month)),to=c(as.character(month.short)))
-    additional.deaths.intent.monthly.summary$month.short <- reorder(additional.deaths.intent.monthly.summary$month.short,additional.deaths.intent.monthly.summary$month)
+    #
+    # additional.deaths.intent.monthly.summary$month.short <- mapvalues(additional.deaths.intent.monthly.summary$month,from=sort(unique(additional.deaths.intent.monthly.summary$month)),to=c(as.character(month.short)))
+    # additional.deaths.intent.monthly.summary$month.short <- reorder(additional.deaths.intent.monthly.summary$month.short,additional.deaths.intent.monthly.summary$month)
 
     additional.deaths.summary.monthly$sex.long <- mapvalues(additional.deaths.summary.monthly$sex,from=sort(unique(additional.deaths.summary.monthly$sex)),to=c('Male','Female'))
     additional.deaths.summary.monthly$sex.long <- reorder(additional.deaths.summary.monthly$sex.long,additional.deaths.summary.monthly$sex)
-
-    additional.deaths.intent.monthly.summary$sex.long <- mapvalues(additional.deaths.intent.monthly.summary$sex,from=sort(unique(additional.deaths.intent.monthly.summary$sex)),to=c('Male','Female'))
-    additional.deaths.intent.monthly.summary$sex.long <- reorder(additional.deaths.intent.monthly.summary$sex.long,additional.deaths.intent.monthly.summary$sex)
+    #
+    # additional.deaths.intent.monthly.summary$sex.long <- mapvalues(additional.deaths.intent.monthly.summary$sex,from=sort(unique(additional.deaths.intent.monthly.summary$sex)),to=c('Male','Female'))
+    # additional.deaths.intent.monthly.summary$sex.long <- reorder(additional.deaths.intent.monthly.summary$sex.long,additional.deaths.intent.monthly.summary$sex)
 
     # FOR PLOT BY MONTH AND SEX
 
-    additional.deaths.summary.monthly = fix_cause_names(additional.deaths.summary.monthly)
+    # additional.deaths.summary.monthly = fix_cause_names(additional.deaths.summary.monthly)
 
-    additional.deaths.summary.monthly$intent = ifelse(additional.deaths.summary.monthly$cause%in%causes.cardio,'Cardiovascular','Respiratory')
-    additional.deaths.intent.monthly.summary = fix_intent_names(additional.deaths.intent.monthly.summary)
+    # additional.deaths.summary.monthly$intent = ifelse(additional.deaths.summary.monthly$cause%in%causes.cardio,'Cardiovascular','Respiratory')
+    # additional.deaths.intent.monthly.summary = fix_intent_names(additional.deaths.intent.monthly.summary)
 
 
     # save all necessary files after processing
@@ -269,10 +269,10 @@ if(model%in%c('1d','1d2')){
     saveRDS(additional.deaths,paste0(file.loc,'additional_deaths_age_draws.rds'))
     saveRDS(additional.deaths.monthly,paste0(file.loc,'additional_deaths_monthly_draws.rds'))
     saveRDS(additional.deaths.total,paste0(file.loc,'additional_deaths_total_draws.rds'))
-    saveRDS(additional.deaths.intent,paste0(file.loc,'additional_deaths_intent_age_draws.rds'))
-    saveRDS(additional.deaths.intent.summary,paste0(file.loc,'additional_deaths_intent_summary_age_draws.rds'))
-    saveRDS(additional.deaths.intent.monthly,paste0(file.loc,'additional_deaths_intent_monthly_draws.rds'))
-    saveRDS(additional.deaths.intent.monthly.summary,paste0(file.loc,'additional_deaths_intent_summary_monthly_draws.rds'))
+    # saveRDS(additional.deaths.intent,paste0(file.loc,'additional_deaths_intent_age_draws.rds'))
+    # saveRDS(additional.deaths.intent.summary,paste0(file.loc,'additional_deaths_intent_summary_age_draws.rds'))
+    # saveRDS(additional.deaths.intent.monthly,paste0(file.loc,'additional_deaths_intent_monthly_draws.rds'))
+    # saveRDS(additional.deaths.intent.monthly.summary,paste0(file.loc,'additional_deaths_intent_summary_monthly_draws.rds'))
 
 }
 
