@@ -39,7 +39,7 @@ if(contig==1){
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 
-causes.all = c('cancer')
+causes.all = c('Cancer')
 
 # load the draws data for each age and sex for the cause chosen
 for(h in causes.all){
