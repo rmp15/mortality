@@ -1279,11 +1279,11 @@ if(model %in% c('1e','1f')){
         # function to show ranking by age in states for each sex in jan and july
         plot.function.excess.risk.state.ranking.age.sex.jan.jul <- function(sex.sel) {
 
-        dat=subset(dat,sex==sex.sel&month%in%c(1,7))
-
         # find limits for plot
-        min.plot <- min(subset(dat)$odds.ll)
-        max.plot <- max(subset(dat)$odds.ul)
+        min.plot <- min(subset(dat,month%in%c(1,7))$odds.ll)
+        max.plot <- max(subset(dat,month%in%c(1,7))$odds.ul)
+
+        dat=subset(dat,sex==sex.sel&month%in%c(1,7))
 
         # attach long month names
         dat$month.short <- mapvalues(dat$month,from=sort(unique(dat$month)),to=month.short[c(1,7)])
