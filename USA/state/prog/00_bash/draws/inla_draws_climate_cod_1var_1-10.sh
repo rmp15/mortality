@@ -6,17 +6,17 @@
 clear
 
 declare -a sexstrings=('male' 'female')
-declare -a models=(10)
+declare -a models=(11)
 declare -i start=1980
 declare -i end=2016
 declare country="USA"
 declare dname="t2m"
 declare metric="meanc3"
 #declare -a cods=("Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease" "Other_cardiovascular_diseases" "Other_respiratory_diseases") #"External" "Unintentional" "Unintentional_wo_drowning" "Intentional" "Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault" "Other_external_causes_of_injury")
-declare -a cods=("Cancer" "Other")
+declare -a cods=("Cardiopulmonary")
 declare -i fast=1
 declare -i contig=1
-declare -a draws=(5000)
+declare -a draws=(10)
 
 #################################################
 # 1. MAKE DRAWS
