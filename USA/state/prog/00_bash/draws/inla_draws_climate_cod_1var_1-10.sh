@@ -16,7 +16,7 @@ declare metric="meanc3"
 declare -a cods=("Cardiopulmonary")
 declare -i fast=1
 declare -i contig=1
-declare -a draws=(10)
+declare -a draws=(100)
 
 #################################################
 # 1. MAKE DRAWS
