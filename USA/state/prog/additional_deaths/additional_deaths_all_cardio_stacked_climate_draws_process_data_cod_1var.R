@@ -18,7 +18,7 @@ num.draws <- as.numeric(args[8])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; contig=1 ; num.draws = 5000
+#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11 ; dname = 't2m' ; metric = 'meanc3' ; contig=1 ; num.draws = 1000
 
 multiple = 0
 
@@ -38,9 +38,15 @@ if(contig==1){
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
-causes.cardio = c('Ischaemic heart disease','Cerebrovascular disease')
-causes.resp = c('Chronic obstructive pulmonary disease', 'Respiratory infections')
-causes.all = c(causes.cardio,causes.resp)
+if(model%in%c('1d','1d2')){
+    causes.cardio = c('Ischaemic heart disease','Cerebrovascular disease')
+    causes.resp = c('Chronic obstructive pulmonary disease', 'Respiratory infections')
+    causes.all = c(causes.cardio,causes.resp)
+}
+
+if(model%in%c('1e')){
+    causes.all = c('Cardiopulmonary')
+}
 
 # load the draws data for each age and sex for the cause chosen
 for(h in causes.all){
@@ -67,7 +73,7 @@ for(h in causes.all){
 
 }}}
 
-# for national model, plot additional deaths (with CIs) all on one page, one for men and one for women
+# for national model
 if(model%in%c('1d','1d2')){
 
     dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_cardio_ons_',year.start,'_',year.end))
@@ -287,7 +293,9 @@ if(model%in%c('1d','1d2')){
 
 }
 
-# ADD SUBNATIONAL MODEL HERE TO FINISH
-if(model%in%c('1d','1d2')){
-    # TO FINISH HERE
+# for sub-national model
+if(model%in%c('1e')){
+
+    dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_cardio_ons_',year.start,'_',year.end))
+    print(head(dat.mort))
 }
