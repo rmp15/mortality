@@ -308,6 +308,7 @@ if(model%in%c('1e')){
     additional.deaths.state = data.frame()
     additional.deaths.total.state = data.frame()
     additional.deaths.monthly.state = data.frame()
+    odds.mean.all = data.frame()
     for(k in seq(num.draws)){
 
             print(paste0('draw ',k))
@@ -338,6 +339,7 @@ if(model%in%c('1e')){
 
                 parameter.table= merge(parameter.table, drawseq.lookup)
                 parameter.table$DRAWSEQ = NULL
+                parameter.table$draw = k
 
                 # 1. ADDITIONAL DEATHS FROM UNIFORM 1/2 DEGREE INCREASE NATIONALLY FROM LAST YEAR'S POPULATION
 
@@ -354,7 +356,11 @@ if(model%in%c('1e')){
                 dat.merged.sub <- subset(dat.merged,year==year.end)
                 dat.merged.sub.all=rbind(dat.merged.sub.all,dat.merged.sub)
 
+
             }
+
+            # EXTRACTING ODDS FOR RANKING
+            odds.mean.all=rbind(odds.mean.all,parameter.table)
 
             # NATIONALLY
 
@@ -513,8 +519,6 @@ if(model%in%c('1e')){
     # additional.deaths.summary.monthly$intent = ifelse(additional.deaths.summary.monthly$cause%in%causes.cardio,'Cardiovascular','Respiratory')
     # additional.deaths.intent.monthly.summary = fix_intent_names(additional.deaths.intent.monthly.summary)
 
-
-
     # subnationally
 
     # total deaths overall also
@@ -567,5 +571,8 @@ if(model%in%c('1e')){
     # saveRDS(additional.deaths.intent.summary,paste0(file.loc,'additional_deaths_intent_summary_age_draws.rds'))
     # saveRDS(additional.deaths.intent.monthly,paste0(file.loc,'additional_deaths_intent_monthly_draws.rds'))
     # saveRDS(additional.deaths.intent.monthly.summary,paste0(file.loc,'additional_deaths_intent_summary_monthly_draws.rds'))
+
+    # draws of parameters for ranking plots
+    saveRDS(odds.mean.all, paste0(file.loc,'parameters_draws.rds'))
 
 }

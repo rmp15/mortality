@@ -16,12 +16,13 @@ metric <- as.character(args[6])
 cause <- as.character(args[7]) ; cause <- gsub('_',' ',cause)
 contig <- as.numeric(args[8])
 pw.arg = as.numeric(args[9])
+draws = as.numeric(args[10])
 
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
 # year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'; contig=1
-# pw.arg = 0
+# pw.arg = 0; draws=1000
 
 multiple = 0
 
@@ -127,7 +128,7 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
         ifelse(cause=='Unintentional','Unintentional injuries',
         ifelse(cause=='Unintentional wo drowning','Unintentional injuries except drowinings',
         ifelse(cause=='Transport accidents','Transport',
-        ifelse(cause=='Intentional self-harm','Intentional self-harm', # TO ASK MAJID. 'Suicides' ???
+        ifelse(cause=='Intentional self-harm','Intentional self-harm',
         ifelse(cause=='Accidental falls','Falls',
         ifelse(cause=='Accidental drowning and submersion','Drownings',
         ifelse(cause=='Assault','Assault',cause
@@ -1016,7 +1017,7 @@ if(model %in% c('1e','1f')){
         geom_polygon(aes(fill=odds.mean),color='black',size=0.01) +
         scale_fill_gradient2(limits=c(min.plot,max.plot),low="green", mid="white",high="red",midpoint=0,guide = guide_legend(title = ''),labels=percent) +
         facet_wrap(~month.short) +
-        guides(fill=guide_colorbar(barwidth=30, title='Excess risk associated with\n1 degree additional warming')) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess relative risk associated\nwith a 1 degree warmer year')) +
         ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
         theme_map() +
         theme(text = element_text(size = 15),legend.position = 'bottom',legend.justification=c(0.5,0),strip.background = element_blank()))
@@ -1054,11 +1055,11 @@ if(model %in% c('1e','1f')){
         geom_point(aes(x=as.factor(STATE_ABBR),y=odds.mean)) +
         geom_errorbar(aes(x=as.factor(STATE_ABBR),ymin=odds.ll,ymax=odds.ul), width=0) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('State') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        xlab('State') + ylab('Excess relative risk associated with a 1 degree warmer year') +
         scale_y_continuous(labels=scales::percent) +
         coord_flip() +
         facet_wrap(~month.short) +
-        guides(fill=guide_colorbar(barwidth=30, title='Excess risk associated with\n1 degree additional warming')) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess relative risk associated with\na 1 degree warmer year')) +
         ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
         theme_bw() + theme(text = element_text(size = 6),
         panel.grid.major = element_blank(),axis.text.y = element_text(size=6, angle=0),
@@ -1101,11 +1102,11 @@ if(model %in% c('1e','1f')){
         geom_point(aes(x=as.factor(month.short),y=odds.mean)) +
         geom_errorbar(aes(x=as.factor(month.short),ymin=odds.ll,ymax=odds.ul), width=0) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('State') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        xlab('State') + ylab('Excess relative risk associated with a 1 degree warmer year') +
         scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
         coord_flip() +
         facet_wrap(~STATE_ABBR) +
-        guides(fill=guide_colorbar(barwidth=30, title='Excess risk associated with\n1 degree additional warming')) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess relative risk associated\nwith a 1 degree warmer year')) +
         ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
         theme_bw() + theme(text = element_text(size = 6),
         panel.grid.major = element_blank(),axis.text.y = element_text(size=6, angle=0),
@@ -1151,14 +1152,14 @@ if(model %in% c('1e','1f')){
         geom_errorbar(aes(x=unique,ymin=odds.ll,ymax=odds.ul,color=month.short), width=0,alpha=0.2) +
         geom_point(aes(x=unique,y=odds.mean), alpha=0.2) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        xlab('') + ylab('Excess relative risk associated with a 1 degree warmer year') +
         scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
         coord_flip() +
         facet_grid(age~sex) +
         guides(color=guide_legend(nrow=1)) +
         scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
         theme_bw() + theme(text = element_text(size = 15),
-        panel.grid.major = element_blank(),axis.text.y = element_text(size=6, angle=0),
+        panel.grid.major = element_blank(),
         axis.text.y=element_blank(),axis.title.y=element_blank(),axis.ticks.y=element_blank(),
         plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
         panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
@@ -1199,7 +1200,7 @@ if(model %in% c('1e','1f')){
         geom_errorbar(aes(x=unique,ymin=odds.ll,ymax=odds.ul,color=month.short), width=0,alpha=0.2) +
         geom_point(aes(x=unique,y=odds.mean), alpha=0.2) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        xlab('') + ylab('Excess relative risk associated with a 1 degree warmer year') +
         scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
         coord_flip() +
         facet_grid(age~sex) +
@@ -1237,6 +1238,10 @@ if(model %in% c('1e','1f')){
         dat$month.short <- mapvalues(dat$month,from=sort(unique(dat$month)),to=month.short)
         dat$month.short <- reorder(dat$month.short,(dat$month))
 
+        # attach long age names
+        dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=c(as.character(age.code[,2])))
+        dat$age.long <- reorder(dat$age.long,dat$age)
+
         shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
         dat = merge(dat,shapefile.data,by.x=c('fips'),by.y=c('fips'))
 
@@ -1251,10 +1256,10 @@ if(model %in% c('1e','1f')){
         geom_errorbar(aes(x=unique,ymin=odds.ll,ymax=odds.ul), width=0,alpha=0.2) +
         geom_point(aes(x=unique,y=odds.mean), alpha=0.5) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        xlab('Age group (years)') + ylab('Excess relative risk associated with a 1 degree warmer year') +
         scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
         coord_flip() +
-        facet_grid(age~month.short,scales='free') +
+        facet_grid(age.long~month.short,scales='free') +
         guides(color=guide_legend(nrow=1)) +
         # scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
         theme_bw() + theme(text = element_text(size = 15),
@@ -1289,29 +1294,33 @@ if(model %in% c('1e','1f')){
         dat$month.short <- mapvalues(dat$month,from=sort(unique(dat$month)),to=month.short[c(1,7)])
         dat$month.short <- reorder(dat$month.short,(dat$month))
 
+        # attach long age names
+        dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=c(as.character(age.code[,2])))
+        dat$age.long <- reorder(dat$age.long,dat$age)
+
         shapefile.data = read.csv('../../data/shapefiles/shapefile_data.csv')
         dat = merge(dat,shapefile.data,by.x=c('fips'),by.y=c('fips'))
 
-        # sort by low risk to highest risk
-        dat = dat[with(dat, order(odds.mean)),]
+        # for each grouping of age,sex,month, rank by odds
+        dat.ranked = arrange(dat, age, sex, month, odds.mean)
 
-        # create unique column of month and state
-        dat$unique = 1:nrow(dat)
+        # add unique ranking id by age,sex,month
+        dat.ranked = ddply(dat.ranked,.(age,sex,month), transform, pos=rank(odds.mean,ties.method='first'))
 
         # plotting
-        print(ggplot(data=subset(dat)) +
-        geom_errorbar(aes(x=unique,ymin=odds.ll,ymax=odds.ul), width=0,alpha=0.2) +
-        geom_point(aes(x=unique,y=odds.mean), alpha=0.5) +
+        print(ggplot(data=subset(dat.ranked)) +
+        geom_errorbar(aes(x=pos,ymin=odds.ll,ymax=odds.ul), width=0,alpha=0.2) +
+        geom_point(aes(x=pos,y=odds.mean), alpha=0.5) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('') + ylab('Excess relative risk associated with 1 degree additional warming') +
+        xlab('Age group (years)') + ylab('Excess relative risk associated with a 1 degree warmer year') +
         scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
         coord_flip() +
-        facet_grid(age~month.short) +
+        facet_grid(age.long~month.short,switch='y') +
         guides(color=guide_legend(nrow=1)) +
         # scale_colour_manual(values=colorRampPalette(rev(brewer.pal(12,"RdYlBu")[c(9:10,2:1,1:2,10:9)]))(12),guide = guide_legend(title = 'month'),labels=month.short) +
         theme_bw() + theme(text = element_text(size = 15),
         panel.grid.major = element_blank(),
-        axis.text.y=element_blank(),axis.title.y=element_blank(),axis.ticks.y=element_blank(),
+        axis.text.y=element_blank(),axis.ticks.y=element_blank(),
         plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
         panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
         panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -1382,5 +1391,8 @@ if(model %in% c('1e','1f')){
         pdf(paste0(file.loc,'climate_month_params_excess_risk_w_national_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
         for(i in sort(unique(dat$age))){plot.function.excess.risk.w.national(2,i,10)}
         dev.off()
+
+    # load draws for excess risks and rank
+    dat = readRDS('')
 
 }
