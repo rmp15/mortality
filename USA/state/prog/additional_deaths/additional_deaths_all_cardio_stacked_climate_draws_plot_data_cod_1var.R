@@ -379,7 +379,7 @@ ggplot() +
     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5), aes(x=as.factor(age.long),y=perc.mean,group=cause),size=3,shape=16) +
     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99),position=position_dodge(width=0.5), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=2,shape=16) +
     geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Age group (years)') + ylab('Additional deaths associated with a 1 degree warmer year (based on 2016 population)') +
+    xlab('Age group (years)') + ylab('Excess relative risk associated with a 1 degree warmer year') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(~sex.long) +
     scale_y_continuous(labels=scales::percent) +
@@ -405,7 +405,7 @@ ggplot() +
     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&cause!='Other unintentional injuries'), aes(x=as.factor(age.long),y=perc.mean),size=3,shape=16) +
     geom_point(data=subset(additional.deaths.summary.perc,sex>0&age<99&cause!='Other unintentional injuries'), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=2,shape=16) +
     geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Age group (years)') + ylab('Excess relative risk associated with a 1 degree warmer year (based on 2016 population)') +
+    xlab('Age group (years)') + ylab('Excess relative risk associated with a 1 degree warmer year') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(cause~sex.long,scale='free') +
     scale_y_continuous(labels=scales::percent_format()) +
@@ -453,7 +453,7 @@ ggplot() +
     geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=perc.mean),size=3,shape=16) +
     geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=perc.mean,color=cause),size=2,shape=16) +
     geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Month') + ylab('Excess relative risk associated with a 1 degree warmer year (based on 2016 population)') +
+    xlab('Month') + ylab('Excess relative risk associated with a 1 degree warmer year') +
     # ylim(c(min.plot,max.plot)) +
     coord_flip() +
     facet_grid(cause~sex.long) +
@@ -481,7 +481,7 @@ ggplot() +
     geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99), aes(x=as.factor(month.short),y=perc.mean),size=3,shape=16) +
     geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99), aes(x=as.factor(month.short),y=perc.mean,color=cause),size=2,shape=16) +
     geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Month') + ylab('Excess relative risk associated with a 1 degree warmer year (based on 2016 population)') +
+    xlab('Month') + ylab('Excess relative risk associated with a 1 degree warmer year') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(cause~sex.long,scales='free') +
     scale_y_continuous(labels=scales::percent) +
@@ -505,7 +505,7 @@ ggplot() +
     geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99),position=position_dodge(width=0.5), aes(x=month.short,y=perc.mean,group=cause),size=3,shape=16) +
     geom_point(data=subset(additional.deaths.summary.monthly.perc,sex>0&month<99),position=position_dodge(width=0.5), aes(x=month.short,y=perc.mean,color=cause),size=2,shape=16) +
     geom_hline(yintercept=0,linetype='dotted') +
-    xlab('Month') + ylab('Excess relative risk associated with a 1 degree warmer year (based on 2016 population)') +
+    xlab('Month') + ylab('Excess relative risk associated with a 1 degree warmer year') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(~sex.long) +
     scale_y_continuous(labels=scales::percent) +
