@@ -40,7 +40,7 @@ if(contig==1){
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
-causes.intentional = c('Assault','Intentional self-harm')
+causes.intentional = c('Assault','Suicide')
 causes.unintentional = c('Accidental falls', 'Accidental drowning and submersion', 'Transport accidents', 'Other external causes of injury')
 causes.all = c(causes.intentional,causes.unintentional)
 
@@ -457,7 +457,7 @@ ggplot() +
     geom_hline(yintercept=0,linetype='dotted') +
     xlab('Age group (years)') + ylab('Excess relative risk associated with a 1 degree warmer year') +
     facet_grid(cause~sex.long) +
-    scale_y_continuous(labels=scales::percent_format(accuracy=1)) +
+    scale_y_continuous(labels=scales::percent_format()) +
     scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)]) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     # guides(color=guide_legend(title="",nrow=1)) +
@@ -555,7 +555,7 @@ ggplot() +
     # ylim(c(min.plot,max.plot)) +
     coord_flip() +
     facet_grid(cause~sex.long) +
-    scale_y_continuous(labels=scales::percent_format(accuracy=1)) +
+    scale_y_continuous(labels=scales::percent_format()) +
     scale_color_manual(values=colors.subinjuries[c(1,2,3,5,6)]) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     # guides(color=guide_legend(title="",nrow=1)) +
