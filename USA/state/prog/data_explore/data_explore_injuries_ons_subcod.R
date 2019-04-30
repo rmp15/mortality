@@ -89,6 +89,13 @@ dat.national.com.sex = merge(dat.national.com.sex,StdPopMF,by='age',all.x=1)
 dat.national.com.sex = dat.national.com.sex[order(dat.national.com.sex$cause.sub,dat.national.com.sex$age,dat.national.com.sex$year),]
 dat.national.com.sex = ddply(dat.national.com.sex,.(cause.sub,year,month), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
 
+# create ASDR national data for sub sub-causes BY SEX
+dat.national.com.sex.sep = ddply(dat.national,.(cause.sub,month,year,sex,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
+dat.national.com.sex.sep$rate.adj = with(dat.national.com.sex.sep, deaths/pop.adj)
+dat.national.com.sex.sep = merge(dat.national.com.sex.sep,StdPopMF,by='age',all.x=1)
+dat.national.com.sex.sep = dat.national.com.sex.sep[order(dat.national.com.sex.sep$cause.sub,dat.national.com.sex.sep$age,dat.national.com.sex.sep$year),]
+dat.national.com.sex.sep = ddply(dat.national.com.sex.sep,.(cause.sub,year,month,sex), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
+
 # create yearly ASDR national data FIX THIS
 dat.national.com.sex.year = ddply(dat.national.com.sex,.(cause.sub,year), summarize, ASDR=mean(ASDR))
 
@@ -142,7 +149,6 @@ dat.national.year.all$sex.long = as.character(dat.national.year.all$sex.long)
 ############################
 
 pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-
 # 1. monthly plot facetted by subsubcause
 ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
@@ -188,9 +194,160 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=yea
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
 dev.off()
 
+pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_scaled_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+# 1b. monthly plot facetted by subsubcause SCALED
+ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+
+ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+
+ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+dev.off()
+
+# 2. monthly plot facetted by subsubcause MALE
+pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_male_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(dat=subset(dat.national.com.sex.sep,sex==1&cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+
+ggplot(dat=subset(dat.national.com.sex.sep,sex==1&cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+
+ggplot(dat=subset(dat.national.com.sex.sep,sex==1), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+dev.off()
+
+# 3. monthly plot facetted by subsubcause FEMALE
+pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_female_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(dat=subset(dat.national.com.sex.sep,sex==2&cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+
+ggplot(dat=subset(dat.national.com.sex.sep,sex==2&cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+
+ggplot(dat=subset(dat.national.com.sex.sep,sex==2), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    facet_grid(~cause.sub) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+dev.off()
 ############################
 # for nationalised data
 ############################

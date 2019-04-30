@@ -43,12 +43,21 @@ colors.subinjuries = mycols[c(
                                 20)] # Intentional self-harm
 
 colors.cardio = mycols[c(
-                                1,   # Ischaemic
-                                11,  # Cerebrovascular
+                                9,   # Ischaemic
+                                28,  # Cerebrovascular
                                 33,  # Other cardiovascular
                                 44,  # COPD
-                                10,  # Respiratory infections
+                                25,  # Respiratory infections
                                 24)] # Other respiratory diseases
+
+# original cardio colour scheme
+# colors.cardio = mycols[c(
+#                                 1,   # Ischaemic
+#                                 11,  # Cerebrovascular
+#                                 33,  # Other cardiovascular
+#                                 44,  # COPD
+#                                 10,  # Respiratory infections
+#                                 24)] # Other respiratory diseases
 
 # colors for years progression
 colors.years = mycols[c(        9,   # Beginning
@@ -172,6 +181,7 @@ cod.other = c('Endocrine disorders','Genitourinary diseases','Maternal condition
 
 # ASDR weightings
 # from http://apps.who.int/healthinfo/statistics/mortality/whodpms/definitions/pop.htm
+# and https://www.who.int/healthinfo/paper31.pdf
 StdPopMF =      c(1822+7033,        # 0-4
                 8687+8597,          # 5-14
                 8474+8222,          # 15-24
