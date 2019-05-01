@@ -21,7 +21,7 @@ draws = as.numeric(args[10])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10; dname = 't2m' ; metric = 'meanc3' ; cause = 'Transport accidents'; contig=1
+# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cancer'; contig=1
 # pw.arg = 0; draws=1000
 
 multiple = 0
@@ -163,7 +163,7 @@ if(model%in%c('1d','1d2')){
         geom_pointrange(aes(x=month.short,y=odds.mean,ymin=odds.ll,ymax=odds.ul,color=as.factor(sex)), position=position_dodge(width=0.5)) +
         geom_hline(yintercept=0, lty=2) +
         #scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-        scale_y_continuous(labels=scales::percent_format(accuracy=1)) +
+        scale_y_continuous(labels=scales::percent_format( )) +
         # ggtitle(cod.print) +
         # coord_flip(ylim = c(-0.03,0.03)) +
         coord_flip() +
