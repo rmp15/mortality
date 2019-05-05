@@ -152,7 +152,7 @@ plot.asdr.subnational = function(years,cause.sel) {
     theme_map() +
     theme(text = element_text(size = 15),
     legend.position = 'bottom',legend.justification=c(0.5,0),strip.background = element_blank(),
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 
 

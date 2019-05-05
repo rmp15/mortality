@@ -155,7 +155,7 @@ dat.nat.other$sex = as.factor(as.character(dat.nat.other$sex)) ; levels(dat.nat.
 # geom_vline(linetype=2, xintercept = 1:10,alpha=0.2) +
 # #geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
 # ylab('Month') +
-# xlab('Age group') + ggtitle(cod.arg) +
+# xlab('Age group (years)') + ggtitle(cod.arg) +
 # scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 # scale_x_discrete(labels=age.print) +
 # #xlim(1,12) +
@@ -175,7 +175,7 @@ geom_vline(linetype=2, xintercept = 1:10,alpha=0.2) +
 geom_errorbar(data=subset(dat.nat,type=='max'),aes(x=factor(age),ymin=COM.5,ymax=COM.95),color='red',width=0.2) +
 geom_errorbar(data=subset(dat.nat,type=='min'),aes(x=factor(age),ymin=COM.5,ymax=COM.95),color='green',width=0.2) +
 ylab('Month') +
-xlab('Age group') + ggtitle(cod.arg) +
+xlab('Age group (years)') + ggtitle(cod.arg) +
 scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 scale_x_discrete(labels=age.print) +
 #xlim(1,12) +
@@ -195,7 +195,7 @@ dev.off()
 # geom_errorbar(data=subset(dat.nat,type=='max'),aes(x=factor(age),ymin=COM.5,ymax=COM.95),color='red',width=0.2) +
 # geom_errorbar(data=subset(dat.nat,type=='min'),aes(x=factor(age),ymin=COM.5,ymax=COM.95),color='green',width=0.2) +
 # ylab('Month') +
-# xlab('Age group') + ggtitle(cod.arg) +
+# xlab('Age group (years)') + ggtitle(cod.arg) +
 # scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 # scale_x_discrete(labels=age.print) +
 # #xlim(1,12) +
@@ -242,7 +242,7 @@ dev.off()
 # #geom_vline(linetype=2, xintercept = 1:10,alpha=0.2) +
 # #geom_errorbarh(aes(xmin=lowerCI,xmax=upperCI,color=as.factor(sex)),height=0) +
 # ylab('Month') +
-# xlab('Age group') + ggtitle('') +
+# xlab('Age group (years)') + ggtitle('') +
 # scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 # scale_x_discrete(labels=age.print) +
 # facet_grid(sex~cause) +
@@ -287,7 +287,7 @@ plot.together = function(data,size){
     geom_point(data=subset(data,type=='max'),aes(x=factor(age),y=COM.mean,size=(size^2)/2),fill='red',shape=24) +
     geom_point(data=subset(data,type=='min'),aes(y=COM.mean,x=factor(age),size=(size^2)/2),fill='green',shape=25) +
     ylab('Month') +
-    xlab('Age group') + ggtitle('') +
+    xlab('Age group (years)') + ggtitle('') +
     scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
     scale_x_discrete(labels=age.print) +
     #xlim(1,12) +
@@ -325,7 +325,7 @@ dev.off()
 #     geom_point(data=subset(dat.nat.complete,type=='max'),aes(x=factor(age),y=COM.mean,size=size,fill=as.factor(cause)),shape=24) +
 # geom_point(data=subset(dat.nat.complete,type=='min'),aes(y=COM.mean,x=factor(age),size=size,fill=as.factor(cause)),shape=25) +
 # ylab('Month') +
-# xlab('Age group') + ggtitle('') +
+# xlab('Age group (years)') + ggtitle('') +
 # scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 # scale_x_discrete(labels=age.print) +
 # scale_fill_discrete(name="Cause") +
@@ -375,7 +375,7 @@ ifelse(!dir.exists(file.loc.reg.output), dir.create(file.loc.reg.output, recursi
 # geom_vline(linetype=2, xintercept = 1:10,alpha=0.2) +
 # #geom_errorbarh(aes(xmin=`COM.5`,xmax=`COM.95`,color=as.factor(sex)),height=0) +
 # ylab('Month') +
-# xlab('Age group') + #ggtitle(cod.arg) +
+# xlab('Age group (years)') + #ggtitle(cod.arg) +
 # scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 # scale_x_discrete(labels=age.print) +
 # #xlim(1,12) +
@@ -398,7 +398,7 @@ ifelse(!dir.exists(file.loc.reg.output), dir.create(file.loc.reg.output, recursi
 # geom_vline(linetype=2, xintercept = 1:10,alpha=0.2) +
 # #geom_errorbarh(aes(xmin=`COM.5`,xmax=`COM.95`,color=as.factor(sex)),height=0) +
 # ylab('Month') +
-# xlab('Age group') + #ggtitle(cod.arg) +
+# xlab('Age group (years)') + #ggtitle(cod.arg) +
 # scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 # scale_x_discrete(labels=age.print) +
 # #xlim(1,12) +
@@ -419,7 +419,7 @@ ifelse(!dir.exists(file.loc.reg.output), dir.create(file.loc.reg.output, recursi
 # geom_vline(linetype=2, xintercept = 1:10,alpha=0.2) +
 # #geom_errorbarh(aes(xmin=`COM.5`,xmax=`COM.95`,color=as.factor(sex)),height=0) +
 # ylab('Month') +
-# xlab('Age group') + #ggtitle(cod.arg) +
+# xlab('Age group (years)') + #ggtitle(cod.arg) +
 # scale_y_continuous(breaks=c(seq(0,12)),labels=c(month.short[12],month.short),expand = c(0.01, 0)) +
 # scale_x_discrete(labels=age.print) +
 # #xlim(1,12) +

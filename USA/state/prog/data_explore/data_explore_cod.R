@@ -94,7 +94,7 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=yea
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 dev.off()
 
@@ -109,9 +109,9 @@ dat.national.year$sex.long = mapvalues(dat.national.year$sex,from=sort(unique(da
 dat.national.year$sex.long = reorder(dat.national.year$sex.long,rev(dat.national.year$sex))
 dat.national.year$sex.long = as.character(dat.national.year$sex.long)
 
-dat.national.year.all$sex.long = mapvalues(dat.national.year.all$sex,from=sort(unique(dat.national.year.all$sex)),to=as.character(sex.filter2))
-dat.national.year.all$sex.long = reorder(dat.national.year.all$sex.long,rev(dat.national.year.all$sex))
-dat.national.year.all$sex.long = as.character(dat.national.year.all$sex.long)
+# dat.national.year.all$sex.long = mapvalues(dat.national.year.all$sex,from=sort(unique(dat.national.year.all$sex)),to=as.character(sex.filter2))
+# dat.national.year.all$sex.long = reorder(dat.national.year.all$sex.long,rev(dat.national.year.all$sex))
+# dat.national.year.all$sex.long = as.character(dat.national.year.all$sex.long)
 
 # subset of all data
 last.years = c((year.start.arg):(year.end.arg))
@@ -144,7 +144,7 @@ p0 = ggplot(data=dat.last.years, aes(x=age.long,y=deaths,color=as.factor(cause),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # fix order of causes
 dat.last.years$cause = factor(dat.last.years$cause, levels= c('Other','Injuries', 'Cancer', 'Cardiorespiratory'))
@@ -177,7 +177,7 @@ p1 = ggplot(data=dat.last.years, aes(x=age.long,y=deaths,color=as.factor(cause),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # p1 but without legend
 p2 = p1 + guides(fill=FALSE,color=FALSE)
@@ -206,7 +206,7 @@ p3 = ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # p3 but without legend
 p4 = p3 + guides(fill=FALSE,color=FALSE)
@@ -238,7 +238,7 @@ q1 = ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause)) +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # q1 but without legend
 q2 = q1 + guides(fill=FALSE,color=FALSE)
@@ -257,7 +257,7 @@ q3 = ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause)) +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # q3 but without legend
 q4 = q3 + guides(fill=FALSE,color=FALSE)
@@ -282,7 +282,7 @@ r1 = ggplot(dat=dat.national.year, aes(x=year,y=(deaths/100000),fill=cause)) +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # r1 but without legend
 r2 = r1 + guides(fill=FALSE,color=FALSE)
@@ -307,7 +307,7 @@ r1 = ggplot(dat=dat.national.year.all, aes(x=year,y=(deaths),fill=cause)) +
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # r1 but without legend
 r2 = r1 + guides(fill=FALSE,color=FALSE)
