@@ -224,7 +224,7 @@ dev.off()
 # scale_size(guide='none') +
 # theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 # panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
-# legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"))
+# legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 # dev.off()
 #
 # # entire period com plot v1a (plotting all causes together)
@@ -251,7 +251,7 @@ dev.off()
 # annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf) +
 # theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 # panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
-# legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"),
+# legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="white", size=.5, linetype="dotted"),
 # panel.spacing = unit(2, "lines"))
 # dev.off()
 #
@@ -297,7 +297,7 @@ plot.together = function(data,size){
     annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf) +
     theme(text = element_text(size = 15),strip.text.x=element_text(size=size),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
     panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
-    legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"),
+    legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="white", size=.5, linetype="dotted"),
     panel.spacing = unit(1, "lines"))
 }
 
@@ -333,7 +333,7 @@ dev.off()
 # scale_size(guide='none') +
 # theme(text = element_text(size = 15),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.x = element_text(angle=90),
 # panel.background = element_blank(),strip.background = element_blank(), axis.line = element_line(colour = "black"),
-# legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="gray90", size=.5, linetype="dotted"),panel.spacing = unit(2.5, "lines"))
+# legend.position = 'bottom',legend.justification='center',legend.background = element_rect(fill="white", size=.5, linetype="dotted"),panel.spacing = unit(2.5, "lines"))
 # dev.off()
 #
 # # REGIONAL
@@ -661,6 +661,8 @@ map.climate.colour <- c('#FFFFFF',map.climate.colour)
 # 1. map of com for entire period
 
 # add short month name
+
+# Update to take out alaska and hawaii
 
 # function to plot
 plot.function.state.entire.round <- function(sex.sel) {

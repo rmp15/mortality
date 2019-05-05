@@ -48,7 +48,7 @@ clear
 echo "starting nationalised wavelet analysis for $country, $cod, years $start - $end";
 :
 # runs wavelet analysis (figure 2-11)
-Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national_cod.R $start $end $numsim $sig $noise $cod $log &
+#Rscript ~/git/mortality/USA/state/prog/wavelet/wavelet_national_cod.R $start $end $numsim $sig $noise $cod $log &
 
 done; done; done; done;
 
@@ -106,7 +106,7 @@ echo "plotting COM analysis for $country for $cod, years $start - $end";
 #Rscript ~/git/mortality/USA/state/prog/com/com_data_process_cod.R $start $end $cod
 
 # plots (figure 12, figure 14-17)
-#Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
+Rscript ~/git/mortality/USA/state/prog/com/com_plot_cod.R $start $end $cod
 
 done;
 

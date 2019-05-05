@@ -130,7 +130,7 @@ scale_fill_manual(values=map.region.colour,guide = guide_legend(title = '')) +
 coord_fixed() +
 theme_map() +
 theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom',
-	legend.background = element_rect(fill = "grey95"),legend.box = "horizontal")
+	legend.background = element_rect(fill = "white"),legend.box = "horizontal")
 )
 dev.off()
 
@@ -141,7 +141,7 @@ scale_fill_manual(values=map.climate.colour,guide = guide_legend(title = '')) +
 coord_fixed() +
 theme_map() +
 theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom',
-	legend.background = element_rect(fill = "grey95"),legend.box = "horizontal")
+	legend.background = element_rect(fill = "white"),legend.box = "horizontal")
 )
 dev.off()
 
@@ -152,6 +152,6 @@ scale_fill_manual(values=map.climate.colour,guide = guide_legend(title = '')) +
 coord_fixed() +
 theme_map() +
 theme(text = element_text(size = 15),legend.justification=c(1,0), legend.position='bottom',
-	legend.background = element_rect(fill = "grey95"),legend.box = "horizontal")
+	legend.background = element_rect(fill = "white"),legend.box = "horizontal")
 )
 dev.off()
