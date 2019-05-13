@@ -353,7 +353,7 @@ dev.off()
 dat.national.com.sex.sep$sex.long <- mapvalues(dat.national.com.sex.sep$sex,from=sort(unique(dat.national.com.sex.sep$sex)),to=c('Male','Female'))
 dat.national.com.sex.sep$sex.long <- with(dat.national.com.sex.sep,reorder(dat.national.com.sex.sep$sex.long,sex))
 
-# 3. monthly plot facetted by subsubcause FEMALE
+# 3. monthly plot facetted by subsubcause BOTH
 pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_both_sexes_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 ggplot(dat=subset(dat.national.com.sex.sep,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +

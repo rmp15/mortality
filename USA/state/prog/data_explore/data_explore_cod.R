@@ -60,6 +60,13 @@ dat.nat.broad.asdr = merge(dat.nat.broad.asdr,StdPopMF,by='age',all.x=1)
 dat.nat.broad.asdr = dat.nat.broad.asdr[order(dat.nat.broad.asdr$cause,dat.nat.broad.asdr$age,dat.nat.broad.asdr$year),]
 dat.nat.broad.asdr = ddply(dat.nat.broad.asdr,.(cause,year,month), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
 
+# create monthly ASDR national data for sub causes BY SEX
+dat.national.com.sex.sep = ddply(dat.national,.(cause,month,year,sex,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
+dat.national.com.sex.sep$rate.adj = with(dat.national.com.sex.sep, deaths/pop.adj)
+dat.national.com.sex.sep = merge(dat.national.com.sex.sep,StdPopMF,by='age',all.x=1)
+dat.national.com.sex.sep = dat.national.com.sex.sep[order(dat.national.com.sex.sep$cause,dat.national.com.sex.sep$age,dat.national.com.sex.sep$year),]
+dat.national.com.sex.sep = ddply(dat.national.com.sex.sep,.(cause,year,month,sex), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
+
 # create yearly ASDR national data
 dat.nat.broad.asdr.year = ddply(dat.nat.broad.asdr,.(cause,year), summarize, ASDR=mean(ASDR))
 
@@ -89,6 +96,31 @@ ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=yea
     scale_color_gradientn(colors=yearpalette) +
     # scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 3,title = paste0("Year"))) +
     facet_grid(~cause) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+
+dev.off()
+
+# fix names of sexes
+dat.national.com.sex.sep$sex.long <- mapvalues(dat.national.com.sex.sep$sex,from=sort(unique(dat.national.com.sex.sep$sex)),to=c('Male','Female'))
+dat.national.com.sex.sep$sex.long <- with(dat.national.com.sex.sep,reorder(dat.national.com.sex.sep$sex.long,sex))
+
+pdf(paste0(file.loc,'broad_cod_asdr_plots_both_sexes_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+
+# 1.
+ggplot(dat=dat.national.com.sex.sep, aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Age standardised death rate (per 100,000)') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    # scale_colour_manual(values=yearpalette, guide = guide_legend(nrow = 3,title = paste0("Year"))) +
+    facet_grid(sex.long~cause) +
     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
