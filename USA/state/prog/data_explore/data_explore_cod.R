@@ -215,17 +215,17 @@ pdf(paste0(file.loc,'broad_cod_all_years_plots_by_month_',year.start.arg,'_',yea
 
 age.colours=c("blue",brewer.pal(9,"BrBG")[c(9:6,4:1)],"grey")
 
-p1 = ggplot(data=dat.last.years, aes(x=ID,y=deaths,color=as.factor(age.long),fill=as.factor(age.long))) +
+p1 = ggplot(data=dat.last.years, aes(x=month,y=deaths,color=as.factor(age.long),fill=as.factor(age.long))) +
     geom_bar(width = 0.9, stat = "identity") +
     xlab('Month') + ylab('Number of deaths') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
     scale_fill_manual(values=age.colours, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
     scale_color_manual(values=age.colours, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
     # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
     scale_y_continuous(label = comma) +
     facet_grid(sex.long~cause)   +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90, vjust=0.5, hjust=1), axis.ticks.x=element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
