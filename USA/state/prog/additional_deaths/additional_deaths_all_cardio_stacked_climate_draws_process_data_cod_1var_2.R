@@ -49,6 +49,11 @@ if(model%in%c('1e')){
     causes.all = c('Cardiopulmonary')
 }
 
+# data frames to populate with
+dat.merged.sub.all.age = data.frame()
+dat.merged.sub.all.age.sex = data.frame()
+dat.merged.sub.all.age.sex.cause = data.frame()
+
 # load the draws data for each age and sex for the cause chosen
 for(h in causes.all){
     for (i in seq(length(sex.filter))) {
@@ -68,20 +73,15 @@ for(h in causes.all){
             save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
                 '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
             draws.current = readRDS(paste0(file.loc.input,save.name))
-            #draws.curent = draws.current
             do.call("<-", list(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h), draws.current))
+            draws.current = NULL
 
-            print(paste0(' draws done for ',sex.filter[i],', ',age.filter[j],', ',h,'...'))
-
-}}
-
-} # suspect this is the bracket I will get rid of
+            print(paste0(' draws loaded for ',sex.filter[i],', ',age.filter[j],', ',h,'...'))
 
 # for national model
-if(model%in%c('1d','1d2')){
+# if(model%in%c('1d','1d2')){
 
     dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_cardio_ons_',year.start,'_',year.end))
-    print(head(dat.mort))
 
     # make for national data
     dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
@@ -89,35 +89,36 @@ if(model%in%c('1d','1d2')){
     dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
     dat.national <- dat.national[order(dat.national$cause.sub,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-    # with all the draws made for each age and sex, will now make an estimate for additional deaths
+    # isolate the cause, sex and age group
+    dat.national$cause.group = NULL ; names(dat.national)[3] = 'cause.'
+    dat.national.current <- subset(dat.national,cause.==as.character(h)&sex==i&age==age.filter[j]) ; names(dat.national.current)[3] = 'cause'
+
+    print(head(dat.national.current))
+
+    # with all the draws made for a single age, sex and cause, will now make an estimate for additional deaths
     additional.deaths = data.frame()
     additional.deaths.total = data.frame()
     additional.deaths.monthly = data.frame()
 
+    dat.merged.sub.all = data.frame()
+
+    # additional deaths for each draw made for a particular age sex and cause of death
     for(k in seq(num.draws)){
 
             print(paste0('draw ',k))
-            dat.merged.sub.all = data.frame()
-            # for each cause of death in cause.all
-            for(h in causes.all){
-
-                # isolate the cause
-                dat.national$cause.group = NULL ; names(dat.national)[3] = 'cause.'
-                dat.national.current <- subset(dat.national,cause.==as.character(h)) ; names(dat.national.current)[3] = 'cause'
 
                 # empty data frame for parameters
                 parameter.table = data.frame()
 
                 # cycle through every age-sex group
-                for (i in seq(length(sex.filter))) {
-                    for (j in seq(length(age.filter))) {
+                # for (i in seq(length(sex.filter))) {
+                    # for (j in seq(length(age.filter))) {
 
                 # for each draw make a parameter summary to then calculate additional deaths
                 climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h))[[k]]$latent))]
                 climate.values = exp(climate.values)
-                table = data.frame(cause=h,age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
-                parameter.table = rbind(parameter.table,table)
-                }}
+                parameter.table = data.frame(cause=h,age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
+                # }}
 
                 # 1. ADDITIONAL DEATHS FROM UNIFORM 1/2 DEGREE INCREASE NATIONALLY FROM LAST YEAR'S POPULATION
 
@@ -132,33 +133,42 @@ if(model%in%c('1d','1d2')){
 
                 # take one year
                 dat.merged.sub <- subset(dat.merged,year==year.end)
+                dat.merged.sub$draw = k
 
                 dat.merged.sub.all=rbind(dat.merged.sub.all,dat.merged.sub)
 
             }
+            dat.merged.sub.all.age=rbind(dat.merged.sub.all.age,dat.merged.sub.all)
 
-            # integrate across year by cause, age and sex, also for entire population
-            dat.merged.sub.year = ddply(dat.merged.sub.all,.(cause,sex,age),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
-            dat.total.sex = ddply(dat.merged.sub.year,.(cause,sex),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total.sex$age = 99
-            dat.total= ddply(dat.merged.sub.year,.(cause),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total$age = 99 ; dat.total$sex = 0
-
-            dat.merged.sub.year = rbind(dat.merged.sub.year,dat.total.sex,dat.total)
-            dat.merged.sub.year$draw = k
-
-            additional.deaths = rbind(additional.deaths,dat.merged.sub.year)
-            additional.deaths.total = rbind(additional.deaths.total,subset(dat.merged.sub.year,sex==0&age==99))
-
-            # integrate across year by month and sex, also for entire population
-            dat.merged.sub.year.monthly = ddply(dat.merged.sub.all,.(cause,sex,month),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
-            # dat.total.sex.monthly = ddply(dat.merged.sub.year.monthly,.(cause,sex),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total.sex.monthly$month = 99
-            # dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(cause),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total.monthly$month = 99 ; dat.total$sex = 0
-
-            # dat.merged.sub.year.monthly = rbind(dat.merged.sub.year.monthly,dat.total.monthly)
-            dat.merged.sub.year.monthly$draw = k
-
-            additional.deaths.monthly = rbind(additional.deaths.monthly,dat.merged.sub.year.monthly)
-
+            # delete current age sex cause draws combination
+            rm(list=paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h))
+        }
+        dat.merged.sub.all.age.sex=rbind(dat.merged.sub.all.age.sex,dat.merged.sub.all.age)
     }
+    dat.merged.sub.all.age.sex.cause=rbind(dat.merged.sub.all.age.sex.cause,dat.merged.sub.all.age.sex)
+}
+
+# integrate across year by cause, age and sex, also for entire population
+dat.merged.sub.year = ddply(dat.merged.sub.all.age.sex.cause,.(cause,sex,age,draw),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
+dat.total.sex = ddply(dat.merged.sub.year,.(cause,sex,draw),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total.sex$age = 99
+dat.total= ddply(dat.merged.sub.year,.(cause,draw),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total$age = 99 ; dat.total$sex = 0
+
+dat.merged.sub.year = rbind(dat.merged.sub.year,dat.total.sex,dat.total)
+
+additional.deaths = dat.merged.sub.year
+additional.deaths.total = subset(dat.merged.sub.year,sex==0&age==99)
+
+# integrate across year by month and sex, also for entire population
+dat.merged.sub.year.monthly = ddply(dat.merged.sub.all.age.sex.cause,.(cause,sex,month,draw),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
+# dat.total.sex.monthly = ddply(dat.merged.sub.year.monthly,.(cause,sex),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total.sex.monthly$month = 99
+# dat.total.monthly = ddply(dat.merged.sub.year.monthly,.(cause),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total.monthly$month = 99 ; dat.total$sex = 0
+
+# dat.merged.sub.year.monthly = rbind(dat.merged.sub.year.monthly,dat.total.monthly)
+# dat.merged.sub.year.monthly$draw = k
+
+additional.deaths.monthly = dat.merged.sub.year.monthly
+
+    # }
 
     # save additional.deaths, additional.deaths.monthly and additional.deaths.total NEED TO ADD FOR NON_CONTIG ALSO
     output.local = paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
@@ -288,8 +298,6 @@ if(model%in%c('1d','1d2')){
     saveRDS(additional.deaths.intent.summary,paste0(file.loc,'additional_deaths_intent_summary_age_draws.rds'))
     saveRDS(additional.deaths.intent.monthly,paste0(file.loc,'additional_deaths_intent_monthly_draws.rds'))
     saveRDS(additional.deaths.intent.monthly.summary,paste0(file.loc,'additional_deaths_intent_summary_monthly_draws.rds'))
-
-}
 
 # for sub-national model FINISH RANKING PLOT
 if(model%in%c('1e')){
