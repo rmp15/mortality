@@ -148,6 +148,8 @@ for(h in causes.all){
     dat.merged.sub.all.age.sex.cause=rbind(dat.merged.sub.all.age.sex.cause,dat.merged.sub.all.age.sex)
 }
 
+#GO FROM HERE WHEN STARTING AGAIN
+
 # integrate across year by cause, age and sex, also for entire population
 dat.merged.sub.year = ddply(dat.merged.sub.all.age.sex.cause,.(cause,sex,age,draw),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg))
 dat.total.sex = ddply(dat.merged.sub.year,.(cause,sex,draw),summarise,deaths.added=sum(deaths.added),deaths.added.two.deg=sum(deaths.added.two.deg)) ; dat.total.sex$age = 99
@@ -172,7 +174,7 @@ additional.deaths.monthly = dat.merged.sub.year.monthly
 
     # save additional.deaths, additional.deaths.monthly and additional.deaths.total NEED TO ADD FOR NON_CONTIG ALSO
     output.local = paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
-                    '/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_cardio/',num.draws,'_draws/')
+                    '/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_cardio/',num.draws,'_draws/with_other/')
     ifelse(!dir.exists(output.local), dir.create(output.local,recursive=TRUE), FALSE)
 
     # saveRDS(additional.deaths,paste0(file.loc,'additional_deaths_age_draws.rds'))
