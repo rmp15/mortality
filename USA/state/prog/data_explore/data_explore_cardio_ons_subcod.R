@@ -32,13 +32,13 @@ dat$cause = dat$cause.group ; dat$cause.group=NULL
 dat$cause.sub <- gsub('Ischaemic heart disease', 'Ischaemic\nheart disease', dat$cause.sub)                                                 # 1
 dat$cause.sub <- gsub('Cerebrovascular disease', 'Cerebrovascular\ndisease', dat$cause.sub)                                                 # 2
 dat$cause.sub <- gsub('Other cardiovascular diseases', 'Other cardiovascular\ndiseases', dat$cause.sub)                                     # 3
-dat$cause.sub <- gsub('Chronic obstructive pulmonary disease', 'Chronic obstructive\npulmonary disease', dat$cause.sub)                     # 4
+dat$cause.sub <- gsub('Chronic obstructive pulmonary disease', 'COPD', dat$cause.sub)                     # 4
 dat$cause.sub <- gsub('Respiratory infections', 'Respiratory\ninfections', dat$cause.sub)                                                   # 5
 dat$cause.sub <- gsub('Other respiratory diseases', 'Other respiratory\ndiseases', dat$cause.sub)                                           # 6
 
 # reorder
 # dat$cause = factor(dat$cause, levels=c('Unintentional injuries','Intentional injuries'))
-dat$cause.sub = factor(dat$cause.sub, levels=c('Other cardiovascular\ndiseases','Other respiratory\ndiseases','Ischaemic\nheart disease','Cerebrovascular\ndisease','Chronic obstructive\npulmonary disease',
+dat$cause.sub = factor(dat$cause.sub, levels=c('Other cardiovascular\ndiseases','Other respiratory\ndiseases','Ischaemic\nheart disease','Cerebrovascular\ndisease','COPD',
                                                 'Respiratory\ninfections'))
 
 library(plyr)
@@ -315,7 +315,10 @@ dev.off()
 
 dat.national.com.sex.sep$sex.long = mapvalues(dat.national.com.sex.sep$sex,from=sort(unique(dat.national.com.sex.sep$sex)),to=as.character(sex.filter2))
 dat.national.com.sex.sep$sex.long = reorder(dat.national.com.sex.sep$sex.long,(dat.national.com.sex.sep$sex))
-dat.national.com.sex.sep$sex.long = as.character(dat.national.com.sex.sep$sex.long)
+# dat.national.com.sex.sep$sex.long = as.character(dat.national.com.sex.sep$sex.long)
+
+dat.national.com.sex.sep$cause.sub = factor(dat.national.com.sex.sep$cause.sub, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','COPD',
+                                                'Respiratory\ninfections','Other cardiovascular\ndiseases','Other respiratory\ndiseases'))
 
 pdf(paste0(file.loc,'cardio_ons_subsubcod_asdr_plots_sex_facet_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 # 2. monthly plot facetted by subsubcause
@@ -356,7 +359,7 @@ ggplot(dat=subset(dat.national.com.sex.sep), aes(x=month,y=100000*ASDR,group=yea
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
     guides(color=guide_colorbar(barwidth=30, title='Year')) +
     scale_color_gradientn(colors=yearpalette) +
     facet_grid(sex.long~cause.sub) +

@@ -69,8 +69,8 @@ add_legend_names = function(dat){
     levels(dat$cause.legend)[levels(dat$cause.legend)=='Cerebrovascular disease'] <- "Cerebrovascular\ndisease"
     levels(dat$cause.legend)[levels(dat$cause.legend)=='Chronic obstructive pulmonary disease'] <- "COPD"
     levels(dat$cause.legend)[levels(dat$cause.legend)=='Respiratory infections'] <- "Respiratory\ninfections"
-    levels(dat$cause.legend)[levels(dat$cause.legend)=='Other cardiovascular diseases'] <- "Other\ncardiovascular\ndiseases"
-    levels(dat$cause.legend)[levels(dat$cause.legend)=='Other respiratory diseases'] <- "Other\nrespiratory\ndiseases"
+    levels(dat$cause.legend)[levels(dat$cause.legend)=='Other cardiovascular diseases'] <- "Other cardiovascular\ndiseases"
+    levels(dat$cause.legend)[levels(dat$cause.legend)=='Other respiratory diseases'] <- "Other respiratory\ndiseases"
 
     # alternative names for cardiorespiratory causes mk2
     dat$cause.legend.2 = dat$cause
