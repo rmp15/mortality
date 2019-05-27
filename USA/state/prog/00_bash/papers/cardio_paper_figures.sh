@@ -84,7 +84,7 @@ echo "plotting figure 6 for cardio paper $start - $end";
 # to correct directory
 cd ~/git/mortality/USA/state/prog/00_bash/
 
-#Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country 11 $dname $metric $cause $contig $pw $draws
+Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country 11 $dname $metric $cause $contig $pw $draws
 
 #################################################
 # Tables XX-XX (not currently in paper)

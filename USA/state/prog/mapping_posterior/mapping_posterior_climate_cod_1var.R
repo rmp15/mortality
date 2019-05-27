@@ -21,7 +21,7 @@ draws = as.numeric(args[10])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cancer'; contig=1
+# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'; contig=1
 # pw.arg = 0; draws=1000
 
 multiple = 0
@@ -1266,7 +1266,7 @@ if(model %in% c('1e','1f')){
         geom_errorbar(aes(x=pos,ymin=odds.ll,ymax=odds.ul), width=0,alpha=0.2) +
         geom_point(aes(x=pos,y=odds.mean), alpha=0.5) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('Age group (years)') + ylab('Excess relative risk associated with a 1 degree warmer year') +
+        xlab('Age group (years)') + ylab('Excess relative risk associated with a 1°C warmer year') +
         scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
         coord_flip() +
         facet_grid(age.long~month.short,switch='y') +
@@ -1276,7 +1276,7 @@ if(model %in% c('1e','1f')){
         panel.grid.major = element_blank(),
         axis.text.y=element_blank(),axis.ticks.y=element_blank(),
         plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "white"),
         panel.border = element_rect(colour = "black"),strip.background = element_blank(),
         legend.position = 'bottom',legend.justification='center',
         legend.background = element_rect(fill="white", size=.5, linetype="dotted")))
@@ -1322,7 +1322,7 @@ if(model %in% c('1e','1f')){
         geom_errorbar(aes(x=pos,ymin=odds.ll,ymax=odds.ul), width=0,alpha=0.2) +
         geom_point(aes(x=pos,y=odds.mean), alpha=0.5) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('Age group (years)') + ylab('Excess relative risk associated with a 1 degree warmer year') +
+        xlab('Age group (years)') + ylab('Excess relative risk associated with a 1°C warmer year') +
         scale_y_continuous(limits=c(min.plot,max.plot),labels=scales::percent) +
         coord_flip() +
         facet_grid(age.long~month.short,switch='y') +
@@ -1332,7 +1332,7 @@ if(model %in% c('1e','1f')){
         panel.grid.major = element_blank(),
         axis.text.y=element_blank(),axis.ticks.y=element_blank(),
         plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "white"),
         panel.border = element_rect(colour = "black"),strip.background = element_blank(),
         legend.position = 'bottom',legend.justification='center',
         legend.background = element_rect(fill="white", size=.5, linetype="dotted")))
@@ -1394,7 +1394,7 @@ if(model %in% c('1e','1f')){
 
         # # male output to pdf
         # pdf(paste0(file.loc,'climate_month_params_excess_risk_w_national_men_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'.pdf'),paper='a4r',height=0,width=0)
-        # for(i in sort(unique(dat$age))){plot.function.excess.risk.w.national(1,i,10)}
+        for(i in sort(unique(dat$age))){plot.function.excess.risk.w.national(1,i,10)}
         # dev.off()
         #
         # # female output to pdf
