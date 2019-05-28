@@ -59,17 +59,17 @@ additional.deaths.intent.monthly.summary = readRDS(paste0(file.loc,'additional_d
 additional.deaths.summary = readRDS(paste0(file.loc,'additional_deaths_summary_age_draws.rds'))
 additional.deaths.summary.monthly =    readRDS(paste0(file.loc,'additional_deaths_summary_monthly_draws.rds'))
 
-additional.deaths.summary$cause = factor(additional.deaths.summary$cause, levels=c('Ischaemic heart disease','Cerebrovascular disease','Chronic obstructive pulmonary disease','Respiratory infections', 'Other cardiovascular diseases', 'Other respiratory diseases'))
-additional.deaths.summary.monthly$cause = factor(additional.deaths.summary.monthly$cause, levels=c('Ischaemic heart disease','Cerebrovascular disease','Chronic obstructive pulmonary disease','Respiratory infections', 'Other cardiovascular diseases', 'Other respiratory diseases'))
+additional.deaths.summary$cause = factor(additional.deaths.summary$cause, levels=c('Ischaemic heart disease','Cerebrovascular disease', 'Other cardiovascular diseases','Chronic obstructive pulmonary disease','Respiratory infections', 'Other respiratory diseases'))
+additional.deaths.summary.monthly$cause = factor(additional.deaths.summary.monthly$cause, levels=c('Ischaemic heart disease','Cerebrovascular disease', 'Other cardiovascular diseases','Chronic obstructive pulmonary disease','Respiratory infections', 'Other respiratory diseases'))
 
 # alternative names for cardiorespiratory causes mk1
 add_legend_names = function(dat){
     dat$cause.legend = dat$cause
     levels(dat$cause.legend)[levels(dat$cause.legend)=='Ischaemic heart disease'] <- "Ischaemic\nheart disease"
     levels(dat$cause.legend)[levels(dat$cause.legend)=='Cerebrovascular disease'] <- "Cerebrovascular\ndisease"
+    levels(dat$cause.legend)[levels(dat$cause.legend)=='Other cardiovascular diseases'] <- "Other heart\ndiseases"
     levels(dat$cause.legend)[levels(dat$cause.legend)=='Chronic obstructive pulmonary disease'] <- "COPD"
     levels(dat$cause.legend)[levels(dat$cause.legend)=='Respiratory infections'] <- "Respiratory\ninfections"
-    levels(dat$cause.legend)[levels(dat$cause.legend)=='Other cardiovascular diseases'] <- "Other cardiovascular\ndiseases"
     levels(dat$cause.legend)[levels(dat$cause.legend)=='Other respiratory diseases'] <- "Other respiratory\ndiseases"
 
     # alternative names for cardiorespiratory causes mk2
@@ -120,7 +120,7 @@ p1 = ggplot() +
     xlab('Age group (years)') + ylab("Additional deaths associated with a 1°C\n warmer year (based on 2016 population)") +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(.~intent +sex.long) +
-    scale_fill_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_fill_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(fill=guide_legend(title="",nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +
@@ -148,7 +148,7 @@ p2 =ggplot() +
     xlab('Month') + ylab('Additional deaths associated with a 1 degree \n warmer year (based on 2016 population)') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(. ~intent + sex.long) +
-    scale_fill_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_fill_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(fill=guide_legend(title="",nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +
@@ -171,7 +171,7 @@ p3 = ggplot() +
     xlab('Age group (years)') +  ylab('') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(. ~intent + sex.long) +
-    scale_fill_manual(values=colors.cardio[c(1,2,4,5,3,6)],guide=FALSE) +
+    scale_fill_manual(values=colors.cardio,guide=FALSE) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     # guides(fill=guide_legend(title="Subcategory of intentional injury")) +
     # ggtitle('Additional deaths by types of intentional injuries') +
@@ -191,7 +191,7 @@ p4 =ggplot() +
     xlab('Month') + ylab('') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(. ~intent + sex.long) +
-    scale_fill_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_fill_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(fill=guide_legend(title="", nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +
@@ -219,7 +219,7 @@ p5 =ggplot() +
     scale_x_discrete(labels=month.short.2) +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(. ~intent + sex.long) +
-    scale_fill_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_fill_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(fill=guide_legend(title="", nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +

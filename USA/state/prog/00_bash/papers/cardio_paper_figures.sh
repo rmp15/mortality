@@ -31,7 +31,7 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 
 echo "plotting figures 1 and 2 for cardio paper $start - $end";
 
-Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cardio_ons_subcod.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cardio_ons_subcod.R $start $end
 
 #################################################
 # Figure 3 (same as injury paper)
@@ -68,7 +68,7 @@ echo "plotting figure 5 and supplementary figure cardio paper $start - $end";
 cd ~/git/mortality/USA/state/prog/00_bash/
 
 #Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_cardio_stacked_climate_draws_plot_data_cod_1var.R $start $end $country $model $dname $metric $contig $draws
-#Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_cardio_stacked_climate_draws_plot_data_cod_1var_2.R $start $end $country $model $dname $metric $contig $draws
+Rscript ~/git/mortality/USA/state/prog/additional_deaths/additional_deaths_all_cardio_stacked_climate_draws_plot_data_cod_1var_2.R $start $end $country $model $dname $metric $contig $draws
 
 #################################################
 # Figure 6 (rankings of excess risk)
