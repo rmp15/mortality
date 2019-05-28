@@ -20,7 +20,7 @@ draws = as.numeric(args[10])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 11; dname = 't2m' ; metric = 'meanc3' ; cause = 'Cardiopulmonary'; contig=1
+# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10; dname = 't2m' ; metric = 'meanc3' ; cause = 'Ischaemic heart disease'; contig=1
 # pw.arg = 0; draws=10
 
 multiple = 0
@@ -169,7 +169,7 @@ if(model%in%c('1d','1d2')){
         facet_wrap(~age.long, nrow=2) +
         xlab("Month") + ylab(paste0("Excess relative risk associated with a 1°C warmer year")) + # 'Percentage change in death rates associated with a 1°C warmer year'
         labs(color = "Sex\n") +
-        scale_color_manual(labels = c("Male", "Female"), values = c("blue", "red")) +
+        scale_color_manual(labels = c("Male", "Female"), values = c("#2a78c1", "#c1892a")) +
         theme_bw() + theme(text = element_text(size = 15),
         panel.grid.major = element_blank(),axis.text.x = element_text(angle=0),
         plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
@@ -196,7 +196,7 @@ if(model%in%c('1d','1d2')){
         facet_wrap(~month.short, nrow=2) +
         xlab("Age group (years)") + ylab(paste0("Excess relative risk associated with a 1°C warmer year")) +
         labs(color = "Sex\n") +
-        scale_color_manual(labels = c("Male", "Female"), values = c("blue", "red")) +
+        scale_color_manual(labels = c("Male", "Female"), values = c("#2a78c1", "#c1892a")) +
         theme_bw() + theme(text = element_text(size = 15),
         panel.grid.major = element_blank(),axis.text.x = element_text(angle=0),
         plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
