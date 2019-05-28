@@ -21,7 +21,7 @@ declare -a cods=("Cancer" "Cardiopulmonary" "External" "Other")
 #declare -a cods=("Other_cardiovascular_diseases" "Other_respiratory_diseases" "Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease")
 #declare -a cods=("Cancer" "Other")
 declare -i contig=1
-declare -i pw=0
+declare -i pw=1
 
 #################################################
 # 1. PLOT PARAMETERS OF STATE CLIMATE POSTERIORS
