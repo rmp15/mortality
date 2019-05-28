@@ -365,9 +365,9 @@ additional.deaths.summary.perc$cause = gsub('Ischaemic heart disease', 'Ischaemi
 additional.deaths.summary.perc$cause = gsub('Cerebrovascular disease', 'Cerebrovascular\ndisease',additional.deaths.summary.perc$cause)
 additional.deaths.summary.perc$cause = gsub('Chronic obstructive pulmonary disease', 'COPD',additional.deaths.summary.perc$cause)
 additional.deaths.summary.perc$cause = gsub('Respiratory infections', 'Respiratory\ninfections',additional.deaths.summary.perc$cause)
-additional.deaths.summary.perc$cause = gsub('Other cardiovascular diseases', 'Other\ncardiovascular\ndiseases',additional.deaths.summary.perc$cause)
+additional.deaths.summary.perc$cause = gsub('Other cardiovascular diseases', 'Other\nheart\ndiseases',additional.deaths.summary.perc$cause)
 additional.deaths.summary.perc$cause = gsub('Other respiratory diseases', 'Other\nrespiratory\ndiseases',additional.deaths.summary.perc$cause)
-additional.deaths.summary.perc$cause = factor(additional.deaths.summary.perc$cause, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','COPD','Respiratory\ninfections','Other\ncardiovascular\ndiseases', 'Other\nrespiratory\ndiseases'))
+additional.deaths.summary.perc$cause = factor(additional.deaths.summary.perc$cause, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other\nheart\ndiseases','COPD','Respiratory\ninfections','Other\nrespiratory\ndiseases'))
 
 # pdf(paste0(file.loc,country,'_rate_pred_type',model,
 #     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
@@ -405,7 +405,7 @@ ggplot() +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(~sex.long) +
     scale_y_continuous(labels=scales::percent) +
-    scale_color_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_color_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(color=guide_legend(title="",nrow=1)) +
     coord_flip() +
@@ -430,8 +430,8 @@ ggplot() +
     xlab('Age group (years)') + ylab('Percentage change in death rates associated with a 1°C warmer year') +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(cause~sex.long,scale='free') +
-    scale_y_continuous(labels=scales::percent_format(accuracy=1)) +
-    scale_color_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_y_continuous(labels=scales::percent_format()) +
+    scale_color_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(color=FALSE) +
     coord_flip() +
@@ -482,7 +482,7 @@ ggplot() +
     coord_flip() +
     facet_grid(cause~sex.long) +
     scale_y_continuous(labels=scales::percent_format()) +
-    scale_color_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_color_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     # guides(color=guide_legend(title="",nrow=1)) +
     guides(color=FALSE) +
@@ -509,7 +509,7 @@ ggplot() +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(cause~sex.long,scales='free') +
     scale_y_continuous(labels=scales::percent) +
-    scale_color_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_color_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(color=guide_legend(title="Subcategory of injury",nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +
@@ -533,7 +533,7 @@ ggplot() +
     # ylim(c(min.plot,max.plot)) +
     facet_grid(~sex.long) +
     scale_y_continuous(labels=scales::percent) +
-    scale_color_manual(values=colors.cardio[c(1,2,4,5,3,6)]) +
+    scale_color_manual(values=colors.cardio) +
     # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
     guides(color=guide_legend(title="Subcategory of injury",nrow=1)) +
     # ggtitle('Additional deaths by types of intentional injuries') +
