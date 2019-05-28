@@ -14,8 +14,9 @@ declare country="USA"
 declare -a dnames=("t2m")
 declare -a metrics=('meanc3')
 #declare -a cods=("Cardiopulmonary")
-declare -a cods=("Cancer" "Other" "Other_cardiovascular_diseases" "Other_respiratory_diseases" "Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease" "External" "Unintentional" "Unintentional_wo_drowning" "Intentional" "Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault" "Other_external_causes_of_injury")
+#declare -a cods=("Cancer" "Other" "Other_cardiovascular_diseases" "Other_respiratory_diseases" "Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease" "External" "Unintentional" "Unintentional_wo_drowning" "Intentional" "Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault" "Other_external_causes_of_injury")
 #declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other" "Unintentional" "Intentional")
+declare -a cods=("Cancer" "Cardiopulmonary" "External" "Other")
 #declare -a cods=("Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault" "Other_external_causes_of_injury")
 #declare -a cods=("Other_cardiovascular_diseases" "Other_respiratory_diseases" "Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease")
 #declare -a cods=("Cancer" "Other")
@@ -34,8 +35,8 @@ for metric in "${metrics[@]}"; do
 
 for model in "${models[@]}"; do
 
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $pw
-Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $pw
+Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $pw
+#Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start $end $country $model $dname $metric $cod $contig $pw
 
 #################################################
 # 2. PLOT RAW AGAINST FITTED DEATH RATES AND RESIDUALS
