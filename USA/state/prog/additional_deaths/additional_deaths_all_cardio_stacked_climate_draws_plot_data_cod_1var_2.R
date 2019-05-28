@@ -597,7 +597,7 @@ if(model%in%c('1e')){
     state.lookup = read.csv('../../data/fips_lookup/name_fips_lookup.csv')
     additional.deaths.summary.monthly.state = merge(additional.deaths.summary.monthly.state,state.lookup[,c(1,2,3)])
 
-        plot.function.additional.deaths <- function(dat, sex.sel) {
+    plot.function.additional.deaths <- function(dat, sex.sel) {
 
         # find limits for plot
         min.plot <- min(dat$deaths.added.ll)
@@ -636,204 +636,74 @@ if(model%in%c('1e')){
     dev.off()
 
 
+    plot.function.additional.deaths <- function(dat, sex.sel) {
+
+        # find limits for plot
+        min.plot <- min(dat$deaths.added.ll)
+        max.plot <- max(dat$deaths.added.ul)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    pdf(paste0(file.loc,country,'_rate_pred_type',model,
-        '_',year.start,'_',year.end,'_',dname,'_',metric,'_cardiovascular_respiratory_contig.pdf'),paper='a4r',height=0,width=0)
-    p1 = ggplot() +
-        geom_bar(data=subset(additional.deaths.summary,sex>0&age<99), aes(x=as.factor(age.long),y=deaths.added.mean,fill=cause.legend), stat='identity') +
-        geom_point(data=subset(additional.deaths.intent.summary,sex.long!='Both'&age.long!='All ages'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16) +
-        # geom_errorbar(data=subset(additional.deaths.intent.summary),aes(x=as.factor(age.long),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
+        # plotting
+        print(ggplot(data=subset(dat,sex==sex.sel)) +
+        geom_point(aes(x=as.factor(code_name),y=deaths.added.mean)) +
+        geom_errorbar(aes(x=as.factor(code_name),ymin=deaths.added.ll,ymax=deaths.added.ul), width=0) +
         geom_hline(yintercept=0,linetype='dotted') +
-        xlab('Age group (years)') + ylab("Additional deaths associated with a 1°C\n warmer year (based on 2016 population)") +
-        # ylim(c(min.plot,max.plot)) +
-        facet_grid(.~intent +sex.long) +
-        scale_fill_manual(values=colors.cardio) +
-        # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-        guides(fill=guide_legend(title="",nrow=1)) +
-        # ggtitle('Additional deaths by types of intentional injuries') +
+        xlab('State') + ylab('Additional deaths associated with a 1°C warmer year (based on 2016 population)') +
+        scale_x_discrete(limits=rev(levels(dat$code_name)))+
+        scale_y_continuous() +
+        coord_flip() +
+        facet_wrap(~month.short) +
+        guides(fill=guide_colorbar(barwidth=30, title='Excess relative risk associated with\na 1 degree warmer year')) +
+        # ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
         theme_bw() + theme(text = element_text(size = 15),
-        panel.grid.major = element_blank(),axis.text.x = element_text(angle=90, vjust=0.5),
+        panel.grid.major = element_blank(),axis.text.y = element_text(size=4, angle=0),
         plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
         panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
         panel.border = element_rect(colour = "black"),strip.background = element_blank(),
         legend.position = 'bottom',legend.justification='center',
-        legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+        legend.background = element_rect(fill="white", size=.5, linetype="dotted")))
+        }
 
-    print(p1)
-
+    # male output to pdf
+    pdf(paste0(file.loc,'additional_deaths_men_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    plot.function.additional.deaths(additional.deaths.summary.monthly.state,1)
     dev.off()
 
-    # FOR PLOT BY MONTH AND SEX
-
-    pdf(paste0(file.loc,country,'_rate_pred_type',model,
-        '_',year.start,'_',year.end,'_',dname,'_',metric,'_cardiovascular_respiratory_monthly_contig.pdf'),paper='a4r',height=0,width=0)
-    p2 =ggplot() +
-        geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause.legend), stat='identity') +
-        geom_point(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16) +
-        # geom_errorbar(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
-        geom_hline(yintercept=0,linetype='dotted') +
-        xlab('Month') + ylab('Additional deaths associated with a 1 degree \n warmer year (based on 2016 population)') +
-        # ylim(c(min.plot,max.plot)) +
-        facet_grid(. ~intent + sex.long) +
-        scale_fill_manual(values=colors.cardio) +
-        # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-        guides(fill=guide_legend(title="",nrow=1)) +
-        # ggtitle('Additional deaths by types of intentional injuries') +
-        theme_bw() + theme(text = element_text(size = 15),
-        panel.grid.major = element_blank(),axis.text.x = element_text(angle=90, vjust=0.5),
-        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-        legend.position = 'bottom',legend.justification='center',
-        legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-    print(p2)
-    dev.off()
-
-    p3 = ggplot() +
-        geom_bar(data=subset(additional.deaths.summary,sex>0&age<99&cause!='Other unintentional injuries'), aes(x=as.factor(age.long),y=deaths.added.mean,fill=cause.legend), stat='identity') +
-        geom_point(data=subset(additional.deaths.intent.summary,sex.long!='Both'&age.long!='All ages'),aes(x=as.factor(age.long),y=deaths.added.mean),shape=16,color='black') +
-        # geom_errorbar(data=subset(additional.deaths.intent.summary),aes(x=as.factor(age.long),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
-        geom_hline(yintercept=0,linetype='dotted') +
-        xlab('Age group (years)') +  ylab('') +
-        # ylim(c(min.plot,max.plot)) +
-        facet_grid(. ~intent + sex.long) +
-        scale_fill_manual(values=colors.cardio,guide=FALSE) +
-        # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-        # guides(fill=guide_legend(title="Subcategory of intentional injury")) +
-        # ggtitle('Additional deaths by types of intentional injuries') +
-        theme_bw() + theme(text = element_text(size = 15),
-        panel.grid.major = element_blank(),axis.text.x = element_text(angle=90, vjust=0.5),
-        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-        legend.position = 'bottom',legend.justification='center',
-        legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-    p4 =ggplot() +
-        geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause.legend), stat='identity') +
-        geom_point(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16,color='black') +
-        # geom_errorbar(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),ymax=deaths.added.ul,ymin=deaths.added.ll),width=.3,size=0.5) +
-        geom_hline(yintercept=0,linetype='dotted') +
-        xlab('Month') + ylab('') +
-        # ylim(c(min.plot,max.plot)) +
-        facet_grid(. ~intent + sex.long) +
-        scale_fill_manual(values=colors.cardio) +
-        # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-        guides(fill=guide_legend(title="", nrow=1)) +
-        # ggtitle('Additional deaths by types of intentional injuries') +
-        theme_bw() + theme(text = element_text(size = 15), strip.text.x=element_blank(),
-        axis.title.y = element_text(margin=margin(b=1000)),
-        panel.grid.major = element_blank(),axis.text.x = element_text(angle=90, vjust=0.5),
-        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-        legend.position = 'bottom',legend.justification='center',
-        legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-    # alternative p4 but with month skipping
-
-    # additional.deaths.summary.monthly$month.short.2 <- mapvalues(additional.deaths.summary.monthly$month,from=sort(unique(additional.deaths.summary.monthly$month)),to=c(as.character(month.short.2)))
-    # additional.deaths.summary.monthly$month.short.2 <- reorder(additional.deaths.summary.monthly$month.short.2,additional.deaths.summary.monthly$month)
-    # additional.deaths.intent.monthly.summary$month.short.2 <- mapvalues(additional.deaths.intent.monthly.summary$month,from=sort(unique(additional.deaths.intent.monthly.summary$month)),to=c(as.character(month.short.2)))
-    # additional.deaths.intent.monthly.summary$month.short.2 <- reorder(additional.deaths.intent.monthly.summary$month.short.2,additional.deaths.intent.monthly.summary$month)
-
-    p5 =ggplot() +
-        geom_bar(data=subset(additional.deaths.summary.monthly,sex>0&month<99&cause!='Other unintentional injuries'), aes(x=as.factor(month.short),y=deaths.added.mean,fill=cause.legend), stat='identity') +
-        geom_point(data=subset(additional.deaths.intent.monthly.summary),aes(x=as.factor(month.short),y=deaths.added.mean),shape=16,color='black') +
-        geom_hline(yintercept=0,linetype='dotted') +
-        xlab('Month') + ylab('') +
-        scale_x_discrete(labels=month.short.2) +
-        # ylim(c(min.plot,max.plot)) +
-        facet_grid(. ~intent + sex.long) +
-        scale_fill_manual(values=colors.cardio) +
-        # scale_y_continuous(breaks = seq(min.plot, max.plot, by = 50),limits=c(min.plot,max.plot)) +
-        guides(fill=guide_legend(title="", nrow=1)) +
-        # ggtitle('Additional deaths by types of intentional injuries') +
-        theme_bw() + theme(text = element_text(size = 15), strip.text.x=element_blank(),
-        axis.title.y = element_text(margin=margin(b=1000)),
-        panel.grid.major = element_blank(),axis.text.x = element_text(angle=90, vjust=0.5),
-        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
-        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-        legend.position = 'bottom',legend.justification='center',
-        legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-    # make sure that everything aligns (from http://www.exegetic.biz/blog/2015/05/r-recipe-aligning-axes-in-ggplot2/)
-    p3 = ggplot_gtable(ggplot_build(p3))
-    p4 = ggplot_gtable(ggplot_build(p4))
-    p5 = ggplot_gtable(ggplot_build(p5))
-
-    maxWidth = unit.pmax(p3$widths[2:3],p4$widths[2:3],p5$widths[2:3])
-
-    p3$widths[2:3] = maxWidth ; p4$widths[2:3] = maxWidth ; p5$widths[2:3] = maxWidth
-
-    # everything all on one page
-    pdf(paste0(file.loc,country,'_rate_pred_type',model,
-        '_',year.start,'_',year.end,'_',dname,'_',metric,'_cardiovascular_respiratory_all_contig.pdf'),paper='a4r',height=0,width=0)
-    grid.arrange(p3,p4,nrow=2,left=paste("Additional deaths associated with a 1°C warmer year (based on 2016 population)"))
-    dev.off()
-
-    #name=expression(paste("Temperature (",degree,"C)"))
-
-    # same plot as above but with skipping month names
-    pdf(paste0(file.loc,country,'_rate_pred_type',model,
-        '_',year.start,'_',year.end,'_',dname,'_',metric,'_cardiovascular_respiratory_all_contig_month_skip.pdf'),paper='a4r',height=0,width=0)
-    grid.arrange(p3,p5,nrow=2,left=paste("Additional deaths associated with a 1°C warmer year (based on 2016 population)"))
+    # female output to pdf
+    pdf(paste0(file.loc,'additional_deaths_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    plot.function.additional.deaths(additional.deaths.summary.monthly.state,2)
     dev.off()
 
     # PLOTS IN RELATIVE RISK IN DEATHS
 
     # load mortality data
-    dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_cardio_ons_',year.start,'_',year.end))
+    dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start,'_',year.end))
+    dat.mort <- subset(dat.mort,cause=='Cardiopulmonary')
     print(head(dat.mort))
 
-    # make for national data
+    # make for state data by all ages
     dat.mort$deaths.pred <- with(dat.mort,pop.adj*rate.adj)
-    dat.national <- ddply(dat.mort,.(year,month,cause.sub,sex,age),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
+    dat.national <- ddply(dat.mort,.(fips,year,month,sex),summarize,deaths=sum(deaths),deaths.pred=sum(deaths.pred),pop.adj=sum(pop.adj))
     dat.national$rate.adj <- with(dat.national,deaths.pred/pop.adj)
-    dat.national <- dat.national[order(dat.national$cause.sub,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
-    dat.national$cause = dat.national$cause.sub ; dat.national$cause.sub = NULL
+    dat.national <- dat.national[order(dat.national$sex,dat.national$fips,dat.national$year,dat.national$month),]
+    dat.national$cause = 'Cardiopulmonary'
 
     # take one year
     dat.merged.sub <- subset(dat.national,year==year.end)
 
     # summarise by age-sex and cause across the year
-    dat.year.summary = ddply(dat.merged.sub,.(sex,age,cause),summarize,deaths=sum(deaths.pred))
+    dat.year.summary = dat.merged.sub
+    # dat.year.summary = ddply(dat.merged.sub,.(sex,age,cause),summarize,deaths=sum(deaths.pred))
     # dat.year.summary = fix_cause_names(dat.year.summary)
 
     # merge with summary of additional deaths by sex,age,cause
     dat.year.summary$age.long = mapvalues(dat.year.summary$age,from=sort(unique(dat.year.summary$age)),to=as.character(age.code[,2]))
     dat.year.summary$sex.long = mapvalues(dat.year.summary$sex,from=sort(unique(dat.year.summary$sex)),to=as.character(sex.filter2))
 
-    additional.deaths.summary.perc = merge(dat.year.summary,additional.deaths.summary,by=c('sex.long','sex','age.long','age','cause'))
+    additional.deaths.summary.perc = merge(dat.year.summary,additional.deaths.summary.monthly.state,by=c('sex','month','fips'))
     additional.deaths.summary.perc$perc.mean = with(additional.deaths.summary.perc,deaths.added.mean/deaths)
     additional.deaths.summary.perc$perc.ul = with(additional.deaths.summary.perc,deaths.added.ul/deaths)
     additional.deaths.summary.perc$perc.ll = with(additional.deaths.summary.perc,deaths.added.ll/deaths)
-    additional.deaths.summary.perc$cause = factor(additional.deaths.summary.perc$cause, levels=c('Ischaemic heart disease','Cerebrovascular disease','Chronic obstructive pulmonary disease','Respiratory infections', 'Other cardiovascular diseases', 'Other respiratory diseases'))
 
     perc_calculator = function(dat){
         dat$perc.mean = with(dat,deaths.added.mean/deaths)
@@ -842,6 +712,44 @@ if(model%in%c('1e')){
 
         return(dat)
     }
+
+    plot.function.perc.change.deaths <- function(dat, sex.sel) {
+
+        # find limits for plot
+        min.plot <- min(dat$deaths.added.ll)
+        max.plot <- max(dat$deaths.added.ul)
+
+
+        # plotting
+        print(ggplot(data=subset(dat,sex==sex.sel)) +
+        geom_point(aes(x=as.factor(code_name),y=perc.mean)) +
+        geom_errorbar(aes(x=as.factor(code_name),ymin=perc.ll,ymax=perc.ul), width=0) +
+        geom_hline(yintercept=0,linetype='dotted') +
+        xlab('State') + ylab('Percentage change in deaths rates associated with a 1°C warmer year') +
+        scale_x_discrete(limits=rev(levels(dat$code_name)))+
+        scale_y_continuous(labels=scales::percent) +
+        coord_flip() +
+        facet_wrap(~month.short) +
+        guides(fill=guide_colorbar(barwidth=30, title='Percentage change in deaths rates associated with a 1°C warmer year')) +
+        # ggtitle(paste0(cod.print,' ', age.sel,' ',sex.lookup2[sex.sel],' : ', year.start,'-',year.end)) +
+        theme_bw() + theme(text = element_text(size = 15),
+        panel.grid.major = element_blank(),axis.text.y = element_text(size=4, angle=0),
+        plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+        panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+        legend.position = 'bottom',legend.justification='center',
+        legend.background = element_rect(fill="white", size=.5, linetype="dotted")))
+        }
+
+    # male output to pdf
+    pdf(paste0(file.loc,'perc_change_deaths_men_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    plot.function.perc.change.deaths(additional.deaths.summary.perc,1)
+    dev.off()
+
+    # female output to pdf
+    pdf(paste0(file.loc,'perc_change_deaths_women_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.pdf'),paper='a4r',height=0,width=0)
+    plot.function.perc.change.deaths(additional.deaths.summary.perc,2)
+    dev.off()
 
     # summarise by age-sex and intent across the year
     # additional.deaths.intent.summary.perc = dat.year.summary
@@ -853,9 +761,9 @@ if(model%in%c('1e')){
     # additional.deaths.intent.summary.perc = merge(additional.deaths.intent.summary.perc,additional.deaths.intent.summary,by=c('sex.long','age.long','intent'))
     # additional.deaths.intent.summary.perc =  perc_calculator(additional.deaths.intent.summary.perc)
     #
-    additional.deaths.summary.perc$age.long = factor(additional.deaths.summary.perc$age.long, levels=rev(age.print))
+    # additional.deaths.summary.perc$age.long = factor(additional.deaths.summary.perc$age.long, levels=rev(age.print))
 
-    additional.deaths.summary.perc$sex.long = factor(additional.deaths.summary.perc$sex.long, levels=rev(unique(additional.deaths.summary.perc$sex.long)))
+    # additional.deaths.summary.perc$sex.long = factor(additional.deaths.summary.perc$sex.long, levels=rev(unique(additional.deaths.summary.perc$sex.long)))
 
 
     # pdf(paste0(file.loc,country,'_rate_pred_type',model,
@@ -911,13 +819,13 @@ if(model%in%c('1e')){
     #     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
     # dev.off()
 
-    additional.deaths.summary.perc$cause = gsub('Ischaemic heart disease', 'Ischaemic\nheart disease',additional.deaths.summary.perc$cause)
-    additional.deaths.summary.perc$cause = gsub('Cerebrovascular disease', 'Cerebrovascular\ndisease',additional.deaths.summary.perc$cause)
-    additional.deaths.summary.perc$cause = gsub('Chronic obstructive pulmonary disease', 'COPD',additional.deaths.summary.perc$cause)
-    additional.deaths.summary.perc$cause = gsub('Respiratory infections', 'Respiratory\ninfections',additional.deaths.summary.perc$cause)
-    additional.deaths.summary.perc$cause = gsub('Other cardiovascular diseases', 'Other\nheart\ndiseases',additional.deaths.summary.perc$cause)
-    additional.deaths.summary.perc$cause = gsub('Other respiratory diseases', 'Other\nrespiratory\ndiseases',additional.deaths.summary.perc$cause)
-    additional.deaths.summary.perc$cause = factor(additional.deaths.summary.perc$cause, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other\nheart\ndiseases','COPD','Respiratory\ninfections','Other\nrespiratory\ndiseases'))
+    # additional.deaths.summary.perc$cause = gsub('Ischaemic heart disease', 'Ischaemic\nheart disease',additional.deaths.summary.perc$cause)
+    # additional.deaths.summary.perc$cause = gsub('Cerebrovascular disease', 'Cerebrovascular\ndisease',additional.deaths.summary.perc$cause)
+    # additional.deaths.summary.perc$cause = gsub('Chronic obstructive pulmonary disease', 'COPD',additional.deaths.summary.perc$cause)
+    # additional.deaths.summary.perc$cause = gsub('Respiratory infections', 'Respiratory\ninfections',additional.deaths.summary.perc$cause)
+    # additional.deaths.summary.perc$cause = gsub('Other cardiovascular diseases', 'Other\nheart\ndiseases',additional.deaths.summary.perc$cause)
+    # additional.deaths.summary.perc$cause = gsub('Other respiratory diseases', 'Other\nrespiratory\ndiseases',additional.deaths.summary.perc$cause)
+    # additional.deaths.summary.perc$cause = factor(additional.deaths.summary.perc$cause, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other\nheart\ndiseases','COPD','Respiratory\ninfections','Other\nrespiratory\ndiseases'))
 
     # pdf(paste0(file.loc,country,'_rate_pred_type',model,
     #     '_',year.start,'_',year.end,'_',dname,'_',metric,'_intentional_unintentional_excess_risk_fast_contig.pdf'),paper='a4r',height=0,width=0)
