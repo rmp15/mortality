@@ -835,7 +835,7 @@ if(model%in%c('1e')){
     plot.function.month(2)
     dev.off()
 
-    # output perc data
-    saveRDS(additional.deaths.summary.perc, paste0(file.loc,'perc_change_deaths_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.rds'))
-
 }
+
+# output perc data
+saveRDS(additional.deaths.summary.perc, paste0(file.loc,'perc_change_deaths_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.rds'))
