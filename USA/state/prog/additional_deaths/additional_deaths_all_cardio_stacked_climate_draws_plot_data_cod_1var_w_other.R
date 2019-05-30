@@ -839,3 +839,4 @@ if(model%in%c('1e')){
 
 # output perc data
 saveRDS(additional.deaths.summary.perc, paste0(file.loc,'perc_change_deaths_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.rds'))
+write.csv(additional.deaths.summary.perc, paste0(file.loc,'perc_change_deaths_',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'.csv'))
