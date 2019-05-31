@@ -32,6 +32,7 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 echo "plotting figures 1 and 2 for cardio paper $start - $end";
 
 #Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_cardio_ons_subcod.R $start $end
+Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_natural_ons_subcod.R $start $end
 
 #################################################
 # Figure 3 (same as injury paper)

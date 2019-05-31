@@ -1,371 +1,183 @@
 rm(list=ls())
 
+library(plyr)
+library(scales)
+library(RColorBrewer)
+library(ggplot2)
+library(grid)
+library(gridExtra)
+
 # break down the arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
 year.start.arg <- as.numeric(args[1])
 year.end.arg <- as.numeric(args[2])
 
-library(RColorBrewer)
-
 # create directories for output
-file.loc <- paste0('../../output/data_explore_cod/cardio/')
+file.loc <- paste0('../../output/data_explore_cod/natural/')
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
-
-# load data
-filename <- paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_cardio_ons_',year.start.arg,'_',year.end.arg)
-dat <- readRDS(filename)
 
 # gender state and age lookup
 source('../../data/objects/objects.R')
+
+# fix coding for ages for printing
+age.code$age.print = as.character(age.code$age.print)
 
 # year palette
 colorfunc = colorRampPalette(c(brewer.pal(6 , "BrBG" )[1:3],brewer.pal(6 , "RdGy" )[4:6]))
 yearpalette = colorfunc(year.end.arg-year.start.arg +1)
 
-# fix cod names
-dat$cause = dat$cause.group ; dat$cause.group=NULL
-# dat$cause <- gsub('Unintentional', 'Unintentional injuries', dat$cause) # first in order
-# dat$cause <- gsub('Intentional', 'Intentional injuries', dat$cause) # second in order
-# dat$cause <- gsub('Other', 'Undetermined whether accidentally or purposely inflicted', dat$cause)
+# DATA PREP FOR CARDIO
+{
 
-# fix sub-cod names
-dat$cause.sub <- gsub('Ischaemic heart disease', 'Ischaemic\nheart disease', dat$cause.sub)                                                 # 1
-dat$cause.sub <- gsub('Cerebrovascular disease', 'Cerebrovascular\ndisease', dat$cause.sub)                                                 # 2
-dat$cause.sub <- gsub('Other cardiovascular diseases', 'Other heart\ndiseases', dat$cause.sub)                                     # 3
-dat$cause.sub <- gsub('Chronic obstructive pulmonary disease', 'COPD', dat$cause.sub)                     # 4
-dat$cause.sub <- gsub('Respiratory infections', 'Respiratory\ninfections', dat$cause.sub)                                                   # 5
-dat$cause.sub <- gsub('Other respiratory diseases', 'Other respiratory\ndiseases', dat$cause.sub)                                           # 6
+    # load data for
+    filename <- paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_cardio_ons_',year.start.arg,'_',year.end.arg)
+    dat <- readRDS(filename)
 
-# reorder
-# dat$cause = factor(dat$cause, levels=c('Unintentional injuries','Intentional injuries'))
-# dat$cause.sub = factor(dat$cause.sub, levels=c('Other cardiovascular\ndiseases','Other respiratory\ndiseases','Ischaemic\nheart disease','Cerebrovascular\ndisease','COPD',
-#                                                 'Respiratory\ninfections'))
-dat$cause.sub = factor(dat$cause.sub, levels=c('Other respiratory\ndiseases','Respiratory\ninfections','COPD',
-                                                'Other heart\ndiseases','Cerebrovascular\ndisease','Ischaemic\nheart disease'))
+    # fix cod names
+    dat$cause = dat$cause.group ; dat$cause.group=NULL
 
-library(plyr)
-library(scales)
+    # fix sub-cod names
+    dat$cause.sub <- gsub('Ischaemic heart disease', 'Ischaemic\nheart disease', dat$cause.sub)                                                 # 1
+    dat$cause.sub <- gsub('Cerebrovascular disease', 'Cerebrovascular\ndisease', dat$cause.sub)                                                 # 2
+    dat$cause.sub <- gsub('Other cardiovascular diseases', 'Other cardiovascular\ndiseases', dat$cause.sub)                                     # 3
+    dat$cause.sub <- gsub('Chronic obstructive pulmonary disease', 'COPD', dat$cause.sub)                     # 4
+    dat$cause.sub <- gsub('Respiratory infections', 'Respiratory\ninfections', dat$cause.sub)                                                   # 5
+    dat$cause.sub <- gsub('Other respiratory diseases', 'Other respiratory\ndiseases', dat$cause.sub)                                           # 6
 
-# # compare with broad causes of death
-# filename.broad = paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg)
-# dat.broad = readRDS(filename.broad)
-#
-# dat.summarised = ddply(dat,.(year,sex),summarise,deaths=sum(deaths))
-# dat.summarised.broad = subset(ddply(dat.broad,.(cause,year,sex),summarise,deaths=sum(deaths)),cause=='Cardiopulmonary')
-# dat.compare = merge(dat.summarised,dat.summarised.broad)
+    # reorder
+    dat$cause.sub = factor(dat$cause.sub, levels=c('Other respiratory\ndiseases','Respiratory\ninfections','COPD',
+                                                    'Other cardiovascular\ndiseases','Cerebrovascular\ndisease','Ischaemic\nheart disease'))
 
-# DATA PREP
+    # create monthly nationalised data for sub sub-causes
+    dat.national = ddply(dat,.(cause.sub,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
+    dat.national$rate.adj = with(dat.national,deaths/pop.adj)
+    dat.national = dat.national[order(dat.national$cause.sub,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-########################################### SUB CAUSES ###########################################
+    # create ASDR national data for sub sub-causes by sex
+    dat.national.com.sex.sep = ddply(dat.national,.(cause.sub,month,year,sex,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
+    dat.national.com.sex.sep$rate.adj = with(dat.national.com.sex.sep, deaths/pop.adj)
+    dat.national.com.sex.sep = merge(dat.national.com.sex.sep,StdPopMF,by='age',all.x=1)
+    dat.national.com.sex.sep = dat.national.com.sex.sep[order(dat.national.com.sex.sep$cause.sub,dat.national.com.sex.sep$age,dat.national.com.sex.sep$year),]
+    dat.national.com.sex.sep = ddply(dat.national.com.sex.sep,.(cause.sub,year,month,sex), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
 
-# create monthly nationalised data for broad sub-causes
-dat.nat.broad = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
-# dat.nat.broad$pop.adj = dat.nat.broad$pop.adj / 3; # why is this true???
-dat.nat.broad$rate.adj = with(dat.nat.broad,deaths/pop.adj)
-dat.nat.broad  = dat.nat.broad[order(dat.nat.broad$cause,dat.nat.broad$sex,dat.nat.broad$age,dat.nat.broad$year,dat.nat.broad$month),]
+    dat.national.com.sex.sep$sex.long = mapvalues(dat.national.com.sex.sep$sex,from=sort(unique(dat.national.com.sex.sep$sex)),to=as.character(sex.filter2))
+    dat.national.com.sex.sep$sex.long = reorder(dat.national.com.sex.sep$sex.long,(dat.national.com.sex.sep$sex))
 
-# create yearly nationalised data for broad sub-causes
-dat.nat.broad.year = ddply(dat.nat.broad,.(cause,year,sex,age),summarize,deaths=sum(deaths),pop.adj=mean(pop.adj))
-dat.nat.broad.year$rate.adj = with(dat.nat.broad.year,deaths/pop.adj)
+    dat.national.com.sex.sep$cause.sub = factor(dat.national.com.sex.sep$cause.sub, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other cardiovascular\ndiseases',
+                                                    'COPD', 'Respiratory\ninfections','Other respiratory\ndiseases'))
 
-# create monthly ASDR national data for sub causes
-dat.nat.broad.asdr = ddply(dat.nat.broad,.(cause,month,year,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
-dat.nat.broad.asdr$rate.adj = with(dat.nat.broad.asdr, deaths/pop.adj)
-dat.nat.broad.asdr = merge(dat.nat.broad.asdr,StdPopMF,by='age',all.x=1)
-dat.nat.broad.asdr = dat.nat.broad.asdr[order(dat.nat.broad.asdr$cause,dat.nat.broad.asdr$age,dat.nat.broad.asdr$year),]
-dat.nat.broad.asdr = ddply(dat.nat.broad.asdr,.(cause,year,month), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
+    # subset of all data
+    last.years = c((year.start.arg):(year.end.arg))
+    dat.last.years = subset(dat.national,year %in% last.years)
+    dat.last.years = ddply(dat.last.years,.(cause.sub,month,sex,age),summarize,deaths=sum(deaths),rate.adj=mean(rate.adj))
 
-# create yearly ASDR national data
-dat.nat.broad.asdr.year = ddply(dat.nat.broad.asdr,.(cause,year), summarize, ASDR=mean(ASDR))
+    # fix names of sexes
+    dat.last.years$sex.long <- mapvalues(dat.last.years$sex,from=sort(unique(dat.last.years$sex)),to=c('Male','Female'))
+    dat.last.years$sex.long <- with(dat.last.years,reorder(dat.last.years$sex.long,sex))
 
-########################################### SUB SUB CAUSES ###########################################
+    # fix names of ages
+    dat.last.years$age.long <- mapvalues(dat.last.years$age,from=sort(unique(dat.last.years$age)),to=as.character(age.code[,2]))
+    dat.last.years$age.long <- reorder(dat.last.years$age.long,dat.last.years$age)
 
-# create monthly nationalised data for sub sub-causes
-dat.national = ddply(dat,.(cause.sub,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
-dat.national$rate.adj = with(dat.national,deaths/pop.adj)
-dat.national = dat.national[order(dat.national$cause.sub,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
+    # fix names of months
+    dat.last.years$ID = mapvalues(dat.last.years$month, from=sort(unique(dat.last.years$month)),to=month.short)
+    dat.last.years$ID = with(dat.last.years,reorder(dat.last.years$ID,month))
 
-# create yearly nationalised data for sub sub-causes
-dat.national.year = ddply(dat.national,.(cause.sub,year,sex,age),summarize,deaths=sum(deaths),pop.adj=mean(pop.adj))
-dat.national.year$rate.adj = with(dat.national.year,deaths/pop.adj)
+    # copy both datasets
+    dat.national.com.sex.sep.cardio = dat.national.com.sex.sep
+    dat.last.years.cardio = dat.last.years
 
-# create yearly nationalised data for sub-causes by sex only
-dat.national.year.all = ddply(dat.national,.(cause.sub,year,sex),summarize,deaths=sum(deaths),pop.adj=mean(pop.adj))
-dat.national.year.all$rate.adj = with(dat.national.year.all,deaths/pop.adj)
+    # fix column name
+    names(dat.national.com.sex.sep.cardio)[1] = 'cause'
+    names(dat.last.years.cardio)[1] = 'cause'
 
-# create monthly ASDR national data for sub sub-causes
-dat.national.com.sex = ddply(dat.national,.(cause.sub,month,year,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
-dat.national.com.sex$rate.adj = with(dat.national.com.sex, deaths/pop.adj)
-dat.national.com.sex = merge(dat.national.com.sex,StdPopMF,by='age',all.x=1)
-dat.national.com.sex = dat.national.com.sex[order(dat.national.com.sex$cause.sub,dat.national.com.sex$age,dat.national.com.sex$year),]
-dat.national.com.sex = ddply(dat.national.com.sex,.(cause.sub,year,month), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
+}
 
-# create ASDR national data for sub sub-causes BY SEX
-dat.national.com.sex.sep = ddply(dat.national,.(cause.sub,month,year,sex,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
-dat.national.com.sex.sep$rate.adj = with(dat.national.com.sex.sep, deaths/pop.adj)
-dat.national.com.sex.sep = merge(dat.national.com.sex.sep,StdPopMF,by='age',all.x=1)
-dat.national.com.sex.sep = dat.national.com.sex.sep[order(dat.national.com.sex.sep$cause.sub,dat.national.com.sex.sep$age,dat.national.com.sex.sep$year),]
-dat.national.com.sex.sep = ddply(dat.national.com.sex.sep,.(cause.sub,year,month,sex), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
+# DATA PREP FOR CANCER AND OTHER
+{
+    # load data
+    filename <- paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg)
+    dat <- readRDS(filename)
 
-# create yearly ASDR national data FIX THIS
-dat.national.com.sex.year = ddply(dat.national.com.sex,.(cause.sub,year), summarize, ASDR=mean(ASDR))
+    # fix cod names
+    dat$cause <- gsub('Cardiopulmonary', 'Cardiorespiratory', dat$cause)
+    dat$cause <- gsub('External', 'Injuries', dat$cause)
+    dat$cause <- gsub('Cancer', 'Cancers', dat$cause)
 
-library(ggplot2)
+    # create nationalised data
+    dat.national = ddply(dat,.(cause,year,month,sex,age),summarize,deaths=sum(deaths.adj),pop.adj=sum(pop.adj))
+    dat.national$rate.adj = with(dat.national,deaths/pop.adj)
+    dat.national = dat.national[order(dat.national$cause,dat.national$sex,dat.national$age,dat.national$year,dat.national$month),]
 
-# fix coding for ages for printing
-age.code$age.print = as.character(age.code$age.print)
+    # create yearly nationalised data for sub-causes
+    dat.national.year = ddply(dat.national,.(cause,year,sex,age),summarize,deaths=sum(deaths),pop.adj=mean(pop.adj))
+    dat.national.year$rate.adj = with(dat.national.year,deaths/pop.adj)
 
-# PLOTTING
 
-########################################### SUB CAUSES ###########################################
+    # create monthly ASDR national data for sub causes
+    dat.nat.broad.asdr = ddply(dat.national,.(cause,month,year,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
+    dat.nat.broad.asdr$rate.adj = with(dat.nat.broad.asdr, deaths/pop.adj)
+    dat.nat.broad.asdr = merge(dat.nat.broad.asdr,StdPopMF,by='age',all.x=1)
+    dat.nat.broad.asdr = dat.nat.broad.asdr[order(dat.nat.broad.asdr$cause,dat.nat.broad.asdr$age,dat.nat.broad.asdr$year),]
+    dat.nat.broad.asdr = ddply(dat.nat.broad.asdr,.(cause,year,month), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
 
-######################################################################################
-#  for nationalised death rates by age and sex
-######################################################################################
+    # create monthly ASDR national data for sub causes BY SEX
+    dat.national.com.sex.sep = ddply(dat.national,.(cause,month,year,sex,age),summarize, deaths=sum(deaths),pop.adj=sum(pop.adj))
+    dat.national.com.sex.sep$rate.adj = with(dat.national.com.sex.sep, deaths/pop.adj)
+    dat.national.com.sex.sep = merge(dat.national.com.sex.sep,StdPopMF,by='age',all.x=1)
+    dat.national.com.sex.sep = dat.national.com.sex.sep[order(dat.national.com.sex.sep$cause,dat.national.com.sex.sep$age,dat.national.com.sex.sep$year),]
+    dat.national.com.sex.sep = ddply(dat.national.com.sex.sep,.(cause,year,month,sex), summarize, ASDR=sum(rate.adj*weight)/sum(weight))
 
-# attach long age names
-dat.nat.broad$age.long = mapvalues(dat.nat.broad$age,from=sort(unique(dat.nat.broad$age)),to=as.character(age.code[,2]))
-dat.nat.broad$age.long = reorder(dat.nat.broad$age.long,dat.nat.broad$age)
-dat.nat.broad$age.long = as.character(dat.nat.broad$age.long)
+    # fix names of sexes
+    dat.national.com.sex.sep$sex.long <- mapvalues(dat.national.com.sex.sep$sex,from=sort(unique(dat.national.com.sex.sep$sex)),to=c('Male','Female'))
+    dat.national.com.sex.sep$sex.long <- with(dat.national.com.sex.sep,reorder(dat.national.com.sex.sep$sex.long,sex))
 
-# attach long age and sex names
-dat.nat.broad.year$age.long = mapvalues(dat.nat.broad.year$age,from=sort(unique(dat.nat.broad.year$age)),to=as.character(age.code[,2]))
-dat.nat.broad.year$age.long = reorder(dat.nat.broad.year$age.long,dat.nat.broad.year$age)
-#dat.nat.broad.year$age.long = as.character(dat.nat.broad.year$age.long)
-dat.nat.broad.year$sex.long = mapvalues(dat.nat.broad.year$sex,from=sort(unique(dat.nat.broad.year$sex)),to=as.character(sex.filter2))
-dat.nat.broad.year$sex.long = reorder(dat.nat.broad.year$sex.long,rev(dat.nat.broad.year$sex))
-dat.nat.broad.year$sex.long = as.character(dat.nat.broad.year$sex.long)
+    # subset of all data
+    dat.last.years = subset(dat.national,year %in% last.years)
+    dat.last.years = ddply(dat.last.years,.(cause,month,sex,age),summarize,deaths=sum(deaths),rate.adj=mean(rate.adj))
 
-########################################### SUB SUB CAUSES ###########################################
+    # fix names of sexes
+    dat.last.years$sex.long <- mapvalues(dat.last.years$sex,from=sort(unique(dat.last.years$sex)),to=c('Male','Female'))
+    dat.last.years$sex.long <- with(dat.last.years,reorder(dat.last.years$sex.long,sex))
 
-######################################################################################
-#  for nationalised death rates by age and sex
-######################################################################################
+    # fix names of ages
+    dat.last.years$age.long <- mapvalues(dat.last.years$age,from=sort(unique(dat.last.years$age)),to=as.character(age.code[,2]))
+    dat.last.years$age.long <- reorder(dat.last.years$age.long,dat.last.years$age)
 
-# attach long age names
-dat.national$age.long = mapvalues(dat.national$age,from=sort(unique(dat.national$age)),to=as.character(age.code[,2]))
-dat.national$age.long = reorder(dat.national$age.long,dat.national$age)
+    # fix names of months
+    dat.last.years$ID = mapvalues(dat.last.years$month, from=sort(unique(dat.last.years$month)),to=month.short)
+    dat.last.years$ID = with(dat.last.years,reorder(dat.last.years$ID,month))
 
-# attach long age and sex names
-dat.national.year$age.long = mapvalues(dat.national.year$age,from=sort(unique(dat.national.year$age)),to=as.character(age.code[,2]))
-dat.national.year$age.long = reorder(dat.national.year$age.long,dat.national.year$age)
-#dat.national.year$age.long = as.character(dat.national.year$age.long)
-dat.national.year$sex.long = mapvalues(dat.national.year$sex,from=sort(unique(dat.national.year$sex)),to=as.character(sex.filter2))
-dat.national.year$sex.long = reorder(dat.national.year$sex.long,rev(dat.national.year$sex))
-dat.national.year$sex.long = as.character(dat.national.year$sex.long)
+    # copy both datasets
+    dat.national.com.sex.sep.broad = dat.national.com.sex.sep
+    dat.last.years.broad = dat.last.years
 
-dat.national.year.all$sex.long = mapvalues(dat.national.year.all$sex,from=sort(unique(dat.national.year.all$sex)),to=as.character(sex.filter2))
-dat.national.year.all$sex.long = reorder(dat.national.year.all$sex.long,rev(dat.national.year.all$sex))
-dat.national.year.all$sex.long = as.character(dat.national.year.all$sex.long)
+    # only keep cancer and other
+    dat.national.com.sex.sep.broad = subset(dat.national.com.sex.sep.broad,cause%in%c('Cancers','Other'))
+    dat.last.years.broad = subset(dat.last.years.broad,cause%in%c('Cancers','Other'))
 
-############################
-# for nationalised ASDR data
-############################
+}
 
-pdf(paste0(file.loc,'cardio_ons_subsubcod_asdr_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-# 1. monthly plot facetted by subsubcause
-# ggplot(dat=subset(dat.national.com.sex,!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-#     geom_line() +
-#     xlab('Month') +
-#     ylab('Age standardised death rate (per 100,000)') +
-#     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
-#     guides(color=guide_colorbar(barwidth=30, title='Year')) +
-#     scale_color_gradientn(colors=yearpalette) +
-#     facet_grid(~cause.sub) +
-#     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-#     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-#
-# ggplot(dat=subset(dat.national.com.sex,!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-#     geom_line() +
-#     xlab('Month') +
-#     ylab('Age standardised death rate (per 100,000)') +
-#     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-#     guides(color=guide_colorbar(barwidth=30, title='Year')) +
-#     scale_color_gradientn(colors=yearpalette) +
-#     facet_grid(~cause.sub) +
-#     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-#     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+# combine sub cardio dataset with broad other causes dataset
+dat.national.com.sex.sep.all = rbind(dat.national.com.sex.sep.cardio,dat.national.com.sex.sep.broad)
+dat.last.years.all = rbind(dat.last.years.cardio,dat.last.years.broad)
 
-ggplot(dat=dat.national.com.sex, aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+###########################################
+#  ASDR data plots by month over time
+###########################################
+
+pdf(paste0(file.loc,'natural_ons_subsubcod_asdr_plots_sex_facet_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+ggplot(dat=subset(dat.national.com.sex.sep.all), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
-    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    guides(color=guide_colorbar(barwidth=30, title='Year')) +
-    scale_color_gradientn(colors=yearpalette) +
-    facet_grid(~cause.sub) +
-    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-dev.off()
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_asdr_plots_male_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-# 2. monthly plot facetted by subsubcause MALE
-# ggplot(dat=subset(dat.national.com.sex.sep,sex==1&!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-#     geom_line() +
-#     xlab('Month') +
-#     ylab('Age standardised death rate (per 100,000)') +
-#     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
-#     guides(color=guide_colorbar(barwidth=30, title='Year')) +
-#     scale_color_gradientn(colors=yearpalette) +
-#     facet_grid(~cause.sub) +
-#     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-#     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-# #
-# ggplot(dat=subset(dat.national.com.sex.sep,sex==1&!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-#     geom_line() +
-#     xlab('Month') +
-#     ylab('Age standardised death rate (per 100,000)') +
-#     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-#     guides(color=guide_colorbar(barwidth=30, title='Year')) +
-#     scale_color_gradientn(colors=yearpalette) +
-#     facet_grid(~cause.sub) +
-#     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-#     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-ggplot(dat=subset(dat.national.com.sex.sep,sex==1), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-    geom_line() +
-    xlab('Month') +
-    ylab('Age standardised death rate (per 100,000)') +
-    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    guides(color=guide_colorbar(barwidth=30, title='Year')) +
-    scale_color_gradientn(colors=yearpalette) +
-    facet_grid(~cause.sub) +
-    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-dev.off()
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_asdr_plots_female_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-# 3. monthly plot facetted by subsubcause FEMALE
-# ggplot(dat=subset(dat.national.com.sex.sep,sex==2&!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-#     geom_line() +
-#     xlab('Month') +
-#     ylab('Age standardised death rate (per 100,000)') +
-#     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
-#     guides(color=guide_colorbar(barwidth=30, title='Year')) +
-#     scale_color_gradientn(colors=yearpalette) +
-#     facet_grid(~cause.sub) +
-#     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-#     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-#
-# ggplot(dat=subset(dat.national.com.sex.sep,sex==2&!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-#     geom_line() +
-#     xlab('Month') +
-#     ylab('Age standardised death rate (per 100,000)') +
-#     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-#     guides(color=guide_colorbar(barwidth=30, title='Year')) +
-#     scale_color_gradientn(colors=yearpalette) +
-#     facet_grid(~cause.sub) +
-#     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-#     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-ggplot(dat=subset(dat.national.com.sex.sep,sex==2), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-    geom_line() +
-    xlab('Month') +
-    ylab('Age standardised death rate (per 100,000)') +
-    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-    guides(color=guide_colorbar(barwidth=30, title='Year')) +
-    scale_color_gradientn(colors=yearpalette) +
-    facet_grid(~cause.sub) +
-    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-dev.off()
-
-dat.national.com.sex.sep$sex.long = mapvalues(dat.national.com.sex.sep$sex,from=sort(unique(dat.national.com.sex.sep$sex)),to=as.character(sex.filter2))
-dat.national.com.sex.sep$sex.long = reorder(dat.national.com.sex.sep$sex.long,(dat.national.com.sex.sep$sex))
-# dat.national.com.sex.sep$sex.long = as.character(dat.national.com.sex.sep$sex.long)
-
-dat.national.com.sex.sep$cause.sub = factor(dat.national.com.sex.sep$cause.sub, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other heart\ndiseases',
-                                                'COPD', 'Respiratory\ninfections','Other respiratory\ndiseases'))
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_asdr_plots_sex_facet_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-# 2. monthly plot facetted by subsubcause
-# ggplot(dat=subset(dat.national.com.sex.sep,!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-#     geom_line() +
-#     xlab('Month') +
-#     ylab('Age standardised death rate (per 100,000)') +
-#     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
-#     guides(color=guide_colorbar(barwidth=30, title='Year')) +
-#     scale_color_gradientn(colors=yearpalette) +
-#     facet_grid(sex.long~cause.sub) +
-#     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-#     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-#
-# ggplot(dat=subset(dat.national.com.sex.sep,!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-#     geom_line() +
-#     xlab('Month') +
-#     ylab('Age standardised death rate (per 100,000)') +
-#     ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
-#     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short)   +
-#     guides(color=guide_colorbar(barwidth=30, title='Year')) +
-#     scale_color_gradientn(colors=yearpalette) +
-#     facet_grid(sex.long~cause.sub) +
-#     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-#     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
-#     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-#     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-#     legend.position = 'bottom',legend.justification='center',
-#     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-ggplot(dat=subset(dat.national.com.sex.sep), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-    geom_line() +
-    xlab('Month') +
-    ylab('Age standardised death rate (per 100,000)') +
-    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+    ylim(c(0,max(100000*dat.national.com.sex.sep.all$ASDR))) +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
     guides(color=guide_colorbar(barwidth=30, title='Year')) +
     scale_color_gradientn(colors=yearpalette) +
-    facet_grid(sex.long~cause.sub) +
+    facet_grid(sex.long~cause) +
     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    strip.text.x=element_text(size=9),
     axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
@@ -373,44 +185,38 @@ ggplot(dat=subset(dat.national.com.sex.sep), aes(x=month,y=100000*ASDR,group=yea
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 dev.off()
 
-pdf(paste0(file.loc,'cardio_ons_subsubcod_asdr_plots_sex_facet_portrait_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4',height=0,width=0)
-# 2. monthly plot facetted by subsubcause
-ggplot(dat=subset(dat.national.com.sex.sep,!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
-    geom_line() +
-    xlab('Month') +
-    ylab('Age standardised death rate (per 100,000)') +
-    ylim(c(0,max(100000*dat.national.com.sex.sep$ASDR))) +
+############################
+# total deaths by month and age
+############################
+
+pdf(paste0(file.loc,'natural_cod_all_years_plots_by_month_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+age.colours=c("blue",brewer.pal(9,"BrBG")[c(9:6,4:1)],"grey")
+
+dat.last.years.temp = dat.last.years.all
+dat.last.years.temp$cause = factor(dat.last.years.temp$cause, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other cardiovascular\ndiseases',
+                                                'COPD', 'Respiratory\ninfections','Other respiratory\ndiseases','Cancers','Other'))
+
+p1 = ggplot(data=dat.last.years.temp, aes(x=month,y=deaths,color=as.factor(age.long),fill=as.factor(age.long))) +
+    geom_bar(width = 0.9, stat = "identity") +
+    xlab('Month') + ylab('Number of deaths') +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
-    guides(color=guide_colorbar(barwidth=30, title='Year')) +
-    scale_color_gradientn(colors=yearpalette) +
-    facet_grid(sex.long~cause.sub) +
+    scale_fill_manual(values=age.colours, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
+    scale_color_manual(values=age.colours, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
+    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    scale_y_continuous(label = comma) +
+    facet_grid(sex.long~cause)   +
     theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    strip.text.x=element_text(size=9),
+    axis.text.x = element_text(angle=90, vjust=0.5, hjust=1), axis.ticks.x=element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+
+# plot p1 but with custom legend
+print(p1)
+
 dev.off()
-############################
-# for nationalised data
-############################
-
-# subset of all data
-last.years = c((year.start.arg):(year.end.arg))
-dat.last.years = subset(dat.national,year %in% last.years)
-dat.last.years = ddply(dat.last.years,.(cause.sub,month,sex,age),summarize,deaths=sum(deaths),rate.adj=mean(rate.adj))
-
-# fix names of sexes
-dat.last.years$sex.long <- mapvalues(dat.last.years$sex,from=sort(unique(dat.last.years$sex)),to=c('Male','Female'))
-dat.last.years$sex.long <- with(dat.last.years,reorder(dat.last.years$sex.long,sex))
-
-# fix names of ages
-dat.last.years$age.long <- mapvalues(dat.last.years$age,from=sort(unique(dat.last.years$age)),to=as.character(age.code[,2]))
-dat.last.years$age.long <- reorder(dat.last.years$age.long,dat.last.years$age)
-
-# fix names of months
-dat.last.years$ID = mapvalues(dat.last.years$month, from=sort(unique(dat.last.years$month)),to=month.short)
-dat.last.years$ID = with(dat.last.years,reorder(dat.last.years$ID,month))
 
 # function to extract legend of figure
 extract_legend<-function(a.gplot){
@@ -421,46 +227,45 @@ extract_legend<-function(a.gplot){
     return(legend)
 }
 
-pdf(paste0(file.loc,'cardio_cod_all_years_plots_by_month_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+############################
+# total deaths by age
+############################
 
-age.colours=c("blue",brewer.pal(9,"BrBG")[c(9:6,4:1)],"grey")
+# dummy plot to extract legend
+dat.last.years.all$cause = factor(dat.last.years.all$cause, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other cardiovascular\ndiseases',
+                                                'COPD', 'Respiratory\ninfections','Other respiratory\ndiseases','Cancers','Other'))
+p0 = ggplot(data=subset(dat.last.years.all), aes(x=age.long,y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
+    geom_bar(width = 0.9, stat='identity') +
+    #coord_polar("y", start=0) +
+    xlab('Age group (years)') + ylab('Number of deaths') +
+    scale_fill_manual(values=(c(colors.cardio,colors.broad.cod[c(3,1)])), guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=(c(colors.cardio,colors.broad.cod[c(3,1)])), guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_y_continuous(label = comma) +
+    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
+    facet_grid(sex.long~.)   +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+# extract legend from plot p0
+p0L = extract_legend(p0)
 
-dat.last.years.temp = dat.last.years
-dat.last.years.temp$cause.sub = factor(dat.last.years.temp$cause.sub, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other heart\ndiseases',
+# reorder plot
+dat.last.years.all$cause = factor(dat.last.years.all$cause, levels=c('Other','Cancers','Ischaemic\nheart disease','Cerebrovascular\ndisease','Other cardiovascular\ndiseases',
                                                 'COPD', 'Respiratory\ninfections','Other respiratory\ndiseases'))
 
-p1 = ggplot(data=dat.last.years.temp, aes(x=month,y=deaths,color=as.factor(age.long),fill=as.factor(age.long))) +
-    geom_bar(width = 0.9, stat = "identity") +
-    xlab('Month') + ylab('Number of deaths') +
-    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
-    scale_fill_manual(values=age.colours, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
-    scale_color_manual(values=age.colours, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    scale_y_continuous(label = comma) +
-    facet_grid(sex.long~cause.sub)   +
-    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.text.x = element_text(angle=90, vjust=0.5, hjust=1), axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+# plot correct ordering of causes of death
+pdf(paste0(file.loc,'natural_ons_subsubcod_all_years_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 
-library(grid)
-library(gridExtra)
-
-# plot p1 but with custom legend
-print(p1)
-
-dev.off()
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_all_years_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-
-p1 = ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+p1 = ggplot(data=subset(dat.last.years.all), aes(x=age.long,y=deaths,color=as.factor(cause),fill=as.factor(cause))) +
     geom_bar(width = 0.9, stat='identity') +
     #coord_polar("y", start=0) +
     xlab('Age group (years)') + ylab('Number of deaths') +
-    scale_fill_manual(values=rev(colors.cardio), guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=rev(colors.cardio), guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_fill_manual(values=(c(colors.broad.cod[c(1,3)],colors.cardio)), guide = guide_legend(nrow = 1,title = paste0(""))) +
+    scale_color_manual(values=(c(colors.broad.cod[c(1,3)],colors.cardio)), guide = guide_legend(nrow = 1,title = paste0(""))) +
     scale_y_continuous(label = comma) +
     # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
     facet_grid(sex.long~.)   +
@@ -471,261 +276,11 @@ p1 = ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# print for pdf
-print(p1)
-
-# copy of dataframe to extract legend the correct way around
-dat.last.years.temp = dat.last.years
-dat.last.years.temp$cause.sub = factor(dat.last.years.temp$cause.sub, levels=c('Ischaemic\nheart disease','Cerebrovascular\ndisease','Other heart\ndiseases',
-                                                'COPD', 'Respiratory\ninfections','Other respiratory\ndiseases'))
-
-# p1 but without diseases reversed in order
-p2 = ggplot(data=subset(dat.last.years.temp), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 0.9, stat='identity') +
-    #coord_polar("y", start=0) +
-    xlab('Age group (years)') + ylab('Number of deaths') +
-    scale_fill_manual(values=colors.cardio, guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.cardio, guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_y_continuous(label = comma) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~.)   +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# extract legend from plot p2
-p2L = extract_legend(p2)
-
-p2b = ggplot(data=subset(dat.last.years.temp,!(cause.sub%in%c('Other heart\ndiseases','Other respiratory\ndiseases'))), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 0.9, stat='identity') +
-    #coord_polar("y", start=0) +
-    xlab('Age group (years)') + ylab('Number of deaths') +
-    scale_fill_manual(values=colors.cardio[c(1,2,4,5)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.cardio[c(1,2,4,5)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_y_continuous(label = comma) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~.)   +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# extract legend from plot p2
-p2bL = extract_legend(p2b)
-
-# p1 but only other diseases to strip out legend
-p3 = ggplot(data=subset(dat.last.years,(cause.sub%in%c('Other heart\ndiseases','Other respiratory\ndiseases'))), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 0.9, stat='identity') +
-    #coord_polar("y", start=0) +
-    xlab('Age group (years)') + ylab('Number of deaths') +
-    scale_fill_manual(values=colors.cardio[c(3,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.cardio[c(3,6)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_y_continuous(label = comma) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~.)   +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# extract legend from plot p2
-p3L = extract_legend(p3)
 
 # p1 but without legend
-p4 = p1 + guides(fill=FALSE,color=FALSE)
+p2 = p1 + guides(fill=FALSE,color=FALSE)
 
-library(grid)
-library(gridExtra)
-
-# plot p1 but with custom legend (no unintentional legend)
-print(grid.arrange(p4,p2L,heights=c(11,1)))
-
-# layout for two seperated legends
-lay <- rbind(c(1,1,1,1,1,1,1,1,1),
-             c(2,2,2,2,2,2,3,3,3))
-
-# plot p1 but with custom legend (unintentional legend seperate)
-print(grid.arrange(p4,p2bL,p3L,layout_matrix=lay,heights=c(11,1)))
-
-ggplot(data=subset(dat.last.years,!(cause.sub%in%c('Other heart\ndiseases','Other respiratory\ndiseases'))), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 0.9, stat='identity') +
-    xlab('Age group (years)') + ylab('Number of deaths') +
-    scale_fill_manual(values=rev(colors.cardio), guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=rev(colors.cardio), guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_y_continuous(label = comma) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    facet_grid(sex.long~.)   +
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-dev.off()
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_all_years_plots_full_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-
-# full bars per age group
-p5 = ggplot(data=subset(dat.last.years), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 0.9, position='fill', stat = "identity") +
-    #coord_polar("y", start=0) +
-    xlab('Age group (years)') + ylab('Proportion of deaths') +
-    scale_fill_manual(values=colors.cardio[c(3,6,1,2,4,5)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.cardio[c(3,6,1,2,4,5)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_y_continuous(labels = scales::percent) +
-    facet_grid(sex.long~.)   +
-     theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# print p5 for pdf
-print(p5)
-
-# p5 but without legends
-p6 = p5 + guides(fill=FALSE,color=FALSE)
-
-# plot p5 but with custom legend (unintentional legend seperate)
-print(grid.arrange(p6,p2L,p3L,layout_matrix=lay,heights=c(11,1)))
-
-ggplot(data=subset(dat.last.years,!(cause.sub%in%c('Other cardiovascular\ndiseases','Other respiratory\ndiseases'))), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
-    geom_bar(width = 0.9, position='fill', stat = "identity") +
-    #coord_polar("y", start=0) +
-    xlab('Age group (years)') + ylab('Proportion of deaths') +
-    scale_fill_manual(values=colors.cardio[c(1,2,4,5)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    scale_color_manual(values=colors.cardio[c(1,2,4,5)], guide = guide_legend(nrow = 1,title = paste0(""))) +
-    # ggtitle(paste0((year.end.arg-4),'-',year.end.arg,' 5-year average')) +
-    scale_y_continuous(labels = scales::percent) +
-    facet_grid(sex.long~.)   +
-     theme_bw() +
-    theme(panel.grid.major = element_blank(),text = element_text(size = 15),
-    axis.ticks.x=element_blank(),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-dev.off()
-
-# fix names of sexes
-dat.national.year$sex.long <- with(dat.national.year,reorder(dat.national.year$sex.long,sex))
-dat.national.year.all$sex.long <- with(dat.national.year.all,reorder(dat.national.year.all$sex.long,sex))
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_age_sex_over_time_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-# plots over time
-q3 = ggplot(dat=dat.national.year, aes(x=year,y=rate.adj*100000,color=cause.sub)) +
-    geom_line() +
-    xlab('Year') +
-    ylab('Death rate (per 100,000)') +
-    scale_y_continuous(labels = comma) +
-    geom_vline(xintercept=1999, linetype="dotted") +
-    facet_wrap(sex.long~age.long,ncol=10, scales='free', labeller=label_wrap_gen(multi_line=FALSE)) +
-    scale_color_manual(values=colors.cardio[c(3,6,1,2,4,5)], guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# q3 but without legend
-q4 = q3 + guides(fill=FALSE,color=FALSE)
-
-# plot q3 but with custom legend (unintentional legend seperate)
-print(grid.arrange(q4,p2L,p3L,layout_matrix=lay,heights=c(11,1)))
-
-dev.off()
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_age_sex_over_time_plots_stacked_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-
-# 1. stacked plot over time facetted by subsubcause
-r1 = ggplot(dat=dat.national.year, aes(x=year,y=(deaths/100000),fill=cause.sub)) +
-    geom_area(position='stack') +
-    geom_vline(xintercept=1999, linetype="dotted") +
-    xlab('Year') +
-    ylab('Number of deaths (hundreds of thousands)') +
-    scale_y_continuous() +
-    scale_fill_manual(values=colors.cardio[c(3,6,1,2,4,5)], guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
-    facet_wrap(sex.long~age.long,ncol=10, scales='free', labeller=label_wrap_gen(multi_line=FALSE)) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# r1 but without legend
-r2 = r1 +  guides(fill=FALSE,color=FALSE)
-
-# plot r1 but with custom legend (blocks of colour instead of lines)
-print(grid.arrange(r2,p2L,p3L,layout_matrix=lay,heights=c(11,1)))
-
-dev.off()
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_age_sex_over_time_plots_stacked_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-
-# 1. stacked plot over time facetted by subsubcause
-r1 = ggplot(dat=dat.national.year, aes(x=year,y=(deaths/100000),fill=cause.sub)) +
-    geom_area(position='stack') +
-    geom_vline(xintercept=1999, linetype="dotted") +
-    xlab('Year') +
-    ylab('Number of deaths (hundreds of thousands)') +
-    scale_y_continuous() +
-    scale_fill_manual(values=colors.cardio[c(3,6,1,2,4,5)], guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
-    facet_wrap(sex.long~age.long,ncol=10, scales='free', labeller=label_wrap_gen(multi_line=FALSE)) +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(), strip.text.x= element_text(size=7),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# r1 but without legend
-r2 = r1 +  guides(fill=FALSE,color=FALSE)
-
-# plot r1 but with custom legend (blocks of colour instead of lines)
-print(grid.arrange(r2,p2L,p3L,layout_matrix=lay,heights=c(11,1)))
-
-dev.off()
-
-# full bar chart per age-sex group with breakdown of types of injuries
-dat.national.year.all$cause.sub = gsub('\n',' ',dat.national.year.all$cause.sub)
-dat.national.year.all$cause.sub = factor(dat.national.year.all$cause.sub, levels=c('Other cardiovascular diseases','Other respiratory diseases','Ischaemic heart disease','Cerebrovascular disease','Chronic obstructive pulmonary disease',
-                                                'Respiratory infections'))
-
-pdf(paste0(file.loc,'cardio_ons_subsubcod_over_time_plots_stacked_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-
-# 1. stacked plot over time facetted by subsubcause
-r1 = ggplot(dat=dat.national.year.all, aes(x=year,y=(deaths),fill=cause.sub)) +
-    geom_area(position='stack') +
-    xlab('Year') +
-    ylab('Number of deaths') +
-    scale_y_continuous(labels = comma) +
-    scale_fill_manual(values=colors.cardio[c(3,6,1,2,4,5)], guide = guide_legend(byrow=TRUE,nrow = 1,title = paste0(""))) +
-    facet_wrap(sex.long~.,ncol=2, scales='fixed') +
-    theme_bw() + theme( panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
-    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
-    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
-    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
-
-# r1 but without legend
-r2 = r1 + guides(fill=FALSE,color=FALSE)
-
-# plot r1 but with custom legend (blocks of colour instead of lines)
-print(grid.arrange(r2,p2L,p3L,layout_matrix=lay,heights=c(11,1)))
+# plot p1 but with custom legend
+print(grid.arrange(p2,p0L,heights=c(11,1)))
 
 dev.off()
