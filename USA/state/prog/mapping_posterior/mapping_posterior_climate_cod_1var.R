@@ -20,7 +20,7 @@ draws = as.numeric(args[10])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10; dname = 't2m' ; metric = 'meanc3' ; cause = 'Ischaemic heart disease'; contig=1
+# year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10; dname = 't2m' ; metric = 'meanc3' ; cause = 'Other cardiovascular diseases'; contig=1
 # pw.arg = 0; draws=10
 
 multiple = 0
