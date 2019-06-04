@@ -212,7 +212,6 @@ if(cause!='AllCause'){
 if(cause=='AllCause'){
     save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig')
     save.name.neg <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_neg_fast_contig')
-
 }
 
 saveRDS(dat,paste0(file.loc.local,save.name))
