@@ -120,83 +120,83 @@ if(pw.arg==1){
     dat.neg <- data.frame()
 
     # find the posterior exponential mean
-    # for (i in seq(length(sex.filter))) {
-    #     for (j in seq(length(age.filter))) {
-    #         # load data
-    #         if(cause!='AllCause'){
-    #             file.name <- paste0('~/data/mortality/US/state/climate_effects/',
-    #             dname,'/',metric,'/pw/type_',model,'/age_groups/',age.filter[j],
-    #             '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',
-    #             year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
-    #         }
-    #         if(cause=='AllCause'){
-    #             file.name <- paste0('~/data/mortality/US/state/climate_effects/',
-    #             dname,'/',metric,'/pw/type_',model,'/age_groups/',age.filter[j],
-    #             '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],
-    #             '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
-    #         }
-    #         model.current <- try(readRDS(file.name))
-    #         if(inherits(model.current,"try-error")){
-    #             if(cause!='AllCause'){
-    #             file.name <- paste0('~/data/mortality/US/state/climate_effects/',
-    #             dname,'/',metric,'/pw/type_',model,'/age_groups/',age.filter[j],
-    #             '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],'_',
-    #             year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
-    #         }
-    #             if(cause=='AllCause'){
-    #             file.name <- paste0('~/data/mortality/US/state/climate_effects/',
-    #             dname,'/',metric,'/pw/type_',model,'/age_groups/',age.filter[j],
-    #             '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
-    #             '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
-    #         }
-    #         }
-    #
-    #         print(file.name)
-    #         model.current <- readRDS(file.name)
-    #         current.file <- model.current$summary.random$month5
-    #         current.file$age <- age.filter[j] ; current.file$sex <- i
-    #         current.file.neg <- model.current$summary.random$month6
-    #         current.file.neg$age <- age.filter[j] ; current.file.neg$sex <- i
-    #
-    #         # find mean and CIs of transformed distributions and probability of increased odds from posterior marginal FOR POSITIVE ANOMALY
-    #         dat.mean.exp <- data.frame(ID=numeric(0),odds.mean=numeric(0),odds.ll=numeric(0),odds.ul=numeric(0),odds.prob=numeric(0))
-    #         for(k in c(1:length(model.current$marginals.random$month5))) {
-    #             # find the exponentiated means and CIs
-    #             marginal.exp <- inla.tmarginal(function(x) exp(x), model.current$marginals.random$month5[[k]])
-    #             odds.mean <- inla.emarginal(function(x) x,marginal.exp) - 1
-    #             odds.ll <- inla.qmarginal(0.025,marginal.exp) - 1
-    #             odds.ul <- inla.qmarginal(0.975,marginal.exp) - 1
-    #
-    #             # find the probability of increased odds from posterior marginal
-    #             odds.prob <- 1 - inla.pmarginal(1,marginal.exp)
-    #             dat.temp <- data.frame(ID=k,odds.mean=odds.mean,odds.ll=odds.ll,odds.ul=odds.ul,odds.prob=odds.prob)
-    #             dat.mean.exp <- rbind(dat.mean.exp,dat.temp)
-    #         }
-    #
-    #         # find mean and CIs of transformed distributions and probability of increased odds from posterior marginal FOR NEGATIVE ANOMALY
-    #         dat.mean.exp.neg <- data.frame(ID=numeric(0),odds.mean=numeric(0),odds.ll=numeric(0),odds.ul=numeric(0),odds.prob=numeric(0))
-    #         for(k in c(1:length(model.current$marginals.random$month6))) {
-    #             # find the exponentiated means and CIs
-    #             marginal.exp <- inla.tmarginal(function(x) exp(x), model.current$marginals.random$month6[[k]])
-    #             odds.mean <- inla.emarginal(function(x) x,marginal.exp) - 1
-    #             odds.ll <- inla.qmarginal(0.025,marginal.exp) - 1
-    #             odds.ul <- inla.qmarginal(0.975,marginal.exp) - 1
-    #
-    #             # find the probability of increased odds from posterior marginal
-    #             odds.prob <- 1 - inla.pmarginal(1,marginal.exp)
-    #             dat.temp <- data.frame(ID=k,odds.mean=odds.mean,odds.ll=odds.ll,odds.ul=odds.ul,odds.prob=odds.prob)
-    #             dat.mean.exp.neg <- rbind(dat.mean.exp.neg,dat.temp)
-    #         }
-    #
-    #         # merge exponentiated means
-    #         current.file <- merge(current.file,dat.mean.exp,by=('ID'))
-    #         current.file.neg <- merge(current.file.neg,dat.mean.exp.neg,by=('ID'))
-    #
-    #         # attached new age sex profile to master file
-    #         dat <- rbind(dat,current.file)
-    #         dat.neg <- rbind(dat.neg,current.file.neg)
-    #     }
-    # }
+    for (i in seq(length(sex.filter))) {
+        for (j in seq(length(age.filter))) {
+            # load data
+            if(cause!='AllCause'){
+                file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+                dname,'/',metric,'/pw/type_',model,'/age_groups/',age.filter[j],
+                '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],'_',
+                year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
+            }
+            if(cause=='AllCause'){
+                file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+                dname,'/',metric,'/pw/type_',model,'/age_groups/',age.filter[j],
+                '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.filter[i],
+                '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
+            }
+            model.current <- try(readRDS(file.name))
+            if(inherits(model.current,"try-error")){
+                if(cause!='AllCause'){
+                file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+                dname,'/',metric,'/pw/type_',model,'/age_groups/',age.filter[j],
+                '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],'_',
+                year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
+            }
+                if(cause=='AllCause'){
+                file.name <- paste0('~/data/mortality/US/state/climate_effects/',
+                dname,'/',metric,'/pw/type_',model,'/age_groups/',age.filter[j],
+                '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
+                '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
+            }
+            }
+
+            print(file.name)
+            model.current <- readRDS(file.name)
+            current.file <- model.current$summary.random$month5
+            current.file$age <- age.filter[j] ; current.file$sex <- i
+            current.file.neg <- model.current$summary.random$month6
+            current.file.neg$age <- age.filter[j] ; current.file.neg$sex <- i
+
+            # find mean and CIs of transformed distributions and probability of increased odds from posterior marginal FOR POSITIVE ANOMALY
+            dat.mean.exp <- data.frame(ID=numeric(0),odds.mean=numeric(0),odds.ll=numeric(0),odds.ul=numeric(0),odds.prob=numeric(0))
+            for(k in c(1:length(model.current$marginals.random$month5))) {
+                # find the exponentiated means and CIs
+                marginal.exp <- inla.tmarginal(function(x) exp(x), model.current$marginals.random$month5[[k]])
+                odds.mean <- inla.emarginal(function(x) x,marginal.exp) - 1
+                odds.ll <- inla.qmarginal(0.025,marginal.exp) - 1
+                odds.ul <- inla.qmarginal(0.975,marginal.exp) - 1
+
+                # find the probability of increased odds from posterior marginal
+                odds.prob <- 1 - inla.pmarginal(1,marginal.exp)
+                dat.temp <- data.frame(ID=k,odds.mean=odds.mean,odds.ll=odds.ll,odds.ul=odds.ul,odds.prob=odds.prob)
+                dat.mean.exp <- rbind(dat.mean.exp,dat.temp)
+            }
+
+            # find mean and CIs of transformed distributions and probability of increased odds from posterior marginal FOR NEGATIVE ANOMALY
+            dat.mean.exp.neg <- data.frame(ID=numeric(0),odds.mean=numeric(0),odds.ll=numeric(0),odds.ul=numeric(0),odds.prob=numeric(0))
+            for(k in c(1:length(model.current$marginals.random$month6))) {
+                # find the exponentiated means and CIs
+                marginal.exp <- inla.tmarginal(function(x) exp(x), model.current$marginals.random$month6[[k]])
+                odds.mean <- inla.emarginal(function(x) x,marginal.exp) - 1
+                odds.ll <- inla.qmarginal(0.025,marginal.exp) - 1
+                odds.ul <- inla.qmarginal(0.975,marginal.exp) - 1
+
+                # find the probability of increased odds from posterior marginal
+                odds.prob <- 1 - inla.pmarginal(1,marginal.exp)
+                dat.temp <- data.frame(ID=k,odds.mean=odds.mean,odds.ll=odds.ll,odds.ul=odds.ul,odds.prob=odds.prob)
+                dat.mean.exp.neg <- rbind(dat.mean.exp.neg,dat.temp)
+            }
+
+            # merge exponentiated means
+            current.file <- merge(current.file,dat.mean.exp,by=('ID'))
+            current.file.neg <- merge(current.file.neg,dat.mean.exp.neg,by=('ID'))
+
+            # attached new age sex profile to master file
+            dat <- rbind(dat,current.file)
+            dat.neg <- rbind(dat.neg,current.file.neg)
+        }
+    }
 
 # create directories for output
 file.loc.local <- paste0('~/data/mortality/US/state/climate_effects/',dname,'/',metric,'/pw/type_',model,'/parameters/')
@@ -213,12 +213,12 @@ if(cause=='AllCause'){
     save.name <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_fast_contig')
     save.name.neg <- paste0(country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_neg_fast_contig')
 }
-print('0')
+# print('0')
 saveRDS(dat,paste0(file.loc.local,save.name))
 saveRDS(dat,paste0(file.loc.git,save.name))
-print('1')
+# print('1')
 saveRDS(dat.neg,paste0(file.loc.local,save.name.neg))
 saveRDS(dat.neg,paste0(file.loc.git,save.name.neg))
-print('2')
+# print('2')
 }
 }
