@@ -69,7 +69,7 @@ for(cause in causes){
             ,country,'_rate_pred_type',model,'_',year.start,'_',year.end,'_',dname,'_',metric,'_neg_fast'))
         }
     }
-    dat$cause = cause ; dat.2$cause = cause
+    dat$cause = cause ; dat.2$cause = cause ; dat.3$cause = cause
     dat.all = rbind(dat.all,dat)
     dat.2.all = rbind(dat.2.all,dat.2)
     dat.3.all = rbind(dat.3.all,dat.3)
@@ -86,26 +86,28 @@ ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # function to fix names of causes
 
-fix_names = function(dat.all){
-  dat.all$cause = ifelse(dat.all$cause=='AllCause', 'All cause',
-        ifelse(dat.all$cause=='Cancer', 'Cancers',
-        ifelse(dat.all$cause=='Cardiopulmonary', 'Cardiorespiratory diseases',
-        ifelse(dat.all$cause=='External', 'Injuries',
-        ifelse(dat.all$cause=='Other', 'Other',
-        ifelse(dat.all$cause=='Intentional','Intentional injuries',
-        ifelse(dat.all$cause=='Unintentional','Unintentional injuries',
-        ifelse(dat.all$cause=='Unintentional wo drowning','Unintentional injuries except drowinings',
-        ifelse(dat.all$cause=='Transport accidents','Transport',
-        ifelse(dat.all$cause=='Intentional self-harm','Intentional self-harm',
-        ifelse(dat.all$cause=='Accidental falls','Falls',
-        ifelse(dat.all$cause=='Accidental drowning and submersion','Drownings',
-        ifelse(dat.all$cause=='Assault','Assault','NA'
+fix_names = function(dat){
+  dat$cause = ifelse(dat$cause=='AllCause', 'All cause',
+        ifelse(dat$cause=='Cancer', 'Cancers',
+        ifelse(dat$cause=='Cardiopulmonary', 'Cardiorespiratory diseases',
+        ifelse(dat$cause=='External', 'Injuries',
+        ifelse(dat$cause=='Other', 'Other',
+        ifelse(dat$cause=='Intentional','Intentional injuries',
+        ifelse(dat$cause=='Unintentional','Unintentional injuries',
+        ifelse(dat$cause=='Unintentional wo drowning','Unintentional injuries except drowinings',
+        ifelse(dat$cause=='Transport accidents','Transport',
+        ifelse(dat$cause=='Intentional self-harm','Intentional self-harm',
+        ifelse(dat$cause=='Accidental falls','Falls',
+        ifelse(dat$cause=='Accidental drowning and submersion','Drownings',
+        ifelse(dat$cause=='Assault','Assault','NA'
         )))))))))))))
+
+    return(dat)
 }
 
 dat.all = fix_names(dat.all)
-dat.all.2 = fix_names(dat.all.2)
-dat.all.3 = fix_names(dat.all.3)
+dat.2.all = fix_names(dat.2.all)
+dat.3.all = fix_names(dat.3.all)
 
 # isolate and merge two data frames from different models
 dat.all = dat.all[,c('ID','odds.mean','odds.ll','odds.ul','age','sex','cause')]
@@ -119,6 +121,12 @@ dat.merged$sex.long = reorder(dat.merged$sex.long,dat.merged$sex)
 dat.merged$age.long = mapvalues(dat.merged$age,from=sort(unique(dat.merged$age)),to=as.character(age.code[,2]))
 dat.merged$age.long = reorder(dat.merged$age.long,dat.merged$age)
 
+# size of point inversely proportional to uncertainty
+dat.merged$size.1 <- with(dat.merged,1/(odds.ul-odds.ll))
+dat.merged$size.1 <- 3*(dat.merged$size.1/max(dat.merged$size.1))
+dat.merged$size.2 <- with(dat.merged,1/(odds.ul.2-odds.ll.2))
+dat.merged$size.2 <- (dat.merged$size.2/max(dat.merged$size.2))
+
 pdf(paste0(file.loc,'pw_against_non_pw.pdf'),paper='a4r',height=0,width=0)
 ggplot(data=subset(dat.merged),aes(x=odds.mean,y=odds.mean.2,color=sex.long)) +
     geom_point() +
@@ -131,6 +139,54 @@ ggplot(data=subset(dat.merged),aes(x=odds.mean,y=odds.mean.2,color=sex.long)) +
     labs(color = "Sex\n") +
     scale_color_manual(labels=c('Male','Female'), values = c("#2a78c1", "#c1892a")) +
     facet_grid(cause~age.long) +
+    xlab('Temperature parameter estimates from\noriginal temperature model') + ylab('Temperature parameter estimates from\n alternative temperature model') +
+    theme_bw() + theme(text = element_text(size = 10),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+dev.off()
+
+# make a plot where the size is inversely proportional to the variance
+pdf(paste0(file.loc,'pw_against_non_pw_size.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=subset(dat.merged),aes(x=odds.mean,y=odds.mean.2,size=size.2,alpha=size.2,color=sex.long)) +
+    scale_x_continuous(labels=scales::percent) +
+    scale_y_continuous(labels=scales::percent) +
+    geom_point() +
+    geom_abline(linetype='dotted') +
+    geom_hline(yintercept=0,linetype='dotted') +
+    geom_vline(xintercept=0,linetype='dotted') +
+    # coord_equal() +
+    labs(color = "Sex\n") +
+    scale_color_manual(labels=c('Male','Female'), values = c("#2a78c1", "#c1892a")) +
+    # scale_color_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
+    # facet_grid(cause~age.long) +
+    xlab('Temperature parameter estimates from\noriginal temperature model') + ylab('Temperature parameter estimates from\n alternative temperature model') +
+    theme_bw() + theme(text = element_text(size = 10),
+    panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
+    plot.title = element_text(hjust = 0.5),panel.background = element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+dev.off()
+
+# make a density plot
+pdf(paste0(file.loc,'pw_against_non_pw_density.pdf'),paper='a4r',height=0,width=0)
+ggplot(data=subset(dat.merged),aes(x=odds.mean,y=odds.mean.2,size=size.2,alpha=size.2,color=sex.long)) +
+    scale_x_continuous(labels=scales::percent) +
+    scale_y_continuous(labels=scales::percent) +
+    geom_density_2d() +
+    geom_abline(linetype='dotted') +
+    geom_hline(yintercept=0,linetype='dotted') +
+    geom_vline(xintercept=0,linetype='dotted') +
+    # coord_equal() +
+    labs(color = "Sex\n") +
+    scale_color_manual(labels=c('Male','Female'), values = c("#2a78c1", "#c1892a")) +
+    # scale_color_manual(values=colors.broad.cod, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
+    facet_wrap(~age.long,scale='free') +
     xlab('Temperature parameter estimates from\noriginal temperature model') + ylab('Temperature parameter estimates from\n alternative temperature model') +
     theme_bw() + theme(text = element_text(size = 10),
     panel.grid.major = element_blank(),axis.text.x = element_text(angle=90),
