@@ -274,7 +274,7 @@ p1 = ggplot(data=subset(dat.last.years.all), aes(x=age.long,y=deaths,color=as.fa
     axis.ticks.x=element_blank(),
     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
     panel.border = element_rect(colour = "black"),strip.background = element_blank(),
-    legend.position = 'bottom',legend.justification='center',
+    legend.position = 'bottom',legend.justification='center', legend.text=element_text(size=11),
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
 # p1 but without legend
@@ -282,5 +282,7 @@ p2 = p1 + guides(fill=FALSE,color=FALSE)
 
 # plot p1 but with custom legend
 print(grid.arrange(p2,p0L,heights=c(11,1)))
+
+print(p1)
 
 dev.off()
