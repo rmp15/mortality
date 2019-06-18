@@ -26,9 +26,11 @@ yearpalette = colorfunc(year.end.arg-year.start.arg +1)
 source('../../data/objects/objects.R')
 
 # fix cod names
-dat$cause <- gsub('Cardiopulmonary', 'Cardiorespiratory', dat$cause)
+dat$cause <- gsub('Cardiopulmonary', 'Cardiorespiratory\ndiseases', dat$cause)
 dat$cause <- gsub('Cancer', 'Cancers', dat$cause)
 dat$cause <- gsub('External', 'Injuries', dat$cause)
+dat$cause <- gsub('Other', 'Other\ncauses', dat$cause)
+
 
 library(plyr)
 library(scales)
@@ -241,7 +243,7 @@ print(p1)
 dev.off()
 
 # fix order of causes
-dat.last.years$cause = factor(dat.last.years$cause, levels= c('Other','Injuries', 'Cancers', 'Cardiorespiratory'))
+dat.last.years$cause = factor(dat.last.years$cause, levels= c('Other\ncauses','Injuries', 'Cancers', 'Cardiorespiratory\ndiseases'))
 
 pdf(paste0(file.loc,'broad_cod_all_years_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 
@@ -302,8 +304,8 @@ dev.off()
 dat.national.year$sex.long <- with(dat.national.year,reorder(dat.national.year$sex.long,sex))
 dat.national.year.all$sex.long <- with(dat.national.year.all,reorder(dat.national.year.all$sex.long,sex))
 
-dat.national.year$cause = factor(dat.national.year$cause, levels= c('Other','Injuries', 'Cancers', 'Cardiorespiratory'))
-dat.national.year.all$cause = factor(dat.national.year.all$cause, levels= c('Other','Injuries', 'Cancers', 'Cardiorespiratory'))
+dat.national.year$cause = factor(dat.national.year$cause, levels= c('Other\ncauses','Injuries', 'Cancers', 'Cardiorespiratory\ndiseases'))
+dat.national.year.all$cause = factor(dat.national.year.all$cause, levels= c('Other','Injuries', 'Cancers', 'Cardiorespiratory\ndiseases'))
 
 # plots over time
 pdf(paste0(file.loc,'broad_cod_age_sex_over_time_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
