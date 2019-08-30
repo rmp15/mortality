@@ -12,7 +12,7 @@ clear
 cd ~/git/mortality/USA/state/prog/00_bash/
 
 declare -i start=1980
-declare -i end=2016
+declare -i end=2017
 
 ##################################################################################################
 # 1. PROCESS DATA FOR BROAD CAUSES

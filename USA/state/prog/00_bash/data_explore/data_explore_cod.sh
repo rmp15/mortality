@@ -7,7 +7,7 @@
 clear
 
 declare -i start=1980
-declare -i end=2016
+declare -i end=2017
 
 # to correct directory
 cd ~/git/mortality/USA/state/prog/00_bash/
