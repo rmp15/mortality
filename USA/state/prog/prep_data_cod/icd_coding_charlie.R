@@ -1,4 +1,4 @@
-rm(list=ls())
+icd_coding_charlie.Rrm(list=ls())
 
 library(dplyr)
 library(plyr)
