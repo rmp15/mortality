@@ -114,6 +114,10 @@ yearsummary_injuries  <- function(x=2000) {
         # numerical cause
         dat.merged$cause.numeric = as.numeric(as.character(substr(dat.merged$cause,2,4)))
 
+		# test for if there are any V00 values
+		dat.v00 = subset(dat.merged,letter=='V'&cause.numeric==0)
+		num.v00 = dim(dat.v00)[1]
+
         # cause subgroups
         dat.merged$cause.sub =
                             ifelse(dat.merged$letter=='V'&dat.merged$cause.numeric>=0&dat.merged$cause.numeric<=999,	'Transport accidents',
@@ -198,6 +202,7 @@ yearsummary_injuries  <- function(x=2000) {
 	# print(ddply(dat.summarised.complete,.(cause.group),summarise,deaths=sum(deaths)))
 
 	print(paste0('total deaths in year ',sum(dat$deaths),', total deaths for injuries ',sum(dat.merged$deaths),' ',sum(dat.summarised$deaths),' ',sum(dat.summarised.complete$deaths)))
+	# print(paste0('total number of V00 deaths ',num.v00))
 
   	return(dat.summarised.complete)
 }
