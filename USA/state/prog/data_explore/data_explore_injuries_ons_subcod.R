@@ -32,13 +32,13 @@ dat$cause <- gsub('Intentional', 'Intentional injuries', dat$cause) # second in 
 dat$cause.sub <- gsub('Transport accidents', 'Transport', dat$cause.sub)                                        # 1
 dat$cause.sub <- gsub('Accidental falls', 'Falls', dat$cause.sub)                                               # 2
 dat$cause.sub <- gsub('Accidental drowning and submersion', 'Drownings', dat$cause.sub)                         # 3
-dat$cause.sub <- gsub('Other external causes of injury', 'Other unintentional\ninjuries', dat$cause.sub)        # 4
+dat$cause.sub <- gsub('Other external causes of injury', 'Other injuries', dat$cause.sub)        # 4
 dat$cause.sub <- gsub('Assault', 'Assault', dat$cause.sub)                                                      # 5
 dat$cause.sub <- gsub('Intentional self-harm', 'Suicide', dat$cause.sub)                          # 6
 
 # reorder
 dat$cause = factor(dat$cause, levels=c('Unintentional injuries','Intentional injuries'))
-dat$cause.sub = factor(dat$cause.sub, levels=c('Transport','Falls','Drownings','Assault','Suicide','Other unintentional\ninjuries'))
+dat$cause.sub = factor(dat$cause.sub, levels=c('Transport','Falls','Drownings','Assault','Suicide','Other injuries'))
 
 library(plyr)
 library(scales)
@@ -150,7 +150,7 @@ dat.national.year.all$sex.long = as.character(dat.national.year.all$sex.long)
 
 pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 # 1. monthly plot facetted by subsubcause
-ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -165,7 +165,7 @@ ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
-ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -198,7 +198,7 @@ dev.off()
 
 pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_scaled_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 # 1b. monthly plot facetted by subsubcause SCALED
-ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -214,7 +214,7 @@ ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
-ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex,cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -249,7 +249,7 @@ dev.off()
 
 # 2. monthly plot facetted by subsubcause MALE
 pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_male_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(dat=subset(dat.national.com.sex.sep,sex==1&cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex.sep,sex==1&cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -265,7 +265,7 @@ ggplot(dat=subset(dat.national.com.sex.sep,sex==1&cause.sub!='Other unintentiona
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
-ggplot(dat=subset(dat.national.com.sex.sep,sex==1&cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex.sep,sex==1&cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -300,7 +300,7 @@ dev.off()
 
 # 3. monthly plot facetted by subsubcause FEMALE
 pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_female_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(dat=subset(dat.national.com.sex.sep,sex==2&cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex.sep,sex==2&cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -316,7 +316,7 @@ ggplot(dat=subset(dat.national.com.sex.sep,sex==2&cause.sub!='Other unintentiona
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
-ggplot(dat=subset(dat.national.com.sex.sep,sex==2&cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex.sep,sex==2&cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -355,7 +355,7 @@ dat.national.com.sex.sep$sex.long <- with(dat.national.com.sex.sep,reorder(dat.n
 
 # 3. monthly plot facetted by subsubcause BOTH
 pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_both_sexes_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
-ggplot(dat=subset(dat.national.com.sex.sep,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex.sep,cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -371,7 +371,7 @@ ggplot(dat=subset(dat.national.com.sex.sep,cause.sub!='Other unintentional\ninju
     legend.position = 'bottom',legend.justification='center',
     legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
 
-ggplot(dat=subset(dat.national.com.sex.sep,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex.sep,cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -405,7 +405,7 @@ ggplot(dat=subset(dat.national.com.sex.sep,sex==2), aes(x=month,y=100000*ASDR,gr
 dev.off()
 
 pdf(paste0(file.loc,'injury_ons_subsubcod_asdr_plots_both_sexes_portrait_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4',height=0,width=0)
-ggplot(dat=subset(dat.national.com.sex.sep,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
+ggplot(dat=subset(dat.national.com.sex.sep,cause.sub!='Other injuries'), aes(x=month,y=100000*ASDR,group=year,colour=year)) +
     geom_line() +
     xlab('Month') +
     ylab('Age standardised death rate (per 100,000)') +
@@ -447,7 +447,7 @@ pdf(paste0(file.loc,'injury_cod_all_years_plots_by_month_',year.start.arg,'_',ye
 
 age.colours=c("blue",brewer.pal(9,"BrBG")[c(9:6,4:1)],"grey")
 
-p1 = ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional\ninjuries'), aes(x=month,y=deaths,color=as.factor(age.long),fill=as.factor(age.long))) +
+p1 = ggplot(data=subset(dat.last.years,cause.sub!='Other injuries'), aes(x=month,y=deaths,color=as.factor(age.long),fill=as.factor(age.long))) +
     geom_bar(width = 0.9, stat = "identity") +
     xlab('Month') + ylab('Number of deaths') +
     scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
@@ -475,7 +475,7 @@ pdf(paste0(file.loc,'injury_ons_subsubcod_all_years_plots_',year.start.arg,'_',y
 
 # full bar chart per age-sex group with breakdown of types of injuries
 dat.last.years$cause.sub = gsub('\n',' ',dat.last.years$cause.sub)
-dat.last.years$cause.sub = factor(dat.last.years$cause.sub, levels=c('Other unintentional injuries','Transport','Falls','Drownings','Assault','Suicide'))
+dat.last.years$cause.sub = factor(dat.last.years$cause.sub, levels=c('Other injuries','Transport','Falls','Drownings','Assault','Suicide'))
 
 # function to extract legend of figure
 extract_legend<-function(a.gplot){
@@ -510,7 +510,7 @@ print(p1)
 p1L = extract_legend(p1)
 
 # p1 but without other unintentional injuries to strip out legend
-p2= ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+p2= ggplot(data=subset(dat.last.years,cause.sub!='Other injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
     geom_bar(width = 0.9, stat='identity') +
     #coord_polar("y", start=0) +
     xlab('Age group (years)') + ylab('Number of deaths') +
@@ -531,7 +531,7 @@ p2= ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries')
 p2L = extract_legend(p2)
 
 # p3 but only other unintentional injuries to strip out legend
-p3= ggplot(data=subset(dat.last.years,cause.sub=='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+p3= ggplot(data=subset(dat.last.years,cause.sub=='Other injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
     geom_bar(width = 0.9, stat='identity') +
     #coord_polar("y", start=0) +
     xlab('Age group (years)') + ylab('Number of deaths') +
@@ -598,7 +598,7 @@ p6 = p5 + guides(fill=FALSE,color=FALSE)
 # plot p5 but with custom legend (unintentional legend seperate)
 print(grid.arrange(p6,p2L,p3L,layout_matrix=lay,heights=c(11,1)))
 
-ggplot(data=subset(dat.last.years,cause.sub!='Other unintentional injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
+ggplot(data=subset(dat.last.years,cause.sub!='Other injuries'), aes(x=age.long,y=deaths,color=as.factor(cause.sub),fill=as.factor(cause.sub))) +
     geom_bar(width = 0.9, position='fill', stat = "identity") +
     #coord_polar("y", start=0) +
     xlab('Age group (years)') + ylab('Proportion of deaths') +
@@ -649,7 +649,7 @@ dev.off()
 
 # full bar chart per age-sex group with breakdown of types of injuries
 dat.national.year$cause.sub = gsub('\n',' ',dat.national.year$cause.sub)
-dat.national.year$cause.sub = factor(dat.national.year$cause.sub, levels=c('Other unintentional injuries','Transport','Falls','Drownings','Assault','Suicide'))
+dat.national.year$cause.sub = factor(dat.national.year$cause.sub, levels=c('Other injuries','Transport','Falls','Drownings','Assault','Suicide'))
 
 pdf(paste0(file.loc,'injury_ons_subsubcod_age_sex_over_time_plots_stacked_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 
@@ -678,7 +678,7 @@ dev.off()
 
 # full bar chart per age-sex group with breakdown of types of injuries
 dat.national.year.all$cause.sub = gsub('\n',' ',dat.national.year.all$cause.sub)
-dat.national.year.all$cause.sub = factor(dat.national.year.all$cause.sub, levels=c('Other unintentional injuries','Transport','Falls','Drownings','Assault','Suicide'))
+dat.national.year.all$cause.sub = factor(dat.national.year.all$cause.sub, levels=c('Other injuries','Transport','Falls','Drownings','Assault','Suicide'))
 
 pdf(paste0(file.loc,'injury_ons_subsubcod_over_time_plots_stacked_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
 

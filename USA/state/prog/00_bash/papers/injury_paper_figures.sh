@@ -11,7 +11,7 @@ declare -i end=2016
 declare -a sexstrings=('male' 'female')
 declare -a model=(10)
 declare -i start=1980
-declare -i end=2016
+declare -i end=2017
 declare -i start2=1979
 declare country="USA"
 declare dname="t2m"
@@ -32,7 +32,7 @@ echo "plotting figures 1 and 2 for injury paper $start - $end";
 # runs code
 Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R $start $end
 
-# OLD LEGACY (no need to run but left just in case want to summarise by intentional and unintentional)
+# LEGACY (no need to run but left just in case want to summarise by intentional and unintentional)
 #Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons.R $start $end
 
 #################################################
@@ -44,7 +44,7 @@ cd ~/git/climate/countries/USA/prog/00_bash/
 
 echo "plotting figure 3 injury paper $start - $end";
 
-#Rscript ~/git/climate/countries/USA/prog/06_plots/plots_against_time.R $start2 $end $dname $metric
+#Rscript ~/git/climate/countries/USA/prog/06_plots/plots_against_time.R $start $end $dname $metric
 
 #################################################
 # Figure 4 (anomaly summary)
