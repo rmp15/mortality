@@ -15,7 +15,7 @@ declare -i end=2017
 declare -i start2=1979
 declare country="USA"
 declare dname="t2m"
-declare metric="meanc3"
+declare metric="meanc4"
 declare -i fast=1
 declare -i contig=1
 declare -a draws=(5000)
@@ -30,7 +30,7 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 echo "plotting figures 1 and 2 for injury paper $start - $end";
 
 # runs code
-Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R $start $end
+#Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons_subcod.R $start $end
 
 # LEGACY (no need to run but left just in case want to summarise by intentional and unintentional)
 #Rscript ~/git/mortality/USA/state/prog/data_explore/data_explore_injuries_ons.R $start $end
@@ -55,7 +55,7 @@ cd ~/git/climate/countries/USA/prog/00_bash/
 
 echo "plotting figure 4 injury paper $start - $end";
 
-#Rscript ~/git/climate/countries/USA/prog/15_anomaly_summaries/anomaly_summaries.R $start2 $end $dname $metric
+Rscript ~/git/climate/countries/USA/prog/15_anomaly_summaries/anomaly_summaries.R $start $end $dname $metric
 
 #################################################
 # Figure 5 (additional deaths) and Supplementary Figure 1 and 2
