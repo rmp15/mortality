@@ -20,13 +20,13 @@ contig.arg <- as.numeric(args[13])
 pw.arg <- as.numeric(args[14])
 
 # for test runs
-# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2016 ; type.arg = 11 ;
-# cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc3' ; year.start.analysis.arg = 1980 ;
-# year.end.analysis.arg = 2016 ; cod.arg = 'Transport accidents'; fast.arg = 1 ; contig.arg = 1
+# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2017 ; type.arg = 27 ;
+# cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc4' ; year.start.analysis.arg = 1980 ;
+# year.end.analysis.arg = 2017 ; cod.arg = 'Transport accidents'; fast.arg = 1 ; contig.arg = 1
 # pw.arg=0
 
 # types character for file strings
-types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','minus1','1d2','1d3','1d4','0a','0b','1d5','1d6','1d7','1d8')
+types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','minus1','1d2','1d3','1d4','0a','0b','1d5','1d6','1d7','1d8','1d9')
 type.selected <- types[type.arg]
 
 print(paste(year.start.analysis.arg,year.end.analysis.arg,age.arg,sex.arg,type.selected,cod.arg))
@@ -52,9 +52,9 @@ source('../models/INLA/03_spatiotemporal/inla_load_data_cod.R')
 # merge mortality data with climate region data
 # dat.inla.load <- merge(dat.inla.load,dat.region,by.x=('fips'),by.y=('STATE_FIPS'),all.x=TRUE)
 
-# load climate data for 1979-2016
-file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
-dat.climate <- readRDS(paste0(file.loc,'state_weighted_summary_',metric.arg,'_',dname.arg,'_1979_2016.rds'))
+# load climate data for 1980-2017
+file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development_era5/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
+dat.climate <- readRDS(paste0(file.loc,'state_weighted_summary_',metric.arg,'_',dname.arg,'_1980_2017.rds'))
 dat.climate$state.fips <- as.numeric(as.character(dat.climate$state.fips))
 
 # merge mortality and climate data and reorder
@@ -142,10 +142,10 @@ if(pw.arg==1){
 
 # create directory for output
 if(pw.arg==0){
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.arg)
+    file.loc <- paste0('~/data/mortality/US/state/climate_effects_era5/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.arg)
 }
 if(pw.arg==1){
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups/',age.arg)
+    file.loc <- paste0('~/data/mortality/US/state/climate_effects_era5/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups/',age.arg)
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
