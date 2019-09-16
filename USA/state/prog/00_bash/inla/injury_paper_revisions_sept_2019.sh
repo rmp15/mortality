@@ -10,9 +10,9 @@ clear
 declare -a sexstrings=('male' 'female')
 declare -a models=(10)
 declare -i start=1980
-declare -i end=2016
+declare -i end=2017
 declare -i start2=1980
-declare -i end2=2016
+declare -i end2=2017
 declare country="USA"
 declare dname="t2m"
 declare metric="meanc4"
