@@ -1,0 +1,10 @@
+#!/bin/sh
+#PBS -l walltime=120:00:00
+#PBS -l select=1:ncpus=2:mem=5gb
+#PBS -J 1-25
+
+cd  $EPHEMERAL/adolescent_height
+# cp ${HOME}/adolescent_height/* ${TMPDIR}
+module load anaconda3/personal
+R --slave --args ${PBS_ARRAY_INDEX} < ${EPHEMERAL}/adolescent_height/height.config
+# mv * ${WORK}/adolescent_height
