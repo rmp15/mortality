@@ -165,27 +165,27 @@ Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatio
 #################################################
 # 2. COMBINE RESULTS
 #################################################
-
-declare -a cods=('External' 'Intentional' 'Unintentional' 'Unintentional_wo_drowning' 'Accidental_drowning_and_submersion' 'Accidental_falls' 'Transport_accidents' 'Assault' 'Intentional_self-harm')
-
-for model in "${models[@]}"; do
-for cod in "${cods[@]}"; do
-
-echo "combining results into one file from INLA model $model years $start - $end";
-:
-#Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod.R $start2 $end2 $country $model $dname $metric $cod $contig
-
-done; done;
-
-#################################################
-# 3. PLOT RESULTS
-#################################################
-
-for model in "${models[@]}"; do
-for cod in "${cods[@]}"; do
-
-echo "combining results into one file from INLA model $model years $start - $end";
-
-Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start2 $end2 $country $model $dname $metric $cod $contig
-
-done; done;
+#
+#declare -a cods=('External' 'Intentional' 'Unintentional' 'Unintentional_wo_drowning' 'Accidental_drowning_and_submersion' 'Accidental_falls' 'Transport_accidents' 'Assault' 'Intentional_self-harm')
+#
+#for model in "${models[@]}"; do
+#for cod in "${cods[@]}"; do
+#
+#echo "combining results into one file from INLA model $model years $start - $end";
+#:
+##Rscript ~/git/mortality/USA/state/prog/bind_posterior/bind_posterior_climate_cod.R $start2 $end2 $country $model $dname $metric $cod $contig
+#
+#done; done;
+#
+##################################################
+## 3. PLOT RESULTS
+##################################################
+#
+#for model in "${models[@]}"; do
+#for cod in "${cods[@]}"; do
+#
+#echo "combining results into one file from INLA model $model years $start - $end";
+#
+##Rscript ~/git/mortality/USA/state/prog/mapping_posterior/mapping_posterior_climate_cod_1var.R $start2 $end2 $country $model $dname $metric $cod $contig
+#
+#done; done;
