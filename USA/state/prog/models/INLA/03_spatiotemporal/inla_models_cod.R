@@ -667,8 +667,8 @@
         f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
         f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
         # state-month specific terms
-        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='bym',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
-        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='bym',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
+        f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (spatially-correlated)
+        f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (spatially-correlated)
         # state specific terms
         f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
         f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
