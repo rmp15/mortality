@@ -1,7 +1,8 @@
 #!/bin/sh
-#PBS -l walltime=720:00:00
+#PBS -l walltime=120:00:00
 #PBS -l select=1:ncpus=32:mem=512gb
+#PBS -J 1-100
 
 cd $HOME
 module load anaconda3/personal
-Rscript /git/mortality/USA/state/prog/models/INL~A/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 1 1980 2017 27 0 't2m' 'meanc4' 1980 2017 'Accidental_drowning_and_submersion' 1 1 0
+R --slave --args ${PBS_ARRAY_INDEX} < ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5_medbio.R
