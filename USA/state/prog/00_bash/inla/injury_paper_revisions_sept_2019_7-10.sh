@@ -31,119 +31,15 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 
 (
 
-#declare cod="Accidental_drowning_and_submersion"
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 35 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 35 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#declare cod="Accidental_falls"
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 35 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 35 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#declare cod="Transport_accidents"
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 35 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 35 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#declare cod="Assault"
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 35 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 35 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig;
-
 declare cod="Intentional_self-harm"
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 85 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 65 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 55 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 45 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
