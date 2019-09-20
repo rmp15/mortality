@@ -1,6 +1,6 @@
 rm(list=ls())
 
-# set up argument (don't get why but it should be like this appararently
+# set up argument (don't get why but it should be like this apparently)
 seedVal <-as.numeric(commandArgs()[4])
 
 # create complete grid of age, sex, and cause of death values
@@ -37,7 +37,7 @@ print(paste(year.start.analysis.arg,year.end.analysis.arg,age.arg,sex.arg,type.s
 # range of years
 years <- year.start.arg:year.end.arg
 
-require(mailR)
+# require(mailR)
 
 # create file location for output
 if(pw.arg==0){
@@ -221,16 +221,16 @@ if(pw.arg==1){subject.arg = paste0(subject.arg,' pw done')}
 
 
 print(subject.arg)
-
-# sending email
-sender = "emailr349@gmail.com"
-recipients = c("r.parks15@imperial.ac.uk")
-send.mail(from = sender,
-to = recipients,
-subject = subject.arg,
-body = "Well done",
-smtp = list(host.name = "smtp.gmail.com", port = 465,
-user.name = "emailr349@gmail.com",
-passwd = "inlaisthebest", ssl = TRUE),
-authenticate = TRUE,
-send = TRUE)
+#
+# # sending email
+# sender = "emailr349@gmail.com"
+# recipients = c("r.parks15@imperial.ac.uk")
+# send.mail(from = sender,
+# to = recipients,
+# subject = subject.arg,
+# body = "Well done",
+# smtp = list(host.name = "smtp.gmail.com", port = 465,
+# user.name = "emailr349@gmail.com",
+# passwd = "inlaisthebest", ssl = TRUE),
+# authenticate = TRUE,
+# send = TRUE)
