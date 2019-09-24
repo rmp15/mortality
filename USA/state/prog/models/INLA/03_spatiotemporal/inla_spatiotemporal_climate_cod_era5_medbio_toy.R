@@ -54,4 +54,6 @@ output.string = paste0('USA_rate_pred_type',type.selected,'_',age.arg,'_',sex.lo
 
 # save all parameters of INLA model
 parameters.name <- paste0(output.string)
+if(cod.arg!='AllCause'){parameters.name = paste0(parameters.name,'_',cod.arg,'_parameters')}
+if(cod.arg=='AllCause'){parameters.name = paste0(parameters.name,'_parameters')}
 saveRDS(mod.test,paste0(file.loc,'/',parameters.name))
