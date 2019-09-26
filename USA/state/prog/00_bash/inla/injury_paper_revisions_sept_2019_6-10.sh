@@ -54,8 +54,8 @@ declare cod="Assault"
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 15 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  5 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R  0 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 
 ) &
 
