@@ -89,7 +89,7 @@ declare cod="Accidental_falls"
 declare cod="Accidental_drowning_and_submersion"
 
 #Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 75 2 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
+#Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5.R 25 1 $start $end 27 0 $dname $metric $start2 $end2 $cod $fast $contig $pw;
 
 declare cod="Transport_accidents"
 
