@@ -24,7 +24,7 @@ model <- models[model]
 # MODEL 1D
 
 if(pw.arg==0){
-    if(model%in% c('1d','1d2','1e')){
+    if(model%in% c('1d','1d2','1e','1d9','1d10')){
     
     # create dataframe with each of the national terms for entire group of age and sexes
     dat <- data.frame()
