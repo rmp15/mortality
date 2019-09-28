@@ -134,7 +134,7 @@ cod.print = ifelse(cause=='AllCause', 'All cause',
         )))))))))))))
 
 # for national model, plot climate parameters (with CIs) all on one page, one for men and one for women
-if(model%in%c('1d','1d2')){
+if(model%in%c('1d','1d2','1d9','1d10')){
 
     # attach long age names
     dat$age.long <- mapvalues(dat$age,from=sort(unique(dat$age)),to=as.character(age.code[,2]))
