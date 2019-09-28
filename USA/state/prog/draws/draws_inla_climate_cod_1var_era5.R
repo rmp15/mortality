@@ -30,6 +30,7 @@ model <- models[model]
 INLA:::inla.dynload.workaround()
 
 # load inla paradiso (what on earth is this?)
+library(INLA)
 inla.paradiso()
 inla.setOption(pardiso.license="~/git/mortality/USA/state/prog/00_bash/paradiso.lic")
 inla.paradiso.check()
@@ -38,7 +39,6 @@ inla.paradiso.check()
 causes = c("Transport accidents", "Intentional_self-harm", "Accidental falls", "Accidental drowning and submersion", "Assault")
 
 # load the data for each age and sex to make draws
-library(INLA)
 # for(cause in causes){
 for (i in seq(length(sex.filter))) {
     for (j in seq(length(age.filter))) {
