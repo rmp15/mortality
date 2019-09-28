@@ -8,20 +8,15 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 clear
 
 declare -i start=1980
-declare -i end=2016
-declare -a models=(10)
+declare -i end=2017
+declare -a models=(27)
 declare country="USA"
 declare -a dnames=("t2m")
-declare -a metrics=('meanc3')
-#declare -a cods=("Cardiopulmonary")
-#declare -a cods=("Cancer" "Other" "Other_cardiovascular_diseases" "Other_respiratory_diseases" "Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease" "External" "Unintentional" "Unintentional_wo_drowning" "Intentional" "Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault" "Other_external_causes_of_injury")
-#declare -a cods=("AllCause" "Cancer" "Cardiopulmonary" "External" "Other" "Unintentional" "Intentional")
-declare -a cods=("Cancer" "Cardiopulmonary" "External" "Other")
-#declare -a cods=("Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault" "Other_external_causes_of_injury")
-#declare -a cods=("Other_cardiovascular_diseases" "Other_respiratory_diseases" "Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease")
-#declare -a cods=("Cancer" "Other")
+declare -a metrics=('meanc4')
+#declare -a cods=("Ischaemic_heart_disease" "Cerebrovascular_disease" "Respiratory_infections" "Chronic_obstructive_pulmonary_disease" "Other_cardiovascular_diseases" "Other_respiratory_diseases") #"External" "Unintentional" "Unintentional_wo_drowning" "Intentional" "Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault" "Other_external_causes_of_injury")
+declare -a cods=("Transport_accidents" "Intentional_self-harm" "Accidental_falls" "Accidental_drowning_and_submersion" "Assault")
 declare -i contig=1
-declare -i pw=1
+declare -i pw=0
 
 #################################################
 # 1. PLOT PARAMETERS OF STATE CLIMATE POSTERIORS
