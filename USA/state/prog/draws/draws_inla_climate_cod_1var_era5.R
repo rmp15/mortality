@@ -57,10 +57,14 @@ for (i in seq(length(sex.filter))) {
         print(paste0('Reading ',file.name))
         model.current <- readRDS(file.name)
 
-
         # temporary workaround to avoid GLIBC error (???) from:
         # https://www.mn.uio.no/math/english/services/it/help/status/2018-07-26-inla-r.html
         INLA:::inla.dynload.workaround()
+
+        # load inla paradiso (what on earth is this?)
+        inla.paradiso()
+        inla.setOption(pardiso.license="~/git/mortality/USA/state/prog/00_bash/paradiso.lic")
+
 
         # make draws from the model for the parameters
         print(paste0('Making ',num.draws, ' draws...'))
