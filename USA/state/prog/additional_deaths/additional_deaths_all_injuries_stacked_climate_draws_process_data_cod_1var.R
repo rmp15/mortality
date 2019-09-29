@@ -102,6 +102,7 @@ if(model%in%c('1d','1d2')){
 
                 # for each draw make a parameter summary to then calculate additional deaths
                 climate.values = get(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h))[[k]]$latent[grep('month5',rownames(get(paste0('draws.',age.filter[j],'.',sex.lookup[i],'.',h))[[k]]$latent))]
+                # draws.current[[k]]$latent[grep('month5',rownames(draws.current[[k]]$latent))]
                 climate.values = exp(climate.values)
                 table = data.frame(cause=h,age=age.filter[j], sex=i, ID=c(1:12),odds.mean=climate.values)
                 parameter.table = rbind(parameter.table,table)
