@@ -8,4 +8,4 @@ module load anaconda3/personal
 R --slave --args ${PBS_ARRAY_INDEX} < $EPHEMERAL/git/mortality/USA/state/prog/00_bash/draws/draws_inla_climate_cod_1var_era5_medbio.R
 
 # to run type
-# qsub -q med-bio inla/medbio_injury_run.run
+# qsub -q med-bio inla/medbio_injury_draws_test.run
