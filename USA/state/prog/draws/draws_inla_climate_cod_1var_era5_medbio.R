@@ -35,6 +35,9 @@ INLA:::inla.dynload.workaround()
 
 # load inla paradiso (what on earth is this?)
 library(INLA)
+inla.paradiso()
+inla.setOption(pardiso.license="~/git/mortality/USA/state/prog/00_bash/paradiso.lic")
+inla.paradiso.check()
 
 # create directories for output
 file.loc <- paste0('~/data/mortality/US/state/draws_era5/',year.start,'_',year.end,
