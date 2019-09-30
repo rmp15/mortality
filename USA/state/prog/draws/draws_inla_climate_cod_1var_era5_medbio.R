@@ -23,7 +23,7 @@ model <- 27
 dname <- 't2m'
 metric <- 'meanc4'
 contig <- 1
-num.draws <- 100
+num.draws <- 1
 
 # source variables
 source('../../data/objects/objects.R')
@@ -36,27 +36,27 @@ INLA:::inla.dynload.workaround()
 # load inla paradiso (what on earth is this?)
 library(INLA)
 inla.pardiso()
-inla.setOption(pardiso.license="$EPHEMERAL/git/mortality/USA/state/prog/00_bash/pardiso.lic")
+inla.setOption(pardiso.license="~/git/mortality/USA/state/prog/00_bash/pardiso.lic")
 inla.pardiso.check()
 
 # create directories for output
-file.loc <- paste0('$EPHEMERAL/data/mortality/US/state/draws_era5/',year.start,'_',year.end,
+file.loc <- paste0('~/data/mortality/US/state/draws_era5/',year.start,'_',year.end,
 '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[age],'/')
 if(contig==1){
-    file.loc <- paste0('$EPHEMERAL/data/mortality/US/state/draws_era5/',year.start,'_',year.end,
+    file.loc <- paste0('~/data/mortality/US/state/draws_era5/',year.start,'_',year.end,
     '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',cause,'/',num.draws,'_draws/age_groups/',age.filter[age],'/')
     }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 # load the full model for a particular age and sex
 if(cause!='AllCause'){
-    file.name <- paste0('$EPHEMERAL/data/mortality/US/state/climate_effects_era5/',
+    file.name <- paste0('/rds/general/user/rmp15/ephemeral/data/mortality/US/state/climate_effects_era5/',
     dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age,
     '/',country,'_rate_pred_type',model,'_',age,'_',sex.lookup[sex],'_',
     year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
 }
 if(cause=='AllCause'){
-    file.name <- paste0('$EPHEMERAL/data/mortality/US/state/climate_effects_era5/',
+    file.name <- paste0('/rds/general/user/rmp15/ephemeral/data/mortality/US/state/climate_effects_era5/',
     dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age,
     '/',country,'_rate_pred_type',model,'_',age,'_',sex.lookup[sex],
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_parameters_fast_contig')
