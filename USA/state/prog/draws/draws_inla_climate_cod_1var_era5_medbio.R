@@ -23,7 +23,7 @@ model <- 27
 dname <- 't2m'
 metric <- 'meanc4'
 contig <- 1
-num.draws <- 1000
+num.draws <- 100
 
 # source variables
 source('../../data/objects/objects.R')
@@ -67,7 +67,8 @@ model.current <- readRDS(file.name)
 
 # make draws from the model for the parameters
 print(paste0('Making ',num.draws, ' draws...'))
-draws.current = try(inla.posterior.sample(num.draws,model.current))
+# draws.current = try(inla.posterior.sample(num.draws,model.current))
+draws.current = try(inla.posterior.sample(num.draws,model.current,selection=list('month5'=1:12)))
 
 # OTHER ATTEMPTS
 # draws.current = try(inla.posterior.sample(num.draws,model.current,selection=list('Predictor'=1:10)))
@@ -75,6 +76,6 @@ draws.current = try(inla.posterior.sample(num.draws,model.current))
 
 # save draws as an rds file
 print('Saving file...')
-save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],
+save.name = paste0(country,'_rate_pred_type',model,'_',age.filter[age],'_',sex.lookup[sex],
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_',num.draws,'_draws_fast_contig')
 try(saveRDS(draws.current,paste0(file.loc,save.name)))
