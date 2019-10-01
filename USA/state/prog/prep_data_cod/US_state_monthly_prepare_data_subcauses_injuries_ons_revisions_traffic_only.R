@@ -62,11 +62,11 @@ yearsummary_injuries  <- function(x=2000) {
         dat.merged$cause.sub =
                             ifelse(dat.merged$cause.numeric>=8000&dat.merged$cause.numeric<=8079, 'Other transport accidents',#'Railway Accidents',
 							ifelse(dat.merged$cause.numeric>=8100&dat.merged$cause.numeric<=8199, 'Road traffic accidents',#'Motor Vehicle Traffic Accidents',
-							ifelse(dat.merged$cause.numeric>=8200&dat.merged$cause.numeric<=8259, 'Transport accidents',#'Motor Vehicle Nontraffic Accidents',
+							ifelse(dat.merged$cause.numeric>=8200&dat.merged$cause.numeric<=8259, 'Other transport accidents',#'Motor Vehicle Nontraffic Accidents',
 							ifelse(dat.merged$cause.numeric>=8260&dat.merged$cause.numeric<=8299, 'Road traffic accidents',#'Other Road Vehicle Accidents',
-							ifelse(dat.merged$cause.numeric>=8300&dat.merged$cause.numeric<=8389, 'Transport accidents',#'Water Transport Accidents',
-							ifelse(dat.merged$cause.numeric>=8400&dat.merged$cause.numeric<=8459, 'Transport accidents',#'Air and Space Transport Accidents',
-							ifelse(dat.merged$cause.numeric>=8460&dat.merged$cause.numeric<=8499, 'Transport accidents',#'Vehicle Accidents, Not Elsewhere Classifiable',
+							ifelse(dat.merged$cause.numeric>=8300&dat.merged$cause.numeric<=8389, 'Other transport accidents',#'Water Transport Accidents',
+							ifelse(dat.merged$cause.numeric>=8400&dat.merged$cause.numeric<=8459, 'Other transport accidents',#'Air and Space Transport Accidents',
+							ifelse(dat.merged$cause.numeric>=8460&dat.merged$cause.numeric<=8499, 'Other transport accidents',#'Vehicle Accidents, Not Elsewhere Classifiable',
 							'NA')))))))
 
 		# merge cod in ICD 9 coding
@@ -151,7 +151,7 @@ yearsummary_injuries  <- function(x=2000) {
   	names(dat.summarised)[1:8] <- c('cause.group','cause.sub','fips','year','month','sex','age','deaths')
 	dat.summarised <- na.omit(dat.summarised)
     #
-	# create an exhaustive list of location sex age month (in this case it should be 51 * 2 * 10 * 12 * 4 = 12240 rows)
+	# create an exhaustive list of location sex age month
 	fips 	=	c(1,2,4,5,6,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,
 				26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,
 				41,42,44,45,46,47,48,49,50,51,53,54,55,56)
