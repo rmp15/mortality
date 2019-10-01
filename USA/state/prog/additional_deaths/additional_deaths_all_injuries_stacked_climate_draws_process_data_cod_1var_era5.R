@@ -18,7 +18,7 @@ num.draws <- as.numeric(args[8])
 
 # NEED TO MAKE CONTIG OPTION ACTUALLY DO SOMETHING
 
-#year.start = 1980 ; year.end = 2016 ; country = 'USA' ; model = 10 ; dname = 't2m' ; metric = 'meanc3' ; contig=1 ; num.draws = 5000
+#year.start = 1980 ; year.end = 2017 ; country = 'USA' ; model = 27 ; dname = 't2m' ; metric = 'meanc4' ; contig=1 ; num.draws = 100
 
 multiple = 0
 
@@ -30,16 +30,16 @@ model <- models[model]
 # colorway = c("navy","deepskyblue2","deepskyblue3","lightgreen","white","gold","orange","red","darkred")
 
 # create directories for output
-file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
+file.loc <- paste0('../../output/additional_deaths_climate_era5/',year.start,'_',year.end,
 '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/all_injuries/',num.draws,'_draws/')
 if(contig==1){
-    file.loc <- paste0('../../output/additional_deaths_climate/',year.start,'_',year.end,
+    file.loc <- paste0('../../output/additional_deaths_climate_era5/',year.start,'_',year.end,
 '/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_injuries/',num.draws,'_draws/')
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
 
 causes.intentional = c('Assault','Intentional self-harm')
-causes.unintentional = c('Accidental falls', 'Accidental drowning and submersion', 'Transport accidents', 'Other external causes of injury')
+causes.unintentional = c('Accidental falls', 'Accidental drowning and submersion', 'Transport accidents')
 causes.all = c(causes.intentional,causes.unintentional)
 
 # load the draws data for each age and sex for the cause chosen
@@ -50,10 +50,10 @@ for(h in causes.all){
             print(paste0('Loading draws for ',sex.filter[i],', ',age.filter[j],', ',h,'...'))
 
             # get location of file
-            file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+            file.loc.input <- paste0('~/data/mortality/US/state/draws_era5/',year.start,'_',year.end,
                     '/',dname,'/',metric,'/non_pw/type_',model,'/non_contig/',h,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
             if(contig==1){
-                file.loc.input <- paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+                file.loc.input <- paste0('~/data/mortality/US/state/draws_era5/',year.start,'_',year.end,
                 '/',dname,'/',metric,'/non_pw/type_',model,'/contig/',h,'/',num.draws,'_draws/age_groups/',age.filter[j],'/')
             }
 
@@ -67,7 +67,7 @@ for(h in causes.all){
 }}}
 
 # for national model, plot additional deaths (with CIs) all on one page, one for men and one for women
-if(model%in%c('1d','1d2')){
+if(model%in%c('1d','1d2','1d9','1d10')){
 
     dat.mort <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_ons_',year.start,'_',year.end))
     print(head(dat.mort))
@@ -157,7 +157,7 @@ if(model%in%c('1d','1d2')){
     }
 
     # save additional.deaths, additional.deaths.monthly and additional.deaths.total NEED TO ADD FOR NON_CONTIG ALSO
-    output.local = paste0('~/data/mortality/US/state/draws/',year.start,'_',year.end,
+    output.local = paste0('~/data/mortality/US/state/draws_era5/',year.start,'_',year.end,
                     '/',dname,'/',metric,'/non_pw/type_',model,'/contig/all_injuries/',num.draws,'_draws/')
     ifelse(!dir.exists(output.local), dir.create(output.local,recursive=TRUE), FALSE)
 
