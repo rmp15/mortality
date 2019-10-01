@@ -1,7 +1,7 @@
 #!/bin/sh
 #PBS -l walltime=72:00:00
 #PBS -l select=1:ncpus=30:mem=300gb
-#PBS -J 21-40
+#PBS -J 21-4
 
 cd $HOME/git/mortality/USA/state/prog/00_bash/
 module load anaconda3/personal

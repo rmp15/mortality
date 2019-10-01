@@ -80,9 +80,9 @@ pdf(paste0(file.loc.output,country,'_rate_pred_type',model,
     '_',year.start,'_',year.end,'_',dname,'_',metric,'_all_excess_risk_freescale_fast_contig_edit.pdf'),paper='a4',height=0,width=0)
 ggplot() +
     # geom_bar(data=subset(additional.deaths.summary.perc,sex>0&age<99&!(cause%in%c('5. Assault','6. Intentional\nself-harm'))), aes(x=as.factor(age.long),y=perc.mean,fill=cause), stat='identity') +
-    geom_errorbar(data=subset(additional.deaths.summary.all,sex>0&age<99&cause!='Other unintentional injuries'),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
-    geom_point(data=subset(additional.deaths.summary.all,sex>0&age<99&cause!='Other unintentional injuries'), aes(x=as.factor(age.long),y=perc.mean),size=2,shape=16) +
-    geom_point(data=subset(additional.deaths.summary.all,sex>0&age<99&cause!='Other unintentional injuries'), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=1,shape=16) +
+    geom_errorbar(data=subset(additional.deaths.summary.all,sex>0&age<99&!(cause%in%c('Respiratory\ninfections','Other\nrespiratory\ndiseases','COPD','Other\ncardiovascular\ndiseases','Other unintentional injuries'))),aes(x=as.factor(age.long),ymax=perc.ul,ymin=perc.ll),width=.2,size=0.5) +
+    geom_point(data=subset(additional.deaths.summary.all,sex>0&age<99&!(cause%in%c('Respiratory\ninfections','Other\nrespiratory\ndiseases','COPD','Other\ncardiovascular\ndiseases','Other unintentional injuries'))), aes(x=as.factor(age.long),y=perc.mean),size=2,shape=16) +
+    geom_point(data=subset(additional.deaths.summary.all,sex>0&age<99&!(cause%in%c('Respiratory\ninfections','Other\nrespiratory\ndiseases','COPD','Other\ncardiovascular\ndiseases','Other unintentional injuries'))), aes(x=as.factor(age.long),y=perc.mean,color=cause),size=1,shape=16) +
     geom_hline(yintercept=0,linetype='dotted') +
     xlab('Age group (years)') + ylab('Percentage change in death rates associated with a 1°C warmer year') +
     # ylim(c(min.plot,max.plot)) +
