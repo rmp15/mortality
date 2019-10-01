@@ -207,6 +207,8 @@ dat.appended = appendyears(year.start.arg,year.end.arg)
 # reorder appended data
 dat.appended = dat.appended[order(dat.appended$year,dat.appended$cause.group,dat.appended$cause.sub),]
 
+# COPY AND PASTE FROM HERE
+
 # Add USA label
 dat.appended$iso3 <- "USA"
 
