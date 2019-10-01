@@ -23,7 +23,7 @@ model <- 27
 dname <- 't2m'
 metric <- 'meanc4'
 contig <- 1
-num.draws <- 100
+num.draws <- 10
 
 # source variables
 source('../../data/objects/objects.R')
