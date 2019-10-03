@@ -30,9 +30,12 @@ if(pw.arg==0){
     dat.parameters <- data.frame()
 
     # find the posterior exponential mean
-for (cause in c('Transport accidents','Accidental falls','Accidental drowning and submersion','Intentional self-harm','Assault')){
-    for (i in seq(length(sex.filter))) {
-        for (j in seq(length(age.filter))) {
+# for (cause in c('Transport accidents','Accidental falls','Accidental drowning and submersion','Intentional self-harm','Assault')){
+#     for (i in seq(length(sex.filter))) {
+#         for (j in seq(length(age.filter))) {
+for (cause in c('Transport accidents')){
+    for (i in c(1)) {
+        for (j in c(2,3,4,5,6,8,9,10)) {
             # load data
             print(paste0(cause,' ',i,' ',j))
 
