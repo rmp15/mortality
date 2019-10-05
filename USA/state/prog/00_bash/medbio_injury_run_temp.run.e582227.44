@@ -1,0 +1,25 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: Matrix
+Loading required package: sp
+Loading required package: parallel
+This is INLA_19.09.03 built 2019-09-24 21:31:45 UTC.
+See www.r-inla.org/contact-us for how to get help.
+To enable PARDISO sparse library; see inla.pardiso()
+
+Attaching package: ‘INLA’
+
+The following object is masked _by_ ‘.GlobalEnv’:
+
+    f
+
+=>> PBS: job killed: walltime 259215 exceeded limit 259200

@@ -1,0 +1,31 @@
+
+ RDS usage at 18:10 on 4/10/2019
+
+
+ Individual allocation /rds/general/user/rmp15
+
+   Home       Data:  199GB of 1.00TB (20%)	
+              Files: 154K of 10.00M (2%)	
+   Ephemeral  Data:  8.09TB of 109.95TB (7%)	
+              Files: 48K of 20.97M (0%)	
+
+ 
+Imperial College London HPC Service
+-----------------------------------
+Job medbio_injury_draws_test.run, jobid 582503[62].pbs, username rmp15 - started execution at 18:11:26 Fri 04/10/19 on system uv-ax5
+ 
+[1] "SUCCESS: PARDISO IS INSTALLED AND WORKING"
+[1] FALSE
+[1] "Reading /rds/general/user/rmp15/ephemeral/data/mortality/US/state/climate_effects_era5/t2m/meanc4/non_pw/type_1d9/age_groups/0/USA_rate_pred_type1d9_0_Women_1980_2017_t2m_meanc4_Intentional self-harm_parameters_fast_contig"
+[1] "Making 1000 draws..."
+[1] "Saving file..."
+
+============================================
+
+        Job resource usage summary 
+
+                 Memory (GB)    NCPUs
+ Requested  :       360            30
+ Used       :        22 (peak)   0.99 (ave)
+
+============================================
