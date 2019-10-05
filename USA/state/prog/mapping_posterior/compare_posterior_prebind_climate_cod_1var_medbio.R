@@ -14,7 +14,7 @@ pw.arg <- as.numeric(args[10])
 
 # for model testing
 # year.start = 1980 ; year.end = 2017 ; country = 'USA' ; model = 27 ; model.2 = 28 ; dname='t2m' ; metric='meanc4'
-# cause = 'Transport accidents' ;  contig.arg = 1 ; pw.arg = 0
+# cause = 'Falls' ;  contig.arg = 1 ; pw.arg = 0
 
 # source variables
 source('../../data/objects/objects.R')
@@ -33,9 +33,9 @@ if(pw.arg==0){
 # for (cause in c('Transport accidents','Accidental falls','Accidental drowning and submersion','Intentional self-harm','Assault')){
 #     for (i in seq(length(sex.filter))) {
 #         for (j in seq(length(age.filter))) {
-for (cause in c('Transport accidents')){
+for (cause in c('Accidental falls')){
     for (i in c(1)) {
-        for (j in c(2,3,4,5,6,8,9,10)) {
+        for (j in c(1,2,3,4,6,7,8,9,10)) {
             # load data
             print(paste0(cause,' ',i,' ',j))
 
