@@ -29,6 +29,7 @@ inla.function.climate.fast <- function() {
     E = pop.adj,
     control.compute = list(dic=TRUE),
     control.predictor = list(link = 1),
+    num.threads = 30, # NEED TO FIX
     control.inla = list(diagonal=10000, int.strategy='eb',strategy='gaussian'),
     ))
     
@@ -40,6 +41,7 @@ inla.function.climate.fast <- function() {
     E = pop.adj,
     control.compute = list(config=TRUE, dic=TRUE),
     control.predictor = list(link = 1),
+    num.threads = 30, # NEED TO FIX
     control.inla=list(diagonal=0),
     control.mode = list(result = mod.rough, restart = TRUE),
     ))
