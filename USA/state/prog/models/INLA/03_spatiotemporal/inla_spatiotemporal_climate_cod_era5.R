@@ -158,6 +158,10 @@ source('../models/INLA/03_spatiotemporal/inla_functions_cod.R')
 # https://www.mn.uio.no/math/english/services/it/help/status/2018-07-26-inla-r.html
 INLA:::inla.dynload.workaround()
 
+# load inla pardiso (what on earth is this?)
+inla.setOption(pardiso.license="~/git/mortality/USA/state/prog/00_bash/pardiso.lic")
+inla.pardiso.check()
+
 # input arguments into function to perform inference
 if(fast.arg==0){
     mod = inla.function.climate()
