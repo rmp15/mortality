@@ -1,0 +1,31 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: Matrix
+Loading required package: sp
+Loading required package: parallel
+This is INLA_19.09.03 built 2019-09-24 21:31:45 UTC.
+See www.r-inla.org/contact-us for how to get help.
+To enable PARDISO sparse library; see inla.pardiso()
+
+Attaching package: ‘INLA’
+
+The following object is masked _by_ ‘.GlobalEnv’:
+
+    f
+
+sh: line 1: 11926 Killed                  '/rds/general/user/rmp15/home/anaconda3/lib/R/library/INLA/bin/linux/64bit/inla.static' -b -s -v -t 40 '/tmp/pbs.592493[28].pbs/RtmpqGoEAY/file2bec4462abbd/Model.ini' > '/tmp/pbs.592493[28].pbs/RtmpqGoEAY/file2bec4462abbd/Logfile.txt'
+Error in inla.inlaprogram.has.crashed() : 
+  The inla-program exited with an error. Unless you interupted it yourself, please rerun with verbose=TRUE and check the output carefully.
+  If this does not help, please contact the developers at <help@r-inla.org>.
+Calls: inla.function.climate.fast ... system.time -> inla -> inla.inlaprogram.has.crashed
+Timing stopped at: 3.368e+04 409.5 3.414e+04
+Execution halted

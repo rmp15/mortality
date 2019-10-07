@@ -1,0 +1,41 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Loading required package: Matrix
+Loading required package: sp
+Loading required package: parallel
+This is INLA_19.09.03 built 2019-09-24 21:31:45 UTC.
+See www.r-inla.org/contact-us for how to get help.
+To enable PARDISO sparse library; see inla.pardiso()
+
+Attaching package: ‘INLA’
+
+The following object is masked _by_ ‘.GlobalEnv’:
+
+    f
+
+
+
+	GMRFLib version 3.0-0-snapshot, has recived error no [1]
+	Reason    : Alloc failed
+	Message   : Fail to calloc nmemb=777521 elements of size=8 bytes
+	Function  : GMRFLib_Q2csr
+	File      : smtp-pardiso.c
+	Line      : 192
+	RCSId     : file: smtp-pardiso.c  hgid: 0bed76828f01  date: Tue Sep 03 11:21:49 2019 +0300
+
+sh: line 1:  9212 Aborted                 '/rds/general/user/rmp15/home/anaconda3/lib/R/library/INLA/bin/linux/64bit/inla.static' -b -s -v -t 40 '/tmp/pbs.592493[4].pbs/RtmpdNsjxY/file21e13399f8a9/Model.ini' > '/tmp/pbs.592493[4].pbs/RtmpdNsjxY/file21e13399f8a9/Logfile.txt'
+Error in inla.inlaprogram.has.crashed() : 
+  The inla-program exited with an error. Unless you interupted it yourself, please rerun with verbose=TRUE and check the output carefully.
+  If this does not help, please contact the developers at <help@r-inla.org>.
+Calls: inla.function.climate.fast ... system.time -> inla -> inla.inlaprogram.has.crashed
+Timing stopped at: 3.354e+04 131.9 3.369e+04
+Execution halted
