@@ -112,7 +112,8 @@ yearsummary_injuries  <- function(x=2000) {
                             ifelse(dat.merged$letter=='V'&dat.merged$cause.numeric>=870&dat.merged$cause.numeric<=879,	'Road traffic accidents',
                             ifelse(dat.merged$letter=='V'&dat.merged$cause.numeric>=880&dat.merged$cause.numeric<=889,	'Other transport accidents',
                             ifelse(dat.merged$letter=='V'&dat.merged$cause.numeric>=890&dat.merged$cause.numeric<=899,	'Road traffic accidents',
-                            'NA')))))))))
+                            ifelse(dat.merged$letter=='V'&dat.merged$cause.numeric>=900&dat.merged$cause.numeric<=999,	'Other transport accidents',
+                            'NA'))))))))))
 
 		# get rid of non-transport accidents
 		dat.merged = subset(dat.merged,cause.sub!='NA')

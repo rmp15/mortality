@@ -22,6 +22,11 @@ if(cod.arg%in%c('Transport accidents','Accidental falls','Other external causes 
     dat.inla.load$cause.group = NULL ; names(dat.inla.load)[6] = 'cause'
     dat.inla.load <- subset(dat.inla.load,cause==cod.arg)
 }
+if(cod.arg%in%c('Road traffic accidents','Other transport accidents')){
+	dat.inla.load <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_injuries_transport_ons_',year.start.arg,'_',year.end.arg))
+    dat.inla.load$cause.group = NULL ; names(dat.inla.load)[6] = 'cause'
+    dat.inla.load <- subset(dat.inla.load,cause==cod.arg)
+}
 if(cod.arg%in%c('Ischaemic heart disease','Cerebrovascular disease','Other cardiovascular diseases',
 				'Chronic obstructive pulmonary disease','Respiratory infections','Other respiratory diseases')){
 	dat.inla.load <- readRDS(paste0('../../output/prep_data_cod/datus_nat_deaths_subcod_cardio_ons_',year.start.arg,'_',year.end.arg))

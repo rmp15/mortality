@@ -6,7 +6,7 @@ seedVal <-as.numeric(commandArgs()[4])
 # create complete grid of age, sex, and cause of death values
 sexes = c(1,2)
 ages = c(0,5,15,25,35,45,55,65,75,85)
-causes = c('Transport accidents','Accidental falls','Accidental drowning and submersion','Intentional self-harm','Assault')
+causes = c('Transport accidents','Accidental falls','Accidental drowning and submersion','Intentional self-harm','Assault','Road traffic accidents','Other transport accidents')
 
 seed.grid = expand.grid(sex=sexes,age=ages,cause=causes)
 
