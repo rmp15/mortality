@@ -1,0 +1,18 @@
+ 
+Imperial College London HPC Service
+-----------------------------------
+Job medbio_injury_run_temp.run, jobid 593214[30].pbs, username rmp15 - started execution at 17:51:50 Mon 07/10/19 on system ax4
+ 
+[1] "1980 2017 85 1 1d10 Accidental drowning and submersion"
+[1] FALSE
+[1] FALSE
+
+============================================
+
+        Job resource usage summary 
+
+                 Memory (GB)    NCPUs
+ Requested  :       360            30
+ Used       :       177 (peak)   0.98 (ave)
+
+============================================

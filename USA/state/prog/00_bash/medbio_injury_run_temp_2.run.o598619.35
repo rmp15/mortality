@@ -1,0 +1,18 @@
+ 
+Imperial College London HPC Service
+-----------------------------------
+Job medbio_injury_run_temp_2.run, jobid 598619[35].pbs, username rmp15 - started execution at 05:07:56 Fri 11/10/19 on system ax4
+ 
+[1] "1980 2017 35 2 1d10 Intentional self-harm"
+[1] FALSE
+[1] FALSE
+
+============================================
+
+        Job resource usage summary 
+
+                 Memory (GB)    NCPUs
+ Requested  :       360            30
+ Used       :       166 (peak)   0.98 (ave)
+
+============================================

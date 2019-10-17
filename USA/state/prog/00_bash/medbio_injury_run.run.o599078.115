@@ -1,0 +1,19 @@
+ 
+Imperial College London HPC Service
+-----------------------------------
+Job medbio_injury_run.run, jobid 599078[115].pbs, username rmp15 - started execution at 16:50:04 Sat 12/10/19 on system ax4
+ 
+[1] "1980 2017 65 1 1d9 Road traffic accidents"
+[1] FALSE
+[1] FALSE
+[1] "Men 65 model 1d9 t2m meanc4 Road traffic accidents 1980-2017 contig fast non-pw done"
+
+============================================
+
+        Job resource usage summary 
+
+                 Memory (GB)    NCPUs
+ Requested  :       360            30
+ Used       :       186 (peak)   0.98 (ave)
+
+============================================
