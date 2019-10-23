@@ -5,7 +5,7 @@
 
 cd $HOME/git/mortality/USA/state/prog/00_bash/
 module load anaconda3/personal
-R --slave --args ${PBS_ARRAY_INDEX} < $HOME/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5_medbio.R
+R --slave --args ${PBS_ARRAY_INDEX} < $HOME/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_era5_medbio_2.R
 
 # to run type
 # qsub -q med-bio inla/medbio_injury_run_2.run
