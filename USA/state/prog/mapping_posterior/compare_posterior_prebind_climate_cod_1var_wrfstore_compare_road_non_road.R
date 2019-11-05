@@ -15,7 +15,7 @@ pw.arg <- as.numeric(args[11])
 
 # for model testing
 # year.start = 1980 ; year.end = 2017 ; country = 'USA' ; model = 27 ; dname='t2m' ; metric='meanc4'
-# cause = 'Transport accidents' ; cause.2 = 'Road traffic accidents' ;  contig.arg = 1 ; pw.arg = 0
+# cause.2 = 'Transport accidents' ;  contig.arg = 1 ; pw.arg = 0
 # Other transport accidents
 
 # source variables
@@ -30,17 +30,17 @@ dat <- data.frame()
 dat.parameters <- data.frame()
 
     # find the posterior exponential mean
-for (i in c(1)) {
-    for (j in c(1,6,7,8,10)) {
+for (i in c(2)) {
+    for (j in c(1,2,3,4,5,6,7,8,9,10)) {
         # load data
-        print(paste0(cause,' ',cause.2,' ',i,' ',j))
+        print(paste0(cause.2,' ',i,' ',j))
 
         # load file names
         # file.name <- paste0('~/data/mortality/US/state/climate_effects_era5/',
         # dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
         # '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],'_',
         # year.start,'_',year.end,'_',dname,'_',metric,'_',cause,'_parameters_fast_contig')
-        file.name.2 <- paste0('/rds/general/user/rmp15/ephemeral/data/mortality/US/state/climate_effects_era5/',
+        file.name.2 <- paste0('~/data/mortality/US/state/climate_effects_era5/',
         dname,'/',metric,'/non_pw/type_',model,'/age_groups/',age.filter[j],
         '/',country,'_rate_pred_type',model,'_',age.filter[j],'_',sex.lookup[i],'_',
         year.start,'_',year.end,'_',dname,'_',metric,'_',cause.2,'_parameters_fast_contig')
@@ -82,6 +82,7 @@ save.name.param <- paste0(country,'_parameters_',model,'_',year.start,'_',year.e
 
 # write.csv(dat,paste0(file.loc.git,save.name))
 write.csv(dat.parameters,paste0(file.loc.git,save.name.param))
+
 
 # # plot results
 # library(ggplot2)
