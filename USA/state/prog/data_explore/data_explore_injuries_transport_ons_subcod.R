@@ -35,10 +35,12 @@ dat$cause <- gsub('Intentional', 'Intentional injuries', dat$cause) # second in 
 # dat$cause.sub <- gsub('Other external causes of injury', 'Other injuries', dat$cause.sub)        # 4
 # dat$cause.sub <- gsub('Assault', 'Assault', dat$cause.sub)                                                      # 5
 # dat$cause.sub <- gsub('Intentional self-harm', 'Suicide', dat$cause.sub)                          # 6
+dat$cause.sub <- gsub('Road traffic accidents', 'Road traffic injuries', dat$cause.sub)
+dat$cause.sub <- gsub('Other transport accidents', 'Other transport injuries', dat$cause.sub)
 
 # reorder
 # dat$cause = factor(dat$cause, levels=c('Unintentional injuries','Intentional injuries'))
-dat$cause.sub = factor(dat$cause.sub, levels=c('Road traffic accidents','Other transport accidents'))
+dat$cause.sub = factor(dat$cause.sub, levels=c('Road traffic injuries','Other transport injuries'))
 
 library(plyr)
 library(scales)
