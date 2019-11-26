@@ -49,8 +49,16 @@ file.loc <- paste0('~/git/climate/countries/USA/data/temp_maricopa/PHX_temp_mont
 dat.climate <- read.csv(file.loc)
 dat.climate$X = NULL
 
-# centre each month by its long-term average TO DO
-# TO FINISH
+library(dplyr)
+
+# centre each month by its long-term average
+dat.climate = ddply(dat.climate, c("month"), transform, temp_mean_detrend = pracma::detrend(temp_mean), temp_mean_scale = scale(temp_mean))
+
+# plot to check if desired
+ggplot(data=dat.test,aes(x=year)) +
+geom_line(aes(y=temp_mean_detrend,color=as.factor(month)),linetype=1) +
+geom_line(aes(y=temp_mean_scale,color=as.factor(month)),linetype=2) +
+facet_wrap(~month)+geom_hline(yintercept=0)
 
 # merge mortality and climate data and reorder
 dat.merged <- merge(dat.inla.load,dat.climate,by.x=c('year','month'),by.y=c('year','month'),all.x=TRUE)
@@ -74,8 +82,6 @@ if(type.arg %in% c(26)){
 
 }
 
-library(dplyr)
-
 # lookups
 source('../../data/objects/objects.R')
 
@@ -98,7 +104,7 @@ dat.inla <- dat.inla[order(dat.inla$sex,dat.inla$age,dat.inla$year.month),]
 rownames(dat.inla) <- 1:nrow(dat.inla)
 
 # create a factor variable for age (1 to 10)
-# FINISH AND CALL ID
+dat.inla$age.rank = with(dat.inla, match(age, unique(age)))
 
 # variables for INLA model
 dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
