@@ -1,0 +1,49 @@
+## INLA Code for "Covariate and county" model used in Bennett, Tamura-Wicks et al. PLOS Medicine 2019
+##
+## Each age group is run separately.
+##
+## death                    - number of deaths in county unit, year, in that age group
+## year1, year2           -  year
+## year.ind1                - Index for year
+## cty.ind1, cty.ind2     - Indexes for county units of contiguous USA
+## adj                        - Adjacency matrix for county units of contiguous USA
+## PM25                     - Concentrations of PM2.5
+## 
+## See the paper for details of the exact definitions of covariates used
+
+## Models are run in R, using the package INLA 
+## with family = "poisson" and E = population in county unit, year, in that age group
+
+
+############### DEFINE "Covariate and county" MODEL FORMULA ######################
+
+
+fml <- death ~
+
+# national (age-specific) intercept + linear time slope
+  1 + year1 + 
+  
+# county-specific intercept 
+  f(cty.ind1, model="besag",graph=adj, hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+  
+# county-specific linear time slope - only included in the Restrictive model
+  #f(cty.ind2, year2, model="besag",graph=adj, hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+  
+# non-linear time trend 
+  f(year.ind1, model='rw1', hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+
+# PM2.5 concentrations
+  PM25 + 
+  
+# Covariates 
+  Income + Poverty + Race + logLungCancerRate + Education + Urbanicity + Unemployment + Temperature + RelativeHumidity +  
+  
+# Overdispersion terms
+  f(e, model = "iid", hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001))))
+
+
+##############################################
+
+
+
+

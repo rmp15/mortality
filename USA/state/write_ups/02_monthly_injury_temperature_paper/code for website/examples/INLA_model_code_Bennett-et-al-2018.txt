@@ -1,0 +1,70 @@
+
+## INLA Code for model used in Bennett et al. Lancet Public Health 2018
+## 
+## yearc1 - Centred year
+## imd.id1, imd.id2, imd.id3 - Indexes for deciles of IMD
+## age.id1, age.id2, age.id3 - Indexes for Age group
+## year.id1, year.id2 - Indexes for year
+## age_imd.id1, age_imd.id2 - Indexes for age group/decile of IMD interaction
+## epsilon.id1 - Index for age group/decile of IMD/year
+
+
+# Precision for fixed effects
+fixed.prec = 0.001
+
+#INLA formula
+fml  <- deaths ~
+	#global terms
+		f(yearc1, model = "linear", mean.linear = 0, prec.linear = fixed.prec) +  
+		
+	# IMD specific intercepts
+		f(imd.id1, model="rw1",  		hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+		
+	# IMD specific trends
+		f(imd.id2, yearc1 , model="rw1", 	hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+		
+	# age specific intercepts	
+		f(age.id1, model="rw1", 		hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+		
+	# age specific trends	
+		f(age.id2, yearc1 , model="rw1", 	hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+		
+	# rw over time for each IMD
+		f(year.id1,model="rw1",group=imd.id3,control.group=list(model="exchangeable"), 	
+								hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+									
+	# rw over time for each age group 
+		f(year.id2,model="rw1",group=age.id3,control.group=list(model="exchangeable"), 	
+								hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+																		
+	# interaction betwn IMD and agegrp intercepts
+		f(age_imd.id1, model="iid", 		hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) + 
+		
+	# interaction betwn IMD and agegrp trends
+		f(age_imd.id2, yearc1, model="iid", 	hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001)))) +
+		
+	# overdispersion terms
+		f(epsilon.id1, model = "iid", 		hyper = list(prec = list(prior = "loggamma", param = c(1, 0.001))))
+
+###############################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

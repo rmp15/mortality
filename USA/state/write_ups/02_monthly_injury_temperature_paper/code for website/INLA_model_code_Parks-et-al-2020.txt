@@ -1,0 +1,62 @@
+
+## INLA Code for model used in Parks et al. Nature Medicine 2020
+## 
+## year.month, year.month2, year.month3 - month and year identifier over time
+## month, month2, month3, month4, month5, month6, month7 - month index 
+## ID, ID2 - state index 
+## adj - adjacency matrix for state units of contiguous USA
+## anomaly - temperature anomaly 
+
+#INLA formula
+
+        fml  <- deaths ~
+
+        # global terms
+        	1 +                                                                     		# global intercept
+        	year.month +                                                           			# global slope
+
+        # month specific terms
+        	f(month, model='rw1',cyclic = TRUE) +                                           	# month specific intercept
+        	f(month2, year.month2, model='rw1', cyclic= TRUE) +                             	# month specific slope
+
+        # state specific terms
+        	f(ID, model="bym",graph=USA.adj) +                                      		# state specific intercept (BYM)
+        	f(ID2, year.month2, model="bym",graph=USA.adj) +                        		# state specific slope (BYM)
+
+        # state-month specific terms
+        	f(month3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=USA.adj))+                  # state-month specific intercept (besag part of BYM)
+        	f(month4, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=USA.adj))+    # state-month specific slope (besag part of BYM)
+        	f(month6, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='iid'))+                                  # state-month specific intercept (iid part of BYM)
+        	f(month7, year.month2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='iid'))+                    # state-month specific slope (iid part of BYM)
+
+        # climate specific terms
+        	f(month5, anomaly, model="rw1", cyclic=TRUE) +                                 		# month specific climate slope
+
+        # random walk across time
+        	f(year.month3, model="rw1") +                                           		# random walk across time
+
+        # overdispersion term
+        	f(e, model = "iid")                                                    		 	# overdispersion term
+
+
+###############################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
