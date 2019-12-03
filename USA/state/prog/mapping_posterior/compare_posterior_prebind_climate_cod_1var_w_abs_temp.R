@@ -67,12 +67,17 @@ for(cause in causes){
 }
 
 # 1. merge temperature terms against each other and plot
+# TEMPORARILY CUT OUT THE 65 FEMALES AS IT's WRONG
 dat.param.1$X = NULL ; dat.param.2$X = NULL
 dat.param.1$month=c(1:12) ; dat.param.2$month=c(1:12)
 names(dat.param.1) = c('model.1.mean',"model.1.ll", "model.1.ul", "age", "sex",'cause')
 dat.param.merged = merge(dat.param.1,dat.param.2,by.x=c('age','sex','cause','month'))
+dat.param.merged
 
 # 2. merge intercept terms against each other and plot
 dat.intercept.1$X = NULL ; dat.intercept.2$X = NULL
 names(dat.intercept.1) = c('model.1.mean', "age", "sex",'cause')
 dat.intercept.merged = merge(dat.intercept.1,dat.intercept.2,by.x=c('age','sex','cause'))
+
+# 3. plot absolute temperature terms
+dat.abs.temp.2$month=c(1:12)
