@@ -175,4 +175,22 @@ dat.merged.sub.year = merge(dat.mort.sub.year,additional.deaths.summary.perc[c(1
 dat.merged.sub.year$additional.deaths = with(dat.merged.sub.year,deaths.pred*perc.mean)
 dat.merged.sub.year.sum = ddply(na.omit(dat.merged.sub.year),.(fips),summarise,additional.deaths=round(sum(additional.deaths)))
 
-# add state names and round
+# get rid of Hawaii and Alaska
+dat.merged.sub.year.sum = subset(dat.merged.sub.year.sum,!(fips%in%c(2,15)))
+
+# round to nearest five
+dat.merged.sub.year.sum$additional.deaths = round(dat.merged.sub.year.sum$additional.deaths/5)*5
+
+# attach state names
+state.lookup <- read.csv('~/git/mortality/USA/state/data/fips_lookup/name_fips_lookup.csv')
+dat = merge(dat.merged.sub.year.sum,state.lookup,by='fips',all.x=TRUE)
+dat=dat[,c(1:3)]
+
+# make human readable
+dat = dat[,c(3,2)]
+names(dat) = c('State','Additional deaths')
+
+# output as file
+write.csv(dat,paste0(file.loc,'table_additional_deaths_by_state.csv'),row.names=FALSE)
+
+
