@@ -17,10 +17,13 @@ pw.arg <- as.numeric(args[9])
 # for test runs
 # sex.arg = 2 ; year.start.arg = 1982 ; year.end.arg = 2017 ; type.arg=27
 # cluster.arg = 0 ; year.start.analysis.arg = 1982 ; year.end.analysis.arg = 2017 ;
-# cod.arg = 'AllCause'; pw.arg=1
-# dname.arg='t2m'; metric.arg='mean'
+# cod.arg = 'AllCause'; pw.arg=0
+# fips.arg = '04013' ; fips.arg = as.numeric(fips.arg) # currently doesn't do anything until code is generalised to county
 
-# types character for file strings
+# meteoroligical variables (currently hard-coded)
+dname.arg='t2m'; metric.arg='mean'
+
+# types character for file strings (internal model references so not so important for anyone else apart from code developer)
 types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','minus1','1d2','1d3','1d4','0a','0b','1d5','1d6','1d7','1d8','1d9')
 type.selected <- types[type.arg]
 
@@ -32,10 +35,10 @@ library(plyr)
 
 # create file location for output
 if(pw.arg==0){
-    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects_maricopa/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages')), dir.create(paste0('~/data/mortality/US/state/climate_effects_maricopa/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages'),recursive=TRUE), FALSE)
+    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects_single_county/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages')), dir.create(paste0('~/data/mortality/US/state/climate_effects_maricopa/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages'),recursive=TRUE), FALSE)
 }
 if(pw.arg==1){
-    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects_maricopa/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages')), dir.create(paste0('~/data/mortality/US/state/climate_effects_maricopa/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages'),recursive=TRUE), FALSE)
+    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects_single_county/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages')), dir.create(paste0('~/data/mortality/US/state/climate_effects_maricopa/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages'),recursive=TRUE), FALSE)
 }
 
 # load data and filter results
@@ -50,7 +53,7 @@ if(cod.arg%in%c('AllCause')){
     dat.inla.load <- subset(dat.inla.load,sex==sex.arg)
 }
 
-# load climate data for 1980-2018
+# load climate data for 1980-2018 (currently hard coded for Maricopa but will need to generalised
 file.loc <- paste0('~/git/climate/countries/USA/data/temp_maricopa/PHX_temp_monthly_stats_C.csv')
 dat.climate <- read.csv(file.loc)
 dat.climate$X = NULL
@@ -68,8 +71,6 @@ dat.climate = plyr::ddply(dat.climate, c("month"), transform, temp_mean_detrend 
 dat.merged <- merge(dat.inla.load,dat.climate,by.x=c('year','month'),by.y=c('year','month'),all.x=TRUE)
 dat.merged <- dat.merged[order(dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
 
-# optional addition of long-term normals into model (currently testing may be removed)
-
 # lookups
 source('../../data/objects/objects.R')
 
@@ -85,16 +86,16 @@ dat.year.month$year.month <- seq(nrow(dat.year.month))
 # merge year.month table with population table to create year.month id
 dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
 
-# make sure that the order of the main data file matches that of the shapefile otherwise the model will not be valid
+# reorder file for neatness
 dat.inla <- dat.inla[order(dat.inla$sex,dat.inla$age,dat.inla$year.month),]
 
 # fix rownames
 rownames(dat.inla) <- 1:nrow(dat.inla)
 
-# create a factor variable for age (1 to 10)
+# create a factor variable for age (1 to 10 for the 10 age groups)
 dat.inla$ID = with(dat.inla, match(age, unique(age)))
 
-# variables for INLA model
+# variables for INLA model (quirks of model mean that to re-use a column for another element of model, you have to clone it)
 dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
 dat.inla$month7 <- dat.inla$month6 <- dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
 dat.inla$e <- 1:nrow(dat.inla)
@@ -117,10 +118,10 @@ if(pw.arg==1){
 
 # create directory for output
 if(pw.arg==0){
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects_maricopa/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages/')
+    file.loc <- paste0('~/data/mortality/US/state/climate_effects_single_county/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages/')
 }
 if(pw.arg==1){
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects_maricopa/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages/')
+    file.loc <- paste0('~/data/mortality/US/state/climate_effects_single_county/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages/')
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 

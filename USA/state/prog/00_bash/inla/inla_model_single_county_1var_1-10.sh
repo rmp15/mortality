@@ -8,12 +8,13 @@
 clear
 
 declare -a sexstrings=('male' 'female')
-declare -a models=(27)
 declare -i start=1982
 declare -i end=2017
+declare -i model=27
+declare -i cluster=0
 declare -i start2=1982
 declare -i end2=2017
-declare country="USA"
+declare cod="AllCause"
 declare -i pw=0
 declare county="Maricopa"
 
@@ -25,11 +26,10 @@ declare county="Maricopa"
 cd ~/git/mortality/USA/state/prog/00_bash/
 
 (
-declare cod="AllCause"
 
 
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_single_county.R 1 $start $end 27 0 $start2 $end2 $cod $pw;
-Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_single_county.R 2 $start $end 27 0 $start2 $end2 $cod $pw;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_single_county.R 1 $start $end $model 0 $start2 $end2 $cod $pw $county;
+Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_single_county.R 2 $start $end $model 0 $start2 $end2 $cod $pw $county;
 
 ) &
 
