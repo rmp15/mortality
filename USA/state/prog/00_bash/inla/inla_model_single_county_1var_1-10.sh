@@ -27,7 +27,7 @@ cd ~/git/mortality/USA/state/prog/00_bash/
 
 (
 
-
+# run males then females
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_single_county.R 1 $start $end $model 0 $start2 $end2 $cod $pw $county;
 Rscript ~/git/mortality/USA/state/prog/models/INLA/03_spatiotemporal/inla_spatiotemporal_climate_cod_single_county.R 2 $start $end $model 0 $start2 $end2 $cod $pw $county;
 

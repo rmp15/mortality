@@ -214,10 +214,14 @@ mod = inla.function.climate.faster()
 
 # prep data for output
 
-# make piecewise
-
-# output string for filenames
-output.string = paste0('maricopa_rate_pred_type',type.selected,'_',sex.lookup[sex.arg],'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
+if(pw.arg==0){
+    # output string for filenames
+    output.string = paste0('single_county_rate_pred_type',type.selected,'_',sex.lookup[sex.arg],'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
+}
+if(pw.arg==1){
+    # output string for filenames
+    output.string = paste0(output.string,'_pw')
+}
 
 # save all parameters of INLA model
 parameters.name <- paste0(output.string)
@@ -242,14 +246,13 @@ saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
 # send email notification
 
 # subject for email
-subject.arg = paste0(sex.lookup[sex.arg],' ',age.arg,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.analysis.arg,'-',year.end.analysis.arg)
+subject.arg = paste0(sex.lookup[sex.arg],' single county all ages model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.analysis.arg,'-',year.end.analysis.arg)
 if(contig.arg == 1){subject.arg = paste0(subject.arg,' contig')}
 if(fast.arg==0){subject.arg = paste0(subject.arg,' ')}
 if(fast.arg==1){subject.arg = paste0(subject.arg,' fast')}
 if(fast.arg==2){subject.arg = paste0(subject.arg,' faster')}
 if(pw.arg==0){subject.arg = paste0(subject.arg,' non-pw done')}
 if(pw.arg==1){subject.arg = paste0(subject.arg,' pw done')}
-
 
 print(subject.arg)
 
