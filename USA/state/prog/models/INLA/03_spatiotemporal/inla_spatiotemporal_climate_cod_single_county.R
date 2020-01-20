@@ -179,7 +179,7 @@ if(type.arg==27){
     }
 }
 
-# functions to enable age group and sex to be selected with faster AR1 structure in addition to rough run
+# functions to enable sex to be selected with faster AR1 structure in addition to rough run
 inla.function.climate.faster <- function() {
 
     # INLA model rough
