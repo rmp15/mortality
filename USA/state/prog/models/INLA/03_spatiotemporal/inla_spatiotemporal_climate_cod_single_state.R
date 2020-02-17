@@ -140,6 +140,14 @@ ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
 library(INLA)
 
+# temporary workaround to avoid GLIBC error (???) from:
+# https://www.mn.uio.no/math/english/services/it/help/status/2018-07-26-inla-r.html
+INLA:::inla.dynload.workaround()
+
+# load inla pardiso (what on earth is this?)
+inla.setOption(pardiso.license="~/git/mortality/USA/state/prog/00_bash/pardiso.lic")
+inla.pardiso.check()
+
 # define model
 # 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
 if(type.arg==27){
@@ -213,27 +221,31 @@ mod = inla.function.climate.faster()
 
 # prep data for output
 
-# output string for filenames
-output.string = paste0('USA_rate_pred_type',type.selected,'_',age.arg,'_',sex.lookup[sex.arg],'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
+# load state fips lookup code
+fips.lookup <- read.csv('~/git/mortality/USA/state/data/fips_lookup/name_fips_lookup.csv')
+fips.lookup = fips.lookup[!(fips.lookup$fips%in%c(2,15)),]
+
+state.name = as.character(subset(fips.lookup,fips==state.arg)[1,1])
+
+if(pw.arg==0){
+    # output string for filenames
+    output.string = paste0(state.name,'_rate_pred_type',type.selected,'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
+}
+if(pw.arg==1){
+    # output string for filenames
+    output.string = paste0(output.string,'_pw')
+}
 
 # save all parameters of INLA model
 parameters.name <- paste0(output.string)
 if(cod.arg!='AllCause'){parameters.name = paste0(parameters.name,'_',cod.arg,'_parameters')}
 if(cod.arg=='AllCause'){parameters.name = paste0(parameters.name,'_parameters')}
-if(fast.arg==1){parameters.name = paste0(parameters.name,'_fast')}
-if(fast.arg==2){parameters.name = paste0(parameters.name,'_faster')}
-if(contig.arg == 1){parameters.name = paste0(parameters.name,'_contig')}
-#mod$misc <- NULL ; mod$.args$.parent.frame <- NULL
 saveRDS(mod,paste0(file.loc,'/',parameters.name))
 
 # save summary of INLA model
 summary.name <- paste0(output.string)
 if(cod.arg!='AllCause'){summary.name = paste0(summary.name,'_',cod.arg,'_summary')}
 if(cod.arg=='AllCause'){summary.name = paste0(summary.name,'_summary')}
-if(fast.arg==1){summary.name = paste0(summary.name,'_fast')}
-if(fast.arg==2){summary.name = paste0(summary.name,'_faster')}
-if(contig.arg == 0){summary.name = paste0(summary.name,'.txt')}
-if(contig.arg == 1){summary.name = paste0(summary.name,'_contig.txt')}
 inla.summary.mod <- summary(mod)
 capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))
 
@@ -241,16 +253,13 @@ capture.output(inla.summary.mod,file=paste0(file.loc,'/',summary.name))
 RDS.name <- paste0(output.string)
 if(cod.arg!='AllCause'){RDS.name = paste0(RDS.name,'_',cod.arg)}
 if(cod.arg=='AllCause'){RDS.name = paste0(RDS.name)}
-if(fast.arg==1){RDS.name = paste0(RDS.name,'_fast')}
-if(fast.arg==2){RDS.name = paste0(RDS.name,'_faster')}
-if(contig.arg == 1){RDS.name = paste0(RDS.name,'_contig')}
 plot.dat <- as.data.frame(cbind(dat.inla,rate.pred=mod$summary.fitted.values$mean,sd=mod$summary.fitted.values$sd))
 saveRDS(plot.dat,paste0(file.loc,'/',RDS.name))
 
 # send email notification
 
 # subject for email
-subject.arg = paste0(sex.lookup[sex.arg],' ',age.arg,' model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.analysis.arg,'-',year.end.analysis.arg)
+subject.arg = paste0(state.name,' single state all age and sex model ',type.selected,' ',dname.arg,' ',metric.arg,' ',cod.arg,' ',year.start.analysis.arg,'-',year.end.analysis.arg)
 if(contig.arg == 1){subject.arg = paste0(subject.arg,' contig')}
 if(fast.arg==0){subject.arg = paste0(subject.arg,' ')}
 if(fast.arg==1){subject.arg = paste0(subject.arg,' fast')}
@@ -258,18 +267,17 @@ if(fast.arg==2){subject.arg = paste0(subject.arg,' faster')}
 if(pw.arg==0){subject.arg = paste0(subject.arg,' non-pw done')}
 if(pw.arg==1){subject.arg = paste0(subject.arg,' pw done')}
 
-
 print(subject.arg)
 
-# sending email
-sender = "emailr349@gmail.com"
-recipients = c("r.parks15@imperial.ac.uk")
-send.mail(from = sender,
-to = recipients,
-subject = subject.arg,
-body = "Well done",
-smtp = list(host.name = "smtp.gmail.com", port = 465,
-user.name = "emailr349@gmail.com",
-passwd = "inlaisthebest", ssl = TRUE),
-authenticate = TRUE,
-send = TRUE)
+# # sending email
+# sender = "emailr349@gmail.com"
+# recipients = c("r.parks15@imperial.ac.uk")
+# send.mail(from = sender,
+# to = recipients,
+# subject = subject.arg,
+# body = "Well done",
+# smtp = list(host.name = "smtp.gmail.com", port = 465,
+# user.name = "emailr349@gmail.com",
+# passwd = "inlaisthebest", ssl = TRUE),
+# authenticate = TRUE,
+# send = TRUE)
