@@ -1,5 +1,7 @@
 rm(list=ls())
 
+# FOR ALL AGES AND ALL CAUSES TOGETHER IN ONE STATE
+
 # arguments from Rscript
 args <- commandArgs(trailingOnly=TRUE)
 
@@ -20,16 +22,16 @@ contig.arg <- as.numeric(args[13])
 pw.arg <- as.numeric(args[14])
 
 # for test runs
-# age.arg = 65 ; sex.arg = 1 ; year.start.arg = 1980 ; year.end.arg = 2017 ; type.arg = 27 ;
+# year.start.arg = 1980 ; year.end.arg = 2017 ; type.arg = 27 ;
 # cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc4' ; year.start.analysis.arg = 1980 ;
-# year.end.analysis.arg = 2017 ; cod.arg = 'Transport accidents'; fast.arg = 1 ; contig.arg = 1
-# pw.arg=0
+# year.end.analysis.arg = 2017 ; cod.arg = 'AllCause'; fast.arg = 1 ; contig.arg = 1
+# pw.arg=0 ; state.arg = 4
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','minus1','1d2','1d3','1d4','0a','0b','1d5','1d6','1d7','1d8','1d9','1d10')
 type.selected <- types[type.arg]
 
-print(paste(year.start.analysis.arg,year.end.analysis.arg,age.arg,sex.arg,type.selected,cod.arg))
+print(paste(year.start.analysis.arg,year.end.analysis.arg,type.selected,cod.arg))
 
 # range of years
 years <- year.start.arg:year.end.arg
@@ -38,28 +40,30 @@ require(mailR)
 
 # create file location for output
 if(pw.arg==0){
-    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
+    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects_single_state/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages')), dir.create(paste0('~/data/mortality/US/state/climate_effects_single_state/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages'),recursive=TRUE), FALSE)
 }
 if(pw.arg==1){
-    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
+    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects_single_state/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages')), dir.create(paste0('~/data/mortality/US/state/climate_effects_single_state/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages'),recursive=TRUE), FALSE)
 }
-# load data and filter results
-source('../models/INLA/03_spatiotemporal/inla_load_data_cod.R')
-
-# load climate region data and fix names
-# source('../models/INLA/03_spatiotemporal/inla_climate_regions.R')
-
-# merge mortality data with climate region data
-# dat.inla.load <- merge(dat.inla.load,dat.region,by.x=('fips'),by.y=('STATE_FIPS'),all.x=TRUE)
+# load data and summarise for all cause
+library(plyr)
+dat.inla.load <- readRDS(paste0('../../output/prep_data_cod/datus_state_rates_cod_',year.start.arg,'_',year.end.arg))
+dat.inla.load <- subset(dat.inla.load,fips==state.arg)
+dat.inla.load <- ddply(dat.inla.load,.(year,month),summarise,deaths.adj=sum(deaths.adj),pop.adj=sum(pop.adj)/4) # /4 because four broad causes and need to adjust for that
+dat.inla.load$rate.adj = with(dat.inla.load,deaths.adj/pop.adj)
 
 # load climate data for 1980-2017
 file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development_era5/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
 dat.climate <- readRDS(paste0(file.loc,'state_weighted_summary_',metric.arg,'_',dname.arg,'_1980_2017.rds'))
 dat.climate$state.fips <- as.numeric(as.character(dat.climate$state.fips))
 
+# take one age-sex combination for single state (very similar values anyway)
+dat.climate = subset(dat.climate,state.fips==state.arg&sex==1&age==55)
+dat.climate = with(dat.climate,dat.climate[,c('year','month','t2m.meanc4')])
+
 # merge mortality and climate data and reorder
-dat.merged <- merge(dat.inla.load,dat.climate,by.x=c('sex','age','year','month','fips'),by.y=c('sex','age','year','month','state.fips'),all.x=TRUE)
-dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
+dat.merged <- merge(dat.inla.load,dat.climate,by=c('year','month'),all.x=TRUE)
+dat.merged <- dat.merged[order(dat.merged$year,dat.merged$month),]
 
 # optional addition of long-term normals into model (currently testing may be removed)
 if(type.arg %in% c(26)){
@@ -93,22 +97,11 @@ library(dplyr)
 # lookups
 source('../../data/objects/objects.R')
 
-# adjacency matrix with connections
-# Hawaii -> California, Alaska -> Washington
-if(contig.arg == 0){USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"}
-# only contiguous USA
-if(contig.arg == 1){USA.adj <- "../../output/adj_matrix_create/USA.graph.contig"}
-
 ##############
 
 # filter all data by sex age and month
 fit.years <- year.start.analysis.arg:year.end.analysis.arg
-dat.inla <- dat.merged[dat.merged$sex==sex.arg & dat.merged$age==age.arg & dat.merged$year %in% fit.years,]
-
-# filter Hawaii and Alaska if required and load correct drawseq lookup NEED TO FIX HERE AND WITH AGE SPLIT!!
-if(contig.arg == 0){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')}
-if(contig.arg == 1){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')}
-dat.inla = merge(dat.inla,drawseq.lookup,by='fips')
+dat.inla <- dat.merged[dat.merged$year %in% fit.years,]
 
 # extract unique table of year and months to generate year.month
 dat.year.month <- unique(dat.inla[,c('year', 'month')])
@@ -120,10 +113,7 @@ dat.year.month$year.month <- seq(nrow(dat.year.month))
 dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
 
 # make sure that the order of the main data file matches that of the shapefile otherwise the model will not be valid
-dat.inla <- dat.inla[order(dat.inla$DRAWSEQ,dat.inla$sex,dat.inla$age,dat.inla$year.month),]
-
-# add ID column for INLA
-dat.inla$ID <- dat.inla$DRAWSEQ
+dat.inla <- dat.inla[order(dat.inla$year.month),]
 
 # fix rownames
 rownames(dat.inla) <- 1:nrow(dat.inla)
@@ -131,7 +121,6 @@ rownames(dat.inla) <- 1:nrow(dat.inla)
 # variables for INLA model
 dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
 dat.inla$month7 <- dat.inla$month6 <- dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
-dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
 dat.inla$e <- 1:nrow(dat.inla)
 
 # create piecewise climate variable if required
@@ -142,17 +131,52 @@ if(pw.arg==1){
 
 # create directory for output
 if(pw.arg==0){
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects_era5/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.arg)
+    file.loc <- paste0('~/data/mortality/US/state/climate_effects_single_state/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/all_ages/')
 }
 if(pw.arg==1){
-    file.loc <- paste0('~/data/mortality/US/state/climate_effects_era5/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups/',age.arg)
+    file.loc <- paste0('~/data/mortality/US/state/climate_effects_single_state/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/all_ages/')
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
 library(INLA)
 
-# load inla function
-source('../models/INLA/03_spatiotemporal/inla_functions_cod.R')
+# define model
+# 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
+if(type.arg==27){
+    if(pw.arg==0){
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # climate specific terms
+        f(month5, variable, model="rw1", cyclic=TRUE) +                                 # month specific climate slope
+        # random walk across time
+        f(year.month3, model="rw1") +                                           		# rw1 over time
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+
+    # if piece-wise then this model
+    if(pw.arg==1){
+        fml  <- deaths.adj ~
+        # global terms
+        1 +                                                                     		# global intercept
+        year.month +                                                           			# global slope
+        # month specific terms
+        f(month, model='rw1',cyclic = TRUE) +                                           # month specific intercept
+        f(month2, year.month2, model='rw1', cyclic= TRUE) +                             # month specific slope
+        # climate specific terms
+        f(month5, variable_pos, model="rw1", cyclic=TRUE) +                   # month specific climate slope, by age
+        f(month6, variable_neg, model="rw1", cyclic=TRUE) +                   # month specific climate slope, by age
+        # random walk across time (could make by age group if converges OK
+        f(year.month3, model="rw1") +                                           		# rw1 over time
+        # overdispersion term
+        f(e, model = "iid")                                                    		 	# overdispersion term
+    }
+}
 
 # temporary workaround to avoid GLIBC error (???) from:
 # https://www.mn.uio.no/math/english/services/it/help/status/2018-07-26-inla-r.html
