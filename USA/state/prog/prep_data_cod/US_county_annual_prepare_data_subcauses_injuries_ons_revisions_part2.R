@@ -25,11 +25,11 @@ dat.merged.na = readRDS(paste0('../../output/prep_data_cod/datus_county_deaths_n
 library(foreign)
 pop.state <- read.dta('~/data/mortality/US/state/processed/county/countyPopulationsnewyears.dta')
 
-# optional statistics for missing records
-dat.merged.na=subset(dat.merged.na,year>1998&year<2016)
-dat.merged.na = subset(dat.merged.na,deaths>=1)
-dat.merged.na$stateFips = substr(dat.merged.na$fips,1,2)
-dat.merged.na=subset(dat.merged.na, !(stateFips%in%c('02','15')))
+# optional statistics for missing records before processing
+# dat.merged.na=subset(dat.merged.na,year>1998&year<2016)
+# dat.merged.na = subset(dat.merged.na,deaths>=1)
+# dat.merged.na$stateFips = substr(dat.merged.na$fips,1,2)
+# dat.merged.na=subset(dat.merged.na, !(stateFips%in%c('02','15')))
 
 # optional statistics for missing records
 dat.merged=subset(dat.merged,year>1998&year<2016)
@@ -42,15 +42,34 @@ dat.merged=subset(dat.merged, !(stateFips%in%c('02','15')))
 # transfer 46113 to 46102
 # transfer 51515 to 51019
 # transfer 51560 to 51005
+dat.merged$fips = ifelse(dat.merged$fips=='12025','12086',
+                    ifelse((dat.merged$fips=='46113'&dat.merged$year%in%c(2012:2014)),'46102',
+                    ifelse(dat.merged$fips=='51515','51019',
+                    ifelse(dat.merged$fips=='51560','51005',
+                    dat.merged$fips))))
 
-# re-summarise by state,year,month,sex,agegroup (FIX)
-dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.sub,fips,year,sex,agegroup),deaths=sum(deaths))
-names(dat.summarised)[1:6] <- c('cause.sub','fips','year','sex','age','deaths')
+# re-summarise by state,year,month,sex,agegroup
+dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.sub,fips,year,sex,age),deaths=sum(deaths))
 dat.summarised <- na.omit(dat.summarised)
 
 # re-attach population
+dat.merged <- merge(dat.summarised,pop.state,by=c('sex','age','year','fips'),all.x=TRUE)
+
+# Look at rows which are matched and which ones are missing and why
+dat.merged.not.na = dat.merged[rowSums(is.na(dat.merged))==0,]
+dat.merged.na = dat.merged[rowSums(is.na(dat.merged))>0,]
+dat.merged.na$stateFips=substr(dat.merged.na$fips,1,2)
+dat.merged.na=subset(dat.merged.na,year>1998&year<2015)
+dat.merged.na = subset(dat.merged.na,deaths>=1)
+dat.merged.na=subset(dat.merged.na, !(stateFips%in%c('02','15')))
+print(ddply(dat.merged.na,.(fips),summarize,deaths=sum(deaths)))
+
+# reorder
+dat.merged <- dat.merged[order(dat.merged$cause.sub,dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year),]
 
 # attach supercounty data and re-sum over those
+supercounty=readRDS('~/git/pollution/countries/USA/data/super_counties/mfips_25000')
+# HERE HOW DO I MATCH???
 
 # calculate rate and check nothing weird
 
