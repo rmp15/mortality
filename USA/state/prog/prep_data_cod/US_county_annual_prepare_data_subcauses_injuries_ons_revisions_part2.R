@@ -48,7 +48,7 @@ dat.summarised <- dplyr::summarise(group_by(dat.merged,cause.sub,fips,year,sex,a
 names(dat.summarised)[1:6] <- c('cause.sub','fips','year','sex','age','deaths')
 dat.summarised <- na.omit(dat.summarised)
 
-# attach population
+# re-attach population
 
 # attach supercounty data and re-sum over those
 
