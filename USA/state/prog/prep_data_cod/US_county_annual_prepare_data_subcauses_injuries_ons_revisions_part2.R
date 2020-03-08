@@ -8,6 +8,7 @@ year.end.arg <- as.numeric(args[2])
 library(dplyr)
 library(plyr)
 library(foreign)
+library(tidyr)
 
 # source only the 'intentional' variable
 source('../../data/objects/objects.R')
@@ -25,6 +26,8 @@ dat.merged.na = readRDS(paste0('../../output/prep_data_cod/datus_county_deaths_n
 library(foreign)
 pop.state <- read.dta('~/data/mortality/US/state/processed/county/countyPopulationsnewyears.dta')
 
+# DO I NEED TO SUMMARISE FIPS LIKE BELOW, i.e. COMBINE COUNTIES WHICH CHANGE ETC?
+
 # optional statistics for missing records before processing
 # dat.merged.na=subset(dat.merged.na,year>1998&year<2016)
 # dat.merged.na = subset(dat.merged.na,deaths>=1)
@@ -33,6 +36,7 @@ pop.state <- read.dta('~/data/mortality/US/state/processed/county/countyPopulati
 
 # optional statistics for missing records
 dat.merged=subset(dat.merged,year>1998&year<2016)
+dat.merged$stateFips=substr(dat.merged$fips,1,2)
 dat.merged=subset(dat.merged, !(stateFips%in%c('02','15')))
 
 # NEED TO FIX THE COUNTIES in full data set
@@ -68,9 +72,20 @@ print(ddply(dat.merged.na,.(fips),summarize,deaths=sum(deaths)))
 dat.merged <- dat.merged[order(dat.merged$cause.sub,dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year),]
 
 # attach supercounty data and re-sum over those
-supercounty=readRDS('~/git/pollution/countries/USA/data/super_counties/mfips_25000')
-# HERE HOW DO I MATCH???
+# supercounty=readRDS('~/git/pollution/countries/USA/data/super_counties/mfips_25000')
+supercounty=read.csv('~/git/pollution/countries/USA/data/super_counties/supercounty_lookup.csv')
+supercounty$Fips_codes = trimws(supercounty$Fips_codes)
+supercounty = separate_rows(supercounty, Fips_codes)
+
+dat.merged.test = merge(dat.merged,supercounty,by.x=c('fips'),by.y=c('Fips_codes'),all.x=TRUE)
+dat.merged.test$stateFips=substr(dat.merged.test$fips,1,2)
+dat.merged.test$countyFips=substr(dat.merged.test$fips,3,5)
+dat.merged.test.na = dat.merged.test[rowSums(is.na(dat.merged.test))>0,]
 
 # calculate rate and check nothing weird
+dat.summarised <- dplyr::summarise(group_by(dat.merged.test,cause.sub,Merged_county_ID,year,sex,age),deaths=sum(deaths),pop=sum(pop))
+
+# reorder
+dat.merged <- dat.merged[order(dat.merged$cause.sub,dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year),]
 
 # some final checks
