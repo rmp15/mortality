@@ -145,3 +145,6 @@ if(model%in%c('1d','1d2','1d9','1d10')){
 
     saveRDS(additional.deaths.monthly.summary,paste0(file.loc,'additional_deaths_summary_monthly_draws.rds'))
     saveRDS(additional.deaths.summer.summary,paste0(file.loc,'additional_deaths_summary_summer_draws.rds'))
+
+    write.csv(additional.deaths.monthly.summary,paste0(file.loc,'additional_deaths_summary_monthly_draws.csv'))
+    write.csv(additional.deaths.summer.summary,paste0(file.loc,'additional_deaths_summary_summer_draws.csv'))
