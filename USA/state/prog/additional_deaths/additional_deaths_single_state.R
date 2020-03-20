@@ -20,10 +20,10 @@ contig.arg <- as.numeric(args[13])
 pw.arg <- as.numeric(args[14])
 
 # for test runs
-# year.start.arg = 1980 ; year.end.arg = 2017 ; type.arg = 27 ;
-# cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc4' ; year.start.analysis.arg = 1980 ;
-# year.end.analysis.arg = 2017 ; cod.arg = 'AllCause'; fast.arg = 1 ; contig.arg = 1
-# pw.arg=0 ; state.arg = 4
+year.start.arg = 1980 ; year.end.arg = 2017 ; type.arg = 27 ;
+cluster.arg = 0 ; dname.arg = 't2m' ; metric.arg = 'meanc4' ; year.start.analysis.arg = 1980 ;
+year.end.analysis.arg = 2017 ; cod.arg = 'AllCause'; fast.arg = 1 ; contig.arg = 1
+pw.arg=0 ; state.arg = 4
 
 # types character for file strings
 types <- c('1','1a','2','2a','3','3a','4','1b','1c','1d','1e','1f','1de','1ef','1g','0','minus1','1d2','1d3','1d4','0a','0b','1d5','1d6','1d7','1d8','1d9','1d10')
@@ -61,7 +61,7 @@ draws.current = try(inla.posterior.sample(num.draws,model.current,selection=list
 # create directories for output
 file.loc <- paste0('../../output/additional_deaths_climate_single_state/',year.start.arg,'_',year.end.arg,
 '/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/non_contig/all_cause/',num.draws,'_draws/')
-if(contig==1){
+if(contig.arg==1){
     file.loc <- paste0('../../output/additional_deaths_climate_single_state/',year.start.arg,'_',year.end.arg,
 '/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/non_contig/all_cause/',num.draws,'_draws/')
 }
@@ -142,6 +142,11 @@ if(model%in%c('1d','1d2','1d9','1d10')){
 
     additional.deaths.summer.summary = ddply(additional.deaths.monthly.summer.summary,.(),summarise,
     deaths.attributable.median=median(deaths.attributable),deaths.attributable.mean=mean(deaths.attributable),deaths.attributable.ll=quantile(deaths.attributable,0.025),deaths.attributable.ul=quantile(deaths.attributable,0.975))
+
+    # summarise by year
+    additional.deaths.year.summary = ddply(additional.deaths.monthly,.(year,draw),summarise,deaths.attributable=sum(deaths.attributable))
+
+
 
     saveRDS(additional.deaths.monthly.summary,paste0(file.loc,'additional_deaths_summary_monthly_draws.rds'))
     saveRDS(additional.deaths.summer.summary,paste0(file.loc,'additional_deaths_summary_summer_draws.rds'))
