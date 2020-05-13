@@ -151,6 +151,15 @@ if(model%in%c('1d','1d2','1d9','1d10')){
     additional.deaths.year.summary = ddply(additional.deaths.year.summary,.(year),summarise,
     deaths.attributable.median=median(deaths.attributable),deaths.attributable.mean=mean(deaths.attributable),deaths.attributable.ll=quantile(deaths.attributable,0.025),deaths.attributable.ul=quantile(deaths.attributable,0.975))
 
+    # create directories for output
+    file.loc <- paste0('../../output/additional_deaths_climate_single_state/',year.start.arg,'_',year.end.arg,
+    '/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/non_contig/all_cause/',num.draws,'_draws/')
+    if(contig.arg==1){
+        file.loc <- paste0('../../output/additional_deaths_climate_single_state/',year.start.arg,'_',year.end.arg,
+    '/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/non_contig/all_cause/',num.draws,'_draws/')
+    }
+    ifelse(!dir.exists(file.loc), dir.create(file.loc,recursive=TRUE), FALSE)
+
     saveRDS(additional.deaths.monthly.summary,paste0(file.loc,'additional_deaths_summary_monthly_draws.rds'))
     saveRDS(additional.deaths.summer.summary,paste0(file.loc,'additional_deaths_summary_summer_draws.rds'))
     saveRDS(additional.deaths.year.summary,paste0(file.loc,'additional_deaths_summary_yearly_summer_draws.rds'))
@@ -158,3 +167,5 @@ if(model%in%c('1d','1d2','1d9','1d10')){
     write.csv(additional.deaths.monthly.summary,paste0(file.loc,'additional_deaths_summary_monthly_draws.csv'))
     write.csv(additional.deaths.summer.summary,paste0(file.loc,'additional_deaths_summary_summer_draws.csv'))
     write.csv(additional.deaths.year.summary,paste0(file.loc,'additional_deaths_summary_yearly_summer_draws.csv'))
+
+}
