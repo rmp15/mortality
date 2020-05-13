@@ -1,17 +1,15 @@
 # FOR ALL AGES AND ALL CAUSES TOGETHER IN ONE STATE
 
 # temporary load csv
-dat = read.csv("~/Desktop/elisabeth_attribution_long_2020_04_03.csv")
+dat = read.csv("~/Desktop/elisabeth_attribution_long_2020_05_11.csv")
 
 dat = dat[,c(1:3)]
 ############################
 # for nationalised data
 ############################
 
-pdf(paste0('~/Desktop/example.pdf'),paper='a4r',height=0,width=0)
-
 p1 = ggplot(data=subset(dat), aes(x=as.factor(Year),y=Deaths,color=as.factor(Type),fill=as.factor(Type))) +
-    geom_bar(width = 0.9, stat = "identity") +
+    geom_bar(width = 0.9, stat = "identity", position = 'dodge') +
     xlab('Year') + ylab('Deaths') +
     # scale_fill_manual(values=age.colours, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
     # scale_color_manual(values=age.colours, guide = guide_legend(nrow = 1,title = paste0("Age group (years)"))) +
@@ -25,12 +23,7 @@ p1 = ggplot(data=subset(dat), aes(x=as.factor(Year),y=Deaths,color=as.factor(Typ
 
 print(p1)
 
-dev.off()
+ggsave(paste0('~/Desktop/elisabeth_attribution_long_2020_05_11.eps'),device='eps')
 
-library(grid)
-library(gridExtra)
 
-# plot p1 but with custom legend
-print(p1)
-
-dev.off()
+# dev.off()

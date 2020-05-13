@@ -1,0 +1,1012 @@
+%0 Journal Article
+%T Relation between Elevated Ambient Temperature and Mortality: A Review of the Epidemiologic Evidence
+%V 24
+%N 2
+%P 190-202
+%U https://academic.oup.com/epirev/article-lookup/doi/10.1093/epirev/mxf007
+%G en
+%J Epidemiologic Reviews
+%A Basu, R.
+%D 2002-12-01
+
+%0 Book
+%T Visualizing Mortality Dynamics in the Lexis Diagram
+%S The Springer Series on Demographic Methods and Population Analysis
+%V 44
+%C Cham
+%I Springer International Publishing
+%@ 978-3-319-64818-7 978-3-319-64820-0
+%U http://link.springer.com/10.1007/978-3-319-64820-0
+%A Rau, Roland
+%A Bohk-Ewald, Christina
+%A Muszyńska, Magdalena M.
+%A Vaupel, James W.
+%D 2018
+
+%0 Journal Article
+%T Deaths in winter: Can Britain learn from Europe?
+%V 5
+%N 2
+%P 178-182
+%U http://link.springer.com/10.1007/BF00156826
+%G en
+%J European Journal of Epidemiology
+%A McKee, C. M.
+%D 6/1989
+
+%0 Journal Article
+%T The effect of weather on respiratory and cardiovascular deaths in 12 U.S. cities.
+%V 110
+%N 9
+%P 859-863
+%U https://ehp.niehs.nih.gov/doi/10.1289/ehp.02110859
+%G en
+%J Environmental Health Perspectives
+%A Braga, Alfésio L F
+%A Zanobetti, Antonella
+%A Schwartz, Joel
+%D 09/2002
+
+%0 Journal Article
+%T Winter season mortality: will climate warming bring benefits?
+%V 10
+%N 6
+%P 064016
+%U https://iopscience.iop.org/article/10.1088/1748-9326/10/6/064016
+%J Environmental Research Letters
+%A Kinney, Patrick L
+%A Schwartz, Joel
+%A Pascal, Mathilde
+%A Petkova, Elisaveta
+%A Tertre, Alain Le
+%A Medina, Sylvia
+%A Vautard, Robert
+%D 2015-06-01
+
+%0 Journal Article
+%T Wavelet analysis of ecological time series
+%V 156
+%N 2
+%P 287-304
+%U http://link.springer.com/10.1007/s00442-008-0993-2
+%G en
+%J Oecologia
+%A Cazelles, Bernard
+%A Chavez, Mario
+%A Berteaux, Dominique
+%A Ménard, Frédéric
+%A Vik, Jon Olav
+%A Jenouvrier, Stéphanie
+%A Stenseth, Nils C.
+%D 5/2008
+
+%0 Book
+%T Seasonality in Human Mortality
+%S Demographic Research Monographs
+%I Springer Berlin Heidelberg
+%@ 978-3-540-44900-3
+%U http://link.springer.com/10.1007/978-3-540-44902-7
+%G en
+%D 2007
+
+%0 Journal Article
+%T Excess winter mortality in Europe: a cross country analysis identifying key risk factors
+%V 57
+%N 10
+%P 784-789
+%U http://jech.bmj.com/cgi/doi/10.1136/jech.57.10.784
+%G en
+%J Journal of Epidemiology & Community Health
+%A Healy, J D
+%D 2003-10-01
+
+%0 Journal Article
+%T Trends in heat-related mortality in the United States, 1975–2004
+%V 50
+%N 1
+%P 145-160
+%U http://link.springer.com/10.1007/s11069-008-9327-2
+%G en
+%J Natural Hazards
+%A Sheridan, Scott C.
+%A Kalkstein, Adam J.
+%A Kalkstein, Laurence S.
+%D 7/2009
+
+%0 Book
+%7 0
+%T The World According to Wavelets: The Story of a Mathematical Technique in the Making, Second Edition
+%I A K Peters/CRC Press
+%@ 978-0-429-06462-3
+%U https://www.taylorfrancis.com/books/9781439864555
+%G en
+%A Hubbard, Barbara Burke
+%D 1998-5-30
+
+%0 Journal Article
+%T Seasonal Variation of Deaths in the United States, 1951–1960
+%V 61
+%N 315
+%P 706-719
+%U http://www.tandfonline.com/doi/abs/10.1080/01621459.1966.10480899
+%G en
+%J Journal of the American Statistical Association
+%A Rosenwaike, Ira
+%D 09/1966
+
+%0 Journal Article
+%T Vulnerability to the mortality effects of warm temperature in the districts of England and Wales
+%V 4
+%N 4
+%P 269-273
+%U http://www.nature.com/articles/nclimate2123
+%G en
+%J Nature Climate Change
+%A Bennett, James E.
+%A Blangiardo, Marta
+%A Fecht, Daniela
+%A Elliott, Paul
+%A Ezzati, Majid
+%D 4/2014
+
+%0 Journal Article
+%T The potential effects of climate change on winter mortality in England and Wales
+%V 38
+%N 3
+%P 141-147
+%U http://link.springer.com/10.1007/BF01208491
+%G en
+%J International Journal of Biometeorology
+%A Langford, Ian H.
+%A Bentham, Graham
+%D 9/1995
+
+%0 Journal Article
+%T Regional Similarities in Seasonal Mortality across the United States: An Examination of 28 Metropolitan Statistical Areas
+%V 8
+%N 5
+%P e63971
+%U https://dx.plos.org/10.1371/journal.pone.0063971
+%G en
+%J PLoS ONE
+%A Kalkstein, Adam J.
+%E O’Rourke, Dennis
+%D 2013-5-29
+
+%0 Journal Article
+%T Smart-Home Technologies to Assist Older People to Live Well at Home
+%V 01
+%N 01
+%U http://www.esciencecentral.org/journals/smart-home-technologies-to-assist-older-people-to-live-well-at-home-2329-8847.1000101.php?aid=12044
+%J Journal of Aging Science
+%A Kimberly Miller, Arooke Adair
+%D 2013
+
+%0 Journal Article
+%T Travelling waves and spatial hierarchies in measles epidemics
+%V 414
+%N 6865
+%P 716-723
+%U http://www.nature.com/articles/414716a
+%G en
+%J Nature
+%A Grenfell, B. T.
+%A Bjørnstad, O. N.
+%A Kappey, J.
+%D 12/2001
+
+%0 Journal Article
+%T The ERA-Interim reanalysis: configuration and performance of the data assimilation system
+%V 137
+%N 656
+%P 553-597
+%U http://doi.wiley.com/10.1002/qj.828
+%G en
+%J Quarterly Journal of the Royal Meteorological Society
+%A Dee, D. P.
+%A Uppala, S. M.
+%A Simmons, A. J.
+%A Berrisford, P.
+%A Poli, P.
+%A Kobayashi, S.
+%A Andrae, U.
+%A Balmaseda, M. A.
+%A Balsamo, G.
+%A Bauer, P.
+%A Bechtold, P.
+%A Beljaars, A. C. M.
+%A van de Berg, L.
+%A Bidlot, J.
+%A Bormann, N.
+%A Delsol, C.
+%A Dragani, R.
+%A Fuentes, M.
+%A Geer, A. J.
+%A Haimberger, L.
+%A Healy, S. B.
+%A Hersbach, H.
+%A Hólm, E. V.
+%A Isaksen, L.
+%A Kållberg, P.
+%A Köhler, M.
+%A Matricardi, M.
+%A McNally, A. P.
+%A Monge-Sanz, B. M.
+%A Morcrette, J.-J.
+%A Park, B.-K.
+%A Peubey, C.
+%A de Rosnay, P.
+%A Tavolato, C.
+%A Thépaut, J.-N.
+%A Vitart, F.
+%D 04/2011
+
+%0 Journal Article
+%T Mortality risk attributable to high and low ambient temperature: a multicountry observational study
+%V 386
+%N 9991
+%P 369-375
+%U https://linkinghub.elsevier.com/retrieve/pii/S0140673614621140
+%G en
+%J The Lancet
+%A Gasparrini, Antonio
+%A Guo, Yuming
+%A Hashizume, Masahiro
+%A Lavigne, Eric
+%A Zanobetti, Antonella
+%A Schwartz, Joel
+%A Tobias, Aurelio
+%A Tong, Shilu
+%A Rocklöv, Joacim
+%A Forsberg, Bertil
+%A Leone, Michela
+%A De Sario, Manuela
+%A Bell, Michelle L
+%A Guo, Yue-Liang Leon
+%A Wu, Chang-fu
+%A Kan, Haidong
+%A Yi, Seung-Muk
+%A de Sousa Zanotti Stagliorio Coelho, Micheline
+%A Saldiva, Paulo Hilario Nascimento
+%A Honda, Yasushi
+%A Kim, Ho
+%A Armstrong, Ben
+%D 07/2015
+
+%0 Journal Article
+%T High ambient temperature and mortality: a review of epidemiologic studies from 2001 to 2008
+%V 8
+%N 1
+%P 40
+%U http://ehjournal.biomedcentral.com/articles/10.1186/1476-069X-8-40
+%G en
+%J Environmental Health
+%A Basu, Rupa
+%D 12/2009
+
+%0 Journal Article
+%T Changes in the seasonality of mortality in Germany from 1946 to 1995: the role of temperature
+%V 42
+%N 2
+%P 84-88
+%U http://link.springer.com/10.1007/s004840050089
+%J International Journal of Biometeorology
+%A Lerchl, A.
+%D 1998-12-11
+
+%0 Journal Article
+%T Temperature, temperature extremes, and mortality: a study of acclimatisation and effect modification in 50 US cities
+%V 64
+%N 12
+%P 827-833
+%U http://oem.bmj.com/cgi/doi/10.1136/oem.2007.033175
+%G en
+%J Occupational and Environmental Medicine
+%A Medina-Ramon, M
+%A Schwartz, J
+%D 2007-12-01
+
+%0 Journal Article
+%T Variability of El Niño/Southern Oscillation activity at millennial timescales during the Holocene epoch
+%V 420
+%N 6912
+%P 162-165
+%U http://www.nature.com/articles/nature01194
+%G en
+%J Nature
+%A Moy, Christopher M.
+%A Seltzer, Geoffrey O.
+%A Rodbell, Donald T.
+%A Anderson, David M.
+%D 11/2002
+
+%0 Journal Article
+%T Heat-Related Mortality and Adaptation to Heat in the United States
+%V 122
+%N 8
+%P 811-816
+%U https://ehp.niehs.nih.gov/doi/10.1289/ehp.1307392
+%G en
+%J Environmental Health Perspectives
+%A Bobb, Jennifer F.
+%A Peng, Roger D.
+%A Bell, Michelle L.
+%A Dominici, Francesca
+%D 08/2014
+
+%0 Journal Article
+%T Climate change, thermal stress and mortality changes
+%V 46
+%N 3
+%P 331-344
+%U https://linkinghub.elsevier.com/retrieve/pii/S0277953697001627
+%G en
+%J Social Science & Medicine
+%A Martens, W.J.M.
+%D 2/1998
+
+%0 Journal Article
+%T Changing Seasonality of Mortality From Coronary Heart Disease
+%V 278
+%N 12
+%P 1012
+%U http://jama.jamanetwork.com/article.aspx?doi=10.1001/jama.1997.03550120072036
+%G en
+%J JAMA: The Journal of the American Medical Association
+%A Seretakis, Dimitrios
+%D 1997-09-24
+
+%0 Journal Article
+%T Excess Winter Deaths in Europe: a multi-country descriptive analysis
+%V 25
+%N 2
+%P 339-345
+%U https://academic.oup.com/eurpub/article-lookup/doi/10.1093/eurpub/cku073
+%G en
+%J European Journal of Public Health
+%A Fowler, Tom
+%A Southgate, Rosamund J.
+%A Waite, Thomas
+%A Harrell, Ruth
+%A Kovats, Sari
+%A Bone, Angie
+%A Doyle, Yvonne
+%A Murray, Virginia
+%D 04/2015
+
+%0 Journal Article
+%T Seasonality of climate-human mortality relationships in US cities and impacts of climate change
+%V 26
+%P 61-76
+%U http://www.int-res.com/abstracts/cr/v26/n1/p61-76/
+%G en
+%J Climate Research
+%A Davis, Re
+%A Knappenberger, Pc
+%A Michaels, Pj
+%A Novicoff, Wm
+%D 2004
+
+%0 Journal Article
+%T Seasonality of Deaths in the U.S. by Age and Cause
+%V 6
+%P 471-488
+%U http://www.demographic-research.org/volumes/vol6/17/
+%G en
+%J Demographic Research
+%A Feinstein, Craig A.
+%D 2002-06-28
+
+%0 Journal Article
+%T Declining Vulnerability to Temperature-related Mortality in London over the 20th Century
+%V 164
+%N 1
+%P 77-84
+%U http://academic.oup.com/aje/article/164/1/77/80896/Declining-Vulnerability-to-Temperaturerelated
+%G en
+%J American Journal of Epidemiology
+%A Carson, Claire
+%A Hajat, Shakoor
+%A Armstrong, Ben
+%A Wilkinson, Paul
+%D 2006-07-01
+
+%0 Journal Article
+%T The Time Course of Weather-Related Deaths:
+%V 12
+%N 6
+%P 662-667
+%U http://journals.lww.com/00001648-200111000-00014
+%G en
+%J Epidemiology
+%A Ferreira Braga, Alfésio Luís
+%A Zanobetti, Antonella
+%A Schwartz, Joel
+%D 11/2001
+
+%0 Journal Article
+%T Climate change and human health: present and future risks
+%V 367
+%N 9513
+%P 859-869
+%U https://linkinghub.elsevier.com/retrieve/pii/S0140673606680793
+%G en
+%J The Lancet
+%A McMichael, Anthony J
+%A Woodruff, Rosalie E
+%A Hales, Simon
+%D 03/2006
+
+%0 Journal Article
+%T The Imperative for Climate Action to Protect Health
+%V 380
+%N 3
+%P 263-273
+%U http://www.nejm.org/doi/10.1056/NEJMra1807873
+%G en
+%J New England Journal of Medicine
+%E Solomon, Caren G.
+%A Haines, Andy
+%A Ebi, Kristie
+%D 2019-01-17
+
+%0 Journal Article
+%T Projecting Future Heat-Related Mortality under Climate Change Scenarios: A Systematic Review
+%V 119
+%N 12
+%P 1681-1690
+%U https://ehp.niehs.nih.gov/doi/10.1289/ehp.1103456
+%G en
+%J Environmental Health Perspectives
+%A Huang, Cunrui
+%A Barnett, Adrian Gerard
+%A Wang, Xiaoming
+%A Vaneckova, Pavla
+%A FitzGerald, Gerard
+%A Tong, Shilu
+%D 12/2011
+
+%0 Journal Article
+%T Projections of temperature-related excess mortality under climate change scenarios
+%V 1
+%N 9
+%P e360-e367
+%U https://linkinghub.elsevier.com/retrieve/pii/S2542519617301560
+%G en
+%J The Lancet Planetary Health
+%A Gasparrini, Antonio
+%A Guo, Yuming
+%A Sera, Francesco
+%A Vicedo-Cabrera, Ana Maria
+%A Huber, Veronika
+%A Tong, Shilu
+%A de Sousa Zanotti Stagliorio Coelho, Micheline
+%A Nascimento Saldiva, Paulo Hilario
+%A Lavigne, Eric
+%A Matus Correa, Patricia
+%A Valdes Ortega, Nicolas
+%A Kan, Haidong
+%A Osorio, Samuel
+%A Kyselý, Jan
+%A Urban, Aleš
+%A Jaakkola, Jouni J K
+%A Ryti, Niilo R I
+%A Pascal, Mathilde
+%A Goodman, Patrick G
+%A Zeka, Ariana
+%A Michelozzi, Paola
+%A Scortichini, Matteo
+%A Hashizume, Masahiro
+%A Honda, Yasushi
+%A Hurtado-Diaz, Magali
+%A Cesar Cruz, Julio
+%A Seposo, Xerxes
+%A Kim, Ho
+%A Tobias, Aurelio
+%A Iñiguez, Carmen
+%A Forsberg, Bertil
+%A Åström, Daniel Oudin
+%A Ragettli, Martina S
+%A Guo, Yue Leon
+%A Wu, Chang-fu
+%A Zanobetti, Antonella
+%A Schwartz, Joel
+%A Bell, Michelle L
+%A Dang, Tran Ngoc
+%A Van, Dung Do
+%A Heaviside, Clare
+%A Vardoulakis, Sotiris
+%A Hajat, Shakoor
+%A Haines, Andy
+%A Armstrong, Ben
+%D 12/2017
+
+%0 Journal Article
+%T The impact of major heat waves on all-cause and cause-specific mortality in France from 1971 to 2003
+%V 80
+%N 7
+%P 615-626
+%U http://link.springer.com/10.1007/s00420-007-0173-4
+%G en
+%J International Archives of Occupational and Environmental Health
+%A Rey, Grégoire
+%A Jougla, Eric
+%A Fouillet, Anne
+%A Pavillon, Gérard
+%A Bessemoulin, Pierre
+%A Frayssinet, Philippe
+%A Clavel, Jacqueline
+%A Hémon, Denis
+%D 2007-5-2
+
+%0 Journal Article
+%T Reversal of the road death trend in the U.S. in 2015–2016: An examination of the climate and economic hypotheses
+%V 9
+%P 161-168
+%U https://linkinghub.elsevier.com/retrieve/pii/S2214140518300021
+%G en
+%J Journal of Transport & Health
+%A Robertson, Leon S.
+%D 06/2018
+
+%0 Journal Article
+%T Risk factors for falls among older adults: A review of the literature
+%V 75
+%N 1
+%P 51-61
+%U https://linkinghub.elsevier.com/retrieve/pii/S0378512213000546
+%G en
+%J Maturitas
+%A Ambrose, Anne Felicia
+%A Paul, Geet
+%A Hausdorff, Jeffrey M.
+%D 05/2013
+
+%0 Journal Article
+%T Higher temperatures increase suicide rates in the United States and Mexico
+%V 8
+%N 8
+%P 723-729
+%U http://www.nature.com/articles/s41558-018-0222-x
+%G en
+%J Nature Climate Change
+%A Burke, Marshall
+%A González, Felipe
+%A Baylis, Patrick
+%A Heft-Neal, Sam
+%A Baysan, Ceren
+%A Basu, Sanjay
+%A Hsiang, Solomon
+%D 8/2018
+
+%0 Journal Article
+%T Aggression and heat: The influence of ambient temperature, negative affect, and a cooling drink on physical aggression.
+%V 33
+%N 3
+%P 245-255
+%U http://doi.apa.org/getdoi.cfm?doi=10.1037/0022-3514.33.3.245
+%G en
+%J Journal of Personality and Social Psychology
+%A Baron, Robert A.
+%A Bell, Paul A.
+%D 1976
+
+%0 Journal Article
+%T Time-Course of Cause-Specific Hospital Admissions During Snowstorms: An Analysis of Electronic Medical Records From Major Hospitals in Boston, Massachusetts
+%P amjepid;kww219v1
+%U https://academic.oup.com/aje/article-lookup/doi/10.1093/aje/kww219
+%G en
+%J American Journal of Epidemiology
+%A Bobb, Jennifer F.
+%A Ho, Kalon K. L.
+%A Yeh, Robert W.
+%A Harrington, Lori
+%A Zai, Adrian
+%A Liao, Katherine P.
+%A Dominici, Francesca
+%D 2017-01-30
+
+%0 Journal Article
+%T National and regional seasonal dynamics of all-cause and cause-specific mortality in the USA from 1980 to 2016
+%V 7
+%P e35500
+%U https://elifesciences.org/articles/35500
+%X In temperate climates, winter deaths exceed summer ones. However, there is limited information on the timing and the relative magnitudes of maximum and minimum mortality, by local climate, age group, sex and medical cause of death. We used geo-coded mortality data and wavelets to analyse the seasonality of mortality by age group and sex from 1980 to 2016 in the USA and its subnational climatic regions. Death rates in men and women ≥ 45 years peaked in December to February and were lowest in June to August, driven by cardiorespiratory diseases and injuries. In these ages, percent difference in death rates between peak and minimum months did not vary across climate regions, nor changed from 1980 to 2016. Under five years, seasonality of all-cause mortality largely disappeared after the 1990s. In adolescents and young adults, especially in males, death rates peaked in June/July and were lowest in December/January, driven by injury deaths.
+          , 
+            In the USA, more deaths happen in the winter than the summer. But when deaths occur varies greatly by sex, age, cause of death, and possibly region. Seasonal differences in death rates can change over time due to changes in factors that cause disease or affect treatment.
+            Analyzing the seasonality of deaths can help scientists determine whether interventions to minimize deaths during a certain time of year are needed, or whether existing ones are effective. Scrutinizing seasonal patterns in death over time can also help scientists determine whether large-scale weather or climate changes are affecting the seasonality of death.
+            Now, Parks et al. show that there are age and sex differences in which times of year most deaths occur. Parks et al. analyzed data on US deaths between 1980 and 2016. While overall deaths in a year were highest in winter and lowest in summer, a greater number of young men died during summer – mainly due to injuries – than during winter. Seasonal differences in deaths among young children have largely disappeared and seasonal differences in the deaths of older children and young adults have become smaller. Deaths among women and men aged 45 or older peaked between December and February – largely caused by respiratory and heart diseases, or injuries. Deaths in this older age group were lowest during the summer months. Death patterns in older people changed little over time. No regional differences were found in seasonal death patterns, despite large climate variation across the USA.
+            The analysis by Parks et al. suggests public health and medical interventions have been successful in reducing seasonal deaths among many groups. But more needs to be done to address seasonal differences in deaths among older adults. For example, by boosting flu vaccination rates, providing warnings about severe weather and better insulation for homes. Using technology like hands-free communication devices or home visits to help keep vulnerable elderly people connected during the winter months may also help.
+%G en
+%J eLife
+%A Parks, Robbie M
+%A Bennett, James E
+%A Foreman, Kyle J
+%A Toumi, Ralf
+%A Ezzati, Majid
+%D 2018-10-30
+
+%0 Journal Article
+%T Climate change, weather and road deaths
+%V 24
+%N 3
+%P 232-235
+%U http://injuryprevention.bmj.com/lookup/doi/10.1136/injuryprev-2017-042419
+%G en
+%J Injury Prevention
+%A Robertson, Leon
+%D 06/2018
+
+%0 Journal Article
+%T Effect of Snow, Temperature and Their Interaction on Highway Truck Traffic
+%V 03
+%N 01
+%P 24-38
+%U http://www.scirp.org/journal/doi.aspx?DOI=10.4236/jtts.2013.31003
+%J Journal of Transportation Technologies
+%A Roh, Hyuk-Jae
+%A Datla, Sandeep
+%A Sharma, Satish
+%D 2013
+
+%0 Journal Article
+%T Temperature and the Allocation of Time: Implications for Climate Change
+%V 32
+%N 1
+%P 1-26
+%U https://www.journals.uchicago.edu/doi/10.1086/671766
+%G en
+%J Journal of Labor Economics
+%A Graff Zivin, Joshua
+%A Neidell, Matthew
+%D 01/2014
+
+%0 Journal Article
+%T H. Rue, L. Held: Gaussian Markov random fields. Theory and applications: Chapman & Hall/CRC, Boca Raton--London--New York--Singapore 2005, pp. 263, EUR 44.99. ISBN 1-58488-432-0
+%V 67
+%N 2
+%P 243-244
+%U http://link.springer.com/10.1007/s00184-007-0162-3
+%G en
+%J Metrika
+%A Sturtz, Sibylle
+%D 3/2008
+
+%0 Book Section
+%T A Study of the Combined Effects of Extended Driving and Heat Stress on Driver Arousal and Performance
+%C Boston, MA
+%I Springer US
+%P 537-558
+%@ 978-1-4684-2531-4 978-1-4684-2529-1
+%U http://link.springer.com/10.1007/978-1-4684-2529-1_25
+%G en
+%B Vigilance
+%E Mackie, Robert R.
+%A Mackie, Robert R.
+%A O’Hanlon, James F.
+%D 1977
+
+%0 Journal Article
+%T Increases in external cause mortality due to high and low temperatures: evidence from northeastern Europe
+%V 61
+%N 5
+%P 963-966
+%U http://link.springer.com/10.1007/s00484-016-1270-4
+%G en
+%J International Journal of Biometeorology
+%A Orru, Hans
+%A Åström, Daniel Oudin
+%D 5/2017
+
+%0 Journal Article
+%T Driving performance in cold, warm, and thermoneutral environments
+%V 34
+%N 6
+%P 597-602
+%U https://linkinghub.elsevier.com/retrieve/pii/S0003687003000553
+%G en
+%J Applied Ergonomics
+%A Daanen, Hein A.M
+%A van de Vliert, Evert
+%A Huang, Xu
+%D 11/2003
+
+%0 Journal Article
+%T Climate as a risk factor for armed conflict
+%V 571
+%N 7764
+%P 193-197
+%U http://www.nature.com/articles/s41586-019-1300-6
+%G en
+%J Nature
+%A Mach, Katharine J.
+%A Kraan, Caroline M.
+%A Adger, W. Neil
+%A Buhaug, Halvard
+%A Burke, Marshall
+%A Fearon, James D.
+%A Field, Christopher B.
+%A Hendrix, Cullen S.
+%A Maystadt, Jean-Francois
+%A O’Loughlin, John
+%A Roessler, Philip
+%A Scheffran, Jürgen
+%A Schultz, Kenneth A.
+%A von Uexkull, Nina
+%D 7/2019
+
+%0 Journal Article
+%T Alcohol-Related Risk of Driver Fatalities: An Update Using 2007 Data
+%V 73
+%N 3
+%P 341-350
+%U http://www.jsad.com/doi/10.15288/jsad.2012.73.341
+%G en
+%J Journal of Studies on Alcohol and Drugs
+%A Voas, Robert B.
+%A Torres, Pedro
+%A Romano, Eduardo
+%A Lacey, John H.
+%D 05/2012
+
+%0 Journal Article
+%T Crime and Social Interactions
+%V 111
+%N 2
+%P 507-548
+%U https://academic.oup.com/qje/article-lookup/doi/10.2307/2946686
+%G en
+%J The Quarterly Journal of Economics
+%A Glaeser, E. L.
+%A Sacerdote, B.
+%A Scheinkman, J. A.
+%D 1996-05-01
+
+%0 Journal Article
+%T Future life expectancy in 35 industrialised countries: projections with a Bayesian model ensemble
+%V 389
+%N 10076
+%P 1323-1335
+%U https://linkinghub.elsevier.com/retrieve/pii/S0140673616323819
+%G en
+%J The Lancet
+%A Kontis, Vasilis
+%A Bennett, James E
+%A Mathers, Colin D
+%A Li, Guangquan
+%A Foreman, Kyle
+%A Ezzati, Majid
+%D 04/2017
+
+%0 Journal Article
+%T Modeling snow and cold effects for classified highway traffic volumes
+%V 20
+%N 4
+%P 1514-1525
+%U http://link.springer.com/10.1007/s12205-015-0236-0
+%G en
+%J KSCE Journal of Civil Engineering
+%A Roh, Hyuk-Jae
+%A Sharma, Satish
+%A Sahu, Prasanta K.
+%D 5/2016
+
+%0 Journal Article
+%T Ambient Temperature and Morbidity: A Review of Epidemiological Evidence
+%V 120
+%N 1
+%P 19-28
+%U https://ehp.niehs.nih.gov/doi/10.1289/ehp.1003198
+%G en
+%J Environmental Health Perspectives
+%A Ye, Xiaofang
+%A Wolff, Rodney
+%A Yu, Weiwei
+%A Vaneckova, Pavla
+%A Pan, Xiaochuan
+%A Tong, Shilu
+%D 01/2012
+
+%0 Journal Article
+%T Penalising Model Component Complexity: A Principled, Practical Approach to Constructing Priors
+%V 32
+%N 1
+%P 1-28
+%U http://projecteuclid.org/euclid.ss/1491465621
+%G en
+%J Statistical Science
+%A Simpson, Daniel
+%A Rue, Håvard
+%A Riebler, Andrea
+%A Martins, Thiago G.
+%A Sørbye, Sigrunn H.
+%D 02/2017
+
+%0 Journal Article
+%T Indoor and Outdoor Falls in Older Adults Are Different: The Maintenance of Balance, Independent Living, Intellect, and Zest in the Elderly of Boston Study: INDOOR AND OUTDOOR FALLS IN OLDER ADULTS
+%V 58
+%N 11
+%P 2135-2141
+%U http://doi.wiley.com/10.1111/j.1532-5415.2010.03062.x
+%G en
+%J Journal of the American Geriatrics Society
+%A Kelsey, Jennifer L.
+%A Berry, Sarah D.
+%A Procter-Gray, Elizabeth
+%A Quach, Lien
+%A Nguyen, Uyen-Sa D. T.
+%A Li, Wenjun
+%A Kiel, Douglas P.
+%A Lipsitz, Lewis A.
+%A Hannan, Marian T.
+%D 11/2010
+
+%0 Book Section
+%T Human Health: Impacts, Adaptation, and Co-Benefits
+%C Cambridge
+%I Cambridge University Press
+%P 709-754
+%@ 978-1-107-41537-9
+%U https://www.cambridge.org/core/product/identifier/CBO9781107415379A032/type/book_part
+%B Climate Change 2014 Impacts, Adaptation, and Vulnerability
+%E Field, Christopher B.
+%E Barros, Vicente R.
+%E Dokken, David Jon
+%E Mach, Katharine J.
+%E Mastrandrea, Michael D.
+%D 2014
+
+%0 Journal Article
+%T A Comprehensive Analysis of the Association of Highway Traffic with Winter Weather Conditions
+%V 104
+%P 497-506
+%U https://linkinghub.elsevier.com/retrieve/pii/S1877042813045345
+%G en
+%J Procedia - Social and Behavioral Sciences
+%A Datla, Sandeep
+%A Sahu, Prasanta
+%A Roh, Hyuk-Jae
+%A Sharma, Satish
+%D 12/2013
+
+%0 Journal Article
+%T The Relationship between Meteorological Conditions and Homicide, Suicide, Rage, and Psychiatric Hospitalization
+%V 59
+%N 5
+%P 1397-1402
+%U http://doi.wiley.com/10.1111/1556-4029.12471
+%G en
+%J Journal of Forensic Sciences
+%A Talaei, Ali
+%A Hedjazi, Arya
+%A Rezaei Ardani, Amir
+%A Fayyazi Bordbar, Mohammad Reza
+%A Talaei, Andisheh
+%D 09/2014
+
+%0 Journal Article
+%T Statistical Investigations of Snowfall and Temperature Interaction with Passenger Car and Truck Traffic on Primary Highways in Canada
+%V 30
+%N 2
+%P 04015006
+%U http://ascelibrary.org/doi/10.1061/%28ASCE%29CR.1943-5495.0000099
+%G en
+%J Journal of Cold Regions Engineering
+%A Roh, Hyuk-Jae
+%A Sahu, Prasanta K.
+%A Sharma, Satish
+%A Datla, Sandeep
+%A Mehran, Babak
+%D 06/2016
+
+%0 Journal Article
+%T Bayesian image restoration, with two applications in spatial statistics
+%V 43
+%N 1
+%P 1-20
+%U http://link.springer.com/10.1007/BF00116466
+%G en
+%J Annals of the Institute of Statistical Mathematics
+%A Besag, Julian
+%A York, Jeremy
+%A Molli�, Annie
+%D 3/1991
+
+%0 Journal Article
+%T The impact of climate change on youth depression and mental health
+%V 1
+%N 3
+%P e94-e95
+%U https://linkinghub.elsevier.com/retrieve/pii/S2542519617300451
+%G en
+%J The Lancet Planetary Health
+%A Majeed, Haris
+%A Lee, Jonathan
+%D 06/2017
+
+%0 Journal Article
+%T Determinants of motor vehicle deaths in the united states: A cross-sectional analysis
+%V 23
+%N 5
+%P 431-436
+%U https://linkinghub.elsevier.com/retrieve/pii/000145759190062A
+%G en
+%J Accident Analysis & Prevention
+%A Zlatoper, Thomas J.
+%D 10/1991
+
+%0 Journal Article
+%T Effects of moderate heat stress on driver vigilance in a moving vehicle
+%V 39
+%N 1
+%P 61-75
+%U http://www.tandfonline.com/doi/abs/10.1080/00140139608964434
+%G en
+%J Ergonomics
+%A Wyon, David P.
+%A Wyon, Inger
+%A Norin, Fredrik
+%D 01/1996
+
+%0 Journal Article
+%T Prior distributions for variance parameters in hierarchical models (comment on article by Browne and Draper)
+%V 1
+%N 3
+%P 515-534
+%U http://projecteuclid.org/euclid.ba/1340371048
+%G en
+%J Bayesian Analysis
+%A Gelman, Andrew
+%D 09/2006
+
+%0 Journal Article
+%T Temperature and aggression: Ubiquitous effects of heat on occurrence of human violence.
+%V 106
+%N 1
+%P 74-96
+%U http://doi.apa.org/getdoi.cfm?doi=10.1037/0033-2909.106.1.74
+%G en
+%J Psychological Bulletin
+%A Anderson, Craig A.
+%D 1989
+
+%0 Journal Article
+%T Global Warming and U.S. Crime Rates: An Application of Routine Activity Theory
+%V 35
+%N 6
+%P 802-825
+%U http://journals.sagepub.com/doi/10.1177/0013916503255565
+%G en
+%J Environment and Behavior
+%A Rotton, James
+%A Cohn, Ellen G.
+%D 11/2003
+
+%0 Journal Article
+%T Impacts of temperature and its variability on mortality in New England
+%V 5
+%N 11
+%P 988-991
+%U http://www.nature.com/articles/nclimate2704
+%G en
+%J Nature Climate Change
+%A Shi, Liuhua
+%A Kloog, Itai
+%A Zanobetti, Antonella
+%A Liu, Pengfei
+%A Schwartz, Joel D.
+%D 11/2015
+
+%0 Journal Article
+%T Approximate Bayesian inference for latent Gaussian models by using integrated nested Laplace approximations
+%V 71
+%N 2
+%P 319-392
+%U http://doi.wiley.com/10.1111/j.1467-9868.2008.00700.x
+%G en
+%J Journal of the Royal Statistical Society: Series B (Statistical Methodology)
+%A Rue, Håvard
+%A Martino, Sara
+%A Chopin, Nicolas
+%D 04/2009
+
