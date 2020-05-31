@@ -52,6 +52,35 @@ dat.inla.load <- subset(dat.inla.load,fips==state.arg)
 dat.inla.load <- ddply(dat.inla.load,.(year,month),summarise,deaths.adj=sum(deaths.adj),pop.adj=sum(pop.adj)/4) # /4 because four broad causes and need to adjust for that
 dat.inla.load$rate.adj = with(dat.inla.load,deaths.adj/pop.adj)
 
+# gender state and age lookup
+source('../../data/objects/objects.R')
+
+# create directories for plot
+file.loc <- paste0('../../output/data_explore_cod/single_state/')
+ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
+
+# year palette
+colorfunc = colorRampPalette(c(brewer.pal(6 , "BrBG" )[1:3],brewer.pal(6 , "RdGy" )[4:6]))
+yearpalette = colorfunc(year.end.arg-year.start.arg +1)
+
+# plot rates using ggplot
+pdf(paste0(file.loc,'death_rates_over_time_ons_all_cause_plots_',year.start.arg,'_',year.end.arg,'.pdf'),paper='a4r',height=0,width=0)
+library(ggplot2)
+ggplot(dat=subset(dat.inla.load), aes(x=month,y=100000*rate.adj,group=year,colour=year)) +
+    geom_line() +
+    xlab('Month') +
+    ylab('Death rate (per 100,000)') +
+    scale_x_continuous(breaks=c(seq(1,12,by=1)),labels=month.short.2)   +
+    guides(color=guide_colorbar(barwidth=30, title='Year')) +
+    scale_color_gradientn(colors=yearpalette) +
+    theme_bw() +  theme(panel.grid.major = element_blank(),text = element_text(size = 15),
+    axis.text.x = element_text(angle=90), axis.ticks.x=element_blank(),
+    panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+    panel.border = element_rect(colour = "black"),strip.background = element_blank(),
+    legend.position = 'bottom',legend.justification='center',
+    legend.background = element_rect(fill="white", size=.5, linetype="dotted"))
+dev.off()
+
 # load climate data for 1980-2017
 file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development_era5/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
 dat.climate <- readRDS(paste0(file.loc,'state_weighted_summary_',metric.arg,'_',dname.arg,'_1980_2017.rds'))
