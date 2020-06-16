@@ -10,6 +10,8 @@ plot(spain.gen)
 # remove island provinces (have asked Hicham)
 #spain.gen  <- spain.gen [!spain.gen $STATE_FIPS %in% c("02", "15"),]
 
+# CURRENTLY HERE!
+
 # extract data from shapefile
 shapefile.data <- attr(spain.gen, 'data')
 names(shapefile.data)[3] <- 'fips'
