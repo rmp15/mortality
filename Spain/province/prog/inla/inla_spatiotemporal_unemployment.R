@@ -49,60 +49,18 @@ if(pw.arg==1){
     ifelse(!dir.exists(paste0('~/data/mortality/Spain/province/unemployment_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/Spain/province/unemployment_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
 }
 # load data and filter results
-source('../models/INLA/03_spatiotemporal/inla_load_data_cod.R')
-
-# load climate region data and fix names
-# source('../models/INLA/03_spatiotemporal/inla_climate_regions.R')
-
-# merge mortality data with climate region data
-# dat.inla.load <- merge(dat.inla.load,dat.region,by.x=('fips'),by.y=('STATE_FIPS'),all.x=TRUE)
-
-## load climate data for 1980-2017
-#file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development_era5/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
-#dat.climate <- readRDS(paste0(file.loc,'state_weighted_summary_',metric.arg,'_',dname.arg,'_1980_2017.rds'))
-#dat.climate$state.fips <- as.numeric(as.character(dat.climate$state.fips))
-
-# merge mortality and climate data and reorder
-dat.merged <- merge(dat.inla.load,dat.climate,by.x=c('sex','age','year','month','fips'),by.y=c('sex','age','year','month','state.fips'),all.x=TRUE)
-dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
-
-# optional addition of long-term normals into model (currently testing may be removed)
-if(type.arg %in% c(26,29)){
-
-    # load long-term average (for sensitivity of model to inclusion). This may be a temporary inclusion depending on the outcome
-    file.loc.abs <- paste0('~/git/climate/countries/USA/output/multiyear_normals/',dname.arg,'/mean/')
-    dat.climate.abs = readRDS(paste0(file.loc.abs,'state_longterm_95_nonnormals_mean_',dname.arg,'_1980_2009.rds'))
-    dat.climate.abs$state.fips = as.numeric(dat.climate.abs$state.fips)
-    names(dat.climate.abs)[grep('mean',names(dat.climate.abs))] <- 'variable.abs'
-    dat.climate.abs = subset(dat.climate.abs,select=c(month,state.fips,sex,age,variable.abs))
-
-    # merge existing mortality and climate data with long-run absolute values
-    dat.merged <- merge(dat.merged,dat.climate.abs,by.x=c('sex','age','month','fips'),by.y=c('sex','age','month','state.fips'),all.x=TRUE)
-
-    # reorder one more time as had to add another column
-    dat.merged <- dat.merged[order(dat.merged$fips,dat.merged$sex,dat.merged$age,dat.merged$year,dat.merged$month),]
-
-}
-
-# generalise climate variable name
-names(dat.merged)[grep(dname.arg,names(dat.merged))] <- 'variable'
-
-# create lookup table for climate regions
-# regions.lookup <- data.frame(climate_region=sort(unique(dat.merged$climate_region)))
-# regions.lookup$ID.clim <- seq(nrow(regions.lookup))
-
-# dat.merged <- merge(dat.merged,regions.lookup,by='climate_region')
+source('../models/INLA/inla_load_data_cod.R')
 
 library(dplyr)
 
 # lookups
-source('../../data/objects/objects.R')
+#source('../../data/objects/objects.R')
 
 # adjacency matrix with connections
-# Hawaii -> California, Alaska -> Washington
-if(contig.arg == 0){USA.adj <- "../../output/adj_matrix_create/USA.graph.edit"}
-# only contiguous USA
-if(contig.arg == 1){USA.adj <- "../../output/adj_matrix_create/USA.graph.contig"}
+# only contiguous Spain FINISHING FROM adj_matrix.....R script first
+if(contig.arg == 1){Spain.adj <- "../../output/adj_matrix_create/spain.graph.contig"} # FIX FOR REST OF CODE
+
+# UP TO HERE SO FAR!
 
 ##############
 
