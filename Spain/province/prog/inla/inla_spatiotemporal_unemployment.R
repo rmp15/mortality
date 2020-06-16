@@ -3,10 +3,12 @@ rm(list=ls())
 # set up argument (don't get why but it should be like this apparently)
 seedVal <-as.numeric(commandArgs()[4])
 
+seedVal = 1
+
 # create complete grid of age, sex, and cause of death values
-sexes = c(1,2)
-ages = c(0,5,15,25,35,45,55,65,75,85)
-causes = c('Transport accidents','Accidental falls','Accidental drowning and submersion','Intentional self-harm','Assault','Road traffic accidents','Other transport accidents')
+sexes = c(0, 1, 2)
+ages = c(25, 40, 50, 65)
+causes = c('Suicide')
 
 seed.grid = expand.grid(sex=sexes,age=ages,cause=causes)
 
@@ -15,14 +17,14 @@ chosen.row =seed.grid[seedVal,]
 # break down the arguments from Rscript
 sex.arg <- as.numeric(chosen.row[1,1])
 age.arg <- as.numeric(chosen.row[1,2])
-year.start.arg <- 1980
-year.end.arg <- 2017
+year.start.arg <- 1999
+year.end.arg <- 2018
 type.arg <- 29 #CURRENTLY THE MODEL WITH TEMPERATURE (LONG-TERM) INCLUDED
 cluster.arg <- 0
 dname.arg <- 't2m'
 metric.arg <- 'meanc4'
-year.start.analysis.arg <- 1980
-year.end.analysis.arg <- 2017
+year.start.analysis.arg <- 1999
+year.end.analysis.arg <- 2018
 cod.arg <- as.character(chosen.row[1,3])
 fast.arg <- 1
 contig.arg <- 1
@@ -41,10 +43,10 @@ years <- year.start.arg:year.end.arg
 
 # create file location for output
 if(pw.arg==0){
-    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
+    ifelse(!dir.exists(paste0('~/data/mortality/Spain/province/unemployment_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/Spain/province/unemployment_effects/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
 }
 if(pw.arg==1){
-    ifelse(!dir.exists(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/US/state/climate_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
+    ifelse(!dir.exists(paste0('~/data/mortality/Spain/province/unemployment_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups')), dir.create(paste0('~/data/mortality/Spain/province/unemployment_effects/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups'),recursive=TRUE), FALSE)
 }
 # load data and filter results
 source('../models/INLA/03_spatiotemporal/inla_load_data_cod.R')
@@ -55,10 +57,10 @@ source('../models/INLA/03_spatiotemporal/inla_load_data_cod.R')
 # merge mortality data with climate region data
 # dat.inla.load <- merge(dat.inla.load,dat.region,by.x=('fips'),by.y=('STATE_FIPS'),all.x=TRUE)
 
-# load climate data for 1980-2017
-file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development_era5/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
-dat.climate <- readRDS(paste0(file.loc,'state_weighted_summary_',metric.arg,'_',dname.arg,'_1980_2017.rds'))
-dat.climate$state.fips <- as.numeric(as.character(dat.climate$state.fips))
+## load climate data for 1980-2017
+#file.loc <- paste0('~/git/climate/countries/USA/output/metrics_development_era5/',dname.arg,'/',metric.arg,'_',dname.arg,'/')
+#dat.climate <- readRDS(paste0(file.loc,'state_weighted_summary_',metric.arg,'_',dname.arg,'_1980_2017.rds'))
+#dat.climate$state.fips <- as.numeric(as.character(dat.climate$state.fips))
 
 # merge mortality and climate data and reorder
 dat.merged <- merge(dat.inla.load,dat.climate,by.x=c('sex','age','year','month','fips'),by.y=c('sex','age','year','month','state.fips'),all.x=TRUE)
