@@ -7,7 +7,7 @@ seedVal = 1
 
 # create complete grid of age, sex, and cause of death values
 sexes = c(0, 1, 2)
-ages = c(25, 40, 50, 65)
+ages = c(25, 40, 50, 65, 99)
 causes = c('Suicide')
 
 seed.grid = expand.grid(sex=sexes,age=ages,cause=causes)
@@ -19,7 +19,7 @@ sex.arg <- as.numeric(chosen.row[1,1])
 age.arg <- as.numeric(chosen.row[1,2])
 year.start.arg <- 1999
 year.end.arg <- 2018
-type.arg <- 29 #CURRENTLY THE MODEL WITH TEMPERATURE (LONG-TERM) INCLUDED
+type.arg <- 27
 cluster.arg <- 0
 dname.arg <- 't2m'
 metric.arg <- 'meanc4'
@@ -58,64 +58,85 @@ library(dplyr)
 
 # adjacency matrix with connections
 # only contiguous Spain FINISHING FROM adj_matrix.....R script first
-if(contig.arg == 1){Spain.adj <- "../../output/adj_matrix_create/spain.graph.contig"} # FIX FOR REST OF CODE
+if(contig.arg == 1){Spain.adj <- "../../output/adj_matrix_create/spain.graph.contig"}
 
-# UP TO HERE SO FAR!
-
-##############
+# calculate rate
+dat.inla.load$rate = with(dat.inla.load,suicide_men/pop_men)
 
 # filter all data by sex age and month
-fit.years <- year.start.analysis.arg:year.end.analysis.arg
-dat.inla <- dat.merged[dat.merged$sex==sex.arg & dat.merged$age==age.arg & dat.merged$year %in% fit.years,]
-
-# filter Hawaii and Alaska if required and load correct drawseq lookup NEED TO FIX HERE AND WITH AGE SPLIT!!
-if(contig.arg == 0){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.rds')}
-if(contig.arg == 1){drawseq.lookup <-readRDS('~/git/mortality/USA/state/output/adj_matrix_create/drawseq.lookup.contig.rds')}
-dat.inla = merge(dat.inla,drawseq.lookup,by='fips')
+#fit.years <- year.start.analysis.arg:year.end.analysis.arg
+#dat.inla <- dat.merged[dat.merged$sex==sex.arg & dat.merged$age==age.arg & dat.merged$year %in% fit.years,]
 
 # extract unique table of year and months to generate year.month
-dat.year.month <- unique(dat.inla[,c('year', 'month')])
-dat.year.month <- dat.year.month[order(dat.year.month$year,dat.year.month$month),]
-dat.year.month$month <- as.integer(dat.year.month$month)
-dat.year.month$year.month <- seq(nrow(dat.year.month))
+dat.year.month <- unique(dat.inla.load[,c('year', 'quarter')])
+dat.year.month <- dat.year.month[order(dat.year.month$year,dat.year.month$quarter),]
+dat.year.month$quarter <- as.integer(dat.year.month$quarter)
+dat.year.month$year.quarter <- seq(nrow(dat.year.month))
 
 # merge year.month table with population table to create year.month id
-dat.inla <- merge(dat.inla,dat.year.month, by=c('year','month'))
+dat.inla <- merge(dat.inla.load,dat.year.month, by=c('year','quarter'))
 
 # make sure that the order of the main data file matches that of the shapefile otherwise the model will not be valid
-dat.inla <- dat.inla[order(dat.inla$DRAWSEQ,dat.inla$sex,dat.inla$age,dat.inla$year.month),]
+#dat.inla <- dat.inla[order(dat.inla$DRAWSEQ,dat.inla$sex,dat.inla$age,dat.inla$year.month),]
 
 # add ID column for INLA
-dat.inla$ID <- dat.inla$DRAWSEQ
+dat.inla$ID <- as.numeric(dat.inla$cprov)
 
 # fix rownames
 rownames(dat.inla) <- 1:nrow(dat.inla)
 
 # variables for INLA model
-dat.inla$year.month4 <- dat.inla$year.month3 <- dat.inla$year.month2 <- dat.inla$year.month
-dat.inla$month8 <- dat.inla$month7 <- dat.inla$month6 <- dat.inla$month5 <- dat.inla$month4 <- dat.inla$month3 <- dat.inla$month2 <- dat.inla$month
+dat.inla$year.quarter4 <- dat.inla$year.quarter3 <- dat.inla$year.quarter2 <- dat.inla$year.quarter
+dat.inla$quarter8 <- dat.inla$quarter7 <- dat.inla$quarter6 <- dat.inla$quarter5 <- dat.inla$quarter4 <- dat.inla$quarter3 <- dat.inla$quarter2 <- dat.inla$quarter
 dat.inla$ID3 <- dat.inla$ID2 <- dat.inla$ID
-dat.inla$e <- 1:nrow(dat.inla)
+#dat.inla$e <- 1:nrow(dat.inla)
+
+# sort data by e column
+dat.inla = dat.inla[order(dat.inla$e),]
 
 # create piecewise climate variable if required
-if(pw.arg==1){
-    dat.inla$variable2 = ifelse(dat.inla$variable<0,0,dat.inla$variable)
-    dat.inla$variable3 = ifelse(dat.inla$variable>0,0,dat.inla$variable)
-}
+#if(pw.arg==1){
+#    dat.inla$variable2 = ifelse(dat.inla$variable<0,0,dat.inla$variable)
+#    dat.inla$variable3 = ifelse(dat.inla$variable>0,0,dat.inla$variable)
+#}
 
 # create directory for output
 if(pw.arg==0){
-    file.loc <- paste0('/rds/general/user/rmp15/ephemeral/data/mortality/US/state/climate_effects_era5/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.arg)
+    file.loc <- paste0('/rds/general/user/rmp15/ephemeral/data/mortality/spain/province/suicide/',dname.arg,'/',metric.arg,'/non_pw/type_',type.selected,'/age_groups/',age.arg)
 }
 if(pw.arg==1){
-    file.loc <- paste0('/rds/general/user/rmp15/ephemeral/data/mortality/US/state/climate_effects_era5/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups/',age.arg)
+    file.loc <- paste0('/rds/general/user/rmp15/ephemeral/data/mortality/US/spain/province/suicide/',dname.arg,'/',metric.arg,'/pw/type_',type.selected,'/age_groups/',age.arg)
 }
 ifelse(!dir.exists(file.loc), dir.create(file.loc, recursive=TRUE), FALSE)
 
 library(INLA)
 
+# formula to run model
+# 1. Type Id space-time interaction with besag state interaction terms and state-month specific variable slope (rw1)
+fml  <- suicide_men ~
+# global terms
+1 +                                                                     		# global intercept
+year.quarter +                                                           		# global slope
+# quarter specific terms
+f(quarter, model='rw1',cyclic = TRUE) +                                         # month specific intercept
+f(quarter2, year.quarter2, model='rw1', cyclic= TRUE) +                         # month specific slope
+# state-quarter specific terms
+#f(quarter3, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='besag',graph=Spain.adj))+                  # state-month specific intercept (spatially-correlated)
+#f(quarter4, year.quarter2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='besag',graph=Spain.adj))+    # state-month specific slope (spatially-correlated)
+f(quarter6, model="rw1",cyclic = TRUE,group=ID,control.group=list(model='iid'))+                                  # state-month specific intercept (spatially-correlated)
+f(quarter7, year.quarter2, model="rw1",cyclic = TRUE,group=ID, control.group=list(model='iid'))+                    # state-month specific slope (spatially-correlated)
+# state specific terms
+f(ID, model="iid") +                                      		# state specific intercept (iid but change to bym)
+f(ID2, year.quarter2, model="iid") +                        		# state specific slope (iid but change to bym)
+# climate specific terms
+#f(quarter5, variable, model="rw1", cyclic=TRUE) +                                 # month specific climate slope
+# random walk across time
+f(year.quarter3, model="rw1") +                                           		# rw1
+# overdispersion term
+f(e, model = "iid")                                                    		 	# overdispersion term
+
 # load inla function
-source('../models/INLA/03_spatiotemporal/inla_functions_cod.R')
+source('../inla/inla_functions_cod.R')
 
 # temporary workaround to avoid GLIBC error (???) from:
 # https://www.mn.uio.no/math/english/services/it/help/status/2018-07-26-inla-r.html
