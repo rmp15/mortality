@@ -142,28 +142,27 @@ source('../inla/inla_functions_cod.R')
 # https://www.mn.uio.no/math/english/services/it/help/status/2018-07-26-inla-r.html
 # INLA:::inla.dynload.workaround()
 
-# input arguments into function to perform inference
-if(fast.arg==0){
-    mod = inla.function.climate()
-}
-if(fast.arg==1){
-    mod = inla.function.climate.fast()
-}
-if(fast.arg==2){
+## input arguments into function to perform inference
+#if(fast.arg==0){
+#    mod = inla.function.climate()
+#}
+#if(fast.arg==1){
+#    mod = inla.function.climate.fast()
+#}
+#if(fast.arg==2){
     mod = inla.function.climate.faster()
-}
+#}
 
 # prep data for output
 
 # output string for filenames
-output.string = paste0('USA_rate_pred_type',type.selected,'_',age.arg,'_',sex.lookup[sex.arg],'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
+output.string = paste0('Spain_rate_pred_type',type.selected,'_',age.arg,'_',sex.arg,'_',year.start.analysis.arg,'_',year.end.analysis.arg,'_',dname.arg,'_',metric.arg)
 
 # save all parameters of INLA model
 parameters.name <- paste0(output.string)
 if(cod.arg!='AllCause'){parameters.name = paste0(parameters.name,'_',cod.arg,'_parameters')}
-if(cod.arg=='AllCause'){parameters.name = paste0(parameters.name,'_parameters')}
-if(fast.arg==1){parameters.name = paste0(parameters.name,'_fast')}
-if(fast.arg==2){parameters.name = paste0(parameters.name,'_faster')}
+#if(fast.arg==1){parameters.name = paste0(parameters.name,'_fast')}
+#if(fast.arg==2){parameters.name = paste0(parameters.name,'_faster')}
 if(contig.arg == 1){parameters.name = paste0(parameters.name,'_contig')}
 #mod$misc <- NULL ; mod$.args$.parent.frame <- NULL
 saveRDS(mod,paste0(file.loc,'/',parameters.name))
