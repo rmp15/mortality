@@ -29,6 +29,18 @@ echo "preparing annual death rates in injury sub-sub-causes of deaths for years 
 # Main analysis revisions of paper (September 2020)
 Rscript ~/git/mortality/USA/state/prog/prep_data_cod/US_county_annual_prepare_data_subcauses_injuries.R $start $end
 
+#################################################
+# covariate data prep
+#################################################
+
+# to correct directory
+cd ~/git/mortality/USA/state/prog/00_bash/
+
+echo "preparing covariates for years $start - $end";
+
+# Main analysis revisions of paper (September 2020)
+Rscript ~/git/mortality/USA/state/prog/covariates/covariates.R $start $end
+
 # BELOW NOT YET FINISHED TBC
 
 #################################################
