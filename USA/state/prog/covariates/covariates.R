@@ -7,14 +7,7 @@ library(dplyr)
 library(reshape2)
 library(ggplot2)
 
-#setwd("~/git/mortality/USA/state/data/covariates/")
-#
-#source('archive/code/make_data/get_mort_causespec.R')
-#source('archive/code/make_data/combine_sc.R')
-#source('archive/code/make_data/combine_mc.R')
-#source('archive/code/make_data/shp2gg.R')
-# source('P:/code/functions/ggsave_a4.R')
-
+setwd("~/git/mortality/USA/state/data/covariates/")
 
 ################ DEFINE ######################
 
@@ -23,364 +16,14 @@ id_sex <- 2 # select sex type (1=male, 2=female)
 startyear <- 1999 # extracting data starting in this year
 obs.Years <- 18 # ... for n years
 
-#file_sclist_orig <- 'archive/code/make_data/outputs/scfips.dta' # file summarising admin boundary changes
-#file_sclist <- 'archive/code/make_data/outputs/mfips_25000' # file summarising merging up to population threshold
-#
-#
-## !!!! also make sure that pop and mort data going in at L70+ are consistent with above supercounty merging
-#Ages <- 18 # total number of age-groups
-#if (id_sex==1) {
-#  sexnam <- 'male'
-#  fileout <- paste0('archive/code/make_data/outputs/data_cardiorespiratory_',polnam,'_',sexnam,'_',startyear,'_',obs.Years,'yrs.txt')
-#  fileoutT <- paste0('C:\\Users\\umahx99/data_cardiorespiratory_',polnam,'_',sexnam,'_',startyear,'_',obs.Years,'yrs.txt')
-#  fileoutTWB <- paste0('C:\\Users\\umahx99/data_cardiorespiratory_',polnam,'_',sexnam,'_',startyear,'_',obs.Years,'yrsWB.txt')
-#  #fileoutN <- paste0('archive/code/make_data/outputs/data_cardiorespiratory_',polnam,'_',sexnam,'_',startyear,'_',obs.Years,'yrs_N.txt')
-#}
-#if (id_sex==2) {
-#  sexnam <- 'female'
-#  fileout <- paste0('archive/code/make_data/outputs/data_cardiorespiratory_',polnam,'_',sexnam,'_',startyear,'_',obs.Years,'yrs.txt')
-#  fileoutT <- paste0('C:\\Users\\umahx99/data_cardiorespiratory_',polnam,'_',sexnam,'_',startyear,'_',obs.Years,'yrs.txt')
-#  fileoutTWB <- paste0('C:\\Users\\umahx99/data_cardiorespiratory_',polnam,'_',sexnam,'_',startyear,'_',obs.Years,'yrsWB.txt')
-#  #fileoutN <- paste0('archive/code/make_data/outputs/data_cardiorespiratory_',polnam,'_',sexnam,'_',startyear,'_',obs.Years,'yrs_N.txt')
-#}
-#
-#causes_icd10 <- c('CVD','respiratory')
-#causeregex_icd10 <- c('I','J')
-#causefind_icd10 <- data.frame(cause=causes_icd10,causeregex=causeregex_icd10)
-#causes_icd9 <- c('respiratory','respiratory','CVD','CVD')
-#causeregex_icd9 <- c('4[6789][0123456789][0123456789]','5[01][0123456789][0123456789]','39[0123456789][0123456789]','4[012345][0123456789][0123456789]')
-#causefind_icd9 <- data.frame(cause=causes_icd9,causeregex=causeregex_icd9)
-#
-#causesLC_icd10 <- c('lung cancer')
-#causeregexLC_icd10 <- c('C3[34]')
-#causefindLC_icd10 <- data.frame(cause=causesLC_icd10,causeregex=causeregexLC_icd10)
-#
-#causesLC_icd9 <- c('lung cancer')#,'respiratory','respiratory','CVD','CVD','external causes')
-#causeregexLC_icd9 <- c('162[0123456789]')#,'4[6789][0123456789][0123456789]','5[01][0123456789][0123456789]','39[0123456789][0123456789]','4[012345][0123456789][0123456789]','[89][0123456789][0123456789][0123456789]')
-#causefindLC_icd9 <- data.frame(cause=causesLC_icd9,causeregex=causeregexLC_icd9)
-#
 refyr <- 2000 # reference year to which LC mort rate and income should be standardised
-#
 id_race <- 2 #1=white, 2=black, 3=native, 4=asian
-##id_hisp <- 2 #1=non-hisp, 2=hisp
-#
-#file_inla_adj <- 'archive/code/make_data/outputs/us.graph'
-#################### making adjacency matrix ####################
-## subset map to continental US only
-#shp <- readOGR(dsn="archive/code/make_data/data/us_county_data/shapefile",layer="county_shp_2015_proj")
-#fipslist <- read.csv('archive/code/make_data/data/us_county_data/county_climreg_statefips.csv',header = TRUE,stringsAsFactors = FALSE)
-#fipslist$statefips <- sprintf('%02d',fipslist$statefips)
-#fipsmain <- fipslist$statefips
-#fipsmain <- fipsmain[!fipsmain %in% c('02','15')]
-#shpmain <- subset(shp,STATEFP %in% fipsmain)
-#
-## merge counties in spatial polygons data format (accounting for admin boundary changes)
-#scloc.sc <- read.dta(file_sclist_orig)
-#scloc.df.sc <- data.frame(lapply(scloc.sc, as.character), stringsAsFactors=FALSE)
-#source("archive/code/make_data/shpmerge.R")
-#shpmainmerged <- shpmerge(shpmain,'GEOID',scloc.df.sc)
-#
-## merge counties in spatial polygons data format (accounting for merging smaller population counties)
-#scloc <- readRDS(file_sclist)
-#scloc.df <- data.frame(lapply(scloc, as.character), stringsAsFactors=FALSE)
-#shpmainmerged2 <- shpmerge(shpmainmerged,'GEOID',scloc.df)
-#names(shpmainmerged2) <- 'id'
-#map <- shp2gg(shpmainmerged2)
-#names(shpmainmerged2) <- 'GEOID'
-#
-## convert shapefile to inla adjacency matrix
-#shpnb <- poly2nb(shpmainmerged2)
-#
-## data frame summarising county number/FIPS conversion
-#ctyid <- data.frame(fips = shpmainmerged2@data$GEOID)
-#ctyid$id <- c(1:nrow(ctyid))
-#
-## accounting for various island counties in adjacency matrix
-#num.LAD <- c()
-#adj.LAD <- c()
-#for (n in 1:length(shpnb)) {
-#  num.LAD.temp <- length(shpnb[[n]])
-#  adj.LAD.temp <- shpnb[[n]]
-#  if (ctyid$fips[n] == '25M01') {
-#    num.LAD.temp <- 1
-#    adj.LAD.temp <- ctyid$id[ctyid$fips %in% c('25001')] # this line may need modifying depending on the merging threshold
-#    shpnb[[n]] <- adj.LAD.temp
-#  }
-#  if (ctyid$fips[n] == '25001') {
-#    num.LAD.temp <- 2
-#    adj.LAD.temp <- ctyid$id[ctyid$fips %in% c('25M01','25023')] # this line may need modifying depending on the merging threshold
-#    shpnb[[n]] <- adj.LAD.temp
-#  }
-#  if (ctyid$fips[n] == '53055') { # san juan - add skagit
-#    num.LAD.temp <- 1
-#    adj.LAD.temp <- ctyid$id[ctyid$fips %in% '53057']
-#    shpnb[[n]] <- adj.LAD.temp
-#  }
-#  if (ctyid$fips[n] == '53057') { # skagit - add san juan
-#    num.LAD.temp <- num.LAD.temp + 1
-#    adj.LAD.temp <- c(adj.LAD.temp,ctyid$id[ctyid$fips %in% '53055'])
-#    shpnb[[n]] <- adj.LAD.temp
-#  }
-#  num.LAD <- c(num.LAD,num.LAD.temp)
-#  adj.LAD <- c(adj.LAD,adj.LAD.temp)
-#}
-#LADs <- length(num.LAD)
-#weights.LAD <- rep(1,length(adj.LAD))
-#
-## make INLA adjacency matrix
-#nb2INLA(file_inla_adj,nb = shpnb)
-#
-#
-#
-##################### INCLUDE POLLUTION DATA ####################
-#load(paste0('archive/code/make_data/data/pollution/CACES_P3v1.1clu_county_',polnam,'.RData'))
-#apannual <- P3v1.1clu_county
-#apannual$year <- as.numeric(apannual$year)
-#colnames(apannual)[1] <- 'fips'
-#apannual <- subset(apannual,year >= startyear & year <= (startyear+obs.Years-1))
-#
-## attach pop data
+
+##################### INCLUDE POPULATION DATA ####################
+
 load('nchs_raw_annotated_withag_1990_to_2016') # CURRENTLY MISSING
-#load('archive/code/make_data/outputs/nchs_pop_with_sc_withag_1990_to_2016')
 pop_nchs_allage <- as.data.frame(summarise(group_by(subset(dat_nchs,sex==id_sex),year,fips,sex),popsum=sum(popsum)))
 popsum_nchs <- subset(pop_nchs_allage,sex==id_sex)
-#ap_pop_nchs <- left_join(apannual,popsum_nchs)
-#
-## accounting for some missing data due to merging/splitting counties
-##ap_pop_nchs[is.na(ap_pop_nchs$popsum)==1,'popsum'] <- 0
-#
-#ap_pop_nchs[ap_pop_nchs$fips == '08014' & ap_pop_nchs$year <= 1999,'popsum'] <- popsum_nchs[popsum_nchs$fips == '08014' & popsum_nchs$year == 2000,'popsum']
-#ap_pop_nchs[ap_pop_nchs$fips == '46113' & ap_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '46102' & popsum_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum']
-#ap_pop_nchs[ap_pop_nchs$fips == '51515' & ap_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '51515' & popsum_nchs$year %in% c(2009),'popsum']
-#
-## merging counties with population-weighted pollution
-#ap_pop_nchs_sctag <- combine_sc(ap_pop_nchs,scloc.df.sc)
-#ap_pop_nchs_sctag$appop <- ap_pop_nchs_sctag$pred.wght*ap_pop_nchs_sctag$popsum
-#ap_pop_nchs_sc <- data.frame(summarise(group_by(ap_pop_nchs_sctag,fips,year),apsc.wght=sum(appop)/sum(popsum),popsum=sum(popsum)))
-#ap_pop_nchs_mctag <- combine_mc(ap_pop_nchs_sc,scloc.df)
-#ap_pop_nchs_mctag$appop <- ap_pop_nchs_mctag$apsc.wght*ap_pop_nchs_mctag$popsum
-#ap_pop_nchs_mc <- data.frame(summarise(group_by(ap_pop_nchs_mctag,fips,year),apmc.wght=sum(appop)/sum(popsum)))
-#
-## centering values
-#apmc_bugs <- ap_pop_nchs_mc
-#colnames(apmc_bugs)[3] <- 'apmerge'
-#apmean <- mean(apmc_bugs$apmerge)
-#apmc_bugs$apmerge <- apmc_bugs$apmerge - apmean
-#apmc_bugs$year <- apmc_bugs$year - startyear + 1
-#
-##################### INCLUDE OZONE DATA ####################
-#load(paste0('archive/code/make_data/data/pollution/CACES_P3v1.1clu_county_o3.RData'))
-#o3annual <- P3v1.1clu_county
-#o3annual$year <- as.numeric(o3annual$year)
-#colnames(o3annual)[1] <- 'fips'
-#o3annual <- subset(o3annual,year >= startyear & year <= (startyear+obs.Years-1))
-#
-## attach pop data
-#load('archive/code/make_data/data/nchs_raw_annotated_withag_1990_to_2016')
-##load('archive/code/make_data/outputs/nchs_pop_with_sc_withag_1990_to_2016')
-#pop_nchs_allage <- as.data.frame(summarise(group_by(subset(dat_nchs,sex==id_sex),year,fips,sex),popsum=sum(popsum)))
-#popsum_nchs <- subset(pop_nchs_allage,sex==id_sex)
-#o3_pop_nchs <- left_join(o3annual,popsum_nchs)
-#
-## accounting for some missing data due to merging/splitting counties
-##o3_pop_nchs[is.na(o3_pop_nchs$popsum)==1,'popsum'] <- 0
-#
-#o3_pop_nchs[o3_pop_nchs$fips == '08014' & o3_pop_nchs$year <= 1999,'popsum'] <- popsum_nchs[popsum_nchs$fips == '08014' & popsum_nchs$year == 2000,'popsum']
-#o3_pop_nchs[o3_pop_nchs$fips == '46113' & o3_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '46102' & popsum_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum']
-#o3_pop_nchs[o3_pop_nchs$fips == '51515' & o3_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '51515' & popsum_nchs$year %in% c(2009),'popsum']
-#
-## merging counties with population-weighted pollution
-#o3_pop_nchs_sctag <- combine_sc(o3_pop_nchs,scloc.df.sc)
-#o3_pop_nchs_sctag$o3pop <- o3_pop_nchs_sctag$pred.wght*o3_pop_nchs_sctag$popsum
-#o3_pop_nchs_sc <- data.frame(summarise(group_by(o3_pop_nchs_sctag,fips,year),o3sc.wght=sum(o3pop)/sum(popsum),popsum=sum(popsum)))
-#o3_pop_nchs_mctag <- combine_mc(o3_pop_nchs_sc,scloc.df)
-#o3_pop_nchs_mctag$o3pop <- o3_pop_nchs_mctag$o3sc.wght*o3_pop_nchs_mctag$popsum
-#o3_pop_nchs_mc <- data.frame(summarise(group_by(o3_pop_nchs_mctag,fips,year),o3mc.wght=sum(o3pop)/sum(popsum)))
-#
-## centering values
-#o3mc_bugs <- o3_pop_nchs_mc
-#colnames(o3mc_bugs)[3] <- 'o3merge'
-#o3mean <- mean(o3mc_bugs$o3merge)
-#o3mc_bugs$o3merge <- o3mc_bugs$o3merge - o3mean
-#o3mc_bugs$year <- o3mc_bugs$year - startyear + 1
-#
-##################### INCLUDE NO2 DATA ####################
-#load(paste0('archive/code/make_data/data/pollution/CACES_P3v1.1clu_county_no2.RData'))
-#no2annual <- P3v1.1clu_county
-#no2annual$year <- as.numeric(no2annual$year)
-#colnames(no2annual)[1] <- 'fips'
-#no2annual <- subset(no2annual,year >= startyear & year <= (startyear+obs.Years-1))
-#
-## attach pop data
-#load('archive/code/make_data/data/nchs_raw_annotated_withag_1990_to_2016')
-##load('archive/code/make_data/outputs/nchs_pop_with_sc_withag_1990_to_2016')
-#pop_nchs_allage <- as.data.frame(summarise(group_by(subset(dat_nchs,sex==id_sex),year,fips,sex),popsum=sum(popsum)))
-#popsum_nchs <- subset(pop_nchs_allage,sex==id_sex)
-#no2_pop_nchs <- left_join(no2annual,popsum_nchs)
-#
-## accounting for some missing data due to merging/splitting counties
-##no2_pop_nchs[is.na(no2_pop_nchs$popsum)==1,'popsum'] <- 0
-#
-#no2_pop_nchs[no2_pop_nchs$fips == '08014' & no2_pop_nchs$year <= 1999,'popsum'] <- popsum_nchs[popsum_nchs$fips == '08014' & popsum_nchs$year == 2000,'popsum']
-#no2_pop_nchs[no2_pop_nchs$fips == '46113' & no2_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '46102' & popsum_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum']
-#no2_pop_nchs[no2_pop_nchs$fips == '51515' & no2_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '51515' & popsum_nchs$year %in% c(2009),'popsum']
-#
-## merging counties with population-weighted pollution
-#no2_pop_nchs_sctag <- combine_sc(no2_pop_nchs,scloc.df.sc)
-#no2_pop_nchs_sctag$no2pop <- no2_pop_nchs_sctag$pred.wght*no2_pop_nchs_sctag$popsum
-#no2_pop_nchs_sc <- data.frame(summarise(group_by(no2_pop_nchs_sctag,fips,year),no2sc.wght=sum(no2pop)/sum(popsum),popsum=sum(popsum)))
-#no2_pop_nchs_mctag <- combine_mc(no2_pop_nchs_sc,scloc.df)
-#no2_pop_nchs_mctag$no2pop <- no2_pop_nchs_mctag$no2sc.wght*no2_pop_nchs_mctag$popsum
-#no2_pop_nchs_mc <- data.frame(summarise(group_by(no2_pop_nchs_mctag,fips,year),no2mc.wght=sum(no2pop)/sum(popsum)))
-#
-## centering values
-#no2mc_bugs <- no2_pop_nchs_mc
-#colnames(no2mc_bugs)[3] <- 'no2merge'
-#no2mean <- mean(no2mc_bugs$no2merge)
-#no2mc_bugs$no2merge <- no2mc_bugs$no2merge - no2mean
-#no2mc_bugs$year <- no2mc_bugs$year - startyear + 1
-#
-##################### INCLUDE so2 DATA ####################
-#load(paste0('archive/code/make_data/data/pollution/CACES_P3v1.1clu_county_so2.RData'))
-#so2annual <- P3v1.1clu_county
-#so2annual$year <- as.numeric(so2annual$year)
-#colnames(so2annual)[1] <- 'fips'
-#so2annual <- subset(so2annual,year >= startyear & year <= (startyear+obs.Years-1))
-#
-## attach pop data
-#load('archive/code/make_data/data/nchs_raw_annotated_withag_1990_to_2016')
-##load('archive/code/make_data/outputs/nchs_pop_with_sc_withag_1990_to_2016')
-#pop_nchs_allage <- as.data.frame(summarise(group_by(subset(dat_nchs,sex==id_sex),year,fips,sex),popsum=sum(popsum)))
-#popsum_nchs <- subset(pop_nchs_allage,sex==id_sex)
-#so2_pop_nchs <- left_join(so2annual,popsum_nchs)
-#
-## accounting for some missing data due to merging/splitting counties
-##so2_pop_nchs[is.na(so2_pop_nchs$popsum)==1,'popsum'] <- 0
-#
-#so2_pop_nchs[so2_pop_nchs$fips == '08014' & so2_pop_nchs$year <= 1999,'popsum'] <- popsum_nchs[popsum_nchs$fips == '08014' & popsum_nchs$year == 2000,'popsum']
-#so2_pop_nchs[so2_pop_nchs$fips == '46113' & so2_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '46102' & popsum_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum']
-#so2_pop_nchs[so2_pop_nchs$fips == '51515' & so2_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '51515' & popsum_nchs$year %in% c(2009),'popsum']
-#
-## merging counties with population-weighted pollution
-#so2_pop_nchs_sctag <- combine_sc(so2_pop_nchs,scloc.df.sc)
-#so2_pop_nchs_sctag$so2pop <- so2_pop_nchs_sctag$pred.wght*so2_pop_nchs_sctag$popsum
-#so2_pop_nchs_sc <- data.frame(summarise(group_by(so2_pop_nchs_sctag,fips,year),so2sc.wght=sum(so2pop)/sum(popsum),popsum=sum(popsum)))
-#so2_pop_nchs_mctag <- combine_mc(so2_pop_nchs_sc,scloc.df)
-#so2_pop_nchs_mctag$so2pop <- so2_pop_nchs_mctag$so2sc.wght*so2_pop_nchs_mctag$popsum
-#so2_pop_nchs_mc <- data.frame(summarise(group_by(so2_pop_nchs_mctag,fips,year),so2mc.wght=sum(so2pop)/sum(popsum)))
-#
-## centering values
-#so2mc_bugs <- so2_pop_nchs_mc
-#colnames(so2mc_bugs)[3] <- 'so2merge'
-#so2mean <- mean(so2mc_bugs$so2merge)
-#so2mc_bugs$so2merge <- so2mc_bugs$so2merge - so2mean
-#so2mc_bugs$year <- so2mc_bugs$year - startyear + 1
-#
-##################### INCLUDE pm10 DATA ####################
-#load(paste0('archive/code/make_data/data/pollution/CACES_P3v1.1clu_county_pm10.RData'))
-#pm10annual <- P3v1.1clu_county
-#pm10annual$year <- as.numeric(pm10annual$year)
-#colnames(pm10annual)[1] <- 'fips'
-#pm10annual <- subset(pm10annual,year >= startyear & year <= (startyear+obs.Years-1))
-#
-## attach pop data
-#load('archive/code/make_data/data/nchs_raw_annotated_withag_1990_to_2016')
-##load('archive/code/make_data/outputs/nchs_pop_with_sc_withag_1990_to_2016')
-#pop_nchs_allage <- as.data.frame(summarise(group_by(subset(dat_nchs,sex==id_sex),year,fips,sex),popsum=sum(popsum)))
-#popsum_nchs <- subset(pop_nchs_allage,sex==id_sex)
-#pm10_pop_nchs <- left_join(pm10annual,popsum_nchs)
-#
-## accounting for some missing data due to merging/splitting counties
-##pm10_pop_nchs[is.na(pm10_pop_nchs$popsum)==1,'popsum'] <- 0
-#
-#pm10_pop_nchs[pm10_pop_nchs$fips == '08014' & pm10_pop_nchs$year <= 1999,'popsum'] <- popsum_nchs[popsum_nchs$fips == '08014' & popsum_nchs$year == 2000,'popsum']
-#pm10_pop_nchs[pm10_pop_nchs$fips == '46113' & pm10_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '46102' & popsum_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum']
-#pm10_pop_nchs[pm10_pop_nchs$fips == '51515' & pm10_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '51515' & popsum_nchs$year %in% c(2009),'popsum']
-#
-## merging counties with population-weighted pollution
-#pm10_pop_nchs_sctag <- combine_sc(pm10_pop_nchs,scloc.df.sc)
-#pm10_pop_nchs_sctag$pm10pop <- pm10_pop_nchs_sctag$pred.wght*pm10_pop_nchs_sctag$popsum
-#pm10_pop_nchs_sc <- data.frame(summarise(group_by(pm10_pop_nchs_sctag,fips,year),pm10sc.wght=sum(pm10pop)/sum(popsum),popsum=sum(popsum)))
-#pm10_pop_nchs_mctag <- combine_mc(pm10_pop_nchs_sc,scloc.df)
-#pm10_pop_nchs_mctag$pm10pop <- pm10_pop_nchs_mctag$pm10sc.wght*pm10_pop_nchs_mctag$popsum
-#pm10_pop_nchs_mc <- data.frame(summarise(group_by(pm10_pop_nchs_mctag,fips,year),pm10mc.wght=sum(pm10pop)/sum(popsum)))
-#
-## centering values
-#pm10mc_bugs <- pm10_pop_nchs_mc
-#colnames(pm10mc_bugs)[3] <- 'pm10merge'
-#pm10mean <- mean(pm10mc_bugs$pm10merge)
-#pm10mc_bugs$pm10merge <- pm10mc_bugs$pm10merge - pm10mean
-#pm10mc_bugs$year <- pm10mc_bugs$year - startyear + 1
-#
-##################### INCLUDE co DATA ####################
-#load(paste0('archive/code/make_data/data/pollution/CACES_P3v1.1clu_county_co.RData'))
-#coannual <- P3v1.1clu_county
-#coannual$year <- as.numeric(coannual$year)
-#colnames(coannual)[1] <- 'fips'
-#coannual <- subset(coannual,year >= startyear & year <= (startyear+obs.Years-1))
-#
-## attach pop data
-#load('archive/code/make_data/data/nchs_raw_annotated_withag_1990_to_2016')
-##load('archive/code/make_data/outputs/nchs_pop_with_sc_withag_1990_to_2016')
-#pop_nchs_allage <- as.data.frame(summarise(group_by(subset(dat_nchs,sex==id_sex),year,fips,sex),popsum=sum(popsum)))
-#popsum_nchs <- subset(pop_nchs_allage,sex==id_sex)
-#co_pop_nchs <- left_join(coannual,popsum_nchs)
-#
-## accounting for some missing data due to merging/splitting counties
-##co_pop_nchs[is.na(co_pop_nchs$popsum)==1,'popsum'] <- 0
-#
-#co_pop_nchs[co_pop_nchs$fips == '08014' & co_pop_nchs$year <= 1999,'popsum'] <- popsum_nchs[popsum_nchs$fips == '08014' & popsum_nchs$year == 2000,'popsum']
-#co_pop_nchs[co_pop_nchs$fips == '46113' & co_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '46102' & popsum_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum']
-#co_pop_nchs[co_pop_nchs$fips == '51515' & co_pop_nchs$year %in% c(2010,2011,2012,2013,2014,2015),'popsum'] <- popsum_nchs[popsum_nchs$fips == '51515' & popsum_nchs$year %in% c(2009),'popsum']
-#
-## merging counties with population-weighted pollution
-#co_pop_nchs_sctag <- combine_sc(co_pop_nchs,scloc.df.sc)
-#co_pop_nchs_sctag$copop <- co_pop_nchs_sctag$pred.wght*co_pop_nchs_sctag$popsum
-#co_pop_nchs_sc <- data.frame(summarise(group_by(co_pop_nchs_sctag,fips,year),cosc.wght=sum(copop)/sum(popsum),popsum=sum(popsum)))
-#co_pop_nchs_mctag <- combine_mc(co_pop_nchs_sc,scloc.df)
-#co_pop_nchs_mctag$copop <- co_pop_nchs_mctag$cosc.wght*co_pop_nchs_mctag$popsum
-#co_pop_nchs_mc <- data.frame(summarise(group_by(co_pop_nchs_mctag,fips,year),comc.wght=sum(copop)/sum(popsum)))
-#
-## centering values
-#comc_bugs <- co_pop_nchs_mc
-#colnames(comc_bugs)[3] <- 'comerge'
-#comean <- mean(comc_bugs$comerge)
-#comc_bugs$comerge <- comc_bugs$comerge - comean
-#comc_bugs$year <- comc_bugs$year - startyear + 1
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-##################### INCLUDE YEARLY MEAN DAILY TEMPERATURE DATA ####################
-##load temperature data - made up by Robbie from mean of 365 24hr mean temperature - population weighting 1st for sc and then again for mc
-#  temp <- readRDS('archive\\code\\make_data\\data\\meterology_sc\\meterology_sc\\t2m\\ymean_t2m/supercounty_summary_ymean_t2m_1999_2015.rds')
-#  temp <- subset(temp, sex==id_sex)
-#   colnames(temp)[which(colnames(temp)=="apsc.wght")] <- 'temp_ymean'
-#   temp <- temp[,which(names(temp) %in% c("fips","year","temp_ymean"))]
-##centre
-#  temp_ymean_mean <- mean(temp$temp_ymean)
-#  temp$temp_ymean <- temp$temp_ymean - temp_ymean_mean
-#  temp$year <- temp$year - startyear + 1
-#
-#
-##################### INCLUDE YEARLY MEAN DAILY TEMPERATURE DATA ####################
-##load temperature data - made up by Robbie from mean of 365 24hr mean temperature - population weighting 1st for sc and then again for mc
-#  relh <- readRDS('archive\\code\\make_data\\data\\meterology_sc\\meterology_sc\\rh\\ymean_rh/supercounty_summary_ymean_rh_1999_2015.rds')
-#  relh <- subset(relh, sex==id_sex)
-#   colnames(relh)[which(colnames(relh)=="apsc.wght")] <- 'relh_ymean'
-#   relh <- relh[,which(names(relh) %in% c("fips","year","relh_ymean"))]
-#
-##centre
-#  relh_ymean_mean <- mean(relh$relh_ymean)
-#  relh$relh_ymean <- relh$relh_ymean - relh_ymean_mean
-#  relh$year <- relh$year - startyear + 1
-#
 #
 ################## INCLUDE INCOME DATA ####################
 load('income_with_sc')
@@ -393,25 +36,12 @@ income_us_sc <- subset(income_us_sc,STATEFP != '00')
 income_us_sc <- subset(income_us_sc,COUNTYFP != '000')
 income_us_sc <- subset(income_us_sc,!STATEFP %in% c('02','15','03','07','14','43','52','64','68','70','74','81','84','86','67','89','71','76','95','79'))
 
-# merge counties, work out total income
-#popsum_income <- data.frame(summarise(group_by(pop_nchs_allage,fips,year),poptot=sum(popsum)))
-#popsum_income_sc <- combine_sc(popsum_income,scloc.df.sc)
-#income_us_sc <- left_join(income_us_sc,popsum_income_sc,by=c('fips','year'))
-#income_us_sc$total <- income_us_sc$inc_pc_sc*income_us_sc$poptot
-#income_us_mctag <- combine_mc(income_us_sc,scloc.df)
-#income_us_merged <- data.frame(summarise(group_by(income_us_mctag,fips,year),pc_merged=sum(total,na.rm=TRUE)/sum(poptot,na.rm=TRUE)))
-
 # adjust for inflation 
 CPIdf <- read.csv2('CPI.csv',header = TRUE,sep=',',stringsAsFactors = FALSE)
 CPI_base <- subset(CPIdf,year==refyr)$CPI
 CPIdf$ratio <- as.numeric(unlist(CPI_base))/as.numeric(unlist(CPIdf$CPI))
 income_us_sc <- left_join(income_us_sc,CPIdf,by='year')
-income_us_sc$pc_const <- income_us_sc$inc_pc_sc*income_us_sc$ratio
-
-## convert to personal income per some unit to help with convergence
-#income_us_merged$log_pc_const <- log(income_us_merged$pc_const)
-#income_mean <- mean(income_us_merged$log_pc_const)
-#income_us_merged$log_pc_const <- income_us_merged$log_pc_const - income_mean
+income_us_sc$pc_const <- round(income_us_sc$inc_pc_sc*income_us_sc$ratio)
 
 ################## INCLUDE POVERTY DATA ##################
 load('povperc_with_sc')
@@ -424,27 +54,12 @@ poppov_us_sc <- subset(poppov_us_sc,STATEFP != '00')
 poppov_us_sc <- subset(poppov_us_sc,COUNTYFP != '000')
 poppov_us_sc <- subset(poppov_us_sc,!STATEFP %in% c('02','15','03','07','14','43','52','64','68','70','74','81','84','86','67','89','71','76','95','79'))
 
-# merge counties 
-#poppov_us_sc <- left_join(poppov_us_sc,popsum_income_sc,by=c('fips','year'))
-#poppov_us_sc$total <- poppov_us_sc$poppov_sc*poppov_us_sc$poptot
-#poppov_us_mctag <- combine_mc(poppov_us_sc,scloc.df)
-#poppov_us_merged <- data.frame(summarise(group_by(poppov_us_mctag,fips,year),poppov_merged=sum(total,na.rm=TRUE)/sum(poptot,na.rm=TRUE)))
-#povmean <- mean(poppov_us_merged$poppov_merged)
-#poppov_us_merged$poppov_merged <- poppov_us_merged$poppov_merged - povmean
-
 ################## INCLUDE RACE DATA ##################
 # trim race data 
 pop_race <- subset(dat_nchs,race==id_race & sex==id_sex & year >= startyear & year < (startyear+obs.Years))
+
 # sum for this race for each fips-year
 pop_race_allage <- data.frame(summarise(group_by(pop_race,year,fips),popsum=sum(popsum)))
-# merge for ctys
-#pop_race_allage_mc <- combine_mc(combine_sc(pop_race_allage,scloc.df.sc),scloc.df)
-# sum of race for each cty 
-#pop_race_allage_mc_sum <- data.frame(summarise(group_by(pop_race_allage_mc,year,fips),poprace=sum(popsum)))
-
-# get total population at mc level 
-#pop_nchs_allage_mc <- combine_mc(combine_sc(pop_nchs_allage,scloc.df.sc),scloc.df)
-#pop_nchs_allage_mc_sum <- data.frame(summarise(group_by(pop_nchs_allage_mc,year,fips),poptot=sum(popsum)))
 
 # get race perc 
 poprace_us_merged <- left_join(pop_race_allage,pop_nchs_allage,by=c('year','fips'))
@@ -455,40 +70,6 @@ poprace_us_merged$STATEFP <- substr(poprace_us_merged$fips,1,2)
 poprace_us_merged <- subset(poprace_us_merged,!STATEFP %in% c('02','15','03','07','14','43','52','64','68','70','74','81','84','86','67','89','71','76','95','79'))
 poprace_us_merged <- poprace_us_merged[,c(1,2,6)]
 
-#racemean <- mean(poprace_us_merged$popraceprop)
-#poprace_us_merged$popraceprop <- poprace_us_merged$popraceprop - racemean
-
-# 
-#   
-#   ################## INCLUDE HISP DATA ##################
-#   # trim race data 
-#   pop_hisp <- subset(dat_nchs,hisp==id_hisp & sex==id_sex & year >= startyear & year < (startyear+obs.Years))
-#   # sum for this hisp for each fips-year
-#   pop_hisp_allage <- data.frame(summarise(group_by(pop_hisp,year,fips),popsum=sum(popsum)))
-#   # merge for ctys
-#   pop_hisp_allage_mc <- combine_mc(combine_sc(pop_hisp_allage,scloc.df.sc),scloc.df)
-#   # sum of hisp for each cty 
-#   pop_hisp_allage_mc_sum <- data.frame(summarise(group_by(pop_hisp_allage_mc,year,fips),pophisp=sum(popsum)))
-#   
-#   # get total population at mc level 
-#   pop_nchs_allage_mc <- combine_mc(combine_sc(pop_nchs_allage,scloc.df.sc),scloc.df)
-#   pop_nchs_allage_mc_sum <- data.frame(summarise(group_by(pop_nchs_allage_mc,year,fips),poptot=sum(popsum)))
-#   
-#   # get hisp perc 
-#   pophisp_us_merged <- left_join(pop_hisp_allage_mc_sum,pop_nchs_allage_mc_sum,by=c('year','fips'))
-#   pophisp_us_merged$pophispprop <- pophisp_us_merged$pophisp/pophisp_us_merged$poptot
-#   
-#   # remove AK + HI + overseas 
-#   pophisp_us_merged$STATEFP <- substr(pophisp_us_merged$fips,1,2)
-#   pophisp_us_merged <- subset(pophisp_us_merged,!STATEFP %in% c('02','15','03','07','14','43','52','64','68','70','74','81','84','86','67','89','71','76','95','79'))
-#   pophisp_us_merged <- pophisp_us_merged[,c(1,2,5)]
-#   
-#   hispmean <- mean(pophisp_us_merged$pophispprop)
-#   pophisp_us_merged$pophispprop <- pophisp_us_merged$pophispprop - hispmean
-#   
-#   length(unique(pophisp_us_merged$fips))
-  
-  
 ################## INCLUDE EDU DATA ##################
 
 load('edu_with_sc')
@@ -501,25 +82,6 @@ edu_sc <- subset(edu_sc,STATEFP != '00')
 edu_sc <- subset(edu_sc,COUNTYFP != '000')
 edu_sc <- subset(edu_sc,!STATEFP %in% c('02','15','03','07','14','43','52','64','68','70','74','81','84','86','67','89','71','76','95','79','72'))
 
-#edu_us_mctag <- combine_mc(edu_sc,scloc.df)
-#pop_us_allage <- data.frame(summarise(group_by(dat_nchs,year,fips),popsum=sum(popsum,na.rm = TRUE)))
-#pop_us_mctag <- combine_mc(combine_sc(pop_us_allage,scloc.df.sc),scloc.df)
-#pop_us_mc <- data.frame(summarise(group_by(pop_us_mctag,year,fips),popsum=sum(popsum,na.rm = TRUE)))
-#edu_us_mctag <- left_join(edu_us_mctag,pop_us_mc,by=c('year','fips'))
-#edu_us_mctag$pophsgrad <- edu_us_mctag$popsum*edu_us_mctag$hsgrad
-#edu_us_merged <- as.data.frame(summarise(group_by(edu_us_mctag,fips,year),hsgrad=sum(pophsgrad,na.rm = TRUE)/sum(popsum,na.rm = TRUE)))
-#
-#edu_sc$type <- 'before merging'
-#edu_us_merged_plot <- edu_us_merged
-#edu_us_merged_plot$type <- 'after merging'
-#edu_plot <- rbind(edu_sc[,c('hsgrad','type')],edu_us_merged_plot[,c('hsgrad','type')])
-#p <- ggplot(edu_plot,aes(hsgrad))+geom_histogram()
-#p + facet_wrap(~type)
-#
-#edumean <- mean(edu_us_merged$hsgrad)
-#edu_us_merged$hsgrad <- edu_us_merged$hsgrad - edumean
-  
-
 ################# INCLUDE UR DATA ######################
 load('urbanpop_with_sc')
 
@@ -527,10 +89,6 @@ load('urbanpop_with_sc')
 daturban_mctag <- daturban
 daturban_mc <- data.frame(summarise(group_by(daturban_mctag,fips,year),totpop=sum(totpop),toturban=sum(toturban)))
 daturban_mc$urban <- with(daturban_mc,toturban/totpop)
-
-# replace population by NCHS pop - use pop_nchs_mctag
-#daturban_mc_nchs <- left_join(daturban_mc,pop_us_mc) # NEED TO FIX
-#daturban_mc_nchs$urban <- daturban_mc_nchs$toturban/daturban_mc_nchs$popsum
 
 # interpolate between years 
 daturbaninterp <- data.frame()
@@ -560,97 +118,12 @@ for (cty in unique(daturban_mc$fips)) {
   dattemp[dattemp$year %in% xout,'urban'] <- yinterp
   daturbaninterp <- rbind(daturbaninterp,dattemp)
 }
-
-#urbanmean <- mean(daturbaninterp$urban)
-#daturbaninterp$urban <- daturbaninterp$urban - urbanmean
   
 ################# INCLUDE UNEMPLOYMENT DATA ######################
 load('unemployment_with_sc')
 dat_unemployment_sc <- subset(dat_unemployment_sc,year >= startyear & year < (startyear + obs.Years))
 
 dat_unemployment_sc$unemp_rate <- dat_unemployment_sc$unemployed_tot/dat_unemployment_sc$labour_force_tot
-
-# account for mc 
-#dat_unemployment_mctag <- combine_mc(dat_unemployment_sc,scloc.df)
-#dat_unemployment_mc <- data.frame(summarise(group_by(dat_unemployment_mctag,fips,year),labour_force_tot=sum(labour_force_tot),unemployed_tot=sum(unemployed_tot)))
-#dat_unemployment_mc$unemp_rate <- dat_unemployment_mc$unemployed_tot/dat_unemployment_mc$labour_force_tot
-#
-#unempmean <- mean(dat_unemployment_mc$unemp_rate)
-#dat_unemployment_mc$unemp_rate <- dat_unemployment_mc$unemp_rate - unempmean
-
-# TEMPORARY SUMMARY
-
-
-# ################# INCLUDE METRO DATA ######################
-# 
-# file_metro <- 'archive/code/make_data/data/urban/urban_classification.csv'
-# datmetro <- read.csv(file_metro,header=FALSE)
-# datmetro <- datmetro[,c('V1','V7','V8','V9')]
-# names(datmetro) <- c('fips','Y1990','Y2006','Y2013')
-# datmetro$fips[nchar(datmetro$fips)==4] <- paste0('0',datmetro$fips[nchar(datmetro$fips)==4])
-# datmetro <- melt(datmetro,id.vars='fips')
-# datmetro$metro <- '0'
-# datmetro$metro[datmetro$value >= 5] <- '1'
-# 
-# datmetro$metro[datmetro$fips %in% c('04012','04027','35006','35061')] <- 0
-# 
-# #subset(datmetro,fips %in% )
-# 
-# 
-# ## merging for sc ##
-# #   datmetro_sctag <- combine_sc(datmetro,scloc.df.sc)
-# #   datmetro_sc <- data.frame(summarise(group_by(datmetro_sctag,fips),metro2006=floor(mean(as.numeric(metro)[variable=='Y2006'])),metro2013=floor(mean(as.numeric(metro)[variable=='Y2013']))))
-# #   
-# #   # merging for mc
-# #   datmetro_mctag <- combine_mc(datmetro_sc,scloc.df)
-# #   datmetro_mc <- data.frame(summarise(group_by(datmetro_mctag,fips),metro=floor(mean(as.numeric(metro2006))),metrodiff=sum(diff(metro2006))))
-# #   
-# 
-# ## merging for sc ##
-# datmetro_sctag <- combine_sc(datmetro,scloc.df.sc)
-# datmetro_sc <- data.frame(summarise(group_by(datmetro_sctag,fips),metro2006=mean(as.numeric(metro)[variable=='Y2006'])))
-# 
-# # merging for mc
-# datmetro_mctag <- combine_mc(datmetro_sc,scloc.df)
-# datmetro_mc <- data.frame(summarise(group_by(datmetro_mctag,fips),metro=mean(as.numeric(metro2006)),metro_forceurban=floor(mean(as.numeric(metro2006))),metro_forcerural=ceiling(mean(as.numeric(metro2006))),metrodiff=sum(diff(metro2006))))
-# datmetro_mc$metro[!datmetro_mc$metro %in% c(1,0)] <- 2
-  
-
-################## INCLUDE SMK DATA ##################
-
-#load('archive/code/make_data/outputs/smk_with_sc')
-## cut dataset to particular years
-#smk_sc <- subset(smk_sc, year >= startyear & year < (startyear+obs.Years))
-## remove all US and all county figures as well as overseas, AK, HI
-#smk_sc$STATEFP <- substr(smk_sc$fips,1,2)
-#smk_sc$COUNTYFP <- substr(smk_sc$fips,3,5)
-#smk_sc <- subset(smk_sc,STATEFP != '00')
-#smk_sc <- subset(smk_sc,COUNTYFP != '000')
-#smk_sc <- subset(smk_sc,!STATEFP %in% c('02','15','03','07','14','43','52','64','68','70','74','81','84','86','67','89','71','76','95','79','72'))
-#
-#smk_us_mctag <- combine_mc(smk_sc,scloc.df)
-#pop_us_allage <- data.frame(summarise(group_by(dat_nchs,year,sex,fips),popsum=sum(popsum,na.rm = TRUE)))
-#pop_us_mctag <- combine_mc(combine_sc(pop_us_allage,scloc.df.sc),scloc.df)
-#pop_us_mc <- data.frame(summarise(group_by(pop_us_mctag,year,sex,fips),popsum=sum(popsum,na.rm = TRUE)))
-#smk_us_mctag <- left_join(smk_us_mctag,pop_us_mc,by=c('year',"sex",'fips'))
-#smk_us_mctag$popsmk <- smk_us_mctag$popsum*smk_us_mctag$smk
-#smk_us_merged <- as.data.frame(summarise(group_by(smk_us_mctag,fips,sex,year),smk=sum(popsmk,na.rm = TRUE)/sum(popsum,na.rm = TRUE)))
-#
-#smk_sc$type <- 'before merging'
-#smk_us_merged_plot <- smk_us_merged
-#smk_us_merged_plot$type <- 'after merging'
-#smk_plot <- rbind(smk_sc[,c('smk','type')],smk_us_merged_plot[,c('smk','type')])
-#p <- ggplot(smk_plot,aes(smk))+geom_histogram()
-#p + facet_wrap(~type)
-#
-##log transformed smoking prev
-#Lsmkmean <- mean(log(smk_us_merged$smk))
-#smk_us_merged$Lsmk <- log(smk_us_merged$smk) - Lsmkmean
-##smk prev
-#smkmean <- mean(smk_us_merged$smk)
-#smk_us_merged$smk <- smk_us_merged$smk - smkmean
-#
-
 
 ################## COLLECT ALL PROCESSED COVARIATES ##################
 
@@ -661,7 +134,13 @@ edu_sc = edu_sc[,c(1,2,3)]
 daturbaninterp = daturbaninterp
 dat_unemployment_sc = dat_unemployment_sc[,c(1,2,5)]
 
-# make expanded grid of years, fips to merge completely to
+# make expanded grid of years, fips to merge all completely to
+fips_codes = sort(unique(popsum_nchs$fips))
+years = c(startyear:(startyear+obs.Years-1))
+data_complete = expand.grid(year=years,fips=fips_codes)
+
+# merge all above files together
+data_complete = merge(data_complete, income_us_sc,by=c('year','fips'),all.X=TRUE)
 
 # TO FINISH FROM HERE!
 
