@@ -135,7 +135,7 @@ daturbaninterp = daturbaninterp
 dat_unemployment_sc = dat_unemployment_sc[,c(1,2,5)]
 
 # make expanded grid of years, fips to merge all completely to
-fips_codes = sort(unique(popsum_nchs$fips))
+fips_codes = sort(unique(popsum_nchs$fips)) # SHOULD THIS BE ALL THE FIPS CODES FROM THE TROPICAL STORM FILE?
 years = c(startyear:(startyear+obs.Years-1))
 data_complete = expand.grid(year=years,fips=fips_codes)
 
